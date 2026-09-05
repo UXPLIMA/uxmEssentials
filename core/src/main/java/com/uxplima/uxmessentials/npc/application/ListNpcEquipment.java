@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc equip <name> list}: print the slots an NPC wears and the stored item token for each, or the empty
  * notice when it wears nothing. The token is shown verbatim (a material name reads cleanly; a serialized
  * full-item payload is truncated to a bounded length so the line never floods chat). A name no NPC exists at is
- * rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter gate.
+ * rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command gate.
  */
 public final class ListNpcEquipment {
 

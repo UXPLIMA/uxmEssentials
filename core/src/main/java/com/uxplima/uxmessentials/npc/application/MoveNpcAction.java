@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * its neighbour. {@code index1Based} is the 1-based position the operator sees in {@code /npc action list};
  * {@code up} moves it one earlier, otherwise one later. A name no NPC exists at is rejected with
  * {@link NpcError#NOT_FOUND}; a move past either end (the first up, the last down) or an out-of-range index with
- * {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the adapter gate.
+ * {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the command gate.
  */
 public final class MoveNpcAction {
 

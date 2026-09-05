@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc fix <npc>}: force a clean re-spawn of an existing NPC for every viewer — despawn it, then render it
  * again — to recover from a client-side desync (a ghost or a missing fake entity) without editing the stored
  * model. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class FixNpc {
 

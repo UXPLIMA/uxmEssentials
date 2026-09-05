@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /npc action clear <name>}: remove every action from an NPC's action list and save. A name no NPC exists
  * at is rejected with {@link NpcError#NOT_FOUND}. Clearing leaves the single {@code clickCommand} untouched (it
- * is the separate, simpler mechanism). The operator-only permission is enforced at the adapter gate.
+ * is the separate, simpler mechanism). The operator-only permission is enforced at the command gate.
  */
 public final class ClearNpcActions {
 

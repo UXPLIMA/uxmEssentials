@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
  * ({@code -}, {@code none}, {@code clear}, {@code empty} or a blank value) hides the label entirely, and a reset word
  * ({@code default}, {@code reset}) puts the id back. The new snapshot is saved and re-rendered so the label changes at
  * once. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class SetNpcDisplayName {
 

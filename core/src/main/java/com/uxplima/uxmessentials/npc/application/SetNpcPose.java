@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc pose <name> <pose>}: freeze an existing NPC in a body pose, save the new snapshot, and re-render so
  * every viewer sees the new pose at once. The pose arrives already validated at the adapter boundary (a known
  * pose name, upper-cased); this use case owns only the not-found decision and the persistence. A name no NPC
- * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter
+ * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command
  * gate.
  */
 public final class SetNpcPose {

@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@link NpcError#NOT_FOUND}. The entity type arrives already validated at the adapter boundary (a real, living
  * Bukkit type, upper-cased); this use case owns only the not-found decision and the persistence. The skin is
  * preserved across the change, so flipping a mob back to {@code PLAYER} restores its skin. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class SetNpcEntityType {
 

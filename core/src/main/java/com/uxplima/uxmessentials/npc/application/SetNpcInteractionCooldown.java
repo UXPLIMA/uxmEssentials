@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * reset it to the module-wide default ({@code 0}). This changes only the click-debounce; nothing visual changes,
  * so it saves the snapshot without re-rendering. The millis arrive already validated (non-negative) at the adapter
  * boundary. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class SetNpcInteractionCooldown {
 

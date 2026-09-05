@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /npc mirror <name> <true|false>}: toggle whether an NPC mirrors each viewer's own skin (rendered
  * per-viewer at spawn). The new snapshot is saved and re-rendered so the change shows at once. A name no NPC
- * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter
+ * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command
  * gate.
  */
 public final class SetNpcMirrorSkin {

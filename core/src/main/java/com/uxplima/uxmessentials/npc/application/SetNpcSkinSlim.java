@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * rejected with {@link NpcError#NOT_FOUND}-style feedback via {@link NpcMessageKey#NPC_SKIN_SLIM_NO_SKIN}; a
  * non-player NPC is rejected with {@link NpcError#SKIN_ONLY_PLAYER}. The new snapshot is saved and re-rendered so
  * the arms switch at once. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class SetNpcSkinSlim {
 

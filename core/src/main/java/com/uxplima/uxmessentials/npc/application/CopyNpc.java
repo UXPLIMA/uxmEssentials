@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * click command, look, actions, …) across unchanged. The source name must exist ({@link NpcError#NOT_FOUND}) and
  * the new name must be free ({@link NpcError#NAME_TAKEN}). The clone is a brand-new NPC created now, so it gets its
  * own creation time and is spawned + {@code NpcCreated}-published like any create. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class CopyNpc {
 

@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc movehere <name>}: re-anchor an existing NPC to the operator's current position, save the new
  * snapshot, and re-render the fake player at its new location. A name no NPC exists at is rejected with
  * {@link NpcError#NOT_FOUND}. {@code NpcMoved} is published so anything pinned to the NPC (a hologram linked to
- * it) re-anchors. The operator-only permission is enforced at the adapter gate.
+ * it) re-anchors. The operator-only permission is enforced at the command gate.
  */
 public final class MoveNpc {
 

@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc action remove <name> <index>}: drop one action from an NPC's action list and save. The index is
  * 1-based as the operator sees it in {@code /npc action list}; it is converted to the 0-based list position here.
  * A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}; an index outside the current list with
- * {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the adapter gate.
+ * {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the command gate.
  */
 public final class RemoveNpcAction {
 

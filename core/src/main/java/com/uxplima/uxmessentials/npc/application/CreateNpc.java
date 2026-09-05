@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
  * the supplied default skin (the creator's own skin, resolved at the adapter boundary, or {@code null} when it
  * is unavailable). A name an NPC already exists under is rejected with {@link NpcError#NAME_TAKEN}; a brand-new
  * name is stored, the fake player is spawned for every eligible viewer, and {@code NpcCreated} is published. The
- * operator-only permission to run this command is enforced at the adapter gate; this use case owns the
+ * operator-only permission to run this command is enforced at the command gate; this use case owns the
  * name-taken decision and the persistence.
  */
 public final class CreateNpc {

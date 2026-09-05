@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /npc delete <name>}: remove a server-wide NPC, despawn its fake player from every viewer, and free its
  * name for reuse. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}; a successful delete
  * removes the row, despawns the fake player, and publishes {@code NpcDeleted} attributed to the staff member who
- * ran the command. The operator-only permission is enforced at the adapter gate.
+ * ran the command. The operator-only permission is enforced at the command gate.
  */
 public final class DeleteNpc {
 

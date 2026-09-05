@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * colour), save the new snapshot, and re-render so the change shows at once. The colour is the name of one of the
  * sixteen chat colours, stored verbatim; the adapter maps it to the team colour at render time and falls back to
  * the default white outline when the name is unknown. Turning glow off clears nothing else. A name no NPC exists
- * at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter gate.
+ * at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command gate.
  */
 public final class SetNpcGlowing {
 

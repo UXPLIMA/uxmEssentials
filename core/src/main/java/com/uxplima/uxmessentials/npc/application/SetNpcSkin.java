@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@link NpcError#SKIN_ONLY_PLAYER} (the stored skin is left untouched, ready to show again if the NPC is flipped
  * back to {@code PLAYER}). The skin is resolved at the adapter boundary (a raw texture/signature pair, or an
  * online player's textures) and handed here as a domain {@link NpcSkin}; this use case owns the not-found and
- * player-type decisions and the persistence. The operator-only permission is enforced at the adapter gate.
+ * player-type decisions and the persistence. The operator-only permission is enforced at the command gate.
  */
 public final class SetNpcSkin {
 

@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * ({@code x+0.5}, {@code z+0.5}), keeping its Y and facing, so a hand-placed NPC sits flush in its cell rather than
  * against an edge. Backed by {@link Position#atBlockCenter()}. A name no NPC exists at is rejected with
  * {@link NpcError#NOT_FOUND}; {@code NpcMoved} is published so a linked hologram re-anchors. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class CenterNpc {
 

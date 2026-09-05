@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * {@link Kind} the command supplies, since the only difference is which field is set and which message is sent. The
  * new snapshot is saved and re-rendered so the change takes effect at once. The distance arrives already validated
  * (finite, non-negative) at the adapter boundary, or {@code null} to reset. A name no NPC exists at is rejected
- * with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter gate.
+ * with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command gate.
  */
 public final class SetNpcRange {
 

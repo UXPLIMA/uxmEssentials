@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * player clicks it, and save the new snapshot. A name no NPC exists at is rejected with
  * {@link NpcError#NOT_FOUND}. Binding does not touch the rendering — the fake player looks the same — so no
  * re-render is needed; the interaction listener reads the bound command from the repository when the NPC is
- * clicked. The operator-only permission is enforced at the adapter gate.
+ * clicked. The operator-only permission is enforced at the command gate.
  */
 public final class SetNpcClickCommand {
 

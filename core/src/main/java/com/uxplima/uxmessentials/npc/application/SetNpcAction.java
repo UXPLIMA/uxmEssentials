@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
  * {@code /npc action set <name> <index> …}: replace the action at an existing position with a new one, keeping
  * the rest of the chain. {@code index1Based} is the 1-based position the operator sees in {@code /npc action
  * list}. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}; an index outside the current list
- * with {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the adapter gate.
+ * with {@link NpcError#ACTION_INDEX_INVALID}. The operator-only permission is enforced at the command gate.
  */
 public final class SetNpcAction {
 

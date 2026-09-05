@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /npc showintab <name> <true|false>}: toggle whether an NPC stays a tab-list entry (the default hides it
  * after spawn). The new snapshot is saved and re-rendered so the tab visibility changes at once. A name no NPC
- * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the adapter
+ * exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is enforced at the command
  * gate.
  */
 public final class SetNpcShowInTab {
