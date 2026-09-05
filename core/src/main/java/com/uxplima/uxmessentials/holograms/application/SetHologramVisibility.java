@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * Mirrors {@link SetHologramAppearance}: both forms pass a single-field mutation, so this one use case backs the
  * mode change ({@code ALL} / {@code PERMISSION} with its operator-chosen node) and the distance change rather
  * than two near-identical classes. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND};
- * the operator-only permission is enforced at the adapter gate, and the raw distance is clamped at the command
+ * the operator-only permission is enforced at the command gate, and the raw distance is clamped at the command
  * boundary so an invalid {@link Visibility} never reaches here.
  */
 public final class SetHologramVisibility {

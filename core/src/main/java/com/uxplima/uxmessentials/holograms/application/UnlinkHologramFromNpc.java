@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram unlinknpc <name>}: clear an existing hologram's NPC link so it anchors to its own stored
  * location again, save the new snapshot, and re-render the live entity back at that location. A name no hologram
  * exists at is rejected with {@link HologramError#NOT_FOUND}; a hologram that is not linked is left untouched and
- * the operator told it was not linked. The operator-only permission is enforced at the adapter gate.
+ * the operator told it was not linked. The operator-only permission is enforced at the command gate.
  */
 public final class UnlinkHologramFromNpc {
 

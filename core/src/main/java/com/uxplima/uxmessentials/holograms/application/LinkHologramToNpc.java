@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * NPC's next move. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a name no NPC
  * exists at is rejected with a friendly "no such NPC" reply (no link is written), checked through the
  * {@link LinkedNpcLocator} so the use case never depends on the npc context. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class LinkHologramToNpc {
 

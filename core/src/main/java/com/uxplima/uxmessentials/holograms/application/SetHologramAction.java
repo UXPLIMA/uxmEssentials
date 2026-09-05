@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
  * keeping the rest of the chain. {@code index1Based} is the 1-based position the operator sees in
  * {@code /hologram action <name> list}. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}; an index outside the current chain with
- * {@link HologramError#ACTION_INDEX_OUT_OF_RANGE}. The operator-only permission is enforced at the adapter gate.
+ * {@link HologramError#ACTION_INDEX_OUT_OF_RANGE}. The operator-only permission is enforced at the command gate.
  */
 public final class SetHologramAction {
 

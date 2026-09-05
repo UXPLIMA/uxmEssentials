@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram action <name> list}; {@code up} moves it one earlier, otherwise one later. A name no hologram
  * exists at is rejected with {@link HologramError#NOT_FOUND}; a move past either end (the first up, the last down)
  * or an out-of-range index with {@link HologramError#ACTION_INDEX_OUT_OF_RANGE}. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class MoveHologramAction {
 

@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
  * of a hologram's action chain and save the new snapshot. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}. Appending does not change the rendered text — the click listener reads the
  * action chain from the repository when the hologram is clicked — so there is no re-render. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class AddHologramAction {
 

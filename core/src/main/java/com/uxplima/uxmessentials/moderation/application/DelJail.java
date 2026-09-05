@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code JailLocationRemoved} attributed to the staff member and confirms with {@code DELJAIL_DELETED}. Only a
  * stored jail can be removed this way — a config-defined jail name lives in {@code moderation.conf}, not the
  * store, so a {@code /jail del} of such a name reports not-found (the operator edits the config to remove it).
- * The operator-only permission is enforced at the adapter gate.
+ * The operator-only permission is enforced at the command gate.
  */
 public final class DelJail {
 

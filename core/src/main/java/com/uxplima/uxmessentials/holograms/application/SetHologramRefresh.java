@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram refreshinterval <name> <ticks>}: set how often a hologram re-renders so its lines pick up
  * fresh placeholder values, save the new snapshot, and re-render once now. A value of 0 makes the hologram
  * static (rendered once, never again). A name no hologram exists at is rejected with
- * {@link HologramError#NOT_FOUND}; the operator-only permission is enforced at the adapter gate, and a
+ * {@link HologramError#NOT_FOUND}; the operator-only permission is enforced at the command gate, and a
  * negative tick count is clamped to 0 at the command boundary.
  */
 public final class SetHologramRefresh {

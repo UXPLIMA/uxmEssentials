@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * index is 1-based as the operator sees it in {@code /hologram action <name> list}; it is converted to the 0-based
  * chain position here. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; an index
  * outside the current chain with {@link HologramError#ACTION_INDEX_OUT_OF_RANGE}. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class RemoveHologramAction {
 

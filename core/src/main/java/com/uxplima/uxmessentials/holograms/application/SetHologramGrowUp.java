@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * its anchor (the anchor is the bottom) or downward as usual (the anchor is the top), save, and re-render so the
  * renderer lays the lines out in the chosen direction. A purely visual positioning choice — the stored location
  * is untouched. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; the operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class SetHologramGrowUp {
 

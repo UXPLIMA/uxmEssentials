@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram delete <name>}: remove a server-wide hologram, despawn its live entity, and free its name
  * for reuse. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a successful
  * delete removes the rows, despawns the entity, and publishes {@code HologramDeleted} attributed to the staff
- * member who ran the command. The operator-only permission is enforced at the adapter gate.
+ * member who ran the command. The operator-only permission is enforced at the command gate.
  */
 public final class DeleteHologram {
 

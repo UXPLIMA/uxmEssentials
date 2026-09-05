@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p>A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; blacklisting a player already
  * on the list (or removing one not on it) is reported as a no-op rather than re-rendering. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class ManageHologramBlacklist {
 

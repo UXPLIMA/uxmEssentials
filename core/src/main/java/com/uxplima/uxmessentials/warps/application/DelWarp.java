@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.warps.domain.event.WarpDeleting;
  * {@code /delwarp <name>}: remove a server-wide warp, freeing its name for reuse. A name no warp exists at
  * is rejected with {@link WarpError#NOT_FOUND}; a successful delete removes the row and publishes
  * {@code WarpDeleted} attributed to the staff member who ran the command. The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class DelWarp {
 

@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * rejected with {@link KitError#NOT_FOUND}; a successful delete removes the entry from the config-backed
  * catalog. Per-player one-time stamps for the deleted kit are left in place — they are harmless dangling PDC
  * values keyed by a kit that no longer exists, and {@code /kit reset} can clear them if a kit is later
- * recreated under the same id. The operator-only permission is enforced at the adapter gate.
+ * recreated under the same id. The operator-only permission is enforced at the command gate.
  */
 public final class DelKit {
 

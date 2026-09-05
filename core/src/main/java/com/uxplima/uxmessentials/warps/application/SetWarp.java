@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.warps.domain.event.WarpCreating;
  * {@code /setwarp <name>}: create a server-wide warp at the staff member's current position, or re-anchor
  * an existing one of the same name in place. A brand-new name is stored as a new {@link Warp} and publishes
  * {@code WarpCreated}; an existing name overwrites the row, keeping the warp's owner, creation time, and
- * gates, and saves silently. The operator-only permission to run this command is enforced at the adapter
+ * gates, and saves silently. The operator-only permission to run this command is enforced at the command
  * gate; this use case owns the create-vs-move decision and the persistence.
  *
  * <p>The optional per-warp cost and required permission are passed through from the command so an operator

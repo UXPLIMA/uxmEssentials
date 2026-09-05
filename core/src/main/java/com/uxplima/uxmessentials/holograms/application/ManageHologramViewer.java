@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * MANUAL is allowed and simply has no visible effect until {@code /hologram visibility <name> manual} runs. A
  * name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a show of a player already in the
  * set (or a hide of one not in it) is reported as a no-op rather than re-applying the live change. The
- * operator-only permission is enforced at the adapter gate.
+ * operator-only permission is enforced at the command gate.
  */
 public final class ManageHologramViewer {
 

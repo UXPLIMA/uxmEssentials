@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * lines become page 0 and the new lines become page 1. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}; a non-text hologram (item/block/head/entity) with
  * {@link HologramError#NOT_TEXT_HOLOGRAM}, since only text holograms render paged lines. The operator-only
- * permission is enforced at the adapter gate.
+ * permission is enforced at the command gate.
  */
 public final class AddHologramPage {
 

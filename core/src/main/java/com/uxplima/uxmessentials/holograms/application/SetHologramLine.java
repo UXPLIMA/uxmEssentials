@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram setline <name> <index> <text…>}: replace one existing line of a hologram (1-based at the
  * command boundary, 0-based here), save the new snapshot, and re-render the live entity. A name no hologram
  * exists at is rejected with {@link HologramError#NOT_FOUND}; an index outside the hologram's line range with
- * {@link HologramError#LINE_INDEX_OUT_OF_RANGE}. The operator-only permission is enforced at the adapter gate.
+ * {@link HologramError#LINE_INDEX_OUT_OF_RANGE}. The operator-only permission is enforced at the command gate.
  */
 public final class SetHologramLine {
 

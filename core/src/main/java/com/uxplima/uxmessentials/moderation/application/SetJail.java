@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * name, so this is an upsert and always succeeds — a brand-new name and a redefinition both publish
  * {@code JailLocationDefined} and confirm with {@code SETJAIL_SAVED}. The stored jail then merges with the
  * config jails behind the combined directory, so {@code /jail <player> <name>} accepts it and the sanction
- * adapter resolves its location. The operator-only permission is enforced at the adapter gate.
+ * adapter resolves its location. The operator-only permission is enforced at the command gate.
  */
 public final class SetJail {
 

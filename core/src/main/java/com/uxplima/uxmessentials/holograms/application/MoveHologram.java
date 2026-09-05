@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /hologram movehere <name>}: re-anchor an existing hologram to the operator's current position, save
  * the new snapshot, and re-render the live entity at its new location. A name no hologram exists at is
- * rejected with {@link HologramError#NOT_FOUND}. The operator-only permission is enforced at the adapter gate.
+ * rejected with {@link HologramError#NOT_FOUND}. The operator-only permission is enforced at the command gate.
  */
 public final class MoveHologram {
 

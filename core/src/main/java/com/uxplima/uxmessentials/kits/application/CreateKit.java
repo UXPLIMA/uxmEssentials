@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * kit and persisted to its own {@code modules/kits/kits/<id>.conf} file; an id a kit already exists under is
  * refused with
  * {@link KitError#ALREADY_EXISTS} so a create never silently clobbers a curated kit (that is what
- * {@code /kit editor} is for). The operator-only permission is enforced at the adapter gate.
+ * {@code /kit editor} is for). The operator-only permission is enforced at the command gate.
  */
 public final class CreateKit {
 

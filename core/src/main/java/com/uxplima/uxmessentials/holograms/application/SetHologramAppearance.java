@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * load the hologram, apply one {@link Appearance} transition, save the new snapshot, and re-render the live
  * entity so the change shows immediately. Each command form passes a single-field mutation, so this one use
  * case backs them all rather than seven near-identical classes. A name no hologram exists at is rejected with
- * {@link HologramError#NOT_FOUND}; the operator-only permission is enforced at the adapter gate, and the raw
+ * {@link HologramError#NOT_FOUND}; the operator-only permission is enforced at the command gate, and the raw
  * value is parsed and clamped at the command boundary so an invalid {@link Appearance} never reaches here.
  */
 public final class SetHologramAppearance {

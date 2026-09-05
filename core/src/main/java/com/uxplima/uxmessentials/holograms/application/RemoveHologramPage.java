@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * ordinary one showing that page's lines. Rejected with {@link HologramError#NOT_FOUND} (no such hologram),
  * {@link HologramError#NOT_MULTI_PAGE} (the hologram has no pages to remove), or
  * {@link HologramError#PAGE_INDEX_OUT_OF_RANGE} (index outside the page range). The operator-only permission is
- * enforced at the adapter gate.
+ * enforced at the command gate.
  */
 public final class RemoveHologramPage {
 

@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>Unlike a balance mutation this is a pricing-policy change, so it publishes no economy domain event (the
  * sealed {@code EconomyEvent} family is for aggregate state) and records only through the {@link EconomyAudit}.
- * The operator-only permission is enforced at the adapter gate. A price may be set in any configured currency;
+ * The operator-only permission is enforced at the command gate. A price may be set in any configured currency;
  * an omitted or unknown currency falls back to the default, matching how the config {@code worth.items} list
  * resolves an item's pay-out currency.
  */

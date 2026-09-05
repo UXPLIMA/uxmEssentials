@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * new snapshot, and re-render the live entity so the spin takes effect. A name no hologram exists at is rejected
  * with {@link HologramError#NOT_FOUND}. A stored rotation is only visually meaningful with a {@code FIXED}
  * billboard (a self-facing billboard overrides any transform); the operator sets the billboard separately. The
- * operator-only permission is enforced at the adapter gate.
+ * operator-only permission is enforced at the command gate.
  */
 public final class RotateHologram {
 

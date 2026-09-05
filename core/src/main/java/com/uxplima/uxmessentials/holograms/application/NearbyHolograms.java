@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * {@code /hologram nearby [radius]}: list every hologram within {@code radius} blocks of the operator, nearest
  * first, with its distance. Holograms in another world are infinitely far apart (the {@link Position} distance
  * contract), so they fall outside any finite radius. The header / per-entry / empty feedback all resolve from
- * {@link HologramsMessageKey}. The operator-only permission is enforced at the adapter gate.
+ * {@link HologramsMessageKey}. The operator-only permission is enforced at the command gate.
  */
 public final class NearbyHolograms {
 

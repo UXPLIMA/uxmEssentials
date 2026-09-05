@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * carrying every property (lines, model, appearance, visibility, rotation, refresh interval, type). A {@code
  * src} no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a {@code dest} a hologram already
  * exists under with {@link HologramError#NAME_TAKEN} (so a copy never overwrites). The new hologram is stored
- * and its live entity spawned. The operator-only permission is enforced at the adapter gate.
+ * and its live entity spawned. The operator-only permission is enforced at the command gate.
  */
 public final class CopyHologram {
 
