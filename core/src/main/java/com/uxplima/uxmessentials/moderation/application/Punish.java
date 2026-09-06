@@ -14,8 +14,8 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * {@code /punish <player> <template>}: apply a configured punishment template to a target. It resolves the
- * template name through {@link ResolveTemplate}, then dispatches to the existing sanction use case — a timed
- * template lands a {@link TempBan}, a permanent one a {@link Ban} — so the exempt gate, the kick, the audit
+ * template name through {@link ResolveTemplate}, then dispatches to the existing sanction use case: a timed
+ * template lands a {@link TempBan}, a permanent one a {@link Ban}, so the exempt gate, the kick, the audit
  * line, the history row, the duration cap and the broadcast are all the underlying use case's job, never
  * duplicated here. An unknown template name is refused with {@link ModerationError#UNKNOWN_TEMPLATE} rendered
  * to the actor.

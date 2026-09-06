@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * {@code /getpos} (aliases {@code /coords}, {@code /whereami}) {@code [player]}: show a player's world and
- * coordinates plus look direction. A read-only query through the {@link PlayerInfo} port — nothing is mutated.
+ * coordinates plus look direction. A read-only query through the {@link PlayerInfo} port: nothing is mutated.
  * The viewer sees their own position, or another player's with the {@code .others} node; an offline target is a
  * silent no-op the adapter has already rejected before this runs.
  */

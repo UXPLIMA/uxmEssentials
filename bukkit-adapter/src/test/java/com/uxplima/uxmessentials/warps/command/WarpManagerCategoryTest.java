@@ -163,7 +163,7 @@ class WarpManagerCategoryTest {
         return new PlayerRef(player.getUniqueId(), player.getName());
     }
 
-    /** A category repository over a fixed, mutable map — the panel's saves and deletes land here. */
+    /** A category repository over a fixed, mutable map: the panel's saves and deletes land here. */
     private static final class StubWarpCategoryRepository
             implements com.uxplima.uxmessentials.warps.application.port.WarpCategoryRepository {
         private final Map<String, WarpCategory> byId = new LinkedHashMap<>();

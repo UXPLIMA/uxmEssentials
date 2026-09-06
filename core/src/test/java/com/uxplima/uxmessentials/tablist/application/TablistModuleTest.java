@@ -31,7 +31,7 @@ class TablistModuleTest {
 
     @Test
     void publishesNoCommand() {
-        // The tablist is always-on when enabled — there is no per-player visibility toggle.
+        // The tablist is always-on when enabled: there is no per-player visibility toggle.
         assertThat(new TablistModule().commands()).isEmpty();
     }
 

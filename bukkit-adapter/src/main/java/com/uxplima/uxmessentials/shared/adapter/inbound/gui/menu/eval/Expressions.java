@@ -5,10 +5,10 @@ import java.util.Objects;
 /**
  * The public entry point to the sandboxed expression evaluator. The caller substitutes any {@code %placeholder%}
  * to a literal before calling, so what arrives here is a self-contained arithmetic/boolean expression with no
- * outside references — that keeps this layer pure (no Bukkit, no I/O, no reflection) and trivially unit-testable.
+ * outside references: that keeps this layer pure (no Bukkit, no I/O, no reflection) and trivially unit-testable.
  * The grammar is the whole surface: numbers, the four arithmetic operators plus {@code ^} and {@code %}, the
- * allow-listed functions, comparisons, and boolean logic. Anything else — an unknown identifier, a method-like
- * token, oversized or over-nested input — is rejected with an {@link ExpressionException}, never executed.
+ * allow-listed functions, comparisons, and boolean logic. Anything else, an unknown identifier, a method-like
+ * token, oversized or over-nested input: is rejected with an {@link ExpressionException}, never executed.
  */
 public final class Expressions {
 
@@ -36,7 +36,7 @@ public final class Expressions {
     }
 
     /**
-     * Render {@code value} the way the evaluator renders a number back into text — an integral value without a
+     * Render {@code value} the way the evaluator renders a number back into text, an integral value without a
      * trailing {@code .0}. A caller that substitutes an evaluated number into rendered text (a {@code {math: …}}
      * placeholder, a {@code data_number_*} reader) reuses this so its output matches the number formatting the rest
      * of the evaluator produces, rather than re-deriving it and drifting.

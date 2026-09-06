@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * Renders a catalog template straight to a {@link CommandSender} at the command boundary, supplying the
  * shared {@code <prefix>} tag the {@link com.uxplima.uxmessentials.shared.application.port.MessageSink}
  * supplies on the delivery path. Command classes use this for the synchronous rejections they answer in
- * line — the players-only / unknown-player / no-permission failures and the console-side replies — which
+ * line, the players-only / unknown-player / no-permission failures and the console-side replies, which
  * the entity-scheduled sink cannot carry because the recipient may be the console or an offline target.
  *
  * <p>The {@code <prefix>} value is itself a catalog entry, so it is resolved in the recipient's locale and

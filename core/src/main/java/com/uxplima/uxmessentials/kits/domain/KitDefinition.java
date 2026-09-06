@@ -11,7 +11,7 @@ import java.util.Optional;
  * claims, whether it may be claimed only once ({@code oneTime}), whether it is gated behind the per-kit
  * permission node, and the optional {@link KitCost}. Each kit is defined in its own
  * {@code modules/kits/kits/<id>.conf} file and loaded into this value object; a kit is never mutated in
- * place — an edit produces a new definition the repository overwrites the kit's file with.
+ * place: an edit produces a new definition the repository overwrites the kit's file with.
  *
  * <p>The cooldown is the default tier when the player holds no numbered {@code uxmessentials.kit.cooldown.
  * <seconds>} node; the {@code Cooldowns} port resolves the effective wait per claim against it. The
@@ -50,7 +50,7 @@ import java.util.Optional;
  * @param parsePlaceholders whether the recipient's PlaceholderAPI tokens are resolved in each granted item's name and lore
  * @param onFull what the grant does when the inventory cannot hold everything: drop the overflow or deny the claim
  * @param unlockOnce whether the kit's {@code cost} is a one-time unlock fee: charged on the first claim, then waived
- *     forever once the player has unlocked it — distinct from {@code oneTime} (consumed forever) and from a per-claim cost
+ *     forever once the player has unlocked it. Distinct from {@code oneTime} (consumed forever) and from a per-claim cost
  */
 public record KitDefinition(
         KitId id,
@@ -142,10 +142,10 @@ public record KitDefinition(
     }
 
     /**
-     * A copy of this kit with its {@code items} swapped for {@code newItems} and every other setting —
+     * A copy of this kit with its {@code items} swapped for {@code newItems} and every other setting
      * cooldown, one-time, permission, cost, every display override, commands, sound, particles, first-join,
      * auto-equip, category, claim money, per-permission cooldowns, priority, custom permission, variants,
-     * preview, close-on-claim, requirements, and the claim/deny actions — carried through unchanged. The item
+     * preview, close-on-claim, requirements, and the claim/deny actions: carried through unchanged. The item
      * editor uses this so editing a kit's stacks never silently wipes its other configuration.
      */
     public KitDefinition withItems(List<KitItem> newItems) {

@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * persisted association keyed by hologram name (it survives a restart), separate from the hologram snapshot so a
  * show/hide never re-writes the whole aggregate.
  *
- * <p>The set may be managed regardless of the hologram's current mode — adding a viewer before switching to
+ * <p>The set may be managed regardless of the hologram's current mode. Adding a viewer before switching to
  * MANUAL is allowed and simply has no visible effect until {@code /hologram visibility <name> manual} runs. A
  * name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a show of a player already in the
  * set (or a hide of one not in it) is reported as a no-op rather than re-applying the live change. The

@@ -49,9 +49,9 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The warp welcome-messages golden test: the engine-rendered list editor must draw the exact list the old bespoke
- * {@code WarpWelcomeMessagesView} drew — one icon per stored message across the top two rows (slots 0..17, the icon
+ * {@code WarpWelcomeMessagesView} drew. One icon per stored message across the top two rows (slots 0..17, the icon
  * keyed off the message's delivery type), the WRITABLE_BOOK add button (slot 18), the ARROW back button (slot 22),
- * and the LAVA_BUCKET clear button (slot 26) — and each gesture must run the same edit the old click did. The window
+ * and the LAVA_BUCKET clear button (slot 26), and each gesture must run the same edit the old click did. The window
  * is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot. Then, through the
  * engine's own menu listener, the remove / cycle / clear clicks and the add / edit input seams prove the migrated
  * path saves the warp, and the back button proves it reopens the engine warp editor.

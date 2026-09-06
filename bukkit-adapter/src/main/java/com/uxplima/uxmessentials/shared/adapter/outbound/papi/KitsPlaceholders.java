@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * <p>The per-kit reads ({@link #cooldownRemaining}, {@link #available}, {@link #hasPermission},
  * {@link #cost}, {@link #claimsLeft}) all answer {@link Optional#empty()} when no kit carries the requested
  * id (or the id is malformed) so the resolver renders the empty default for an unknown kit rather than a
- * misleading {@code no}/{@code 0}. {@link #usableIds} lists the kits a player may claim — the same filter the
+ * misleading {@code no}/{@code 0}. {@link #usableIds} lists the kits a player may claim, the same filter the
  * {@code /kit list} surface renders.
  */
 public interface KitsPlaceholders {
@@ -29,7 +29,7 @@ public interface KitsPlaceholders {
     Optional<Duration> cooldownRemaining(PlayerRef who, String kitId);
 
     /**
-     * Whether {@code who} may claim the kit named {@code kitId} right now — its cooldown is ready, they hold
+     * Whether {@code who} may claim the kit named {@code kitId} right now. Its cooldown is ready, they hold
      * the per-kit permission, and they have not already consumed it if it is one-time. Empty when no kit
      * carries that id.
      */
@@ -46,7 +46,7 @@ public interface KitsPlaceholders {
 
     /**
      * How many times {@code who} may still claim the kit named {@code kitId}: {@code 1} or {@code 0} for a
-     * one-time kit (by whether they have already consumed it), and a negative value — "unlimited" — for a
+     * one-time kit (by whether they have already consumed it), and a negative value, "unlimited", for a
      * repeatable kit. Empty when no kit carries that id.
      */
     Optional<Integer> claimsLeft(PlayerRef who, String kitId);

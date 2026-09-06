@@ -1,16 +1,16 @@
 -- Rebuild player_warps around a stable surrogate id so a rename never orphans a side row (the old
 -- (owner,name) key orphaned ratings on every rename/delete). The legacy tables are kept intact under a
--- _v1_legacy name for the one-shot Java data migration (T6) to copy across — this file is schema only,
+-- _v1_legacy name for the one-shot Java data migration (T6) to copy across. This file is schema only,
 -- it moves no data. id is an application-assigned BIGINT (max(id)+1, the V5/V11/V69 idiom), so the schema
 -- needs no dialect-specific auto-increment; every value is a typed column (no JSON blob); money is
 -- DECIMAL(20,4) and every instant a BIGINT of epoch milliseconds, matching V1-V69. The side tables carry a
--- plain indexed warp_id with no ON DELETE CASCADE (SQLite gates that behind a pragma) — the repository
+-- plain indexed warp_id with no ON DELETE CASCADE (SQLite gates that behind a pragma), the repository
 -- deletes a warp's side rows in the same transaction as the parent.
 --
 -- Two identifiers on the new table deliberately break from the V14 names they otherwise mirror: the primary
 -- key is named pk_player_warps_v2 and the owner index idx_player_warps_by_owner. Renaming (not dropping) the
 -- old table leaves V14's pk_player_warps constraint and idx_player_warps_owner index alive under the
--- _v1_legacy table, and both constraint and index names are global — per schema, not per table — in
+-- _v1_legacy table, and both constraint and index names are global (per schema, not per table) in
 -- PostgreSQL, SQLite, and the H2 engine jOOQ's DDL parser simulates against. Reusing either V14 name would
 -- collide there. A distinct name on the new table sidesteps the clash on every backend (MySQL, which scopes
 -- them per table, never saw a clash either way) without a non-portable DROP of the legacy identifiers.

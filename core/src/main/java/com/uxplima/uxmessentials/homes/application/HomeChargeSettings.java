@@ -31,7 +31,7 @@ public record HomeChargeSettings(HomeCost create, HomeCost relocate, HomeCost te
         };
     }
 
-    /** A settings instance with all actions free — useful when economy is disabled or not yet wired. */
+    /** A settings instance with all actions free: useful when economy is disabled or not yet wired. */
     public static HomeChargeSettings allFree() {
         HomeCost free = HomeCost.free();
         return new HomeChargeSettings(free, free, free);

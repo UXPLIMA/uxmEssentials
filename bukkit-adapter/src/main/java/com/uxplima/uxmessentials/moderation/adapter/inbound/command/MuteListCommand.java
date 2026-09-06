@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /mutelist}: list the players currently muted — the companion of {@code /banlist}. The
+ * {@code /mutelist}: list the players currently muted, the companion of {@code /banlist}. The
  * {@code ListMutes} use case runs the bounded DB query and renders the page, hopped off the tick thread
  * through the {@link Scheduler} port so a large mute table never blocks the command.
  */

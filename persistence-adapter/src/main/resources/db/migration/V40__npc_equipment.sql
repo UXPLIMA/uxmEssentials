@@ -5,7 +5,7 @@
 -- real item at render time and skips a name the live server does not know, so a name that ages out of the
 -- registry degrades to an empty slot rather than a broken NPC.
 --
--- glowing is a SMALLINT 0/1 (the same portable boolean shape as look_at_player in V39 — SQLite, MySQL/MariaDB
+-- glowing is a SMALLINT 0/1 (the same portable boolean shape as look_at_player in V39, SQLite, MySQL/MariaDB
 -- and PostgreSQL do not all agree on a native BOOLEAN literal in the subset we keep portable), defaulting to 0
 -- so every existing NPC keeps its current un-glowing look. glow_color is the optional outline colour NAME
 -- (e.g. RED), nullable for the default white outline.

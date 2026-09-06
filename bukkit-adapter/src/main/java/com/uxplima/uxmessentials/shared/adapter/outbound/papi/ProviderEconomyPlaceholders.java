@@ -17,12 +17,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@link EconomyPlaceholders} over the economy context's resolved {@link EconomyProvider} and the
  * operator-selected {@link AmountFormat}. The same provider every {@code /balance} reads is queried here, so
- * the placeholder balance matches the command's — served from the offline read-cache the provider fronts.
+ * the placeholder balance matches the command's: served from the offline read-cache the provider fronts.
  *
  * <p>The formatted value uses the v2.1 compact format when the operator selected {@code economy.amount-format
  * = compact}, otherwise the full grouped figure, through the shared {@link MoneyFormat}; the compact
  * placeholder always renders the abbreviated form regardless of that setting. The baltop reads the ranked
- * snapshot bounded by a fixed cap — a placeholder that walks an unbounded leaderboard would be a footgun —
+ * snapshot bounded by a fixed cap (a placeholder that walks an unbounded leaderboard would be a footgun)
  * and the position/row resolve empty for anything outside that window (exempt or simply unranked). A
  * currency-bearing placeholder resolves its {@link Currency} from the provider's configured set and degrades
  * when the id names no configured currency.

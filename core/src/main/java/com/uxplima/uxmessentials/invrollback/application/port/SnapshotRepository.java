@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.invrollback.domain.SnapshotId;
 
 /**
  * Outbound port for durable inventory-snapshot storage. A snapshot's queryable facts (id, owner, cause, capture
- * instant) are first-class columns and only its serialized inventory is opaque payload — but that split is the
+ * instant) are first-class columns and only its serialized inventory is opaque payload, but that split is the
  * adapter's concern; the application sees the whole {@link Snapshot}. Snapshots are DB-backed and survive a world
  * rollback (the same hard invariant the economy ledger holds), never PDC. The jOOQ adapter implements this; the
  * use cases depend only on the contract.
@@ -20,11 +20,11 @@ public interface SnapshotRepository {
     /** Persist a freshly captured snapshot. Its id is client-minted, so this is always an insert. */
     void save(Snapshot snapshot);
 
-    /** Every snapshot the owner has, newest first — backs the restore listing and the retention sweep. */
+    /** Every snapshot the owner has, newest first: backs the restore listing and the retention sweep. */
     List<Snapshot> list(UUID owner);
 
     /**
-     * The distinct owners that currently hold at least one snapshot — the seam the scheduled retention sweep
+     * The distinct owners that currently hold at least one snapshot. The seam the scheduled retention sweep
      * iterates so it can apply the per-player count cap ({@link #deleteBeyondCount}) across every player without
      * enumerating players it has no snapshots for. Order is unspecified.
      */
@@ -45,7 +45,7 @@ public interface SnapshotRepository {
     int deleteBeyondCount(UUID owner, int keep);
 
     /**
-     * Delete every snapshot captured strictly before {@code cutoff}, returning the number removed — the age-based
+     * Delete every snapshot captured strictly before {@code cutoff}, returning the number removed: the age-based
      * half of the retention sweep.
      */
     int deleteOlderThan(Instant cutoff);

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
  * {@code VaultAmount} count gate (a concrete cap allows indices up to it, the unlimited sentinel allows any),
  * the {@code VaultSize} clamp into the renderable {@code [1, 6]} row range, the {@code VaultId} index
  * validation, and the {@code Vault} transitions (an open at an unchanged size returns the same aggregate, a
- * contents save raises {@code VaultContentsChanged}). The model is pure — no clock or repository — so every
+ * contents save raises {@code VaultContentsChanged}). The model is pure, no clock or repository, so every
  * rule holds here.
  */
 class VaultQuotaTest {

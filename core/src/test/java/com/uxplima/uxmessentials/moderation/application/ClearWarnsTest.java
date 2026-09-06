@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@code /unwarn} wipes a player's whole warning history in one shot — the natural complement of the
+ * {@code /unwarn} wipes a player's whole warning history in one shot, the natural complement of the
  * append-only {@code /warn}. Clearing a target with warnings removes every row and audit-logs an ok line with
  * the removed count; clearing a target with none is a no-op that still answers the actor and audit-logs the
  * miss, never throwing.

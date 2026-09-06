@@ -68,12 +68,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The jailed-players golden test: the engine-rendered release list must draw the exact grid the original
  * {@code JailedPlayersView} drew. The store holds two active jails ("Alpha" in jail "north", "Beta" in jail
- * "south"), so the list draws two PLAYER_HEAD icons (content slots 0 and 1 — each player's name surfaces through the
+ * "south"), so the list draws two PLAYER_HEAD icons (content slots 0 and 1. Each player's name surfaces through the
  * {@code mod_jailed_player} token) and the two ARROW nav buttons (slots 48 and 50). The engine window is snapshotted
  * as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced
  * for this fixture, then frozen here as the contract so the old class could be deleted. Then a left click on the
  * first head through the engine's own {@link MenuListener} proves the migrated path releases that player through the
- * same audited {@code Unjail} use case {@code /unjail} takes — captured by the recording {@code Sanctions} the use
+ * same audited {@code Unjail} use case {@code /unjail} takes. Captured by the recording {@code Sanctions} the use
  * case calls.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code mod_jailed_player} token, so a jailed player's
@@ -136,14 +136,14 @@ class ModerationJailedListGoldenTest {
         fireClick(0); // content slot 0 holds Alpha; a left click must release them
 
         // Unjail releases the target through the Sanctions adapter for an online target, so the recording adapter
-        // captured Alpha's UUID — the audited release path ran for the clicked player.
+        // captured Alpha's UUID: the audited release path ran for the clicked player.
         assertThat(sanctions.released).containsExactly(ALPHA);
     }
 
     /**
      * The slot -> (material, plain name) map the deleted {@code JailedPlayersView} produced for this fixture (two
      * active jails, "Alpha" in "north" and "Beta" in "south"), captured while both paths rendered it identically and
-     * frozen here: two PLAYER_HEAD icons (content slots 0 and 1 — the names surface through the {@code
+     * frozen here: two PLAYER_HEAD icons (content slots 0 and 1. The names surface through the {@code
      * mod_jailed_player} token) and the two nav ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

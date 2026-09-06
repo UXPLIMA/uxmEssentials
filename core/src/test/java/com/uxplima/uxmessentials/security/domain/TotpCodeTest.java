@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Pins {@link TotpCode} to the RFC 6238 specification. The parameterised cases are the Appendix B reference
  * vectors for the SHA1 variant: the seed is the ASCII "12345678901234567890" (Base32
- * {@code GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ}), and each timestamp maps to the vector's code — truncated to the
+ * {@code GEZDGNBVGY3TQOJQGEZDGNBVGY3TQOJQ}), and each timestamp maps to the vector's code, truncated to the
  * 6-digit surface every authenticator app shows. Passing these is the proof our maths matches Google
  * Authenticator, Aegis and the rest byte-for-byte. The remaining cases pin the ± window tolerance and that a wrong
  * code is refused.

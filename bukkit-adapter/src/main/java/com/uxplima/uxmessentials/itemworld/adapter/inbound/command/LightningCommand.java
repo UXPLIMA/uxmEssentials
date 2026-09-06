@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /lightning [player]} (alias {@code /smite}): strike lightning at a player. With no argument the strike
- * lands wherever the caller is aiming — the self form is the "strike where I aim" verb: the block under the
+ * lands wherever the caller is aiming. The self form is the "strike where I aim" verb: the block under the
  * cross-hair, or the point along the look direction when that is open air (so aiming at the sky still strikes
  * out in front, not back on the caller). With a named player or a selector the strike lands on each
  * <em>target's own position</em>, never the caller's look direction, and {@code @a} fans the strike out to
@@ -122,7 +122,7 @@ public final class LightningCommand extends ItemworldCommandSupport implements C
     }
 
     /**
-     * The point of the self/look strike: the block under the cross-hair, or — when that is open air — the point
+     * The point of the self/look strike: the block under the cross-hair, or, when that is open air, the point
      * {@code REACH} away along the caller's look direction. Aiming at the sky must never fall back to the
      * caller's own position; the bolt follows the aim and grounds itself at that column.
      */

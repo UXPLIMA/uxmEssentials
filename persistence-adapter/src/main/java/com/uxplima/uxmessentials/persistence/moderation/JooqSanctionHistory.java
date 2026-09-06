@@ -20,11 +20,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The jOOQ-backed {@link SanctionHistory} over the generated V11 history table. {@link #append} is a single
  * insert with a synthetic {@code max(id)+1} key (the V5 warn-history pattern), so the table is only ever
- * inserted into and read back — never updated. The family reads scope to a family by {@code action} and read
+ * inserted into and read back: never updated. The family reads scope to a family by {@code action} and read
  * newest-first off the {@code (target, ts DESC)} index; the unified {@link #recentForTarget} read drops the
  * action filter so every kind folds into one timeline; {@link #recentByActor} scopes by {@code actor} (V28
- * index) for {@code /staffhistory}. Every read caps at the supplied limit. Every statement is typed jOOQ DSL —
- * no SQL is ever string-concatenated — and writes go through the transactional {@code write} seam.
+ * index) for {@code /staffhistory}. Every read caps at the supplied limit. Every statement is typed jOOQ DSL
+ * no SQL is ever string-concatenated, and writes go through the transactional {@code write} seam.
  */
 @NullMarked
 public final class JooqSanctionHistory extends JooqRepository implements SanctionHistory {

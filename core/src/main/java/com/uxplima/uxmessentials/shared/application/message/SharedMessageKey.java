@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.shared.application.message;
 
 /**
- * The shared kernel's common message keys — the cross-cutting block no single feature context owns.
+ * The shared kernel's common message keys: the cross-cutting block no single feature context owns.
  *
  * <p>Several families live here (docs/13-i18n §6, the {@code shared} row): the {@code command.*} failures
  * every command-bearing context raises before it reaches a use case (no permission, player-only,
@@ -39,7 +39,7 @@ public enum SharedMessageKey implements MessageKey {
     LANG_UNKNOWN("lang.unknown"),
     LANG_AVAILABLE("lang.available"),
 
-    // the cross-cutting /help command listing — one paginated page of usable commands
+    // the cross-cutting /help command listing. One paginated page of usable commands
     HELP_HEADER("help.header"),
     HELP_ENTRY("help.entry"),
     HELP_ENTRY_ALIASES("help.entry-aliases"),

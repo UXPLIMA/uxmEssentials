@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link VanishVisibility} implementation, reading the vanish context's single {@link VanishStore} authority
  * directly (rather than an indirect {@code canSee} projection). A {@code target} is hidden from a {@code viewer} when
- * the target is vanished in the store and the viewer's see level is below the target's use level — so a sender who
+ * the target is vanished in the store and the viewer's see level is below the target's use level, so a sender who
  * cannot see a vanished player resolves them as if offline, while staff whose see level clears the target's use level
  * can still message them. The rule itself is the pure {@code VanishState#canSee}; this adapter only supplies the two
  * inputs (the store's vanished level and the viewer's see level, resolved through the shared {@link VanishLevelResolver}

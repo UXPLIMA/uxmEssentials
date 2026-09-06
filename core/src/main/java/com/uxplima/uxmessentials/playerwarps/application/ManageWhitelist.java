@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /pwarp whitelist add|remove}: manage the guest list of a {@code WHITELIST}-access warp. Allowed to the
- * owner, a co-owner, and a manager by the capability matrix ({@link WarpCapability#MANAGE_WHITELIST}) — the guest
+ * owner, a co-owner, and a manager by the capability matrix ({@link WarpCapability#MANAGE_WHITELIST}), the guest
  * list is presentation-adjacent, not the money or the lifecycle, so a manager may run it. Each verb resolves the
  * warp ({@link PlayerWarpError#NOT_FOUND}), gates the actor ({@link PlayerWarpError#NO_PERMISSION}), then adds or
  * removes the whitelist row and notifies. The add is idempotent at the store, so re-whitelisting a player is a

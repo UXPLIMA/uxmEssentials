@@ -67,7 +67,7 @@ class BiomeHotspotListenerTest {
         listener.onChunkLoad(new ChunkLoadEvent(chunk, true));
         listener.onChunkLoad(new ChunkLoadEvent(chunk, false));
 
-        assertThat(hotspots.records).hasSize(1); // deduped by chunk key — no duplicate, no re-scan
+        assertThat(hotspots.records).hasSize(1); // deduped by chunk key, no duplicate, no re-scan
     }
 
     @Test
@@ -82,7 +82,7 @@ class BiomeHotspotListenerTest {
         listener.onChunkLoad(new ChunkLoadEvent(second, true));
         listener.onChunkLoad(new ChunkLoadEvent(first, false));
 
-        // first(0,0) scanned twice — the bounded window forgot it after second(9,9), rather than growing without limit.
+        // first(0,0) scanned twice: the bounded window forgot it after second(9,9), rather than growing without limit.
         long firstChunkRecords = hotspots.records.stream()
                 .filter(record -> record.chunkX() == 0 && record.chunkZ() == 0)
                 .count();

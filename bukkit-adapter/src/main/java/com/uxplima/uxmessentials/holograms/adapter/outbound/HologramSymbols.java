@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Operator-defined text macros applied to every hologram line at render — a config map of literal {@code token →
+ * Operator-defined text macros applied to every hologram line at render, a config map of literal {@code token →
  * replacement} pairs (for example {@code ":heart:" = "<red>❤"}) so a server can keep recurring symbols and
  * snippets in one place. The replacements are plain literal substitutions in configured order, applied to a
  * line's MiniMessage source before it is deserialised, so a replacement may itself contain MiniMessage tags.
@@ -30,7 +30,7 @@ public record HologramSymbols(Map<String, String> replacements) {
         replacements = Collections.unmodifiableMap(new LinkedHashMap<>(replacements));
     }
 
-    /** No configured symbols — {@link #wrap} is then the identity. */
+    /** No configured symbols: {@link #wrap} is then the identity. */
     public static HologramSymbols none() {
         return new HologramSymbols(Map.of());
     }
@@ -58,7 +58,7 @@ public record HologramSymbols(Map<String, String> replacements) {
     }
 
     /**
-     * A transform that applies these symbols and then {@code next} — so a line's macros expand before the
+     * A transform that applies these symbols and then {@code next}, so a line's macros expand before the
      * placeholder bridge runs. Returns {@code next} unchanged when no symbols are configured.
      */
     public UnaryOperator<String> wrap(UnaryOperator<String> next) {

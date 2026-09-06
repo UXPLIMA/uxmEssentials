@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.playerwarps.domain;
 /**
  * The raw totals of a warp's star ratings, straight from the rating table: the {@link #sum} of every awarded star
  * over the {@link #count} of votes cast. It is the un-smoothed input the ranking policy turns into a
- * {@link RatingSummary} — the plain average is {@code sum / count}, and the Bayesian score folds in the global mean
+ * {@link RatingSummary}. The plain average is {@code sum / count}, and the Bayesian score folds in the global mean
  * ({@link BayesianRating}). A warp nobody has rated is {@code (0, 0)}; guarding the division by a zero count is the
  * policy's concern, not this value object's, so the tally itself never divides.
  *

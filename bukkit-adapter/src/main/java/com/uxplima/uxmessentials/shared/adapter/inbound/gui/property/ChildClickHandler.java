@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
  * ignores both flags; a list-entry button branches on them exactly as the bespoke entry button branched on the live
  * {@code InventoryClickEvent} (left moves up, right moves down, shift-left edits, shift-right removes).
  *
- * <p>Passing the gesture as the property model's own booleans — not the engine's {@code ClickKind} — is what keeps
+ * <p>Passing the gesture as the property model's own booleans, not the engine's {@code ClickKind}, is what keeps
  * the property package decoupled from the menu engine: the engine maps its click kind down to these two booleans when
  * it invokes a button, so neither this type nor any property ever names an engine class.
  */

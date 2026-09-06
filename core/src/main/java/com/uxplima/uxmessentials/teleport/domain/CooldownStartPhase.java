@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.teleport.domain;
 
 /**
- * When a teleport cooldown's clock starts, and — equivalently — which lifecycle transitions are allowed
+ * When a teleport cooldown's clock starts, and, equivalently, which lifecycle transitions are allowed
  * to burn it. This is the domain's own statement of the {@code cooldown-start-phase} contract; the
  * shared {@code Cooldowns.CooldownStartPhase} kernel enum mirrors it at the port boundary, and the
  * application maps between the two so the domain never imports a port type.
@@ -13,7 +13,7 @@ package com.uxplima.uxmessentials.teleport.domain;
  */
 public enum CooldownStartPhase {
 
-    /** The clock starts the moment {@code /tpa} is issued — even a request later denied burns it. */
+    /** The clock starts the moment {@code /tpa} is issued: even a request later denied burns it. */
     REQUEST,
 
     /** The clock starts when the target accepts; a denied or expired request does not burn it. */

@@ -3,7 +3,7 @@
 -- periodic sampler adds the sample interval to today's row for each online player,
 -- classified by their live AFK state. Storing per-day rows means the today /
 -- last-7-days / last-30-days / all-time buckets the command renders fall out as
--- range SUMs at read time — there is no rollover job and no aggregate row to keep
+-- range SUMs at read time. There is no rollover job and no aggregate row to keep
 -- consistent.
 --
 -- Same portability contract as V1-V63: the DDL stays in the subset SQLite (the

@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The LiteBans source's {@code SupportedMappings} rows — its claim of what it migrates (docs/12-migration
+ * The LiteBans source's {@code SupportedMappings} rows. Its claim of what it migrates (docs/12-migration
  * §5.4). Each row ties a LiteBans table to the moderation aggregate it seeds, the mapper that performs the
  * translation, and the identity the conflict policy keys on. {@code MigrationSourceRegistryDriftTest} holds
  * this table in lock-step with the registered source: a built source with no rows, or rows for an

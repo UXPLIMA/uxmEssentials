@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link PluginHook} to either its real implementation (the target plugin is present and enabled) or its
  * no-op default (absent), and hands callers the typed capability by class.
  *
- * <p>Resolution happens exactly once, here, because plugin presence is stable for a server run — a plugin
+ * <p>Resolution happens exactly once, here, because plugin presence is stable for a server run, a plugin
  * cannot appear or vanish mid-run. Callers fetch a never-null capability with {@link #capability(Class)} and
  * use it unconditionally; the absent default makes every call a safe no-op without a presence check. A hook
  * whose {@link PluginHook#whenPresent} throws (an incompatible SDK surfacing as a {@code NoClassDefFoundError}

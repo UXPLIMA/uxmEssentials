@@ -23,13 +23,13 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Silences the open animation and sound a vanished player would otherwise broadcast when opening a lidded container.
  * A chest, shulker box, ender chest, or barrel plays its lid animation and open sound to every nearby player, driven by
- * the block's viewer count — so even a hidden player's peek gives them away. This listener intercepts the open: for a
+ * the block's viewer count, so even a hidden player's peek gives them away. This listener intercepts the open: for a
  * vanished opener of one of those containers ({@link VanishContainers#broadcastsOpen}) it cancels the noisy vanilla
  * open, which never touches the block's viewer count, and instead shows a detached copy of the contents that carries no
  * block and therefore no animation. On close it writes the copy's contents back to the real container.
  *
- * <p>This is the same "live inventory mirror" pattern the invsee / endersee / offline-container views use — a raw
- * Bukkit inventory built and opened outside the menu engine — and is allow-listed with them in the architecture fence.
+ * <p>This is the same "live inventory mirror" pattern the invsee / endersee / offline-container views use, a raw
+ * Bukkit inventory built and opened outside the menu engine, and is allow-listed with them in the architecture fence.
  * It is packet-free (our packet layer carries entity data, not block actions), which is the trade-off for not shipping
  * a ProtocolLib-style interceptor: the copy is a point-in-time snapshot, so if another actor mutates the real container
  * while the vanished player has the mirror open, the write-back on close wins. That window is negligible for a hidden
@@ -63,7 +63,7 @@ public final class VanishSilentContainerListener implements Listener {
         Inventory original = event.getInventory();
         Mirror active = mirrors.get(who);
         if (active != null && active.copy() == original) {
-            return; // our own silent re-open — do not intercept it again
+            return; // our own silent re-open, do not intercept it again
         }
         if (!store.isVanished(who)
                 || !VanishContainers.broadcastsOpen(original.getType().name())) {

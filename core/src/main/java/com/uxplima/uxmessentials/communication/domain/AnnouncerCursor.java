@@ -4,7 +4,7 @@ import java.util.OptionalInt;
 import java.util.function.IntUnaryOperator;
 
 /**
- * The immutable rotation position of the announcer — the index it last broadcast, or none before the first tick.
+ * The immutable rotation position of the announcer, the index it last broadcast, or none before the first tick.
  * It owns the no-immediate-repeat rule: given the number of announcements and the {@link Ordering},
  * {@link #advance} returns the next index and a new cursor, never repeating the previous index when more than one
  * announcement is configured.
@@ -13,7 +13,7 @@ import java.util.function.IntUnaryOperator;
  * rotation draws an index through the injected {@code randomBound} function (a bounded RNG passed in by the use
  * case so the domain stays pure and deterministic under test) and, when the draw lands on the previous index and
  * more than one entry exists, nudges it forward by one so the same announcement is never shown twice running. A
- * single-entry config collapses both to "index 0 every tick" — there is no other entry to avoid.
+ * single-entry config collapses both to "index 0 every tick": there is no other entry to avoid.
  *
  * @param last the index broadcast on the previous tick, empty before the first tick
  */

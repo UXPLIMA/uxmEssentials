@@ -12,14 +12,14 @@ api-version: '26.2'
 # to WorldPhase and it runs at ServerLoadEvent instead.
 load: STARTUP
 authors: ['UXPLIMA']
-description: 'All-in-one essentials: homes, warps, teleport, DB-backed economy, kits, player-state, private messages + mail, presence, lightweight moderation, item/world utilities — organised as first-class hot-reloadable feature modules with an EssentialsX migration path.'
+description: 'All-in-one essentials: homes, warps, teleport, DB-backed economy, kits, player-state, private messages + mail, presence, lightweight moderation, item/world utilities: organised as first-class hot-reloadable feature modules with an EssentialsX migration path.'
 website: 'https://github.com/UXPLIMA/uxmEssentials'
 
 # Folia: every scheduler call goes through the injected Scheduler port; the
 # adapter routes to the right region/entity/global scheduler.
 folia-supported: true
 
-# Optional integrations — the plugin runs fully without any of them. LuckPerms
+# Optional integrations, the plugin runs fully without any of them. LuckPerms
 # backs the Permissions port (else the Bukkit-permission default impl, ADR 0005);
 # Vault/Treasury are consumed/registered by the EconomyProvider adapters (ADR 0004).
 dependencies:
@@ -117,7 +117,7 @@ dependencies:
     SuperiorSkyblock2:
       load: BEFORE
       required: false
-    # Menu-engine optional integrations — consumed behind the hooks SPI (shared.adapter.outbound.hooks). Each is
+    # Menu-engine optional integrations: consumed behind the hooks SPI (shared.adapter.outbound.hooks). Each is
     # reached only past a plugin-present guard, so the menu engine (and the plugin as a whole) runs fully without
     # any of them; the no-op default carries no SDK type, so an absent one never loads an external class. Loaded
     # before us so their head/item registries are ready when a menu renders on enable.
@@ -145,7 +145,7 @@ dependencies:
     # Currency back-ends the menu engine can target by spec (shared.adapter.outbound.currency). Vault is already
     # listed above; these three are reached purely by reflection past a plugin-present guard, so the menu engine
     # runs fully without any of them and an absent one loads no class. Loaded before us so the guard sees them on
-    # enable. (Exp needs no plugin — it is native Paper experience.)
+    # enable. (Exp needs no plugin: it is native Paper experience.)
     PlayerPoints:
       load: BEFORE
       required: false

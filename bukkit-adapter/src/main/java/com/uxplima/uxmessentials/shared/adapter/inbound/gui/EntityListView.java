@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A reusable, config-driven paginated management list over an entity type {@code T}. It draws one icon per
  * entity into the configured content slots (paging when there are more entities than fit), a previous/next
- * button at the layout's nav slots, an optional create button, and a glass-filler background — all geometry,
+ * button at the layout's nav slots, an optional create button, and a glass-filler background, all geometry,
  * materials, and slots from an {@link EntityListLayout}, every visible string from a {@link MessageKey}. A
  * click on an entity icon invokes {@code onSelect} (a module wires that to open its {@link EntityEditorView});
  * a click on the create button invokes the optional {@code onCreate}.
@@ -101,7 +101,7 @@ public final class EntityListView<T> {
      * entity back, which is always one of the very entities this view's supplier produced.
      *
      * <p>When the snapshot is empty and the caller wired an {@code emptyTitle}, the window opens under that title
-     * instead — the engine then draws just the filler and nav, an empty-state panel rather than a head grid, so a
+     * instead. The engine then draws just the filler and nav, an empty-state panel rather than a head grid, so a
      * list with nothing to show no longer needs a bespoke empty-state window.
      */
     private EntityListSpec spec(PlayerRef viewer) {
@@ -200,7 +200,7 @@ public final class EntityListView<T> {
         }
 
         /**
-         * The title shown when the entity snapshot is empty — an empty-state panel under this title rather than a
+         * The title shown when the entity snapshot is empty, an empty-state panel under this title rather than a
          * head/icon grid. Optional: a list that omits it keeps the regular {@link #title} even when empty.
          */
         public Builder<T> emptyTitle(MessageKey emptyTitle) {

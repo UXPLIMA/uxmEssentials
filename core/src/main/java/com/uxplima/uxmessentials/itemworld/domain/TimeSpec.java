@@ -37,12 +37,12 @@ public record TimeSpec(long ticks, Mode mode) {
         }
     }
 
-    /** {@code /day} — daytime set. */
+    /** {@code /day}, daytime set. */
     public static TimeSpec day() {
         return new TimeSpec(1_000L, Mode.SET);
     }
 
-    /** {@code /night} — nighttime set. */
+    /** {@code /night}, nighttime set. */
     public static TimeSpec night() {
         return new TimeSpec(13_000L, Mode.SET);
     }

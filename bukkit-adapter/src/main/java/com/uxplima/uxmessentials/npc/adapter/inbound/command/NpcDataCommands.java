@@ -131,25 +131,25 @@ final class NpcDataCommands extends NpcCommandSupport {
             List.of("pale", "spotted", "snowy", "black", "ashen", "rusty", "woods", "chestnut", "striped");
     /** The chicken/cow/pig temperature-variant names, offered for {@code chicken_variant}/{@code cow_variant}/{@code pig_variant}. */
     private static final List<String> TEMPERATURE_VARIANT_VALUES = List.of("temperate", "warm", "cold");
-    /** The horse coat-colour ids (0–6), offered as tab completions for {@code horse_color}. */
+    /** The horse coat-colour ids (0 to 6), offered as tab completions for {@code horse_color}. */
     private static final List<String> HORSE_COLOR_VALUES = List.of("0", "1", "2", "3", "4", "5", "6");
-    /** The horse marking ids (0–4), offered as tab completions for {@code horse_markings}. */
+    /** The horse marking ids (0 to 4), offered as tab completions for {@code horse_markings}. */
     private static final List<String> HORSE_MARKINGS_VALUES = List.of("0", "1", "2", "3", "4");
     /** The horse style names (the named alias of the markings), offered as tab completions for {@code horse_style}. */
     private static final List<String> HORSE_STYLE_VALUES = Arrays.stream(Horse.Style.values())
             .map(style -> style.name().toLowerCase(Locale.ROOT))
             .toList();
-    /** The llama coat-variant ids (0–3), offered as tab completions for {@code llama_variant}. */
+    /** The llama coat-variant ids (0 to 3), offered as tab completions for {@code llama_variant}. */
     private static final List<String> LLAMA_VARIANT_VALUES = List.of("0", "1", "2", "3");
-    /** The sheep wool-colour names, offered as tab completions for {@code sheep_color} (a 0–15 id is also accepted). */
+    /** The sheep wool-colour names, offered as tab completions for {@code sheep_color} (a 0 to 15 id is also accepted). */
     private static final List<String> SHEEP_COLOR_VALUES = Arrays.stream(DyeColor.values())
             .map(color -> color.name().toLowerCase(Locale.ROOT))
             .toList();
     /** The shulker peek stops (0 closed … 100 open), offered as tab completions for {@code shulker_peek}. */
     private static final List<String> SHULKER_PEEK_VALUES = List.of("0", "25", "50", "75", "100");
-    /** The panda gene ids (0–6), offered as tab completions for {@code panda_gene}. */
+    /** The panda gene ids (0 to 6), offered as tab completions for {@code panda_gene}. */
     private static final List<String> PANDA_GENE_VALUES = List.of("0", "1", "2", "3", "4", "5", "6");
-    /** The predefined tropical-fish variant indices (0–21), offered as tab completions for {@code tropical_fish}. */
+    /** The predefined tropical-fish variant indices (0 to 21), offered as tab completions for {@code tropical_fish}. */
     private static final List<String> TROPICAL_FISH_VALUES = java.util.stream.IntStream.rangeClosed(0, 21)
             .mapToObj(Integer::toString)
             .toList();

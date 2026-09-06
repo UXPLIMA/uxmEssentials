@@ -5,12 +5,12 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
 /**
  * The modelled failures an atomic two-sided move (a {@code /pay}, a {@code WarpCost} charge) can produce.
  * Distinct from {@link EconomyError} because a transfer has policy gates a single-sided credit/debit does
- * not — paying yourself, paying below the currency minimum, paying a target who has disabled incoming pay,
+ * not. Paying yourself, paying below the currency minimum, paying a target who has disabled incoming pay,
  * or naming a currency the active provider cannot serve. Each value carries the {@link EconomyMessageKey}
  * the command adapter renders.
  *
  * <p>This is the error half of the {@code EconomyProvider.transfer} contract: a transfer either applies both
- * legs atomically or returns one of these and mutates nothing — rejected, not partially applied (the
+ * legs atomically or returns one of these and mutates nothing. Rejected, not partially applied (the
  * double-spend invariant, {@code docs/02-concurrency.md} §6.7).
  */
 public enum TransferError {
@@ -18,7 +18,7 @@ public enum TransferError {
     /** The sender cannot cover the amount; the guarded debit changed no rows (the contract's rejection case). */
     INSUFFICIENT_FUNDS(EconomyMessageKey.PAY_INSUFFICIENT),
 
-    /** A {@code /pay} to the payer's own account — refused before any leg runs. */
+    /** A {@code /pay} to the payer's own account, refused before any leg runs. */
     SELF_TRANSFER(EconomyMessageKey.PAY_SELF),
 
     /** The amount is below the currency's configured {@code min-pay}. */

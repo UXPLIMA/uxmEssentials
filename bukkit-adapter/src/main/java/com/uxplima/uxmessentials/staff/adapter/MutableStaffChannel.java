@@ -11,8 +11,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A rebindable {@link StaffChannel} holder: it forwards to {@link StaffChannel#NONE} until the messaging-backed
  * channel is bound in, mirroring the messaging context's {@code MutableMutePolicy}. When the messaging module
- * is disabled the binding never happens and staff chat stays {@code NONE} — an empty audience and a no-op send
- * — so {@code /staffchat} degrades rather than fails.
+ * is disabled the binding never happens and staff chat stays {@code NONE}, an empty audience and a no-op send
+ *, so {@code /staffchat} degrades rather than fails.
  */
 @NullMarked
 public final class MutableStaffChannel implements StaffChannel {

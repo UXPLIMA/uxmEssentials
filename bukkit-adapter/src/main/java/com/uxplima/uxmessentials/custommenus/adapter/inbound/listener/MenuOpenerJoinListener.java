@@ -23,11 +23,11 @@ import org.jspecify.annotations.Nullable;
  * <p>The item is placed in the opener's configured slot when that slot is a valid, empty player-inventory slot;
  * otherwise it is added to the first free slot so a full or occupied target never drops the item on the floor. The
  * join event fires on the joining player's own entity thread, where touching their live inventory is legal, so the
- * give runs inline — it only ever touches the one player who joined, never the wider roster.
+ * give runs inline: it only ever touches the one player who joined, never the wider roster.
  */
 public final class MenuOpenerJoinListener implements Listener {
 
-    /** The player inventory addresses slots {@code 0..40}: 0–35 storage, 36–39 armour, 40 off-hand. */
+    /** The player inventory addresses slots {@code 0..40}: 0 to 35 storage, 36 to 39 armour, 40 off-hand. */
     private static final int MAX_SLOT = 40;
 
     private final Supplier<List<OpenerSpec>> openers;

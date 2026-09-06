@@ -19,13 +19,13 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>RClaim is a {@code compileOnly} soft-depend, so {@code net.weesli.rclaim.*} is absent from the runtime
  * and test classpaths. Every typed RClaim reference lives inside a method behind {@link #active()}, which
- * only consults the plugin manager — constructing this provider and asking whether it is active never loads
+ * only consults the plugin manager. Constructing this provider and asking whether it is active never loads
  * an RClaim class. The static {@link RClaimProvider} accessors are read lazily inside {@link #claimAt}, again
  * past the present guard, and any {@link Throwable} degrades to empty/inactive.
  *
  * <p>RClaim is chunk-based and stores claim ownership in the chunk's {@code PersistentDataContainer}, so its
  * {@code ClaimManager.getClaim(Location)} would force a chunk load (region-bound, unsafe on Folia). This
- * provider instead matches against the in-memory claim cache by world name and chunk-corner coordinates —
+ * provider instead matches against the in-memory claim cache by world name and chunk-corner coordinates
  * a pure-datastore lookup that never touches a chunk. Trust is owner-or-member; RClaim has no per-claim ban
  * concept, so {@link ClaimLookup#isBanned} is always {@code false}.
  */
@@ -70,7 +70,7 @@ public final class RClaimClaimProvider implements ClaimProvider {
             return Optional.empty();
         }
         // RClaim stores a claim's chunk via its block-corner coordinates (chunkX << 4). Convert the queried
-        // block to its chunk corner and match against the cached claims by world name — a pure in-memory scan
+        // block to its chunk corner and match against the cached claims by world name, a pure in-memory scan
         // that never loads a chunk, unlike getClaim(Location) which reads the chunk's PersistentDataContainer.
         int cornerX = (blockX >> 4) << 4;
         int cornerZ = (blockZ >> 4) << 4;
@@ -95,7 +95,7 @@ public final class RClaimClaimProvider implements ClaimProvider {
 
         @Override
         public boolean isBanned(UUID player) {
-            // RClaim has no per-claim ban concept — access is modelled as membership/permission only.
+            // RClaim has no per-claim ban concept: access is modelled as membership/permission only.
             return false;
         }
 

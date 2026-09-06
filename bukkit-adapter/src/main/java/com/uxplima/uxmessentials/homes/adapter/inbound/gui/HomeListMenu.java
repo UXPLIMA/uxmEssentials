@@ -43,7 +43,7 @@ import org.jspecify.annotations.Nullable;
  * owner could hold, from the first slot up to their resolved {@link HomeQuota} ceiling: a filled cell shows the home's
  * icon and opens the {@link HomeActionMenu} on click, an empty-but-addressable cell shows the empty bed and creates a
  * home there at the player's position. The two collapse into one {@link HomeCell} list template over the
- * {@code home:slots} source — the {@code home_icon} / {@code home_cell_name} / {@code home_cell_lore} placeholders
+ * {@code home:slots} source, the {@code home_icon} / {@code home_cell_name} / {@code home_cell_lore} placeholders
  * branch on whether the bound cell carries a home, and the page indicator fills from the engine's {@code %page%} /
  * {@code %max_page%}.
  *
@@ -133,7 +133,7 @@ public final class HomeListMenu {
     /**
      * The slot list, built off the viewer's region thread (it reads homes and resolves the quota). Lists the owner's
      * homes by slot index, resolves the addressable-slot ceiling, and emits one {@link HomeCell} per index {@code
-     * 0..maxSlots-1} — filled when a home occupies that index, empty otherwise. Every cell carries the owner's used
+     * 0..maxSlots-1}: filled when a home occupies that index, empty otherwise. Every cell carries the owner's used
      * count and ceiling so an empty cell's lore can fill {@code {used}}/{@code {limit}} without re-reading the store.
      */
     private List<HomeCell> slots(MenuContext ctx) {
@@ -198,7 +198,7 @@ public final class HomeListMenu {
     /**
      * Create a home at {@code slotIndex}. The click runs on the viewer's entity thread, so the live position is read
      * here; the block-safety check reads the target column, which is only legal on that column's region thread, so we
-     * hop there first, then persist async and reopen — the same threads and checks the old view used.
+     * hop there first, then persist async and reopen: the same threads and checks the old view used.
      */
     private void create(Player player, PlayerRef viewer, int slotIndex) {
         Position at = BukkitRefs.toPosition(Objects.requireNonNull(player.getLocation(), "player location"));

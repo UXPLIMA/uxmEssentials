@@ -14,7 +14,7 @@ import java.util.UUID;
  *
  * <p>The visibility rule lives here as {@link #canSee}: a viewer sees a vanished target only when the viewer's
  * <em>see level</em> is at least the target's <em>use level</em> ({@link VanishLevels}). Both levels are resolved from
- * permissions by the adapter (it is not a domain concern) and passed in — the viewer's see level as the argument, the
+ * permissions by the adapter (it is not a domain concern) and passed in. The viewer's see level as the argument, the
  * target's use level read from this state. The simple case still holds: with layered permissions off a viewer with the
  * plain {@code .see} node resolves to see level 1 and every vanished player is use level 1, so {@code 1 >= 1} reveals;
  * a viewer with no see node resolves to see level 0, so {@code 0 >= 1} hides.

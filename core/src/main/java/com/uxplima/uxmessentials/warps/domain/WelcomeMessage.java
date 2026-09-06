@@ -6,9 +6,9 @@ import java.util.Set;
 
 /**
  * One welcome message a warp shows on arrival: the {@code message} text and the delivery {@code type}. The
- * type is validated and normalised at the record boundary against the {@link #VALID_TYPES known set} —
+ * type is validated and normalised at the record boundary against the {@link #VALID_TYPES known set}
  * upper-cased, and any value outside the set (including a legacy or malformed stored value) coerced to
- * {@code CHAT} — so a delivery switch elsewhere never has to defend against an unexpected type.
+ * {@code CHAT}, so a delivery switch elsewhere never has to defend against an unexpected type.
  */
 public record WelcomeMessage(String message, String type) {
 

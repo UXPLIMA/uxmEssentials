@@ -30,7 +30,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 /**
  * A static "page info" item resolves {@code %max_page%} to the page count its sibling list paginates across, even
  * though static items render before the list pages. Seven entries over three content slots span three pages, so the
- * indicator reads {@code 1/3} on page zero and {@code 2/3} after a flip — the renderer stamps the page count onto the
+ * indicator reads {@code 1/3} on page zero and {@code 2/3} after a flip. The renderer stamps the page count onto the
  * context it draws the static item with, mirroring the one {@code populateList} would have computed.
  */
 class MaxPagePlaceholderTest {

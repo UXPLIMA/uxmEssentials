@@ -24,8 +24,8 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 /**
  * Converts an OGUI (OGUI-Custom-GUIs) GUI YAML into an equivalent uxmEssentials HOCON menu spec, so an operator
- * migrating off OGUI keeps their menus. An OGUI file wraps its whole GUI under a single root key — the GUI name
- * ({@code world_shop:}) — beneath which sit the {@code title}, the {@code rows} (or {@code size}), the open-command
+ * migrating off OGUI keeps their menus. An OGUI file wraps its whole GUI under a single root key, the GUI name
+ * ({@code world_shop:}), beneath which sit the {@code title}, the {@code rows} (or {@code size}), the open-command
  * {@code commands} aliases, and the {@code items { … }} map. This reads that surface and emits the {@code title} /
  * {@code rows} / {@code items { … }} shape
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpecLoader} loads, mirroring the sibling
@@ -53,7 +53,7 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
  * directory convert.
  *
  * <p>A file that declares more than one GUI (some OGUI example files bundle several) has only its first GUI converted,
- * with a warning naming the rest — our loader is one menu per {@code .conf}, so the others belong in their own files.
+ * with a warning naming the rest: our loader is one menu per {@code .conf}, so the others belong in their own files.
  * OGUI colour codes ({@code &a}, {@code #77ff77}) and PlaceholderAPI tokens ({@code %player_name%}) are carried
  * through verbatim: our renderer resolves MiniMessage and PAPI, so a placeholder keeps working, while a legacy code is
  * left as written and warned about once. The whole class is Configurate-only and touches no Bukkit type, so it is
@@ -129,12 +129,12 @@ public final class OguiConverter {
                 roots.entrySet().iterator().next();
         if (roots.size() > 1) {
             warnings.add("file declares " + roots.size() + " GUIs; only the first, '" + first.getKey()
-                    + "', was converted — split the others into their own files");
+                    + "', was converted. Split the others into their own files");
         }
         return first.getValue();
     }
 
-    /** The GUI's open-command {@code commands} aliases as a note — our opener wiring is separate, as in DeluxeMenus. */
+    /** The GUI's open-command {@code commands} aliases as a note: our opener wiring is separate, as in DeluxeMenus. */
     private Optional<String> openCommandNote(ConfigurationNode gui) {
         ConfigurationNode commands = gui.node("commands");
         if (commands.virtual() || commands.isNull()) {
@@ -144,14 +144,14 @@ public final class OguiConverter {
         if (value.isBlank()) {
             return Optional.empty();
         }
-        return Optional.of("open commands: " + value + " — wire this via /menu open or an openers.conf entry");
+        return Optional.of("open commands: " + value + ". Wire this via /menu open or an openers.conf entry");
     }
 
     /** Warn when a GUI uses a non-chest {@code inventory_type} (HOPPER, DISPENSER, …) we render as a chest instead. */
     private void warnNonChest(ConfigurationNode gui, List<String> warnings) {
         String type = gui.node("inventory_type").getString("").strip();
         if (!type.isEmpty() && !type.equalsIgnoreCase("CHEST")) {
-            warnings.add("inventory_type '" + type + "' is not a chest; converted as a chest menu — adjust the rows");
+            warnings.add("inventory_type '" + type + "' is not a chest; converted as a chest menu, adjust the rows");
         }
     }
 
@@ -237,7 +237,7 @@ public final class OguiConverter {
         }
         if (!itemId.isEmpty() && !type.equals("vanilla")) {
             warnings.add("item uses a '" + type + "' custom item ('" + itemId
-                    + "'); only its material was converted — set the provider icon manually");
+                    + "'); only its material was converted, set the provider icon manually");
         }
         return material;
     }
@@ -279,7 +279,7 @@ public final class OguiConverter {
     // --- actions ------------------------------------------------------------------------------------------------
 
     /**
-     * Build the item's click actions. Every gesture-agnostic source folds onto our {@code any} gesture — the legacy
+     * Build the item's click actions. Every gesture-agnostic source folds onto our {@code any} gesture, the legacy
      * {@code commands} list (each run as a {@code console} command), then the typed {@code actions}, then the item's
      * navigation {@code type}, then a trailing {@code close}. A per-gesture {@code click_actions} map, when present,
      * adds its typed actions onto the matching gesture.
@@ -669,7 +669,7 @@ public final class OguiConverter {
         boolean present = isPresent(item.node("else_item")) || isPresent(item.node("else-item"));
         if (present) {
             warnings.add("item '" + key
-                    + "' has an else_item fallback; our view gate hides the item instead — the fallback was dropped");
+                    + "' has an else_item fallback; our view gate hides the item instead. The fallback was dropped");
         }
     }
 
@@ -732,7 +732,7 @@ public final class OguiConverter {
     /**
      * The requirements a converted item's {@code view} gate accumulates. Most conditions are mandatory (an AND list);
      * a single multi-world {@code WORLD} whitelist is instead an OR-group written with {@code minimum = 1}. The two
-     * cannot be combined precisely — a positive minimum applies to the whole list — so when a whitelist meets other
+     * cannot be combined precisely, a positive minimum applies to the whole list, so when a whitelist meets other
      * requirements the group folds into the mandatory list (over-restrictive, fails closed) with a warning.
      */
     private static final class ViewGate {
@@ -768,7 +768,7 @@ public final class OguiConverter {
             List<String> all = new ArrayList<>(mandatory);
             if (!orGroup.isEmpty()) {
                 warnings.add("combined a multi-world WORLD membership with other requirements; "
-                        + "emitted them all as mandatory — verify");
+                        + "emitted them all as mandatory, verify");
                 all.addAll(orGroup);
             }
             view.node("requirements").set(all);

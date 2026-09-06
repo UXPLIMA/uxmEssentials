@@ -4,8 +4,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Outbound port holding the thin "is this player in staff mode, and under which profile" marker. The
- * captured loadout itself is not here — it is DB-backed in {@link StaffLoadoutRepository} so it survives a
- * restart — so this store only tracks the transient active flag and the mode name.
+ * captured loadout itself is not here. It is DB-backed in {@link StaffLoadoutRepository} so it survives a
+ * restart, so this store only tracks the transient active flag and the mode name.
  *
  * <p>The adapter backs this with a {@code ConcurrentHashMap<UUID, StaffModeState>} mutated through
  * {@code compute}/{@code computeIfAbsent}, the per-player-keyed concurrency pattern the project mandates.

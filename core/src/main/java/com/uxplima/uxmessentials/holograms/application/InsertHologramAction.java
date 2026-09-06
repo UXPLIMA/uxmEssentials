@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
  * {@code /hologram action <name> list}; {@code after} chooses whether the new action lands just after it
  * ({@code true}) or just before it ({@code false}). A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}; an index outside the current chain with
- * {@link HologramError#ACTION_INDEX_OUT_OF_RANGE} (an empty chain has no valid position — use plain {@code add}).
+ * {@link HologramError#ACTION_INDEX_OUT_OF_RANGE} (an empty chain has no valid position, use plain {@code add}).
  * The operator-only permission is enforced at the command gate.
  */
 public final class InsertHologramAction {

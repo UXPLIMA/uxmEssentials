@@ -37,7 +37,7 @@ class PlayerStateSuggestionsTest {
         // The full name, the short alias and the numeric id for every mode (s/c/a/sp, 0..3, survival..spectator).
         assertThat(all)
                 .contains("survival", "creative", "adventure", "spectator", "s", "c", "a", "sp", "0", "1", "2", "3");
-        // Every suggested token must parse — the rule is never to offer a form the command rejects.
+        // Every suggested token must parse: the rule is never to offer a form the command rejects.
         assertThat(all).allMatch(token -> GameModeRef.parse(token).isPresent());
     }
 

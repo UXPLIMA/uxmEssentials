@@ -15,8 +15,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>The visibility bit lives in the {@link ScoreboardVisibilityStore} (PDC-backed in the adapter, surviving relog);
  * the confirmation is one of the plugin's own {@link ScoreboardMessageKey} strings through the
- * {@link Notifier}; the event is the seam other plugins observe. Nothing here renders — that is the
- * adapter's render path — keeping the use case pure and free of any HUD type.
+ * {@link Notifier}; the event is the seam other plugins observe. Nothing here renders: that is the
+ * adapter's render path, keeping the use case pure and free of any HUD type.
  */
 public final class ToggleScoreboard {
 

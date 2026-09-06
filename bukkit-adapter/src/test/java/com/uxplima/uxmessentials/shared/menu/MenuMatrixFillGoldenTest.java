@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * End-to-end proof that the two loader-level conveniences render as ordinary items through a live open. A real
  * {@link MenuSpecLoader} folds a {@code layout} grid and a {@code fill-item} into plain slotted items, and a real
  * {@link Menus} paints them, so the assertions land on the live top inventory: a fill icon in every empty slot, the
- * real items untouched, and — with a grid — the border character exactly where the drawing placed it.
+ * real items untouched, and, with a grid, the border character exactly where the drawing placed it.
  */
 class MenuMatrixFillGoldenTest {
 

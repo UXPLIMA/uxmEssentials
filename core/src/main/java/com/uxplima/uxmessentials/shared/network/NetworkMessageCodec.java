@@ -11,7 +11,7 @@ import java.util.UUID;
 
 /**
  * The pure-Java binary codec for every {@link NetworkMessage}. Encodes a frame to a {@code byte[]} and
- * decodes one back, with no dependency on Bukkit, Velocity, or any serialization framework — just
+ * decodes one back, with no dependency on Bukkit, Velocity, or any serialization framework, just
  * {@link DataOutputStream}/{@link DataInputStream} over a byte array. Both the backend bus client and the
  * proxy broker share this one class so the wire format cannot drift between the two sides (a single
  * pure-codec shared by both ends).
@@ -48,7 +48,7 @@ public final class NetworkMessageCodec {
      * Decode {@code frame} back into a {@link NetworkMessage}.
      *
      * @throws IllegalArgumentException if the frame is empty, carries an unknown version, or names an
-     *     unknown message type — a malformed or version-incompatible frame is rejected, never half-applied
+     *     unknown message type. A malformed or version-incompatible frame is rejected, never half-applied
      */
     public static NetworkMessage decode(byte[] frame) {
         Objects.requireNonNull(frame, "frame");

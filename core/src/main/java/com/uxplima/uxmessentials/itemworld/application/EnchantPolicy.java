@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 /**
  * The {@code /enchant <enchant> [level]} clamp policy: normalise the enchantment id and clamp the requested
  * level to the configured ceiling before the adapter applies it to the held item. The clamp is the one real
- * rule for {@code /enchant} — it prevents an over-vanilla level being handed to the registry verbatim — so it
+ * rule for {@code /enchant} (it prevents an over-vanilla level being handed to the registry verbatim) so it
  * lives here and is unit-testable in {@code :core}.
  *
  * <p>The ceiling comes from {@link ItemworldConfig#maxEnchantLevel()}. A blank id is rejected with

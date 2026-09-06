@@ -5,18 +5,18 @@ import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Who may see a hologram, and how far away it stays visible — the per-player visibility
+ * Who may see a hologram, and how far away it stays visible, the per-player visibility
  * controls, kept separate from the visual {@link Appearance} so a visibility change is one transition rather
  * than a restyle. Pure value object (no Bukkit): a {@link Mode}, an optional permission node, and a distance in
  * blocks; the adapter maps each onto Paper's native per-viewer {@code show/hideEntity} and the display view
  * range at the rendering boundary.
  *
- * <p>{@link Mode#ALL} (the default) shows the hologram to everyone — the cheap, static-hologram path with no
+ * <p>{@link Mode#ALL} (the default) shows the hologram to everyone, the cheap, static-hologram path with no
  * per-viewer bookkeeping. {@link Mode#PERMISSION} shows it only to players who hold {@link #permission()}; the
  * node is operator-chosen and so dynamic (it is not a fixed plugin-declared node). {@link Mode#MANUAL} hides the
  * hologram from everyone until an operator explicitly shows it to a named player; the set of shown players is a
  * per-hologram, persisted association the operator grows with {@code /hologram show} and shrinks with {@code
- * /hologram hide}, so it survives a restart. Like {@code ALL}, {@code MANUAL} carries no permission node — its
+ * /hologram hide}, so it survives a restart. Like {@code ALL}, {@code MANUAL} carries no permission node, its
  * gate is the explicit viewer set, not a node.
  *
  * <p>{@link #distance()} is the visibility radius in blocks: {@link #UNLIMITED} (0, the default) leaves the
@@ -37,7 +37,7 @@ public record Visibility(Mode mode, @Nullable String permission, int distance) {
 
     /** How the renderer decides who may see a hologram. */
     public enum Mode {
-        /** Everyone sees the hologram — the default, no per-viewer bookkeeping. */
+        /** Everyone sees the hologram: the default, no per-viewer bookkeeping. */
         ALL,
         /** Only players who hold the hologram's {@link Visibility#permission()} node see it. */
         PERMISSION,

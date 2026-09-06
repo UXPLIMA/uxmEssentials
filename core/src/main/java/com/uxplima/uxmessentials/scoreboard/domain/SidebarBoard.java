@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  * several boards (a staff board, a build-world board, a default) and {@link SidebarConfig#select} picks the
  * highest-priority one whose condition matches each viewer.
  *
- * <p>The board's {@link DisplayContent} still owns its own structural concerns once selected — its
+ * <p>The board's {@link DisplayContent} still owns its own structural concerns once selected, its
  * {@link DisplayContent#worldBlacklist() world blacklist} keeps suppressing the sidebar within the selected board, so
  * a board chosen by condition can still tear down for a viewer who walks into a world it blacklists. That preserves the
  * single-board back-compat behaviour for the implicit {@code default} board, which carries an always-true condition and

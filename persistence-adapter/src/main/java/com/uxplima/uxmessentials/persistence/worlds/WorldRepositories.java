@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.worlds.application.port.WorldRepository;
  * Factory for the worlds context's persistence adapter, so the consuming bukkit-adapter wires a
  * {@link WorldRepository} from the {@link Persistence} handle it already holds without ever naming a jOOQ
  * type (jOOQ is an {@code implementation} dependency of this module, kept off the consumer's compile
- * classpath). The returned repository is the cached jOOQ adapter — write-through at the database, applied to
+ * classpath). The returned repository is the cached jOOQ adapter. Write-through at the database, applied to
  * the in-memory snapshot.
  */
 public final class WorldRepositories {

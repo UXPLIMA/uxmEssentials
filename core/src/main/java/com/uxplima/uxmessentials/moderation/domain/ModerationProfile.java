@@ -31,7 +31,7 @@ public record ModerationProfile(PlayerRef target, MuteState mute, JailState jail
         Objects.requireNonNull(tempban, "tempban");
     }
 
-    /** A clean profile — no mute, no jail, no tempban. */
+    /** A clean profile, no mute, no jail, no tempban. */
     public static ModerationProfile clean(PlayerRef target) {
         return new ModerationProfile(target, MuteState.none(), JailState.none(), TempbanState.none());
     }

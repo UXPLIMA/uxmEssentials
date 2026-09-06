@@ -42,7 +42,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The end-to-end proof that a click gesture's {@code else} chain walks like an if / else-if / else ladder. The real
  * {@link MenuSpecLoader} reads the nested {@code else} grammar, the real {@link RequirementConditions} back the
- * {@code has-empty-slots} gates, and the live {@link MenuListener} evaluates the chain — so these drive config → open →
+ * {@code has-empty-slots} gates, and the live {@link MenuListener} evaluates the chain, so these drive config → open →
  * click → effect, not any part in isolation. The viewer's real inventory drives which gate holds, and a recording
  * {@code record-note} action captures exactly which branch ran (and in what order), so the walk order is observable.
  */

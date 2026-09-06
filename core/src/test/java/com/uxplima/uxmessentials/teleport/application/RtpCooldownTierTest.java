@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * The {@code /rtp} cooldown resolves its own numbered tier — {@code uxmessentials.rtp.cooldown.<seconds>} — not the
+ * The {@code /rtp} cooldown resolves its own numbered tier, {@code uxmessentials.rtp.cooldown.<seconds>}, not the
  * shared {@code tp} tier. Pinned in pure {@code :core} with a capturing {@link Cooldowns} fake: the pre-search gate
  * and the post-arrival stamp both key the {@code rtp} feature, and when the player holds no tier node the config
  * default flows through as the kind's fallback (the shared reducer, tested elsewhere, then refines it). This is the

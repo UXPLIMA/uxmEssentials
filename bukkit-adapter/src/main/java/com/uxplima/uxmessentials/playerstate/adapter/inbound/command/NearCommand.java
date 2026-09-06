@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /near [radius]} ({@code uxmessentials.near.use}): list the players within a radius of you, nearest
- * first. Self-only — it reads your own location. The {@code ListNearby} use case clamps the radius and renders
+ * first. Self-only: it reads your own location. The {@code ListNearby} use case clamps the radius and renders
  * the list; this handler maps the optional radius argument.
  */
 @NullMarked

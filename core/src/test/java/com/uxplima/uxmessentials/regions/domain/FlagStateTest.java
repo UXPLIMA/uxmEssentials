@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Pure coverage of the flag-editor value logic: the {@link FlagState} cycle, its strict {@link FlagState#parse}
  * (which rejects an out-of-range value) and lenient {@link FlagState#of}, and the {@link FlagValue} round-trip the
- * editor and the port speak. No Bukkit, Paper, or WorldGuard — this is the domain's contract.
+ * editor and the port speak. No Bukkit, Paper, or WorldGuard: this is the domain's contract.
  */
 class FlagStateTest {
 

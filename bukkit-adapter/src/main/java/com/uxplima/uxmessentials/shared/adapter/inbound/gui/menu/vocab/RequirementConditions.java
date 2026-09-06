@@ -27,25 +27,25 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The requirement slice of the menu condition vocabulary: the ways a spec can gate an item's visibility (its
- * {@code view} list) or a click on what the viewer actually holds — money, experience, an inventory item, a bit of
+ * {@code view} list) or a click on what the viewer actually holds, money, experience, an inventory item, a bit of
  * PDC meta, a free slot. Registered once at startup into the shared {@link MenuBindings} alongside the generic
  * {@link MenuVocabulary} conditions ({@code perm}, {@code has-prev/next}, {@code papi-compare}, {@code expr}), so a
  * disk-loaded spec resolves {@code has-money} / {@code has-item} / {@code has-empty-slots} the same way a
  * code-registered feature menu does.
  *
  * <p>A valued condition is written {@code has-money:100} in config; the parser leaves that whole (it is registry
- * blind), and the runtime's registry-aware split — {@code Ref.resolve} at the validation, view and click sites —
+ * blind), and the runtime's registry-aware split ({@code Ref.resolve} at the validation, view and click sites)
  * re-keys it to the registered head {@code has-money} with {@code 100} carried as {@code value}. So every handler
  * here reads its argument from {@code value}, exactly as an action does.
  *
- * <p><strong>Every condition fails closed.</strong> A requirement that cannot be verified must not pass — an
+ * <p><strong>Every condition fails closed.</strong> A requirement that cannot be verified must not pass, an
  * offline viewer, a malformed argument, an unknown material, or anything a lookup unexpectedly throws all answer
  * {@code false}. That is the safe default for a gate: better to hide an item or deny a click than to grant on a
  * value we could not read. The viewer's live {@link Player} is resolved from the open context's UUID; a viewer who
  * logged off in the gap resolves to {@code null} and the condition is {@code false}.
  *
- * <p>Threading: these run on the render/entity thread — {@code view} during the renderer's populate, a click gate on
- * the viewer's entity thread — where reading the viewer's own inventory, experience and PDC is Folia-safe. No
+ * <p>Threading: these run on the render/entity thread. {@code view} during the renderer's populate, a click gate on
+ * the viewer's entity thread: where reading the viewer's own inventory, experience and PDC is Folia-safe. No
  * foreign player is touched. Nothing here produces player-facing text (a condition returns a boolean), so no
  * {@code MessageKey} is involved; the only text is a diagnostic {@code log} line when a lookup throws.
  */
@@ -61,7 +61,7 @@ public final class RequirementConditions {
      * façade {@code has-money} resolves a back-end through; {@code playerMeta} is the PDC accessor {@code has-meta}
      * reads; {@code log} is the operator console logger a fail-closed condition warns through when a lookup throws.
      * Left separate from {@link MenuVocabulary#registerConditions} so that method's existing call-sites stay
-     * untouched — the composition root calls both.
+     * untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Currencies currencies, PlayerMeta playerMeta, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -79,7 +79,7 @@ public final class RequirementConditions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a {@code false}
-     * result rather than escaping into the render or click path — a condition that cannot be evaluated must fail
+     * result rather than escaping into the render or click path. A condition that cannot be evaluated must fail
      * closed, the same discipline every gate here already applies to a bad argument.
      */
     private static BiPredicate<MenuContext, Map<String, String>> closed(
@@ -94,7 +94,7 @@ public final class RequirementConditions {
         };
     }
 
-    /** {@code has-money:<amount> [currency-spec]} — whether the viewer holds at least {@code amount} of that currency. */
+    /** {@code has-money:<amount> [currency-spec]}: whether the viewer holds at least {@code amount} of that currency. */
     private static boolean hasMoney(MenuContext ctx, Map<String, String> args, Currencies currencies) {
         Player player = viewer(ctx);
         if (player == null) {
@@ -105,14 +105,14 @@ public final class RequirementConditions {
                 .orElse(false);
     }
 
-    /** {@code has-exp:<amount>} — whether the viewer's total experience points meet the threshold. */
+    /** {@code has-exp:<amount>}: whether the viewer's total experience points meet the threshold. */
     private static boolean hasExp(MenuContext ctx, Map<String, String> args) {
         Player player = viewer(ctx);
         OptionalInt amount = parseInt(value(args));
         return player != null && amount.isPresent() && player.getTotalExperience() >= amount.getAsInt();
     }
 
-    /** {@code has-level:<amount>} — whether the viewer's experience level meets the threshold. */
+    /** {@code has-level:<amount>}: whether the viewer's experience level meets the threshold. */
     private static boolean hasLevel(MenuContext ctx, Map<String, String> args) {
         Player player = viewer(ctx);
         OptionalInt amount = parseInt(value(args));
@@ -120,7 +120,7 @@ public final class RequirementConditions {
     }
 
     /**
-     * {@code has-item:<material> [amount] [name:<exact display name>]} — whether the viewer's main storage holds at
+     * {@code has-item:<material> [amount] [name:<exact display name>]}. Whether the viewer's main storage holds at
      * least {@code amount} (default 1) matching stacks. The core match is the material; an optional {@code name:}
      * suffix additionally requires each counted stack's plain-text display name to equal the given text (which may
      * itself carry spaces). An unknown material or an unparsable argument is {@code false}.
@@ -149,7 +149,7 @@ public final class RequirementConditions {
     }
 
     /**
-     * {@code has-meta:<key> [value]} — whether the viewer's PDC holds {@code key}, and, when a value is given, whether
+     * {@code has-meta:<key> [value]}. Whether the viewer's PDC holds {@code key}, and, when a value is given, whether
      * the stored value equals it exactly (spaces preserved, mirroring how {@code meta-set} stores it). A blank key is
      * {@code false}.
      */
@@ -170,7 +170,7 @@ public final class RequirementConditions {
         return playerMeta.get(player, key).map(parts[1]::equals).orElse(false);
     }
 
-    /** {@code has-empty-slots:<count>} — whether the viewer's main storage has at least {@code count} empty slots. */
+    /** {@code has-empty-slots:<count>}: whether the viewer's main storage has at least {@code count} empty slots. */
     private static boolean hasEmptySlots(MenuContext ctx, Map<String, String> args) {
         Player player = viewer(ctx);
         OptionalInt count = parseInt(value(args));
@@ -187,7 +187,7 @@ public final class RequirementConditions {
     }
 
     /**
-     * {@code check-inventory:<slot> <material>} — whether the item in raw slot {@code slot} of the viewer's inventory
+     * {@code check-inventory:<slot> <material>}, whether the item in raw slot {@code slot} of the viewer's inventory
      * is present and of that material. A missing operand, a non-numeric slot, an unknown material, or a slot out of
      * range is {@code false}.
      */
@@ -246,7 +246,7 @@ public final class RequirementConditions {
 
     /**
      * A parsed {@code has-item} argument: the material token, a required count (default 1, never below 1), and an
-     * optional exact display-name match. The grammar is {@code <material> [amount] [name:<exact>]} — {@code name:}
+     * optional exact display-name match. The grammar is {@code <material> [amount] [name:<exact>]}, {@code name:}
      * and everything after it (which may contain spaces) is the display name, and the material plus optional amount
      * precede it. Parsing is Bukkit-free (the material token is resolved to a {@link Material} by the caller, so an
      * unknown material fails there) so a plain-JUnit test can exercise the grammar; a blank or nameless-only argument

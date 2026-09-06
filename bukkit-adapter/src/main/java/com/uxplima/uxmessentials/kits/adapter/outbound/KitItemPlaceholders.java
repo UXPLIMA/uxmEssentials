@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * author an item named {@code <gold>{player}'s Reward} and have it resolve for the recipient.
  *
  * <p>{@link #bridgeFor} returns the per-grant transform: the recipient's PlaceholderAPI substitution when the
- * kit opts in and PlaceholderAPI is installed, the identity otherwise — so an existing kit and a server
+ * kit opts in and PlaceholderAPI is installed, the identity otherwise, so an existing kit and a server
  * without PlaceholderAPI both grant the item's text unchanged.
  */
 @NullMarked

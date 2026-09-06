@@ -36,7 +36,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Registers the invited-players list (opened from a home's action menu) with the menu engine and opens it. A small
  * class that registers the invited-player list source, the placeholders its heads need, and the revoke, add, and back
- * click actions, then loads the {@code home-invites} spec and hands it to {@link Menus} — the same shape the ignore
+ * click actions, then loads the {@code home-invites} spec and hands it to {@link Menus}, the same shape the ignore
  * list and vault selector follow.
  *
  * <p>The home's invite set is a database read whose names resolve through the offline-capable kernel
@@ -212,7 +212,7 @@ public final class HomeInvitesMenu {
     /**
      * One invited player resolved to a display name, or the empty-list marker when {@link #uuid} is {@code null}.
      * The placeholders and the revoke action branch on whether the uuid is present, so a real head and the empty
-     * placeholder share one list template — the same owned/locked pattern the vault selector uses.
+     * placeholder share one list template: the same owned/locked pattern the vault selector uses.
      *
      * @param uuid the invited player's id, or {@code null} for the empty-list marker
      * @param name the invited player's resolved display name, or empty for the marker

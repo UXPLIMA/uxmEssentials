@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.discordlink.domain.PendingLink;
 
 /**
  * An in-memory {@link DiscordLinkStore} for the pure use-case tests: two maps keyed by player, mirroring the
- * jOOQ store's invariants — one pending row per player (the code unique across rows), one confirmed row per
+ * jOOQ store's invariants. One pending row per player (the code unique across rows), one confirmed row per
  * player (the Discord id unique across rows), and a confirm that binds and clears the player's pending row in
  * one step. No persistence, no concurrency; the jOOQ adapter's own round-trip test covers the durable side.
  */

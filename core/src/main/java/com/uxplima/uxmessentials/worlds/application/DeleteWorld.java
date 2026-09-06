@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.worlds.domain.event.WorldDeleted;
  * value), unloads the world if loaded, deletes its files, drops the metadata row, and publishes
  * {@link WorldDeleted}. The default world is protected; the recursive file delete and the metadata
  * drop run off-tick on the {@code Scheduler}'s async executor, hopping back to the requester only to
- * notify — the synchronous gate (unload + protect-default check) stays on the calling global thread.
+ * notify: the synchronous gate (unload + protect-default check) stays on the calling global thread.
  */
 public final class DeleteWorld {
 

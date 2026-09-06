@@ -14,8 +14,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A read-only detail line in a property grid: a labelled button whose lore shows a value the viewer cannot
  * change, and whose click does nothing. The active-punishment detail view is read-only for everything except
- * the explicit revoke and history buttons — the target, type, issuer, reason, and remaining time are facts an
- * admin inspects, not fields they edit — so each is a {@code LabelProperty}. It carries no use case and never
+ * the explicit revoke and history buttons. The target, type, issuer, reason, and remaining time are facts an
+ * admin inspects, not fields they edit, so each is a {@code LabelProperty}. It carries no use case and never
  * mutates: it is the {@link EditableProperty} the framework draws for a value that is shown but not edited. The
  * value resolver receives the viewer so a localised value (a kind name, "Permanent") renders in their locale.
  */

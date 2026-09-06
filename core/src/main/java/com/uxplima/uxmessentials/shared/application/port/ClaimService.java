@@ -29,9 +29,9 @@ public interface ClaimService {
     /**
      * Returns whether {@code at} falls inside <em>any</em> claim, regardless of owner or trust. Unlike {@link
      * #canPlace} and {@link #canAccess}, this asks no "may this player…" question and consults none of the
-     * placement knobs — it is the player-agnostic "is this land claimed" check that random-teleport uses to keep
+     * placement knobs. It is the player-agnostic "is this land claimed" check that random-teleport uses to keep
      * its shared, no-owner pre-warmed pool out of claimed land (wilderness only). A service with no claim plugin
-     * behind it reports {@code false} — nothing is protected — which is why the default is {@code false} and the
+     * behind it reports {@code false}, nothing is protected, which is why the default is {@code false} and the
      * real, provider-backed implementation overrides it.
      */
     default boolean isProtected(Position at) {

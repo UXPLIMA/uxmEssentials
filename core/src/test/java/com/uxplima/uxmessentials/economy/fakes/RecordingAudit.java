@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * A {@link EconomyAudit} that records each audited mutation so a test can assert exactly one line per
- * eco-admin action and one bulk line (with its affected-count) per bulk verb — never per-target spam.
+ * eco-admin action and one bulk line (with its affected-count) per bulk verb, never per-target spam.
  */
 public final class RecordingAudit implements EconomyAudit {
 

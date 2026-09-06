@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The {@link AdvancementFilter} decision logic: the enabled gate, the deny-list, the allow-list's exclusivity, the
- * recipe and only-announceable gates, and the per-advancement template lookup with its global fallback — all matched
+ * recipe and only-announceable gates, and the per-advancement template lookup with its global fallback: all matched
  * case-insensitively on the advancement key.
  */
 class AdvancementFilterTest {

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * An immutable location in a world: coordinates plus the look direction.
  *
- * <p>This is the kernel's geometry primitive — the teleport context's destinations, the {@code /back}
+ * <p>This is the kernel's geometry primitive. The teleport context's destinations, the {@code /back}
  * capture, and the pre-warmed RTP queue all carry {@code Position} rather than a Bukkit
  * {@code Location}. The adapter maps to and from {@code Location} at the boundary. {@code yaw} and
  * {@code pitch} are degrees; block coordinates (used by the move-cancels-warmup comparison) are

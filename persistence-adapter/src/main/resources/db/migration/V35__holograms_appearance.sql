@@ -9,7 +9,7 @@
 --
 --   billboard         the facing mode enum name (CENTER / FIXED / VERTICAL / HORIZONTAL)
 --   background_argb    the text-panel background as a packed ARGB int (NULL = vanilla translucent panel)
---   text_shadow        0/1 — whether the text casts a drop shadow
+--   text_shadow        0/1. Whether the text casts a drop shadow
 --   brightness_block   the block-light override 0-15 (NULL = world light)
 --   brightness_sky     the sky-light override 0-15 (NULL = world light)
 --   scale              the uniform scale factor (NULL = 1.0)

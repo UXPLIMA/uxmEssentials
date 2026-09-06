@@ -22,9 +22,9 @@ import com.uxplima.uxmessentials.communication.domain.StoredAnnouncement;
  *
  * <p>This widens the source set and folds in the persisted global override: the merged config carries the file's
  * ordering, and the default interval and min-players gate are the operator's in-game override from the
- * {@link AnnouncerSettingsStore} when set, else the file values — so the settings screen overrides the file default
+ * {@link AnnouncerSettingsStore} when set, else the file values, so the settings screen overrides the file default
  * without a reload, the same way an enabled store announcement joins the rotation without one. When a store
- * announcement's id collides with a config one, the store version wins — the editor is the authoritative surface
+ * announcement's id collides with a config one, the store version wins. The editor is the authoritative surface
  * for an id it manages, and a collision is an operator editing an id that also exists in the file, where the live
  * in-game edit is the one they expect to see. The merged announcement list preserves config order first, then
  * appends the store ids the config did not already carry.

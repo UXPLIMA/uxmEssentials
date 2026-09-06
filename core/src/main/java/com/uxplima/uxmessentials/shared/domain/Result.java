@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A success-or-failure outcome carrying either a value of type {@code T} or an error of type
  * {@code E}. Application services return this instead of throwing for expected, modelled failures
- * (insufficient funds, an active cooldown, a quota reached) so the caller must handle both arms — the
+ * (insufficient funds, an active cooldown, a quota reached) so the caller must handle both arms, the
  * compiler enforces exhaustiveness through the sealed permits and pattern matching.
  *
  * <p>Exceptions remain reserved for genuinely exceptional, unmodelled faults. A modelled failure is a
@@ -26,7 +26,7 @@ public sealed interface Result<T, E> permits Result.Ok, Result.Err {
         return new Ok<>(Objects.requireNonNull(value, "value"));
     }
 
-    /** The empty-success shape — {@code Result<Unit, E>} carrying {@link Unit#INSTANCE}. */
+    /** The empty-success shape: {@code Result<Unit, E>} carrying {@link Unit#INSTANCE}. */
     static <E> Result<Unit, E> ok() {
         return new Ok<>(Unit.INSTANCE);
     }
@@ -42,10 +42,10 @@ public sealed interface Result<T, E> permits Result.Ok, Result.Err {
         return !isOk();
     }
 
-    /** The success value if present, else throws — call only after {@link #isOk()}. */
+    /** The success value if present, else throws, call only after {@link #isOk()}. */
     T orElseThrow();
 
-    /** The error if present, else throws — call only after {@link #isErr()}. */
+    /** The error if present, else throws, call only after {@link #isErr()}. */
     E errorOrThrow();
 
     /** The success value as an {@link Optional}; empty on failure. */

@@ -8,9 +8,9 @@ import java.util.Optional;
 
 /**
  * The operator-configured per-item sell value: a case-insensitive material-id → unit-price map, loaded once
- * from the economy config (no DB, no migration — a worth is a pricing policy, not persisted player state).
+ * from the economy config (no DB, no migration: a worth is a pricing policy, not persisted player state).
  * The price is per single item in the economy's default currency, so a stack value is the unit price times
- * the amount. A material absent from the table has no worth and is "not sellable" — the lookup yields an empty
+ * the amount. A material absent from the table has no worth and is "not sellable". The lookup yields an empty
  * {@link Optional} rather than defaulting to zero, so {@code /worth} and {@code /sell} can tell the two apart.
  *
  * <p>This is the config-backed implementation of {@link WorthSource}; the {@code /setworth} override store is
@@ -29,7 +29,7 @@ public final class WorthTable implements WorthSource {
         this.prices = Map.copyOf(normalized);
     }
 
-    /** An empty table — every material is unpriced. */
+    /** An empty table: every material is unpriced. */
     public static WorthTable empty() {
         return new WorthTable(Map.of());
     }

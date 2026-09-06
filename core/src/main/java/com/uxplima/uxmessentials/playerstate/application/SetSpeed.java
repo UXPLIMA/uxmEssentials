@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.application.port.DomainEventPublisher;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The {@code /speed} family — {@code /speed <value> [player]} sets both walk and fly speed, while
+ * The {@code /speed} family. {@code /speed <value> [player]} sets both walk and fly speed, while
  * {@code /walkspeed} and {@code /flyspeed} set each independently. The snapshot is updated through the
  * {@link PlayerStateStore}, the live player's walk/fly multiplier is set by the {@link StateReconciler} on the
  * owning region thread, a {@link SpeedChanged} event is published per affected speed, and the actor and

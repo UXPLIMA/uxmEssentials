@@ -85,7 +85,7 @@ class JooqRtpPoolRepositoryTest {
                         new RtpColumn(WORLD, 100, 100, BiomeName.of("plains"), NOW.minusSeconds(90)),
                         new RtpColumn(WORLD, 200, 200, BiomeName.of("desert"), NOW.minusSeconds(60)),
                         new RtpColumn(WORLD, 300, 300, BiomeName.of("desert"), NOW.minusSeconds(30)),
-                        new RtpColumn(WORLD, 400, 400, NOW))); // no recorded biome — never matches
+                        new RtpColumn(WORLD, 400, 400, NOW))); // no recorded biome: never matches
 
         List<RtpColumn> desert = repo.loadByBiome(WORLD, BiomeName.of("desert"), 10);
 
@@ -141,7 +141,7 @@ class JooqRtpPoolRepositoryTest {
         return new JooqRtpPoolRepository(persistence.dsl(), maxPerWorld, clock);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

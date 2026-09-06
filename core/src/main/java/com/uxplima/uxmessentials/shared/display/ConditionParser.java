@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
  * <h2>Grammar</h2>
  *
  * <ul>
- *   <li>blank or {@code null} → {@link DisplayCondition#always()} (no filter — always show).</li>
+ *   <li>blank or {@code null} → {@link DisplayCondition#always()} (no filter, always show).</li>
  *   <li>a leading {@code !} → wrap the remainder in {@link DisplayCondition.Negate}.</li>
  *   <li>{@code permission:<node>} → {@link DisplayCondition.Permission}.</li>
  *   <li>{@code world:<name>} → {@link DisplayCondition.World}.</li>
@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  *
  * An <em>unparseable</em> condition resolves to {@link DisplayCondition#never()}, not {@code always()}. The
  * intent of writing a condition is "show this only if X"; if X cannot be understood, hiding the element is the
- * safe failure — it never surfaces an element the operator meant to gate behind a (broken) rule. A blank
+ * safe failure: it never surfaces an element the operator meant to gate behind a (broken) rule. A blank
  * condition is different: it is a deliberate "no filter" and maps to {@code always()}.
  */
 public final class ConditionParser {

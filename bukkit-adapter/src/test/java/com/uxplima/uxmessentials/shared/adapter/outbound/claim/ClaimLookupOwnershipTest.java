@@ -28,14 +28,14 @@ import org.mockbukkit.mockbukkit.ServerMock;
 /**
  * Proves the ownership contract each provider now supplies: {@code isOwner} answers owner-only, distinct from
  * {@code isTrusted}'s owner-or-member. The load-bearing case is a player who is trusted but does not own the
- * claim — {@code isTrusted} must stay {@code true} while {@code isOwner} turns {@code false}.
+ * claim: {@code isTrusted} must stay {@code true} while {@code isOwner} turns {@code false}.
  *
  * <p>The two typed providers (Lands, GriefPrevention) are driven through a stubbed SDK {@code Area}/{@code
  * Claim}. The reflective providers hold their claim as a plain {@code Object} and reach it through cached
  * {@link Method} handles; with no plugin SDK on the test classpath those handles never resolve on their own,
  * so each test injects handles pointing at a local fake with the methods the provider expects and constructs
  * the (package-private) lookup directly. That exercises the real {@code isOwner}/{@code owner} bodies without
- * standing up the plugin, and adds no SDK class name to the classpath — leaving the lazy-load proofs in
+ * standing up the plugin, and adds no SDK class name to the classpath. Leaving the lazy-load proofs in
  * {@link ClaimProvidersTest} untouched.
  */
 class ClaimLookupOwnershipTest {
@@ -173,7 +173,7 @@ class ClaimLookupOwnershipTest {
                 "isMemberOfRegion",
                 HomesteadFakeMembers.class.getMethod("isMemberOfRegion", long.class, UUID.class));
 
-        // A region whose id the fake treats as "everyone is a member" — the owner is trusted by identity, the
+        // A region whose id the fake treats as "everyone is a member". The owner is trusted by identity, the
         // member by region membership, yet only the owner passes isOwner.
         ClaimLookup lookup = homesteadLookup(provider, HomesteadFakeMembers.MEMBER_REGION, owner);
 

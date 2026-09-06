@@ -22,24 +22,24 @@ import com.uxplima.uxmessentials.survival.domain.SmeltMap;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The composable core of the three break-drop auto-* mechanics — auto-smelt, then auto-sell, then auto-pickup — pulled
+ * The composable core of the three break-drop auto-* mechanics (auto-smelt, then auto-sell, then auto-pickup) pulled
  * out of the {@link AutoDropsListener} so the same transform runs on any set of items a break produces, not only the
  * ones the vanilla {@code BlockBreakEvent} carries. The listener feeds it the origin block's drops; the tree-feller
  * and veinminer cascades feed it each extra block's drops so a felled trunk or a mined vein is picked up, smelted, and
- * sold exactly like the block the player broke by hand — closing the gap where cascade blocks bypassed the pipeline
+ * sold exactly like the block the player broke by hand. Closing the gap where cascade blocks bypassed the pipeline
  * and spilled to the ground.
  *
  * <p>The order is fixed: a drop is smelted first (raw iron becomes an ingot), then the priced ones are sold for coin,
  * then whatever remains is routed into the player's inventory (overflowing to the ground when it is full). Each stage
- * is gated independently by its own config switch, per-player toggle, and use permission — resolved once per break by
- * {@link #stagesFor} — so a server that enables only auto-pickup gets exactly auto-pickup. Auto-sell removes a stack
+ * is gated independently by its own config switch, per-player toggle, and use permission, resolved once per break by
+ * {@link #stagesFor}, so a server that enables only auto-pickup gets exactly auto-pickup. Auto-sell removes a stack
  * from the set only once the wallet credit has actually succeeded, so a refused deposit never destroys the item: it
  * falls through to pickup or the ground. A completed sale is reported through {@link AutoSellNotices}: the sold stack
  * never reaches the inventory, so without the receipt it reads as a lost drop.
  *
  * <h2>Folia</h2>
- * The inventory, the world drops, and the wallet credit are all applied inline on the caller's thread — the region
- * owning the broken block — so no scheduler hop is needed, matching the harvesting and farm-assist listeners.
+ * The inventory, the world drops, and the wallet credit are all applied inline on the caller's thread, the region
+ * owning the broken block, so no scheduler hop is needed, matching the harvesting and farm-assist listeners.
  */
 @NullMarked
 public final class AutoDropsPipeline {
@@ -162,7 +162,7 @@ public final class AutoDropsPipeline {
      */
     public record Stages(boolean pickup, boolean smelt, boolean sell) {
 
-        /** Whether any stage is active — the cheap gate a caller checks before computing a block's drops. */
+        /** Whether any stage is active: the cheap gate a caller checks before computing a block's drops. */
         public boolean anyActive() {
             return pickup || smelt || sell;
         }

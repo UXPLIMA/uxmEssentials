@@ -43,7 +43,7 @@ public final class LocaleParityCheck {
             System.err.println(problems);
             System.exit(1);
         }
-        System.out.println("Locale parity check OK — every shipped locale carries en's exact key set.");
+        System.out.println("Locale parity check OK. Every shipped locale carries en's exact key set.");
     }
 
     private static void appendDiff(StringBuilder out, String label, Set<String> authority, Set<String> actual) {

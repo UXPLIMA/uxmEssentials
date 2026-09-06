@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * A Caffeine read-cache decorator over a delegate {@link IgnoreStore}, keyed by owner uuid. The ignore list
  * is read on the hot {@code /msg} and {@code /mail send} delivery paths (an ignore-aware lookup per message),
  * so a recipient's small list is served from memory after the first miss and re-loaded only when a write to
- * that owner invalidates the entry — write-through at the delegate, invalidate here, never a write-back cache
+ * that owner invalidates the entry, write-through at the delegate, invalidate here, never a write-back cache
  * that could lose a mutation. The durable source of truth is always the delegate.
  */
 public final class CachedIgnoreStore implements IgnoreStore {

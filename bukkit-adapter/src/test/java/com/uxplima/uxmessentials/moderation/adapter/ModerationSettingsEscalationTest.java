@@ -106,7 +106,7 @@ class ModerationSettingsEscalationTest {
         }
     }
 
-    /** A {@link Logger} that drops every line — the parse tests assert on the result, not the log. */
+    /** A {@link Logger} that drops every line: the parse tests assert on the result, not the log. */
     private static final class NoopLogger implements Logger {
         @Override
         public void info(String message, Object... args) {}

@@ -16,12 +16,12 @@ public enum VaultError {
     /** The per-action economy fee (create or open) exceeds the player's balance, so the action is refused. */
     CANNOT_AFFORD,
 
-    /** A {@code /vault delete <n>} of an index the owner has no vault row for — there is nothing to remove. */
+    /** A {@code /vault delete <n>} of an index the owner has no vault row for: there is nothing to remove. */
     DELETE_UNKNOWN,
 
     /**
      * A presentation change ({@code /vault rename}, {@code /vault icon}) targeting an index the owner has no
-     * vault row for — there is nothing to rename or re-icon.
+     * vault row for: there is nothing to rename or re-icon.
      */
     VAULT_UNKNOWN
 }

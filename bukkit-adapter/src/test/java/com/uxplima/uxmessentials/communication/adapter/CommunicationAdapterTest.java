@@ -126,7 +126,7 @@ class CommunicationAdapterTest {
 
     @Test
     void theJoinListenerSendsNoMotdWhenMotdOnJoinIsOff(@TempDir Path offDir) throws Exception {
-        // With motd-on-join = false the joiner is sent nothing — only the join broadcast (set on the event) fires.
+        // With motd-on-join = false the joiner is sent nothing, only the join broadcast (set on the event) fires.
         Path dir = offDir.resolve("modules").resolve("communication");
         Files.createDirectories(dir);
         Files.writeString(dir.resolve("info-pages.conf"), """
@@ -208,7 +208,7 @@ class CommunicationAdapterTest {
         execute(dispatcher, "info");
 
         // Page one of a three-page body: the header is drawn first, then the first two body lines, then the footer.
-        // The double resolves a MessageKey to its key string and delivers it, so the chrome appears in lines too —
+        // The double resolves a MessageKey to its key string and delivers it, so the chrome appears in lines too
         // assert the full interleaved order, which pins header → body slice → footer.
         assertThat(sink.lines)
                 .containsExactly(

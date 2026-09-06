@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared plumbing for the two security commands: resolving the invoking player, sending a synchronous in-line
  * rejection on the tick thread, and delivering a message from the async worker thread through the sink. The split
- * mirrors the threading contract — cheap gating replies go out with {@link CommandFeedback} on the calling thread,
+ * mirrors the threading contract. Cheap gating replies go out with {@link CommandFeedback} on the calling thread,
  * while the outcome of the off-thread crypto/DB work is resolved with {@link Messages} (a pure function) and handed
  * to the {@link MessageSink}, which re-enters the entity thread to deliver it.
  */
@@ -53,12 +53,12 @@ abstract class SecurityCommandSupport {
         return BukkitRefs.toRef(player);
     }
 
-    /** Send {@code key} to {@code sender} synchronously on the calling (tick) thread — for the cheap gating replies. */
+    /** Send {@code key} to {@code sender} synchronously on the calling (tick) thread: for the cheap gating replies. */
     protected void reply(CommandSender sender, MessageKey key) {
         feedback.send(sender, key);
     }
 
-    /** Resolve {@code key} for {@code viewer} and deliver it through the sink — safe to call off the tick thread. */
+    /** Resolve {@code key} for {@code viewer} and deliver it through the sink, safe to call off the tick thread. */
     protected void notify(PlayerRef viewer, MessageKey key) {
         notify(viewer, key, Map.of());
     }

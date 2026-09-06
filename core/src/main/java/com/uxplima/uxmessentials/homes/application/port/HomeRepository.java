@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Outbound port for durable, per-owner home storage, keyed by {@code (owner, slot)}. Every home fact
- * (owner, slot, world, coordinates, label, icon, timestamps) is a first-class column — there is no opaque
- * JSON blob (the architecture persistence invariant) — so the {@link HomeSet} an owner loads is rebuilt
+ * (owner, slot, world, coordinates, label, icon, timestamps) is a first-class column. There is no opaque
+ * JSON blob (the architecture persistence invariant), so the {@link HomeSet} an owner loads is rebuilt
  * from queryable rows and the count is read with a {@code COUNT(*)} rather than by deserialising a
  * document.
  *
@@ -46,7 +46,7 @@ public interface HomeRepository {
      * The owner's homes if they are already in memory, without touching the database. A cache decorator
      * returns its cached set on a hit and an empty {@link Optional} on a miss; an undecorated store has
      * nothing in memory and so returns empty. This exists for tick-thread callers that must never block on
-     * I/O — chiefly the slot suggesters, which complete only the slots a join-warmed cache already holds and
+     * I/O. Chiefly the slot suggesters, which complete only the slots a join-warmed cache already holds and
      * suggest nothing on a cold miss rather than reaching the disk while the player types. Never loads;
      * never blocks.
      */

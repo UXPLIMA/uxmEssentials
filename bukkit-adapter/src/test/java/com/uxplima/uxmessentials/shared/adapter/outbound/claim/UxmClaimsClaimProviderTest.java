@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The uxmClaims provider's reflection path with uxmClaims absent — the case on the test classpath, where the
+ * The uxmClaims provider's reflection path with uxmClaims absent, the case on the test classpath, where the
  * {@code com.uxplima.claim.*} API classes do not resolve. {@link UxmClaimsClaimProvider#active()} must report
  * inactive and {@link UxmClaimsClaimProvider#claimAt} must return empty without throwing, proving the
  * reflective chain degrades cleanly when the API class is missing.

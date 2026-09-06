@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.eval.PagedResul
 import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuContext;
 
 /**
- * Holds the functions that supply a list-backed item's entries one page at a time — the viewer's page, sort and
+ * Holds the functions that supply a list-backed item's entries one page at a time. The viewer's page, sort and
  * filters go down to whatever holds the data, and only that page comes back. This is the streaming sibling of
  * {@link ListSourceRegistry}, for corpora too large to hand over whole. A duplicate id is a wiring mistake, so
  * registration fails loudly rather than letting one source shadow another.
@@ -39,7 +39,7 @@ public final class PagedListSourceRegistry {
         return handlers.containsKey(id);
     }
 
-    /** Every registered paged-source id, sorted — the catalog a list-backed item's source picker offers. */
+    /** Every registered paged-source id, sorted: the catalog a list-backed item's source picker offers. */
     public List<String> ids() {
         return handlers.keySet().stream().sorted().toList();
     }

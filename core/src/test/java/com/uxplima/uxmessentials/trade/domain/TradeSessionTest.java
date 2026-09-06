@@ -126,7 +126,7 @@ class TradeSessionTest {
         TradeSession bothConfirmedButNotArmed =
                 open().confirm(TradeSide.INITIATOR).confirm(TradeSide.PARTNER);
 
-        // Confirmed on both sides, but ready() was never called — the session is still OPEN, so commit is illegal.
+        // Confirmed on both sides, but ready() was never called: the session is still OPEN, so commit is illegal.
         assertThatExceptionOfType(IllegalTradeTransitionException.class).isThrownBy(bothConfirmedButNotArmed::commit);
     }
 

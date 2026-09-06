@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  *
  * <p>This is application code, not domain: it depends on the {@link ConfigStore} port to read the tree, then
  * hands the pure list to {@link RankLadder#of(List)} which owns the ordering and uniqueness invariants. A
- * missing knob falls back to a sane default — an unnamed rank shows its id, a rank with no cost is free — so a
+ * missing knob falls back to a sane default (an unnamed rank shows its id, a rank with no cost is free) so a
  * partially-trimmed file still yields a usable ladder.
  */
 public final class RankLadders {

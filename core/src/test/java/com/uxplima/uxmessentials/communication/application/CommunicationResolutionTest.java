@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
 import org.junit.jupiter.api.Test;
 
 /**
- * The communication resolution use cases through their real implementations against deterministic fakes — the
+ * The communication resolution use cases through their real implementations against deterministic fakes, the
  * same wiring the connection listeners and the announcer timer drive, minus Bukkit. It pins the headline rules:
  * a join channel's {@code MessagePolicy} decides whether the plugin renders a substituted template, suppresses
  * the line, or defers to vanilla; the sequential ordering walks the templates in author order; the announcer's
@@ -37,14 +37,14 @@ class CommunicationResolutionTest {
 
     @Test
     void aCustomJoinPolicySubstitutesPlaceholdersIntoTheSelectedTemplate() {
-        ResolveJoinMessage resolve = joinWith(MessagePolicy.custom(
-                Ordering.SEQUENTIAL, List.of("<yellow>{player}</yellow> joined — {count} online")));
+        ResolveJoinMessage resolve = joinWith(
+                MessagePolicy.custom(Ordering.SEQUENTIAL, List.of("<yellow>{player}</yellow> joined, {count} online")));
 
         ResolvedMessage resolved = resolve.resolve(false, null, ALICE);
 
         assertThat(resolved.hasTemplate()).isTrue();
         assertThat(resolved.suppressVanilla()).isTrue();
-        assertThat(resolved.template()).contains("<yellow>Alice</yellow> joined — 7 online");
+        assertThat(resolved.template()).contains("<yellow>Alice</yellow> joined, 7 online");
     }
 
     @Test
@@ -111,8 +111,8 @@ class CommunicationResolutionTest {
                 Duration.ofMinutes(5), 3, Ordering.SEQUENTIAL, List.of(line("tip one"), line("tip two")));
         NextAnnouncement announcer = new NextAnnouncement(new AtomicReference<>(config)::get, fixedRandom(0));
 
-        assertThat(announcer.pick(2)).isEmpty(); // below the gate of 3 — skipped
-        assertThat(pickedId(announcer.pick(3))).contains("tip one"); // at the gate — fires
+        assertThat(announcer.pick(2)).isEmpty(); // below the gate of 3, skipped
+        assertThat(pickedId(announcer.pick(3))).contains("tip one"); // at the gate, fires
     }
 
     @Test
@@ -134,7 +134,7 @@ class CommunicationResolutionTest {
         assertThat(announcer.pick(50)).isEmpty();
     }
 
-    /** A single-line, chat-only, unconditional announcement whose id is the line text — convenient for assertions. */
+    /** A single-line, chat-only, unconditional announcement whose id is the line text: convenient for assertions. */
     private static Announcement line(String text) {
         return new Announcement(
                 text,
@@ -172,7 +172,7 @@ class CommunicationResolutionTest {
         return bound -> (queue.isEmpty() ? 0 : queue.removeFirst()) % bound;
     }
 
-    /** A {@link SequenceCounter} that hands out 0, 1, 2, … per channel — the production atomic counter, in-test. */
+    /** A {@link SequenceCounter} that hands out 0, 1, 2, … per channel, the production atomic counter, in-test. */
     private static final class CountingSequence implements SequenceCounter {
         private final java.util.Map<String, Integer> counters = new java.util.HashMap<>();
 

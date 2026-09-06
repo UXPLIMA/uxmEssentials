@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The security context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code SECURITY_2FA_ENABLED} ↔ {@code security.2fa.enabled}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in the
- * context — every message resolves through one of these.
+ * context: every message resolves through one of these.
  *
  * <p>This is the Phase-1 seed: the enrolment surface ({@code /2fa setup|confirm|disable}, {@code /pin set}). Later
  * phases (join verification, op-command protection, IP/alt guard) add their own keys here as their behaviour lands.
@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  */
 public enum SecurityMessageKey implements MessageKey {
 
-    // /2fa setup — the enrolment challenge: the header, the secret and otpauth URI for the authenticator app, and
+    // /2fa setup, the enrolment challenge: the header, the secret and otpauth URI for the authenticator app, and
     // the hint to confirm with a code before it takes effect.
     SECURITY_2FA_SETUP_HEADER("security.2fa.setup-header"),
     SECURITY_2FA_SETUP_SECRET("security.2fa.setup-secret"),
@@ -23,13 +23,13 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_2FA_SETUP_HINT("security.2fa.setup-hint"),
     SECURITY_2FA_ALREADY_ENROLLED("security.2fa.already-enrolled"),
 
-    // /2fa confirm — the second step that turns the pending secret into an enabled factor.
+    // /2fa confirm: the second step that turns the pending secret into an enabled factor.
     SECURITY_2FA_CONFIRM_USAGE("security.2fa.confirm-usage"),
     SECURITY_2FA_CONFIRM_NO_PENDING("security.2fa.confirm-no-pending"),
     SECURITY_2FA_CONFIRM_INVALID("security.2fa.confirm-invalid"),
     SECURITY_2FA_ENABLED("security.2fa.enabled"),
 
-    // /2fa disable — removing the authenticator factor, which requires proving it with a current code first. A PIN
+    // /2fa disable: removing the authenticator factor, which requires proving it with a current code first. A PIN
     // neither proves this nor is touched by it; that is /pin remove's business.
     SECURITY_2FA_DISABLE_USAGE("security.2fa.disable-usage"),
     SECURITY_2FA_DISABLE_NOT_ENROLLED("security.2fa.disable-not-enrolled"),
@@ -44,7 +44,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_2FA_STATUS_NONE("security.2fa.status-none"),
     SECURITY_2FA_FEATURE_DISABLED("security.2fa.feature-disabled"),
 
-    // /pin — the PIN factor's own surface: the root usage and status lines, the first-set verbs, and the feature-off
+    // /pin. The PIN factor's own surface: the root usage and status lines, the first-set verbs, and the feature-off
     // refusal. The three PinPolicy refusals are shared by /pin set and /pin change.
     SECURITY_PIN_USAGE("security.pin.usage"),
     SECURITY_PIN_STATUS("security.pin.status"),
@@ -64,16 +64,16 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_PIN_CREATE_MISMATCH("security.pin.create-mismatch"),
     SECURITY_PIN_CREATE_DONE("security.pin.create-done"),
 
-    // /pin lock — locking your own account from the keypad before stepping away.
+    // /pin lock, locking your own account from the keypad before stepping away.
     SECURITY_PIN_LOCK_DONE("security.pin.lock-done"),
     SECURITY_PIN_LOCK_NOT_SET("security.pin.lock-not-set"),
     SECURITY_PIN_FEATURE_DISABLED("security.pin.feature-disabled"),
 
-    // /pin change <old> <new> — replacing a live PIN, which requires proving the current one.
+    // /pin change <old> <new>: replacing a live PIN, which requires proving the current one.
     SECURITY_PIN_CHANGE_USAGE("security.pin.change-usage"),
     SECURITY_PIN_CHANGED("security.pin.changed"),
 
-    // /pin remove <pin> — removing the PIN factor, which requires proving it. Shares the not-set / invalid / locked
+    // /pin remove <pin>: removing the PIN factor, which requires proving it. Shares the not-set / invalid / locked
     // refusals with /pin change, since both fail the same three ways before they touch the store.
     SECURITY_PIN_REMOVE_USAGE("security.pin.remove-usage"),
     SECURITY_PIN_REMOVED("security.pin.removed"),
@@ -81,7 +81,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_PIN_INVALID("security.pin.invalid"),
     SECURITY_PIN_LOCKED_OUT("security.pin.locked-out"),
 
-    // /security — the operator surface over another player's factors: the root usage, the per-target status lines,
+    // /security. The operator surface over another player's factors: the root usage, the per-target status lines,
     // the force verb that pushes a target back into verification, and the reset verb that clears a factor without a
     // proof so a locked-out player can be recovered.
     SECURITY_ADMIN_USAGE("security.admin.usage"),
@@ -96,7 +96,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_ADMIN_RESET_DONE("security.admin.reset-done"),
     SECURITY_ADMIN_RESET_NOTHING("security.admin.reset-nothing"),
 
-    // Phase 2 — join verification: the freeze prompt on join, the keypad GUI (title, digit/clear/submit/TOTP buttons
+    // Phase 2, join verification: the freeze prompt on join, the keypad GUI (title, digit/clear/submit/TOTP buttons
     // and the masked entry display), the TOTP text prompt, the success and failed replies, the must-verify nudge when
     // a frozen player tries to act, and the lockout kick after too many failures.
     SECURITY_VERIFY_PROMPT("security.verify.prompt"),
@@ -124,7 +124,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_VERIFY_FAILED_TITLE("security.verify.failed-title"),
     SECURITY_VERIFY_FAILED_SUBTITLE("security.verify.failed-subtitle"),
 
-    // Phase 3 — op-command protection: the prompt when a protected command is blocked pending a fresh proof, the
+    // Phase 3. Op-command protection: the prompt when a protected command is blocked pending a fresh proof, the
     // reply when the re-auth succeeds and the command is retried, the reply when the submitted code is wrong, and the
     // refusal when the shared lockout blocks any further attempt.
     SECURITY_REAUTH_REQUIRED("security.reauth.required"),
@@ -132,7 +132,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_REAUTH_FAILED("security.reauth.failed"),
     SECURITY_REAUTH_LOCKED_OUT("security.reauth.locked-out"),
 
-    // Phase 4 — IP/alt guard: the /alts header/entry/empty lines shown to staff, the staff notice raised when a
+    // Phase 4, IP/alt guard: the /alts header/entry/empty lines shown to staff, the staff notice raised when a
     // joining player shares an IP with other accounts, and the kick shown when an IP is over the account cap.
     SECURITY_ALTS_HEADER("security.alts.header"),
     SECURITY_ALTS_ENTRY("security.alts.entry"),
@@ -140,7 +140,7 @@ public enum SecurityMessageKey implements MessageKey {
     SECURITY_ALTS_NOTIFY("security.alts.notify"),
     SECURITY_ALTS_KICKED("security.alts.kicked"),
 
-    // Phase 4 — ClientID: the /clientinfo line reporting a player's recorded brand (or that none was seen), the
+    // Phase 4. ClientID: the /clientinfo line reporting a player's recorded brand (or that none was seen), the
     // staff notice when a flagged/blocked brand joins, and the kick shown when a client is not allowed.
     SECURITY_CLIENT_INFO("security.client.info"),
     SECURITY_CLIENT_UNKNOWN("security.client.unknown"),

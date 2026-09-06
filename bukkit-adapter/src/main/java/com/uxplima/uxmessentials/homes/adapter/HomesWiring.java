@@ -76,11 +76,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the homes context's adapters, use cases, and slot-grid views over the injected kernel ports, the
  * persistence DSL, and the teleport context's engine, and produces the Brigadier command list the plugin
- * registers. This is the one place the homes context is wired — nothing else news up its classes.
+ * registers. This is the one place the homes context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a Caffeine read-cache decorator (write-through at the delegate,
  * invalidate in the cache) wrapped by {@link HomeSync} so a local write announces itself across servers. The
- * teleporter delegates execution to the teleport context — homes never re-implements movement — which is why the
+ * teleporter delegates execution to the teleport context, homes never re-implements movement, which is why the
  * wiring receives the already-constructed {@link TeleportEngine}. Text prompts (home rename, invite add) go through
  * the shared {@link TextInput} seam installed once in bootstrap, so homes installs no input machinery of its own.
  */
@@ -440,7 +440,7 @@ public final class HomesWiring {
     }
 
     private static List<SethomeGuard> buildGuards(ModuleContext ctx) {
-        // Only the pure, Bukkit-free guard runs inside the use cases — they execute async, where a block
+        // Only the pure, Bukkit-free guard runs inside the use cases. They execute async, where a block
         // read is illegal. The block-reading SafeLocationGuard is invoked by the views on the region thread.
         Set<String> disabledWorlds = new HashSet<>(ctx.config().getStringList("disabled-worlds", List.of()));
         return List.of(new WorldBlacklistGuard(disabledWorlds));
@@ -449,7 +449,7 @@ public final class HomesWiring {
     private static HomeCharge buildCharge(ModuleContext ctx, KernelPorts kernel, Optional<HomeEconomy> homeEconomy) {
         boolean economyEnabled = ctx.config().getBoolean("economy.enabled", false);
         if (!economyEnabled || homeEconomy.isEmpty()) {
-            // Economy disabled in config or no provider wired — all actions are free.
+            // Economy disabled in config or no provider wired: all actions are free.
             return new HomeCharge(kernel.permissions(), Optional.empty(), HomeChargeSettings.allFree());
         }
         String currency = ctx.config().getString("economy.currency", "default");

@@ -6,15 +6,15 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * A single frozen copy of a player's inventory at a moment of interest. The queryable facts — the id, the owner,
- * the {@link SnapshotCause}, and the capture instant — are first-class; the inventory itself is intrinsically
+ * A single frozen copy of a player's inventory at a moment of interest. The queryable facts, the id, the owner,
+ * the {@link SnapshotCause}, and the capture instant. Are first-class; the inventory itself is intrinsically
  * opaque payload, held here as the adapter's already-serialized {@code byte[]} (the architecture persistence
  * invariant: the domain never sees a Bukkit {@code ItemStack}, the adapter encodes the live inventory into these
  * bytes on capture and decodes them back on restore).
  *
  * <p>Modelled as a class rather than a record because the payload is a {@code byte[]}: the bytes are defensively
  * copied in and out and compared by value, so the aggregate stays immutable and equals/hashCode behave. Every
- * snapshot carries an id from creation — {@link #capture} mints a fresh one for a new capture, {@link #of}
+ * snapshot carries an id from creation. {@link #capture} mints a fresh one for a new capture, {@link #of}
  * rehydrates one read back from storage.
  */
 public final class Snapshot {

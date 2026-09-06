@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /vault rename <n> [name]}: set or clear the player-chosen display name of a vault they already own.
- * Mirrors {@link DeleteVault}'s order — the vault must exist before its presentation can change, so an index
+ * Mirrors {@link DeleteVault}'s order. The vault must exist before its presentation can change, so an index
  * with no row returns {@link VaultError#VAULT_UNKNOWN} and writes nothing. A {@code null} (or blank, after the
  * adapter trims) name clears the display name; a non-null name applies it through {@link Vault#renamedTo}, which
  * enforces the domain length guard. The size, contents, icon and last-touched are preserved.

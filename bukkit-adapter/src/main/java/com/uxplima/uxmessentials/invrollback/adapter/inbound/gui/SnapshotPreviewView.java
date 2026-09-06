@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * Opens a chosen snapshot's contents as a read-only preview window with a control row: a details panel, a teleport
  * button, a restore button, and an export-to-shulkers button. The window is a menu spec
  * ({@link SnapshotPreviewWindow}), so an operator re-skins its chrome and moves its buttons; this class owns the
- * wording, resolved from the message catalog in the viewer's locale, and what each button does — a hand-off to the
+ * wording, resolved from the message catalog in the viewer's locale, and what each button does, a hand-off to the
  * {@link SnapshotRestorer}, {@link SnapshotTeleporter}, or {@link SnapshotExporter}.
  *
  * <p>The snapshot's own items sit in a read-only content region, so no click can take one out. No edit is ever

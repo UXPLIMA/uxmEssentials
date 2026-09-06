@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  * <p><b>Ships enabled by default.</b> The bundled config turns vanish on out of the box, so {@link #enabled(ConfigStore)}
  * defaults to {@code true} like the steady-state contexts; an operator flips {@code modules.vanish.enabled = false} to
  * turn it off, at which point the messaging/nametags vanish gates degrade to "no one is hidden" and staff-mode vanish
- * becomes a no-op. It persists nothing — the vanish state is transient in-memory state re-derived on join — so the
+ * becomes a no-op. It persists nothing (the vanish state is transient in-memory state re-derived on join) so the
  * module owns no Flyway location.
  *
  * <p>The {@code /vanish} command, the packet-hide view, and the join/quit listener are Bukkit-facing and land with the

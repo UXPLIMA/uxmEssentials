@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@code /banhistory}, {@code /mutehistory}, {@code /history} and {@code /staffhistory}: read-only reviews of
  * the append-only sanction history. An empty history renders the empty notice; a populated one renders a header
- * with the count then one entry per row, scoped to the right slice — the family reviews stay ban- or
+ * with the count then one entry per row, scoped to the right slice. The family reviews stay ban- or
  * mute-family, the unified {@code /history} folds every kind for one target newest-first, and
  * {@code /staffhistory} folds every kind issued by one staff member.
  */

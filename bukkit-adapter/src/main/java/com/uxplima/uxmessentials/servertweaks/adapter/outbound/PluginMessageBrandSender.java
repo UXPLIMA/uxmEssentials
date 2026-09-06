@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * Sends the configured server brand to a player over the {@code minecraft:brand} plugin-message channel, so the
  * client's F3 debug screen shows it instead of the default "Paper" brand. The payload is encoded once at construction
  * ({@link BrandPayload}) and reused for every join, and the channel itself is registered and unregistered by the
- * module wiring — this sender only writes to it.
+ * module wiring: this sender only writes to it.
  *
  * <p>The channel is the reserved {@code minecraft:brand} custom-payload channel: re-sending the brand after the player
  * has joined overrides the brand the server announced during the login/configuration phase. The client renders the

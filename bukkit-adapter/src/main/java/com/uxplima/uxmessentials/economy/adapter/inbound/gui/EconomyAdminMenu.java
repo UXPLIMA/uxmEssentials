@@ -20,9 +20,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Registers the bare-{@code /eco} admin hub with the menu engine and opens it. A three-row panel with three
- * entries — [Manage a player] opens the shared {@link PlayerPickerView} and routes the picked target to the
+ * entries. [Manage a player] opens the shared {@link PlayerPickerView} and routes the picked target to the
  * per-player {@link EconomyTargetMenu manage screen}, [Server-wide] opens the {@link EconomyBulkMenu bulk screen},
- * and [Transaction history] opens the global transaction log — plus a close button. The raw
+ * and [Transaction history] opens the global transaction log, plus a close button. The raw
  * {@code /eco give|take|set|reset …} subcommands are untouched; this hub is only the bare-root opener.
  *
  * <p>The hub carries the viewer reference as its menu subject, so the three opens reach the live viewer without

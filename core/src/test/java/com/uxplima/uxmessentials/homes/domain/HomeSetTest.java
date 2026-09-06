@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The {@code HomeSet} aggregate invariants under the slot model: a slot stays in range and holds at most
  * one home, the count-vs-limit quota gate, the slot-ascending ordering, the lowest-free-slot search, and
- * the events each transition raises. The aggregate is pure — no clock or repository — so every rule is
+ * the events each transition raises. The aggregate is pure, no clock or repository, so every rule is
  * asserted here in isolation from the application layer.
  */
 class HomeSetTest {

@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * the released row disappears.
  *
  * <p>The active-jail read is a DB query, and each target's display name resolves through the {@link PlayerLookup}
- * and each remaining time against the {@link Clock} — none of which belongs in an off-thread list source. So
+ * and each remaining time against the {@link Clock}: none of which belongs in an off-thread list source. So
  * {@link #open} runs the read off the tick thread, resolves every name and remaining string there, and hands the
  * fully-resolved rows in as the menu subject; the {@code moderation:jailed} list source only reads that subject.
  * The {@code mod_jailed_player} / {@code mod_jailed_jail} / {@code mod_jailed_issuer} / {@code mod_jailed_reason} /

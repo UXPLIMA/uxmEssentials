@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.migration.convert.SourceId;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A live {@link Convert} that migrates a single surface — a player's economy balance — read from a
+ * A live {@link Convert} that migrates a single surface, a player's economy balance, read from a
  * running provider through a {@link BalanceFeed} rather than from an on-disk data tree. One instance is
  * registered per built live source ({@code vault}, {@code playerpoints}); the id, display name, layout
  * note, and the feed that backs the read are all supplied at construction, so the class itself carries

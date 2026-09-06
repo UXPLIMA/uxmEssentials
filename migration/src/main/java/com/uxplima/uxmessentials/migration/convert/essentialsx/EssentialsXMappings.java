@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The EssentialsX source's {@code SupportedMappings} rows — the v1 source's claim of what it migrates
+ * The EssentialsX source's {@code SupportedMappings} rows. The v1 source's claim of what it migrates
  * (docs/12-migration §5.1). This list is one of the three artefacts {@code MigrationMappingDriftTest}
  * holds in lock-step: code table ⇄ the §5.1 doc rows ⇄ the golden-file fixtures. A mapper added without
  * a row here, or a row here with no code path and fixture, fails {@code ./gradlew check}. The deliberate

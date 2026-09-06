@@ -22,8 +22,8 @@ import com.uxplima.uxmlib.item.ItemBuilder;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A property whose click opens a sub-menu for editing a list of string entries — add, remove (confirm-gated),
- * reorder, and edit each line — backed by a single {@code List<String>} the caller reads and writes through a
+ * A property whose click opens a sub-menu for editing a list of string entries: add, remove (confirm-gated),
+ * reorder, and edit each line. Backed by a single {@code List<String>} the caller reads and writes through a
  * use case (e.g. a hologram's text lines). The sub-menu draws one button per entry into the configured entry
  * slots: left-click moves the line up, right-click moves it down, shift-left-click edits the line through an
  * anvil, and shift-right-click removes it (confirm-gated). An add button opens an anvil for a new line. Each mutation
@@ -34,8 +34,8 @@ import org.jspecify.annotations.NullMarked;
  * and materials come from the caller (the editor layout conf), so nothing is hardcoded. The setter is the
  * module's existing application use case wrapped as a {@link Consumer}; this property holds no domain logic.
  *
- * <p>The sub-menu opens as an engine child window the one menu listener routes — its entry/add/back buttons are
- * {@link SelectorButton}s and a removal gates through the context's {@link ConfirmOpener} confirm child — and each
+ * <p>The sub-menu opens as an engine child window the one menu listener routes. Its entry/add/back buttons are
+ * {@link SelectorButton}s and a removal gates through the context's {@link ConfirmOpener} confirm child, and each
  * mutation reopens the engine list, so the whole flow stays on a single holder and teardown.
  */
 @NullMarked

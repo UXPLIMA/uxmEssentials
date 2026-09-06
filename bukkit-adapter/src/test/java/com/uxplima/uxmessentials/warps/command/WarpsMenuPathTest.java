@@ -151,7 +151,7 @@ class WarpsMenuPathTest {
 
     /**
      * Asserts the {@code subcommand} literal under {@code /warp} is reachable only with {@code grantsAccess}
-     * and not with {@code deniedNode} alone — proving Brigadier {@code .requires(...)} gates the subcommand by
+     * and not with {@code deniedNode} alone. Proving Brigadier {@code .requires(...)} gates the subcommand by
      * its own permission rather than the root's.
      */
     private void assertCanUse(String subcommand, String grantsAccess, String deniedNode) {

@@ -136,7 +136,7 @@ class PlaytimeCommandPathTest {
     @Test
     void theNameArgumentIsAPlainWordNotASelector() {
         // The /playtime player argument completes against the online roster as a plain word; it is not a Paper
-        // entity-selector node, so @a/@p/@s never parse here — showing one player's stats is a single-target read.
+        // entity-selector node, so @a/@p/@s never parse here: showing one player's stats is a single-target read.
         var playerArg = command.build().getChild("player");
         assertThat(playerArg).isNotNull();
         assertThat(playerArg.getName()).isEqualTo("player");
@@ -343,7 +343,7 @@ class PlaytimeCommandPathTest {
         try {
             return dispatcher.execute(input, source) > 0;
         } catch (com.mojang.brigadier.exceptions.CommandSyntaxException unreachable) {
-            // An unmet requirement leaves the node unknown, surfacing as a parse failure — the gate held.
+            // An unmet requirement leaves the node unknown, surfacing as a parse failure, the gate held.
             return false;
         }
     }
@@ -414,7 +414,7 @@ class PlaytimeCommandPathTest {
         public void debug(String message, Object... args) {}
     }
 
-    /** A {@link PlayerInfo} with no live data — the lifetime line falls back to the tracked all-time total. */
+    /** A {@link PlayerInfo} with no live data: the lifetime line falls back to the tracked all-time total. */
     private static final class EmptyInfo implements PlayerInfo {
         @Override
         public java.util.Optional<Position> positionOf(PlayerRef who) {

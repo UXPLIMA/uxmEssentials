@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /payconfirm}: confirm and run the payer's staged large transfer. The use case re-validates funds and
  * the threshold from scratch (the balance may have changed since the prompt) and only then runs the guarded
- * transfer — confirmation re-checks, it never trusts the staged amount blindly
+ * transfer. Confirmation re-checks, it never trusts the staged amount blindly
  * ({@code docs/11-economy-integration.md} §9.2). When nothing is staged the use case tells the payer so. The
  * provider call runs off the tick thread.
  */

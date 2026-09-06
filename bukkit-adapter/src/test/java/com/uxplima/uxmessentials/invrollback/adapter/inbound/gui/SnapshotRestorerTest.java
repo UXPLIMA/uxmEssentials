@@ -74,7 +74,7 @@ class SnapshotRestorerTest {
                 InventorySnapshotCodec.encode(snapshotContents, null));
         repository.save(stored);
 
-        // The player is currently holding dirt in slot 0 — this is the state that must be safety-snapshotted.
+        // The player is currently holding dirt in slot 0: this is the state that must be safety-snapshotted.
         target.getInventory().setItem(0, new ItemStack(Material.DIRT, 12));
 
         restorer(repository).restore(ref(staff), ref(target), stored.id());

@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.worlds.domain.event.WorldUnregistered;
  * Removes a world from the registry while leaving its files on disk and any live world loaded. The
  * gate (NOT_FOUND) is synchronous; the metadata delete and {@link WorldUnregistered} publish run on
  * the {@code Scheduler}'s async executor, hopping back to the requester only to notify. With no Bukkit
- * handle op, this is the use case for which the off-tick split matters most — the whole tail is I/O.
+ * handle op, this is the use case for which the off-tick split matters most: the whole tail is I/O.
  */
 public final class UnregisterWorld {
 

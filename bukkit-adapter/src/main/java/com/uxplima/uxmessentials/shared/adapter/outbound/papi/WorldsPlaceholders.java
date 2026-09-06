@@ -8,8 +8,8 @@ import java.util.Optional;
  * world handles), wired during bootstrap; when the worlds module is disabled the seam is absent and the
  * placeholders degrade to the dash.
  *
- * <p>Every read is server-wide and player-agnostic — the managed/loaded counts and the default world are the
- * same for every requester — but each is still resolved per placeholder request, off the cached repository
+ * <p>Every read is server-wide and player-agnostic. The managed/loaded counts and the default world are the
+ * same for every requester, but each is still resolved per placeholder request, off the cached repository
  * and the live world handles so the read is cheap on the placeholder path.
  */
 public interface WorldsPlaceholders {

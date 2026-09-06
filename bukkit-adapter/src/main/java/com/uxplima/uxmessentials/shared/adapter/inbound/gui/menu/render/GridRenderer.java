@@ -16,14 +16,14 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Paints a {@link GridSpec}'s slot-grid canvas into an open inventory, the grid counterpart of {@link ListViewRenderer}.
- * The canvas mirrors the edited menu: the top rows are the content region — one cell per menu slot on the current page,
- * an item's preview where the menu holds one and the caller's empty placeholder where it does not — and the last row is
+ * The canvas mirrors the edited menu: the top rows are the content region, one cell per menu slot on the current page,
+ * an item's preview where the menu holds one and the caller's empty placeholder where it does not, and the last row is
  * the control bar (previous/next pagination plus the caller's control buttons). A menu up to five rows fits in one page
  * whose content region is exactly its size; a six-row menu paginates, its {@code 54} slots split across two content
  * regions of {@code 45}, with the surplus cells drawn as inert blockers so a click can never land off the menu.
  *
  * <p>Each filled cell's preview is rendered through the engine's own {@link ItemRenderer} from the {@link MenuItemSpec}
- * the caller supplies, so a consumer outside the engine never touches a renderer — it hands specs, the engine draws
+ * the caller supplies, so a consumer outside the engine never touches a renderer. It hands specs, the engine draws
  * them. Every clickable cell (content, nav, control) is recorded onto the holder's {@link GridViewState} so the one
  * listener can route a later click back to the menu slot, page flip or button drawn there.
  */
@@ -110,7 +110,7 @@ public final class GridRenderer {
         }
     }
 
-    /** Ceiling division of two positive ints — the page count of {@code total} cells across pages of {@code per}. */
+    /** Ceiling division of two positive ints: the page count of {@code total} cells across pages of {@code per}. */
     private static int ceilDiv(int total, int per) {
         return (total + per - 1) / per;
     }

@@ -25,6 +25,6 @@ public interface TradeBus {
     /** This backend's {@code server-id}, stamped onto the escrow rows and signals it produces. */
     String localServer();
 
-    /** Whether the bus is currently connected — a {@code /trade} to a remote player needs a healthy bus. */
+    /** Whether the bus is currently connected: a {@code /trade} to a remote player needs a healthy bus. */
     boolean healthy();
 }

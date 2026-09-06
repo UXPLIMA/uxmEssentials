@@ -16,11 +16,11 @@ import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Lets a permitted player leash a villager — a lead vanilla never lets you attach to a villager. Vanilla offers no
+ * Lets a permitted player leash a villager, a lead vanilla never lets you attach to a villager. Vanilla offers no
  * leash interaction for a villager (so {@code PlayerLeashEntityEvent} never fires for one); instead the right-click
  * opens the trade window. This listener intercepts that right-click when the player holds a lead: it attaches the
  * lead through the API, consumes one lead from their hand, and cancels the event so the trade window does not also
- * open — the vanilla "can't leash a villager" outcome is replaced with a real leash.
+ * open: the vanilla "can't leash a villager" outcome is replaced with a real leash.
  *
  * <p>The player must hold {@code uxmessentials.villagers.leash} and a {@link Material#LEAD} in the main hand, and a
  * villager already on a lead is left alone. With the feature off, {@code enabled} is {@code false} and the handler is
@@ -55,7 +55,7 @@ public final class VillagerLeashListener implements Listener {
             return;
         }
         if (!villager.setLeashHolder(player)) {
-            return; // the lead could not attach — leave the interaction for vanilla to resolve
+            return; // the lead could not attach, leave the interaction for vanilla to resolve
         }
         event.setCancelled(true);
         consumeOneLead(player);

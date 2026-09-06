@@ -6,13 +6,13 @@ import java.util.Optional;
 
 /**
  * The farm-assist crop → seed lookup: which planting item a player must spend to replant a harvested crop. It is the
- * pure mapping behind the "harvest and replant, consuming one matching seed" rule — the adapter resolves the crop and
+ * pure mapping behind the "harvest and replant, consuming one matching seed" rule. The adapter resolves the crop and
  * seed names to Bukkit materials, but the mapping itself carries no Bukkit identity so it is unit-testable on plain
  * strings.
  *
  * <p>Only the crops that grow from a single planting item and mature through a block-age are mapped: the four common
  * farmland crops and nether wart. Wheat and beetroot replant from their dedicated seed item, carrot and potato replant
- * from the vegetable itself, and nether wart replants from nether wart — so every mapped crop resolves to a real,
+ * from the vegetable itself, and nether wart replants from nether wart, so every mapped crop resolves to a real,
  * placeable seed. A crop absent from the map (a stem, a cocoa pod) simply is not farm-assisted, and the adapter skips
  * it.
  */

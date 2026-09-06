@@ -37,19 +37,19 @@ import org.jspecify.annotations.Nullable;
  * {@link ItemworldMessageKey#ENTITYCOUNT_HEADER} carrying the total is followed by one
  * {@link ItemworldMessageKey#ENTITYCOUNT_ENTRY} per type, ordered by count descending.
  *
- * <p>Both forms — bare {@code /entitycount} and {@code /entitycount <radius>} — open the
+ * <p>Both forms, bare {@code /entitycount} and {@code /entitycount <radius>}, open the
  * {@link EntityCountMenu} grid when a view is wired (the same tally, one spawn-egg icon per type sorted by
  * count), and otherwise print the chat listing. The bare root's gui-vs-chat choice is made externally: the
  * {@code GuiRootBinding} installs {@link #guiRoot} as the root executor only when the catalog {@code gui} flag is
- * on, and the flag defaults on. The {@code <radius>} child cannot see that flag at build time — its executor is
- * fixed when the tree is built — so it keys off the same view presence the opener does: it opens the grid when a
+ * on, and the flag defaults on. The {@code <radius>} child cannot see that flag at build time: its executor is
+ * fixed when the tree is built, so it keys off the same view presence the opener does: it opens the grid when a
  * view is wired and chats when it is not. {@link #runGui} runs the same region-bound scan on the actor's entity
  * thread, then hands the sorted tally to the view; a console has no inventory and falls back to the chat
  * read-out. One consequence of keying off view presence rather than the per-command flag: a {@code gui=false}
  * override suppresses the bare root's grid (the opener is never installed) but not the {@code <radius>} child's,
  * which still opens the grid while a view is wired. That divergence is accepted because gui defaults on, so the
- * common case has both forms agree; the alternative — threading the resolved flag down into every argument
- * executor — would reach across the registration chokepoint for no behaviour the default does not already give.
+ * common case has both forms agree; the alternative. Threading the resolved flag down into every argument
+ * executor: would reach across the registration chokepoint for no behaviour the default does not already give.
  */
 @NullMarked
 public final class EntityCountCommand extends ItemworldCommandSupport implements CommandRegistration {
@@ -82,7 +82,7 @@ public final class EntityCountCommand extends ItemworldCommandSupport implements
                 .build();
     }
 
-    /** The {@code <radius>} child: open the grid when a view is wired, else chat — mirroring the bare root. */
+    /** The {@code <radius>} child: open the grid when a view is wired, else chat, mirroring the bare root. */
     private int dispatch(CommandContext<CommandSourceStack> ctx, int requested) {
         return listView == null ? run(ctx, requested) : runGui(ctx, requested);
     }

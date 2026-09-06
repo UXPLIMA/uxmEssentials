@@ -14,7 +14,7 @@ import java.util.Optional;
  * ({@link #requirementFor}) merges its own block with the {@code ANY} block the same way, so a shared gate ("must have
  * money") can sit under {@code ANY} once.
  *
- * <p>A gesture may also carry an else-chain ({@link #elseFor}) — the fallback branches tried when its requirement block
+ * <p>A gesture may also carry an else-chain ({@link #elseFor}). The fallback branches tried when its requirement block
  * fails: try block A, else block B, and so on, nested to any depth. Unlike actions and requirements the else-chain is
  * <em>not</em> merged with {@code ANY}: a fallback ladder is a self-contained if / else-if / else structure specific to
  * one gesture, so blending it with a shared {@code ANY} chain would make the branch order ambiguous.
@@ -27,7 +27,7 @@ public record ClickSpec(
 
     /**
      * The historic two-argument form. It forwards to the canonical constructor with no requirement blocks and no
-     * else-chains, so every existing {@code new ClickSpec(actions, conditions)} call-site keeps compiling unchanged —
+     * else-chains, so every existing {@code new ClickSpec(actions, conditions)} call-site keeps compiling unchanged
      * only the loader reaches for the longer forms to attach a gesture's requirements and fallbacks.
      */
     public ClickSpec(Map<ClickKind, List<Ref>> actions, Map<ClickKind, List<Ref>> conditions) {
@@ -37,7 +37,7 @@ public record ClickSpec(
     /**
      * The three-argument form (actions, conditions, requirement blocks). It forwards to the canonical constructor with
      * no else-chains, so every existing {@code new ClickSpec(actions, conditions, requirements)} call-site keeps
-     * compiling unchanged — only the loader reaches for the four-argument form to attach a gesture's else-chain.
+     * compiling unchanged: only the loader reaches for the four-argument form to attach a gesture's else-chain.
      */
     public ClickSpec(
             Map<ClickKind, List<Ref>> actions,
@@ -54,7 +54,7 @@ public record ClickSpec(
     }
 
     /**
-     * Whether any gesture carries at least one action — the test the Bedrock form renderer uses to tell a tappable
+     * Whether any gesture carries at least one action, the test the Bedrock form renderer uses to tell a tappable
      * button from a decorative filler. A SimpleForm button that does nothing on tap is meaningless, so an item whose
      * click binds no action anywhere (the auto-filler, a blank border pane, any display-only item) is left off the
      * form. Requirements and else-chains do not count: without an action there is nothing for a tap to run.
@@ -111,7 +111,7 @@ public record ClickSpec(
     }
 
     /**
-     * A copy with {@code kind}'s own action list replaced by {@code refs} — the primitive the per-gesture action editor
+     * A copy with {@code kind}'s own action list replaced by {@code refs}, the primitive the per-gesture action editor
      * rebuilds one gesture through. An empty list drops the gesture's entry entirely (so the writer emits nothing for
      * it), keeping the map to the gestures that actually bind an action; every other gesture, the conditions, the
      * requirement blocks and the else-chains are carried through unchanged.
@@ -130,7 +130,7 @@ public record ClickSpec(
     }
 
     /**
-     * A copy with {@code kind}'s requirement block replaced by {@code requirement} — the primitive the per-gesture
+     * A copy with {@code kind}'s requirement block replaced by {@code requirement}, the primitive the per-gesture
      * requirement editor rebuilds one gesture's gate through. A block that gates nothing and denies nothing drops the
      * gesture's entry entirely, so the writer emits no empty {@code requirements {}} for it; every other gesture, the
      * actions, the conditions and the else-chains are carried through unchanged.

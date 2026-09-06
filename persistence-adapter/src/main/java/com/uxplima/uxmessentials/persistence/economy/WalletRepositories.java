@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Factory for the economy context's native-ledger persistence adapter, so the consuming bukkit-adapter wires
  * a {@link WalletRepository} (and the debounced writer + transaction telemetry) from the {@link Persistence}
- * handle it already holds without ever naming a jOOQ type — jOOQ is an {@code implementation} dependency of
+ * handle it already holds without ever naming a jOOQ type. JOOQ is an {@code implementation} dependency of
  * this module, kept off the consumer's compile classpath, exactly as {@code HomeRepositories} does for homes.
  *
  * <p>The returned {@link WalletLedger} bundles the cached jOOQ repository (offline-read accelerator,
@@ -53,7 +53,7 @@ public final class WalletRepositories {
     }
 
     /**
-     * Build the bare cached jOOQ repository with no settle/telemetry loops — for tests and tools that exercise
+     * Build the bare cached jOOQ repository with no settle/telemetry loops. For tests and tools that exercise
      * the ledger directly without arming background work.
      */
     public static WalletRepository repository(Persistence persistence, CurrencyRegistry currencies, Clock clock) {
@@ -65,7 +65,7 @@ public final class WalletRepositories {
 
     /**
      * The cached jOOQ repository as its concrete decorator type, so the wiring can hand the cross-server bus a
-     * per-owner invalidation hook on the same cache the provider reads — a remote {@code /pay} or eco-admin
+     * per-owner invalidation hook on the same cache the provider reads, a remote {@code /pay} or eco-admin
      * change drops exactly that owner's cached balance. The wiring then wraps this in its broadcasting
      * decorator and builds the ledger over the wrapped repository via {@link #ledgerOver}.
      */

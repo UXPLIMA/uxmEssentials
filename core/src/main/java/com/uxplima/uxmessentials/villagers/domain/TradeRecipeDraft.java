@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.villagers.domain;
 /**
  * The pure shape of one merchant trade as the trade manager is about to build it: how many buy ingredients it carries
  * and whether it has a sell result. A villager recipe is only well-formed when it costs at least one ingredient and
- * yields a result, and a merchant recipe accepts at most two ingredients — this value object owns that rule so the
+ * yields a result, and a merchant recipe accepts at most two ingredients. This value object owns that rule so the
  * adapter, which reads the live GUI slots and holds the Bukkit {@code MerchantRecipe}, never re-decides validity
  * inline. The adapter maps each editing row to a draft and only materialises a recipe for a {@link #isValid() valid}
  * one; an incomplete row (a result with no cost, or a cost with no result) is simply dropped.

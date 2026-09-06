@@ -21,14 +21,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The SuperiorSkyblock provider with SuperiorSkyblock2 absent — the case on the test classpath, where no
+ * The SuperiorSkyblock provider with SuperiorSkyblock2 absent, the case on the test classpath, where no
  * {@code com.bgsoftware} class resolves. {@link SuperiorSkyblockClaimProvider#active()} must report inactive
  * without naming a SuperiorSkyblock type and {@link SuperiorSkyblockClaimProvider#claimAt} must degrade to empty,
  * proving the present-guard keeps the reflective SuperiorSkyblock chain from loading on a server without it.
  *
  * <p>The SuperiorSkyblock API chain cannot be stood up under MockBukkit, so the ownership decisions that do not
- * need a live SuperiorSkyblock — an owner, a member-but-not-owner as trust, the real owner UUID, the ban-list
- * ban, and an unknown UUID that is neither a member nor banned — are exercised against the pure {@link IslandView}
+ * need a live SuperiorSkyblock, an owner, a member-but-not-owner as trust, the real owner UUID, the ban-list
+ * ban, and an unknown UUID that is neither a member nor banned. Are exercised against the pure {@link IslandView}
  * seam instead. The unclaimed branch (a live SuperiorSkyblock returning {@code null} from {@code getIslandAt}) and
  * the reflective wrapper resolution ({@code SuperiorSkyblockAPI.getPlayer} returning {@code null} for an unknown
  * UUID) need a running SuperiorSkyblock and are not reproducible here; the seam proves the deny decision an
@@ -118,7 +118,7 @@ class SuperiorSkyblockClaimProviderTest {
      * An {@link IslandView} whose answers come from a plain owner UUID, a member set and a ban set, standing in for
      * a real SuperiorSkyblock island. Membership and ban are set containment here; the reflective view instead
      * resolves a {@code SuperiorPlayer} wrapper and defers to {@code Island.isMember} / {@code Island.isBanned},
-     * reading a UUID with no wrapper — one absent from both sets — as neither.
+     * reading a UUID with no wrapper, one absent from both sets, as neither.
      */
     private record FakeIsland(Optional<UUID> owner, Set<UUID> members, Set<UUID> banned) implements IslandView {
 

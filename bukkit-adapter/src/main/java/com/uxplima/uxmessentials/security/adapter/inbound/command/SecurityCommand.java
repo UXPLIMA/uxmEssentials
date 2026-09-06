@@ -38,7 +38,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /security}: the operator surface over <em>another</em> player's second factors — {@code status <player>} to
+ * {@code /security}: the operator surface over <em>another</em> player's second factors. {@code status <player>} to
  * see which factors they hold, {@code force <player>} to push them back into verification, and {@code reset <player>
  * [totp|pin|all]} to clear a factor they can no longer prove.
  *

@@ -59,7 +59,7 @@ class HotspotBiasedSamplerTest {
         HotspotBiasedSampler sampler = new HotspotBiasedSampler(fixedHotspots(HOTSPOT), 0.7, HOTSPOT_RADIUS);
         RandomGenerator random = new Random(42);
 
-        // BASE_AREA carries no target biome, so the hotspot bias is skipped entirely — the plain /rtp path.
+        // BASE_AREA carries no target biome, so the hotspot bias is skipped entirely, the plain /rtp path.
         double nearFraction = fractionNearHotspot(sampler, BASE_AREA, random);
 
         assertThat(nearFraction).isLessThan(0.02);

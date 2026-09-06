@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p><b>Ships enabled by default</b> like the other steady-state contexts, so {@link #enabled(ConfigStore)} defaults
  * to {@code true}; an operator flips {@code modules.trade.enabled = false} to turn the feature off. Same-server trades
- * hold their session purely in memory ({@code TradeSession}), so the module owns no Flyway location in Phase 1 — the
+ * hold their session purely in memory ({@code TradeSession}), so the module owns no Flyway location in Phase 1, the
  * cross-server escrow table lands with the cross-server phase.
  *
  * <p>Phase 1 publishes no command and registers no listener: the {@code /trade} verbs and the window listeners arrive

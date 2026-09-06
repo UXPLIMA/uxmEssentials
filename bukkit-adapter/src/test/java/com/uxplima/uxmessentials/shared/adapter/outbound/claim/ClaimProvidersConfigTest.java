@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The typo-key guard on {@link ClaimProvidersConfig#from}. A key an operator writes under {@code claims.providers}
- * that matches no registered provider disables nothing — the safe direction — but is silent, so the operator's
+ * that matches no registered provider disables nothing, the safe direction, but is silent, so the operator's
  * intended disable never takes without any signal. {@code from} must warn once per unrecognised key, naming it, so
  * that misfire is visible; a key that does match a provider must stay quiet and still take effect.
  */

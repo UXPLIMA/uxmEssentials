@@ -75,7 +75,7 @@ class ModerationStaffFreezeTest {
         return new Notifier(messages, sink);
     }
 
-    /** A no-op audit — the FREEZE mapping does not depend on what the audit records. */
+    /** A no-op audit: the FREEZE mapping does not depend on what the audit records. */
     private static ModerationAudit audit() {
         return new NoopAudit();
     }

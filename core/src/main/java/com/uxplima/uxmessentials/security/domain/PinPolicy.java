@@ -14,7 +14,7 @@ import java.util.Set;
  * honest player one retry and costs an attacker the cheapest attack there is. The list is operator-configured, so a
  * server can add its own (its name spelled on a phone keypad, its founding year) or empty it entirely.
  *
- * <p>The policy deliberately checks <b>format only</b> — length, digits and the blocked list — and never touches the
+ * <p>The policy deliberately checks <b>format only</b> (length, digits and the blocked list) and never touches the
  * stored hash: a PIN is one-way hashed the moment it passes this check, so this class sees the plaintext for exactly
  * as long as it takes to measure it. Numeric-only is intentional; the join-verification factor is a keypad, so a PIN
  * must be enterable there.

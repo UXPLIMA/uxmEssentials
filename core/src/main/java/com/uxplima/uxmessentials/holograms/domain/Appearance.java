@@ -19,8 +19,8 @@ import java.util.Objects;
  * @param billboard how the display faces the viewer ({@link Billboard#CENTER} by default)
  * @param backgroundArgb the text-panel background as a packed ARGB int, or {@link #DEFAULT_BACKGROUND}
  * @param textShadow whether the text casts a per-glyph drop shadow
- * @param brightnessBlock the block-light override 0–15, or {@link #DEFAULT_BRIGHTNESS} for the world value
- * @param brightnessSky the sky-light override 0–15, or {@link #DEFAULT_BRIGHTNESS} for the world value
+ * @param brightnessBlock the block-light override 0 to 15, or {@link #DEFAULT_BRIGHTNESS} for the world value
+ * @param brightnessSky the sky-light override 0 to 15, or {@link #DEFAULT_BRIGHTNESS} for the world value
  * @param transform the spatial display transform (per-axis scale + translation offset)
  * @param lineWidth the maximum line width in pixels before wrapping (200 = vanilla)
  * @param viewRange the view-distance multiplier (1.0 = vanilla)
@@ -29,7 +29,7 @@ import java.util.Objects;
  * @param shadowRadius the display drop-shadow radius on the ground, or {@link #DEFAULT_SHADOW} (the vanilla 0)
  * @param shadowStrength the display drop-shadow strength, or {@link #DEFAULT_SHADOW} (the vanilla 1.0 falloff)
  * @param glowArgb the glowing-outline colour as a packed ARGB int, or {@link #DEFAULT_GLOW} for no glow
- * @param textOpacity the text opacity 0–255, or {@link #DEFAULT_OPACITY} for the vanilla fully-opaque text
+ * @param textOpacity the text opacity 0 to 255, or {@link #DEFAULT_OPACITY} for the vanilla fully-opaque text
  */
 public record Appearance(
         Billboard billboard,
@@ -47,19 +47,19 @@ public record Appearance(
         int glowArgb,
         int textOpacity) {
 
-    /** The background sentinel meaning "no override" — the vanilla translucent panel. */
+    /** The background sentinel meaning "no override", the vanilla translucent panel. */
     public static final int DEFAULT_BACKGROUND = Integer.MIN_VALUE;
 
-    /** The brightness sentinel meaning "no override" — the text takes the world light at its position. */
+    /** The brightness sentinel meaning "no override": the text takes the world light at its position. */
     public static final int DEFAULT_BRIGHTNESS = -1;
 
-    /** The shadow sentinel meaning "no override" — the display uses the vanilla drop-shadow. */
+    /** The shadow sentinel meaning "no override", the display uses the vanilla drop-shadow. */
     public static final float DEFAULT_SHADOW = -1.0f;
 
-    /** The glow sentinel meaning "no glow" — the text carries no glowing outline. */
+    /** The glow sentinel meaning "no glow": the text carries no glowing outline. */
     public static final int DEFAULT_GLOW = Integer.MIN_VALUE;
 
-    /** The opacity sentinel meaning "no override" — the vanilla fully-opaque text. */
+    /** The opacity sentinel meaning "no override", the vanilla fully-opaque text. */
     public static final int DEFAULT_OPACITY = Integer.MIN_VALUE;
 
     private static final int MIN_OPACITY = 0;
@@ -179,7 +179,7 @@ public record Appearance(
         return Math.min(limit, Math.max(-limit, raw));
     }
 
-    /** Clamp a raw text opacity to the accepted 0–255 range, so operator input never throws at the boundary. */
+    /** Clamp a raw text opacity to the accepted 0 to 255 range, so operator input never throws at the boundary. */
     public static int clampOpacity(int raw) {
         return Math.min(MAX_OPACITY, Math.max(MIN_OPACITY, raw));
     }
@@ -299,7 +299,7 @@ public record Appearance(
         return toBuilder().glowArgb(value).build();
     }
 
-    /** A copy with a text-opacity override (0–255), or {@link #DEFAULT_OPACITY} to clear it. */
+    /** A copy with a text-opacity override (0 to 255), or {@link #DEFAULT_OPACITY} to clear it. */
     public Appearance withTextOpacity(int value) {
         return toBuilder().textOpacity(value).build();
     }

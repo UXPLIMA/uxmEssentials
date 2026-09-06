@@ -19,20 +19,20 @@ import org.jspecify.annotations.NullMarked;
  * through the proxy. Registers the plugin-messaging channel with Bukkit's {@code Messenger}, buffers outbound
  * frames and flushes them on any online player, and feeds every inbound frame's bytes back to the
  * {@code onFrame} sink the {@link BusCore} above the seam registers. It knows nothing about
- * {@code NetworkMessage} or the codec — the encode/decode, origin stamp, self-origin loop sentinel and listener
+ * {@code NetworkMessage} or the codec, the encode/decode, origin stamp, self-origin loop sentinel and listener
  * dispatch all live above this seam in {@link BusCore}; only the byte-moving machinery is here.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b> for the outbound buffer ({@link #outbound}, guarded by its own
- * monitor for the small bounded push/drain). Every Bukkit touch — registering the channel, sending a frame
- * through a carrier player — hops onto the right thread through the injected {@link Scheduler} port; the
+ * monitor for the small bounded push/drain). Every Bukkit touch. Registering the channel, sending a frame
+ * through a carrier player. Hops onto the right thread through the injected {@link Scheduler} port; the
  * inbound hand-off runs off the tick thread via {@link Scheduler#async}. The transport never blocks a region
  * thread and never calls a Bukkit API off it.
  *
  * <h2>Degradation</h2>
  * Plugin messages ride a player connection, so a frame can only leave once a player is online to carry it.
  * With no proxy, no peers, or no online players the buffered frames simply never drain and the bus is a no-op
- * — the plugin runs fully local. This is the "degrades to local-only when no proxy/peer responds" contract:
+ *, the plugin runs fully local. This is the "degrades to local-only when no proxy/peer responds" contract:
  * nothing about the single-server happy path depends on the transport ({@code docs/02-concurrency.md}).
  */
 @NullMarked
@@ -135,7 +135,7 @@ public final class PluginMessagingTransport implements PluginMessageListener, Bu
     private byte[] drainOne() {
         synchronized (outbound) {
             byte[] frame = outbound.pollFirst();
-            // An empty array is the "nothing left" sentinel — a real frame always carries the version byte.
+            // An empty array is the "nothing left" sentinel: a real frame always carries the version byte.
             return frame == null ? EMPTY : frame;
         }
     }

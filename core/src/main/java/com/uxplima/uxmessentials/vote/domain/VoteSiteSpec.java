@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * Describes one configured vote site: its display label, the Votifier service key used to match an
  * incoming vote to this site, the optional public URL, and the per-player cooldown before the same
- * player can vote on that site again. The cooldown is a domain concept — the adapter reads it from
+ * player can vote on that site again. The cooldown is a domain concept. The adapter reads it from
  * config and passes the full catalog in at wire-time; no config type appears here.
  *
  * <p>The {@code name} is purely a display label ({@code /vote next}, {@code /vote last}, the GUI

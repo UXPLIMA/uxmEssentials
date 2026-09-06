@@ -2,7 +2,7 @@
 -- banks, player loans with credit scores, and anti-dupe physical banknotes.
 --
 -- Same portability contract as V1/V2: plain CREATE TABLE in the subset SQLite
--- (the default), MySQL/MariaDB and PostgreSQL all accept — no engine-specific
+-- (the default), MySQL/MariaDB and PostgreSQL all accept, no engine-specific
 -- syntax. UUIDs are the canonical 36-character text; timestamps are epoch
 -- milliseconds in a BIGINT; every money column is DECIMAL(20,4), the same width
 -- wallet_balances.amount (V2) uses, never a float. Tables carry the established
@@ -27,7 +27,7 @@ CREATE TABLE economy_shared_banks (
 );
 
 -- The bank roster: one row per (bank, player) with the player's role. Cascades
--- conceptually with its bank — the repository clears and rewrites the roster on
+-- conceptually with its bank. The repository clears and rewrites the roster on
 -- save and deletes it on bank delete.
 CREATE TABLE economy_bank_members (
     bank_id     VARCHAR(36)    NOT NULL,

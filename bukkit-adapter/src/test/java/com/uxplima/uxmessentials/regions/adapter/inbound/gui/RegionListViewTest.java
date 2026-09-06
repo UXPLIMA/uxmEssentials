@@ -45,7 +45,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@link RegionListView} over a real menu engine and a fake {@link RegionService} (WorldGuard
- * is not on the test classpath — the view is exercised through the port): the {@code /regions} list renders one
+ * is not on the test classpath. The view is exercised through the port): the {@code /regions} list renders one
  * paper icon per region priority-first, clicking one hands that region to the injected selection callback, and a
  * world with no regions sends the "no regions" line without opening a window.
  */
@@ -124,7 +124,7 @@ class RegionListViewTest {
         assertThat(menuHolderOpen(staff)).isFalse();
     }
 
-    /** Whether {@code player} currently has an engine menu open — null-safe (no window means a null top inventory). */
+    /** Whether {@code player} currently has an engine menu open: null-safe (no window means a null top inventory). */
     private static boolean menuHolderOpen(PlayerMock player) {
         Inventory top = player.getOpenInventory().getTopInventory();
         return top != null && top.getHolder() instanceof MenuHolder;

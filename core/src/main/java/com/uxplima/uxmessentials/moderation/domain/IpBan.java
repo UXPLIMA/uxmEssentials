@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * One banned IP address — a row in the IP ban-list ({@code /banip}). The login listener resolves a
+ * One banned IP address, a row in the IP ban-list ({@code /banip}). The login listener resolves a
  * connecting address against this set before player data loads. A {@code null} {@code until} is a permanent
  * IP ban; a non-null one a timed ban. {@code target} records the UUID the ban was applied against if any
  * ({@code /banip <player>} resolves one, {@code /banip <ip>} leaves it empty), so the audit line stays

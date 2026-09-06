@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /compass} ({@code uxmessentials.compass.use}): tell the player which of the eight compass points they
- * face, read from their look yaw. A pure read in the adapter — no use case and no state mutation. Self-only,
+ * face, read from their look yaw. A pure read in the adapter, no use case and no state mutation. Self-only,
  * so there is no {@code [player]} target form. The direction word is itself a catalog entry so it stays
  * localized: the yaw maps to one of the eight direction keys, that key resolves to a localized word, and the
  * word feeds the {@code direction} placeholder of the framing line (alongside the rounded {@code degrees}).
@@ -76,7 +76,7 @@ public final class CompassCommand extends PlayerstateCommandSupport implements C
             return 0;
         }
         // Paper marks Player#getLocation() nullable (null only for an entity with no world, which a
-        // connected player never is) — assert it so NullAway is satisfied at the dereference.
+        // connected player never is): assert it so NullAway is satisfied at the dereference.
         Location location = Objects.requireNonNull(player.getLocation(), "player location");
         float yaw = location.getYaw();
         int eighth = Math.round(yaw / 45f) & 7;

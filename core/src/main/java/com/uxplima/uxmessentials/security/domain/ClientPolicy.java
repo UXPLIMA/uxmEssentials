@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The pure decision behind the client-brand guard: given a joining player's reported client brand, decide whether
  * the client is allowed and whether it is worth flagging for staff. It is a value object so the rule is
- * unit-testable without a player or the plugin-message channel — the listener feeds it the raw brand string and
+ * unit-testable without a player or the plugin-message channel. The listener feeds it the raw brand string and
  * acts on the {@link ClientVerdict}.
  *
  * <p>Matching is case-insensitive and trims surrounding whitespace, so an operator listing {@code "vanilla"}

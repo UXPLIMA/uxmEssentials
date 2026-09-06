@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /antioch} (alias {@code /grenade}): lob a short-fused primed TNT from the caller's eye in their facing
- * direction — a holy-hand-grenade gag. An admin-fun verb (audit-logged): the throw is a
+ * direction, a holy-hand-grenade gag. An admin-fun verb (audit-logged): the throw is a
  * destructive, abusable effect, so it is recorded with the actor.
  *
  * <p>Spawning and propelling the TNT is region-bound, so it runs on the caller's region thread through the

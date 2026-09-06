@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /pwarp public <name>} / {@code /pwarp private <name>}: flip one of the owner's player-warps between the
  * {@link WarpAccess#PUBLIC} access (any player may use it) and {@link WarpAccess#PRIVATE} (only the owner may).
- * The warp is resolved by its global name and guarded by ownership — a name no warp of the owner's exists under
+ * The warp is resolved by its global name and guarded by ownership. A name no warp of the owner's exists under
  * is rejected with {@link PlayerWarpError#NOT_FOUND}; a flip saves the warp with the new access, stamping the
  * edit time from the injected {@link Clock}, and renders the matching feedback. An owner only ever toggles their
  * own warps.

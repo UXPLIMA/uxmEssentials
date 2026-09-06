@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.uxplima.uxmessentials.security.domain.LockoutPolicy;
 
 /**
- * The durable, account-scoped brute-force limiter shared by every verification surface — the join freeze, op-command
+ * The durable, account-scoped brute-force limiter shared by every verification surface, the join freeze, op-command
  * re-authentication, and {@code /2fa disable}. It counts consecutive failed proofs per account (keyed by UUID, never
  * per session), so the running budget survives a disconnect and rejoin: an attacker cannot reset their attempts by
  * relogging before the lockout-triggering guess. When the count reaches the configured limit the account is put on a
@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.security.domain.LockoutPolicy;
  * fresh budget.
  *
  * <p>State lives in two {@link ConcurrentHashMap}s keyed by player UUID; every mutation is a single atomic map
- * operation. It is deliberately in-memory — matching the module's existing in-memory lockout instant — so it is durable
+ * operation. It is deliberately in-memory, matching the module's existing in-memory lockout instant, so it is durable
  * across a reconnect within the running server and reset wholesale on module stop via {@link #clearAll()}. The pure
  * retry/lock decision is delegated to {@link LockoutPolicy}; this class only owns the running counts and the timed
  * windows so the three adapters and the {@code DisableTwoFactor} use case all consult one shared limiter.
@@ -50,7 +50,7 @@ public final class AttemptLimiter {
             return false;
         }
         if (!now.isBefore(until)) {
-            // The cooldown lapsed — drop it and the accumulated failures so the next join starts a fresh budget.
+            // The cooldown lapsed: drop it and the accumulated failures so the next join starts a fresh budget.
             lockedUntil.remove(playerId, until);
             failures.remove(playerId);
             return false;

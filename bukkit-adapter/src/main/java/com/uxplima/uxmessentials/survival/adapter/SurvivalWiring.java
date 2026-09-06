@@ -67,11 +67,11 @@ import org.jspecify.annotations.Nullable;
  * ({@code /farmprotect}), farm-assist, anvil-unlocker, one-player-sleep, and head-drop. Each mechanic wires only when
  * its config gate is on: with
  * {@code tree-feller.enabled = false} no {@code /treefeller} command and no tree-feller listener land, and likewise
- * for every other mechanic — so a disabled mechanic contributes nothing, the same "disabled means absent" property
+ * for every other mechanic, so a disabled mechanic contributes nothing, the same "disabled means absent" property
  * the module gate gives at the context level.
  *
- * <p>The context persists nothing — the per-player toggle is a transient PDC stamp held in
- * {@link PdcSurvivalToggles} — so there is no repository, migration, or teardown state; the {@link Wired} record is
+ * <p>The context persists nothing. The per-player toggle is a transient PDC stamp held in
+ * {@link PdcSurvivalToggles}, so there is no repository, migration, or teardown state; the {@link Wired} record is
  * just the commands and listeners to publish.
  */
 @NullMarked
@@ -179,7 +179,7 @@ public final class SurvivalWiring {
     /**
      * The composed break-drop pipeline (auto-pickup → smelt → sell), built once when at least one of the three stages
      * is enabled and shared by the {@link AutoDropsListener} and the harvesting cascades so a felled trunk or a mined
-     * vein is routed exactly like the block broken by hand. Returns {@code null} when all three are off — the cascades
+     * vein is routed exactly like the block broken by hand. Returns {@code null} when all three are off: the cascades
      * then fall back to a plain ground-dropping break.
      */
     private static @Nullable AutoDropsPipeline autoDropsPipeline(
@@ -261,7 +261,7 @@ public final class SurvivalWiring {
         for (Map.Entry<String, Double> entry : config.mobs().entrySet()) {
             EntityType type = matchEntityType(entry.getKey());
             if (type == null) {
-                log.warn("survival headdrop: unknown mob type '{}' — skipping", entry.getKey());
+                log.warn("survival headdrop: unknown mob type '{}', skipping", entry.getKey());
             } else {
                 chances.put(type, new DropChance(entry.getValue()));
             }
@@ -286,14 +286,14 @@ public final class SurvivalWiring {
             Material crop = Material.matchMaterial(name);
             Optional<String> seedName = Crops.seedFor(name);
             if (crop == null) {
-                log.warn("survival farmassist: unknown crop material '{}' — skipping", name);
+                log.warn("survival farmassist: unknown crop material '{}', skipping", name);
             } else if (seedName.isEmpty()) {
-                log.warn("survival farmassist: no seed known for crop '{}' — skipping", name);
+                log.warn("survival farmassist: no seed known for crop '{}', skipping", name);
             } else {
                 Material seed = Material.matchMaterial(seedName.get());
                 if (seed == null) {
                     log.warn(
-                            "survival farmassist: unknown seed material '{}' for crop '{}' — skipping",
+                            "survival farmassist: unknown seed material '{}' for crop '{}', skipping",
                             seedName.get(),
                             name);
                 } else {
@@ -310,7 +310,7 @@ public final class SurvivalWiring {
         for (String name : config.blocks()) {
             Material material = Material.matchMaterial(name);
             if (material == null) {
-                log.warn("survival veinminer: unknown block material '{}' — skipping", name);
+                log.warn("survival veinminer: unknown block material '{}', skipping", name);
             } else {
                 materials.add(material);
             }

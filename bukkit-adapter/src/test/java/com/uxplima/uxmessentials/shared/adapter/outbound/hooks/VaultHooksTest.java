@@ -27,7 +27,7 @@ import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
 
 /**
  * The Vault economy and permission hooks in both states. The absent path proves the NoClassDefFoundError-safe
- * contract structurally — unlike PlaceholderAPI, Vault's SDK is on the test classpath (the migration feed tests
+ * contract structurally. Unlike PlaceholderAPI, Vault's SDK is on the test classpath (the migration feed tests
  * need it), so a missing class cannot surface here; instead the test confirms the no-op defaults and their
  * interfaces declare no {@code net.milkbowl} type, so resolving an absent hook never touches the real service.
  * The present path registers stub Vault services in the {@code ServicesManager} and asserts each capability
@@ -89,7 +89,7 @@ class VaultHooksTest {
     void absentDefaultsAndInterfacesDeclareNoVaultSdkType() {
         // The structural confirmation that the no-op default carries no SDK type, so loading the interface (and
         // its ABSENT field initializer) on a Vault-less server cannot pull in net.milkbowl. Only the two
-        // VaultXService classes — reached past Hooks' present-guard — are allowed to mention it.
+        // VaultXService classes, reached past Hooks' present-guard, are allowed to mention it.
         assertThat(referencesVaultSdk(EconomyQuery.class)).isFalse();
         assertThat(referencesVaultSdk(EconomyQuery.ABSENT.getClass())).isFalse();
         assertThat(referencesVaultSdk(PermissionQuery.class)).isFalse();

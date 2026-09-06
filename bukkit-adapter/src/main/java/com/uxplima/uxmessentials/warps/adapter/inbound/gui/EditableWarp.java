@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * A uniform editable view over a server {@link Warp} and a {@link PlayerWarp} so the warp editor's click
  * handler can act on either through one code path. Both domain types carry the identical set of {@code withX}
  * copy methods and a save; the two records simply don't share a Java supertype, so this adapter bridges them.
- * Each mutator loads the current warp, applies the change and saves through the owning repository — the editor
+ * Each mutator loads the current warp, applies the change and saves through the owning repository, the editor
  * never branches on "server vs player" itself.
  */
 @NullMarked
@@ -138,7 +138,7 @@ interface EditableWarp {
      * Wrap a loaded player warp; every change is written back through {@code repository}. The surrogate-id rebuild
      * dropped the lock, password, and welcome-message facets from the player-warp aggregate (they return in the P4
      * access gate), so the lock/password/welcome members of this shared interface are inert on the player side. The
-     * shared editor does open for a player warp — {@code /pwarp edit} routes through it — but warp-editor.conf gates
+     * shared editor does open for a player warp, {@code /pwarp edit} routes through it, but warp-editor.conf gates
      * those three controls to server warps ({@code view = warps:editor-server-warp}), so a player warp never renders
      * them and these no-op members are never reached; they exist only to satisfy the server branch. The sounds,
      * particles, warmup, and cooldown edits map onto the aggregate's {@code WarpEffects} / {@code WarpTimingOverrides}

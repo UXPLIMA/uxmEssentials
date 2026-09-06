@@ -40,7 +40,7 @@ public final class ItemworldConfig {
 
     /**
      * Whether the {@code /itemedit} held-item editor is enabled ({@code item-edit.enabled}, default {@code true}).
-     * This is the item-edit sub-feature's own toggle, separate from the {@link SubFeatureGroup} gate — an operator
+     * This is the item-edit sub-feature's own toggle, separate from the {@link SubFeatureGroup} gate, an operator
      * switches the whole editor off here without touching the item-utils group.
      */
     public boolean itemEditEnabled() {
@@ -58,7 +58,7 @@ public final class ItemworldConfig {
 
     /**
      * Whether opening a shulker box from the inventory is enabled ({@code shulkers.enabled}, default {@code true}).
-     * This is the shulker sub-feature's own toggle, separate from the {@link SubFeatureGroup} groups — an operator
+     * This is the shulker sub-feature's own toggle, separate from the {@link SubFeatureGroup} groups, an operator
      * turns the in-inventory shulker opener off here without touching any command group.
      */
     public boolean shulkersEnabled() {

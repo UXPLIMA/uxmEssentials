@@ -22,14 +22,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The Residence provider with Residence absent — the case on the test classpath, where no {@code com.bekvon}
+ * The Residence provider with Residence absent, the case on the test classpath, where no {@code com.bekvon}
  * class resolves. {@link ResidenceClaimProvider#active()} must report inactive without naming a Residence type
  * and {@link ResidenceClaimProvider#claimAt} must degrade to empty, proving the present-guard keeps the
  * reflective Residence chain from loading on a server without Residence.
  *
  * <p>The Residence API chain cannot be stood up under MockBukkit, so the decisions that do not need a live
- * Residence — the case-insensitive owner match, the build-flag trust widening, the empty owner, the always-false
- * ban, and above all the UUID-to-name resolution and its {@code null} guard (a UUID the server has never seen) —
+ * Residence. The case-insensitive owner match, the build-flag trust widening, the empty owner, the always-false
+ * ban, and above all the UUID-to-name resolution and its {@code null} guard (a UUID the server has never seen)
  * are exercised against the pure {@link ResidenceView} seam instead. The unclaimed-space branch (a live
  * Residence returning {@code null} from {@code getByLoc}) needs a running Residence and is not reproducible here.
  */
@@ -93,7 +93,7 @@ class ResidenceClaimProviderTest {
     @Test
     void unknownUuid_withNullResolvedName_isNeitherOwnerNorTrusted() {
         // The name-resolution null guard: a UUID the server has never seen resolves to null, and a null name
-        // must never match the owner or a flag holder — even here, where the flag set would otherwise grant it.
+        // must never match the owner or a flag holder: even here, where the flag set would otherwise grant it.
         ClaimLookup lookup = lookupOf(new FakeResidence(OWNER_NAME, Set.of("Ghost"), Map.of()));
 
         assertThat(lookup.isOwner(UNKNOWN)).isFalse();

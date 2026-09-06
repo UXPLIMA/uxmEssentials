@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /tempwarn <player> <duration> [reason]}: append a warning that lapses on its own — the timed sibling
+ * {@code /tempwarn <player> <duration> [reason]}: append a warning that lapses on its own: the timed sibling
  * of {@code /warn}. The duration is mandatory (a permanent warning is {@code /warn}); the {@code TempWarn} use
  * case applies the exempt gate, the duration parse and the audit line, and the target may be offline. It
  * shares the {@code uxmessentials.moderation.warn} node. This handler maps the name, the duration and the

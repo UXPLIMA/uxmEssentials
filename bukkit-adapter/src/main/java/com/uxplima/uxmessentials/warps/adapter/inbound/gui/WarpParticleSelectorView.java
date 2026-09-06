@@ -31,12 +31,12 @@ import org.jspecify.annotations.Nullable;
 /**
  * The teleport-particle selector a warp editor opens to pick a warp's departure or arrival particle: a three-row
  * picker with one icon per preset particle, a custom-name button, a back button to the editor, and a remove button.
- * Clicking a particle runs the same set the old bespoke window did — the warp's departure or arrival particle through
- * the shared {@link EditableWarp} loader — then returns the viewer to the warp editor.
+ * Clicking a particle runs the same set the old bespoke window did. The warp's departure or arrival particle through
+ * the shared {@link EditableWarp} loader, then returns the viewer to the warp editor.
  *
  * <p>The window draws through the menu engine's selector runtime ({@link Menus#openSelector}), so it is a
  * holder-backed engine selector routed and torn down by the one menu listener and one {@code closeMenu}. The option
- * list is the same preset set the original fixed view drew, so a player sees an identical menu — only the machinery
+ * list is the same preset set the original fixed view drew, so a player sees an identical menu, only the machinery
  * behind it changed. The selector serves both server and player warps: the editable warp is resolved through the
  * loader from the warp name and its (nullable) owner, so the single picker covers either kind exactly as before.
  * Every visible string resolves from the warps catalog.
@@ -125,7 +125,7 @@ public final class WarpParticleSelectorView {
         return buttons;
     }
 
-    /** Set the chosen particle on the warp's departure or arrival side, then reopen the editor — the old click's effect. */
+    /** Set the chosen particle on the warp's departure or arrival side, then reopen the editor: the old click's effect. */
     private void pick(
             Player player,
             PlayerRef viewer,

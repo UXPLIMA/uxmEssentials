@@ -39,7 +39,7 @@ import org.openjdk.jmh.annotations.TearDown;
  * The browse read-model's performance guard: it proves the {@link JooqPlayerWarpBrowse#page} query stays flat as the
  * table grows. The budget is a browse page query p99 &le; 15 ms off-thread at 100,000 warps; the single indexed
  * {@code LIMIT}+{@code COUNT} pair meets it because the work is bounded by the page window (forty-five cards) and the
- * V71 composite indexes, not by the row count — page 0 over 100k warps touches the same number of rows as over 10k.
+ * V71 composite indexes, not by the row count: page 0 over 100k warps touches the same number of rows as over 10k.
  *
  * <p>It seeds a real embedded SQLite database (the default backend) with {@code warps} rows via a batched insert and
  * then measures {@code page(publicBrowse(...))}. It is in the JMH source set, so it never ships in the jar and never
@@ -125,7 +125,7 @@ public class PlayerWarpBrowseBenchmark {
         }
     }
 
-    /** The embedded SQLite backend with every default — no network coordinates. */
+    /** The embedded SQLite backend with every default: no network coordinates. */
     private record BenchConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

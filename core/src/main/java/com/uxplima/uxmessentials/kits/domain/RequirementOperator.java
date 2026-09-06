@@ -10,7 +10,7 @@ import java.util.Optional;
  *
  * <p>The ordered comparisons ({@link #GTE}, {@link #LTE}, {@link #GT}, {@link #LT}) are only meaningful when
  * both resolved operands are numbers; {@link #EQ} and {@link #NEQ} also apply to plain strings. Which of the
- * two an evaluator may use against a given pair of values is the evaluator's call — the domain only models the
+ * two an evaluator may use against a given pair of values is the evaluator's call. The domain only models the
  * operator, it never resolves a placeholder or performs the comparison itself, keeping the kernel free of any
  * PlaceholderAPI dependency.
  */

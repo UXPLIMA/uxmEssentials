@@ -13,13 +13,13 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link VanishPickupPreferences} implementation. The {@code /vanish pickup} choice is a per-player preference that
- * survives relog, so it is stamped in PDC under a single pre-created key — the sanctioned use for transient per-holder
+ * survives relog, so it is stamped in PDC under a single pre-created key. The sanctioned use for transient per-holder
  * state, like the poses opt-out and the teleport toggles. An unstamped player reads the module's {@code pickup-items}
  * config default, so the first toggle writes an explicit override that then wins over a later config change.
  *
  * <h2>Concurrency</h2>
- * Ownership: <b>per-holder PDC</b>. Reads and writes go through the owning live {@code Player} on its region thread —
- * the thread a pickup event fires on and the thread {@code /vanish pickup} runs on — and an offline player is never
+ * Ownership: <b>per-holder PDC</b>. Reads and writes go through the owning live {@code Player} on its region thread
+ * the thread a pickup event fires on and the thread {@code /vanish pickup} runs on, and an offline player is never
  * stamped and reads the config default. The {@link NamespacedKey} is created once as a constant, never on a hot path.
  */
 @NullMarked

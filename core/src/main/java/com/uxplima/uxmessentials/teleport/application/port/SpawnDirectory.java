@@ -27,7 +27,7 @@ public interface SpawnDirectory {
      */
     Optional<Position> defaultSpawn(WorldRef world);
 
-    /** Only the operator-set per-world spawn for {@code world}, with no fallback — empty when none is set. */
+    /** Only the operator-set per-world spawn for {@code world}, with no fallback: empty when none is set. */
     Optional<Position> operatorSpawn(WorldRef world);
 
     /** The global main spawn ({@code /setmainspawn}) used when a world has no spawn of its own, or empty. */

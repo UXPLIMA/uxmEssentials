@@ -34,8 +34,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Renders single menu items through the real {@link ItemRenderer} under MockBukkit to prove the skull and
  * equipment icon providers claim their specs and that plain material specs still render unchanged. The default
- * (two-arg) renderer is used for the skull/equipment cases — proving the preserved constructor transparently
- * gains those providers — and a HeadDatabase-enabled renderer with the absent hook proves {@code hdb:<id>}
+ * (two-arg) renderer is used for the skull/equipment cases. Proving the preserved constructor transparently
+ * gains those providers, and a HeadDatabase-enabled renderer with the absent hook proves {@code hdb:<id>}
  * degrades gracefully.
  */
 class IconProvidersTest {

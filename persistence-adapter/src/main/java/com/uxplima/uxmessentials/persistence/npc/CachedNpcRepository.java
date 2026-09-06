@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.npc.domain.NpcName;
 
 /**
  * An in-memory-authoritative decorator over a delegate {@link NpcRepository}. The full NPC set is small and
- * server-wide, and is loaded once — the renderer's spawn-on-enable reads {@link #all()} — and thereafter the
+ * server-wide, and is loaded once, the renderer's spawn-on-enable reads {@link #all()}, and thereafter the
  * loaded set is the authoritative answer for {@code find}/{@code exists}/{@code all}: a name not in the set is
  * absent rather than a trigger to re-query the database. The {@code /npc} use cases run those existence checks on
  * the command (tick/region) thread, so re-querying SQLite on a miss would block that thread; serving from the
@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.npc.domain.NpcName;
  *
  * <p>Every NPC mutation goes through this repository, so the in-memory set stays complete: a {@code save} writes
  * through to the delegate then publishes a new set with the NPC added (immediately findable), and a {@code
- * delete} writes through then publishes one with it removed (immediately absent) — write-through at the delegate,
+ * delete} writes through then publishes one with it removed (immediately absent), write-through at the delegate,
  * applied here, never a reload and never a write-back cache that could lose a mutation. The set is held in an
  * {@link AtomicReference} and swapped copy-on-write (the set is tiny and edits are rare operator commands), so a
  * reader on a command thread always sees a consistent immutable snapshot while a writer publishes the next one.
@@ -77,7 +77,7 @@ public final class CachedNpcRepository implements NpcRepository {
 
     /**
      * Re-read one NPC from the durable delegate and update the in-memory set to match, returning its fresh state
-     * — present when it now exists (created or edited on a peer), empty when it was deleted there. Unlike
+     *: present when it now exists (created or edited on a peer), empty when it was deleted there. Unlike
      * {@link #save}/{@link #delete}, the change did not pass through this cache (a peer wrote the shared row), so
      * the in-memory authoritative set is stale for that name; this hops it back in step against the database. The
      * cross-server listener calls this off the tick thread (the delegate read is a synchronous SQLite query) and

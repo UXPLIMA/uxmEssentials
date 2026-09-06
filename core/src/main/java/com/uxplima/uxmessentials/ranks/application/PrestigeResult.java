@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.ranks.domain.Prestige;
 /**
  * The typed outcome of a {@link Prestige} attempt: which of the five terminal states it reached and, on a
  * successful prestige, the new {@link Prestige} level and the reward multiplier the player now holds. Modelling
- * the outcome as a value the command boundary renders — rather than sending a message from the use case — keeps
+ * the outcome as a value the command boundary renders, rather than sending a message from the use case, keeps
  * the decision logic pure and free of any {@code Messages} dependency, exactly as {@link RankupResult} does.
  *
  * <p>The {@code newPrestige} is present exactly when the status is {@link Status#PRESTIGED}; the
@@ -27,7 +27,7 @@ public record PrestigeResult(Status status, Optional<Prestige> newPrestige, doub
         /** The player prestiged: the pointer reset to the first rank and {@link #newPrestige()} carries the level. */
         PRESTIGED,
 
-        /** The player is not at the top rank yet — there is a higher rank to reach before prestiging. */
+        /** The player is not at the top rank yet: there is a higher rank to reach before prestiging. */
         NOT_AT_TOP,
 
         /** The player has reached the configured prestige cap; nothing was charged and the level did not move. */

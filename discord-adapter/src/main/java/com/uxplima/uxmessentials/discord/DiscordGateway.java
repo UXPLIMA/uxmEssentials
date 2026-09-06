@@ -26,7 +26,7 @@ public interface DiscordGateway {
     /**
      * Post a plain-text message to the Discord channel with the given id. A no-op when the gateway is not
      * connected or the channel id is unknown, so a misconfigured channel never throws on the notification
-     * path. The send itself is asynchronous — this method returns without waiting for the REST round-trip.
+     * path. The send itself is asynchronous: this method returns without waiting for the REST round-trip.
      */
     void sendToChannel(String channelId, String message);
 
@@ -44,6 +44,6 @@ public interface DiscordGateway {
     /** Whether the gateway currently holds a ready connection. */
     boolean isConnected();
 
-    /** Tear the connection down cleanly on plugin disable. Idempotent — safe to call when never connected. */
+    /** Tear the connection down cleanly on plugin disable. Idempotent: safe to call when never connected. */
     void shutdown();
 }

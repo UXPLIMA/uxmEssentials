@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The injectable seam over Paper's asynchronous chunk loading. The pre-generation engine asks for one
  * chunk at a time through this interface and only consumes the returned future, so the rate-limited
- * generation loop can be driven deterministically in tests by a fake that completes immediately —
+ * generation loop can be driven deterministically in tests by a fake that completes immediately
  * Paper's real {@code World#getChunkAtAsync} is exercised only against a live server.
  */
 @NullMarked

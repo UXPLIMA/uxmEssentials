@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
 /**
  * The visibility rules of a nametag: whether it shows at all for a wearer, and the per-(wearer, viewer)
  * suppressions the adapter evaluates each render. {@code showWhen} is a {@link DisplayCondition} gating the
- * wearer — when it fails the wearer carries no nametag at all (the same condition model the scoreboard and
+ * wearer. When it fails the wearer carries no nametag at all (the same condition model the scoreboard and
  * tablist use). {@code hideWhileSneaking} drops the nametag for every viewer while the wearer is sneaking,
  * {@code respectVanish} hides it from viewers who cannot see the wearer through the vanish port, and
  * {@code viewerDistance} bounds the per-tick eligible-viewer cull to a block radius around the wearer.

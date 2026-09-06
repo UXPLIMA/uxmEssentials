@@ -1,7 +1,7 @@
 -- Links a hologram to an NPC so it floats above that NPC and follows it as the NPC moves (the
 -- linkWithNpc/unlinkWithNpc feature). When set, the renderer anchors the hologram at the linked NPC's position
 -- plus a small vertical offset rather than its own stored coordinates, and re-anchors on every NPC move; an
--- absent (NULL) value is the default — the hologram stays anchored to its own stored location. Unlinking clears
+-- absent (NULL) value is the default: the hologram stays anchored to its own stored location. Unlinking clears
 -- the column back to NULL.
 --
 -- The column is nullable with no DEFAULT clause so the ALTER stays portable across SQLite, MySQL/MariaDB and

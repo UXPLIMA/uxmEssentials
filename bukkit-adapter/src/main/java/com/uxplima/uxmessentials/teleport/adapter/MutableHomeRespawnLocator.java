@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * A {@link HomeRespawnLocator} that forwards to a delegate which can be rebound at runtime. The teleport
  * context is wired before the homes context lands (registry order), so its respawn listener is built against
  * this locator while it still resolves to empty. When homes wires, it calls {@link #bind} to supply the
- * cache-backed locator, and the already-registered respawn listener begins resolving the {@code HOME} step —
+ * cache-backed locator, and the already-registered respawn listener begins resolving the {@code HOME} step
  * no re-wiring.
  *
  * <p>If homes is disabled the delegate stays the empty locator, so a {@code HOME} step in a configured

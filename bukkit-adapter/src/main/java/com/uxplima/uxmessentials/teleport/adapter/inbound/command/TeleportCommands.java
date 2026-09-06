@@ -69,7 +69,7 @@ public final class TeleportCommands {
                 // back
                 new BackCommand(s, m),
                 new DeathBackCommand(s, m),
-                // rtp — note /rtp itself is built in TeleportWiring (it needs the RTP menu opener)
+                // rtp. Note /rtp itself is built in TeleportWiring (it needs the RTP menu opener)
                 new SetTprCommand(s, m),
                 // spawn
                 new SpawnCommand(s, m),

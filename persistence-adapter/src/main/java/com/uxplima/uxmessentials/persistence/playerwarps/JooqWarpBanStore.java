@@ -18,11 +18,11 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * jOOQ-backed {@link WarpBanStore} over the generated {@code PLAYER_WARP_BANS} table — one row per
+ * jOOQ-backed {@link WarpBanStore} over the generated {@code PLAYER_WARP_BANS} table, one row per
  * {@code (warp_id, player_uuid)}. {@link #ban} upserts on the composite key: re-banning a player overwrites the
  * expiry, reason, and imposer in place rather than inserting a second row, so there is at most one ban per player
  * per warp. A {@code banned_until} of {@code null} is a permanent ban (an absent {@link Optional}); a present one
- * is the absolute expiry as epoch-millis BIGINT. The reason and imposer columns are nullable — a console or
+ * is the absolute expiry as epoch-millis BIGINT. The reason and imposer columns are nullable, a console or
  * reasonless ban stores {@code null}. Uuids are canonical 36-char text and instants epoch-millis, the schema-wide
  * convention. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */

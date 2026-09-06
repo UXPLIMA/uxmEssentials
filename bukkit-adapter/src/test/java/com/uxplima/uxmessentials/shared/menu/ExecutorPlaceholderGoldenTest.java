@@ -32,11 +32,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * End-to-end golden of the {@code %player%} vs {@code %executor%} distinction through the real {@link Menus} open
  * path. The menu's one item names itself {@code %player%} (the viewer) and lores {@code %executor%} (the opener).
  *
- * <p>A self-open — {@code menus.open(steve, ...)} — leaves the executor defaulted to the viewer, so both read
- * "Steve". An open-for-another through the six-argument overload — {@code menus.open(bob, ..., steve)} — makes Bob
+ * <p>A self-open ({@code menus.open(steve, ...)}) leaves the executor defaulted to the viewer, so both read
+ * "Steve". An open-for-another through the six-argument overload ({@code menus.open(bob, ..., steve)}) makes Bob
  * the viewer (whom {@code %player%} names, since the target is always the viewer on an open-for-another) and Steve
  * the executor (whom {@code %executor%} names), so the window Bob sees reads name "Bob" and lore "Steve". The
- * executor rides the holder's context, so a page flip — which the engine performs as {@code ctx.withPage(...)} —
+ * executor rides the holder's context, so a page flip, which the engine performs as {@code ctx.withPage(...)},
  * keeps {@code %executor%} pointed at the opener.
  */
 class ExecutorPlaceholderGoldenTest {

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /broadcastworld} into the communication context's command surface. It is the world-scoped
- * companion of {@code /broadcast} — same operator announcement, restricted to the sender's world — and wires
+ * companion of {@code /broadcast} (same operator announcement, restricted to the sender's world) and wires
  * under its own {@code uxmessentials.communication.broadcastworld} node. This guard fails if the literal drops
  * out of the surface or wires under a different node.
  */

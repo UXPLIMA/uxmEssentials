@@ -20,7 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqJailLocationStore} against the default embedded SQLite backend with the
- * Flyway baseline applied (including the V8 jail-location table) — the tested default of the backend-parity
+ * Flyway baseline applied (including the V8 jail-location table). The tested default of the backend-parity
  * matrix. It proves the round-trip (save → find) preserves the position, the name-key upsert (a re-anchor
  * overwrites in place rather than inserting), the {@code exists} check, the sorted {@code names} listing, and
  * the delete contract (true on the first removal, false on the second).
@@ -106,7 +106,7 @@ class JooqJailLocationStoreTest {
         return new StoredJail(name, new Position(WORLD, x, y, z, yaw, pitch));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

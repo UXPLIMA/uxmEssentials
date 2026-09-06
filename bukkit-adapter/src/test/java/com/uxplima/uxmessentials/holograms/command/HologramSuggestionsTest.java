@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
  * names through {@link CommandSuggestions#fromStrings} (the helper the command wires onto every name node), and
  * the fixed-choice arguments offer their full enum value set. The provider reads only the supplied name list and
  * the partial token, so it is exercised here without a live server. The enum lists assert that the choices the
- * command offers (billboard, alignment, visibility mode, create type) stay in lockstep with the domain enums —
+ * command offers (billboard, alignment, visibility mode, create type) stay in lockstep with the domain enums
  * the gap the maintainer reported, where {@code FIXED} and friends suggested nothing.
  */
 class HologramSuggestionsTest {

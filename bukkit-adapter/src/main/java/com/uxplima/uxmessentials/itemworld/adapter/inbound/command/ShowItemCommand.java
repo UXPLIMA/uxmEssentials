@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /showitem}: broadcast the held item to chat so everyone online can read what the sender is holding —
+ * {@code /showitem}: broadcast the held item to chat so everyone online can read what the sender is holding
  * the read-only chat verb that shares the held item. It mirrors the held-item read
  * commands ({@link ItemDbCommand}, {@code /recipe}) but fans the result out to the whole roster instead of the
  * sender. No persistence, no audit, and no region hop is needed: the held item is read on the sender's region

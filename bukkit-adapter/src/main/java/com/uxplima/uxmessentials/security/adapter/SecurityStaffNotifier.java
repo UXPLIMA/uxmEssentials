@@ -21,8 +21,8 @@ import org.jspecify.annotations.NullMarked;
  * safe to iterate off-thread under Folia); per-player delivery then hops to each recipient's own entity thread
  * inside the {@link MessageSink}. A join is infrequent, so the per-notice scan of the online set is acceptable.
  *
- * <p>No raw IP or secret is ever passed in — the alt notice carries player names and a count, the client notice a
- * brand — so the log line is safe.
+ * <p>No raw IP or secret is ever passed in. The alt notice carries player names and a count, the client notice a
+ * brand, so the log line is safe.
  */
 @NullMarked
 public final class SecurityStaffNotifier {

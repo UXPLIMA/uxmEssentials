@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.economy.domain.CurrencyId;
 import com.uxplima.uxmessentials.economy.domain.CurrencyRegistry;
 
 /**
- * A scheduled bulk charge — player-warp rent, a subscription, a tax sweep — debits many owners with no player
+ * A scheduled bulk charge (player-warp rent, a subscription, a tax sweep) debits many owners with no player
  * watching. A human who clicks "buy" and is charged the wrong amount can see it and complain; a nightly sweep
  * cannot. On a backend whose take is not guarded, a debit that reports failure may in fact have succeeded, so
  * the next pass sees the money still owed and charges it a second time.

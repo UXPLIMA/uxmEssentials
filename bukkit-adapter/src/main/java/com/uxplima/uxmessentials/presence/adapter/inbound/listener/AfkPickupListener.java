@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Cancels an AFK player's item pickups when the operator has opted into {@code anti-afk.disable-pickup-while-afk}
- * — so a player parked at an AFK farm does not vacuum its drops while away. Registered only when the toggle is
+ *, so a player parked at an AFK farm does not vacuum its drops while away. Registered only when the toggle is
  * on; when off, this listener is never wired, so default behaviour is unchanged.
  *
  * <p>Both pickup entry points are covered: {@link PlayerAttemptPickupItemEvent} (the player's own attempt) and

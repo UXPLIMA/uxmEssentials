@@ -24,9 +24,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * The Athelion parse-and-map golden-file. It seeds an Athelion {@code data.yml} fixture — a password-gated warp with a
+ * The Athelion parse-and-map golden-file. It seeds an Athelion {@code data.yml} fixture. A password-gated warp with a
  * category, ratings and a blocked player; a closed warp in the default category; and a warp in a world the server no
- * longer knows — then drives {@link AthelionPlayerWarpsConvert#plan} and asserts the mapped {@link ImportedPlayerWarp}s.
+ * longer knows, then drives {@link AthelionPlayerWarpsConvert#plan} and asserts the mapped {@link ImportedPlayerWarp}s.
  * This pins the mapping: a password becomes {@code PASSWORD} access, a {@code CLOSED} warp becomes {@code PRIVATE}, the
  * {@code all} category collapses to none, {@code admission} becomes the price, blocked-players become bans, the rating
  * total is spread across the reviewers, and a warp whose world does not resolve is dropped rather than failing the run.

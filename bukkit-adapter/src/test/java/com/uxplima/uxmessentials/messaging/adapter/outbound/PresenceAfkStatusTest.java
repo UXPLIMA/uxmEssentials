@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
  * degradation. An AFK player with a reason surfaces it; an AFK player with no reason (auto-AFK) surfaces a
  * present-but-blank value so "AFK, no reason" is distinguishable from "not AFK"; a non-AFK player is empty.
  * When presence is disabled the messaging side never binds the real status, so the holder stays on
- * {@link AfkStatus#NEVER} and answers empty for everyone — the same degrade-with-the-module-off contract the
+ * {@link AfkStatus#NEVER} and answers empty for everyone, the same degrade-with-the-module-off contract the
  * mute soft-couple has.
  */
 class PresenceAfkStatusTest {

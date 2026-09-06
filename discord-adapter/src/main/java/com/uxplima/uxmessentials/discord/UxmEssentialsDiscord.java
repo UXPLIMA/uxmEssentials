@@ -14,14 +14,14 @@ import org.jspecify.annotations.Nullable;
 import org.spongepowered.configurate.ConfigurateException;
 
 /**
- * The entry point of the optional {@code uxmessentials-discord} jar — its own Paper plugin, declared by this
+ * The entry point of the optional {@code uxmessentials-discord} jar. Its own Paper plugin, declared by this
  * module's {@code paper-plugin.yml} and soft-depending on the host {@code uxmEssentials} (docs/09-deployment.md
  * Path C). It is a thin lifecycle shell: load {@code discord.conf} on enable, connect off-tick only when a
  * token is configured, and shut JDA down cleanly on disable. With no token the plugin stays dormant and the
  * host plugin runs entirely unaffected.
  *
  * <h2>Host integration</h2>
- * The bridge consumes the host plugin's notification source through Bukkit's {@code ServicesManager} — there
+ * The bridge consumes the host plugin's notification source through Bukkit's {@code ServicesManager}: there
  * is no compile-time link to {@code :bukkit-adapter}. The wiring that subscribes to the host's audit /
  * economy events and feeds the {@link NotificationForwarder} is registered once the gateway is ready; until
  * then the forwarder simply drops everything (an unconnected gateway forwards nothing).
@@ -52,7 +52,7 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
     public void onEnable() {
         DiscordConfig config = loadConfig();
         if (config == null || !config.shouldConnect()) {
-            getLogger().info("discord bridge dormant — no token configured (edit config/discord.conf)");
+            getLogger().info("discord bridge dormant. No token configured (edit config/discord.conf)");
             return;
         }
         Bukkit.getAsyncScheduler().runNow(this, ignored -> connect(config));
@@ -76,7 +76,7 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
         try {
             return DiscordConfigLoader.load(getDataFolder().toPath());
         } catch (ConfigurateException | DiscordConfigLoader.UncheckedExtractException failure) {
-            getLogger().warning("discord bridge disabled — could not load config: " + failure.getMessage());
+            getLogger().warning("discord bridge disabled, could not load config: " + failure.getMessage());
             return null;
         }
     }
@@ -92,20 +92,20 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
                     .info("discord bridge connected; mirroring "
                             + config.channels().size() + " channel(s)");
         } catch (DiscordConnectException failure) {
-            getLogger().warning("discord bridge self-disabled — connection failed: " + failure.getMessage());
+            getLogger().warning("discord bridge self-disabled. Connection failed: " + failure.getMessage());
         }
     }
 
     /**
      * Find the host's {@link NotificationSource} via {@code ServicesManager} (no compile-time link to the host
-     * jar) and start the subscriber. When the host plugin exposes no source — it is older than the bridge, or
-     * not yet enabled — the bridge stays connected but forwards nothing, logging why rather than failing.
+     * jar) and start the subscriber. When the host plugin exposes no source. It is older than the bridge, or
+     * not yet enabled: the bridge stays connected but forwards nothing, logging why rather than failing.
      */
     private void startSubscription(DiscordConfig config, NotificationForwarder live) {
         NotificationSource source = lookupSource();
         if (source == null) {
             getLogger()
-                    .warning("discord bridge connected but the host plugin exposes no notification source — "
+                    .warning("discord bridge connected but the host plugin exposes no notification source, "
                             + "nothing will be forwarded (is uxmEssentials installed and enabled on this backend?)");
             return;
         }
@@ -122,8 +122,8 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
 
     /**
      * Register the {@code /link} slash command behind the host's confirmation seam, looked up via {@code
-     * ServicesManager} (no compile-time link to the host jar). When the host exposes no confirmation — it is
-     * older than the bridge, or the discordlink module is disabled — linking stays dormant: the bridge runs the
+     * ServicesManager} (no compile-time link to the host jar). When the host exposes no confirmation: it is
+     * older than the bridge, or the discordlink module is disabled. Linking stays dormant: the bridge runs the
      * outbound notice mirror unchanged and logs why, exactly like the notification-source dormant path.
      *
      * <p>Once linking is live, advertise the bridge's presence back to the host so it knows a {@code /discordlink}
@@ -134,7 +134,7 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
         DiscordLinkConfirmation confirmation = lookupConfirmation();
         if (confirmation == null) {
             getLogger()
-                    .info("discord bridge connected but the host exposes no link confirmation — /link is "
+                    .info("discord bridge connected but the host exposes no link confirmation: /link is "
                             + "dormant (is uxmEssentials installed with the discordlink module enabled?)");
             return;
         }
@@ -155,12 +155,12 @@ public final class UxmEssentialsDiscord extends JavaPlugin {
         return new NotificationRateLimiter(config.maxPerMinute(), Duration.ofMinutes(1), clock);
     }
 
-    /** The live forwarder once connected, or {@code null} while dormant — the seam host wiring publishes to. */
+    /** The live forwarder once connected, or {@code null} while dormant: the seam host wiring publishes to. */
     @Nullable NotificationForwarder forwarder() {
         return forwarder.get();
     }
 
-    /** The live subscriber once connected to a host source, or {@code null} while dormant — test seam. */
+    /** The live subscriber once connected to a host source, or {@code null} while dormant, test seam. */
     @Nullable AuditNoticeSubscriber subscriber() {
         return subscriber.get();
     }

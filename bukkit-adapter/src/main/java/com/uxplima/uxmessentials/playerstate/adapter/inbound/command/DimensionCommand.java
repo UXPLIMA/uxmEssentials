@@ -22,12 +22,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /dimension} ({@code uxmessentials.dimension.use}): tell the player the canonical dimension key of the
  * world they are standing in, read straight from {@code World#getKey()} (for example {@code minecraft:the_nether}),
- * alongside the friendly environment name. A pure read in the adapter — no use case and no state mutation.
+ * alongside the friendly environment name. A pure read in the adapter, no use case and no state mutation.
  * Self-only, so there is no {@code [player]} target form; it is always the invoking player's current world.
  *
  * <p>This is deliberately distinct from {@code /world}: {@code /world} surfaces the world's display name,
  * environment, and per-world player count, whereas {@code /dimension} surfaces the namespaced dimension
- * identifier that {@code /world} never shows — the value plugins and datapacks key worlds by. The dimension key
+ * identifier that {@code /world} never shows: the value plugins and datapacks key worlds by. The dimension key
  * is data, not a user-facing literal, so it feeds the {@code dimension} placeholder; the environment enum name is
  * lower-cased and its underscores spaced for display, which is data shaping rather than a literal too.
  */

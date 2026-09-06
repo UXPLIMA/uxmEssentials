@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The pure {@link PunishmentStats} aggregation over fixture rows: it groups by the issuing staff member,
  * tallies only the four punitive kinds (ban/mute/warn/kick), folds lifts out, honours the optional window, and
- * orders the leaderboard most-active first. No ports, no clock — a deterministic function of the rows and the
+ * orders the leaderboard most-active first. No ports, no clock, a deterministic function of the rows and the
  * window.
  */
 class PunishmentStatsTest {
@@ -93,7 +93,7 @@ class PunishmentStatsTest {
         Instant threshold = T0.plusSeconds(100);
         List<SanctionHistoryEntry> rows = List.of(
                 by(mod, SanctionAction.BAN, T0), // before the window
-                by(mod, SanctionAction.MUTE, threshold), // on the boundary — included
+                by(mod, SanctionAction.MUTE, threshold), // on the boundary, included
                 by(mod, SanctionAction.WARN, threshold.plusSeconds(10)));
 
         PunishmentReport report = stats.aggregate(rows, Optional.of(threshold));

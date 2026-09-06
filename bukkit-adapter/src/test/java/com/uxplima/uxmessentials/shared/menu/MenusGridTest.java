@@ -156,7 +156,7 @@ class MenusGridTest {
     @Test
     void aDragOverANonCaptureGridIsCancelled() {
         // A grid opened with only a content handler (no capture handler) is not capture-enabled, so a drag over it is
-        // cancelled outright — the same safety every non-grid menu window gets — and no item is smuggled onto the
+        // cancelled outright, the same safety every non-grid menu window gets, and no item is smuggled onto the
         // cursor.
         GridHandlers noCapture = new GridHandlers((view, player, menuSlot, filled, kind) -> {});
         menus.openGrid(viewer, spec(1, () -> Map.of(0, item("DIAMOND")), p -> {}), noCapture);
@@ -199,7 +199,7 @@ class MenusGridTest {
         AtomicReference<Integer> closes = new AtomicReference<>(0);
         menus.openPreview(viewer, previewSpec(), () -> closes.updateAndGet(n -> n + 1));
 
-        player.closeInventory(); // the grid editor wires this hook to reopenGrid — the "back to editor" path
+        player.closeInventory(); // the grid editor wires this hook to reopenGrid, the "back to editor" path
 
         assertThat(closes.get()).isEqualTo(1);
     }

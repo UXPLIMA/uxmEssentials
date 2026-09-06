@@ -111,7 +111,7 @@ class NpcTest {
 
     @Test
     void withEquipmentStoresAnOpaqueTokenVerbatim() {
-        // The domain never interprets the equipment value — a serialized-item token is stored and returned
+        // The domain never interprets the equipment value. A serialized-item token is stored and returned
         // byte-for-byte, exactly as a material name would be.
         String token = "b64:rO0ABXNyAB...some-opaque-serialized-payload==";
         Npc npc = Npc.create(NpcName.of("guide"), AT, null, CREATED).withEquipment(EquipmentSlot.MAINHAND, token);
@@ -514,7 +514,7 @@ class NpcTest {
         assertThat(npc.clickCommand()).isEqualTo("spawn");
 
         // A blank display name hides the label: it is stored as the " " sentinel, which reads as hidden rather
-        // than as "no display name set" — the two are different render outcomes (no nametag vs the id).
+        // than as "no display name set": the two are different render outcomes (no nametag vs the id).
         assertThat(npc.withDisplayName(" ").displayName()).isEqualTo(" ");
         assertThat(npc.withDisplayName(" ").displayNameHidden()).isTrue();
         assertThat(npc.withDisplayName(" ").hasDisplayName()).isFalse();
@@ -544,7 +544,7 @@ class NpcTest {
         assertThat(npc.invisible()).isTrue();
         assertThat(npc.silent()).isTrue();
 
-        // Clearing one flag leaves the others set — they do not share state.
+        // Clearing one flag leaves the others set: they do not share state.
         Npc notOnFire = npc.withOnFire(false);
         assertThat(notOnFire.onFire()).isFalse();
         assertThat(notOnFire.invisible()).isTrue();

@@ -6,7 +6,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * A raw EssentialsX location as it appears in a {@code userdata} or {@code warps} YAML file: a world
- * name and the six coordinate fields. This is source-shaped foreign detail — the world is a bare name
+ * name and the six coordinate fields. This is source-shaped foreign detail. The world is a bare name
  * (EssentialsX stores no world uid), so resolving it to a {@code WorldRef} is the mapper's job. Nothing
  * here is a domain type; it only carries what the parser read.
  *

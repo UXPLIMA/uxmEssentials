@@ -111,7 +111,7 @@ class JooqWarpMemberStoreTest {
     }
 
     private void insertRawMember(UUID player, String role) {
-        // Pooled connections run with autoCommit off, so the write must go through a transaction to actually land —
+        // Pooled connections run with autoCommit off, so the write must go through a transaction to actually land
         // the same idiom the other jOOQ persistence tests use for seeding a raw row.
         persistence
                 .dsl()
@@ -124,7 +124,7 @@ class JooqWarpMemberStoreTest {
                         .execute());
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

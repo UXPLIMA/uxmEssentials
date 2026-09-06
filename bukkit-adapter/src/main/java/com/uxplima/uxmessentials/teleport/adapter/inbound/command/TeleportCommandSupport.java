@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared collaborators every teleport Brigadier command holds: the constructed {@link TeleportServices}
- * and the {@link Messages} catalog (the latter only for the players-only rejection a console may see —
+ * and the {@link Messages} catalog (the latter only for the players-only rejection a console may see
  * all player-facing feedback flows through the use cases' {@code MessageSink}). Concrete command classes
  * extend this so each stays focused on building its node and mapping one argument to one use-case call.
  */

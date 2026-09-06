@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>PlayerPoints is not a compile dependency, so its API is reached reflectively, exactly as the old
  * {@code /eco migrate} path did. The read runs off the calling thread on the import executor. A reflective
  * failure (an API shape that has shifted, say) is logged once through the operator {@link Logger} and the
- * feed yields nothing rather than failing the run — it is never swallowed silently.
+ * feed yields nothing rather than failing the run: it is never swallowed silently.
  */
 @NullMarked
 final class PlayerPointsBalanceFeed implements BalanceFeed {

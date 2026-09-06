@@ -6,7 +6,7 @@ import org.jooq.SQLDialect;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The relational backend the plugin runs against. SQLite is the default — single-node servers ship
+ * The relational backend the plugin runs against. SQLite is the default: single-node servers ship
  * with it and never touch a network database. MySQL/MariaDB and PostgreSQL are the network options an
  * operator selects in {@code modules.conf}; the same migrations and the same generated jOOQ DSL run
  * against every backend (the backend-parity invariant, {@code docs/01-architecture.md} §8).
@@ -19,12 +19,12 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public enum DatabaseBackend {
 
-    /** Embedded file database; the default. Single-writer — WAL, write pool sized 1. */
+    /** Embedded file database; the default. Single-writer: WAL, write pool sized 1. */
     SQLITE("sqlite", "org.sqlite.JDBC", SQLDialect.SQLITE, true),
 
     /**
      * MySQL/MariaDB over the network. The MariaDB driver speaks both wire protocols, and the MYSQL
-     * jOOQ dialect renders SQL valid on both — crucially it emits {@code LIMIT}, whereas the MARIADB
+     * jOOQ dialect renders SQL valid on both. Crucially it emits {@code LIMIT}, whereas the MARIADB
      * dialect emits the standard {@code FETCH NEXT … ROWS ONLY} that MariaDB 10.6+ accepts but a real
      * MySQL 8 rejects. Using MYSQL keeps the one network backend correct against either server.
      */

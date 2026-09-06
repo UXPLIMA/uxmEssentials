@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the {@link PoseModule} feature-module contract: it reports the {@code poses} id, ships enabled by default,
- * honours an explicit {@code modules.poses.enabled = false}, and — as the Phase-0 skeleton — contributes no command,
+ * honours an explicit {@code modules.poses.enabled = false}, and, as the Phase-0 skeleton, contributes no command,
  * listener, or migration. The registry-level wiring is covered by {@code FeatureModuleRegistryDriftTest}.
  */
 class PoseModuleTest {

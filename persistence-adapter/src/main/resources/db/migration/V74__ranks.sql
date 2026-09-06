@@ -1,4 +1,4 @@
--- Schema for the ranks bounded context — the DB-backed rank pointer. Rankup does
+-- Schema for the ranks bounded context: the DB-backed rank pointer. Rankup does
 -- not read a permission plugin's group; the plugin tracks the player's current
 -- rank itself, so this row is the authority. It is persisted to the database,
 -- never to PDC, so it survives a world rollback (the same hard invariant the

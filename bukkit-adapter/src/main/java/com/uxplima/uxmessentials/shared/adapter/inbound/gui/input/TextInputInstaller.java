@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * uxmLib {@link PlayerInput} the sign backend drives, wires the native dialog backend where the server supports it, and
  * hands back the {@link TextInput} every GUI-using context shares. The chat listener and the {@code PlayerInput} sign
  * listener are registered here and torn down through
- * {@link Installed#uninstall()}, so on disable/reload exactly the listeners this installs come and go — mirroring how
+ * {@link Installed#uninstall()}, so on disable/reload exactly the listeners this installs come and go, mirroring how
  * the anvil input and the menu listener are installed once in {@code PluginModule}.
  */
 @NullMarked

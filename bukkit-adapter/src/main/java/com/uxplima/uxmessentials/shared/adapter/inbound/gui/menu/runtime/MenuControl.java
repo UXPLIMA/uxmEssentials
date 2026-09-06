@@ -3,14 +3,14 @@ package com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime;
 import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.ListControlSyntax.SortDirection;
 
 /**
- * The handle the engine hands a menu action so a click can drive the very window it fired in — repaint the whole
- * menu, repaint one slot, or reset it to the first page — rather than only touching the world outside it. The
+ * The handle the engine hands a menu action so a click can drive the very window it fired in, repaint the whole
+ * menu, repaint one slot, or reset it to the first page: rather than only touching the world outside it. The
  * {@link MenuListener} binds a real one to the clicked {@link MenuHolder} and threads it onto the
  * {@link MenuActionContext}; every operation runs through the same viewer's-entity-thread hop and the same repaint
  * path a pagination click uses, so a control action never touches the inventory off the viewer's region thread and
  * never opens a second window.
  *
- * <p>A context built outside a live click — a unit test, or a feature invoking a binding directly — carries
+ * <p>A context built outside a live click (a unit test, or a feature invoking a binding directly) carries
  * {@link #NOOP} instead, so a {@code refresh}/{@code reset} there is a harmless no-op rather than a null
  * dereference. That is what keeps the four-argument {@link MenuActionContext} constructor (the one every existing
  * call-site uses) safe without change.

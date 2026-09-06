@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.WorldRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the {@link PoseSessions} registry — the single source of truth for who is posing. Covers put / get / remove /
+ * Pins the {@link PoseSessions} registry: the single source of truth for who is posing. Covers put / get / remove /
  * isPosing and the one-session-per-player invariant (starting a second pose replaces the first, so a player is never
  * in two poses at once), plus the clear-on-stop behaviour a disable/reload relies on to leave no residual state.
  */

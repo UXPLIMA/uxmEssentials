@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * an operator flips {@code modules.invrollback.enabled = true} to start capturing.
  *
  * <p>The {@code inv_snapshots} table ships in the persistence baseline ({@code db/migration}, always applied by
- * the persistence layer), so the module declares no extra migration location of its own — the same arrangement
+ * the persistence layer), so the module declares no extra migration location of its own, the same arrangement
  * vaults/holograms use. The jOOQ {@code SnapshotRepository} and the death/logout capture listener are constructed
  * in the adapter wiring once the module has started; the lifecycle bookkeeping here keeps {@code stop()} honest.
  * The {@code /invrestore} GUI command is Bukkit-facing and lands with a later phase, so this phase publishes no

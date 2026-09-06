@@ -13,7 +13,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * Covers {@link CanSeeNametagVanish}: it answers through Bukkit's {@code Player#canSee} graph, so with the presence
- * module absent (no one is hidden) it degrades to "everyone can see everyone" — the renderer then culls nobody for
+ * module absent (no one is hidden) it degrades to "everyone can see everyone". The renderer then culls nobody for
  * vanish. A miss on the live-player lookup answers {@code false} (not visible) so a since-departed player is never
  * re-added to a viewer set.
  */

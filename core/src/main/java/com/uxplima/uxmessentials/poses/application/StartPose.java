@@ -16,12 +16,12 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * Starts a free pose in place — {@code /lay}, {@code /bellyflop}, or {@code /spin}. Like {@link StartSit} it gates on
+ * Starts a free pose in place, {@code /lay}, {@code /bellyflop}, or {@code /spin}. Like {@link StartSit} it gates on
  * the matching {@code features} switch, the {@link PoseRegionGate}, and the one-session-per-player invariant, then
  * anchors the player on a seat through the {@link SeatPort} so they cannot walk out of the pose, renders the pose
  * through the {@link PosePort}, records the {@link PoseSession}, and publishes {@link PoseStarted}.
  *
- * <p>A free pose is always struck where the player stands, so the seat position doubles as the return location — a
+ * <p>A free pose is always struck where the player stands, so the seat position doubles as the return location, a
  * {@code return-to-start} server puts the player back exactly there when the pose ends. Only {@code /lay} snores: a
  * laying player is added to the {@link Snores} loop when the {@code snore} config is on, so a lie-down reads as
  * sleeping to those nearby; the other two poses never snore.
@@ -69,7 +69,7 @@ public final class StartPose {
     }
 
     /**
-     * Pose {@code who} in {@code pose} at {@code at} facing {@code yaw} — the player's own feet, since a free pose is
+     * Pose {@code who} in {@code pose} at {@code at} facing {@code yaw}. The player's own feet, since a free pose is
      * always struck on the spot. {@code pose} must be one of {@link PoseType#LAY}, {@link PoseType#BELLYFLOP}, or
      * {@link PoseType#SPIN}; the sit poses have their own use cases. Returns the outcome the adapter renders feedback
      * from.
@@ -124,7 +124,7 @@ public final class StartPose {
         /** The pose began; the player is anchored and the pose rendered. */
         STARTED,
 
-        /** The matching {@code features} switch is off — this pose is not offered. */
+        /** The matching {@code features} switch is off: this pose is not offered. */
         DISABLED,
 
         /** The region gate refused the pose here (a claim or WorldGuard veto). */

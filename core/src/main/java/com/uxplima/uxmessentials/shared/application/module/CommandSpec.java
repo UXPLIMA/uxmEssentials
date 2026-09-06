@@ -6,8 +6,8 @@ import java.util.function.Function;
 /**
  * Platform-neutral description of one command a module contributes.
  *
- * <p>The {@code factory} is not invoked for a disabled module, so the handler — and every adapter it
- * closes over — is never constructed unless the module is enabled and started. The bukkit-adapter
+ * <p>The {@code factory} is not invoked for a disabled module, so the handler, and every adapter it
+ * closes over: is never constructed unless the module is enabled and started. The bukkit-adapter
  * calls the factory with the started module's {@link ModuleContext} and registers the resulting
  * {@link BrigadierCommand} on the next {@code LifecycleEvents.COMMANDS} fire.
  *

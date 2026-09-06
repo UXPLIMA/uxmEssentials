@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * player and reads the value on the player's owning region thread, mapping the location to the kernel
  * {@link Position} so the use case stays free of Bukkit. An offline target yields an empty result.
  *
- * <p>Split from {@link PlayerEffects} because these never mutate the player — they only read presentation
+ * <p>Split from {@link PlayerEffects} because these never mutate the player. They only read presentation
  * state the use case renders back to the viewer.
  */
 public interface PlayerInfo {

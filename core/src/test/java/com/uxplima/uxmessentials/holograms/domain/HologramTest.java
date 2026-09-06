@@ -329,7 +329,7 @@ class HologramTest {
 
     @Test
     void aTextHologramStillRefusesToDropItsLastLine() {
-        // The TEXT invariant is unchanged — only the non-text types relax it.
+        // The TEXT invariant is unchanged: only the non-text types relax it.
         Hologram one = twoLine().withLineRemoved(0);
 
         assertThatThrownBy(() -> one.withLineRemoved(0)).isInstanceOf(IllegalStateException.class);

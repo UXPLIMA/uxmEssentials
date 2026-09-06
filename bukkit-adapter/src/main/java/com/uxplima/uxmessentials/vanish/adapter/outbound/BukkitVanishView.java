@@ -17,8 +17,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The {@link VanishView} implementation. It reconciles a vanished player's visibility across every viewer — hiding
- * them from a viewer whose see level is below the player's use level, and revealing them to one who clears it — by
+ * The {@link VanishView} implementation. It reconciles a vanished player's visibility across every viewer, hiding
+ * them from a viewer whose see level is below the player's use level, and revealing them to one who clears it, by
  * driving Bukkit's {@code hidePlayer} / {@code showPlayer} graph, which drops both the player <em>entity</em> and their
  * <em>tablist</em> entry for that viewer in one call, so a hidden player disappears from the world and the tab list
  * together. This is the acceptable Bukkit-level fallback for the packet hide the design prefers; it has the bonus that
@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  * visible.
  *
  * <p>Every mutation hops to the affected viewer's owning region/entity thread through the injected {@link Scheduler}
- * port — {@code hidePlayer}/{@code showPlayer} are per-viewer entity operations valid only on the <em>viewer's</em>
+ * port. {@code hidePlayer}/{@code showPlayer} are per-viewer entity operations valid only on the <em>viewer's</em>
  * owning thread on Folia. The online roster is enumerated on the global region thread (iterating
  * {@code Bukkit.getOnlinePlayers()} off it is illegal on Folia), and each {@code hidePlayer}/{@code showPlayer} then
  * runs on that viewer's own entity thread. An offline player on either side is a silent no-op. The viewer's see level
@@ -59,9 +59,9 @@ public final class BukkitVanishView implements VanishView {
                 return;
             }
             if (VanishLevels.sees(levels.seeLevel(viewerRef), level)) {
-                viewer.showPlayer(plugin, target); // this viewer clears the bar — make sure they see the player
+                viewer.showPlayer(plugin, target); // this viewer clears the bar, make sure they see the player
             } else {
-                viewer.hidePlayer(plugin, target); // below the bar — hide the player from them
+                viewer.hidePlayer(plugin, target); // below the bar, hide the player from them
             }
         });
     }

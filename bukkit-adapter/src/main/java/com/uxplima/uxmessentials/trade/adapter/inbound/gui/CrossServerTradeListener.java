@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The one way a cross-server trade ends that the window itself cannot report: the local player disconnecting.
- * Everything they do inside the window — the confirm, a stack staked, the close — reaches the view through the menu
+ * Everything they do inside the window (the confirm, a stack staked, the close) reaches the view through the menu
  * engine, which owns the window.
  *
  * <p>The handler runs at {@link EventPriority#LOWEST} so it claims the escrow before the engine's own quit teardown

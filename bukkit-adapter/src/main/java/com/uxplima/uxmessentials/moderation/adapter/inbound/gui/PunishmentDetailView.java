@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * (target, type, issuer, reason, remaining time), a "view player history" button that opens
  * {@link PlayerHistoryView}, a back button to the list, and a confirm-gated <em>Revoke</em> wired through the
  * editor's delete slot. Revoking dispatches by {@link PunishmentKind} to the existing {@code unban} /
- * {@code unmute} / {@code unjail} use case, keyed by the target UUID — the GUI adds no revoke logic of its own.
+ * {@code unmute} / {@code unjail} use case, keyed by the target UUID, the GUI adds no revoke logic of its own.
  *
  * <p>The view holds no domain logic: the labels read the projection the list already resolved, and the revoke
  * call is the same audited path the {@code /unban} / {@code /unmute} / {@code /unjail} commands take. The

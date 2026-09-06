@@ -5,7 +5,7 @@
  * plugin loads from the Bukkit {@link org.bukkit.plugin.ServicesManager} to teach the engine custom actions
  * (which cover custom buttons), requirements, placeholders and list sources, and to build a menu-styled item. The
  * {@code event} subpackage carries the cancellable open/click events a plugin listens to. Everything here is a
- * contract other plugins depend on, so a change is a breaking change — evolve additively.
+ * contract other plugins depend on, so a change is a breaking change, evolve additively.
  */
 @org.jspecify.annotations.NullMarked
 package com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.api;

@@ -14,13 +14,13 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link RequirementEvaluator} backed by PlaceholderAPI. It resolves the {@code %placeholder%} tokens in a
- * requirement's two operands through the {@link PlaceholderApiSupport} seam — the one place the
- * {@code me.clip.placeholderapi} soft-depend is reached — then compares the resolved values. When both
+ * requirement's two operands through the {@link PlaceholderApiSupport} seam, the one place the
+ * {@code me.clip.placeholderapi} soft-depend is reached, then compares the resolved values. When both
  * resolved sides parse as numbers it compares them numerically as {@link BigDecimal} (so {@code 10} and
  * {@code 10.0} compare equal and the ordered operators {@code >= <= > <} are meaningful); otherwise only
  * {@link RequirementOperator#EQ}/{@link RequirementOperator#NEQ} apply as a string match and the ordered
  * operators fail closed. A side that resolves to blank (an unknown placeholder PlaceholderAPI leaves untouched
- * or empties) also fails closed, so the menu shows it as unmet (✘) and the gate denies the claim — matching the
+ * or empties) also fails closed, so the menu shows it as unmet (✘) and the gate denies the claim, matching the
  * fail-closed semantics the {@link RequirementEvaluator} port promises.
  *
  * <p>Threading: {@link PlaceholderAPI#setPlaceholders} is a main/region-thread operation. Every caller (the

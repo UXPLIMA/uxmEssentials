@@ -26,8 +26,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the homes cross-server sync seam: the broadcasting decorator publishes a {@link HomeChanged} carrying
- * the affected owner after every local write that changes that owner's set — a {@code save} (a set or a
- * relocate), a {@code deleteSlot}, and the admin {@code deleteAll} — while a read publishes nothing. The
+ * the affected owner after every local write that changes that owner's set, a {@code save} (a set or a
+ * relocate), a {@code deleteSlot}, and the admin {@code deleteAll}, while a read publishes nothing. The
  * listener drops exactly that owner from the {@link CachedHomeRepository} on a remote {@code HomeChanged} so the
  * next {@code /home} reloads the authoritative rows, and a frame of another context leaves the cache untouched.
  * This mirrors {@code PlayerWarpSyncTest} (outbound) and {@code WalletSyncTest} (inbound).
@@ -111,7 +111,7 @@ class HomeSyncTest {
 
         HomeSync.listener(cached).onRemoteChange(new VaultChanged("peer-2", OWNER.uuid(), 1));
 
-        cached.load(OWNER); // still cached — a non-home frame does not invalidate
+        cached.load(OWNER); // still cached. A non-home frame does not invalidate
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 

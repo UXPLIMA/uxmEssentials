@@ -49,17 +49,17 @@ import org.jspecify.annotations.Nullable;
  * {@code /villager manager} command, its window, and the load-time recipe reapply) wires only when
  * {@code trade-manager} is on; and the {@link ClickToTradeListener} lands only when {@code click-to-trade} is on. The
  * {@link DisableTradesListener} always registers when the module is on, because it also honours the per-villager
- * disable flag the manager sets — with the global switch off and no flag it is an inert no-op. The
+ * disable flag the manager sets, with the global switch off and no flag it is an inert no-op. The
  * {@link VillagerProtectionListener} and the {@code /villager protect} toggle wire only under {@code protect}, while the
- * {@link VillagerBucketListener} — like the disable listener — always registers and honours its own {@code bucket}
+ * {@link VillagerBucketListener}, like the disable listener, always registers and honours its own {@code bucket}
  * switch. The {@link VillagerFollowService} and the {@code /villager follow} toggle wire only under {@code follow}, and
  * the {@link VillagerLeashListener} lands only under {@code leash}. The one {@code /villager} command registers whenever
  * the module is on (gated on {@code uxmessentials.villagers.use}) and carries whichever of the {@code manager} /
  * {@code protect} / {@code follow} subcommands their features enabled; with every sub-feature off it is just the root,
  * whose bare executor reports that no villager tools are available.
  *
- * <p>The context persists nothing relational — the last-restock stamp, the disable flag, the follow-owner mark, and the
- * manager's custom recipe set are all PDC state on the villager entity — so there is no repository or migration. The
+ * <p>The context persists nothing relational, the last-restock stamp, the disable flag, the follow-owner mark, and the
+ * manager's custom recipe set are all PDC state on the villager entity, so there is no repository or migration. The
  * restock sweep's and the follow runtime's repeating tasks are started here and any still-open manager window is drained
  * on {@link Wired#stop()}, so a disable or reload leaves no scheduled work and no unsaved edit behind.
  */

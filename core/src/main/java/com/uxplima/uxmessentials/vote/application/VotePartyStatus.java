@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.vote.domain.VotePartyCounter;
 /**
  * Serves the {@code /voteparty} display: the current accumulated count against the effective threshold,
  * and the number of votes still needed. Reads the durable counter and threshold override through the
- * repository so the display stays accurate under escalation — showing the escalated threshold when an
+ * repository so the display stays accurate under escalation. Showing the escalated threshold when an
  * override is stored, the configured base otherwise.
  */
 public final class VotePartyStatus {

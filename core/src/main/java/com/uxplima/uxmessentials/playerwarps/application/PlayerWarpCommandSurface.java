@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  *
  * <p>The {@code public}/{@code private} visibility toggles and {@code del} (gated by
  * {@code uxmessentials.pwarp.delete}) are subcommands of {@code /pwarp}, not separate command literals, so they
- * are not in this table — only the three top-level command literals are.
+ * are not in this table: only the three top-level command literals are.
  */
 final class PlayerWarpCommandSurface {
 
@@ -41,7 +41,7 @@ final class PlayerWarpCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of one player-warp command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one player-warp command, literal and help text, no Brigadier type. */
     private record PlayerWarpCommand(String literal, String description) implements BrigadierCommand {
 
         static PlayerWarpCommand of(String literal, String description) {

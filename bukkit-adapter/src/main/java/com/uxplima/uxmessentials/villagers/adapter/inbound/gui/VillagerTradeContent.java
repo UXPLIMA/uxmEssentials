@@ -16,8 +16,8 @@ import org.jspecify.annotations.Nullable;
  * The buy and sell slots of a trade-manager window: seeded once from the villager's current trades, then owned by
  * the editor until the window closes, at which point the whole region is read back into a replacement trade set.
  *
- * <p>The stacks here are trade <em>templates</em>, not deposited items — the villager's recipes are replaced
- * wholesale on close, never appended — so an editor may put anything into a slot and take it back out again. The
+ * <p>The stacks here are trade <em>templates</em>, not deposited items. The villager's recipes are replaced
+ * wholesale on close, never appended, so an editor may put anything into a slot and take it back out again. The
  * region is never repainted after the first draw, because the window is what the editor is physically arranging:
  * repainting it from the villager's recipes would undo whatever they had just placed, and a toggle click redraws
  * the window on every flip.

@@ -128,7 +128,7 @@ class HeadDropListenerTest {
         return bound -> value;
     }
 
-    /** A source that fails if drawn from — the player-head path must never roll a chance. */
+    /** A source that fails if drawn from: the player-head path must never roll a chance. */
     private static RandomSource rejectingRandom() {
         return bound -> {
             throw new AssertionError("the player-head path must not draw a chance");

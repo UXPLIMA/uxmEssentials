@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  * region thread (the only place a Bukkit world handle may be created), then re-opens the world list so the new world
  * appears. A back button returns to the list.
  *
- * <p>The draft is the menu subject, so every cycle or input submission re-opens this screen with a fresh draft — the
+ * <p>The draft is the menu subject, so every cycle or input submission re-opens this screen with a fresh draft, the
  * screen holds no per-viewer mutable state of its own. The spec mapping mirrors {@code /worlds create} exactly
  * (defaults NORMAL/NORMAL, empty seed and generator), so a GUI-built world is identical to a command-built one. This
  * replays the old bespoke {@code WorldCreateView} verbatim through the engine. Every visible string resolves from the

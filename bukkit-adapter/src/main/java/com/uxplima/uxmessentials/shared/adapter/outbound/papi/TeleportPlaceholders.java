@@ -7,8 +7,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Read seam the expansion queries for the {@code teleport_*} placeholders. It is an adapter over the
- * teleport context's read sides — the shared {@code Cooldowns} gate, the in-flight warmup tracker, the
- * {@code /back} location store, the {@code tpa} request registry and the {@code /tptoggle} flags — wired
+ * teleport context's read sides. The shared {@code Cooldowns} gate, the in-flight warmup tracker, the
+ * {@code /back} location store, the {@code tpa} request registry and the {@code /tptoggle} flags, wired
  * during bootstrap. When the teleport module is disabled the seam is absent and every placeholder degrades
  * to the {@code "-"} default.
  *
@@ -38,7 +38,7 @@ public interface TeleportPlaceholders {
     boolean acceptingRequests(PlayerRef who);
 
     /**
-     * A flattened view of a {@code /back} return point — the world name and block coordinates — so the
+     * A flattened view of a {@code /back} return point, the world name and block coordinates, so the
      * resolver renders the placeholders without importing a teleport domain type.
      *
      * @param world the world the return point lives in

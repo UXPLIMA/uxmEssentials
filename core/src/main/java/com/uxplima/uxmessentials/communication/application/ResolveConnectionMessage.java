@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.communication.domain.PlaceholderBindings;
  * <p>Index selection honours the policy's {@link Ordering}: a sequential channel reads the next monotonically
  * advancing index from the {@link SequenceCounter} keyed by the channel name, a random channel draws a bounded
  * index from the {@link RandomSource}. The policy then wraps the index into range. This engine touches no Bukkit
- * type and renders no MiniMessage — it returns the substituted raw string for the adapter to parse.
+ * type and renders no MiniMessage: it returns the substituted raw string for the adapter to parse.
  */
 public final class ResolveConnectionMessage {
 

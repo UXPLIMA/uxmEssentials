@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Registers the {@code /entitycount} browse menu with the menu engine and opens it. A read-only paginated grid of
- * the nearby-entity tally, one icon per entity type sorted by count descending — the visual twin of the
+ * the nearby-entity tally, one icon per entity type sorted by count descending, the visual twin of the
  * {@code /entitycount} chat read-out. It registers the entry list source and the per-entry placeholders, then
  * loads the {@code itemworld-entitycount} spec and hands it to {@link Menus}.
  *
@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * not in an off-thread list source. So {@code EntityCountCommand} runs the region-bound scan on the actor's entity
  * thread and hands the already-sorted, already-resolved {@link Tally} list (each carrying the type key, the count,
  * and its spawn-egg material name) to {@link #open} as the menu subject; the {@code itemworld:entity-tally} list
- * source only reads that subject — it touches no Bukkit API. The {@code entity_icon} / {@code entity_type} /
+ * source only reads that subject: it touches no Bukkit API. The {@code entity_icon} / {@code entity_type} /
  * {@code entity_count} / {@code entity_radius} placeholders read the bound entry to render each icon, and a click
  * does nothing (the chat read-out had no per-type action either). An empty scan opens the one-row empty-state
  * title instead of a grid.

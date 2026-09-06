@@ -26,7 +26,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * resolution mirrors the message-catalog loader: {@code <dataFolder>/modules/<module>/gui/<name>.conf} on
  * disk is read first so an operator's edit takes effect, else the bundled classpath resource
  * {@code modules/<module>/gui/<name>.conf}, else the code default handed in by the caller. A malformed or
- * missing file never throws — it logs and falls back — so a typo in a layout file can never stop a menu from
+ * missing file never throws, it logs and falls back, so a typo in a layout file can never stop a menu from
  * opening.
  *
  * <p>The conf holds layout integers and {@link Material} names only, never localised text. Every material name
@@ -283,7 +283,7 @@ public final class GuiLayouts {
     /**
      * Load the HOCON root for {@code module}/{@code name}, preferring an operator's on-disk edit over the
      * bundled resource. Returns {@code null} when neither exists or the file cannot be parsed, so the caller
-     * falls back to its code default — a typo never stops a menu opening.
+     * falls back to its code default: a typo never stops a menu opening.
      */
     private @org.jspecify.annotations.Nullable ConfigurationNode root(String module, String name) {
         Objects.requireNonNull(module, "module");

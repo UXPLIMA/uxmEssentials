@@ -16,11 +16,11 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>A lookup is best-effort by design. An unknown id, a HeadDatabase that has not yet finished loading its
  * head index (it builds the index asynchronously on startup, so an early read can come back empty), or a
- * reflective read that fails all collapse to {@link Optional#empty()} rather than throwing — a head lookup
+ * reflective read that fails all collapse to {@link Optional#empty()} rather than throwing, a head lookup
  * degrades to the plain-head fallback, it never breaks a menu render. A null or blank id is empty as well.
  *
  * <p>The lookup touches the item on the calling thread with no I/O, so a caller invokes it on the viewer's
- * entity thread — the menu engine's item-build chain already runs there. This interface and its {@link #ABSENT}
+ * entity thread: the menu engine's item-build chain already runs there. This interface and its {@link #ABSENT}
  * default reference none of {@code me.arcaniax}; the only class that touches HeadDatabase is the real query
  * behind {@link HeadDatabaseHook#whenPresent}, and even that reaches it purely by reflection. So a
  * HeadDatabase-less server loads no SDK class when resolving this capability.
@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public interface HeadQuery {
 
-    /** Whether a live HeadDatabase is present and usable — false for the absent default. */
+    /** Whether a live HeadDatabase is present and usable, false for the absent default. */
     boolean available();
 
     /**

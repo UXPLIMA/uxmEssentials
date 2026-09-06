@@ -30,7 +30,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Mints a physical banknote {@link ItemStack} carrying a fresh anti-dupe token and registers that token in the
  * {@link BanknoteStore} so the note can be redeemed exactly once. The minted item carries three persistent-data
- * tags — value, currency, and token — that the redemption path reads to credit the right wallet by the right
+ * tags (value, currency, and token) that the redemption path reads to credit the right wallet by the right
  * amount; the cosmetic name and lore resolve in the recipient's locale.
  *
  * <p>Minting alone neither debits nor credits any wallet: it produces the bearer instrument and records its

@@ -15,15 +15,15 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  * choices the announcer applies per viewer and per broadcast:
  *
  * <ul>
- *   <li>{@link #condition} — a {@link DisplayCondition} evaluated per recipient so an announcement can be scoped
+ *   <li>{@link #condition}. A {@link DisplayCondition} evaluated per recipient so an announcement can be scoped
  *       to a world, a permission, a gamemode, or any combination; the unconditional default shows to everyone.
- *   <li>{@link #intervalOverride} — an optional per-announcement cadence; when present the adapter schedules this
+ *   <li>{@link #intervalOverride}, an optional per-announcement cadence; when present the adapter schedules this
  *       announcement on its own timer rather than the config-wide default (the cadence is an adapter scheduling
- *       concern — this record only carries the value).
- *   <li>{@link #channels} — the surfaces the lines are pushed to (chat, action bar, title, …); never empty, it
+ *       concern: this record only carries the value).
+ *   <li>{@link #channels}. The surfaces the lines are pushed to (chat, action bar, title, …); never empty, it
  *       defaults to {@link BroadcastChannel#CHAT} when an operator leaves it unset.
- *   <li>{@link #sound} — an optional sound key played alongside the broadcast.
- *   <li>{@link #centered} — whether the adapter should centre each line in chat.
+ *   <li>{@link #sound}: an optional sound key played alongside the broadcast.
+ *   <li>{@link #centered}: whether the adapter should centre each line in chat.
  * </ul>
  *
  * <p>The lines are operator content rendered through MiniMessage later, never {@code MessageKey}s and never

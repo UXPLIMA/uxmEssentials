@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The warp manager's "create new warp" flow, pulled out so both the engine-rendered manager and any caller share the
  * one path: prompt for a name, validate it, create the warp at the operator's current position through {@link SetWarp}
- * — the same use case {@code /warp create} drives — then open that warp's editor; or, on a blank or spaced name, send
+ *, the same use case {@code /warp create} drives, then open that warp's editor; or, on a blank or spaced name, send
  * the invalid-name message and reopen the manager. Cancelling the prompt reopens the manager too. The flow itself adds
  * no domain logic: it drives {@link SetWarp} and the bespoke {@link WarpEditorView}, exactly as the old manager's
  * create button did.

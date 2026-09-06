@@ -10,10 +10,10 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The backend's {@code network} view: whether this backend opts into cross-server sync, its unique
  * {@code server-id} (the origin tag stamped into every outbound frame and the loop sentinel on inbound), the
- * bus channel name, the bounded outbound queue size ({@code docs/09-deployment.md} Path B), and — added in
- * Phase B — which {@link Transport} carries the bus and the canonical {@link Redis} connection block the Redis
- * transport uses. These are restart-only — the channel, the captured server-id and the chosen transport are
- * bound once at enable — so a single immutable snapshot is read at wiring time.
+ * bus channel name, the bounded outbound queue size ({@code docs/09-deployment.md} Path B), and, added in
+ * Phase B, which {@link Transport} carries the bus and the canonical {@link Redis} connection block the Redis
+ * transport uses. These are restart-only. The channel, the captured server-id and the chosen transport are
+ * bound once at enable, so a single immutable snapshot is read at wiring time.
  *
  * @param enabled whether this backend participates in network sync; {@code false} runs purely local
  * @param serverId this backend's unique id; two backends sharing it corrupt origin routing
@@ -70,7 +70,7 @@ public record NetworkConfig(
         return heartbeatInterval().multipliedBy(3);
     }
 
-    /** The carrier(s) the bus rides. {@link #VELOCITY} is the proxy default — no Redis connection is opened. */
+    /** The carrier(s) the bus rides. {@link #VELOCITY} is the proxy default: no Redis connection is opened. */
     public enum Transport {
         VELOCITY,
         REDIS,
@@ -95,7 +95,7 @@ public record NetworkConfig(
      * companion publishes through the {@code ServicesManager}); the factory appends {@code db} to the connection
      * URI ({@code 0} leaves the default database). Redis pub/sub is global across logical databases, so {@code db}
      * has no functional
-     * effect on this transport — it is carried only for back-compat with existing {@code network.redis.db}
+     * effect on this transport. It is carried only for back-compat with existing {@code network.redis.db}
      * settings.
      *
      * @param host the Redis host

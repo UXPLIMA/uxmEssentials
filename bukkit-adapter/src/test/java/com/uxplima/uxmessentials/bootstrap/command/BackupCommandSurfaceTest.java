@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * Pins the {@code /backup} bootstrap command onto the operator surface. {@code /backup} is not sourced from
  * a feature module, so {@code CommandCatalogDriftTest} tracks its literal in its bootstrap list; this guard
- * asserts the registration's literal, the permission node it wires under, and — the point of the command —
+ * asserts the registration's literal, the permission node it wires under, and, the point of the command,
  * that it reuses {@link DataDirBackupSnapshot}, which now exposes the written location {@code /backup}
  * reports. A drift in the literal or the permission would silently break the documented operator surface.
  */

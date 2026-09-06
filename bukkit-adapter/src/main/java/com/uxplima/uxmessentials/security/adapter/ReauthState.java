@@ -10,8 +10,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The transient record of when each player last proved their second factor, the input the op-command re-auth window
- * is measured against. It is stamped from two places — a successful join verification and a successful re-auth prompt
- * — so a player who has just verified is not immediately asked to re-verify to run a protected command. The stamp is
+ * is measured against. It is stamped from two places, a successful join verification and a successful re-auth prompt
+ *, so a player who has just verified is not immediately asked to re-verify to run a protected command. The stamp is
  * a plain {@link Instant}; the {@link com.uxplima.uxmessentials.security.domain.ReauthPolicy} decides whether it is
  * still recent enough.
  *
@@ -36,7 +36,7 @@ public final class ReauthState {
         return lastVerified.get(Objects.requireNonNull(playerId, "playerId"));
     }
 
-    /** Forget {@code playerId}'s verification — on disconnect, so a rejoin must verify again. */
+    /** Forget {@code playerId}'s verification: on disconnect, so a rejoin must verify again. */
     public void clear(UUID playerId) {
         lastVerified.remove(Objects.requireNonNull(playerId, "playerId"));
     }

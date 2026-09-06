@@ -43,17 +43,17 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers and opens the three people-management sub-menus the manage panel's members / whitelist / bans buttons open:
  * {@code pwarp-members} (co-owners and managers), {@code pwarp-whitelist} (the guest list), and {@code pwarp-bans}
- * (barred players). Each is a snapshot list — a warp's people lists are bounded per-warp, so {@link #open} resolves the
+ * (barred players). Each is a snapshot list. A warp's people lists are bounded per-warp, so {@link #open} resolves the
  * warp off the tick thread, reads the one bounded store list, resolves each uuid's name, and hands the fully-resolved
  * rows in as the engine subject; the shared {@code playerwarps:people} list source only reads that subject, touching no
  * port off-thread. The window is then painted on the viewer's entity thread.
  *
- * <p>A row's left click removes that person through the same use case the {@code /pwarp} verb drives —
- * {@link ManageMembers#removeMember}, {@link ManageWhitelist#unwhitelist}, {@link ManageBans#unban} — and each menu's
+ * <p>A row's left click removes that person through the same use case the {@code /pwarp} verb drives
+ * {@link ManageMembers#removeMember}, {@link ManageWhitelist#unwhitelist}, {@link ManageBans#unban}, and each menu's
  * add button prompts for a player name through the engine's {@code input:} step and grants it: two buttons on the
  * members menu add a co-owner or a manager directly ({@link ManageMembers#addMember} with the fixed role, no nested
  * picker), the whitelist button whitelists, and the bans button imposes a permanent, reasonless ban
- * ({@link ManageBans#ban} with empty duration and reason — a timed or reasoned ban is the command's job). A
+ * ({@link ManageBans#ban} with empty duration and reason: a timed or reasoned ban is the command's job). A
  * value-carrying add id is single-segment ({@code pwarp-mem-addco}, ...) because the engine splits the {@code %input%}
  * value on its first colon; the value-free remove/back ids stay namespaced. Every write runs off the tick thread, then
  * the sub-menu re-opens with the re-read rows. The back button returns to {@code pwarp-manage}. The manage panel only
@@ -272,7 +272,7 @@ public final class PlayerWarpPeopleMenu {
         return (actor, name, target) -> manageMembers.addMember(actor, name, target, role);
     }
 
-    /** Impose a permanent, reasonless ban — the GUI's only ban shape; the command owns timed and reasoned bans. */
+    /** Impose a permanent, reasonless ban: the GUI's only ban shape; the command owns timed and reasoned bans. */
     private void banPermanent(PlayerRef actor, PlayerWarpName name, PlayerRef target) {
         manageBans.ban(actor, name, target, Optional.empty(), Optional.empty());
     }

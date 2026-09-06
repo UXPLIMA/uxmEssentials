@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
 /**
  * {@code /npc action add <name> <trigger> <type> <value…>}: append one typed {@link ClickAction} to the end of an
  * NPC's action list and save the new snapshot. A name no NPC exists at is rejected with {@link
- * NpcError#NOT_FOUND}. Appending does not touch the rendering — the fake player looks the same — so no re-render
+ * NpcError#NOT_FOUND}. Appending does not touch the rendering, the fake player looks the same, so no re-render
  * is needed; the interaction listener reads the action list from the repository when the NPC is clicked. The
  * operator-only permission is enforced at the command gate.
  */

@@ -9,7 +9,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A late-bound handle to the player-warp "go to" teleport the shared warp editor invokes when its teleport
  * button is clicked on a player warp. The warps module is wired before player-warps, so the editor listener
- * cannot receive the {@code UsePlayerWarp} use case in its constructor — it receives this handle (always
+ * cannot receive the {@code UsePlayerWarp} use case in its constructor. It receives this handle (always
  * non-null, constructor-injected and {@code final}), and the player-warps wiring binds the teleport into it once
  * that context is wired. When player-warps is disabled the handle stays empty and {@link #teleport} is a no-op,
  * so the editor simply does nothing for a player warp it can no longer resolve.

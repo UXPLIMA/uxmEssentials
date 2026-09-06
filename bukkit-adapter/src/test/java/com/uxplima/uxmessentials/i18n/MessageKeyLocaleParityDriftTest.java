@@ -46,7 +46,7 @@ import org.junit.jupiter.api.TestFactory;
  *
  * <p>Asserts bidirectionally that the {@link MessageKey} constant set equals the key set of every
  * bundled {@code messages_<lang>.conf}, with {@code messages_en.conf} as the authority: every enum
- * constant has an {@code en} entry, and every shipped locale carries exactly {@code en}'s key set — no
+ * constant has an {@code en} entry, and every shipped locale carries exactly {@code en}'s key set, no
  * holes, no stale extras. Per-module key ownership is asserted by prefix so a context owns its key
  * namespace and a misfiled key fails loudly. The Gradle {@code localeParityCheck} gate runs the same
  * comparison as a fast pre-test fail; this is the comprehensive guard.
@@ -187,7 +187,7 @@ class MessageKeyLocaleParityDriftTest {
 
     @Test
     void everyEnumKeyIsRegisteredInTheCatalogAggregate() {
-        // The aggregate MessageKeyCatalog must enumerate every per-module enum — a context whose enum
+        // The aggregate MessageKeyCatalog must enumerate every per-module enum, a context whose enum
         // is forgotten here would silently drop out of the parity matrix and the translatable wiring.
         Set<String> aggregate = MessageKeyCatalog.allKeys();
         for (MessageKey[] block : OWNERSHIP.keySet()) {

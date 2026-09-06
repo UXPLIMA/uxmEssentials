@@ -49,8 +49,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of increment 6: an {@link EnumProperty} clicked inside an editor running on the engine
- * editor runtime opens its option selector as an engine child window — a {@link MenuHolder} routed by the one
- * {@link MenuListener} — rather than a uxmLib {@code SimpleGui}. Choosing a non-selected option hands it to the
+ * editor runtime opens its option selector as an engine child window. A {@link MenuHolder} routed by the one
+ * {@link MenuListener}, rather than a uxmLib {@code SimpleGui}. Choosing a non-selected option hands it to the
  * setter and reopens the parent editor in place; the selected option carries a glint. The whole open → click →
  * child → choose → back flow leaves no live refresh task.
  */
@@ -225,7 +225,7 @@ class MenuEnumSelectorTest {
         return item.containsEnchantment(Enchantment.UNBREAKING);
     }
 
-    /** The first lore line of an item rendered as plain text — the value-lore the editor wrote. */
+    /** The first lore line of an item rendered as plain text, the value-lore the editor wrote. */
     private static String valueLoreOf(ItemStack item) {
         List<Component> lore = TileText.body(item);
         return net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText()

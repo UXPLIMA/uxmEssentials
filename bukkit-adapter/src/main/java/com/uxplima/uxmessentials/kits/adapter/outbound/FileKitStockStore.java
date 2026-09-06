@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A file-backed {@link KitStockStore}. The global per-kit claim tally lives in a single
  * {@code modules/kits/stock.properties} file, one {@code <kit-id>=<count>} line per stock-limited kit. Kits are
- * deliberately DB-free, so this global counter — which has no per-player holder a PDC could hang off — is kept on
+ * deliberately DB-free, so this global counter (which has no per-player holder a PDC could hang off) is kept on
  * disk rather than in the relational store.
  *
  * <p>The live counts are held in a {@link ConcurrentHashMap}; reservation is atomic through {@link Map#compute},

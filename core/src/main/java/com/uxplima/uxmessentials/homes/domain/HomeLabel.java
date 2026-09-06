@@ -3,11 +3,11 @@ package com.uxplima.uxmessentials.homes.domain;
 import java.util.Objects;
 
 /**
- * A player-facing display label for a home — arbitrary mixed-case text the player typed, stripped
+ * A player-facing display label for a home. Arbitrary mixed-case text the player typed, stripped
  * of surrounding whitespace and capped at {@link #MAX_LENGTH} characters.
  *
  * <p>Unlike the retired {@code HomeName}, the label is NOT normalised to lowercase; {@code "Base"}
- * and {@code "base"} are different labels. The label is purely cosmetic — it does not participate
+ * and {@code "base"} are different labels. The label is purely cosmetic. It does not participate
  * in home identity, which is carried by {@link HomeSlot}.
  *
  * @param value the stripped label text (non-null, non-blank, at most {@value #MAX_LENGTH} chars)

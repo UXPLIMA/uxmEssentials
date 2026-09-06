@@ -30,7 +30,7 @@ import org.jspecify.annotations.NullMarked;
  * stored one so a re-click on an already-correct state is a no-op.
  *
  * <p>Kept honest: which board a viewer sees is resolved automatically from each board's condition and priority
- * ({@code SidebarConfig.select}) — there is no use case for a player to manually pick a board, so the panel exposes
+ * ({@code SidebarConfig.select}). There is no use case for a player to manually pick a board, so the panel exposes
  * no board-picker, only the genuine per-player preference. Every visible string is a {@link ScoreboardMessageKey};
  * the use-case write hops off the tick thread through the kernel {@link Scheduler}.
  */

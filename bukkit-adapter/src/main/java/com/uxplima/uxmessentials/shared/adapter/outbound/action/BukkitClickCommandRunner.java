@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * The Bukkit-backed {@link ClickCommandRunner}: a console command goes through {@code Bukkit.dispatchCommand} on
  * the console sender, a player command through {@code player.performCommand}. Both must run on the main/region
  * thread, which the interaction listener guarantees before calling in. Generic to any clickable fixture (NPC or
- * hologram) — it holds no context-specific state, so a single instance is shared by every context that runs a
+ * hologram). It holds no context-specific state, so a single instance is shared by every context that runs a
  * click-action chain.
  */
 @NullMarked

@@ -6,11 +6,11 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The DecentHolograms source's {@code SupportedMappings} rows — its claim of what it migrates
+ * The DecentHolograms source's {@code SupportedMappings} rows. Its claim of what it migrates
  * (docs/12-migration §5). DecentHolograms holograms are server-wide display objects, not player data, so
  * the source contributes a single row: each {@code holograms/<name>.yml} file's first page maps to one
- * {@code Hologram}, keyed on its name. The deliberate gaps — multi-page holograms (only the first page is
- * kept), per-line flags/offsets, click actions, item/icon holograms — are documented as not-migrated and
+ * {@code Hologram}, keyed on its name. The deliberate gaps. Multi-page holograms (only the first page is
+ * kept), per-line flags/offsets, click actions, item/icon holograms. Are documented as not-migrated and
  * carry no row.
  */
 @NullMarked

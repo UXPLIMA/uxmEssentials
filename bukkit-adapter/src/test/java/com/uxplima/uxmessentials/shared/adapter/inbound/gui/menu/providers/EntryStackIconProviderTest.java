@@ -18,8 +18,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The raw-entry icon provider in isolation. It must claim the {@code entry} marker (case-insensitively) and return a
- * defensive clone of the bound {@link ItemStack}, and it must decline every other case — a non-{@code entry} spec, an
- * unbound entry, or an entry that is not an {@link ItemStack} — so a real material name or a placeholder used off such
+ * defensive clone of the bound {@link ItemStack}, and it must decline every other case, a non-{@code entry} spec, an
+ * unbound entry, or an entry that is not an {@link ItemStack}, so a real material name or a placeholder used off such
  * a list falls through to the material fallback rather than throwing. MockBukkit supplies the item factory the stacks
  * need; no menu is opened.
  */
@@ -48,7 +48,7 @@ class EntryStackIconProviderTest {
 
         assertThat(icon).isPresent();
         assertThat(icon.get()).isEqualTo(backing);
-        // A clone, never the backing item — so name/lore layered onto the tile can never reach the source stack.
+        // A clone, never the backing item, so name/lore layered onto the tile can never reach the source stack.
         assertThat(icon.get()).isNotSameAs(backing);
     }
 

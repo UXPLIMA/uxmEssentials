@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * Outbound port for managing debtor loans and credit scores in storage.
  *
- * <p>The two money-moving methods — {@link #disburse} and {@link #applyRepayment} — are <strong>atomic</strong>:
+ * <p>The two money-moving methods, {@link #disburse} and {@link #applyRepayment}, are <strong>atomic</strong>:
  * each performs the wallet leg (a guarded credit/debit on the same native ledger) and the loan-row change in one
  * transaction, committing together or not at all. A wallet leg that cannot apply (insufficient funds, balance
  * cap) leaves the loan row untouched and returns the modelled {@link TransferError}, so money is never created
@@ -45,7 +45,7 @@ public interface LoanRepository {
 
     /**
      * Atomically debit {@code paid} from the debtor's wallet (the guarded debit) and apply {@code updatedLoan}
-     * in one transaction — updating the row when the loan still owes, or deleting it when fully paid. If the
+     * in one transaction, updating the row when the loan still owes, or deleting it when fully paid. If the
      * guarded debit changes no rows (insufficient funds) the loan is left untouched and
      * {@link TransferError#INSUFFICIENT_FUNDS} is returned.
      */

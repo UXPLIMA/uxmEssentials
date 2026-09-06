@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>{@link #arrived} touches the live player, so it hops to the player's entity thread through the kernel
  * {@link Scheduler}; the teleport executor calls it from its arrival callback. An unknown sound/particle
- * name, a disabled verb, or an offline player is a silent no-op — never an exception on the hot path.
+ * name, a disabled verb, or an offline player is a silent no-op, never an exception on the hot path.
  */
 @NullMarked
 public final class TeleportArrivalEffects {

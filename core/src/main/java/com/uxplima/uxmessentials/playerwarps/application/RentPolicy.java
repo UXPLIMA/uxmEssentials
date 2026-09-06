@@ -10,21 +10,21 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The pure rent state machine (the {@code BankInterestPolicy} idiom): given a warp's lifecycle status, its rent
- * state, the current instant, and the configured term, it decides what the sweep should do this pass — nothing
+ * state, the current instant, and the configured term, it decides what the sweep should do this pass: nothing
  * more. It touches no repository, no clock, and no economy; the {@code SettleRent} use case owns the money moves
  * and the persisted transition, so this class stays trivially and exhaustively testable.
  *
  * <p>The decision, per {@link RentDecision}:
  *
  * <ul>
- *   <li>the sub-group off ⇒ {@link RentDecision#NONE} — the exempt short-circuit, so a disabled rent config
+ *   <li>the sub-group off ⇒ {@link RentDecision#NONE}. The exempt short-circuit, so a disabled rent config
  *       charges nothing.
  *   <li>{@link WarpStatus#ACTIVE} with the paid term lapsed ({@code paidUntil ≤ now}) ⇒ {@link RentDecision#DUE};
  *       otherwise {@link RentDecision#NONE} (still paid through).
  *   <li>{@link WarpStatus#SUSPENDED} past its {@code archiveAfter} grace ⇒ {@link RentDecision#ARCHIVE};
- *       otherwise {@link RentDecision#RETRY} — a suspended warp whose owner has since found the funds is
+ *       otherwise {@link RentDecision#RETRY}. A suspended warp whose owner has since found the funds is
  *       restored by the retry pass.
- *   <li>{@link WarpStatus#ARCHIVED} ⇒ {@link RentDecision#NONE} — archived warps are inert until an admin restore.
+ *   <li>{@link WarpStatus#ARCHIVED} ⇒ {@link RentDecision#NONE}: archived warps are inert until an admin restore.
  * </ul>
  */
 @NullMarked

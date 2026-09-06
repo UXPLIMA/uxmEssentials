@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
  * {@code plugin} field), whose {@code getItem(String type, String id)} returns the built {@link ItemStack} (or
  * {@code null} for an unknown type/id).
  *
- * <p>No {@code net.Indyuce} type is named here — the SDK is reached only by string class-name through reflection — so a
+ * <p>No {@code net.Indyuce} type is named here (the SDK is reached only by string class-name through reflection) so a
  * server without MMOItems loads none of its classes and the present-guard in {@link ReflectiveItemProvider}
  * short-circuits before any lookup runs.
  */

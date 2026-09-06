@@ -12,8 +12,8 @@
  * <p>Routing every spec through the {@code CurrencyBackend} registry the economy module owns is the whole point
  * of this seam: a {@code give-money} click and a warp fee now move the same money, so a native currency picks up
  * the guarded compare-and-take debit and the transaction ledger it never had while this façade held a parallel
- * set of providers. The façade depends only on {@code :core}'s backend and currency registries — never on the
- * economy adapter — so the dependency arrow stays {@code shared → core ← economy-adapter}.
+ * set of providers. The façade depends only on {@code :core}'s backend and currency registries, never on the
+ * economy adapter, so the dependency arrow stays {@code shared → core ← economy-adapter}.
  *
  * <p>The capability is entity-thread: callers (Phase-2 economy actions, Phase-3 requirements) run on the viewer's
  * entity thread and invoke a provider there, the same thread the backends require for the players they touch. The

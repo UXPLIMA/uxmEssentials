@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /history <player>}: the unified review of a player's full disciplinary record — every {@code /ban},
+ * {@code /history <player>}: the unified review of a player's full disciplinary record, every {@code /ban},
  * {@code /tempban}, {@code /banip}, {@code /unban}, {@code /mute}, {@code /tempmute}, {@code /unmute},
  * {@code /warn}, {@code /tempwarn} and {@code /kick} applied to them, folded into one newest-first timeline.
  * Where {@code /banhistory} and {@code /mutehistory} stay scoped to a single family, this read folds every

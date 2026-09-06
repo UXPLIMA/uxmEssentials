@@ -85,7 +85,7 @@ class BuySponsorshipTest {
         Result<Unit, PlayerWarpError> result = buy(config(5, 1)).buy(owner, HUB, 7);
 
         assertThat(result.errorOrThrow()).isEqualTo(PlayerWarpError.SPONSOR_COOLDOWN);
-        assertThat(economy.lastChargeOwner).isNull(); // refused before the charge — nothing spent
+        assertThat(economy.lastChargeOwner).isNull(); // refused before the charge: nothing spent
         assertThat(repository.stored("hub").sponsorship()).isEmpty();
     }
 

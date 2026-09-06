@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.messaging.domain.LastConversation;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for the transient {@code /reply} targets — a private message is real-time and never
+ * Outbound port for the transient {@code /reply} targets. A private message is real-time and never
  * persisted, so this store holds only session state the messaging module drops on {@code stop()}. It records
  * each player's {@link LastConversation} (their last PM partner and when it was last touched), captured both
  * when they send and when they receive a message, so either side can {@code /reply}.
@@ -23,6 +23,6 @@ public interface ConversationStore {
     /** The owner's most recent conversation, if any has been recorded this session. */
     Optional<LastConversation> latest(PlayerRef owner);
 
-    /** Forget the owner's reply target — e.g. on quit. */
+    /** Forget the owner's reply target, e.g. on quit. */
     void forget(PlayerRef owner);
 }

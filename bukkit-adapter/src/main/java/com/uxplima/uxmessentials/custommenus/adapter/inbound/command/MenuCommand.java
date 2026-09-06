@@ -51,7 +51,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /menu} — the operator surface over the loaded custom menus. {@code /menu open <name>} opens a registered
+ * {@code /menu}. The operator surface over the loaded custom menus. {@code /menu open <name>} opens a registered
  * spec for the clicking player (gated by {@code uxmessentials.menu.use}); {@code /menu open <name> <target>} opens
  * it for another player (gated by {@code uxmessentials.menu.open.others}, so an operator can push a menu to someone
  * and the console can too); {@code /menu list} prints the loaded menu names; {@code /menu last} reopens the last
@@ -232,10 +232,10 @@ public final class MenuCommand implements CommandRegistration {
      * Open a loaded menu for another player. The menu name is checked first, so an unknown name draws the same
      * not-found line the self-open does before any target work. The target is resolved from the single-player
      * selector; a selector that matches nobody draws the shared unknown-player line rather than opening an empty
-     * window. The sender may be a player or the console — this never opens for the sender, only for the resolved
+     * window. The sender may be a player or the console. This never opens for the sender, only for the resolved
      * target, so the console can legitimately push a menu to a real player. The open is attributed to the sender as
      * the executor so the opened menu can show {@code %executor%} distinct from {@code %player%} (the target): a player
-     * sender becomes that executor, and a console sender — which carries no {@link PlayerRef} — falls back to the
+     * sender becomes that executor, and a console sender, which carries no {@link PlayerRef}, falls back to the
      * target, so {@code %executor%} still resolves to a real name rather than an empty token. The menu itself opens on
      * the target's own region thread through the {@link Menus} facade, so cross-region opens stay Folia-safe.
      */
@@ -267,7 +267,7 @@ public final class MenuCommand implements CommandRegistration {
 
     /**
      * Resolve the single online player the {@code <player>} selector of {@code /menu execute} names, or null when it
-     * matched none — an offline name, or a selector that matched nothing or more than one. Unlike {@link #resolveTarget}
+     * matched none: an offline name, or a selector that matched nothing or more than one. Unlike {@link #resolveTarget}
      * this swallows the Brigadier parse error a no-match name raises, so the caller answers with the shared
      * unknown-player line rather than surfacing a raw parse failure.
      */
@@ -331,11 +331,11 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Re-load just the single {@code menus/<menu>.conf} spec — the per-menu {@code /menu reload <menu>}. The seam
+     * Re-load just the single {@code menus/<menu>.conf} spec, the per-menu {@code /menu reload <menu>}. The seam
      * re-parses that one file and re-registers its spec, leaving every other loaded menu in place; an absent file
      * replies not-found, otherwise the one file's loaded / skipped outcome is reported (a re-registered menu reads
      * {@code 1 loaded, 0 skipped}, a spec that failed to parse or named an unknown id reads {@code 0 loaded, 1
-     * skipped}). Bare {@code /menu reload} still reloads every menu — this is the argument-bearing branch only.
+     * skipped}). Bare {@code /menu reload} still reloads every menu: this is the argument-bearing branch only.
      */
     private int reloadOne(CommandContext<CommandSourceStack> ctx) {
         CommandSender sender = ctx.getSource().getSender();
@@ -356,11 +356,11 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Run one menu action for a target — {@code /menu execute <player> <action>}, the admin "fire a menu action on
+     * Run one menu action for a target, {@code /menu execute <player> <action>}, the admin "fire a menu action on
      * someone" tool. The target is resolved from the single-player selector; an offline or no-match name draws the
      * shared unknown-player line rather than running anything. The {@code <action>} greedy string is parsed into a
      * {@link Ref} and dispatched through {@link Menus#execute}, which runs it on the target's own entity thread with
-     * the target as the action's viewer — so a {@code %player%} in the action resolves to them. The action runs
+     * the target as the action's viewer, so a {@code %player%} in the action resolves to them. The action runs
      * standalone (no menu need be open or registered), and the sender is told which action ran for whom.
      */
     private int executeAction(CommandContext<CommandSourceStack> ctx) {
@@ -383,9 +383,9 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Print an operator diagnostic of a loaded menu — {@code /menu dump <menu>}. An unregistered name replies
-     * not-found; otherwise a header line (title, row count, item count) is followed by one line per item —
-     * {@code id @ slots — material (N actions)} — so an operator can see a menu's shape without opening it. Every line
+     * Print an operator diagnostic of a loaded menu, {@code /menu dump <menu>}. An unregistered name replies
+     * not-found; otherwise a header line (title, row count, item count) is followed by one line per item
+     * {@code id @ slots, material (N actions)}, so an operator can see a menu's shape without opening it. Every line
      * resolves through a {@link CustomMenusMessageKey}, so the dump carries no inline literal.
      */
     private int dump(CommandContext<CommandSourceStack> ctx) {
@@ -412,7 +412,7 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Print a compact one-line metadata summary of a loaded menu — {@code /menu meta <menu>}: its title, row count,
+     * Print a compact one-line metadata summary of a loaded menu, {@code /menu meta <menu>}: its title, row count,
      * item count, and the four routing flags (has a list source, declares a {@code bedrock {}} block, is chest-only,
      * paints the bottom inventory). An unregistered name replies not-found. One reply line, resolved through a
      * {@link CustomMenusMessageKey}.
@@ -430,7 +430,7 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Re-serialize a loaded menu back to its {@code menus/<menu>.conf} file and reload it — {@code /menu save <menu>},
+     * Re-serialize a loaded menu back to its {@code menus/<menu>.conf} file and reload it, {@code /menu save <menu>},
      * the end-to-end proof that the editor's write path round-trips. An unregistered name replies not-found; otherwise
      * the registered spec (and any {@code command {}} block it declared) is validated and written off the tick thread
      * through the {@link Scheduler} port, and the outcome is bridged back to the global region to report it and, on a
@@ -471,7 +471,7 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Open the in-game menu editor for the sender — {@code /menu editor}, gated by {@code uxmessentials.menu.editor}.
+     * Open the in-game menu editor for the sender: {@code /menu editor}, gated by {@code uxmessentials.menu.editor}.
      * The editor is a GUI, so only a player can open it; a console (or other non-player) meets the shared players-only
      * line. The picker itself opens on the player's own entity thread through the engine, so the open stays Folia-safe.
      */
@@ -486,7 +486,7 @@ public final class MenuCommand implements CommandRegistration {
     }
 
     /**
-     * Capture the sender's main-hand item into {@code <slot>} of the menu they are editing — {@code /menu captureitem
+     * Capture the sender's main-hand item into {@code <slot>} of the menu they are editing, {@code /menu captureitem
      * <slot>}, gated by {@code uxmessentials.menu.editor}. A held item is captured with all its NBT (mirroring
      * {@code /hologram action … give hand}) and written into the slot of the viewer's active grid session. Only a
      * player has a hand and an edit session, so the console meets the shared players-only line; the capture hook itself
@@ -530,20 +530,20 @@ public final class MenuCommand implements CommandRegistration {
         return item.slots().slots().stream().map(String::valueOf).collect(Collectors.joining(","));
     }
 
-    /** How many action refs the item binds across every click gesture — the total bound, without double-counting {@code ANY}. */
+    /** How many action refs the item binds across every click gesture: the total bound, without double-counting {@code ANY}. */
     private static int actionCount(MenuItemSpec item) {
         return item.click().actions().values().stream().mapToInt(List::size).sum();
     }
 
-    /** Whether any of the menu's items draws from a list source — the {@code has-list} meta flag. */
+    /** Whether any of the menu's items draws from a list source, the {@code has-list} meta flag. */
     private static boolean hasList(MenuSpec spec) {
         return spec.items().values().stream().anyMatch(item -> item.list().isPresent());
     }
 
     /**
      * The menu's raw title token reduced to plain text for a diagnostic line: MiniMessage tags are stripped so a title
-     * like {@code <title>Shop</title>} reads {@code Shop}, and — because the stripped value is folded back into a
-     * MiniMessage template — a title cannot inject markup into the reply. A {@code @key} reference or a {@code %token%}
+     * like {@code <title>Shop</title>} reads {@code Shop}, and, because the stripped value is folded back into a
+     * MiniMessage template: a title cannot inject markup into the reply. A {@code @key} reference or a {@code %token%}
      * is left verbatim, which is the honest thing to show an operator inspecting the spec.
      */
     private static String plainTitle(String title) {
@@ -553,8 +553,8 @@ public final class MenuCommand implements CommandRegistration {
     /**
      * Convert a DeluxeMenus menu YAML (or a directory of them) at {@code <path>} into {@code menus/*.conf}. The path is
      * absolute or relative to the menus directory; a path that matches no DeluxeMenus YAML replies not-found, otherwise
-     * the converted / skipped / warning counts are reported. Deliberately does not reload — an operator reviews the
-     * emitted files, then runs {@code /menu reload} — and the per-file conversion never crashes the command.
+     * the converted / skipped / warning counts are reported. Deliberately does not reload. An operator reviews the
+     * emitted files, then runs {@code /menu reload}, and the per-file conversion never crashes the command.
      */
     private int convertDeluxeMenus(CommandContext<CommandSourceStack> ctx) {
         CommandSender sender = ctx.getSource().getSender();
@@ -570,7 +570,7 @@ public final class MenuCommand implements CommandRegistration {
 
     /**
      * Convert a zMenu inventory YAML (or a directory of them) at {@code <path>} into {@code menus/*.conf}, exactly as
-     * the DeluxeMenus branch does — same path resolution, same not-found reply, same converted / skipped / warning
+     * the DeluxeMenus branch does. Same path resolution, same not-found reply, same converted / skipped / warning
      * report, same deliberate no-reload. The per-file conversion never crashes the command.
      */
     private int convertZMenu(CommandContext<CommandSourceStack> ctx) {
@@ -587,7 +587,7 @@ public final class MenuCommand implements CommandRegistration {
 
     /**
      * Convert an OGUI GUI YAML (or a directory of them) at {@code <path>} into {@code menus/*.conf}, exactly as the
-     * DeluxeMenus and zMenu branches do — same path resolution, same not-found reply, same converted / skipped /
+     * DeluxeMenus and zMenu branches do. Same path resolution, same not-found reply, same converted / skipped /
      * warning report, same deliberate no-reload. The per-file conversion never crashes the command.
      */
     private int convertOgui(CommandContext<CommandSourceStack> ctx) {
@@ -604,7 +604,7 @@ public final class MenuCommand implements CommandRegistration {
 
     /**
      * Convert a GUIPlus GUI YAML (or a directory of them) at {@code <path>} into {@code menus/*.conf}, exactly as the
-     * DeluxeMenus, zMenu and OGUI branches do — same path resolution, same not-found reply, same converted / skipped /
+     * DeluxeMenus, zMenu and OGUI branches do. Same path resolution, same not-found reply, same converted / skipped /
      * warning report, same deliberate no-reload. The per-file conversion never crashes the command.
      */
     private int convertGuiPlus(CommandContext<CommandSourceStack> ctx) {
@@ -619,7 +619,7 @@ public final class MenuCommand implements CommandRegistration {
         return Command.SINGLE_SUCCESS;
     }
 
-    /** Report the converted / skipped / warning counts a convert run tallied — shared by all converter branches. */
+    /** Report the converted / skipped / warning counts a convert run tallied: shared by all converter branches. */
     private void reportConverted(CommandSender sender, int converted, int skipped, int warnings) {
         feedback.send(
                 sender,

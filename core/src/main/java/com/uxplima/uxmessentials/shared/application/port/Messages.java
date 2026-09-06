@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>This is a synchronous pure function: it resolves the viewer's locale through the
  * override → client → {@code en} fallback chain, looks up the template in the catalog, and does
- * literal {@code {name}} → value substitution. The return is a plain MiniMessage source string — no
+ * literal {@code {name}} → value substitution. The return is a plain MiniMessage source string, no
  * Adventure types cross this boundary, which is what keeps {@code :core} free of {@code net.kyori}.
  * Tag parsing into a {@code Component} happens once downstream in the {@link MessageSink}.
  *

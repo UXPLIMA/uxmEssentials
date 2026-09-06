@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The presence aggregate's transition rules in one place: the AFK auto-transition (idle past a threshold), the
- * manual AFK toggle with its reason, the activity-clears-AFK rule, and the vanish flip — each returning a new
+ * manual AFK toggle with its reason, the activity-clears-AFK rule, and the vanish flip. Each returning a new
  * immutable aggregate so a concurrent reader (the async sweep, a cross-context vanish lookup) never sees a
  * half-applied change. These are the rules the {@code ConcurrentHashMap} store re-applies under {@code compute}.
  */

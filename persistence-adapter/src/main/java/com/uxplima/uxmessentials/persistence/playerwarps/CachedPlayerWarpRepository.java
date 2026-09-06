@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A Caffeine read-cache decorator over a delegate {@link PlayerWarpRepository}, keyed by owner uuid. The cached
  * value is a hot owner's whole warp set as an ordered name → warp map, loaded once on a miss and served from memory
- * until a write to that owner invalidates it — write-through at the delegate, invalidate here, never a write-back
+ * until a write to that owner invalidates it, write-through at the delegate, invalidate here, never a write-back
  * cache that could lose a mutation. The delegate stays the durable source of truth; this only spares repeated reads
  * of the same owner's small set.
  *
@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  * cached map), {@link #count} (its size), and {@link #peekOwned} (the tick-thread suggester path, which reads the
  * cached set on a hit and nothing on a miss without ever loading). Because warp names are now globally unique rather
  * than owner-scoped, a name is no longer owner-derivable, so {@link #findByName}, {@link #findById},
- * {@link #existsByName}, and the cross-owner {@link #all} pass straight through to the delegate — teleport
+ * {@link #existsByName}, and the cross-owner {@link #all} pass straight through to the delegate, teleport
  * correctness beats a cache hit there.
  */
 @NullMarked
@@ -124,7 +124,7 @@ public final class CachedPlayerWarpRepository implements PlayerWarpRepository {
     @Override
     public void recordVisit(PlayerWarpId id) {
         Objects.requireNonNull(id, "id");
-        // Eventually consistent per the port contract: bump the durable counter but do not invalidate — a cached
+        // Eventually consistent per the port contract: bump the durable counter but do not invalidate: a cached
         // owner set drifting by a few visits until its next real write is acceptable and spares a cache churn.
         delegate.recordVisit(id);
     }
@@ -166,7 +166,7 @@ public final class CachedPlayerWarpRepository implements PlayerWarpRepository {
     @Override
     public void markRentReminded(PlayerWarpId id, int stage) {
         Objects.requireNonNull(id, "id");
-        // rent_reminded_stage is persistence-only — never a fact on the cached aggregate — so a bump cannot make the
+        // rent_reminded_stage is persistence-only, never a fact on the cached aggregate, so a bump cannot make the
         // cached owner set stale; forward it like recordVisit without invalidating.
         delegate.markRentReminded(id, stage);
     }

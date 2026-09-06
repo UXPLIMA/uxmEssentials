@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * Factory for the teleport context's durable RTP pool store, so the consuming bukkit-adapter wires an
  * {@link RtpPoolStore} from the {@link Persistence} handle it already holds without ever naming a jOOQ type (jOOQ
  * is an {@code implementation} dependency of this module, kept off the consumer's compile classpath). The returned
- * store is the Caffeine-fronted jOOQ adapter — write-through at the database, count cached and invalidated on write.
+ * store is the Caffeine-fronted jOOQ adapter: write-through at the database, count cached and invalidated on write.
  */
 @NullMarked
 public final class RtpPoolStores {

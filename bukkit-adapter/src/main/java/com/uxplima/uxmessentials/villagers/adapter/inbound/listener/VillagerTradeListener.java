@@ -14,15 +14,15 @@ import org.jspecify.annotations.NullMarked;
  * ({@link PlayerTradeEvent}):
  *
  * <ul>
- *   <li><b>infinite trading</b> — resets every one of the villager's recipes to zero uses and suppresses the usual
+ *   <li><b>infinite trading</b>. Resets every one of the villager's recipes to zero uses and suppresses the usual
  *       use increment, so no trade ever locks out; and</li>
- *   <li><b>instant restock</b> — resets just the recipe that was traded and suppresses its increment, so the trade a
+ *   <li><b>instant restock</b>. Resets just the recipe that was traded and suppresses its increment, so the trade a
  *       player used is available again at once (with no cooldown).</li>
  * </ul>
  *
  * <p>Both suppress the vanilla post-trade use increment ({@code setIncreaseTradeUses(false)}) so the reset performed
  * here is not undone once the event returns. Infinite trading subsumes instant restock, so when both are on the
- * infinite path runs. Only true {@link Villager}s are handled — a wandering trader is out of the module's scope.
+ * infinite path runs. Only true {@link Villager}s are handled: a wandering trader is out of the module's scope.
  *
  * <h2>Folia</h2>
  * The event is dispatched on the region owning the villager the player is trading with, and the handler only reads and

@@ -39,8 +39,8 @@ import org.junit.jupiter.api.Test;
  * The cooldown/warmup machinery rules: a launch gated by an active cooldown never reaches the warmup; on
  * the {@code teleport} start phase the cooldown is stamped only after the warmup completes (so a
  * move-cancelled teleport never burns it); and a denied/cancelled tpa under the {@code accept} phase only
- * stamps when the engine is told the phase fired. The ports are hand-rolled fakes — no Bukkit, no
- * Mockito — so the rules are pinned in pure {@code :core}.
+ * stamps when the engine is told the phase fired. The ports are hand-rolled fakes, no Bukkit, no
+ * Mockito, so the rules are pinned in pure {@code :core}.
  */
 class TeleportEngineTest {
 
@@ -87,7 +87,7 @@ class TeleportEngineTest {
         engine.launch(MOVER, DEST, TeleportKind.SPAWN);
 
         assertThat(executor.hops).isZero();
-        assertThat(cooldowns.stamps).isZero(); // cancelled before completion — cooldown untouched
+        assertThat(cooldowns.stamps).isZero(); // cancelled before completion: cooldown untouched
     }
 
     @Test
@@ -98,10 +98,10 @@ class TeleportEngineTest {
         TeleportEngine teleport =
                 engine(cooldowns, new ImmediateWarmups(), new RecordingExecutor(), CooldownStartPhase.TELEPORT);
 
-        teleport.stampForPhase(MOVER, CooldownStartPhase.ACCEPT); // configured TELEPORT — no stamp
+        teleport.stampForPhase(MOVER, CooldownStartPhase.ACCEPT); // configured TELEPORT, no stamp
         assertThat(cooldowns.stamps).isZero();
 
-        accept.stampForPhase(MOVER, CooldownStartPhase.ACCEPT); // configured ACCEPT — stamps
+        accept.stampForPhase(MOVER, CooldownStartPhase.ACCEPT); // configured ACCEPT, stamps
         assertThat(cooldowns.stamps).isEqualTo(1);
     }
 

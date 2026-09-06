@@ -12,7 +12,7 @@ import java.util.Objects;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The single seam where {@code java.sql} touches a foreign database for a JDBC-backed import source — the
+ * The single seam where {@code java.sql} touches a foreign database for a JDBC-backed import source, the
  * DB-source analogue of the EssentialsX source's {@code YamlSource} (docs/12-migration §2). It opens a
  * <em>read-only</em> {@link Connection} from a {@link JdbcConnection} and reads one table's rows through a
  * caller-supplied SQL string and {@link RowMapper}. Connection, statement and result set are all closed by
@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * lazily, so the import stays bounded across tables.
  *
  * <p>This class builds no SQL: the caller passes a fully-formed statement string (with any table name
- * already strictly sanitised — a table name cannot be a bind parameter) and binds only literal values. No
+ * already strictly sanitised: a table name cannot be a bind parameter) and binds only literal values. No
  * value reaches the SQL by concatenation.
  */
 @NullMarked
@@ -57,7 +57,7 @@ public final class JdbcSource {
         }
     }
 
-    /** Probe whether the configured database can be opened at all — the source's {@code detect} read. */
+    /** Probe whether the configured database can be opened at all: the source's {@code detect} read. */
     public static boolean canOpen(JdbcConnection details) {
         Objects.requireNonNull(details, "details");
         try (Connection connection = open(details)) {

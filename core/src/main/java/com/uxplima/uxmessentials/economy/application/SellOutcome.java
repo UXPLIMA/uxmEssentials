@@ -31,7 +31,7 @@ public record SellOutcome(boolean sold, Optional<Money> earned) {
         return new SellOutcome(true, Optional.of(Objects.requireNonNull(amount, "amount")));
     }
 
-    /** A refused sale — nothing was credited and nothing should be removed. */
+    /** A refused sale: nothing was credited and nothing should be removed. */
     public static SellOutcome refused() {
         return new SellOutcome(false, Optional.empty());
     }

@@ -13,11 +13,11 @@ import java.util.Set;
  * The pure allow/deny decision behind the command whitelist / blacklist. Built once from the module's config, it
  * holds the {@link RuleMode}, a {@code default} command list, a per-group command list map, and the {@code .bypass}
  * permission node; it decides {@link Decision#ALLOW} or {@link Decision#DENY} for one command root and one player's
- * {@link PlayerFacts}. Nothing here is Bukkit-aware — the event handling, the command-root extraction, and the
- * group/permission lookups are all adapter-side — so the decision is a plain function that unit-tests exactly.
+ * {@link PlayerFacts}. Nothing here is Bukkit-aware. The event handling, the command-root extraction, and the
+ * group/permission lookups are all adapter-side, so the decision is a plain function that unit-tests exactly.
  *
  * <p>Resolution: a {@code .bypass} holder is always allowed. Otherwise the player's group selects its command list
- * (falling back to the {@code default} list when the group has none or is absent), and the mode reads that list —
+ * (falling back to the {@code default} list when the group has none or is absent), and the mode reads that list
  * {@link RuleMode#WHITELIST} allows only a listed root, {@link RuleMode#BLACKLIST} denies only a listed root. Console
  * is never modelled here: the adapter's listener fires only for player commands, so a console command is never gated.
  *
@@ -107,7 +107,7 @@ public final class RuleSet {
     }
 
     /**
-     * True when this rule set can never deny any command — a blacklist whose every list is empty. The adapter reads
+     * True when this rule set can never deny any command: a blacklist whose every list is empty. The adapter reads
      * this to short-circuit its listener before any per-command work, so an operator who leaves the lists blank pays
      * nothing. A whitelist is never inert: an empty whitelist denies everything, which is a deliberate lock-down.
      */

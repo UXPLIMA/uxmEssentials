@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultId;
 /**
  * Outbound port for durable, per-owner vault storage. A vault's queryable facts (owner, index, size,
  * last-touched) are first-class columns and only its {@code ItemStack[]} contents serialize, per the
- * architecture persistence invariant — but that split is the adapter's concern; the application sees the whole
+ * architecture persistence invariant, but that split is the adapter's concern; the application sees the whole
  * {@link Vault} aggregate. Vaults are DB-backed and survive a world rollback (the same hard invariant the
  * economy ledger holds), never PDC. The jOOQ adapter implements this; the use cases depend only on the contract.
  */
@@ -21,17 +21,17 @@ public interface VaultRepository {
     /** The owner's vault at this id, or empty when they have not opened one there yet. */
     Optional<Vault> find(VaultId id);
 
-    /** The indices of the vaults the owner currently has rows for, ascending — backs the {@code /vault} listing. */
+    /** The indices of the vaults the owner currently has rows for, ascending: backs the {@code /vault} listing. */
     List<Integer> ownedIndices(PlayerRef owner);
 
     /**
      * The presentation summary (index, display name, icon material name) of every vault the owner has rows for,
-     * ascending by index — one read that backs the {@code /vault} listing and the selector GUI without loading
+     * ascending by index. One read that backs the {@code /vault} listing and the selector GUI without loading
      * each full {@link Vault} aggregate. Empty when the owner has no vaults yet.
      */
     List<VaultSummary> summaries(PlayerRef owner);
 
-    /** How many vaults the owner currently has rows for — the count the amount quota is checked against. */
+    /** How many vaults the owner currently has rows for: the count the amount quota is checked against. */
     int count(PlayerRef owner);
 
     /**

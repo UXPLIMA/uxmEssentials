@@ -192,7 +192,7 @@ class RespawnListenerTest {
         PlayerRespawnEvent event = respawnEventAt(player, vanilla);
         listener.onRespawn(event);
 
-        assertThat(event.getRespawnLocation()).isEqualTo(vanilla); // no location served — vanilla respawn stands
+        assertThat(event.getRespawnLocation()).isEqualTo(vanilla); // no location served: vanilla respawn stands
         assertThat(queue.polls).isEqualTo(1);
         assertThat(queue.refills).isEqualTo(1); // ...but the pool is warmed for next time
         assertThat(grace.applied).isZero();
@@ -261,7 +261,7 @@ class RespawnListenerTest {
         }
     }
 
-    /** A pre-warmed pool whose serve is a plain queue poll — never a synchronous search. */
+    /** A pre-warmed pool whose serve is a plain queue poll: never a synchronous search. */
     private static final class FakeQueue implements SafeLocationQueue {
         private Optional<RtpSafeLocation> next = Optional.empty();
         private int polls;

@@ -1,5 +1,5 @@
 /**
- * The economy context's adapter wiring — the one place the canonical worked DDD example is assembled. It
+ * The economy context's adapter wiring: the one place the canonical worked DDD example is assembled. It
  * builds the native ledger (cached jOOQ repository + debounced settle writer + batched transaction telemetry),
  * wraps it in the native {@code EconomyProvider}, runs register-or-defer through the {@code ServicesManager}
  * (registering the native provider unless a foreign Treasury/Vault economy is already present, in which case it

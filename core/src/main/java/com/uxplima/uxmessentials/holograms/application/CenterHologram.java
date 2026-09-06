@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /hologram center <name>}: re-anchor a hologram to the centre of its current block on the horizontal
- * plane ({@code x → floor + 0.5}, {@code z → floor + 0.5}), keeping its Y and look direction — the
+ * plane ({@code x → floor + 0.5}, {@code z → floor + 0.5}), keeping its Y and look direction, the
  * {@code center} convenience. Save the new snapshot and re-render the live entity. A name no
  * hologram exists at is rejected with {@link HologramError#NOT_FOUND}. The operator-only permission is enforced
  * at the adapter gate.

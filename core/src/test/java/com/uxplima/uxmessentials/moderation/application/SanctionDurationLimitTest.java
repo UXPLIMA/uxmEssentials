@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link SanctionDurationLimit} clamps a requested span to the actor's {@code maxduration} tier. An actor with
  * no node (the exempt fake resolves to the {@code -1} unlimited default) is uncapped; an actor whose tier is a
- * finite number of seconds has any over-cap request — including a permanent ban modelled as the far-future
- * span — reduced to that ceiling, while an under-cap request passes through unchanged.
+ * finite number of seconds has any over-cap request. Including a permanent ban modelled as the far-future
+ * span: reduced to that ceiling, while an under-cap request passes through unchanged.
  */
 class SanctionDurationLimitTest {
 

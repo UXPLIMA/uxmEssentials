@@ -74,7 +74,7 @@ class JooqHologramRepositoryTest {
     @Test
     void saveUpsertsOnTheNameKeyAndRewritesTheLines() {
         repository.save(hologram("spawn", 0, 0, 0, "old-a", "old-b"));
-        repository.save(hologram("spawn", 100, 70, 100, "new")); // same name — a re-anchor with fewer lines
+        repository.save(hologram("spawn", 100, 70, 100, "new")); // same name. A re-anchor with fewer lines
 
         assertThat(repository.all()).hasSize(1);
         Hologram reanchored = repository.find(HologramName.of("spawn")).orElseThrow();
@@ -374,7 +374,7 @@ class JooqHologramRepositoryTest {
         repository.removeFromBlacklist(HologramName.of("spawn"), banned);
         assertThat(repository.blacklisted(HologramName.of("spawn"))).isEmpty();
 
-        // Re-add then delete the hologram — the blacklist rows go with it (no orphans under a reused name).
+        // Re-add then delete the hologram: the blacklist rows go with it (no orphans under a reused name).
         repository.addToBlacklist(HologramName.of("spawn"), banned);
         repository.delete(HologramName.of("spawn"));
         assertThat(repository.blacklisted(HologramName.of("spawn"))).isEmpty();
@@ -670,7 +670,7 @@ class JooqHologramRepositoryTest {
                 HologramName.of(name), Position.of(WORLD, 0, 64, 0), List.of(new HologramLine("line")), createdAt);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

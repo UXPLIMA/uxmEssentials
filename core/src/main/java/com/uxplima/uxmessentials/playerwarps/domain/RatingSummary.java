@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.playerwarps.domain;
 /**
  * The denormalised rollup of a warp's star ratings, kept on the aggregate so a browse menu can sort and render
  * thousands of warps without touching the per-vote rating table. It carries the raw totals ({@link #sum} of stars
- * over {@link #count} votes) alongside two derived numbers: the plain {@link #average} and a {@link #score} — the
+ * over {@link #count} votes) alongside two derived numbers: the plain {@link #average} and a {@link #score}, the
  * ranking value the "top rated" listing sorts on.
  *
  * <p>The {@link #score} is a Bayesian-adjusted figure (so a single five-star vote does not outrank a warp with

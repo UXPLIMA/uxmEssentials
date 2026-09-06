@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * active member providers and, for a queried block, gathers the claim each reports there into one
  * {@link CompositeClaimLookup} that folds their answers per the operator's {@link CombineMode}.
  *
- * <p>With no members it reports inactive and empty, exactly like the no-op provider — so an install with no
+ * <p>With no members it reports inactive and empty, exactly like the no-op provider, so an install with no
  * claim plugin still allows everything.
  */
 @NullMarked

@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.display.BroadcastChannel;
  * {@link AdvancementFilter} whether to announce, then renders {@link #template} (or a per-advancement override)
  * through MiniMessage and delivers it to the selected {@link #channels}.
  *
- * <p>An advancement is identified throughout this model by its namespaced key as a lowercase string — for example
+ * <p>An advancement is identified throughout this model by its namespaced key as a lowercase string, for example
  * {@code minecraft:end/kill_dragon} or {@code minecraft:recipes/building_blocks/oak_planks}. To keep matching
  * case-insensitive, every key the operator supplies in {@link #allow}, {@link #deny}, and the
  * {@link #perAdvancementTemplates} map is normalized to lowercase ({@link Locale#ROOT}) at construction; callers of
@@ -62,7 +62,7 @@ public record AdvancementNoticeConfig(
 
     /**
      * The feature configured off: nothing is announced. The other fields carry sensible defaults so a later flip of
-     * {@code enabled} via the codec starts from a reasonable shape — recipes excluded, only announceable
+     * {@code enabled} via the codec starts from a reasonable shape. Recipes excluded, only announceable
      * advancements considered, no allow/deny entries, a blank (inert) template, chat delivery, and no sound.
      */
     public static AdvancementNoticeConfig disabled() {

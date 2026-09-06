@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Reports a player's current binding ({@code /discordlink status}): the confirmed link when one exists, or
- * empty when the player has not linked. A pure read — the command adapter renders the linked/unlinked message.
+ * empty when the player has not linked. A pure read: the command adapter renders the linked/unlinked message.
  */
 public final class LinkStatus {
 

@@ -34,12 +34,12 @@ public record Page<T>(List<T> items, long totalCount, int page, int pageSize) {
         }
     }
 
-    /** An empty page for {@code query}'s coordinates — no items and a zero total. */
+    /** An empty page for {@code query}'s coordinates: no items and a zero total. */
     public static <T> Page<T> empty(int page, int pageSize) {
         return new Page<>(List.of(), 0L, page, pageSize);
     }
 
-    /** True when at least one more page follows this one — i.e. later matches remain beyond this page's window. */
+    /** True when at least one more page follows this one: i.e. later matches remain beyond this page's window. */
     public boolean hasNext() {
         return (long) (page + 1) * pageSize < totalCount;
     }

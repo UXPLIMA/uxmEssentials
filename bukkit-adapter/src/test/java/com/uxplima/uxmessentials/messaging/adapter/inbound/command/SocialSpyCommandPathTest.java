@@ -137,8 +137,8 @@ class SocialSpyCommandPathTest {
         executeSocialSpy(staff, "socialspy Bob"); // watch Bob
 
         SendMessage send = sendMessage();
-        send.send(ref(alice), ref(bob), MessageBody.of("hi bob")); // Bob is a party — spied
-        send.send(ref(alice), ref(carol), MessageBody.of("hi carol")); // Bob is not — not spied
+        send.send(ref(alice), ref(bob), MessageBody.of("hi bob")); // Bob is a party, spied
+        send.send(ref(alice), ref(carol), MessageBody.of("hi carol")); // Bob is not, not spied
 
         assertThat(delivery.spied).containsExactly("Staff:Alice:Bob:hi bob");
     }

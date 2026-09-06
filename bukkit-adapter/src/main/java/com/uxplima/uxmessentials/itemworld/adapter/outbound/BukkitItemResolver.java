@@ -24,12 +24,12 @@ import org.jspecify.annotations.NullMarked;
  * the live Paper registries: an {@link ItemQuery} to a {@link Material}, an {@link EnchantSpec} id to an
  * {@link Enchantment}, and an item-flag token to an {@link ItemFlag}. The domain owns the id <em>shape</em>
  * (lowercase {@code namespace:path}, grammar-checked); this resolver owns the final registry lookup, which is
- * the one remaining failure mode a well-formed-but-unknown id hits — mapped by the caller to the matching
+ * the one remaining failure mode a well-formed-but-unknown id hits. Mapped by the caller to the matching
  * {@code ItemWorldError}/{@code MessageKey}.
  *
  * <p>Resolution is pure and side-effect-free: each method returns an {@link Optional} that is empty for an
  * unknown id rather than throwing, so a command renders the localized failure and stops. Only item-typed
- * materials pass {@link #material} — a non-item material (a block-only id) is rejected like an unknown item, so
+ * materials pass {@link #material}. A non-item material (a block-only id) is rejected like an unknown item, so
  * {@code /give} and {@code /item} never hand the player an unobtainable stack.
  */
 @NullMarked

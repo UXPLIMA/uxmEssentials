@@ -17,11 +17,11 @@ import org.jooq.DSLContext;
 
 /**
  * The jOOQ-backed {@link SnapshotRepository} over the generated {@code INV_SNAPSHOTS} table. A {@code save}
- * inserts one row keyed by the snapshot's client-minted UUID (never an upsert — every capture is a fresh id); the
+ * inserts one row keyed by the snapshot's client-minted UUID (never an upsert. Every capture is a fresh id); the
  * listing reads an owner's snapshots newest-first off the {@code idx_inv_snapshots_owner} index; a {@code find}
  * resolves one by id; a {@code delete} removes the one row, idempotent on a missing id. {@code owners} answers the
  * distinct owner uuids the retention sweep iterates. {@code deleteBeyondCount}
- * keeps only the owner's newest {@code keep} rows — it reads the owner's ids by recency and deletes those past the
+ * keeps only the owner's newest {@code keep} rows. It reads the owner's ids by recency and deletes those past the
  * cap in a single transaction, a form portable to every backend (no same-table subquery in a {@code DELETE},
  * which MySQL forbids). {@code deleteOlderThan} removes every row captured before the cutoff. Every statement is
  * typed jOOQ DSL; no SQL is ever string-concatenated.

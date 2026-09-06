@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The proof that a Bedrock form open is recorded into the viewer's back history and fires the menu's open-actions, so
  * sub-form navigation round-trips as native forms. Menu A carries a button that opens B, menu B a button that steps
- * back; opening A for a Bedrock viewer, tapping through to B, then tapping back re-sends A's form — the history the
+ * back; opening A for a Bedrock viewer, tapping through to B, then tapping back re-sends A's form, the history the
  * form open recorded is what {@code back} steps to. A second menu proves a form open runs the same {@code open-actions}
  * a chest open does. A real {@link MenuSpecLoader}, a real {@link Menus} wired with the live {@link MenuBindings}
  * registries and a real {@link LastMenu}, and a fake {@link BedrockDetector}/{@link BedrockScreen} standing in for the
@@ -129,7 +129,7 @@ class BedrockNavigationGoldenTest {
 
         assertThat(screen.buttons)
                 .extracting(BedrockButton::text)
-                .as("tapping A's open:B button sends B's form — sub-form navigation as native forms")
+                .as("tapping A's open:B button sends B's form. Sub-form navigation as native forms")
                 .containsExactly("Back");
 
         screen.tap(0);

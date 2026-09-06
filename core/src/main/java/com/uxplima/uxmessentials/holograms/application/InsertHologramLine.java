@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /hologram insertline <name> <index> <text…>}: insert a text line <em>before</em> a 1-based position
  * (0-based here), save the new snapshot, and re-render the live entity. An index at or past the current line
  * count appends, like {@code addline}; the only modelled failure is a name no hologram exists at, rejected with
- * {@link HologramError#NOT_FOUND} (a negative index cannot reach here — the command floors it at 1). The
+ * {@link HologramError#NOT_FOUND} (a negative index cannot reach here: the command floors it at 1). The
  * operator-only permission is enforced at the command gate.
  */
 public final class InsertHologramLine {

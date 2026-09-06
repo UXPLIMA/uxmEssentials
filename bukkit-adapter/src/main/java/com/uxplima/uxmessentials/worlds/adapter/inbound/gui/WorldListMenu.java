@@ -29,8 +29,8 @@ import org.jspecify.annotations.NullMarked;
  * {@code world-list} spec and hands it to {@link Menus}.
  *
  * <p>Unlike the other list migrations, the per-world loaded flag is a Bukkit read ({@code server.getWorld(...)})
- * that may not run in the engine's off-thread list source, so {@link #open} pre-computes the rows — each managed
- * world paired with its live loaded state — on the viewer's region thread and hands them to the engine as the menu
+ * that may not run in the engine's off-thread list source, so {@link #open} pre-computes the rows: each managed
+ * world paired with its live loaded state. On the viewer's region thread and hands them to the engine as the menu
  * subject, mirroring {@code EntityCountMenu}. The {@code worlds:list} source then only reads that subject, and the
  * {@code world_icon} / {@code world_name} / {@code world_environment} / {@code world_loaded} placeholders read the
  * bound row, so the menu touches no Bukkit API off-thread.
@@ -38,7 +38,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>A left click runs {@code worlds:edit}, opening that world's engine-rendered {@link WorldMainMenu} hub; a right
  * click runs {@code worlds:teleport}, the forced staff hand-off {@code /worlds tp <self>} drives (it skips the access
  * gate and entry fee, and loads-then-teleports on the global region thread); the create button runs
- * {@code worlds:create}, opening the engine-rendered {@link WorldCreateMenu} — so the list adds no domain logic of its
+ * {@code worlds:create}, opening the engine-rendered {@link WorldCreateMenu}, so the list adds no domain logic of its
  * own.
  */
 @NullMarked

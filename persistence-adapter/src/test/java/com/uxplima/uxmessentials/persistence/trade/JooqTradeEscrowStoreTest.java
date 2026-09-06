@@ -36,7 +36,7 @@ import org.junit.jupiter.api.io.TempDir;
  * V1-V75 migrations applied. It proves the escrow contract over the {@code trade_escrow} table: a stake round-trips
  * every field (items, item count, multi-currency money to scale, servers, phase, timestamp); the guarded transitions
  * fire exactly once ({@code commitBoth} only when both sides are held, {@code claim} only from committed,
- * {@code beginRefund} only from held); and each transition is a no-op on the second call — the exactly-once guarantee
+ * {@code beginRefund} only from held); and each transition is a no-op on the second call, the exactly-once guarantee
  * the two-phase commit relies on.
  */
 class JooqTradeEscrowStoreTest {
@@ -137,13 +137,13 @@ class JooqTradeEscrowStoreTest {
 
     @Test
     void commitBothRefusesWhenACounterpartVanishesBetweenTheDecisionAndTheWrite() {
-        // Both sides staked and held — a trade one signal away from its atomic commit point.
+        // Both sides staked and held, a trade one signal away from its atomic commit point.
         hold(ALICE, BOB);
         hold(BOB, ALICE);
         // Model the exact cross-server race the two-phase commit must survive: the peer backend refunds Bob's
         // still-held leg (deleting his row) in the window between commitBoth deciding to commit and its write
         // landing. A connection proxy on the racing store runs that refund on the SAME transactional connection the
-        // instant the commit UPDATE is prepared, so the write now finds only Alice's row to flip — the affected-row
+        // instant the commit UPDATE is prepared, so the write now finds only Alice's row to flip, the affected-row
         // divergence a non-locking count-then-update silently commits through (and MySQL/Postgres would too).
         ConnectionProvider connections = persistence.dsl().configuration().connectionProvider();
         TradeEscrowStore racing =
@@ -151,14 +151,14 @@ class JooqTradeEscrowStoreTest {
 
         boolean committed = racing.commitBoth(TRADE, ALICE.uuid(), BOB.uuid());
 
-        // The commit must report failure — it could not move both legs — and must have rolled its partial one-row
+        // The commit must report failure, it could not move both legs, and must have rolled its partial one-row
         // flip back, so neither side is left COMMITTED while its counterpart is refundable (2PC all-or-nothing).
         assertThat(committed)
                 .as("a commit that cannot move both legs atomically must not report success")
                 .isFalse();
         assertThat(store.find(TRADE, ALICE.uuid()).orElseThrow().phase()).isEqualTo(TradeEscrowPhase.HELD);
         assertThat(store.find(TRADE, BOB.uuid()).orElseThrow().phase()).isEqualTo(TradeEscrowPhase.HELD);
-        // Both legs are still fully refundable — no stake stranded, none double-committed.
+        // Both legs are still fully refundable: no stake stranded, none double-committed.
         assertThat(store.beginRefund(TRADE, ALICE.uuid())).isTrue();
         assertThat(store.beginRefund(TRADE, BOB.uuid())).isTrue();
     }
@@ -185,7 +185,7 @@ class JooqTradeEscrowStoreTest {
                 TRADE, owner, "s1", counterparty, "s2", "x", 1, Map.of("coins", new BigDecimal("5")), Instant.EPOCH));
     }
 
-    /** Whether {@code sql} is the guarded commit UPDATE over the escrow table — the write the race interleaves. */
+    /** Whether {@code sql} is the guarded commit UPDATE over the escrow table: the write the race interleaves. */
     private static boolean isCommitWrite(String sql) {
         String normalized = sql.toLowerCase(Locale.ROOT).stripLeading();
         return normalized.startsWith("update") && normalized.contains("trade_escrow");
@@ -194,7 +194,7 @@ class JooqTradeEscrowStoreTest {
     /**
      * A {@link ConnectionProvider} that hands out proxied connections which, the first time the guarded commit UPDATE
      * is prepared, delete Bob's still-held escrow row on that same transactional connection before the UPDATE runs.
-     * This is the deterministic stand-in for the other backend committing a refund in the commit window — the exact
+     * This is the deterministic stand-in for the other backend committing a refund in the commit window, the exact
      * interleaving a non-locking count-then-update misses and a single guarded UPDATE must catch.
      */
     private static ConnectionProvider refundingBobAtTheCommitWrite(ConnectionProvider original) {

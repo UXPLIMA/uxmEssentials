@@ -9,8 +9,8 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the vertical teleport family — {@code /down} plus the {@code /ascend},
- * {@code /descend} and {@code /thru} verbs — into the teleport context's command surface. These
+ * Pins the vertical teleport family, {@code /down} plus the {@code /ascend},
+ * {@code /descend} and {@code /thru} verbs: into the teleport context's command surface. These
  * ship together; this guard fails if any of them ever drops out of the surface or wires under a
  * permission node other than the shared {@code uxmessentials.tp.vertical} the rest of the vertical verbs
  * already use, which would otherwise drift the permissions reference and the permission catalogue.

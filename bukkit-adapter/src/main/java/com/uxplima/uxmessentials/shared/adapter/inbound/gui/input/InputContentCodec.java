@@ -13,7 +13,7 @@ import org.spongepowered.configurate.serialize.SerializationException;
 
 /**
  * Reads the {@code input} config tree into an immutable {@link Parsed} snapshot: the global default mode, the
- * per-key mode overrides, and the cancel keywords. Total and forgiving — an absent file, a missing block, or an
+ * per-key mode overrides, and the cancel keywords. Total and forgiving. An absent file, a missing block, or an
  * unparseable mode token degrades to the shipped defaults (anvil default, no overrides, {@code cancel}/{@code iptal})
  * rather than failing the load, matching the inert-default contract every settings codec in this codebase follows.
  */

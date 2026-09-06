@@ -28,11 +28,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * The chat backend of the text-input seam: one {@link AsyncChatEvent} listener that captures a player's next chat line
  * and reports it as the input. This single shared listener replaces the per-context chat-prompt listeners that used to
- * be copied into kits, warps, and the three economy flows — there is now exactly one place a chat line becomes input.
+ * be copied into kits, warps, and the three economy flows: there is now exactly one place a chat line becomes input.
  *
  * <p>A pending prompt carries a deadline so an unanswered prompt expires instead of swallowing a chat line minutes
  * later; registering a second prompt for the same player replaces the first (the overlap guard). The captured line is
- * handed to the outcome on the async chat thread — the seam ({@link TextInput}) hops it onto the viewer's region thread
+ * handed to the outcome on the async chat thread, the seam ({@link TextInput}) hops it onto the viewer's region thread
  * before the call site's callback runs, so the call site never has to. {@code Cancelled} is never produced here: a
  * chat prompt has no structural cancel; typing a cancel keyword is detected upstream by {@link TextInput} from the
  * submitted text. Install once on enable and {@link #uninstall()} on disable so a disabled plugin holds no listener.
@@ -82,7 +82,7 @@ final class ChatTextBackend implements TextInputBackend, Listener {
             return;
         }
         if (System.currentTimeMillis() > entry.deadline()) {
-            return; // the prompt expired — let this line post as a normal chat message rather than swallow it
+            return; // the prompt expired, let this line post as a normal chat message rather than swallow it
         }
         event.setCancelled(true);
         String text = PlainTextComponentSerializer.plainText()

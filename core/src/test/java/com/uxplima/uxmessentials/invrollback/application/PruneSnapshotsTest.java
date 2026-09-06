@@ -32,7 +32,7 @@ class PruneSnapshotsTest {
     @Test
     void theSweepRemovesOverCountAndOverAgeSnapshotsAcrossEveryOwner() {
         FakeRepository repository = new FakeRepository();
-        // Alice has four recent snapshots — over the count cap of two.
+        // Alice has four recent snapshots, over the count cap of two.
         repository.save(snapshot(ALICE, NOW.minusSeconds(40)));
         repository.save(snapshot(ALICE, NOW.minusSeconds(30)));
         repository.save(snapshot(ALICE, NOW.minusSeconds(20)));

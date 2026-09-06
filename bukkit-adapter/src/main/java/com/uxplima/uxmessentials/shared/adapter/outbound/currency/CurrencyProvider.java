@@ -10,12 +10,12 @@ import java.util.UUID;
  * (Phase 3) consume it without ever naming a provider SDK type.
  *
  * <p>Every method is total: an unavailable back-end (its plugin absent, its hook off, the player offline for an
- * online-only back-end) never throws — it answers {@code 0}/{@code false} and {@link #deposit}/{@link #withdraw}
+ * online-only back-end) never throws. It answers {@code 0}/{@code false} and {@link #deposit}/{@link #withdraw}
  * report no change. Callers therefore use a provider unconditionally, the same way the {@code EconomyQuery} hook
  * is used. A multi-currency back-end binds one provider instance per currency name; {@link #id()} encodes which.
  *
  * <p>Threading: a provider touches Bukkit (the experience API, Vault, a reflected economy) on the calling thread.
- * Call it on the viewer's entity thread — where the menu engine's click and action chains already run — never off
+ * Call it on the viewer's entity thread (where the menu engine's click and action chains already run) never off
  * it.
  */
 public interface CurrencyProvider {
@@ -42,7 +42,7 @@ public interface CurrencyProvider {
     String format(double amount);
 
     /**
-     * A provider bound to {@code id} that is never available and no-ops every operation — what
+     * A provider bound to {@code id} that is never available and no-ops every operation: what
      * {@link Currencies#resolve(String)} returns for a spec no back-end claims. References no SDK type, so
      * resolving an unknown spec loads nothing.
      */

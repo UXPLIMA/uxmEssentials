@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 /**
  * Turns a Bukkit {@code Block} into the seat a player sits on, keeping the sit <em>policy</em> in the domain: the
  * {@link SittableBlocks} value decides whether the material is sittable, how high the seat rests, and whether the
- * block's facing applies. This adapter only reads the live block — its centre, its {@code BlockData} facing — and
+ * block's facing applies. This adapter only reads the live block (its centre, its {@code BlockData} facing) and
  * folds the policy's answers into a domain {@link Position}. Shared by {@code /sit} (the block you look at) and the
  * right-click-to-sit listener so both seat a player identically.
  */

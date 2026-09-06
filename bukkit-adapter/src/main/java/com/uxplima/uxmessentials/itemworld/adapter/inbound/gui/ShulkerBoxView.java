@@ -25,17 +25,17 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Opens a shulker box <em>item</em> the player is holding as a 27-slot view they edit in place, and writes the
- * edited contents back into the box's {@link BlockStateMeta} on close — the AxShulkers "open a shulker from the
+ * edited contents back into the box's {@link BlockStateMeta} on close. The AxShulkers "open a shulker from the
  * inventory" surface. It is a sanctioned raw-inventory leaf (on the ArchUnit createInventory allow-list), built the
  * same dupe-safe way as the playerstate invsee mirrors: the view is seeded from a <em>snapshot</em> of the box's
  * contents ({@link BlockStateMeta#getBlockState()} returns a copy), so the player's edits touch only the view until
  * the single write-back on close applies them in one pass.
  *
- * <p>The source box is locked in place while the view is open — {@link ShulkerBoxListener} cancels any click, drag
+ * <p>The source box is locked in place while the view is open. {@link ShulkerBoxListener} cancels any click, drag
  * or drop that would move it out of its hotbar slot, and refuses to open a second view for a player who already has
- * one — so the {@link ShulkerBoxHolder#sourceSlot() slot} the write-back reads always still holds that same box. A
- * player is tracked once so a single write-back claims their view — whichever of the close handler or
- * {@link #flushAll} (on module stop) reaches it first — and the write-back re-checks the slot still carries a
+ * one, so the {@link ShulkerBoxHolder#sourceSlot() slot} the write-back reads always still holds that same box. A
+ * player is tracked once so a single write-back claims their view, whichever of the close handler or
+ * {@link #flushAll} (on module stop) reaches it first, and the write-back re-checks the slot still carries a
  * shulker box before touching it, so a box that somehow left the slot discards the edits rather than corrupting a
  * different item.
  *
@@ -50,7 +50,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class ShulkerBoxView {
 
-    /** A shulker box holds a single row-of-three grid — 27 slots, always. */
+    /** A shulker box holds a single row-of-three grid: 27 slots, always. */
     static final int SIZE = 27;
 
     private final Messages messages;
@@ -131,7 +131,7 @@ public final class ShulkerBoxView {
 
     /**
      * Reconcile the edited view back into the source box, re-reading the locked hotbar slot. The slot is guarded
-     * against movement while the view is open, so it still holds the same box; the guard here is defensive — if the
+     * against movement while the view is open, so it still holds the same box; the guard here is defensive, if the
      * slot no longer carries a shulker box the edits are discarded rather than written onto a different item.
      */
     private void writeBack(Player player, ShulkerBoxHolder holder) {

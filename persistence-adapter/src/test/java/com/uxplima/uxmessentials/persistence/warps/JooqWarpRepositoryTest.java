@@ -25,7 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqWarpRepository} against the default embedded SQLite backend with the
- * Flyway V1 baseline applied — the tested default of the backend-parity matrix (network backends run the
+ * Flyway V1 baseline applied. The tested default of the backend-parity matrix (network backends run the
  * same DSL behind Testcontainers, which this environment may not have). It proves the round-trip
  * (save → find), the name-key upsert (a re-anchor overwrites in place rather than inserting), the delete,
  * the {@code exists} check the {@code /setwarp} name-taken path relies on, the creation-order list, and the
@@ -95,7 +95,7 @@ class JooqWarpRepositoryTest {
     @Test
     void saveUpsertsOnTheNameKeyRatherThanInserting() {
         repository.save(warp("shop", 0, 0, 0));
-        repository.save(warp("shop", 100, 70, 100)); // same name — a re-anchor
+        repository.save(warp("shop", 100, 70, 100)); // same name, a re-anchor
 
         assertThat(repository.all()).hasSize(1);
         Warp reanchored = repository.find(WarpName.of("shop")).orElseThrow();
@@ -155,7 +155,7 @@ class JooqWarpRepositoryTest {
         return Warp.create(WarpName.of(name), Position.of(WORLD, x, 64, x), owner, createdAt);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

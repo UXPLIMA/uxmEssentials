@@ -186,7 +186,7 @@ class IntegrationConditionsTest {
 
         cooldowns.stampLabel(online(), "daily");
 
-        // Now the label is on cooldown, so the gate fails — the ready/expired semantics the condition documents.
+        // Now the label is on cooldown, so the gate fails: the ready/expired semantics the condition documents.
         assertThat(test("cooldown", "daily")).isFalse();
     }
 
@@ -273,7 +273,7 @@ class IntegrationConditionsTest {
 
     @Test
     void integrationConditionsDeclareNoSdkTypeAnywhere() {
-        // Loading the pack (and its reflective nested helpers) on a plugin-less server must pull in zero SDK class —
+        // Loading the pack (and its reflective nested helpers) on a plugin-less server must pull in zero SDK class
         // the structural guarantee that the present-guard, not a classload, is what gates the reflection. Every SDK
         // reference is a string class-name, so no field or method signature names the JobsReborn / WorldGuard package.
         assertThat(declaresPackage(IntegrationConditions.class, "com.gamingmesh"))

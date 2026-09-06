@@ -69,13 +69,13 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * CHEST icon, so page 0 holds two CHEST tiles (content slots 0 and 1, the names surfacing through the kit-name
  * token) and the two ARROW nav buttons (slots 48 and 50), with no back button at the root. The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — frozen here as the contract so the old class could be deleted. A priced kit is also rendered to
+ * view produced, frozen here as the contract so the old class could be deleted. A priced kit is also rendered to
  * prove its lore expands through the single multi-line placeholder: a free kit expands to two lines
  * (cooldown + claim hint) where a priced one expands to three (cooldown + cost + claim hint).
  *
  * <p>Category mode: a "tools" category pinned to content slot 0 (a BOOK tile) sits alongside the uncategorised
  * kits at the root, fixed to its slot on every page while the kits flow through the remaining slots and spill onto
- * page 1 — proving the pinned-slot pagination the migration relies on. A left click on the category drills in — the
+ * page 1: proving the pinned-slot pagination the migration relies on. A left click on the category drills in, the
  * engine re-opens at that level, where the kit filed under it appears; a left click on the back button steps back
  * to the root. And, through the engine's own {@code MenuListener}, a left click on a kit tile claims it through the
  * same {@link ClaimKit} use case the {@code /kit} command drives (recorded by the granter the use case delegates
@@ -194,7 +194,7 @@ class KitBrowseGoldenTest {
         openLegacy();
 
         // Content slot 0 is the "alpha" kit tile; a right click opens the bespoke read-only preview window, whose
-        // holder is the package-private KitPreviewHolder — recognised here by its class name rather than its type.
+        // holder is the package-private KitPreviewHolder: recognised here by its class name rather than its type.
         fireClick(0, ClickType.RIGHT);
 
         assertThat(top().getHolder()).isNotNull();
@@ -312,7 +312,7 @@ class KitBrowseGoldenTest {
     }
 
     /**
-     * A free, repeatable, ungated, itemless kit with preview off — its icon falls back to CHEST and its default
+     * A free, repeatable, ungated, itemless kit with preview off. Its icon falls back to CHEST and its default
      * lore is exactly the cooldown and claim-hint lines, so a cost line is the only variable lore the test adds.
      */
     private static KitDefinition freeKit(String id) {

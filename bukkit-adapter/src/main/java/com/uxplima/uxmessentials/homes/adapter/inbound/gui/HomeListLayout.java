@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * The externalised geometry of the {@code /home} slot grid, loaded once from
  * {@code modules/homes/gui/home-list.conf}: the row count, the cells homes are drawn into, the materials for a
  * filled-without-custom-icon slot, an empty (clickable to create) slot, and the border filler, plus the three
- * navigation slots. Titles and lore stay in code as {@code MessageKey} lookups — this record holds layout
+ * navigation slots. Titles and lore stay in code as {@code MessageKey} lookups. This record holds layout
  * integers and materials only, never localised strings.
  *
  * @param rows the menu row count, 1..6

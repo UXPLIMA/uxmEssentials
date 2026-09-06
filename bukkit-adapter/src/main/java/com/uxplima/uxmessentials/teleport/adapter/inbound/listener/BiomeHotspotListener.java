@@ -21,18 +21,18 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Passively learns where rare biomes are: every time a chunk loads (as players explore, or worldgen streams terrain),
  * this reads the <em>already-resident</em> chunk's surface biomes once and records them in the {@link BiomeHotspots}
- * registry. Because the chunk is already loaded when {@link ChunkLoadEvent} fires — and the handler runs on the
- * chunk's own owning region thread — the biome read is a free in-memory lookup, never a chunk load, so this adds no
+ * registry. Because the chunk is already loaded when {@link ChunkLoadEvent} fires, and the handler runs on the
+ * chunk's own owning region thread. The biome read is a free in-memory lookup, never a chunk load, so this adds no
  * generation pressure and honours the RTP redesign's "no synchronous chunk load on a tick thread" invariant.
  *
  * <p>Each chunk is scanned <strong>at most once</strong>: a bounded seen-set dedups by chunk key so a chunk that
  * loads and unloads repeatedly is not re-scanned. The set is capped and reset wholesale when it fills, so it can
- * never grow without limit on a long-lived, heavily-explored server — the registry it feeds is bounded too.
+ * never grow without limit on a long-lived, heavily-explored server: the registry it feeds is bounded too.
  */
 @NullMarked
 public final class BiomeHotspotListener implements Listener {
 
-    // Local block offsets sampled within a 16×16 chunk — the four quadrant centres, enough to catch a biome that
+    // Local block offsets sampled within a 16×16 chunk. The four quadrant centres, enough to catch a biome that
     // only touches part of the chunk without reading all 256 columns.
     private static final int[] SAMPLE_OFFSETS = {4, 12};
 
@@ -53,7 +53,7 @@ public final class BiomeHotspotListener implements Listener {
         Chunk chunk = event.getChunk();
         World world = event.getWorld();
         if (!markSeen(new ChunkKey(world.getUID(), chunk.getX(), chunk.getZ()))) {
-            return; // already scanned this chunk — no duplicate, no re-scan
+            return; // already scanned this chunk, no duplicate, no re-scan
         }
         recordBiomes(world, chunk.getX(), chunk.getZ());
     }

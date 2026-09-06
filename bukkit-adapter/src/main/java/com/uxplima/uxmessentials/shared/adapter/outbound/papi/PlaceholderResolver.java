@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * never touches a PlaceholderAPI type.
  *
  * <p>Each key is dispatched to the owning context's read seam ({@link PlaceholderContexts}). When that
- * context is disabled — its seam absent — or the player is offline for a session-only placeholder, the
+ * context is disabled, its seam absent, or the player is offline for a session-only placeholder, the
  * value degrades to a sensible empty/"-" default ({@link #EMPTY}) rather than failing. An entirely unknown
  * key returns {@link Optional#empty()}, which the shell maps to {@code null} so PlaceholderAPI shows the
  * raw token unchanged.
@@ -144,7 +144,7 @@ public final class PlaceholderResolver {
 
     /**
      * Resolve the {@code uxmessentials_}-stripped {@code key} for {@code who}. {@code online} reflects
-     * whether the requesting player is currently connected — session-only placeholders (presence) read
+     * whether the requesting player is currently connected. Session-only placeholders (presence) read
      * empty for an offline player. An unknown key returns {@link Optional#empty()}.
      */
     public Optional<String> resolve(PlayerRef who, boolean online, String key) {
@@ -792,7 +792,7 @@ public final class PlaceholderResolver {
      * Resolve the three ranks keys against the ranks seam. {@code rank} is the player's current rank display name,
      * {@code rank_next} the next rank up ({@link #MAX_RANK} when they are already at the top), and {@code prestige}
      * their prestige level. All read the DB-backed pointer, so they answer for an offline player too. A disabled
-     * module — or a ladder with no ranks — degrades every key to the dash.
+     * module, or a ladder with no ranks, degrades every key to the dash.
      */
     private String ranks(PlayerRef who, String key) {
         Optional<RanksPlaceholders> seam = contexts.ranks();
@@ -1221,7 +1221,7 @@ public final class PlaceholderResolver {
     }
 
     /**
-     * Resolve a {@code menu_*} tail against the menu-engine seam — the reverse of the inbound PAPI bridge, reading
+     * Resolve a {@code menu_*} tail against the menu-engine seam. The reverse of the inbound PAPI bridge, reading
      * the requesting player's own live engine state. {@code is_in_menu} answers yes/no; {@code opened} is the
      * current menu's spec id and {@code last} the most-recently-opened id from history, which persists after the
      * menu closes (so it differs from {@code opened} once a menu is shut); {@code page} and {@code rows} are the
@@ -1387,8 +1387,8 @@ public final class PlaceholderResolver {
      * Resolve a {@code messaging_}-stripped key against the messaging seam. The two durable mail keys
      * ({@code mail_unread}, {@code mail_total}) and the ignore count ({@code ignoring_count}) read straight
      * through and answer for an offline player as well, since mail and the ignore list are DB-backed. The
-     * session-scoped keys — {@code reply_target} (the last-conversation partner), {@code msgtoggle} (whether
-     * the player accepts DMs) and {@code socialspy} (the spy flag) — hold no value for an offline player, so
+     * session-scoped keys, {@code reply_target} (the last-conversation partner), {@code msgtoggle} (whether
+     * the player accepts DMs) and {@code socialspy} (the spy flag), hold no value for an offline player, so
      * the offline guard degrades them to the dash. A disabled module degrades every key to the dash.
      */
     private String messaging(PlayerRef who, boolean online, String key) {
@@ -1411,8 +1411,8 @@ public final class PlaceholderResolver {
     /**
      * Resolve a {@code staff_}-stripped key against the staff seam. {@code mode} reads the live session-scoped
      * {@code /staffmode} marker, so an offline requester (who holds no marker) reads {@code no}; {@code online}
-     * and its {@code count} alias read the server-wide online-staff roster size — the holders of the
-     * {@code uxmessentials.staff.member} marker — which answer for an offline requester too since the count does
+     * and its {@code count} alias read the server-wide online-staff roster size. The holders of the
+     * {@code uxmessentials.staff.member} marker, which answer for an offline requester too since the count does
      * not depend on who asks. A disabled module degrades every key to the dash.
      */
     private String staff(PlayerRef who, boolean online, String key) {
@@ -1448,7 +1448,7 @@ public final class PlaceholderResolver {
     }
 
     /**
-     * Resolve a {@code holograms_}-stripped key against the holograms seam. The only key is {@code count} — the
+     * Resolve a {@code holograms_}-stripped key against the holograms seam. The only key is {@code count}, the
      * server-wide number of registered holograms, the same for every requester. A disabled module degrades it to
      * the dash.
      */
@@ -1462,7 +1462,7 @@ public final class PlaceholderResolver {
 
     /**
      * Resolve a {@code communication_}-stripped key against the communication seam. {@code chat_enabled} reads the
-     * server-wide chat lock — open while {@code /togglechat} does not hold it — and answers for any requester.
+     * server-wide chat lock, open while {@code /togglechat} does not hold it, and answers for any requester.
      * {@code broadcasts} reads the requester's announcer subscription ({@code /broadcasttoggle}); the store
      * resolves the connected player, so it holds no value for an offline requester and the offline guard degrades
      * it to the dash. A disabled module degrades every key to the dash.
@@ -1530,7 +1530,7 @@ public final class PlaceholderResolver {
 
     /**
      * Resolve a {@code poses_}-stripped key against the poses seam. {@code sitting} reports whether the requester is
-     * currently sitting ({@code yes}/{@code no}); {@code posing} whether they hold a free pose — lay/bellyflop/spin —
+     * currently sitting ({@code yes}/{@code no}); {@code posing} whether they hold a free pose, lay/bellyflop/spin,
      * ({@code yes}/{@code no}); {@code pose} the current pose name ({@code sit}/{@code lay}/{@code bellyflop}/{@code
      * spin}/{@code none}); and {@code toggle} whether they let others sit on them ({@code allow}/{@code refuse}). All
      * are live per-player reads, so a disabled module or an offline requester degrades the key to the dash.
@@ -1749,7 +1749,7 @@ public final class PlaceholderResolver {
     /**
      * Resolve a {@code server_}-stripped key against the always-present server-metrics seam. Every value is a
      * server-wide global, so the requesting player is ignored. The TPS keys read the Paper {@code getTPS()}
-     * window — {@code tps} the 1-minute rate, {@code tps_5m}/{@code tps_15m} the longer windows, and
+     * window, {@code tps} the 1-minute rate, {@code tps_5m}/{@code tps_15m} the longer windows, and
      * {@code tps_colored} the 1-minute rate wrapped in a MiniMessage colour (green/yellow/red); the heap keys
      * read whole megabytes; {@code uptime} reads whole minutes and {@code uptime_formatted} the {@code 1h30m}
      * compact form; {@code world_players_<world>} counts a named world's roster (the dash for an unknown world).
@@ -1866,11 +1866,11 @@ public final class PlaceholderResolver {
     /**
      * Resolve a {@code votes_*} tail. Three sub-patterns:
      * <ul>
-     *   <li>{@code <period>} — the requesting player's vote count for that period.</li>
-     *   <li>{@code top_<period>_<n>_name} or {@code top_<period>_<n>_votes} — the name or vote
+     *   <li>{@code <period>}. The requesting player's vote count for that period.</li>
+     *   <li>{@code top_<period>_<n>_name} or {@code top_<period>_<n>_votes}, the name or vote
      *       count of the player ranked {@code <n>} (1-based) on the leaderboard.</li>
-     *   <li>{@code position_<period>} — the requesting player's 1-based leaderboard rank.</li>
-     *   <li>{@code streak_current} or {@code streak_best} — the requesting player's current or
+     *   <li>{@code position_<period>}. The requesting player's 1-based leaderboard rank.</li>
+     *   <li>{@code streak_current} or {@code streak_best}. The requesting player's current or
      *       best consecutive-day voting streak.</li>
      * </ul>
      */
@@ -2130,7 +2130,7 @@ public final class PlaceholderResolver {
 
     /**
      * A live scalar (health, speed, experience progress) rounded to two decimal places with trailing zeros
-     * stripped — so {@code 20.0} reads {@code 20} and {@code 0.25} reads {@code 0.25}.
+     * stripped, so {@code 20.0} reads {@code 20} and {@code 0.25} reads {@code 0.25}.
      */
     private static String decimal(double value) {
         return new java.math.BigDecimal(value)

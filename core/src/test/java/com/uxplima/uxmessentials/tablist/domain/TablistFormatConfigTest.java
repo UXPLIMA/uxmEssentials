@@ -72,7 +72,7 @@ class TablistFormatConfigTest {
 
     @Test
     void priorityTiesAreBrokenByListOrderFirstWins() {
-        // Both match (always), both priority 5 — the format earlier in the list (the codec sorts alphabetically) wins.
+        // Both match (always), both priority 5, the format earlier in the list (the codec sorts alphabetically) wins.
         TablistFormatConfig config = new TablistFormatConfig(
                 List.of(format("alpha", DisplayCondition.always(), 5), format("beta", DisplayCondition.always(), 5)));
 

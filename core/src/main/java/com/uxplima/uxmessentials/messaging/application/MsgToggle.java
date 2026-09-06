@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /msgtoggle}: flip whether the player accepts incoming private messages. With DMs off, a {@code /msg}
- * or {@code /reply} to them is refused with a visible reason — but mail still delivers, so the toggle gates
+ * or {@code /reply} to them is refused with a visible reason, but mail still delivers, so the toggle gates
  * only the real-time channel. The new state is reported to the player. The flag itself lives in the
  * {@link MessageToggleStore} (per-holder PDC state); this use case just flips it and renders the outcome.
  */

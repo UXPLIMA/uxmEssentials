@@ -39,7 +39,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared collaborators and argument helpers the {@code /npc} command and its sub-handlers hold: the constructed
  * {@link NpcServices} and a {@link CommandFeedback} over the {@link Messages} catalog (the latter for the
- * players-only rejection a console may see, and the per-subcommand validation replies — all other player-facing
+ * players-only rejection a console may see, and the per-subcommand validation replies: all other player-facing
  * feedback flows through the use cases' {@code MessageSink}). The root command and each sub-handler extend this
  * so each stays focused on building its node and mapping arguments to use-case calls, while the single
  * {@code /npc} literal stays intact (the sub-handlers contribute argument nodes under it, never a new literal).
@@ -61,7 +61,7 @@ abstract class NpcCommandSupport {
     }
 
     /**
-     * A {@code name} word argument that completes against the current NPC names — the single place every {@code
+     * A {@code name} word argument that completes against the current NPC names, the single place every {@code
      * /npc} subcommand sources its name suggestions, so the operator never has to remember a name. The supplier
      * reads the renderer's warm in-memory name set on the tick thread, never the DB.
      */
@@ -144,8 +144,8 @@ abstract class NpcCommandSupport {
     }
 
     /**
-     * Parse {@code word} case-insensitively to a Bukkit {@link EntityType} an NPC can render as — {@code PLAYER}
-     * (the fake-player path), any living-entity type, or a supported display/interaction type — or {@code null} for
+     * Parse {@code word} case-insensitively to a Bukkit {@link EntityType} an NPC can render as, {@code PLAYER}
+     * (the fake-player path), any living-entity type, or a supported display/interaction type, or {@code null} for
      * an unknown or unrenderable type, so the caller can report {@code NPC_INVALID_ENTITY_TYPE}. Shared by
      * {@code /npc create [type]} and {@code /npc type}.
      */

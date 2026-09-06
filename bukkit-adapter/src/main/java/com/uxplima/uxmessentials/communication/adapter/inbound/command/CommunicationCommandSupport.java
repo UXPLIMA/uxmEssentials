@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared collaborators the communication Brigadier commands hold: the {@link Messages} catalog, used only for the
- * players-only rejection — every other reply flows through a use case's {@code MessageSink} (the toggle
+ * players-only rejection. Every other reply flows through a use case's {@code MessageSink} (the toggle
  * confirmation) or the info sender (an info page). Concrete command classes extend this so each stays focused on
  * building its node and mapping its source to one call. Both surfaces act on the invoking player only.
  */

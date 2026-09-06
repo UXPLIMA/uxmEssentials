@@ -28,29 +28,29 @@ import org.jspecify.annotations.Nullable;
  * that generated far chunks on the tick thread. The flow is:
  *
  * <ol>
- *   <li>Resolve the live world; an absent world completes the future empty at once (never orphaned — the
+ *   <li>Resolve the live world; an absent world completes the future empty at once (never orphaned, the
  *       bug that used to hang the refill loop when the world had unloaded mid-search).</li>
  *   <li>Record whether the target chunk was already resident, then call {@code World#getChunkAtAsync}, which
  *       loads/generates the chunk <em>off the main thread</em> and completes on the chunk's owning region
  *       thread. There is no synchronous chunk load on a tick thread.</li>
  *   <li>On completion, copy a {@link ChunkSnapshot} (max-block-Y + biome, no light) and read the candidate's
- *       facts from that copy — highest ground, biome, standing safety, landing block — so nothing touches the
+ *       facts from that copy (highest ground, biome, standing safety, landing block) so nothing touches the
  *       live chunk once the snapshot is taken.</li>
  *   <li><strong>Chunk-lifecycle ownership:</strong> if the probe is what pulled the chunk in, request its
- *       unload again. Probed-but-unserved chunks otherwise accumulate on the heap and in the region files —
+ *       unload again. Probed-but-unserved chunks otherwise accumulate on the heap and in the region files
  *       the leak the redesign set out to close. A chunk that was already resident is left to its own
  *       lifecycle. The winning location's chunk is reloaded later by the teleport itself.</li>
  * </ol>
  *
  * <p><strong>Claim / region avoidance.</strong> The candidate build also asks {@link ProtectedLand} whether the
- * spot is inside a land claim or a WorldGuard region and records it on the candidate's {@code insideClaim} flag —
+ * spot is inside a land claim or a WorldGuard region and records it on the candidate's {@code insideClaim} flag
  * so the pure policy can keep the shared pool out of protected land. This lookup piggybacks on the snapshot
  * callback, which already runs on the candidate chunk's owning region thread (claim providers are not thread-safe,
  * so the region thread is where they must be read), adding <em>no</em> extra scheduler hop per candidate. It is a
  * cheap in-memory spatial check, never a chunk load. Both the {@code respect-claims} and {@code respect-worldguard}
  * toggles are folded into the injected {@link ProtectedLand}, so a disabled check simply reports "not protected".
  *
- * <p>Every failure path — absent world, a load that fails, a read that throws — completes the future with
+ * <p>Every failure path (absent world, a load that fails, a read that throws) completes the future with
  * {@link Optional#empty()} rather than exceptionally or not at all, honouring the {@link ChunkAccess}
  * contract the finder relies on.
  *
@@ -91,7 +91,7 @@ public final class BukkitChunkAccess implements ChunkAccess {
 
     /**
      * Complete {@code result} from the loaded chunk (or empty on failure) and, in a {@code finally}, release
-     * the chunk if this probe is what loaded it — so the future always completes and no probed chunk leaks.
+     * the chunk if this probe is what loaded it, so the future always completes and no probed chunk leaks.
      */
     void complete(
             CompletableFuture<Optional<SafeCandidate>> result,
@@ -150,7 +150,7 @@ public final class BukkitChunkAccess implements ChunkAccess {
         return new SafeCandidate(position, biome, standingSafe, insideClaim, landing);
     }
 
-    /** Request the chunk's unload only when our probe is what loaded it — the chunk-lifecycle ownership rule. */
+    /** Request the chunk's unload only when our probe is what loaded it, the chunk-lifecycle ownership rule. */
     void releaseIfProbed(World world, int cx, int cz, boolean wasLoaded) {
         if (!wasLoaded) {
             world.unloadChunkRequest(cx, cz);

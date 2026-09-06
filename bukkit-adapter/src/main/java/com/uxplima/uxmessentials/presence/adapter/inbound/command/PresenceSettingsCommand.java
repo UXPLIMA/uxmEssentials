@@ -18,10 +18,10 @@ import com.uxplima.uxmessentials.shared.application.port.Scheduler;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /presencesettings}: open the per-player presence settings panel — the AFK ({@code /afk}) and vanish
+ * {@code /presencesettings}: open the per-player presence settings panel, the AFK ({@code /afk}) and vanish
  * ({@code /vanish}) toggles a player flips for themselves. A players-only, self-service command gated by
  * {@code uxmessentials.presencesettings.use}; it opens the same {@link PresenceSettingsView} the
- * {@code /uxmess gui} hub does. It mutates nothing itself — every flip routes through the existing
+ * {@code /uxmess gui} hub does. It mutates nothing itself. Every flip routes through the existing
  * {@code MarkAfk} / {@code ToggleVanish} use cases the toggle commands already use.
  */
 @NullMarked

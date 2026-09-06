@@ -335,7 +335,7 @@ class MenuSpecLoaderTest {
         assertThat(first.chance()).isEqualTo(25.0);
         assertThat(first.deny()).map(Ref::id).contains("message");
 
-        // The scalar entry parses exactly as before — no modifiers.
+        // The scalar entry parses exactly as before: no modifiers.
         Ref second = actions.get(1);
         assertThat(second.id()).isEqualTo("sound");
         assertThat(second.delayTicks()).isZero();
@@ -590,8 +590,8 @@ class MenuSpecLoaderTest {
 
     @Test
     void aChestSlotBeyondTheSixRowMaximumIsAFailFastConfigError() {
-        // A chest renders at most six rows (54 slots); a slot past that can never be shown, so — consistent with the
-        // loader's fail-fast slot check and the six-row ceiling the auto-sizer parses against — it is a loud error.
+        // A chest renders at most six rows (54 slots); a slot past that can never be shown, so, consistent with the
+        // loader's fail-fast slot check and the six-row ceiling the auto-sizer parses against: it is a loud error.
         assertThatThrownBy(() -> new MenuSpecLoader().parse("items { a { slot = 60, material = STONE } }"))
                 .isInstanceOf(MenuSpecException.class);
     }
@@ -734,7 +734,7 @@ class MenuSpecLoaderTest {
                 """;
         MenuItemSpec item = new MenuSpecLoader().parse(hocon).items().get("x");
 
-        // Resolution runs one level only: 'derived' is used as written — its own pattern="base" key is ignored — so
+        // Resolution runs one level only: 'derived' is used as written, its own pattern="base" key is ignored, so
         // the material stays DIAMOND rather than being pulled down to STONE from the base template.
         assertThat(item.material()).isEqualTo("DIAMOND");
         assertThat(item.name()).isEqualTo("Steve");

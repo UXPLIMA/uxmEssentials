@@ -10,11 +10,11 @@ import com.uxplima.uxmessentials.playerwarps.domain.PasswordHash;
  * <p>Implementations must be:
  *
  * <ul>
- *   <li><b>salted</b> — a fresh random salt per {@link #hash(String)} call, so two warps with the same password
+ *   <li><b>salted</b>. A fresh random salt per {@link #hash(String)} call, so two warps with the same password
  *       produce different digests and a precomputed table is useless;
- *   <li><b>one-way</b> — the stored {@link PasswordHash} yields no path back to the plaintext, which is why only
+ *   <li><b>one-way</b>. The stored {@link PasswordHash} yields no path back to the plaintext, which is why only
  *       the digest is ever persisted;
- *   <li><b>constant-time on verify</b> — {@link #verify(String, PasswordHash)} compares digests in a way whose
+ *   <li><b>constant-time on verify</b>. {@link #verify(String, PasswordHash)} compares digests in a way whose
  *       timing does not depend on how many leading bytes match, so an attacker cannot recover the password byte
  *       by byte from response timing.
  * </ul>

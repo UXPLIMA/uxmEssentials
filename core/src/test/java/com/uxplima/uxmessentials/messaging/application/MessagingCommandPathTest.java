@@ -45,8 +45,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The messaging private-channel paths through the real {@link SendMessage} and {@link Reply} use cases against
- * in-memory fakes — the same wiring the Brigadier handlers drive, minus Bukkit. It proves the ordered
- * delivery gates ({@code /msg} is mute-gated, self-rejected, toggle-gated, and ignore-aware — an ignore
+ * in-memory fakes: the same wiring the Brigadier handlers drive, minus Bukkit. It proves the ordered
+ * delivery gates ({@code /msg} is mute-gated, self-rejected, toggle-gated, and ignore-aware, an ignore
  * silently drops but still echoes), the both-sides reply capture, and the {@code /reply} reply-TTL: a fresh
  * conversation resolves, a stale one declines.
  */
@@ -240,7 +240,7 @@ class MessagingCommandPathTest {
 
         assertThat(result.isOk()).isTrue();
         assertThat(delivery.delivered).isEmpty(); // silently dropped
-        // No AFK notice — it would reveal the ignoring target is online.
+        // No AFK notice: it would reveal the ignoring target is online.
         assertThat(senderNotices.keys).doesNotContain(MessagingMessageKey.MSG_TARGET_AFK.key());
     }
 
@@ -257,7 +257,7 @@ class MessagingCommandPathTest {
         assertThat(stored.body()).isEqualTo(hello);
         assertThat(stored.sender().name()).isEqualTo(alice.name());
         assertThat(senderNotices.keys).contains(MessagingMessageKey.MSG_SENT_TO_MAIL.key());
-        assertThat(delivery.delivered).isEmpty(); // not delivered live — the target is offline
+        assertThat(delivery.delivered).isEmpty(); // not delivered live. The target is offline
     }
 
     @Test
@@ -294,9 +294,9 @@ class MessagingCommandPathTest {
         SocialSpy spies = new SocialSpy(socialSpy, new Notifier(new KeyMessages(), new NoopSink()));
         spies.watch(spy, bob); // watch Bob only
 
-        sendMessage.send(alice, bob, hello); // Bob is the recipient — matches
-        sendMessage.send(bob, carol, hello); // Bob is the sender — matches
-        sendMessage.send(carol, dave, hello); // neither party is Bob — must not match
+        sendMessage.send(alice, bob, hello); // Bob is the recipient, matches
+        sendMessage.send(bob, carol, hello); // Bob is the sender, matches
+        sendMessage.send(carol, dave, hello); // neither party is Bob, must not match
 
         assertThat(delivery.spied).containsExactlyInAnyOrder("Spy<-Alice:Bob:hello", "Spy<-Bob:Carol:hello");
     }
@@ -314,7 +314,7 @@ class MessagingCommandPathTest {
     void aSpyWhoIsAPartyToTheConversationDoesNotGetASpyLine() {
         new SocialSpy(socialSpy, new Notifier(new KeyMessages(), new NoopSink())).toggle(spy);
 
-        sendMessage.send(spy, bob, hello); // the spy sends — must not also be spied
+        sendMessage.send(spy, bob, hello); // the spy sends. Must not also be spied
 
         assertThat(delivery.spied).isEmpty();
     }

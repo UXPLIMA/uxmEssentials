@@ -21,10 +21,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /biome} ({@code uxmessentials.biome.use}): tell the player which biome they are standing in, read from
- * the world at their block position. A pure read in the adapter — no use case and no state mutation. Self-only,
+ * the world at their block position. A pure read in the adapter, no use case and no state mutation. Self-only,
  * so there is no {@code [player]} target form; the biome is always the invoking player's own.
  *
- * <p>The biome name comes from its registry key path segment (e.g. {@code plains}) — that is data, not a
+ * <p>The biome name comes from its registry key path segment (e.g. {@code plains}). That is data, not a
  * user-facing literal, so it feeds the {@code biome} placeholder of the localized show line rather than being
  * a message of its own. Underscores are swapped for spaces so {@code old_growth_pine_taiga} reads naturally.
  */
@@ -61,7 +61,7 @@ public final class BiomeCommand extends PlayerstateCommandSupport implements Com
             return 0;
         }
         // Paper marks Player#getLocation() nullable (null only for an entity with no world, which a
-        // connected player never is) — assert it so NullAway is satisfied at the dereference.
+        // connected player never is): assert it so NullAway is satisfied at the dereference.
         Location location = Objects.requireNonNull(player.getLocation(), "player location");
         String name = player.getWorld()
                 .getBiome(location.getBlockX(), location.getBlockY(), location.getBlockZ())

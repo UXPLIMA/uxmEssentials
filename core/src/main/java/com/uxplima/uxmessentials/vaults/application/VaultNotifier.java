@@ -53,7 +53,7 @@ public final class VaultNotifier {
 
     /**
      * Report {@code viewer}'s vault usage: how many vaults they own against their count cap, and the slot size
-     * of each. The cap renders as the unlimited sentinel when the owner has no count limit. Read-only — this
+     * of each. The cap renders as the unlimited sentinel when the owner has no count limit. Read-only: this
      * resolves nothing and opens nothing.
      */
     public void showInfo(PlayerRef viewer, int ownedCount, VaultAmount cap, VaultSize size) {

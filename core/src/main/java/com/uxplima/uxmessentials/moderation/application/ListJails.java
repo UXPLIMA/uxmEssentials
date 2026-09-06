@@ -9,9 +9,9 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /jails}: list the jails {@code /jail <player> <jail>} will accept — the named jails an operator
+ * {@code /jails}: list the jails {@code /jail <player> <jail>} will accept. The named jails an operator
  * configured in {@code moderation.conf} merged with the DB-backed jails defined in-game with {@code /setjail}.
- * A read-only query against the directory seam — without it an operator has to inspect both sources by hand to
+ * A read-only query against the directory seam. Without it an operator has to inspect both sources by hand to
  * learn the valid names. Renders a header with the count then one entry per name, or an empty notice when no
  * jails exist. The directory hands the names back sorted; because it reads the DB-backed store the adapter
  * runs this off the tick thread.
@@ -47,7 +47,7 @@ public final class ListJails {
     }
 
     /**
-     * The full jail-name union — config jails merged with the DB-backed {@code /setjail} jails, sorted — for the
+     * The full jail-name union (config jails merged with the DB-backed {@code /setjail} jails, sorted) for the
      * management GUI's jail list to render as clickable rows. Reads {@link com.uxplima.uxmessentials.moderation.application.port.JailDirectory#names()},
      * which can touch the database, so the adapter resolves it off the tick thread exactly as {@link #list} is run.
      */

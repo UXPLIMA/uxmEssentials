@@ -50,8 +50,8 @@ public record WarpDisplay(
     }
 
     static WarpDisplay of(PlayerWarp w) {
-        // Player warps no longer model a lock, a password, or welcome messages in the surrogate-id rebuild — those
-        // fold into the P4 access gate and are absent here — so this shared projection defaults them: an unlocked
+        // Player warps no longer model a lock, a password, or welcome messages in the surrogate-id rebuild: those
+        // fold into the P4 access gate and are absent here, so this shared projection defaults them: an unlocked
         // warp with no password and no welcome list. The presentation values that survive (icon, effects, timing)
         // read from the new facets.
         return new WarpDisplay(

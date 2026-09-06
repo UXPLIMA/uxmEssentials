@@ -8,7 +8,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A late-bound handle to the player-warps repository the warp editor reads when it edits a player warp. The
- * warps module is wired before player-warps, so the editor cannot receive the repository in its constructor —
+ * warps module is wired before player-warps, so the editor cannot receive the repository in its constructor
  * instead it receives this handle (always non-null, constructor-injected and {@code final}), and the
  * player-warps wiring binds the repository into it once that context is wired. When player-warps is disabled
  * the handle stays empty and {@link #get()} returns {@code null}, so the editor simply shows no player-warp

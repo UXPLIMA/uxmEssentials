@@ -35,7 +35,7 @@ import org.mockito.Mockito;
 /**
  * Pins the {@code /uxmess doctor} subcommand onto the operator surface. {@code doctor} is a child of the
  * {@code /uxmess} root (not its own catalog literal), so it is not tracked by {@code CommandCatalogDriftTest};
- * this guard asserts the literal is wired under the root and — the point of the command — that its run is
+ * this guard asserts the literal is wired under the root and, the point of the command, that its run is
  * resilient: a health check whose probe throws is still rendered (as a {@code FAIL} entry) rather than aborting
  * the run, because every check goes through {@link HealthCheck#safe()}.
  */
@@ -75,7 +75,7 @@ class DoctorCommandSurfaceTest {
             }
         };
         // The InlineScheduler runs the async + onGlobal stages synchronously, so the whole doctor run executes on
-        // this thread; a leaked exception would surface here. It must not — every check is safe()-wrapped.
+        // this thread; a leaked exception would surface here. It must not: every check is safe()-wrapped.
         UxmessCommand command = command(List.of(okCheck(), explodes));
         CommandSourceStack source = sourceStack();
 
@@ -142,7 +142,7 @@ class DoctorCommandSurfaceTest {
         return new PlaceholdersSubcommand(Path.of("build", "tmp", "placeholders-guard"), Mockito.mock(Logger.class));
     }
 
-    /** A minimal /uxmess gui node — this surface guard only inspects the doctor child, never opens the hub. */
+    /** A minimal /uxmess gui node: this surface guard only inspects the doctor child, never opens the hub. */
     private static GuiSubcommand guiNode() {
         Scheduler scheduler = new InlineScheduler();
         Permissions permissions = Mockito.mock(Permissions.class);

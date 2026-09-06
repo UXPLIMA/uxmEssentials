@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@link ConnectedBlockSearch} on a plain in-memory grid — no Bukkit — over the three behaviours both
+ * Pins {@link ConnectedBlockSearch} on a plain in-memory grid, no Bukkit, over the three behaviours both
  * tree-feller and veinminer lean on: a connected group is visited whole, the visit is capped at {@code maxBlocks},
  * and an origin with no matching neighbour returns just itself. Connectivity includes the diagonal (26-neighbour)
  * steps a branch or a diagonal vein needs.

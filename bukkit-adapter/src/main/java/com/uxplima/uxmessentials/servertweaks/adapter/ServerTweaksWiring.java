@@ -29,14 +29,14 @@ import org.jspecify.annotations.NullMarked;
  * nothing here until an operator opts a tweak in.
  *
  * <ul>
- *   <li><b>customf3brand</b> — when {@code f3-brand.enabled}, the {@code minecraft:brand} outgoing channel is
+ *   <li><b>customf3brand</b>. When {@code f3-brand.enabled}, the {@code minecraft:brand} outgoing channel is
  *       registered and a {@link ServerBrandJoinListener} re-sends the configured brand to each joiner so it shows on
  *       F3; the channel is unregistered on stop.
- *   <li><b>console-spam-fix</b> — when {@code console-filter.enabled}, a {@link ConsoleSpamFilter} is attached to the
+ *   <li><b>console-spam-fix</b>. When {@code console-filter.enabled}, a {@link ConsoleSpamFilter} is attached to the
  *       root Log4j2 logger through the {@link ConsoleFilterInstaller} and detached again on stop.
- *   <li><b>nochatreports</b> — when {@code no-chat-reports.enabled}, an {@link UnsignedChatListener} re-delivers signed
+ *   <li><b>nochatreports</b>. When {@code no-chat-reports.enabled}, an {@link UnsignedChatListener} re-delivers signed
  *       public chat as unsigned messages so it cannot be reported to Mojang.
- *   <li><b>signedvelocity</b> — when {@code signed-velocity.enabled}, the {@code signedvelocity:main} incoming channel
+ *   <li><b>signedvelocity</b>. When {@code signed-velocity.enabled}, the {@code signedvelocity:main} incoming channel
  *       is registered and the chat/command/quit listeners apply a Velocity proxy's rulings from a shared
  *       {@link SignedDirectiveQueue}; the channel is unregistered on stop. Inert without a SignedVelocity proxy.
  * </ul>

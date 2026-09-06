@@ -67,7 +67,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The wallet-dashboard golden test: the engine-rendered panel must draw the exact window the original
  * {@code WalletGuiView} drew, and its history button must reopen the migrated transaction-history list. The panel
  * draws the balance display (GOLD_INGOT@11), the banknotes display (PAPER@13), the history button (BOOK@15), and the
- * close button (BARRIER@22) over a grey-glass backdrop — snapshotted as {@code (slot -> material, plain name)} and
+ * close button (BARRIER@22) over a grey-glass backdrop, snapshotted as {@code (slot -> material, plain name)} and
  * asserted equal slot for slot to the baseline the old view produced (frozen here so the old class could be deleted).
  * Clicking the history button fires through the engine's own {@link MenuListener} and opens the engine
  * {@code economy-transactions} list; clicking close shuts the panel.
@@ -123,7 +123,7 @@ class WalletPanelGoldenTest {
 
         fireClick(HISTORY_SLOT);
 
-        // The history button opens the engine economy-transactions list — a fresh menu over the same player.
+        // The history button opens the engine economy-transactions list, a fresh menu over the same player.
         Inventory list = player.getOpenInventory().getTopInventory();
         assertThat(list.getHolder()).isInstanceOf(MenuHolder.class);
         assertThat(list.getSize()).isEqualTo(54); // the six-row transaction list

@@ -24,7 +24,7 @@ final class MirrorHolder {
     @FunctionalInterface
     interface WriteBack {
         /**
-         * Reconcile {@code contents} — the window's region in its declared slot order — onto the holder's target.
+         * Reconcile {@code contents}, the window's region in its declared slot order, onto the holder's target.
          * Called at most once per window: the implementation claims the window first, so whichever of the close or
          * the module-stop drain reaches it first is the only one that writes.
          */

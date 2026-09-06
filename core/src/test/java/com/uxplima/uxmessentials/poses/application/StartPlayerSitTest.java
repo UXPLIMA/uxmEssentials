@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  * Pins {@link StartPlayerSit}: the five refusals ({@code features.player-sit} off, sitting on yourself, being
  * already posed, a target who refuses, and the region gate) leave no mount and no session, and a success mounts the
  * rider onto the carrier and records a {@link PoseType#PLAYER_SIT} session carrying the target, publishing
- * {@link PoseStarted}. All ports are fakes — no Bukkit.
+ * {@link PoseStarted}. All ports are fakes, no Bukkit.
  */
 class StartPlayerSitTest {
 

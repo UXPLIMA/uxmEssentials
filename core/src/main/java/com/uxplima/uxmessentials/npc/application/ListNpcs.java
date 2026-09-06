@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /npc list [type]}: list server-wide NPCs — every one in stored creation order by default, or just those
+ * {@code /npc list [type]}: list server-wide NPCs. Every one in stored creation order by default, or just those
  * of a given entity type (case-insensitive), name-sorted, when a {@code type} filter is supplied. NPCs are an
  * operator surface (the command is gated as a whole). The matches are returned for the adapter, and the header /
  * per-entry / empty feedback is pushed through the notifier so all text resolves from {@link NpcMessageKey}.

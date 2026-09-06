@@ -22,11 +22,11 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportRequest;
 import com.uxplima.uxmessentials.teleport.domain.TeleportRequest.Transition;
 
 /**
- * Resolves a pending {@code tpa} request — {@code /tpaccept}, {@code /tpdeny}, {@code /tpcancel} — and
+ * Resolves a pending {@code tpa} request ({@code /tpaccept}, {@code /tpdeny}, {@code /tpcancel}) and
  * the TTL expiry sweep. Accept drives the mover's warmup through {@link TeleportEngine} (anchored on the
  * acceptor's live position, supplied by the adapter); deny, cancel, and expire terminate the request
  * and, crucially, never burn the requester's cooldown under the {@code accept} or {@code teleport} start
- * phases — only an accepted request stamps for the {@code accept} phase.
+ * phases: only an accepted request stamps for the {@code accept} phase.
  */
 public final class AcceptTeleport {
 

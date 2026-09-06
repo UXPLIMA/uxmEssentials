@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.adapter.outbound.BukkitRefs;
  *
  * <p>Cheap gates run first so an ordinary interact stays hot-path-light: only a right-click with the main hand is
  * considered (the {@link EquipmentSlot#HAND} guard makes the event fire once rather than twice for the two hands),
- * the item must be a real, tagged opener, and the tagged menu must still be registered — a tag whose menu was since
+ * the item must be a real, tagged opener, and the tagged menu must still be registered. A tag whose menu was since
  * deleted or renamed is a silent no-op, never an error. The event fires on the player's own region thread, and the
  * façade opens the window on that same thread, so this stays Folia-safe.
  */

@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Outbound port for the per-home guest list — the set of players an owner has invited to a private home,
+ * Outbound port for the per-home guest list. The set of players an owner has invited to a private home,
  * keyed by {@code (owner, slot)}. A private home is reachable by its owner and by any invited player; a
  * public home needs no invites. Invites are durable storage, not transient state, so they survive a
  * restart and a world rollback the way the home itself does.

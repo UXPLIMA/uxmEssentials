@@ -26,8 +26,8 @@ import org.jspecify.annotations.NullMarked;
  *       {@link PacketNametagPresenter#update}, which re-selects and (when the selected format or its appearance changed)
  *       removes-then-re-shows, or removes the nametag when no format applies any more.</li>
  *   <li><strong>The global animation clock.</strong> The animation clock is global, not per-wearer: this loop calls
- *       {@link AnimationRegistry#advance()} exactly once per tick on the loop thread — stepping every named animation to
- *       the tick's frame — so an animation advances at most once per tick no matter how many wearers are online, and the
+ *       {@link AnimationRegistry#advance()} exactly once per tick on the loop thread. Stepping every named animation to
+ *       the tick's frame, so an animation advances at most once per tick no matter how many wearers are online, and the
  *       lib's per-wearer text callbacks then read the same current frame.</li>
  * </ul>
  *

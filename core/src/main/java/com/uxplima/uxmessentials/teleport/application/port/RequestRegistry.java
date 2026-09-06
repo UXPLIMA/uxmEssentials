@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportRequest;
 /**
  * Outbound port over the in-flight {@code tpa} requests. Whether a new request displaces a pending one
  * (single-request-displace mode) or stacks (multi-queue mode) is the operator's choice; this port
- * exposes both shapes — {@link #pendingFor(PlayerRef)} returns the queue a target may resolve, oldest
+ * exposes both shapes. {@link #pendingFor(PlayerRef)} returns the queue a target may resolve, oldest
  * first. The registry is runtime state the teleport module clears on {@code stop()}; nothing is
  * persisted.
  */

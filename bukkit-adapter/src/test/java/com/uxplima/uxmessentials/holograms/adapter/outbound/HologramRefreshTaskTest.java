@@ -34,12 +34,12 @@ class HologramRefreshTaskTest {
         HologramRefreshTask task =
                 new HologramRefreshTask(() -> List.of(refreshing), refreshed::add, new CountingLogger(), BASE_TICKS);
 
-        task.tick(); // 20 ticks — not yet due
+        task.tick(); // 20 ticks, not yet due
         assertThat(refreshed).isEmpty();
-        task.tick(); // 40 ticks — due
+        task.tick(); // 40 ticks, due
         assertThat(refreshed).hasSize(1);
-        task.tick(); // 60 ticks — not due
-        task.tick(); // 80 ticks — due again
+        task.tick(); // 60 ticks, not due
+        task.tick(); // 80 ticks, due again
         assertThat(refreshed).hasSize(2);
     }
 
@@ -59,7 +59,7 @@ class HologramRefreshTaskTest {
 
     @Test
     void aSubBaseIntervalRoundsUpToTheBaseCadence() {
-        Hologram fast = hologram("fast", 5); // below base — refreshes every base tick instead
+        Hologram fast = hologram("fast", 5); // below base, refreshes every base tick instead
         List<Hologram> refreshed = new ArrayList<>();
         HologramRefreshTask task =
                 new HologramRefreshTask(() -> List.of(fast), refreshed::add, new CountingLogger(), BASE_TICKS);

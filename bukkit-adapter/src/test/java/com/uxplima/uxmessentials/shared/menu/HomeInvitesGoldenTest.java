@@ -63,10 +63,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * InvitedPlayersMenu} drew. The home has two invited players ("alpha", "beta"), so the list draws two PLAYER_HEAD
  * heads in the first two inner cells (slots 10 and 11, sorted by name), the LIME_DYE add button (slot 49), the
  * ARROW back button (slot 45), and the two ARROW nav buttons (slots 48 and 50). The window is snapshotted as
- * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced —
+ * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced
  * captured while both rendered the same fixture, then frozen here so the old class could be deleted. Then a head
  * click, an add submission, and the back button through the engine's own {@link MenuListener} prove the migrated path
- * revokes an invite, invites a resolved player, and returns to the action menu — faithful in look and behaviour.
+ * revokes an invite, invites a resolved player, and returns to the action menu, faithful in look and behaviour.
  */
 class HomeInvitesGoldenTest {
 

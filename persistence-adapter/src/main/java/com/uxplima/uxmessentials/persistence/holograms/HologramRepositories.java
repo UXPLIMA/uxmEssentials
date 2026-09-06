@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
  * Factory for the holograms context's persistence adapter, so the consuming bukkit-adapter wires a
  * {@link HologramRepository} from the {@link Persistence} handle it already holds without ever naming a jOOQ
  * type (jOOQ is an {@code implementation} dependency of this module, kept off the consumer's compile
- * classpath). The returned repository is the cached jOOQ adapter — write-through at the database, invalidate
+ * classpath). The returned repository is the cached jOOQ adapter, write-through at the database, invalidate
  * in the Caffeine cache.
  */
 @NullMarked
@@ -26,7 +26,7 @@ public final class HologramRepositories {
     /**
      * As {@link #cached(Persistence)} but returned as its concrete decorator type, so the wiring can hand the
      * cross-server bus a per-name reload hook on the same cache the {@code /hologram} commands and the renderer
-     * read — a remote hologram change reloads exactly that name from the shared DB and the listener re-renders it.
+     * read: a remote hologram change reloads exactly that name from the shared DB and the listener re-renders it.
      * Same backing as {@link #cached}; this overload exposes the decorator only so the sync seam can reach it.
      */
     public static CachedHologramRepository cachedConcrete(Persistence persistence) {

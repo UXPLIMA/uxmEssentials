@@ -30,7 +30,7 @@ class NametagsModuleTest {
 
     @Test
     void publishesNoCommand() {
-        // The nametag is always-on when enabled — there is no per-player visibility toggle.
+        // The nametag is always-on when enabled: there is no per-player visibility toggle.
         assertThat(new NametagsModule().commands()).isEmpty();
     }
 

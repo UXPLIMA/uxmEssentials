@@ -218,7 +218,7 @@ class MenuGridViewTest {
     void savingWritesTheEditedSessionAndReloadsIt() {
         view.open(player, viewer, "alpha");
         fireClick(0, ClickType.RIGHT); // pick up the item at slot 0
-        fireClick(2, ClickType.LEFT); // drop it on slot 2 — the grid stays open
+        fireClick(2, ClickType.LEFT); // drop it on slot 2. The grid stays open
 
         fireClick(SAVE_SLOT, ClickType.LEFT);
 
@@ -254,7 +254,7 @@ class MenuGridViewTest {
         fireClick(1, ClickType.LEFT); // an empty cell, an item in hand but an empty cursor
 
         // The empty-cursor left-click now always adds a plain default item and opens its editor; a selected hotbar
-        // item is no longer captured this way — cursor placement and /menu captureitem are the capture paths.
+        // item is no longer captured this way: cursor placement and /menu captureitem are the capture paths.
         String id = itemAt(editSession(), 1).orElseThrow();
         assertThat(editSession().item(id).orElseThrow().material()).isEqualTo("STONE");
     }

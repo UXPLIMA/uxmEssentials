@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link Messages} implementation: resolve the viewer's locale, fetch the catalog template, and do
- * literal {@code {name}} placeholder substitution. The return is a plain MiniMessage source string —
+ * literal {@code {name}} placeholder substitution. The return is a plain MiniMessage source string
  * no Adventure type crosses this boundary, which is what keeps the kernel free of {@code net.kyori};
  * the tag parsing into a {@code Component} happens once downstream in {@link BukkitMessageSink}.
  *

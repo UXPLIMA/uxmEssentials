@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /give <player> <item> [amount]} (alias {@code /i}): give an item to a player. The abusable verb of
- * the item-utils group — a bulk give is audit-logged when the amount crosses the configured threshold, and
+ * the item-utils group. A bulk give is audit-logged when the amount crosses the configured threshold, and
  * the amount is validated against the {@code give-cap} before any stack materialises (docs/permissions.md
  * §Itemworld, docs/10-feature-modules.md §15.10).
  *

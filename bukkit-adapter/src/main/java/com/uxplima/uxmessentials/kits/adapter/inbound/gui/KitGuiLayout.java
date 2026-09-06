@@ -21,8 +21,8 @@ import org.jspecify.annotations.NullMarked;
  * the kit's items, never fewer than one row and never more than six (a 54-slot double chest is Bukkit's chest
  * ceiling), and the slots past the last item are padded with a non-interactive gray-glass pane.
  *
- * <p>{@link #seed} decodes the opaque {@link KitItem} payloads through {@link KitItemCodec} — the one place the
- * kits context turns a stored item back into an {@link ItemStack} — and clones each into the menu so the window
+ * <p>{@link #seed} decodes the opaque {@link KitItem} payloads through {@link KitItemCodec}, the one place the
+ * kits context turns a stored item back into an {@link ItemStack}, and clones each into the menu so the window
  * never aliases a definition's stack.
  */
 @NullMarked

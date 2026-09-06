@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /uninvite <player> [slot]}: revoke a previously granted invite to one of the owner's homes. Also
- * reachable by clicking an invited player's entry in the invited-players GUI. The call is idempotent —
- * revoking an invite that was never granted is a no-op that still reports success — so the owner gets the
+ * reachable by clicking an invited player's entry in the invited-players GUI. The call is idempotent
+ * revoking an invite that was never granted is a no-op that still reports success, so the owner gets the
  * same feedback whether or not the player was on the guest list.
  */
 public final class UninviteFromHome {

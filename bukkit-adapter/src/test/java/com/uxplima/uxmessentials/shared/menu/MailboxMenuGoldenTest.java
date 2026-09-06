@@ -58,7 +58,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code MailboxView} drew. A player holds one unread mail, so the list draws a single WRITTEN_BOOK icon (content
  * slot 0), the clear LAVA_BUCKET button (slot 49), and the two nav ARROWs (slots 48 and 50). The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — captured once while both rendered the same fixture, then frozen here as the contract so the old
+ * view produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old
  * class could be deleted (the glass filler is skipped, as in the pilot and vault golden tests). Then clicks through
  * the engine's own {@link MenuListener} prove the migrated path keeps the behaviour: opening the list marks the box
  * read (mirroring {@code /mail read}), a click on the mail opens its read-only detail (the WRITTEN_BOOK icon and the

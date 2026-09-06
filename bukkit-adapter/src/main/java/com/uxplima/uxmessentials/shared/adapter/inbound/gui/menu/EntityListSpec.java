@@ -21,7 +21,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The list analog of an {@link EditorSpec}: the recipe the engine draws a paginated entity list from. It re-homes
- * exactly the fields the bespoke {@code EntityListView} already collects — the per-viewer title, the geometry
+ * exactly the fields the bespoke {@code EntityListView} already collects, the per-viewer title, the geometry
  * (rows, the content slots, the previous/next nav slots and their icon, the background filler), the entity
  * supplier (the caller pre-resolves it off-thread, so the engine reads only the snapshot), the per-entity icon
  * renderer, the entity-click handler, and the optional create and action buttons.
@@ -177,8 +177,8 @@ public final class EntityListSpec {
     }
 
     /**
-     * Any fixed, pre-built buttons the list draws alongside the entities and nav — beyond the single create and action
-     * buttons — each at its own slot with its own click handler. The list renderer paints each icon as-is and records
+     * Any fixed, pre-built buttons the list draws alongside the entities and nav, beyond the single create and action
+     * buttons, each at its own slot with its own click handler. The list renderer paints each icon as-is and records
      * its click, so a caller that needs more than the create/action pair (the shared player picker's offline-name
      * button plus its optional footer buttons) is not capped at two. Empty for a list that uses none.
      */

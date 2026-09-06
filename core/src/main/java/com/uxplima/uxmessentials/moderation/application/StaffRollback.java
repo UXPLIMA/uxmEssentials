@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /staffrollback <staff> [limit]}: revoke a (rogue or mistaken) staff member's still-active sanctions —
+ * {@code /staffrollback <staff> [limit]}: revoke a (rogue or mistaken) staff member's still-active sanctions
  * un-ban, un-mute and clear-warns every target they sanctioned that is currently still under <em>that staff
  * member's</em> sanction. The append-only history records every sanction a staff member ever applied but carries
  * <em>no</em> active flag, so each revoke is gated by a live-state read against the DB-backed sanction store at
@@ -31,7 +31,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p><b>Issuer-scoped.</b> The revoke is gated not only on "is the target currently sanctioned" but on "was the
  * <em>currently-active</em> sanction issued by the staff member being rolled back". If staffA banned X and then
- * staffB re-banned X, the live ban's issuer is staffB, so {@code /staffrollback staffA} leaves it untouched — a
+ * staffB re-banned X, the live ban's issuer is staffB, so {@code /staffrollback staffA} leaves it untouched, a
  * rollback never lifts another staff member's still-active sanction. The match is on the issuer UUID: a
  * console/system issuer (no UUID) never matches a real staff UUID, so a sanction now standing under a
  * console-issued ban/mute is also left alone. Warnings are removed per-issuer through
@@ -40,7 +40,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>Targets are deduped per action through a {@link Set} of UUIDs: a target the staff member banned twice (or
  * banned then re-banned) is un-banned once. {@link SanctionAction#UNBAN}, {@link SanctionAction#UNMUTE} and
- * {@link SanctionAction#KICK} rows are skipped — a kick is a live disconnect with nothing to undo, and a lift is
+ * {@link SanctionAction#KICK} rows are skipped. A kick is a live disconnect with nothing to undo, and a lift is
  * itself not a sanction. The {@code limit} caps how far back the history read reaches (newest-first), so an
  * operator can scope a rollback to a staff member's recent activity. The result is a {@link RollbackSummary} of
  * the counts undone, reported to the actor; when nothing was in effect the actor is told so instead.
@@ -90,7 +90,7 @@ public final class StaffRollback {
                 case MUTE -> mutes += revokeMute(actor, staff, row.target(), now, unmuted);
                 case WARN -> warns += revokeWarns(actor, staff, row.target(), now, cleared);
                 case UNBAN, UNMUTE, KICK -> {
-                    // A lift is not a sanction and a kick is a live disconnect — nothing to undo.
+                    // A lift is not a sanction and a kick is a live disconnect: nothing to undo.
                 }
             }
         }
@@ -170,7 +170,7 @@ public final class StaffRollback {
     }
 
     /**
-     * The target as a {@link PlayerRef}, name-resolved through the DB-backed seen record — never the Bukkit
+     * The target as a {@link PlayerRef}, name-resolved through the DB-backed seen record, never the Bukkit
      * player lookup, since the whole rollback runs off the tick thread and a Bukkit call there would violate
      * the threading invariant. An unseen target (no row) falls back to a UUID-only ref; the revoke use cases
      * and {@link ModerationRepository#clearWarnsByActor} all key on the UUID, so a name-less ref still works.

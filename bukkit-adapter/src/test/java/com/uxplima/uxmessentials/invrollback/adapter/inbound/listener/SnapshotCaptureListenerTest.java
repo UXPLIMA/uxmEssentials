@@ -38,7 +38,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit coverage of the invrollback capture path end-to-end. A death capture reads the player's live
  * inventory, serializes it, and (off the tick thread via the injected {@link Scheduler}) persists a snapshot whose
  * contents and cause round-trip through the repository and back into items via the {@link InventorySnapshotCodec}.
- * The logout capture is gated by config — with {@code capture.on-logout} off a quit stores nothing, with it on a
+ * The logout capture is gated by config. With {@code capture.on-logout} off a quit stores nothing, with it on a
  * quit stores a LOGOUT snapshot. The ender chest rides along only when {@code include-enderchest} is set.
  */
 class SnapshotCaptureListenerTest {

@@ -194,7 +194,7 @@ class ItemRendererTest {
     @Test
     void catalogLineIsNotSplitEvenWhenMultiLine() {
         // Catalog output owns its own layout, so an @key line stays a single lore component even if the resolved
-        // text carries a newline — only inline/placeholder literals expand. Asserted on the renderer's own output,
+        // text carries a newline: only inline/placeholder literals expand. Asserted on the renderer's own output,
         // since the downstream ItemBuilder breaks any newline-bearing component into visual lines.
         assertThat(plainLore(renderer, itemWithLore(List.of("@first\nsecond")))).containsExactly("first\nsecond");
     }
@@ -228,7 +228,7 @@ class ItemRendererTest {
 
     @Test
     void materialSpecPassesASkullSpecThroughVerbatim() {
-        // A literal skull spec has no %token%, so it reaches the icon path unchanged — the skull provider (and the
+        // A literal skull spec has no %token%, so it reaches the icon path unchanged, the skull provider (and the
         // Bedrock icon sourcing) both read this exact string.
         assertThat(renderer.materialSpec(
                         item("skull:Notch", new ItemDecor(1, Optional.empty(), false, List.of())), ctx))
@@ -444,7 +444,7 @@ class ItemRendererTest {
 
     @Test
     void anArgumentTokenInLoreExpandsWhileANormalPlaceholderStillResolves() {
-        // Regression guard: adding the argument_ special-case must not shadow the registry — %icon% still resolves
+        // Regression guard: adding the argument_ special-case must not shadow the registry: %icon% still resolves
         // (registered to "DIAMOND" in setUp), and %argument_target% resolves from the context arguments.
         MenuContext argCtx = MenuContext.of(new PlayerRef(UUID.randomUUID(), "P"), null, 0, Map.of("target", "Steve"));
 

@@ -26,7 +26,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * and exercises threshold, onlyVoters, escalateBy, reset schedule, announceAt, the legacy flat
  * {@code rewards} list, and the {@code streak.grace-days} read that flows into {@code HandleVote}.
  *
- * <p>No MockBukkit is needed — the test is a pure-Java Configurate HOCON parse.
+ * <p>No MockBukkit is needed: the test is a pure-Java Configurate HOCON parse.
  */
 class PartyConfigLoaderTest {
 

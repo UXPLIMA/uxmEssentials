@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /foodlevel <amount> [player]}: set a player's hunger to a specific value. A live-only effect through
- * the {@link PlayerEffects} port — the requested amount is clamped to {@code 0..20} in the domain
+ * the {@link PlayerEffects} port. The requested amount is clamped to {@code 0..20} in the domain
  * ({@link FoodLevel}), so the adapter only ever sets a value the server accepts. Distinct from {@code /feed},
  * which always restores to full. The actor is confirmed and, for a staff target, the subject is told too.
  */

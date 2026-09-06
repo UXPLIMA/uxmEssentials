@@ -14,16 +14,16 @@ import org.jspecify.annotations.Nullable;
  * appearance metadata, plus the shown display name, the mirror-skin toggle, the collision and tab-visibility
  * toggles, the per-NPC view/turn distances, and the on-fire / invisible / silent state flags. Grouping these
  * visual fields into one immutable value object keeps the {@link Npc} aggregate small while leaving the public
- * surface unchanged — {@code Npc} delegates every visual transition and accessor here. An appearance is a value
+ * surface unchanged: {@code Npc} delegates every visual transition and accessor here. An appearance is a value
  * object: each {@code with*} produces a new instance rather than mutating.
  *
  * <p>{@code skin} is the fake player's skin, or {@code null} for the default (Steve). {@code entityType} is the
- * uppercase Bukkit {@code EntityType} name the NPC renders as ({@code "PLAYER"} by default — the one type with the
+ * uppercase Bukkit {@code EntityType} name the NPC renders as ({@code "PLAYER"} by default, the one type with the
  * tab-entry + skin path); it is a plain string so the domain stays Bukkit-free, and the adapter resolves it. The
  * skin is kept across a type change, so flipping a mob back to {@code PLAYER} restores its skin.
  *
- * <p>{@code equipment} maps each worn {@link EquipmentSlot} to an opaque item <em>token</em> stored verbatim —
- * either a legacy material name ({@code DIAMOND_HELMET}) or a serialized full-item payload — that the render
+ * <p>{@code equipment} maps each worn {@link EquipmentSlot} to an opaque item <em>token</em> stored verbatim
+ * either a legacy material name ({@code DIAMOND_HELMET}) or a serialized full-item payload: that the render
  * adapter alone resolves to a real Bukkit item. A slot absent from the map is empty. {@code glowing} toggles the
  * outline; {@code glowColor} is the colour name ({@code RED}) it is tinted, or {@code null} for the default white.
  *
@@ -256,7 +256,7 @@ public record NpcAppearance(
         return displayName != null && displayName.isBlank();
     }
 
-    /** Upper-case the entity-type name and reject a blank one — the type is always a non-blank uppercase name. */
+    /** Upper-case the entity-type name and reject a blank one: the type is always a non-blank uppercase name. */
     private static String normalizeType(String entityType) {
         Objects.requireNonNull(entityType, "entityType");
         String trimmed = entityType.strip();
@@ -266,7 +266,7 @@ public record NpcAppearance(
         return trimmed.toUpperCase(Locale.ROOT);
     }
 
-    /** Upper-case the pose name and reject a blank one — the pose is always a non-blank uppercase name. */
+    /** Upper-case the pose name and reject a blank one: the pose is always a non-blank uppercase name. */
     private static String normalizePose(String pose) {
         Objects.requireNonNull(pose, "pose");
         String trimmed = pose.strip();
@@ -276,7 +276,7 @@ public record NpcAppearance(
         return trimmed.toUpperCase(Locale.ROOT);
     }
 
-    /** Reject a non-finite or non-positive scale — the size multiplier is always a finite, positive number. */
+    /** Reject a non-finite or non-positive scale: the size multiplier is always a finite, positive number. */
     private static double validateScale(double scale) {
         if (!Double.isFinite(scale) || scale <= 0.0) {
             throw new IllegalArgumentException("scale must be finite and positive, was " + scale);

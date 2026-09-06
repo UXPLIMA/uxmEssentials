@@ -36,7 +36,7 @@ final class ShulkerBoxHolder implements InventoryHolder {
         return owner;
     }
 
-    /** The hotbar slot (0-8) holding the source box — locked while the view is open and re-read on write-back. */
+    /** The hotbar slot (0-8) holding the source box: locked while the view is open and re-read on write-back. */
     int sourceSlot() {
         return sourceSlot;
     }

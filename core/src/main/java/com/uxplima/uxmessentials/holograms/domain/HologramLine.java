@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.holograms.domain;
 import java.util.Objects;
 
 /**
- * One line of a hologram's text. The {@link #value} is the raw, unrendered source — a {@code TextDisplay}
+ * One line of a hologram's text. The {@link #value} is the raw, unrendered source, a {@code TextDisplay}
  * renders MiniMessage, so the line is stored verbatim and deserialised at the adapter boundary, never in the
  * domain. A blank line carries no visible text and would render an empty row, so it is rejected at
  * construction; a hologram that wants a spacer uses a non-blank placeholder.

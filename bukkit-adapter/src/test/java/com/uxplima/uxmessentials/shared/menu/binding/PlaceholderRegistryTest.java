@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Pins the registry's fallback contract now that it carries more than one prefix/family resolver. Two disjoint
  * fallbacks (the PlaceholderAPI bridge and the player-data readers) coexist and each route their own family; when two
  * overlap on an id the first registered wins; {@code has} reports an id either fallback claims; and an exact handler
- * still beats a fallback that would also claim the id. The resolvers themselves are trivial stand-ins — this exercises
+ * still beats a fallback that would also claim the id. The resolvers themselves are trivial stand-ins: this exercises
  * the registry's dispatch, not any live placeholder source.
  */
 class PlaceholderRegistryTest {

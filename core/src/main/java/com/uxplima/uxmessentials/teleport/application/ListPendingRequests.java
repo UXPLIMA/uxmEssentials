@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.teleport.application.port.RequestRegistry;
 import com.uxplima.uxmessentials.teleport.domain.TeleportRequest;
 
 /**
- * Reports the {@code tpa} requests a player has waiting on them — backs {@code /tpalist}. Reads the
+ * Reports the {@code tpa} requests a player has waiting on them, backs {@code /tpalist}. Reads the
  * registry's pending queue (oldest first) and either tells the viewer nothing is pending or sends a
  * header followed by one entry per requester, so a player can see who to {@code /tpaccept} or
  * {@code /tpdeny}. Read-only: it never resolves or expires a request.

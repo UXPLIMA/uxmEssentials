@@ -47,7 +47,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /pwarp}: the single entry point for everything a player does with their own player-warps, structured as a
  * Brigadier subcommand tree (the same idiom {@code /home} uses). With no arguments it opens the management GUI; a
- * bare {@code <name>} teleports; the folded-in verbs cover the whole self-service surface — create/move, archive,
+ * bare {@code <name>} teleports; the folded-in verbs cover the whole self-service surface, create/move, archive,
  * rename, the metadata/access/price edits, the social verbs (rate, favourite), transfer, withdraw, info, and list.
  *
  * <p>Every subcommand is gated by its own {@code uxmessentials.pwarp.<verb>} node through Brigadier
@@ -55,10 +55,10 @@ import org.jspecify.annotations.NullMarked;
  * The self-service verbs let anyone run them but the use case's {@code WarpAuthorization} decides by role which
  * warps they touch; the {@code members}/{@code ban}/{@code whitelist} people-management verbs work the same way,
  * while the operator {@code admin} group ({@code restore}/{@code purge}/{@code setowner}/{@code reload}) acts on any
- * warp by its surrogate id under a single {@code uxmessentials.pwarp.admin} node — that node <em>is</em> the
+ * warp by its surrogate id under a single {@code uxmessentials.pwarp.admin} node. That node <em>is</em> the
  * authorization, so those verbs skip the per-warp role gate, and the irreversible {@code purge} is confirm-gated.
- * Each handler resolves any tick-thread state — the actor's {@link PlayerRef}, and their {@link Position} for
- * {@code set}/{@code move} — then hands the repository I/O to the injected scheduler and returns immediately, so the
+ * Each handler resolves any tick-thread state. The actor's {@link PlayerRef}, and their {@link Position} for
+ * {@code set}/{@code move}, then hands the repository I/O to the injected scheduler and returns immediately, so the
  * command thread never blocks. A malformed name is turned into a friendly notice, never a stack trace, and the
  * teleport password is threaded straight to the access gate: it is never echoed, logged, or tab-completed.
  */
@@ -91,7 +91,7 @@ public final class PlayerWarpCommand extends PlayerWarpCommandSupport implements
     private static final String WHITELIST_PERMISSION = "uxmessentials.pwarp.whitelist";
     private static final String ADMIN_PERMISSION = "uxmessentials.pwarp.admin";
 
-    /** A single {@code <number><unit>} ban duration token — {@code 7d}, {@code 12h}, {@code 30m}; anything else is a reason. */
+    /** A single {@code <number><unit>} ban duration token: {@code 7d}, {@code 12h}, {@code 30m}; anything else is a reason. */
     private static final Pattern BAN_DURATION = Pattern.compile("(\\d+)([smhdw])", Pattern.CASE_INSENSITIVE);
 
     public PlayerWarpCommand(PlayerWarpServices services, Messages messages) {
@@ -589,7 +589,7 @@ public final class PlayerWarpCommand extends PlayerWarpCommandSupport implements
     }
 
     /**
-     * {@code admin reload}: this is not the module-reload authority — that lives on the {@code /uxmess reload} path —
+     * {@code admin reload}: this is not the module-reload authority, that lives on the {@code /uxmess reload} path,
      * so point the operator there rather than reimplementing a hot-reload the services holder cannot reach.
      */
     private int runAdminReload(CommandContext<CommandSourceStack> ctx) {
@@ -600,7 +600,7 @@ public final class PlayerWarpCommand extends PlayerWarpCommandSupport implements
 
     /**
      * The shared shape of an admin-by-id verb: read the {@code id} on the tick thread, run {@code action} off it, and
-     * bridge the operator-facing result back — {@code okKey} on success, the not-found notice on a stale id.
+     * bridge the operator-facing result back: {@code okKey} on success, the not-found notice on a stale id.
      */
     private int runAdminById(
             CommandContext<CommandSourceStack> ctx,
@@ -641,7 +641,7 @@ public final class PlayerWarpCommand extends PlayerWarpCommandSupport implements
             return Optional.empty();
         }
         // A wildly out-of-range digit run (Long overflow, or a Duration that exceeds its own bounds) is not a valid
-        // duration — treat it like any other non-duration token and let it fold into the ban reason, never throwing
+        // duration, treat it like any other non-duration token and let it fold into the ban reason, never throwing
         // out of the command handler.
         try {
             long amount = Long.parseLong(matcher.group(1));

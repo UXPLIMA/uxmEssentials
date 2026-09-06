@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * the <i>target's entity</i> region thread. Enumerating the roster there would be an off-global cross-region read
  * that tears on Folia, so the audience read and the per-recipient delivery both run inside a single
  * {@code scheduler.onGlobal} hop. The {@link MessageSink} then re-targets each delivery to the recipient's own
- * entity thread, so no thread ever blocks waiting on another — the fan-out is push-shaped, never request-reply.
+ * entity thread, so no thread ever blocks waiting on another: the fan-out is push-shaped, never request-reply.
  */
 @NullMarked
 public final class MessagingStaffAlerts {

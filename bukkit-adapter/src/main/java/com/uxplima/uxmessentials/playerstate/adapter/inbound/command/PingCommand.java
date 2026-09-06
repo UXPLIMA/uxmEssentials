@@ -19,9 +19,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /ping [player]} ({@code uxmessentials.ping.use}): show a player's round-trip latency in milliseconds.
- * Read-only — the {@code ShowPing} use case reads through the
+ * Read-only. The {@code ShowPing} use case reads through the
  * {@link com.uxplima.uxmessentials.playerstate.application.port.PlayerInfo} port. The target is a plain
- * online-player name (never an {@code @a}/{@code @p}/{@code @s} selector — one player's ping is a single-target
+ * online-player name (never an {@code @a}/{@code @p}/{@code @s} selector. One player's ping is a single-target
  * read where a fan-out is nonsensical); the {@code .others} target is gated by the shared
  * {@code uxmessentials.ping.others} (or the cross-cutting {@code uxmessentials.playerstate.others}) node.
  */

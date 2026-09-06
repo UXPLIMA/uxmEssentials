@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the {@link PoseSession} structural invariants: the required fields are non-null, and a {@code target} is
- * carried by — and only by — a {@link PoseType#PLAYER_SIT} session (sitting on another player is the one pose with a
+ * carried by, and only by, a {@link PoseType#PLAYER_SIT} session (sitting on another player is the one pose with a
  * second party).
  */
 class PoseSessionTest {

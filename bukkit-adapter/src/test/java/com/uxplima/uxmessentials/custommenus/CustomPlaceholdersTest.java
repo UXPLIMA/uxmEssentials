@@ -64,7 +64,7 @@ class CustomPlaceholdersTest {
         bindings.placeholder("coins", ctx -> "5");
         placeholders.reload(Map.of("doubled", "{math: %coins% * 2}"));
 
-        // substitute resolves the inner %coins% but must NOT evaluate the math — the ItemRenderer's own pass owns that.
+        // substitute resolves the inner %coins% but must NOT evaluate the math: the ItemRenderer's own pass owns that.
         assertThat(resolve("doubled")).contains("{math: 5 * 2}");
         assertThat(resolve("doubled").orElse("")).doesNotContain("10");
     }

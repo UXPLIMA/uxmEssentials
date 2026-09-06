@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.kits.application.port;
 import com.uxplima.uxmessentials.kits.domain.KitId;
 
 /**
- * The persistent global claim counter behind a stock-limited kit — the count of how many times a kit has ever
+ * The persistent global claim counter behind a stock-limited kit. The count of how many times a kit has ever
  * been claimed across all players, independent of the per-player one-time stamp and cooldown. A limited-edition
  * kit ({@code stock = 100}) draws from this counter; an unlimited kit never touches it.
  *
@@ -27,6 +27,6 @@ public interface KitStockStore {
     /** Give back one previously reserved unit of {@code kit}'s stock when a later gate in the same claim fails. */
     void release(KitId kit);
 
-    /** How many units of {@code kit} have been claimed so far — the browse menu reads it to show a sold-out icon. */
+    /** How many units of {@code kit} have been claimed so far: the browse menu reads it to show a sold-out icon. */
     long claimed(KitId kit);
 }

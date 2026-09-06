@@ -21,13 +21,13 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The BentoBox provider with BentoBox absent — the case on the test classpath, where no {@code world.bentobox}
+ * The BentoBox provider with BentoBox absent, the case on the test classpath, where no {@code world.bentobox}
  * class resolves. {@link BentoBoxClaimProvider#active()} must report inactive without naming a BentoBox type and
  * {@link BentoBoxClaimProvider#claimAt} must degrade to empty, proving the present-guard keeps the reflective
  * BentoBox chain from loading on a server without BentoBox.
  *
  * <p>The BentoBox API chain cannot be stood up under MockBukkit, so the ownership decisions that do not need a
- * live BentoBox — an owned island, an unowned/spawn island (no owner), island membership as trust, and the ban —
+ * live BentoBox (an owned island, an unowned/spawn island (no owner), island membership as trust, and the ban)
  * are exercised against the pure {@link IslandView} seam instead. The off-island branch (a live BentoBox
  * returning an empty {@code getIslandAt}) needs a running BentoBox and is not reproducible here.
  */

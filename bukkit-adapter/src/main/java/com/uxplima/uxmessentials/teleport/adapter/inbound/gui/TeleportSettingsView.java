@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * hub): two toggles a player flips for themselves, each reading and writing the same {@link TeleportFlags} the
  * teleport commands do. The first mirrors {@code /tptoggle} (whether the player accepts incoming requests at
  * all); the second mirrors {@code /tpauto} (whether requests are auto-accepted). The panel holds no logic of its
- * own — it reads the flags fresh on every open and routes a flip through the existing port, so opening it always
+ * own. It reads the flags fresh on every open and routes a flip through the existing port, so opening it always
  * shows the live state and a click is the same mutation the command makes.
  */
 @NullMarked

@@ -4,8 +4,8 @@ package com.uxplima.uxmessentials.communication.domain;
  * How a connection message ({@code join}, {@code quit}, {@code death}) is produced for a player.
  *
  * <p>The mode is read from {@code join-quit.conf} per channel. {@link #DISABLE} suppresses the plugin's
- * message entirely — the channel renders nothing and a join/quit channel set here also asks the adapter to clear
- * the vanilla line. {@link #DEFAULT} leaves the vanilla server message untouched — the plugin contributes no
+ * message entirely. The channel renders nothing and a join/quit channel set here also asks the adapter to clear
+ * the vanilla line. {@link #DEFAULT} leaves the vanilla server message untouched. The plugin contributes no
  * template of its own. {@link #CUSTOM} renders one of the operator's authored templates, chosen per the
  * {@link Ordering} on the policy.
  */

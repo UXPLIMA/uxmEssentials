@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The one-line text codec the NPC editor's click-action sub-list uses, so the generic {@code ListProperty}
  * (which edits a {@code List<String>}) can drive the typed {@link ClickAction} chain. A line is
- * {@code <trigger> <type> <value…>} — exactly the {@code /npc action add} argument shape — so an operator who
+ * {@code <trigger> <type> <value…>}, exactly the {@code /npc action add} argument shape, so an operator who
  * knows the command knows the GUI line. {@link #render} turns a stored action into that line for display and
  * editing; {@link #parse} turns an edited line back into an action, returning empty when the trigger/type are
  * unknown or the value fails the cheap per-type check (the sub-list then drops the bad line rather than storing

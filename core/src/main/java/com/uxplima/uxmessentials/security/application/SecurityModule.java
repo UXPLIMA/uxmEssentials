@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * The security bounded context as a first-class {@link FeatureModule}: account-security features that are not a
  * login system, and on an offline-mode server wait for the one installed rather than replacing it. Phase 1 stands up
  * the module identity, the enable gate, and the
- * two-factor enrolment surface — the {@code /2fa} and {@code /pin} verbs backed by the DB-backed
+ * two-factor enrolment surface. The {@code /2fa} and {@code /pin} verbs backed by the DB-backed
  * {@code security_2fa} store, with the PIN hashed and the TOTP secret encrypted at rest. The join-verification
  * flow, op-command protection, and IP/alt guard land as the later phases do, contributed through the adapter wiring.
  *

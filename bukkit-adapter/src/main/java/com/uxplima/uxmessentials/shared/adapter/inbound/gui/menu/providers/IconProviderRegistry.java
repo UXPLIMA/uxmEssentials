@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuCon
 /**
  * The runtime-mutable tail of the icon-provider chain. The built-in {@link IconProviders} chain is immutable once
  * built, so a plugin that wants to teach the engine a new material-spec prefix at runtime registers its
- * {@link IconProvider} here — through the public {@code MenuApi} — rather than rebuilding the chain.
+ * {@link IconProvider} here, through the public {@code MenuApi}, rather than rebuilding the chain.
  * {@link IconProviders#withRuntime} carries a live reference to one of these and consults it <em>after</em> every
  * built-in provider, so a registered provider only ever <em>adds</em> a new prefix and can never shadow a built-in
  * ({@code skull:}, {@code hdb:}, an equipment keyword, …).
@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuCon
  * right trade: writes are rare, reads are lock-free. A provider registered later is seen at the next resolve,
  * because {@link IconProviders} holds this instance by reference rather than snapshotting its contents.
  *
- * <p>A registered {@link IconProvider#icon} runs on the viewer's own region thread — the render thread — exactly
+ * <p>A registered {@link IconProvider#icon} runs on the viewer's own region thread, the render thread, exactly
  * like a built-in provider, so it must read only the viewer's state and never block.
  */
 public final class IconProviderRegistry {
@@ -34,7 +34,7 @@ public final class IconProviderRegistry {
 
     /**
      * The first icon any registered provider returns for {@code spec}, or {@link Optional#empty()} when none of
-     * them claims it — mirroring {@link IconProviders#resolve} over the runtime tail alone.
+     * them claims it: mirroring {@link IconProviders#resolve} over the runtime tail alone.
      */
     public Optional<ItemStack> resolve(String spec, MenuContext ctx) {
         Objects.requireNonNull(spec, "spec");

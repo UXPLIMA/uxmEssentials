@@ -101,7 +101,7 @@ class EquipmentPayloadsTest {
 
     @Test
     void resolvesANonItemMaterialToNothing() {
-        // AIR is a Material but not an item — it must not equip an empty stack.
+        // AIR is a Material but not an item: it must not equip an empty stack.
         assertThat(EquipmentPayloads.resolve("AIR")).isEmpty();
     }
 

@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The operator's cross-cutting claim-provider choices, read once from the root {@code config.conf}
  * {@code claims} block at wiring time. Which claim plugins to consult and how to fold their answers is a
- * server-wide decision, not a per-module one — homes, teleport and poses all read the same block — so it lives
+ * server-wide decision, not a per-module one (homes, teleport and poses all read the same block) so it lives
  * in the globals file rather than under any single module's config subtree, alongside {@code network} and
  * {@code update-check}.
  *
@@ -35,7 +35,7 @@ public record ClaimProvidersConfig(Set<String> disabledProviders, CombineMode co
         disabledProviders = Set.copyOf(disabledProviders);
     }
 
-    /** Every provider on, folded with {@link CombineMode#ANY_LAND} — the behaviour when no {@code claims} block is set. */
+    /** Every provider on, folded with {@link CombineMode#ANY_LAND}: the behaviour when no {@code claims} block is set. */
     public static ClaimProvidersConfig defaults() {
         return new ClaimProvidersConfig(Set.of(), CombineMode.ANY_LAND);
     }
@@ -44,10 +44,10 @@ public record ClaimProvidersConfig(Set<String> disabledProviders, CombineMode co
      * Read the {@code claims} block from {@code config}, defaulting each provider on and the combine to any-land.
      *
      * <p>A key an operator writes under {@code claims.providers} that matches no registered provider (a typo like
-     * {@code lnads}) disables nothing — the safe direction — but is silent, so the intended disable never takes
+     * {@code lnads}) disables nothing, the safe direction, but is silent, so the intended disable never takes
      * without any signal. Each unrecognised key is warned about here, naming it and the known set, so the operator
-     * learns their edit had no effect. The valid keys are {@link ClaimProviders#candidateKeys()} — the same registry
-     * {@link ClaimProviders#detectAll} folds — so this validation cannot drift from the provider set.
+     * learns their edit had no effect. The valid keys are {@link ClaimProviders#candidateKeys()}, the same registry
+     * {@link ClaimProviders#detectAll} folds, so this validation cannot drift from the provider set.
      */
     public static ClaimProvidersConfig from(ConfigStore config, Logger log) {
         Objects.requireNonNull(config, "config");
@@ -76,7 +76,7 @@ public record ClaimProvidersConfig(Set<String> disabledProviders, CombineMode co
     /**
      * Warn when {@code claims.combine} is set to something neither {@code any-land} nor {@code all-land}. Left
      * unwarned, a typo like {@code all_land} silently resolves to the more permissive {@code any-land}, quietly
-     * loosening a security-relevant knob — the same trap the unknown-provider-key warning guards against.
+     * loosening a security-relevant knob: the same trap the unknown-provider-key warning guards against.
      */
     private static void warnOnUnknownCombine(String token, Logger log) {
         String normalized = token.trim().toLowerCase(Locale.ROOT);
@@ -104,10 +104,10 @@ public record ClaimProvidersConfig(Set<String> disabledProviders, CombineMode co
     /** How overlapping claims from several providers are folded into a single trust/ownership answer. */
     public enum CombineMode {
 
-        /** Trusted or owner if <em>any</em> covering claim says so — the most permissive reading. */
+        /** Trusted or owner if <em>any</em> covering claim says so: the most permissive reading. */
         ANY_LAND("any-land"),
 
-        /** Trusted or owner only if <em>every</em> covering claim says so — the strictest reading. */
+        /** Trusted or owner only if <em>every</em> covering claim says so: the strictest reading. */
         ALL_LAND("all-land");
 
         private final String configName;

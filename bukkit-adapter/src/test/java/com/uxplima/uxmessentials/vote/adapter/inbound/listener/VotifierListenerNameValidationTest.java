@@ -74,7 +74,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
  * Covers the voter-name validation gate {@link VotifierListener#handleRaw} runs before a vote is built: a
- * blank, {@code "null"}, or over-16-character username is rejected — no vote is dispatched — while a valid
+ * blank, {@code "null"}, or over-16-character username is rejected, no vote is dispatched, while a valid
  * name flows through to {@link HandleVote}. The dispatch is witnessed through the repository's
  * {@code incrementAndGetPartyCount}, which {@link HandleVote} calls exactly once per handled vote, so a
  * rejected name leaves the counter untouched.

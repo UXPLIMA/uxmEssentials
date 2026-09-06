@@ -32,7 +32,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of the restock sweep: a stale villager (last restock older than the interval, or never restocked)
  * has its trades reset and re-stamped, a freshly-restocked villager is left alone, and a disabled sweep schedules
- * nothing. The sweep enumerates the world on the global thread and hops each restock onto the villager's region — a
+ * nothing. The sweep enumerates the world on the global thread and hops each restock onto the villager's region, a
  * recording scheduler runs both inline so the sweep completes.
  */
 class VillagerRestockSweepTest {
@@ -75,7 +75,7 @@ class VillagerRestockSweepTest {
 
     @Test
     void restocksAVillagerThatNeverRestocked() {
-        // No stamp — the last restock reads as the epoch, which is always due.
+        // No stamp: the last restock reads as the epoch, which is always due.
         sweep(new RecordingScheduler(), true).tick();
 
         assertThat(villager.getRecipes())

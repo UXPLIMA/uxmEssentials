@@ -6,7 +6,7 @@ import java.util.Objects;
  * A server-wide NPC changed on the origin backend (a {@code /npc create}/{@code delete}, a move, a re-skin, an
  * equipment/glow/pose/scale/look/type/action edit, …), so peers must reload their cached copy of that NPC and
  * re-render the in-world fake player so it matches the shared DB. Like {@link HologramChanged}, an NPC is its
- * own per-server packet entity on every backend, so dropping the cache is not enough — the peer must reload the
+ * own per-server packet entity on every backend, so dropping the cache is not enough. The peer must reload the
  * named NPC and re-spawn, refresh, or despawn its live fake player to reflect the change. The frame carries the
  * NPC name only; the durable rows live in the shared database, and the peer re-reads them on receipt.
  *

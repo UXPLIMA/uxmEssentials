@@ -56,17 +56,17 @@ import org.slf4j.LoggerFactory;
  * {@link TradeSessions} registry, the {@link TradeView} that opens and drives each participant's inventory view over a
  * shared session, and the {@link TradeListener} that routes the window's click/drag/close/quit events. Phase 3 adds the
  * money row: the {@link TextInput}-backed amount prompt behind the {@link TradeMoneyPrompt} seam and the
- * {@link TradeSettlement} that moves staked money all-or-nothing through the {@link TradeEconomy} port at commit — the
+ * {@link TradeSettlement} that moves staked money all-or-nothing through the {@link TradeEconomy} port at commit, the
  * port is present only when economy is wired, so without it a trade moves items only. Phase 4 adds the {@code /trade}
- * request/accept flow — the in-memory {@link TradeRequests} book and the per-player {@link TradeCooldown}, both clock
- * driven — plus the config-gated completed-trade audit through the {@link TradeAudit} port. A same-server trade holds
+ * request/accept flow. The in-memory {@link TradeRequests} book and the per-player {@link TradeCooldown}, both clock
+ * driven: plus the config-gated completed-trade audit through the {@link TradeAudit} port. A same-server trade holds
  * its session purely in memory, so there is still no repository or migration; the cross-server bus escrow lands in the
  * final phase behind this same {@link Wired} seam.
  */
 @NullMarked
 public final class TradeWiring {
 
-    /** The dedicated audit channel a completed trade's line is written to — the same channel the other contexts use. */
+    /** The dedicated audit channel a completed trade's line is written to: the same channel the other contexts use. */
     private static final String AUDIT_CHANNEL = "com.uxplima.uxmessentials.audit";
 
     private TradeWiring() {}
@@ -241,7 +241,7 @@ public final class TradeWiring {
     /**
      * Everything the trade module contributes once wired: the Brigadier {@code /trade} command, the window's Bukkit
      * listener, the resolved config, the session registry, and the view. The {@link #open(Player, Player)} convenience
-     * opens a window between two online players — the seam {@code /trade accept} and the window tests drive.
+     * opens a window between two online players, the seam {@code /trade accept} and the window tests drive.
      *
      * @param commands the Brigadier command registrations to publish
      * @param listeners the Bukkit listeners to register

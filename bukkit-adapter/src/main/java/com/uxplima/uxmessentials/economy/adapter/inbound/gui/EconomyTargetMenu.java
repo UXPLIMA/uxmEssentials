@@ -38,7 +38,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the per-player eco-admin manage screen with the menu engine and opens it. A five-row panel for one
  * target player: the target's head with their balance per currency, the Give / Take / Set / Reset action buttons,
- * a [History] link into the engine transaction-history list, and — when more than one currency is configured — a
+ * a [History] link into the engine transaction-history list, and, when more than one currency is configured, a
  * [Currency] item that opens the shared paginated {@link CurrencyPickerMenu} to switch the active currency the four
  * actions apply to. Give / Take / Set capture an amount through the shared input seam and run the matching
  * {@code EcoAdmin} op with {@code Money.of(active, amount)}; Reset is confirm-gated through the engine confirm
@@ -46,7 +46,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The balances are read off the tick thread when the panel opens and handed in as the {@link TargetSubject} the
  * head and the buttons render from, exactly as the old view did; the op itself is dispatched off-tick as the
- * {@code /eco} command does. The menu holds no new domain logic — it replays the old view's handlers verbatim
+ * {@code /eco} command does. The menu holds no new domain logic. It replays the old view's handlers verbatim
  * through the engine. Every visible string resolves from the economy catalog.
  */
 @NullMarked
@@ -99,8 +99,8 @@ public final class EconomyTargetMenu {
     }
 
     /**
-     * Register the bindings the spec names — the four action buttons, the history/back/select-currency clicks, the
-     * subject placeholders, and the multi-currency view condition — and the spec itself. The {@code eco_currency}
+     * Register the bindings the spec names. The four action buttons, the history/back/select-currency clicks, the
+     * subject placeholders, and the multi-currency view condition, and the spec itself. The {@code eco_currency}
      * placeholder and the {@code economy:multi-currency} condition are shared with the bulk screen, so they are
      * registered once here (both screens are wired against one {@code MenuBindings}).
      */
@@ -179,7 +179,7 @@ public final class EconomyTargetMenu {
 
     /**
      * Parse the typed amount against the active currency and, when valid, dispatch the op off the tick thread, then
-     * re-open the screen. A malformed amount sends the existing parse-error rejection and re-opens — no op runs.
+     * re-open the screen. A malformed amount sends the existing parse-error rejection and re-opens, no op runs.
      * Package-private so the amount branch is unit-tested without driving a live anvil, mirroring the old view.
      */
     void applyAmount(

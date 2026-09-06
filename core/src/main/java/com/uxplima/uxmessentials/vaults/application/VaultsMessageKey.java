@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The vaults context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code VAULT_OPENED} ↔ {@code vaults.opened}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in the
- * context — every message resolves through one of these.
+ * context: every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
  * locale-parity guard sees the full {@code en} key set.

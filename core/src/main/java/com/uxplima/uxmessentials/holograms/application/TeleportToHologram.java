@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * {@code /hologram teleport <name>}: send the operator to a hologram's location — the inverse of {@code
+ * {@code /hologram teleport <name>}: send the operator to a hologram's location, the inverse of {@code
  * movehere}. The hologram is resolved here and its location handed to the {@link DirectTeleporter} port, which
  * performs the region-aware async hop. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}. The operator-only permission is enforced at the command gate.

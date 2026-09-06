@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.teleport.application.port.JailGate;
  *
  * <p>This is the implementation that replaces the {@code JailGate.NEVER} placeholder teleport binds until
  * moderation lands. It lives in {@code application} (pure) and imports only the teleport <em>port</em> and
- * the moderation repository port — no adapter type — so the soft couple stays a contract, not a hard edge.
+ * the moderation repository port, no adapter type, so the soft couple stays a contract, not a hard edge.
  */
 public final class RepositoryJailGate implements JailGate {
 

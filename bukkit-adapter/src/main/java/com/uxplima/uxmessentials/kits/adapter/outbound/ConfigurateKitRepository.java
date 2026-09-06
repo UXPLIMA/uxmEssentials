@@ -35,7 +35,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * <p>Parsing each file is delegated to {@link KitCodec}; a malformed or unreadable file is logged and skipped
  * at load so one bad kit never strands the rest. A save writes the kit to a sibling temp file and then moves
  * it into place ({@link StandardCopyOption#ATOMIC_MOVE} where the filesystem supports it), so a crash mid-write
- * never leaves a half-written kit file. Writes are serialized by {@code synchronized} on this repository —
+ * never leaves a half-written kit file. Writes are serialized by {@code synchronized} on this repository
  * authoring is single-operator and rare, so the coarse lock is fine.
  *
  * <p>A pre-existing single {@code kits.conf} monolith (the previous layout) is split into per-kit files on the

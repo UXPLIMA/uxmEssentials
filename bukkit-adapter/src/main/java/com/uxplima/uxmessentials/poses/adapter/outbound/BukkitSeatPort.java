@@ -26,10 +26,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The {@link SeatPort} over a real, invisible seat entity — a small marker-free armour stand the player rides,
+ * The {@link SeatPort} over a real, invisible seat entity. A small marker-free armour stand the player rides,
  * the battle-tested GSit mechanism. Every seat is spawned non-persistent (never written to disk) and PDC-tagged
- * with a once-created {@code uxmessentials:poses_seat} key, so the two ghost-prevention paths — {@link
- * #sweepOrphans()} on enable and {@link #removeSeatsIn(Chunk)} / {@link #removeSeatsIn(World)} on unload — can find
+ * with a once-created {@code uxmessentials:poses_seat} key, so the two ghost-prevention paths, {@link
+ * #sweepOrphans()} on enable and {@link #removeSeatsIn(Chunk)} / {@link #removeSeatsIn(World)} on unload, can find
  * and reap any seat regardless of which run spawned it.
  *
  * <p>All entity work hops through the {@link Scheduler} so the seat and its rider stay on one region thread under
@@ -81,7 +81,7 @@ public final class BukkitSeatPort implements SeatPort {
         World world = plugin.getServer().getWorld(seat.world().uid());
         if (world == null) {
             live.remove(id);
-            log.warn("poses seat skipped — world {} is not loaded", seat.world().name());
+            log.warn("poses seat skipped. World {} is not loaded", seat.world().name());
             return;
         }
         Location at = BukkitRefs.toLocation(world, seat);
@@ -106,7 +106,7 @@ public final class BukkitSeatPort implements SeatPort {
         stand.setInvulnerable(true);
         stand.setSilent(true);
         // Never persisted: a crash or an ungraceful shutdown must not leave a seat behind on disk. An empty seat
-        // that unloads because no player is near is harmless — the rider always keeps their own seat loaded.
+        // that unloads because no player is near is harmless: the rider always keeps their own seat loaded.
         stand.setPersistent(false);
         stand.getPersistentDataContainer().set(seatKey, PersistentDataType.STRING, id);
     }
@@ -189,7 +189,7 @@ public final class BukkitSeatPort implements SeatPort {
         return removed[0];
     }
 
-    /** Remove every live seat now — the module-stop path, so a disable or reload leaves no seat behind. */
+    /** Remove every live seat now, the module-stop path, so a disable or reload leaves no seat behind. */
     public void removeAll() {
         for (LiveSeat entry : live.values()) {
             scheduler.onRegion(entry.position(), () -> removeIfValid(entry.entity()));

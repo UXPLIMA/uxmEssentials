@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /mutelist} into the moderation context's command surface — the companion of {@code /banlist} for
+ * Pins {@code /mutelist} into the moderation context's command surface, the companion of {@code /banlist} for
  * reviewing active mutes. This guard fails if the literal drops out of the surface or wires under a node other
  * than {@code uxmessentials.moderation.mutelist}.
  */

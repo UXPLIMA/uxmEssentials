@@ -18,7 +18,7 @@ public record ArrivalGraceSettings(long seconds, boolean resistance, boolean slo
         }
     }
 
-    /** True when the grace does anything at all — a positive window with at least one protection enabled. */
+    /** True when the grace does anything at all, a positive window with at least one protection enabled. */
     public boolean enabled() {
         return seconds > 0 && (resistance || slowFalling || blockFallDamage);
     }

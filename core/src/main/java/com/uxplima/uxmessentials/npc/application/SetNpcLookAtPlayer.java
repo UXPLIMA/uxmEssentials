@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /npc lookatplayer <name> <true|false>}: toggle whether an NPC rotates to face each nearby viewer, save
- * the new snapshot, and re-render so the change takes effect at once — turning it off snaps the fake player back
+ * the new snapshot, and re-render so the change takes effect at once. Turning it off snaps the fake player back
  * to the fixed facing it was placed with. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}.
  * The operator-only permission is enforced at the command gate; this use case owns the not-found decision and the
  * persistence.

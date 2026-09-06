@@ -44,8 +44,8 @@ import org.jspecify.annotations.Nullable;
  * selectors, and warmup / cooldown override buttons. Each mutation saves the edited warp through the shared
  * {@link EditableWarp} loader and re-opens this panel with the new subject so the operator sees the result.
  *
- * <p>The edited warp is handed in as the menu subject — its name, owner, and a display snapshot read off the
- * viewer's entity thread at open — so the title and every current-value line fill from the {@code warp_edit_*}
+ * <p>The edited warp is handed in as the menu subject, its name, owner, and a display snapshot read off the
+ * viewer's entity thread at open, so the title and every current-value line fill from the {@code warp_edit_*}
  * placeholders without the renderer touching a port. The panel holds no new domain logic: it replays the old
  * bespoke window's handlers verbatim through the engine. This is the warp category settings-panel pattern
  * (subject-carried state, the input seam, the engine sub-screens, and re-open after a mutation). The selector and
@@ -61,7 +61,7 @@ public final class WarpEditorView {
     private static final String SPEC_RESOURCE = "modules/warps/gui/warp-editor.conf";
     private static final int ROWS = 3;
 
-    /** The display item a warp shows when no icon is set — the same default the browse menu falls back to. */
+    /** The display item a warp shows when no icon is set: the same default the browse menu falls back to. */
     private static final Material DEFAULT_ICON = Material.ENDER_PEARL;
 
     private final Menus menus;
@@ -409,7 +409,7 @@ public final class WarpEditorView {
         open(ctx.player(), ctx.viewer(), target.warpName(), target.owner());
     }
 
-    /** The warp's live display item — a valid per-warp override, else the {@link #DEFAULT_ICON} fallback. */
+    /** The warp's live display item, a valid per-warp override, else the {@link #DEFAULT_ICON} fallback. */
     private static Material iconMaterial(WarpEditTarget target) {
         Optional<Material> override = target.display()
                 .iconMaterial()

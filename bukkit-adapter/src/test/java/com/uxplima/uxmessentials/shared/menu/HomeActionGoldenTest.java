@@ -72,10 +72,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * display (slot 4), the NAME_TAG rename (10), ENDER_PEARL teleport (11), BARRIER delete (13), COMPASS relocate (15),
  * ITEM_FRAME change-icon (16, the icon permission granted), GRAY_DYE private-visibility cell (19), PLAYER_HEAD invites
  * (25), and the ARROW back button (22). The window is snapshotted as {@code (slot -> material, plain name)} and
- * asserted equal, slot for slot, to the baseline the old view produced — including the subject-driven title and info
+ * asserted equal, slot for slot, to the baseline the old view produced, including the subject-driven title and info
  * label filled from the home through the home_* placeholders. Then clicks through the engine's own {@link
  * MenuListener} prove teleport, delete, visibility-toggle, and the icon/invites/back buttons drive the same effects
- * the old view did, and the rename seam renames — faithful in look and behaviour.
+ * the old view did, and the rename seam renames, faithful in look and behaviour.
  */
 class HomeActionGoldenTest {
 

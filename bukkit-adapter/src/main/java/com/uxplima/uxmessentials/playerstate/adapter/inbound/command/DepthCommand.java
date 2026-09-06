@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /depth} ({@code uxmessentials.depth.use}): tell the player how many blocks they stand above or below
- * the world's sea level. A pure read in the adapter — block Y minus {@code World#getSeaLevel()}, no use case and
+ * the world's sea level. A pure read in the adapter. Block Y minus {@code World#getSeaLevel()}, no use case and
  * no state mutation. Self-only, so there is no {@code [player]} target form; the count is always the invoking
  * player's own. The sign of the difference picks the above / at / below message.
  */
@@ -59,7 +59,7 @@ public final class DepthCommand extends PlayerstateCommandSupport implements Com
             return 0;
         }
         // Paper marks Player#getLocation() nullable (null only for an entity with no world, which a
-        // connected player never is) — assert it so NullAway is satisfied at the dereference.
+        // connected player never is): assert it so NullAway is satisfied at the dereference.
         Location location = Objects.requireNonNull(player.getLocation(), "player location");
         int delta = location.getBlockY() - player.getWorld().getSeaLevel();
         MessageKey key = delta > 0

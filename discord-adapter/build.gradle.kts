@@ -5,7 +5,7 @@ plugins {
 
 // The optional Discord bridge (docs/09-deployment.md Path C). It is its own Paper
 // plugin jar (uxmEssentials-discord) that consumes the host plugin's ports/events
-// through Bukkit's ServicesManager — there is no compile-time link to :bukkit-adapter.
+// through Bukkit's ServicesManager: there is no compile-time link to :bukkit-adapter.
 // JDA is the only backend. It is not shaded into the jar: the thin plugin jar declares
 // JDA compileOnly and UxmDiscordLoader downloads it from Maven Central at boot via the
 // paper-plugin.yml loader directive. opus-java is dropped at the loader level because the

@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.security.domain.TotpCode;
 import com.uxplima.uxmessentials.security.domain.TwoFactorSecret;
 
 /**
- * Check a single submitted value against a player's second factor during join verification — the read-only twin of
+ * Check a single submitted value against a player's second factor during join verification, the read-only twin of
  * {@link DisableTwoFactor}'s proof step, without the removal. One submission is checked against whichever factors the
  * player holds: a 6-digit TOTP code from an authenticator app (or typed on the keypad) verifies against their shared
  * secret, and a numeric PIN verifies against the stored hash. Either unlocks, so a player who enrolled both may use

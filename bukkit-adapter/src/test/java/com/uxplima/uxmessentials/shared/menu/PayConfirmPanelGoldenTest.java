@@ -68,7 +68,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The pay-confirmation golden test: the engine-rendered strip must draw the exact window the original
  * {@code PayConfirmationView} drew, and its buttons must keep the behaviour. The strip draws the confirm block
  * (GREEN_STAINED_GLASS_PANE@0-2), the recipient head (PLAYER_HEAD@3), the value (PAPER@4), and the cancel block
- * (RED_STAINED_GLASS_PANE@5-8) — snapshotted as {@code (slot -> material, plain name)} and asserted equal slot for
+ * (RED_STAINED_GLASS_PANE@5-8), snapshotted as {@code (slot -> material, plain name)} and asserted equal slot for
  * slot to the baseline the old view produced (frozen here so the old class could be deleted). Clicking the confirm
  * block fires through the engine's own {@link MenuListener} and runs the payer's staged transfer through the same
  * {@link Pay} use case {@code /payconfirm} uses; clicking the cancel block aborts without consuming the staged pay.

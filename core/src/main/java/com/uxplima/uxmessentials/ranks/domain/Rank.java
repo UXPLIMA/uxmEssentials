@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * One rung of the rank ladder: its identity, the {@code order} that places it relative to its neighbours (lower
  * ranks up first), the operator's display name, the rankup {@code cost}, and the raw requirement and action
- * strings. The requirements and actions stay opaque {@link String}s here — Phase 1 only needs to carry them
+ * strings. The requirements and actions stay opaque {@link String}s here. Phase 1 only needs to carry them
  * through from {@code ranks.conf}; the requirement evaluator and the action executor that parse them land in the
  * rankup phase, so the domain does not interpret their grammar yet.
  *

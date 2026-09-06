@@ -34,6 +34,6 @@ final class ScoreboardCommandSurface {
         return new ScoreboardCommand(literal, description);
     }
 
-    /** The kernel-side description of the scoreboard command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of the scoreboard command, literal and help text, no Brigadier type. */
     private record ScoreboardCommand(String literal, String description) implements BrigadierCommand {}
 }

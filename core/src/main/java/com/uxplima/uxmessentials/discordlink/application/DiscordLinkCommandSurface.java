@@ -36,7 +36,7 @@ final class DiscordLinkCommandSurface {
         return new CommandSpec(literal, PERMISSION, factory);
     }
 
-    /** The kernel-side description of one discord-link command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one discord-link command, literal and help text, no Brigadier type. */
     private record DiscordLinkVerb(String literal, String description) implements BrigadierCommand {
 
         static DiscordLinkVerb of(String literal, String description) {

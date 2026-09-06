@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-player visibility subcommands under {@code /hologram}: {@code visibility} (who
- * may see the hologram — {@code ALL} for everyone, {@code PERMISSION} gated by an operator-chosen node, or
+ * may see the hologram. {@code ALL} for everyone, {@code PERMISSION} gated by an operator-chosen node, or
  * {@code MANUAL} hidden until shown to a named player), {@code visibilitydistance} (the visibility radius in
  * blocks, 0 = unlimited), and the manual viewer-set commands {@code show <name> <player>} and {@code hide <name>
  * <player>}. Each maps its parsed argument to one {@link Visibility} transition or viewer mutation on the shared
@@ -38,7 +38,7 @@ import org.jspecify.annotations.NullMarked;
  * inside a use case.
  *
  * <p>The permission node a {@code PERMISSION} hologram requires is the operator's own choice, so it is a dynamic
- * node — not a fixed plugin-declared one. The {@code /hologram} command as a whole stays gated by
+ * node, not a fixed plugin-declared one. The {@code /hologram} command as a whole stays gated by
  * {@code uxmessentials.hologram.use}; this only sets which node a viewer must hold to see one hologram. {@code
  * show}/{@code hide} resolve their target against the online roster (v1 is online-only; an offline name is
  * rejected with a not-found message) and tab-complete the online players.

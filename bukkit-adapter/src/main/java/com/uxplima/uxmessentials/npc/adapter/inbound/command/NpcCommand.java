@@ -37,10 +37,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /npc <create|delete|list|movehere|command|lookatplayer|skin|type|equip|glow|pose|scale|action|data>}:
- * the single operator command for NPCs. The root keeps the lifecycle subcommands — {@code create} (reads the
+ * the single operator command for NPCs. The root keeps the lifecycle subcommands. {@code create} (reads the
  * operator's position and defaults the skin to their own Bukkit profile, or skinless when unavailable),
  * {@code delete}, {@code list}, {@code movehere} (reads the operator's position), {@code command} (the bound
- * click command), and {@code lookatplayer} (whether the NPC turns to face nearby players) — and attaches the skin
+ * click command), and {@code lookatplayer} (whether the NPC turns to face nearby players), and attaches the skin
  * (name/player/url/texture), appearance (type/equip/glow/pose/scale), data (set/clear/list) and action
  * (add/list/remove/clear) sub-handlers under the one {@code /npc} literal, each contributing argument nodes
  * rather than a new literal. The base {@code uxmessentials.npc.admin} node guards the whole command, and each verb

@@ -9,7 +9,7 @@ import java.util.function.Predicate;
  * The pure fast-leaf-decay algorithm: given the coordinate of a just-broken log, decide which nearby leaves have lost
  * their support and should decay now rather than waiting for vanilla's random-tick sweep. It walks the cube of
  * half-width {@code radius} around the origin and returns every leaf coordinate that the caller classifies as
- * <em>decayable</em> (a non-persistent leaf) and that has no log within {@code supportDistance} — the block distance
+ * <em>decayable</em> (a non-persistent leaf) and that has no log within {@code supportDistance}, the block distance
  * within which a standing trunk still holds its leaves, so felling one log of a tree whose trunk still stands does not
  * strip the leaves that trunk supports.
  *

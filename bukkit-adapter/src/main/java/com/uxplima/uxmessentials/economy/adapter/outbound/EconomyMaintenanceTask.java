@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  * stale transaction telemetry and purges the wallets of long-inactive players through {@link EconomyMaintenance},
  * all off the tick thread. Two safety properties make the destructive half safe: it never touches an owner in
  * {@link EconomyMaintenance#protectedOwners()} (a loan/score/bank tie), and it only ever purges an owner whose
- * last login is <em>known</em> and before the cutoff — an owner with no recorded last-played is left alone. When
+ * last login is <em>known</em> and before the cutoff: an owner with no recorded last-played is left alone. When
  * {@code dry-run} is set (the default) it computes and logs what it <em>would</em> remove and deletes nothing, so
  * an operator can watch a server or two before arming the real purge.
  */
@@ -101,7 +101,7 @@ public final class EconomyMaintenanceTask {
 
     /**
      * Run one maintenance pass and report what was (or, under {@code dryRun}, would be) removed. Safe to call
-     * directly — this is the seam {@code /eco purge} previews through. Runs queries inline; callers schedule it
+     * directly: this is the seam {@code /eco purge} previews through. Runs queries inline; callers schedule it
      * off-tick.
      */
     public Report runOnce(boolean dryRunPass) {

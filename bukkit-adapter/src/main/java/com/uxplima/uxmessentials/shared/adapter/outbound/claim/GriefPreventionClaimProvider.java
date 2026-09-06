@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>GriefPrevention is a {@code compileOnly} soft-depend, so {@code me.ryanhamshire.GriefPrevention.*} is
  * absent from the runtime and test classpaths. Every typed GP reference lives inside a method behind
- * {@link #active()}, which only consults the plugin manager — constructing this provider and asking whether
+ * {@link #active()}, which only consults the plugin manager. Constructing this provider and asking whether
  * it is active never loads a GP class. The {@code GriefPrevention.instance.dataStore} is read lazily inside
  * {@link #claimAt}, again past the present guard, and any {@link Throwable} degrades to empty/inactive.
  *

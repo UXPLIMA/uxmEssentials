@@ -43,7 +43,7 @@ public final class EconomyNotifier {
         notifier.send(viewer, key);
     }
 
-    /** Render {@code money} with its symbol in the configured {@link AmountFormat} — the {@code {amount}} value. */
+    /** Render {@code money} with its symbol in the configured {@link AmountFormat}, the {@code {amount}} value. */
     public String amount(Money money) {
         return MoneyFormat.withSymbol(money, amountFormat);
     }

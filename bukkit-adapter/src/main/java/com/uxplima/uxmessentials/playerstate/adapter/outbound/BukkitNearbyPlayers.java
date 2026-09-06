@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * same world, ordered nearest-first.
  *
  * <p>Scanning every other player's {@link Player#getLocation()} from the viewer's region thread is a torn read on
- * Folia — each player's position is owned by that player's own region. The whole scan therefore runs on the
+ * Folia: each player's position is owned by that player's own region. The whole scan therefore runs on the
  * global region thread (where the entire roster is consistently readable): it reads the viewer's live location,
  * snapshots every candidate's position, filters by radius, sorts nearest-first, and hands the result to the
  * supplied callback. The flow is push-shaped, not request-reply: the viewer's region thread schedules the scan

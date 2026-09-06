@@ -128,7 +128,7 @@ class PendingTeleportTest {
 
         Outcome second = cancelled.onMovement(Position.of(WORLD, 100.0, 64.0, 100.0));
 
-        assertThat(second.didCancel()).isFalse(); // already cancelled — no second cancel fires
+        assertThat(second.didCancel()).isFalse(); // already cancelled. No second cancel fires
         assertThat(second.state().isCancelled()).isTrue();
     }
 }

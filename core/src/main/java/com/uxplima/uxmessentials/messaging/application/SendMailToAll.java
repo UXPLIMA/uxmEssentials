@@ -13,10 +13,10 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /mail sendall <text>}: broadcast one piece of mail to a set of recipients. Each recipient gets their
  * own durable, DB-backed mail row (the hard messaging invariant) from {@code sender}, so an offline player
- * still reads it on next join — the same {@link MailRepository#append} path {@link SendMail} uses, fanned out.
+ * still reads it on next join, the same {@link MailRepository#append} path {@link SendMail} uses, fanned out.
  *
- * <p>The recipient set is supplied by the command adapter (its scope — online players, all known mailbox
- * owners — is the adapter's decision and is documented there). This use case does not gate on ignore or mute:
+ * <p>The recipient set is supplied by the command adapter (its scope. Online players, all known mailbox
+ * owners: is the adapter's decision and is documented there). This use case does not gate on ignore or mute:
  * a broadcast is a staff/operator action behind its own permission node, not a normal player message, so the
  * per-recipient ignore filter that {@link SendMail} applies is intentionally absent here. The {@code sender}
  * is not auto-excluded from {@code recipients}; the caller decides whether the broadcaster receives a copy.

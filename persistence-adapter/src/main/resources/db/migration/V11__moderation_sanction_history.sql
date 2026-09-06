@@ -1,4 +1,4 @@
--- Append-only sanction history — one row per ban/unban/mute/unmute applied to a
+-- Append-only sanction history. One row per ban/unban/mute/unmute applied to a
 -- target, so /banhistory and /mutehistory render a player's full disciplinary
 -- record (not just the sanctions still in effect). The active-state tables (V5
 -- moderation_mutes/moderation_tempbans/moderation_ip_bans) hold only the current
@@ -18,7 +18,7 @@
 -- always present) mirroring the V5 *_by columns; `ip` the banned address for an
 -- IP-scoped row (null for a UUID-scoped one); `expires_at` the wall-clock expiry of
 -- a timed sanction in epoch millis (null for a permanent sanction or a lift); `ts`
--- the apply instant in epoch millis. No opaque JSON — every fact a history line
+-- the apply instant in epoch millis. No opaque JSON, every fact a history line
 -- needs is a first-class column. jOOQ's DDLDatabase parses this file alongside
 -- V1-V10 at build time, so the generated ModerationSanctionHistory table and record
 -- appear.

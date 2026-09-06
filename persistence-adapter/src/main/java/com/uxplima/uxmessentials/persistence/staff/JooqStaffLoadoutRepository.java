@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.staff.domain.SavedLoadout;
 import org.jooq.DSLContext;
 
 /**
- * The jOOQ-backed {@link StaffLoadoutRepository} over the generated {@code STAFF_LOADOUT} table — one row per
+ * The jOOQ-backed {@link StaffLoadoutRepository} over the generated {@code STAFF_LOADOUT} table, one row per
  * {@code (player, server_id)}, since the captured pre-mode loadout is inherently per-server state (the inventory
  * to restore is the one the player had on THIS backend). The repository is bound to a single {@code serverId} at
  * construction (this backend's {@code network.server-id}) and scopes every statement to it, so two backends

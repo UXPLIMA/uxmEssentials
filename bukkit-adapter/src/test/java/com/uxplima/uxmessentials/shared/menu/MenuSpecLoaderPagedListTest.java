@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpecLo
 import org.junit.jupiter.api.Test;
 
 /**
- * The {@code list { }} block gained two optional keys — {@code page-size} and {@code sorts} — that a paged source
+ * The {@code list { }} block gained two optional keys, {@code page-size} and {@code sorts}, that a paged source
  * reads to page and order its corpus at the store. This pins that the loader reads both when present, defaults them
  * to the historic "derive size from slots, no explicit sort" when absent, and rejects a negative page size loudly,
  * naming the offending item so an operator can find it.

@@ -9,8 +9,8 @@ import java.util.Objects;
  * Bukkit identity and is unit-testable on plain strings; the adapter passes {@code Material.name()} and never a live
  * {@code Material}.
  *
- * <p>{@link #NONE} covers everything that is not one of the six vanilla tool families — a block, a sword-less weapon,
- * an empty hand — so a hotbar slot that classifies to {@code NONE} is simply not a candidate for auto-selection.
+ * <p>{@link #NONE} covers everything that is not one of the six vanilla tool families. A block, a sword-less weapon,
+ * an empty hand, so a hotbar slot that classifies to {@code NONE} is simply not a candidate for auto-selection.
  */
 public enum ToolType {
     PICKAXE,

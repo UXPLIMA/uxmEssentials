@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * points. PlayerPoints is single-currency, so there is no sub-currency name and the id is simply {@code playerpoints}.
  *
  * <p>Points are whole numbers, so an amount is rounded to the nearest point at the backend boundary before it
- * crosses into the API. No {@code org.black_ixx} type is named here — every reference is a string class-name through
+ * crosses into the API. No {@code org.black_ixx} type is named here. Every reference is a string class-name through
  * reflection, so the absent path loads nothing.
  */
 public final class PlayerPointsCurrencyBackend extends ReflectiveCurrencyBackend {

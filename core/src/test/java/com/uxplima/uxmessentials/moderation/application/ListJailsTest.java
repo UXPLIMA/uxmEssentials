@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * {@code /jails}: the read-only listing of the named jails an operator configured. Mirrors the
- * {@link ReviewWarns} shape — a header with the count then one entry per name when jails exist, an empty
+ * {@link ReviewWarns} shape, a header with the count then one entry per name when jails exist, an empty
  * notice when none are configured. The directory hands names back sorted, so the entries arrive sorted.
  */
 class ListJailsTest {

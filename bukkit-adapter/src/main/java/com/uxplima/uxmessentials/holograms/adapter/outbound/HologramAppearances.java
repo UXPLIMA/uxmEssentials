@@ -59,8 +59,8 @@ final class HologramAppearances {
     }
 
     /**
-     * Apply the {@link Display}-shared fields of {@code appearance} — billboard, scale, translation, view range,
-     * brightness and the drop-shadow — onto an item or block {@code builder}. The text-only fields (background,
+     * Apply the {@link Display}-shared fields of {@code appearance}, billboard, scale, translation, view range,
+     * brightness and the drop-shadow, onto an item or block {@code builder}. The text-only fields (background,
      * line width, text shadow, see-through, alignment) have no meaning for an item or block display, so they are
      * deliberately left off this path.
      */

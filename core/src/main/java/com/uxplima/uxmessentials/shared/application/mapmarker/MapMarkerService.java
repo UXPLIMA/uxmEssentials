@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.warps.domain.event.WarpDeleted;
 /**
  * The map-markers integration's pure dispatch logic: it keeps a map plugin's marker layer in step with the
  * server's warps, spawns, and (opt-in) homes. {@link #refreshAll()} re-reads every enabled source and
- * re-publishes its markers — the on-enable and on-reload path — while {@link #onEvent(DomainEvent)} reacts to
+ * re-publishes its markers, the on-enable and on-reload path, while {@link #onEvent(DomainEvent)} reacts to
  * a single warp/home create or delete so an individual marker is added or removed without re-rendering the
  * whole layer.
  *

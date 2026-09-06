@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * side data:
  *
  * <ul>
- *   <li><b>Access.</b> Olzie has no single access flag; the mapper resolves the axis in order — a non-blank
+ *   <li><b>Access.</b> Olzie has no single access flag; the mapper resolves the axis in order, a non-blank
  *       {@code password} means {@link WarpAccess#PASSWORD} (the writer hashes the plaintext, which never leaves this
  *       import), else a truthy {@code whitelist_enabled} means {@link WarpAccess#WHITELIST}, else a truthy
  *       {@code locked} means {@link WarpAccess#PRIVATE}, else {@link WarpAccess#PUBLIC}. The password presence wins so
@@ -35,8 +35,8 @@ import org.jspecify.annotations.Nullable;
  *       escrowing them, so there are no accrued earnings to import.
  * </ul>
  *
- * <p>A warp whose owner uuid does not parse, or whose world the live server does not know, is dropped — the mapper
- * returns {@link Optional#empty()} and the plan counts it as skipped — so a migrated warp always has a resolvable owner
+ * <p>A warp whose owner uuid does not parse, or whose world the live server does not know, is dropped, the mapper
+ * returns {@link Optional#empty()} and the plan counts it as skipped, so a migrated warp always has a resolvable owner
  * and destination and this mapper never touches a Bukkit world.
  */
 @NullMarked
@@ -95,7 +95,7 @@ public final class OlzieWarpMapper {
 
     /**
      * Resolve the access axis in priority order: a password gate wins, then the whitelist, then the private lock,
-     * then public. The order matters — a warp that is both locked and password-gated is password-gated, since the
+     * then public. The order matters. A warp that is both locked and password-gated is password-gated, since the
      * password is the more specific, still-enterable gate.
      */
     private static WarpAccess access(OlzieWarpRow row, Optional<String> password) {
@@ -148,7 +148,7 @@ public final class OlzieWarpMapper {
     }
 
     /**
-     * The resolved side-table data for one warp — Olzie's full social state, gathered and keyed to uuids by the plan
+     * The resolved side-table data for one warp. Olzie's full social state, gathered and keyed to uuids by the plan
      * before mapping.
      *
      * @param whitelist the whitelisted players
@@ -174,7 +174,7 @@ public final class OlzieWarpMapper {
             ratings = List.copyOf(Objects.requireNonNull(ratings, "ratings"));
         }
 
-        /** An empty sidecar — a warp with no whitelist, bans, favourites, managers or ratings. */
+        /** An empty sidecar: a warp with no whitelist, bans, favourites, managers or ratings. */
         public static Sidecar empty() {
             return new Sidecar(List.of(), List.of(), List.of(), List.of(), List.of(), 0);
         }

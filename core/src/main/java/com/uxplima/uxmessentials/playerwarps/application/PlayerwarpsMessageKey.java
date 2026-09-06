@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The player-warps context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key
  * in {@code messages_<lang>.conf} ({@code PWARP_SET} ↔ {@code pwarp.set}); the constant is the compile-time
- * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context —
+ * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context
  * every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
@@ -62,17 +62,17 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_RATING_INVALID("pwarp.rating-invalid"),
     PWARP_CANNOT_RATE_OWN("pwarp.cannot-rate-own"),
 
-    // rating rewards — the reward a rater earns for rating a warp, and the reward its owner earns per unique rater
+    // rating rewards. The reward a rater earns for rating a warp, and the reward its owner earns per unique rater
     PWARP_RATE_REWARDED("pwarp.rate-rewarded"),
     PWARP_RATE_REWARD_OWNER("pwarp.rate-reward-owner"),
 
-    // favouriting — any-viewer star toggle kept consistent with favourite_count
+    // favouriting, any-viewer star toggle kept consistent with favourite_count
     PWARP_FAVOURITED("pwarp.favourited"),
     PWARP_UNFAVOURITED("pwarp.unfavourited"),
     PWARP_ALREADY_FAVOURITED("pwarp.already-favourited"),
     PWARP_NOT_FAVOURITED("pwarp.not-favourited"),
 
-    // management edits — role-gated single-warp verbs
+    // management edits: role-gated single-warp verbs
     PWARP_NO_PERMISSION("pwarp.no-permission"),
     PWARP_CURRENCY_LOCKED("pwarp.currency-locked"),
     PWARP_DISPLAY_NAME_SET("pwarp.display-name-set"),
@@ -100,24 +100,24 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_CANNOT_TARGET_OWNER("pwarp.cannot-target-owner"),
     PWARP_RESERVED_NAME("pwarp.reserved-name"),
 
-    // sponsorship — paid, time-limited pinned browse placement bought by the owner
+    // sponsorship. Paid, time-limited pinned browse placement bought by the owner
     PWARP_SPONSORED("pwarp.sponsored"),
     PWARP_SPONSORED_LOCKED("pwarp.sponsored-locked"),
     PWARP_SPONSOR_COOLDOWN("pwarp.sponsor-cooldown"),
     PWARP_SPONSOR_LIMIT("pwarp.sponsor-limit"),
     PWARP_SPONSOR_FULL("pwarp.sponsor-full"),
 
-    // rent lifecycle — the offline reminder mail and the system sender it is left under
+    // rent lifecycle, the offline reminder mail and the system sender it is left under
     PWARP_RENT_REMINDER("pwarp.rent.reminder"),
     PWARP_RENT_MAIL_SENDER("pwarp.rent.mail-sender"),
 
-    // cross-server teleport — routing a warp that lives on another backend of the network
+    // cross-server teleport. Routing a warp that lives on another backend of the network
     PWARP_CROSS_SERVER_SENDING("pwarp.cross-server.sending"),
     PWARP_CROSS_SERVER_UNAVAILABLE("pwarp.cross-server.unavailable"),
     PWARP_CROSS_SERVER_ARRIVED("pwarp.cross-server.arrived"),
     PWARP_CROSS_SERVER_FAILED("pwarp.cross-server.failed"),
 
-    // admin group — operator verbs that act on any warp by its surrogate id, gated by the admin node
+    // admin group. Operator verbs that act on any warp by its surrogate id, gated by the admin node
     PWARP_ADMIN_RESTORED("pwarp.admin.restored"),
     PWARP_ADMIN_PURGE_CONFIRM("pwarp.admin.purge-confirm"),
     PWARP_ADMIN_PURGED("pwarp.admin.purged"),
@@ -125,7 +125,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_ADMIN_NOT_FOUND("pwarp.admin.not-found"),
     PWARP_ADMIN_RELOAD_HINT("pwarp.admin.reload-hint"),
 
-    // management GUI — list
+    // management GUI, list
     PWARP_GUI_LIST_TITLE("pwarp.gui.list.title"),
     PWARP_GUI_LIST_ENTRY_NAME("pwarp.gui.list.entry-name"),
     PWARP_GUI_LIST_ENTRY_LORE("pwarp.gui.list.entry-lore"),
@@ -134,7 +134,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_LIST_CREATE("pwarp.gui.list.create"),
     PWARP_GUI_LIST_CREATE_PROMPT("pwarp.gui.list.create-prompt"),
 
-    // browse menu — the paged public browse (opened by bare /pwarp), one card per public warp read a page at a time
+    // browse menu. The paged public browse (opened by bare /pwarp), one card per public warp read a page at a time
     PWARP_GUI_BROWSE_TITLE("pwarp.gui.browse.title"),
     PWARP_GUI_BROWSE_ENTRY_NAME("pwarp.gui.browse.entry-name"),
     PWARP_GUI_BROWSE_LORE_OWNER("pwarp.gui.browse.lore-owner"),
@@ -166,7 +166,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_BROWSE_EMPTY("pwarp.gui.browse.empty"),
     PWARP_GUI_BROWSE_EMPTY_LORE("pwarp.gui.browse.empty-lore"),
 
-    // per-warp detail panel (pwarp-view) — the browse tile opens this; teleport / favourite / rate / info
+    // per-warp detail panel (pwarp-view). The browse tile opens this; teleport / favourite / rate / info
     PWARP_GUI_VIEW_TITLE("pwarp.gui.view.title"),
     PWARP_GUI_VIEW_ENTRY_NAME("pwarp.gui.view.entry-name"),
     PWARP_GUI_VIEW_LORE_OWNER("pwarp.gui.view.lore-owner"),
@@ -194,7 +194,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_VIEW_MANAGE_LORE("pwarp.gui.view.manage-lore"),
     PWARP_GUI_VIEW_BACK_LORE("pwarp.gui.view.back-lore"),
 
-    // five-star rating menu (pwarp-rate) — reached from the detail panel's rate button
+    // five-star rating menu (pwarp-rate). Reached from the detail panel's rate button
     PWARP_GUI_RATE_TITLE("pwarp.gui.rate.title"),
     PWARP_GUI_RATE_STAR_1("pwarp.gui.rate.star-1"),
     PWARP_GUI_RATE_STAR_2("pwarp.gui.rate.star-2"),
@@ -249,7 +249,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_MANAGE_WHITELIST("pwarp.gui.manage.whitelist"),
     PWARP_GUI_MANAGE_BANS("pwarp.gui.manage.bans"),
 
-    // landing — the pwarp-categories menu bare /pwarp opens (quick browse entries + the defined categories)
+    // landing. The pwarp-categories menu bare /pwarp opens (quick browse entries + the defined categories)
     PWARP_GUI_CATEGORIES_TITLE("pwarp.gui.categories.title"),
     PWARP_GUI_CATEGORIES_BROWSE_ALL("pwarp.gui.categories.browse-all"),
     PWARP_GUI_CATEGORIES_MINE("pwarp.gui.categories.mine"),
@@ -286,7 +286,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_ICON_NEXT("pwarp.gui.icon.next"),
     PWARP_GUI_ICON_BACK("pwarp.gui.icon.back"),
 
-    // people sub-menus — members (co-owners / managers)
+    // people sub-menus: members (co-owners / managers)
     PWARP_GUI_MEMBERS_TITLE("pwarp.gui.members.title"),
     PWARP_GUI_MEMBERS_ENTRY_NAME("pwarp.gui.members.entry-name"),
     PWARP_GUI_MEMBERS_ENTRY_LORE("pwarp.gui.members.entry-lore"),
@@ -297,7 +297,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_MEMBERS_NEXT("pwarp.gui.members.next"),
     PWARP_GUI_MEMBERS_BACK("pwarp.gui.members.back"),
 
-    // people sub-menus — whitelist
+    // people sub-menus, whitelist
     PWARP_GUI_WHITELIST_TITLE("pwarp.gui.whitelist.title"),
     PWARP_GUI_WHITELIST_ENTRY_NAME("pwarp.gui.whitelist.entry-name"),
     PWARP_GUI_WHITELIST_ENTRY_LORE("pwarp.gui.whitelist.entry-lore"),
@@ -307,7 +307,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_WHITELIST_NEXT("pwarp.gui.whitelist.next"),
     PWARP_GUI_WHITELIST_BACK("pwarp.gui.whitelist.back"),
 
-    // people sub-menus — bans
+    // people sub-menus, bans
     PWARP_GUI_BANS_TITLE("pwarp.gui.bans.title"),
     PWARP_GUI_BANS_ENTRY_NAME("pwarp.gui.bans.entry-name"),
     PWARP_GUI_BANS_ENTRY_LORE("pwarp.gui.bans.entry-lore"),
@@ -319,14 +319,14 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_BANS_NEXT("pwarp.gui.bans.next"),
     PWARP_GUI_BANS_BACK("pwarp.gui.bans.back"),
 
-    // management GUI — editor frame
+    // management GUI, editor frame
     PWARP_GUI_EDITOR_TITLE("pwarp.gui.editor.title"),
     PWARP_GUI_EDITOR_VALUE_LORE("pwarp.gui.editor.value-lore"),
     PWARP_GUI_EDITOR_BACK("pwarp.gui.editor.back"),
     PWARP_GUI_EDITOR_DELETE("pwarp.gui.editor.delete"),
     PWARP_GUI_EDITOR_DELETE_CONFIRM("pwarp.gui.editor.delete-confirm"),
 
-    // management GUI — properties
+    // management GUI, properties
     PWARP_GUI_PROP_NAME("pwarp.gui.prop.name"),
     PWARP_GUI_PROP_NAME_PROMPT("pwarp.gui.prop.name-prompt"),
     PWARP_GUI_PROP_MOVE("pwarp.gui.prop.move"),
@@ -347,7 +347,7 @@ public enum PlayerwarpsMessageKey implements MessageKey {
     PWARP_GUI_PROP_WARMUP("pwarp.gui.prop.warmup"),
     PWARP_GUI_PROP_COOLDOWN("pwarp.gui.prop.cooldown"),
 
-    // management GUI — shared value words and selectors
+    // management GUI. Shared value words and selectors
     PWARP_GUI_VALUE_NONE("pwarp.gui.value.none"),
     PWARP_GUI_VALUE_PUBLIC("pwarp.gui.value.public"),
     PWARP_GUI_VALUE_PRIVATE("pwarp.gui.value.private"),

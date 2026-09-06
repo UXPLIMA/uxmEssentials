@@ -36,7 +36,7 @@ public final class ClaimPolicy {
      * <ul>
      *   <li>Provider inactive → {@code ALLOWED}.
      *   <li>Block inside a claim the player is banned from → {@code DENIED_ACCESS}, ahead of every
-     *       trust or ownership test — a ban overrides membership.
+     *       trust or ownership test: a ban overrides membership.
      *   <li>Block inside a claim whose membership the player satisfies → {@code ALLOWED}. Membership
      *       is ownership alone when {@code ownerOnly} is set, otherwise owner-or-member.
      *   <li>Block inside a foreign claim and {@code blockForeignClaims} is on → {@code DENIED_FOREIGN}.
@@ -82,7 +82,7 @@ public final class ClaimPolicy {
         if (permitted(lookup, player)) {
             return ClaimDecision.ALLOWED;
         }
-        // Foreign claim exists — either block or allow based on config.
+        // Foreign claim exists: either block or allow based on config.
         return settings.blockForeignClaims() ? ClaimDecision.DENIED_FOREIGN : ClaimDecision.ALLOWED;
     }
 
@@ -106,7 +106,7 @@ public final class ClaimPolicy {
 
         Optional<ClaimLookup> claimOpt = provider.claimAt(world, blockX, blockZ);
         if (claimOpt.isEmpty()) {
-            // No claim at destination — claim may have been removed; allow teleport.
+            // No claim at destination: claim may have been removed; allow teleport.
             return ClaimDecision.ALLOWED;
         }
 
@@ -118,7 +118,7 @@ public final class ClaimPolicy {
     }
 
     /**
-     * Whether ({@code blockX}, {@code blockZ}) in {@code world} falls inside <em>any</em> claim — the
+     * Whether ({@code blockX}, {@code blockZ}) in {@code world} falls inside <em>any</em> claim, the
      * player-agnostic presence check, independent of owner, trust, and every placement knob. An inactive
      * provider (no claim plugin) reports {@code false}. This is what {@link ClaimService#isProtected} answers
      * for random-teleport, whose shared pool has no owning player to run {@link #canPlace}/{@link #canAccess}

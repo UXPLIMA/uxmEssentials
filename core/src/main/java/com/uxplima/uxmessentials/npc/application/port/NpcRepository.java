@@ -8,8 +8,8 @@ import com.uxplima.uxmessentials.npc.domain.NpcName;
 
 /**
  * Outbound port for durable, server-wide NPC storage. Every NPC fact (name, world, coordinates, look
- * direction, skin texture/signature, click command, creation time) is a first-class column — there is no
- * opaque JSON blob (the architecture persistence invariant) — so an {@link Npc} loaded from its row is rebuilt
+ * direction, skin texture/signature, click command, creation time) is a first-class column: there is no
+ * opaque JSON blob (the architecture persistence invariant), so an {@link Npc} loaded from its row is rebuilt
  * from queryable fields, and the list query reads them in stored creation order.
  *
  * <p>NPCs are keyed by their {@link NpcName} alone, so a {@code save} upserts on the single-column {@code name}

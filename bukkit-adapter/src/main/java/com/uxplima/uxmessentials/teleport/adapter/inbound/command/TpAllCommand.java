@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /tpall}: pull every other online player to the invoking staff member at once. Each hop runs
- * through the async {@code TeleportExecutor} with no warmup — a staff verb. The destination is captured
+ * through the async {@code TeleportExecutor} with no warmup, a staff verb. The destination is captured
  * once from the actor's location so a hop in progress does not chase a moving target.
  */
 @NullMarked

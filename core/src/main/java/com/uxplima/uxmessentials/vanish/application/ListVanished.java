@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.vanish.domain.VanishState;
 
 /**
  * {@code /vanish list}: the currently-vanished players a caller is permitted to see. The list is scoped to the
- * caller's see level and the pure {@code VanishState#canSee} rule — a vanished player hidden <em>above</em> the
+ * caller's see level and the pure {@code VanishState#canSee} rule. A vanished player hidden <em>above</em> the
  * caller's see level does not appear, exactly as they are invisible in the world. The chosen semantics: a staffer
  * only ever learns about the vanished players they could already see, so {@code /vanish list} never leaks the
  * presence of a higher-level admin to a lower-level moderator. A vanished caller sees themselves in the list

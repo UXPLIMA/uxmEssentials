@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
  * The externalised presentation of a browse menu, loaded once from {@code modules/<m>/gui/<name>.conf}: the
  * row count, the per-icon fallback {@link Material} (the icon for an itemless menu or an empty kit), the nav
  * button {@link Material}, the two reserved navigation slots, and the optional content-slot list. Titles and
- * lore stay in code as {@code MessageKey} lookups — this record holds layout integers and materials only,
- * never localised strings — so a translated catalog and an operator-edited layout never collide.
+ * lore stay in code as {@code MessageKey} lookups. This record holds layout integers and materials only,
+ * never localised strings, so a translated catalog and an operator-edited layout never collide.
  *
  * <p>The record is immutable and validated at construction: rows are 1..6 (the chest-inventory bound uxmLib
  * enforces too), the nav slots are non-negative, and both materials are non-null. A view reads these values

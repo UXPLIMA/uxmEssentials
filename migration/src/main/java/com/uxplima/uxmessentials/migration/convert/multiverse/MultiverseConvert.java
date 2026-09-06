@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The Multiverse-Core {@link Convert} — the world-registry importer (docs/12-migration). Multiverse keeps its whole
+ * The Multiverse-Core {@link Convert}, the world-registry importer (docs/12-migration). Multiverse keeps its whole
  * registry in one {@code plugins/Multiverse-Core/worlds.yml}, so, like the file-backed hologram and Athelion sources,
  * it carries its own fixed data-file location instead of the shared {@code import.source-path}.
  *
@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * migration order matter; reading the file also means a dry run works on a server that never had Multiverse
  * installed, against a copied-in worlds.yml.
  *
- * <p>The id is {@code multiverse} (a source id is a single lowercase word — a hyphen is outside its charset), so
+ * <p>The id is {@code multiverse} (a source id is a single lowercase word. A hyphen is outside its charset), so
  * {@code /uxmess import multiverse} resolves it. Stateless: one instance is registered for the lifetime of an
  * enabled module.
  */

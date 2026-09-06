@@ -7,11 +7,11 @@ import java.util.Objects;
 /**
  * The restock-timer rule: given the instant a villager last restocked its trades and the current instant,
  * decide whether the configured {@code interval} has elapsed and a restock is due. This is the whole of the
- * restock decision — the villager, its {@code MerchantRecipe} uses, and the persistent last-restock stamp are
+ * restock decision, the villager, its {@code MerchantRecipe} uses, and the persistent last-restock stamp are
  * adapter concerns; the domain only owns the elapsed-time comparison so it can be unit-tested without Bukkit.
  *
  * <p>A villager that has never restocked is modelled by a last-restock at {@link Instant#EPOCH} (the adapter's
- * default when no stamp is present), which is always due — so a freshly-seen villager restocks on the first
+ * default when no stamp is present), which is always due, so a freshly-seen villager restocks on the first
  * sweep and then only once per interval thereafter. The comparison is inclusive: a restock exactly one interval
  * old is due, matching the "older than the interval" wording.
  *
@@ -32,7 +32,7 @@ public record RestockPolicy(Duration interval) {
     }
 
     /**
-     * Whether a villager last restocked at {@code lastRestock} is due to restock again at {@code now} — true once
+     * Whether a villager last restocked at {@code lastRestock} is due to restock again at {@code now}, true once
      * at least {@link #interval} has elapsed (inclusive). A {@code lastRestock} at or before {@code now} minus the
      * interval is due; a more recent one is not.
      */

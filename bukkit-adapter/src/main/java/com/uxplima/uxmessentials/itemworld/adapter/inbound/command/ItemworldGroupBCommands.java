@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Builds the inbound Brigadier surface for itemworld group B — powertool, mob/entity, time/weather (with the
- * {@code /sun /rain /thunder /day /night} aliases), and admin-fun (docs/10-feature-modules.md §15.10) — as
+ * Builds the inbound Brigadier surface for itemworld group B, powertool, mob/entity, time/weather (with the
+ * {@code /sun /rain /thunder /day /night} aliases), and admin-fun (docs/10-feature-modules.md §15.10), as
  * {@link CommandRegistration}s over the constructed {@link ItemworldServices} and the group's policies/stores.
  * Collected in one greppable table that mirrors {@link ItemworldGroupACommands}, so the literal/permission
  * pairing matches the permissions reference and the kernel's {@code ItemworldCommandSurface}; the plugin's
@@ -26,8 +26,8 @@ import org.jspecify.annotations.Nullable;
  * <p>Every command here gates on its sub-feature group plus its per-command disable through
  * {@link ItemworldCommandSupport#enabled} before any mutation, validates its inputs at the boundary, and (for
  * the abusable mob/entity-purge family and the admin-fun verbs) audit-logs through
- * {@link ItemworldServices#audit()}. The stateful corners — powertool bindings (item PDC) and the powertool /
- * unlimited per-player toggles — are transient runtime state the wiring owns and the module's {@code stop()}
+ * {@link ItemworldServices#audit()}. The stateful corners. Powertool bindings (item PDC) and the powertool /
+ * unlimited per-player toggles. Are transient runtime state the wiring owns and the module's {@code stop()}
  * drops with the wiring; itemworld keeps no persistence.
  */
 @NullMarked

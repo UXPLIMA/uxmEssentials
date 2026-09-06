@@ -17,13 +17,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /pay <player> <amount> [currency]} and {@code /payconfirm}: move value between two players atomically.
- * The gates run in order before any leg — self-pay, the currency's {@code min-pay}, the target's
+ * The gates run in order before any leg. Self-pay, the currency's {@code min-pay}, the target's
  * {@code /paytoggle} flag, then the per-currency confirm-threshold ({@code docs/11-economy-integration.md}
- * §6.2, §9.1–§9.2). Below the threshold the transfer is immediate; above it the pay is staged (no debit) and
- * a {@code /payconfirm} re-validates from scratch and only then transfers — confirmation re-checks, it never
+ * §6.2, §9.1 to §9.2). Below the threshold the transfer is immediate; above it the pay is staged (no debit) and
+ * a {@code /payconfirm} re-validates from scratch and only then transfers. Confirmation re-checks, it never
  * trusts the staged amount blindly.
  *
- * <p>The actual move is one {@link EconomyProvider#transfer} call — guarded and atomic at the database — so
+ * <p>The actual move is one {@link EconomyProvider#transfer} call, guarded and atomic at the database, so
  * the double-spend invariant is the provider's to keep; this use case only orchestrates the gates and the
  * confirm flow around it.
  */
@@ -128,8 +128,8 @@ public final class Pay {
 
     private PayOutcome sent(PlayerRef from, PlayerRef to, Money amount) {
         // The provider applied both legs and emitted the WalletDebited/WalletCredited events at the source.
-        // The tax (if any) is then taken out of the receiver — who was just credited the gross, so the sink's
-        // guarded move always succeeds — and the receiver is told the net they actually kept.
+        // The tax (if any) is then taken out of the receiver, who was just credited the gross, so the sink's
+        // guarded move always succeeds, and the receiver is told the net they actually kept.
         Money tax = taxation.collect(from, to, amount);
         Money net = amount.minus(tax);
         notifier.send(from, EconomyMessageKey.PAY_SENT, Map.of("player", to.name(), "amount", notifier.amount(amount)));

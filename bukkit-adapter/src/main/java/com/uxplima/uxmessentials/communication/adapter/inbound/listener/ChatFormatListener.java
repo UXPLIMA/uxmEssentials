@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>Before the format is captured it is run through the {@link ChatPlaceholderExpander}, so an operator's
  * PlaceholderAPI {@code %token%} placeholders in the format expand for the speaker when PlaceholderAPI is
  * installed (a no-op leaving {@code %…%} untouched otherwise). The speaker's typed message is never PlaceholderAPI
- * expanded — only the operator-authored format is — so a player cannot smuggle a placeholder through their message.
+ * expanded, only the operator-authored format is, so a player cannot smuggle a placeholder through their message.
  * The prefix and suffix are parsed as MiniMessage, except that a prefix/suffix written with legacy colour codes
  * (a {@code &c} or section-sign sequence, detected by {@link LegacyChatCodes}) is deserialized through Adventure's
  * legacy serializer instead, so a permission plugin that reports a legacy prefix still renders in colour.
@@ -49,7 +49,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>{@code AsyncChatEvent} fires off the main thread. This listener only reads the speaker's cached permission
  * meta, a permission flag, and the speaker's name/world (plain field reads) before capturing them into an
  * immutable {@link Rendering} snapshot; the installed renderer then assembles the component from that snapshot and
- * the event-supplied display-name/message components, touching no Bukkit API — so the async-listener contract
+ * the event-supplied display-name/message components, touching no Bukkit API, so the async-listener contract
  * holds.
  */
 @NullMarked
@@ -81,7 +81,7 @@ public final class ChatFormatListener implements Listener {
         String format = expander.expand(
                 speaker.getUniqueId(), current.formatFor(meta.primaryGroup().orElse(null)));
         boolean parseMessage = current.allowPlayerFormat() && speaker.hasPermission(FORMAT_PERMISSION);
-        // Name and world are plain field reads on the async chat thread — no scheduling, no foreign-region state.
+        // Name and world are plain field reads on the async chat thread: no scheduling, no foreign-region state.
         Rendering rendering = new Rendering(
                 format,
                 meta.prefix(),
@@ -96,7 +96,7 @@ public final class ChatFormatListener implements Listener {
 
     /**
      * The immutable snapshot the renderer assembles a line from. Captured on the listener thread so the renderer
-     * (which the server may invoke once per viewer) reads no live Bukkit state — only the event-supplied
+     * (which the server may invoke once per viewer) reads no live Bukkit state: only the event-supplied
      * display-name and message components plus these captured strings.
      */
     private record Rendering(

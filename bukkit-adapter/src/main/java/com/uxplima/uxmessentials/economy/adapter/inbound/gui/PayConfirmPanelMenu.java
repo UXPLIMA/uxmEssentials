@@ -26,8 +26,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The menu holds no new domain logic. The confirm action runs the provider call off the tick thread (the old
  * view's threading), then closes the window on the viewer's entity thread; the cancel action simply closes. Every
- * visible string resolves from the economy catalog. The window carries extra context items beyond a bare yes/no — the
- * recipient head and the value — so it is its own spec rather than a generic {@link Menus#confirm} dialog.
+ * visible string resolves from the economy catalog. The window carries extra context items beyond a bare yes/no, the
+ * recipient head and the value, so it is its own spec rather than a generic {@link Menus#confirm} dialog.
  */
 @NullMarked
 public final class PayConfirmPanelMenu {

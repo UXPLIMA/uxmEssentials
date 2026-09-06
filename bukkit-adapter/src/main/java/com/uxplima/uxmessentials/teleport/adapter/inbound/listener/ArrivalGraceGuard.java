@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link ArrivalGrace} implementation and the fall-damage guard behind it. When an {@code /rtp} lands, it
  * shields the player for the configured window so they do not die before the far terrain finishes rendering:
- * a Resistance and/or Slow-Falling potion effect for the duration, and — while the window is open — a
+ * a Resistance and/or Slow-Falling potion effect for the duration, and, while the window is open, a
  * no-fall-damage guard that cancels the fall {@link EntityDamageEvent}. All three are individually toggled by
  * {@link ArrivalGraceSettings}; a disabled or zero-length grace is a silent no-op.
  *

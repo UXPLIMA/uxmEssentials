@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * The typed, immutable view of {@code modules/security/config.conf} for Phase 1: the module enable gate and the
  * two-factor tunables (which factors are offered, the authenticator issuer label, the verification window, and the
  * PIN length policy). Resolved once from the module's scoped {@link ConfigStore} on start and, per the atomic-reload
- * rule, swapped whole on reload — so a command dispatched mid-reload sees one coherent snapshot.
+ * rule, swapped whole on reload, so a command dispatched mid-reload sees one coherent snapshot.
  *
  * <p>The HOCON keys are kebab-case under a {@code two-factor { … }} block; the record components are the camelCase
  * views the application reads. Every knob carries the default the bundled config ships, so an operator who deletes a
@@ -271,7 +271,7 @@ public record SecurityConfig(
             return on;
         }
 
-        /** The pure lockout decision this config drives — reused by the keypad to judge a failed attempt. */
+        /** The pure lockout decision this config drives: reused by the keypad to judge a failed attempt. */
         public LockoutPolicy lockoutPolicy() {
             return new LockoutPolicy(maxAttempts);
         }
@@ -280,7 +280,7 @@ public record SecurityConfig(
     /**
      * The op-command protection tunables ({@code op-protection.*}): whether dangerous commands are gated at all, the
      * list of command roots that demand a recent second-factor proof, and how long a verification counts as recent.
-     * Only players who have enrolled a factor are gated — a re-auth needs something to prove against — and a holder of
+     * Only players who have enrolled a factor are gated, a re-auth needs something to prove against, and a holder of
      * {@code uxmessentials.security.bypass} is exempt. The command list is matched leniently (leading slash, namespace
      * prefix and arguments are ignored) so an operator listing {@code op} catches {@code /op Steve} and
      * {@code minecraft:op} alike.
@@ -318,7 +318,7 @@ public record SecurityConfig(
                     Duration.ofSeconds(windowSeconds));
         }
 
-        /** The pure re-auth decision this config drives — the guard feeds it each protected command and the last verify. */
+        /** The pure re-auth decision this config drives: the guard feeds it each protected command and the last verify. */
         public ReauthPolicy policy() {
             return new ReauthPolicy(Set.copyOf(protectedCommands), reauthWindow);
         }
@@ -327,7 +327,7 @@ public record SecurityConfig(
     /**
      * The IP/alt-guard tunables ({@code ip-guard.*}): whether the guard records a joining player's (hashed) IP and
      * checks for alts at all, the greatest number of distinct accounts allowed on one IP (0 = no cap, only observe),
-     * and whether staff are notified when a joining player shares an IP with other accounts. No GeoIP — the guard
+     * and whether staff are notified when a joining player shares an IP with other accounts. No GeoIP, the guard
      * only ever holds one-way IP tokens.
      *
      * @param enabled whether the IP/alt guard is active ({@code ip-guard.enabled}, default true)
@@ -398,8 +398,8 @@ public record SecurityConfig(
     /**
      * The client-brand-guard tunables ({@code client-id.*}): whether the guard reads a joining player's client brand
      * at all, which side of the brand list is the allowed side (or the flag-only observe mode), and the brand list
-     * itself. The mode string is parsed leniently and falls back to {@link ClientIdMode#FLAG} — the safe observe
-     * mode that never kicks — so a typo never starts denying joins.
+     * itself. The mode string is parsed leniently and falls back to {@link ClientIdMode#FLAG}, the safe observe
+     * mode that never kicks, so a typo never starts denying joins.
      *
      * @param enabled whether the client-brand guard is active ({@code client-id.enabled}, default true)
      * @param mode which side of {@code brands} is allowed ({@code client-id.mode}: block-list|allow-list|flag)

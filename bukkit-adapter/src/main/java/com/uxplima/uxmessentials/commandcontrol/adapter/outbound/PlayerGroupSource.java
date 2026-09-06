@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link LuckPermsPlayerGroupSource} binds only when LuckPerms is installed (probed in {@link PlayerGroupSources}).
  *
  * <p>The read happens on the tick thread inside the preprocess gate, so an implementation must only read already-cached
- * data — never block or load a user — which the LuckPerms-backed source does (it reads the loaded user's cached meta).
+ * data, never block or load a user, which the LuckPerms-backed source does (it reads the loaded user's cached meta).
  */
 @NullMarked
 public interface PlayerGroupSource {
@@ -20,7 +20,7 @@ public interface PlayerGroupSource {
     /** The primary permission group of {@code who}, or {@link Optional#empty()} when none is exposed. */
     Optional<String> groupOf(UUID who);
 
-    /** A source that never reports a group — the default when no permission plugin exposes one. */
+    /** A source that never reports a group: the default when no permission plugin exposes one. */
     static PlayerGroupSource empty() {
         return who -> Optional.empty();
     }

@@ -1,7 +1,7 @@
 -- Re-key staff_loadout from (player) to (player, server_id). The pre-staff-mode loadout is
 -- inherently per-server state: the inventory to restore is the one the player had on THIS
 -- backend. Keyed by player alone, two backends sharing one DB clobber each other's captured
--- loadout — entering staff mode on server B overwrites server A's saved row, and an exit then
+-- loadout. Entering staff mode on server B overwrites server A's saved row, and an exit then
 -- restores the wrong items. Adding the origin server to the key gives every backend its own
 -- independent row, so a save/load/delete on B never touches A's loadout. server_id is the same
 -- backend identity stamped into the cross-server bus (network.server-id); a single-server
@@ -14,7 +14,7 @@
 -- V29-V31 shape unchanged (the four base64 TEXT regions, the captured scalars, the SMALLINT
 -- 0/1 flags and the BIGINT capture instant), so the row mapping is otherwise untouched.
 --
--- Existing rows backfill to 'server-1' — the default network.server-id a single-server install
+-- Existing rows backfill to 'server-1', the default network.server-id a single-server install
 -- runs with (NetworkConfig.DEFAULT_SERVER_ID). A pre-V62 row is only ever an un-restored loadout
 -- from an interrupted exit / crash mid-mode, and dropping it would lose the player's real items
 -- (the very thing the DB-backed loadout protects). Backfilling to the default id therefore

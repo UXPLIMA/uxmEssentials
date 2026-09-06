@@ -97,7 +97,7 @@ public final class NativeCurrencyBackend implements CurrencyBackend {
     }
 
     /**
-     * The repository's atomic two-sided move — the guarded debit of {@code from} and the credit of {@code to}
+     * The repository's atomic two-sided move. The guarded debit of {@code from} and the credit of {@code to}
      * commit together or not at all. This is the guarantee routing must not lose, so it is exposed only to
      * {@link RoutingEconomyProvider}, which uses it in place of a debit-then-credit pair whenever a currency
      * lives on the native ledger.

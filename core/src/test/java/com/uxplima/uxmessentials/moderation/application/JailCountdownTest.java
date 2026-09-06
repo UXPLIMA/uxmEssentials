@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The online-only jail countdown through {@link JailCountdown}: a join re-applies a still-active jail
  * (offline-jail enforcement), a tick burns online time off the remainder, and the player is released only
- * when the accrued online time has served the sentence in full — wall-clock time off the server never
+ * when the accrued online time has served the sentence in full, wall-clock time off the server never
  * advances it.
  */
 class JailCountdownTest {
@@ -51,12 +51,12 @@ class JailCountdownTest {
         FakeSanctions sanctions = new FakeSanctions(TARGET);
         JailCountdown countdown = countdown(repository, sanctions, T0);
 
-        // First session: 4 online minutes elapse — 6 remain, still jailed.
+        // First session: 4 online minutes elapse: 6 remain, still jailed.
         countdown.onTick(TARGET, Duration.ofMinutes(4));
         assertThat(((JailState.Active) repository.loadJail(TARGET)).remaining()).contains(Duration.ofMinutes(6));
         assertThat(sanctions.released).isEmpty();
 
-        // Second session: 6 more online minutes elapse — served, released.
+        // Second session: 6 more online minutes elapse: served, released.
         countdown.onTick(TARGET, Duration.ofMinutes(6));
         assertThat(repository.loadJail(TARGET)).isInstanceOf(JailState.None.class);
         assertThat(sanctions.released).containsExactly(TARGET);

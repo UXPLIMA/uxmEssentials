@@ -30,14 +30,14 @@ import org.jspecify.annotations.Nullable;
 /**
  * Reusable Brigadier suggestion providers for the inbound command surface. Every provider here runs on the
  * tick thread (Brigadier invokes suggestion callbacks synchronously while the client types), so each one is
- * deliberately allocation-light and never touches I/O — it reads only live in-memory state and filters by the
+ * deliberately allocation-light and never touches I/O. It reads only live in-memory state and filters by the
  * partial token the player has typed so far.
  *
  * <p>The two building blocks cover the two shapes Wave 2 needs: {@link #onlinePlayers()} for a player target
  * that should complete against the online roster, and {@link #fromStrings(Supplier)} for any dynamic name list
  * (currency ids, warp names, kit ids) sourced from an in-memory, side-effect-free supplier. On top of those,
  * {@link #playerTargets()} and {@link #singlePlayerTarget()} complete a Mojang player-selector argument with
- * only the selectors that argument can actually resolve (plus online names) — never an entity selector the
+ * only the selectors that argument can actually resolve (plus online names), never an entity selector the
  * parser would reject.
  */
 @NullMarked
@@ -72,7 +72,7 @@ public final class CommandSuggestions {
      */
     public static SuggestionProvider<CommandSourceStack> onlinePlayers() {
         // Brigadier resolves suggestions while the player types, off any region tick thread, so an onGlobal hop is
-        // wrong here — there is no tick to marshal back to and a synchronous wait would stall the type-ahead. The
+        // wrong here: there is no tick to marshal back to and a synchronous wait would stall the type-ahead. The
         // enumeration reads only player names and the cheap in-memory canSee graph (never mutable entity state); a
         // roster that shifts mid-keystroke at worst offers or omits one stale name for that keystroke, harmless.
         return (ctx, builder) -> {
@@ -103,7 +103,7 @@ public final class CommandSuggestions {
     /** The selectors that resolve to one or more PLAYERS for a multi-target argument. Never @e/@n (entities). */
     private static final List<String> MULTI_PLAYER_SELECTORS = List.of("@a", "@p", "@r", "@s");
 
-    /** The selectors valid for a SINGLE-target argument — @a is excluded (it can match more than one player). */
+    /** The selectors valid for a SINGLE-target argument: @a is excluded (it can match more than one player). */
     private static final List<String> SINGLE_PLAYER_SELECTORS = List.of("@p", "@r", "@s");
 
     /** The player-valid selector tokens that match {@code typed} (case-insensitive prefix). Pure: no server access. */
@@ -149,7 +149,7 @@ public final class CommandSuggestions {
 
     /**
      * Suggests every value the supplier returns, prefix-filtered (case-insensitively) by the partial token. The
-     * supplier must be side-effect-free and non-blocking — it is invoked on the tick thread per keystroke, so it
+     * supplier must be side-effect-free and non-blocking. It is invoked on the tick thread per keystroke, so it
      * should read only in-memory state (a registry, an in-memory cache peek). A {@code null} or empty result
      * simply yields no suggestions.
      */

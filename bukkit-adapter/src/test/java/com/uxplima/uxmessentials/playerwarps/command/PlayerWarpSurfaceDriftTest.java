@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * documented one, keeping the kernel surface in lockstep with the permission catalogue. The
  * {@code visibility public|private <name>} toggles and {@code del <name>} are subcommands of {@code /pwarp}
  * (gated by {@code uxmessentials.pwarp.public} and {@code uxmessentials.pwarp.delete}) rather than command
- * literals, so they are not part of this table — {@code del} folded into {@code /pwarp} the way {@code /warp del}
+ * literals, so they are not part of this table. {@code del} folded into {@code /pwarp} the way {@code /warp del}
  * sits under {@code /warp}.
  */
 class PlayerWarpSurfaceDriftTest {

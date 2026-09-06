@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.application.port.PlayerDataStore.Numeric
 
 /**
  * The player-data slice of the menu action vocabulary: the ways a click (or an operator's {@code /menu} spec) can
- * write player-scoped state without a feature wiring it. Two backing stores sit behind one grammar — the durable,
+ * write player-scoped state without a feature wiring it. Two backing stores sit behind one grammar, the durable,
  * database-backed {@link PlayerDataStore} (survives a restart or a world rollback) reached by the {@code data-*}
  * actions, and the transient per-holder PDC {@link PlayerMeta} reached by the {@code meta-*} actions. Registered
  * once at startup into the shared {@link MenuBindings} alongside {@link MenuVocabulary} and the other action packs,
@@ -26,10 +26,10 @@ import com.uxplima.uxmessentials.shared.application.port.PlayerDataStore.Numeric
  * documented no-change rather than an error.
  *
  * <p>Every action is fail-soft: a blank key or a malformed operand is a logged-or-silent no-op, and {@link #safe}
- * turns anything a call unexpectedly throws into a logged no-op too — one bad effect must not abort the rest of a
+ * turns anything a call unexpectedly throws into a logged no-op too. One bad effect must not abort the rest of a
  * chain. The {@code data-*} writes go through the store, which mutates its cache on the entity thread and persists
  * off-tick; the {@code meta-*} writes touch the online viewer's PDC on the entity thread, where the click already
- * runs — no blocking is added.
+ * runs: no blocking is added.
  */
 public final class DataActions {
 
@@ -40,7 +40,7 @@ public final class DataActions {
      * {@code data-*} actions write through; {@code playerMeta} is the PDC accessor the {@code meta-*} actions write
      * through on the online viewer; {@code log} is the operator console logger a fail-soft or malformed action warns
      * through. Left separate from {@link MenuVocabulary#registerActions} so that method's existing call-sites stay
-     * untouched — the composition root calls both.
+     * untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, PlayerDataStore playerData, PlayerMeta playerMeta, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -72,7 +72,7 @@ public final class DataActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs and the npc/
+     * than escaping into the click dispatch. The same fail-soft contract the sibling action packs and the npc/
      * holograms click runner apply to their effect actions.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
@@ -92,7 +92,7 @@ public final class DataActions {
     private static void dataSet(MenuActionContext ctx, PlayerDataStore playerData) {
         KeyValue arg = KeyValue.parse(ctx.arg());
         if (arg.key().isEmpty()) {
-            return; // no key to write — nothing to do, but not an error
+            return; // no key to write. Nothing to do, but not an error
         }
         playerData.set(ctx.viewer().uuid(), arg.key(), arg.value());
     }
@@ -167,7 +167,7 @@ public final class DataActions {
 
     /**
      * A parsed {@code <key> <value…>} argument: the first whitespace-delimited token is the key and everything after
-     * it — with its internal spacing preserved — is the value. The numeric actions read the value as a single number;
+     * it, with its internal spacing preserved, is the value. The numeric actions read the value as a single number;
      * {@code data-set} / {@code meta-set} keep it verbatim, so {@code name Steve Jobs} stores {@code Steve Jobs}.
      * Parsing is Bukkit-free so plain-JUnit grammar tests can exercise it; a blank argument yields an empty key, which
      * every action treats as a no-op.

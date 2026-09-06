@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Guards the externalised browse-menu layouts: every menu that reads a {@code modules/<m>/gui/<name>.conf}
  * must ship that resource under {@code src/main/resources}, it must parse to the row count today's code
- * default carries, and it must hold layout/material keys only — never a {@code MessageKey} or any localised
+ * default carries, and it must hold layout/material keys only. Never a {@code MessageKey} or any localised
  * string. Titles and lore stay in the message catalog, so a layout file that smuggled player text would split
  * the translation surface across two files and silently diverge from the locale-parity guard.
  */
@@ -27,7 +27,7 @@ class GuiLayoutDriftTest {
     @Test
     void layoutResourcesDeclareNoLocalisedTextKeys() {
         // The comments may mention "title"/"lore" in prose (to point operators at the catalog); what must never
-        // appear is a config key that would carry player text — a "title"/"lore"/"name" assignment or a
+        // appear is a config key that would carry player text, a "title"/"lore"/"name" assignment or a
         // MessageKey reference. Player text stays in the message catalog, asserted by the locale-parity guard. A
         // key like a rename-slot legitimately contains "name", so the check targets the assignment form
         // (key = value) rather than the bare substring.

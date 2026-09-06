@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /tprandomplayer} (alias {@code /tprp}) into the teleport context's command surface — the
+ * Pins {@code /tprandomplayer} (alias {@code /tprp}) into the teleport context's command surface, the
  * staff verb that hops you to a random visible online player, the roulette companion of {@code /tp}. It
  * rides the shared {@code uxmessentials.tp.use} node that {@code /tp} and {@code /goto} already use; this
  * guard fails if the literal drops out of the surface or ever wires under a different permission.

@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The WorldGuard side of the random-teleport protection check, reached purely by reflection behind a plugin-present
- * guard — the same pattern the poses region gate and the menu vocabulary's {@code worldguard-region} condition use.
+ * guard: the same pattern the poses region gate and the menu vocabulary's {@code worldguard-region} condition use.
  * A position is protected when <em>any</em> WorldGuard region covers it: the pre-warmed pool is shared and has no
  * owning player, so the question is spatial ("is this spot inside a region") rather than "may player X enter it".
  *
@@ -25,8 +25,8 @@ import org.jspecify.annotations.NullMarked;
  * four. No field or method signature here carries a {@code com.sk89q} type: on a server without WorldGuard the
  * present-guard short-circuits before any {@code Class.forName}, so none of its classes load. The check is fail-open: an absent plugin, an unknown
  * world, or any reflective failure (a version bump moving the query chain) all report "not protected" and are logged
- * at most once, because wrongly refusing wilderness would starve the pool, and the global {@code __global__} region —
- * which has no physical bounds — is not returned by the spatial query, so pure wilderness reports empty.
+ * at most once, because wrongly refusing wilderness would starve the pool, and the global {@code __global__} region
+ * which has no physical bounds: is not returned by the spatial query, so pure wilderness reports empty.
  *
  * <p>Threading: called from the safe-search snapshot callback, which already runs on the candidate chunk's owning
  * region thread, so the region query (an in-memory spatial lookup, not a chunk load) needs no extra scheduler hop.

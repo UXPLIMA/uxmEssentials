@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The same-server trade window as the operator sees it: the spec in {@code modules/trade/gui/trade.conf} plus the
  * bindings that give it behaviour. The file owns the window's height, its backdrop and where the confirm, money and
- * experience buttons sit; this class owns everything the file cannot — the wording (resolved from the message
+ * experience buttons sit; this class owns everything the file cannot. The wording (resolved from the message
  * catalog through placeholders), which button is shown in which state, what a click does, and the two blocks of item
  * slots the file hands over as {@code content {}} regions.
  *
@@ -71,7 +71,7 @@ public final class TradeWindow {
         }
     }
 
-    /** How many item slots each side of this window holds — the size of either region. */
+    /** How many item slots each side of this window holds, the size of either region. */
     int perSide() {
         return offerSlots.size();
     }
@@ -158,7 +158,7 @@ public final class TradeWindow {
         menus.open(holder.viewer(), SPEC_ID, holder);
     }
 
-    /** Redraw {@code viewer}'s window in place, if they still have it open — how a change on one side reaches both. */
+    /** Redraw {@code viewer}'s window in place, if they still have it open: how a change on one side reaches both. */
     void redraw(PlayerRef viewer) {
         menus.redraw(viewer, SPEC_ID);
     }
@@ -173,7 +173,7 @@ public final class TradeWindow {
         return ContentRegions.read(inv, offerSlots);
     }
 
-    /** Empty the viewer's offer region — the offered originals leave the window, so nothing is returned twice. */
+    /** Empty the viewer's offer region: the offered originals leave the window, so nothing is returned twice. */
     void clearOffer(Inventory inv) {
         ContentRegions.clear(inv, offerSlots);
     }

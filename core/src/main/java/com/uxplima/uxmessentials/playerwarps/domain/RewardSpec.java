@@ -10,7 +10,7 @@ import java.util.Optional;
  * the granter substitutes with the rewarded player's name before it is dispatched from the console. Item rewards
  * are deliberately out of scope for this task; only money and a command are modelled.
  *
- * <p>Both arms are independently optional, and an {@link #isEmpty() empty} spec grants nothing — the shipped
+ * <p>Both arms are independently optional, and an {@link #isEmpty() empty} spec grants nothing: the shipped
  * default for a rewards sub-group that is on but leaves one side of it unconfigured. Instances are always built
  * through {@link #of} or {@link #none}, which normalise a non-positive amount or a blank command to "absent" so a
  * {@code money = 0} / {@code command = ""} config reads as no reward at all rather than a zero credit.
@@ -48,7 +48,7 @@ public record RewardSpec(Optional<BigDecimal> money, String currencyId, Optional
         return new RewardSpec(amount, currencyId == null ? "default" : currencyId, template);
     }
 
-    /** True when this spec would grant nothing — neither a money credit nor a command dispatch is configured. */
+    /** True when this spec would grant nothing, neither a money credit nor a command dispatch is configured. */
     public boolean isEmpty() {
         return money.isEmpty() && command.isEmpty();
     }

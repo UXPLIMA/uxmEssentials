@@ -143,7 +143,7 @@ class VoteSiteCatalogLoaderTest {
                 """;
         VoteSiteCatalog catalog = load(dir, hocon);
 
-        // sites block wins — only one site, not two.
+        // sites block wins, only one site, not two.
         assertThat(catalog.sites()).hasSize(1);
         assertThat(catalog.sites().get(0).name()).isEqualTo("PMC");
     }

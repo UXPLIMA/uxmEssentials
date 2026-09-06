@@ -134,7 +134,7 @@ class NpcExtraUseCasesTest {
     @Test
     void rejectsSkinSlimOnAnNpcWithNoSkin() {
         var result = new SetNpcSkinSlim(repository, view, notifier).setSlim(actor, GUIDE, true);
-        // No skin set, so there is nothing to vary — the edit is rejected and nothing re-renders.
+        // No skin set, so there is nothing to vary: the edit is rejected and nothing re-renders.
         assertThat(result.isOk()).isFalse();
         assertThat(view.rendered).isEmpty();
     }

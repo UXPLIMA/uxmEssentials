@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The map-plugin discoverer's plugin-present guard: with none of squaremap, Dynmap or BlueMap installed the
  * integration binds the no-op publisher and reads no map-plugin SDK, so the plugin runs fully without any map
- * plugin — the same soft-depend contract the economy and PlaceholderAPI adapters honour. Loading a real map
+ * plugin, the same soft-depend contract the economy and PlaceholderAPI adapters honour. Loading a real map
  * plugin into the test would pull in classes a stock server never has, so this exercises the absent-plugin path
  * directly.
  *

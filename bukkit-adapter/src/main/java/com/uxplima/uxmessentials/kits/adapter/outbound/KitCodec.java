@@ -40,11 +40,11 @@ import org.spongepowered.configurate.ConfigurationNode;
  *
  * <p>Each {@code requirements} entry is split into a {@code KitRequirement(left, operator, right)} on the first
  * of the operators {@code == != >= <= > <}; spacing is tolerated and a malformed entry (no operator or a blank
- * side) is skipped rather than failing the kit. The operands stay opaque raw strings here — the adapter never
+ * side) is skipped rather than failing the kit. The operands stay opaque raw strings here, the adapter never
  * resolves the placeholders; the {@code RequirementEvaluator} does, on the claim/render thread.
  *
- * The same codec also reads each entry of the previous {@code kits.conf} monolith — a {@code kits { <id> {
- * ... } }} tree — which the repository imports once on first load and splits into per-file kits. An item is
+ * The same codec also reads each entry of the previous {@code kits.conf} monolith, a {@code kits { <id> {
+ * ... } }} tree, which the repository imports once on first load and splits into per-file kits. An item is
  * either a bare Base64 string (its serialized form carries the amount) or a {@code {data, amount}} map for
  * readability. A read that cannot produce a valid definition returns empty so the repository skips the kit
  * rather than failing the whole load.
@@ -321,7 +321,7 @@ final class KitCodec {
 
     /**
      * Write the typed action engine. A kit whose claim actions are exactly the mapping of its legacy
-     * {@code commands}/{@code sound}/{@code particles} keys is written back in the legacy shape — so a kit the
+     * {@code commands}/{@code sound}/{@code particles} keys is written back in the legacy shape, so a kit the
      * GUI editor only ever touched through its command list round-trips unchanged and editor edits persist. Any
      * other claim actions (an authored {@code claim-actions} block) and any deny actions are written in the new
      * {@code claim-actions}/{@code deny-actions} shape, and the legacy keys are then cleared so the two never
@@ -531,7 +531,7 @@ final class KitCodec {
      * Resolve a kit's effective claim actions. The new {@code claim-actions} block, when present, wins outright:
      * it is the typed, ordered action engine that supersedes the flat {@code commands}/{@code sound}/{@code
      * particles} keys, and when both are present the legacy keys are ignored with a one-line warn. When no new
-     * block is authored the legacy keys are mapped into actions so an unmodified kit behaves exactly as before —
+     * block is authored the legacy keys are mapped into actions so an unmodified kit behaves exactly as before
      * {@code commands} become {@code CONSOLE_COMMAND} actions in order, then {@code sound} a {@code SOUND} action,
      * then {@code particles} a {@code PARTICLE} action.
      */

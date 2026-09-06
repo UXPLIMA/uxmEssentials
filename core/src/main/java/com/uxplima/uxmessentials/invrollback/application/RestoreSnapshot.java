@@ -11,12 +11,12 @@ import com.uxplima.uxmessentials.invrollback.domain.SnapshotCause;
 import com.uxplima.uxmessentials.invrollback.domain.SnapshotId;
 
 /**
- * Restores one of a target's stored inventory snapshots — the application half of the {@code /invrestore} restore
+ * Restores one of a target's stored inventory snapshots, the application half of the {@code /invrestore} restore
  * action. It resolves the chosen snapshot, and before the caller overwrites the live inventory it captures the
  * target's <em>current</em> serialized inventory as a {@link SnapshotCause#RESTORE} safety copy (through the same
  * {@link CaptureSnapshot} use case, so the count cap applies), then hands the chosen snapshot back so the adapter
- * can decode it and set the live inventory. A stale id — a snapshot pruned or already restored between the GUI
- * open and the click — resolves to empty and captures nothing, so a dead click leaves no orphan safety row.
+ * can decode it and set the live inventory. A stale id. A snapshot pruned or already restored between the GUI
+ * open and the click: resolves to empty and captures nothing, so a dead click leaves no orphan safety row.
  *
  * <p>Pure application code: it never touches a Bukkit type. The adapter reads and re-applies the live inventory on
  * the target's entity thread and serializes it into the {@code currentContents} bytes it passes in; this use case

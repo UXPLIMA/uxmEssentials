@@ -37,7 +37,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  * Golden renders of the native rich-meta {@code decor} block: a HOCON spec is parsed and rendered through the real
  * {@link ItemRenderer} against MockBukkit so each meta type is asserted on a concrete {@link ItemStack}. Types
  * MockBukkit-v1.21 cannot fully model (armour trim, item-model, base potion type, and registry-backed banner
- * patterns) are asserted only to render a valid item without throwing — they still apply on real Paper, where the
+ * patterns) are asserted only to render a valid item without throwing. They still apply on real Paper, where the
  * registries and meta exist; the renderer's fail-soft contract is what keeps the test runtime from aborting.
  */
 class RichMetaRenderTest {

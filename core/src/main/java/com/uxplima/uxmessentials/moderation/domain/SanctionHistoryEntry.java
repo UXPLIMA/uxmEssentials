@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * One row of the append-only sanction history — a ban/unban/mute/unmute applied to a target, the projection a
+ * One row of the append-only sanction history. A ban/unban/mute/unmute applied to a target, the projection a
  * {@code /banhistory} or {@code /mutehistory} line renders. The history is never updated or overwritten, so a
  * target's full disciplinary record is preserved and a review lists it newest-first.
  *

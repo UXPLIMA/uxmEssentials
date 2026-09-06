@@ -27,7 +27,7 @@ class QuotaNodeReducerTest {
         reducer.offerNode("uxmessentials.tp.warmup.5");
         reducer.offerNode("uxmessentials.tp.warmup.1");
 
-        assertThat(reducer.result().orElse(99)).isEqualTo(1L); // lowest tier wins — the most privileged
+        assertThat(reducer.result().orElse(99)).isEqualTo(1L); // lowest tier wins: the most privileged
     }
 
     @Test
@@ -75,7 +75,7 @@ class QuotaNodeReducerTest {
     void aNonMatchingWorldNodeIsIgnored() {
         QuotaNodeReducer reducer = new QuotaNodeReducer(WARMUP, "nether");
         reducer.seedDefault(3);
-        reducer.offerNode("uxmessentials.tp.warmup.creative.0"); // different world — not folded
+        reducer.offerNode("uxmessentials.tp.warmup.creative.0"); // different world, not folded
 
         assertThat(reducer.result().orElse(99)).isEqualTo(3L); // only the default remains
     }

@@ -281,7 +281,7 @@ class WarpCategorySettingsGoldenTest {
             this.categories = new ArrayList<>(categories);
         }
 
-        /** The last category {@link #save} stored, or empty if none was saved — read by the apply-seam assertions. */
+        /** The last category {@link #save} stored, or empty if none was saved: read by the apply-seam assertions. */
         Optional<WarpCategory> lastSaved() {
             return Optional.ofNullable(saved);
         }

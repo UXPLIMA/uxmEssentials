@@ -14,14 +14,14 @@ import org.jspecify.annotations.NullMarked;
  * wins:
  *
  * <ol>
- *   <li>the player's persisted {@code /lang} override (from the {@link LocaleStore}) — an operator's
+ *   <li>the player's persisted {@code /lang} override (from the {@link LocaleStore}): an operator's
  *       explicit choice always beats the client;</li>
- *   <li>the locale bound for this request at the command boundary ({@link LocaleScope#CURRENT}) — the
+ *   <li>the locale bound for this request at the command boundary ({@link LocaleScope#CURRENT}), the
  *       client locale captured on the region thread and carried across async hops, so a deferred
  *       message resolves in the requester's language on a worker thread;</li>
- *   <li>the configured server-default locale — the fallback for a path that never crossed the
+ *   <li>the configured server-default locale. The fallback for a path that never crossed the
  *       boundary (an event-driven broadcast with no requesting command);</li>
- *   <li>{@link Locale#ENGLISH} — the canonical root.</li>
+ *   <li>{@link Locale#ENGLISH}, the canonical root.</li>
  * </ol>
  *
  * <p>The resolver never touches the Bukkit API: the live client locale ({@code Player.locale()}) is a

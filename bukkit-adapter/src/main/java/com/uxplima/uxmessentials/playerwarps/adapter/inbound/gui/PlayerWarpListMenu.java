@@ -40,7 +40,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The scope of the list depends on who opens it: a plain player sees only their own warps
  * ({@code repository.ownedBy}), an operator holding {@code uxmessentials.pwarp.gui} sees every player's
  * ({@code repository.all}). That decision reads the live {@link Permissions} port, which on Folia may only be
- * queried on the viewer's region thread — so {@link #open} resolves it there and hands the result to the engine
+ * queried on the viewer's region thread, so {@link #open} resolves it there and hands the result to the engine
  * as the menu subject (the {@code EntityCountMenu} pre-compute pattern). The {@code playerwarps:list} source then
  * only reads that subject's flag and the database, touching no Bukkit API off-thread.
  *
@@ -50,7 +50,7 @@ import org.jspecify.annotations.NullMarked;
  * name, owner, world, rounded coordinates, and visibility word into the catalog entry. A left click runs
  * {@code playerwarps:edit}, which opens the still-bespoke {@link PlayerWarpEditorView} for the clicked warp; the
  * create button runs {@code playerwarps:create}, which prompts for a name and creates a private warp at the
- * operator's feet through the same {@link SetPlayerWarp} use case {@code /setpwarp} drives — so the list adds no
+ * operator's feet through the same {@link SetPlayerWarp} use case {@code /setpwarp} drives, so the list adds no
  * domain logic of its own.
  */
 @NullMarked
@@ -176,7 +176,7 @@ public final class PlayerWarpListMenu {
 
     /**
      * Left-click the create button: prompt for a name, then create a private warp at the operator's feet, reopening
-     * the list on cancel — exactly what the old create button did.
+     * the list on cancel: exactly what the old create button did.
      */
     private void create(MenuActionContext ctx) {
         Player player = ctx.player();
@@ -191,7 +191,7 @@ public final class PlayerWarpListMenu {
 
     /**
      * Create the named warp at the operator's feet off the click thread, then reopen the list. A blank name simply
-     * reopens the list. The warp belongs to the operator who opened it, at their feet — exactly {@code /setpwarp}.
+     * reopens the list. The warp belongs to the operator who opened it, at their feet, exactly {@code /setpwarp}.
      */
     private void handleCreate(Player player, PlayerRef viewer, String text) {
         if (text.isBlank()) {

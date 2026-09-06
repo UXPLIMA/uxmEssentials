@@ -11,13 +11,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Coverage of {@link CompositeBusTransport} — the {@code network.transport = both} fan-out — against two fake
+ * Coverage of {@link CompositeBusTransport}, the {@code network.transport = both} fan-out, against two fake
  * {@link BusTransport}s, with no Bukkit, Redis or codec in the loop.
  *
  * <ul>
  *   <li>{@code start} wires the same {@code onFrame} sink into both members, so a frame received on either
  *       member reaches the single sink the {@code BusCore} registered;
- *   <li>{@code send} fans out to both members — a backend may reach some peers over the proxy and others over
+ *   <li>{@code send} fans out to both members. A backend may reach some peers over the proxy and others over
  *       Redis, so every frame goes on both wires;
  *   <li>{@code stop} stops both members;
  *   <li>{@code healthy} is true when either member is healthy (a degraded path is still a usable bus).

@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The bare {@code /checkban} / {@code /checkmute} anvil flow's resolve step ({@link CheckTargetPrompt#checkByName}).
  * A submitted name resolves through the moderation {@code TargetResolver} and is handed to the use-case call with
- * the resolved target; an unknown name fires no check and replies with the shared unknown-target line — the same
+ * the resolved target; an unknown name fires no check and replies with the shared unknown-target line, the same
  * chat behaviour the raw {@code <player>} form gives. The anvil and the entity-thread open are not exercised here;
  * the {@code checkByName} seam is driven directly, mirroring how {@code PlayerPickerView.resolveTyped} is tested.
  */

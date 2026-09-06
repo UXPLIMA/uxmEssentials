@@ -16,7 +16,7 @@ class MapMarkerSettingsTest {
         assertThat(settings.enabled()).isTrue();
         assertThat(settings.warps()).isTrue();
         assertThat(settings.spawns()).isTrue();
-        assertThat(settings.homes()).as("homes are private — off by default").isFalse();
+        assertThat(settings.homes()).as("homes are private, off by default").isFalse();
         assertThat(settings.layerName()).isEqualTo("uxmEssentials");
         assertThat(settings.warpIcon()).isEqualTo("portal");
         assertThat(settings.spawnIcon()).isEqualTo("world");

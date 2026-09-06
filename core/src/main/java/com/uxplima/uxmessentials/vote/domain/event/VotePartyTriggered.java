@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.vote.domain.event;
 
 /**
- * The accumulated vote count reached the configured threshold and a vote party fired — every online
+ * The accumulated vote count reached the configured threshold and a vote party fired, every online
  * player received the party rewards and the counter was reset to zero.
  *
  * @param threshold the count at which the party fired

@@ -16,7 +16,7 @@
 --
 -- Portability contract: plain CREATE TABLE / ALTER TABLE in the subset accepted by SQLite
 -- (default), MySQL/MariaDB, and PostgreSQL. No dialect-specific clause; jOOQ's DDLDatabase
--- parses this file alongside V1–V24 at build time.
+-- parses this file alongside V1 to V24 at build time.
 
 CREATE TABLE vote_party_participants (
     player VARCHAR(36) NOT NULL,

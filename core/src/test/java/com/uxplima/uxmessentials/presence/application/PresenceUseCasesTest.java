@@ -28,7 +28,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The presence use cases through their real implementations against in-memory fakes — the same wiring the
+ * The presence use cases through their real implementations against in-memory fakes. The same wiring the
  * Brigadier handlers, the activity listeners, and the AFK sweep drive, minus Bukkit. It pins the headline rules:
  * {@code /afk} toggles AFK and publishes the matching event; the sweep's auto-mark flips an idle player exactly
  * once; and activity clears AFK, only announcing a return when the player was actually AFK. Vanish moved to its own

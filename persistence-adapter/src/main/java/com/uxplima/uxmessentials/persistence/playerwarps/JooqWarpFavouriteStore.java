@@ -14,12 +14,12 @@ import org.jooq.DSLContext;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jOOQ-backed {@link WarpFavouriteStore} over the generated {@code PLAYER_WARP_FAVOURITES} table — one row per
+ * jOOQ-backed {@link WarpFavouriteStore} over the generated {@code PLAYER_WARP_FAVOURITES} table, one row per
  * {@code (player_uuid, warp_id)}, keyed player-first because the natural query is "this player's favourites".
  * {@link #add} inserts with {@code added_at} from the injected {@link Clock} and {@code ON CONFLICT DO NOTHING},
  * so re-starring an already-favourited warp is a silent no-op rather than a duplicate row or a moved timestamp.
  * The player uuid is canonical 36-char text, the warp id the surrogate {@code long}, and the instant epoch-millis
- * — the schema-wide convention. This store owns only the membership rows; the denormalised
+ *, the schema-wide convention. This store owns only the membership rows; the denormalised
  * {@code player_warps.favourite_count} tally is the favourite use case's concern, not this store's. Every
  * statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */

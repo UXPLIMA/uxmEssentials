@@ -22,7 +22,7 @@ public final class WarpParser {
         return parse(name, YamlSource.load(file));
     }
 
-    /** Parse from a reader with an explicit warp name — the form the golden-file tests drive. */
+    /** Parse from a reader with an explicit warp name: the form the golden-file tests drive. */
     public @Nullable EssXWarp parse(String name, Reader reader) throws IOException {
         return parse(name, YamlSource.load(reader));
     }

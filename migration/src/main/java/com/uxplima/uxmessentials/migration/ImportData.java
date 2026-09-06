@@ -21,13 +21,13 @@ import org.jspecify.annotations.NullMarked;
  *   <li>Take a pre-import backup (live runs only) and emit {@code migration_import_start}.
  *   <li>Stream the source's mapped records, batch them, and write each batch off-tick on the bounded
  *       {@link ImportExecutor} through the bound {@link RecordWriter} (the real writer for a live run,
- *       the no-op accumulator for a dry run — the only difference between the two).
+ *       the no-op accumulator for a dry run, the only difference between the two).
  *   <li>Emit one {@code migration_import_<kind>} per record and fold its outcome into the summary.
  *   <li>Await quiescence and emit {@code migration_import_finish}.
  * </ol>
  *
  * <p>Every write is an upsert keyed by stable identity, so a re-run is idempotent and resumable; this use
- * case never performs an additive balance mutation (§6). It runs entirely off the tick thread — the
+ * case never performs an additive balance mutation (§6). It runs entirely off the tick thread, the
  * command handler dispatches it and returns immediately ({@code MainThreadBlockingDriftTest}).
  */
 @NullMarked

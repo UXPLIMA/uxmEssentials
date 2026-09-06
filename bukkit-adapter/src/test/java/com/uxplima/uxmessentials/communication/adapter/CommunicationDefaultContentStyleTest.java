@@ -15,13 +15,13 @@ import com.uxplima.uxmessentials.shared.adapter.outbound.style.StyleTags;
 import org.junit.jupiter.api.Test;
 
 /**
- * Proves the shipped communication defaults — the {@code /info} pages and the advancement broadcast template — are
+ * Proves the shipped communication defaults, the {@code /info} pages and the advancement broadcast template, are
  * authored in the canon palette and that those tokens actually resolve through the same MiniMessage path production
  * uses. The info pages render through {@code BukkitMessageSink.deliver}, which deserializes with
  * {@link StyleTags#resolver()}; the advancement template renders through {@code HudText.render}, whose second step is
  * the same {@code MiniMessage.deserialize(source, StyleTags.resolver())} (its PlaceholderAPI pre-parse is the identity
- * for a template with no {@code %papi%} token). Both are exercised here with that resolver so a non-resolving token —
- * which has no locale-parity guard, the content being operator config rather than a {@code MessageKey} — fails the
+ * for a template with no {@code %papi%} token). Both are exercised here with that resolver so a non-resolving token
+ * which has no locale-parity guard, the content being operator config rather than a {@code MessageKey}, fails the
  * build instead of shipping as a literal {@code <accent>} in chat.
  */
 class CommunicationDefaultContentStyleTest {

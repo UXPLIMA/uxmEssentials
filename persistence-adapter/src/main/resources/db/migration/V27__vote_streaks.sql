@@ -1,6 +1,6 @@
 -- Adds consecutive-day voting streak tracking to vote_totals. current_streak is the
 -- player's active run of voting days, best_streak the longest run ever reached, and
--- streak_day_key the epoch-day of the most recent vote that touched the streak — so a
+-- streak_day_key the epoch-day of the most recent vote that touched the streak, so a
 -- second vote on the same day leaves the run unchanged while the first vote of the next
 -- day extends it. These live alongside the calendar buckets but advance independently of
 -- the daily/weekly/monthly windows.

@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * the presence context lands (registry order), so its {@code SendMessage} use case is built against this
  * status while it still delegates to {@link AfkStatus#NEVER}. When presence wires, the bootstrap calls
  * {@link #bind} to supply the real {@code PresenceAfkStatus}, and the already-constructed {@code SendMessage}
- * begins honouring it — no re-wiring. This is the same rebindable-holder shape {@link MutableMutePolicy} uses
+ * begins honouring it: no re-wiring. This is the same rebindable-holder shape {@link MutableMutePolicy} uses
  * for the moderation mute gate.
  *
  * <p>If presence is disabled the delegate stays {@link AfkStatus#NEVER}, so messaging degrades to "no one is

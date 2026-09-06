@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Pins the cross-server bus line {@code /uxmess doctor} renders from the live {@link BusHealth} view. The four
  * states an operator needs to tell apart are covered: the bus disabled (the default), enabled over the proxy,
- * enabled over a connected Redis, and enabled over a Redis whose subscribe connection has dropped — the last is
+ * enabled over a connected Redis, and enabled over a Redis whose subscribe connection has dropped: the last is
  * the silent-failure case the line exists to surface. The health signal is the transport's own
  * {@link BusHealth#healthy()} flag, read here through a fake so no real transport is opened.
  */

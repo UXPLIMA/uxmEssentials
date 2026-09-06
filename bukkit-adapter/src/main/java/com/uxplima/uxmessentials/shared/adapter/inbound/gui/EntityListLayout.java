@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The externalised presentation of an {@link EntityListView}: a {@link GuiLayout} (rows, content slots, the
- * previous/next navigation slots and their icon) plus the two fields a managed list adds on top — the
+ * previous/next navigation slots and their icon) plus the two fields a managed list adds on top, the
  * background {@code filler} material and an optional {@code create} button (its slot and icon) for a list that
  * lets the viewer add a new entry. Holds layout integers and materials only; titles, button labels, and the
  * create-button name stay in the message catalog as {@code MessageKey} lookups, so a translated catalog and an

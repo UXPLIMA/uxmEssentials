@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * the first {@code /clearinventory} stages a short-lived pending confirmation and asks them to repeat the
  * command, and a second one inside {@link #CONFIRM_WINDOW} performs the clear. The pending stamp is in-memory
  * and times out on its own, so a forgotten prompt never clears anything. A staff clear of another player
- * ({@code .others}) is never gated — only the clearer's own inventory is protected.
+ * ({@code .others}) is never gated: only the clearer's own inventory is protected.
  */
 public final class ClearInventory {
 
@@ -76,7 +76,7 @@ public final class ClearInventory {
         Instant now = clock.instant();
         Instant deadline = pendingUntil.remove(who.uuid());
         if (deadline != null && now.isBefore(deadline)) {
-            return false; // a live confirmation — let the clear run
+            return false; // a live confirmation, let the clear run
         }
         pendingUntil.put(who.uuid(), now.plus(CONFIRM_WINDOW));
         notifier.send(who, PlayerstateMessageKey.INVENTORY_CLEAR_CONFIRM);

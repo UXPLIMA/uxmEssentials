@@ -10,11 +10,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * The "how an NPC acts" half of the {@link Npc} aggregate: the single click command, whether the NPC rotates to
  * face nearby viewers, and the ordered list of typed actions a click runs. Grouping these behavioural fields into
- * one immutable value object keeps the {@link Npc} aggregate small while leaving the public surface unchanged —
+ * one immutable value object keeps the {@link Npc} aggregate small while leaving the public surface unchanged
  * {@code Npc} delegates every behavioural transition and accessor here. A behavior is a value object: each
  * {@code with*} produces a new instance rather than mutating.
  *
- * <p>{@code clickCommand} is the raw command text run when a player clicks the NPC, or {@code null} for none —
+ * <p>{@code clickCommand} is the raw command text run when a player clicks the NPC, or {@code null} for none
  * running it is an adapter concern, so the domain only carries the binding. {@code lookAtPlayer} controls whether
  * the fake player turns to face each nearby viewer; it defaults to {@code true} so a freshly created NPC tracks
  * players out of the box. {@code actions} is the ordered list of {@link ClickAction}s a click runs, the richer

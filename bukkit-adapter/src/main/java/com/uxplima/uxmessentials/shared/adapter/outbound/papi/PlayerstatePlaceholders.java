@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * Read seam the expansion queries for the {@code playerstate_*} placeholders. It is an adapter over the
  * playerstate context's in-memory snapshot store (for the god toggle) and the live Bukkit player (for the
- * client-side state — gamemode, flight, speed, health, food, experience, position, world and biome) wired
+ * client-side state. Gamemode, flight, speed, health, food, experience, position, world and biome) wired
  * during bootstrap; when the playerstate module is disabled the seam is absent and the placeholders degrade.
  *
  * <p>Every placeholder reads live session state, so an offline player has nothing to report: the seam

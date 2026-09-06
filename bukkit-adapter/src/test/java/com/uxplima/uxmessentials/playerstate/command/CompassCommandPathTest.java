@@ -56,7 +56,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@code /compass}: report the cardinal direction the player is facing, mapped from
- * the look yaw to one of eight compass points. A pure read in the adapter — none of the playerstate use cases
+ * the look yaw to one of eight compass points. A pure read in the adapter. None of the playerstate use cases
  * run, so they are all mocked. The {@link Messages} fake echoes each resolved key's suffix so the chosen
  * direction word is observable through the sender's message queue, including the {@code degrees} placeholder.
  */

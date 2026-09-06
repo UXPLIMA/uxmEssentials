@@ -4,7 +4,7 @@ import java.time.Duration;
 
 /**
  * Formats a {@link Duration} as the compact {@code Nd Nh Nm} string the {@code /playtime} breakdown lines embed
- * (e.g. {@code 2d 5h 13m}). Seconds are intentionally dropped — the sampler's resolution is a minute or coarser,
+ * (e.g. {@code 2d 5h 13m}). Seconds are intentionally dropped. The sampler's resolution is a minute or coarser,
  * and the breakdown reads as wall-clock playtime, not a stopwatch. A zero duration renders as {@code 0m} so a
  * never-played window still produces a value the message can interpolate.
  */

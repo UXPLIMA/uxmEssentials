@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.teleport.domain.SafeSearchArea;
  * and the world border still clamps the served location on top ({@link SafeSearchArea#maxRadius()}). The reduction
  * lives entirely in the one shared reducer, so RTP radii combine across permission groups exactly like home limits.
  *
- * <p>This applies to the per-player live search — the {@code /rtp biome} path, which builds a fresh area per
+ * <p>This applies to the per-player live search. The {@code /rtp biome} path, which builds a fresh area per
  * request. The plain {@code /rtp} and {@code /rtp <world>} paths serve from the shared, world-wide pre-warmed pool
  * (O(1), not per-player), so they carry no per-player radius clamp by construction.
  */

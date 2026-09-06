@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Builds and applies the Bukkit/Adventure side of each kit {@link com.uxplima.uxmessentials.kits.domain.KitAction}
- * the {@link BukkitKitActionRunner} sequences — the one place the kit action engine touches sounds, titles,
+ * the {@link BukkitKitActionRunner} sequences. The one place the kit action engine touches sounds, titles,
  * particles, fireworks, and MiniMessage. Each spec is parsed defensively: a malformed value logs a one-line
  * warning through {@link Logger} and the effect is skipped, never thrown, so a typo on the claim path is
  * harmless. Operator-authored text (message/actionbar/title/broadcast) is MiniMessage, the same config-data

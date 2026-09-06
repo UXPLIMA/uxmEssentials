@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * a {@code ConcurrentHashMap}-keyed set (mutated through {@code compute}-style operations) or per-player PDC, so a
  * read on the announcer's fan-out thread and a write on the toggling player's region thread never race.
  *
- * <p>The store holds only the subscription bit — no template content, no schedule — so it is the plugin's own
+ * <p>The store holds only the subscription bit (no template content, no schedule) so it is the plugin's own
  * transient state, not operator data. {@link #toggle} flips the bit and returns the new state in one atomic step,
  * which the {@code BroadcastOptOut} use case reports back to the player.
  */

@@ -22,12 +22,12 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>Both handlers are per-player and gated by the {@code uxmessentials.survival.farmprotect} permission: the toggle is
  * read from {@link PdcSurvivalToggles} for the acting player and defaults to on, so a permitted player who never touched
- * the command keeps their crops. A mob trampling farmland is not this mechanic's concern — only the player's own
+ * the command keeps their crops. A mob trampling farmland is not this mechanic's concern. Only the player's own
  * {@code EntityChangeBlockEvent} is inspected.
  *
  * <h2>Folia</h2>
  * Both events are dispatched on the region owning the trampled block, and the handler only reads the block type and
- * cancels the event — it mutates nothing — so no scheduler hop is needed.
+ * cancels the event, it mutates nothing, so no scheduler hop is needed.
  */
 @NullMarked
 public final class FarmProtectListener implements Listener {

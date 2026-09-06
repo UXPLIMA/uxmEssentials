@@ -26,7 +26,7 @@ class ExchangeRateTest {
 
     @Test
     void aTinySourceThatRoundsToZeroYieldsNoAmount() {
-        // 0.001 source at a rate of 1 and precision 2 rounds to 0.00 — a move that would debit for nothing.
+        // 0.001 source at a rate of 1 and precision 2 rounds to 0.00: a move that would debit for nothing.
         ExchangeRate rate = new ExchangeRate(SOURCE, TARGET, BigDecimal.ONE, BigDecimal.ZERO);
 
         assertThat(rate.calculateTargetAmount(new BigDecimal("0.001"), 2)).isEmpty();

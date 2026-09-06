@@ -23,7 +23,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The anti-corruption codec between a player's live {@link PotionEffect}s and the opaque {@link LoadoutBlob}
- * the staff loadout stores them as — the potion-effect sibling of {@code VaultItemCodec}. Staff mode does not
+ * the staff loadout stores them as: the potion-effect sibling of {@code VaultItemCodec}. Staff mode does not
  * touch a player's potions directly; it captures them here so they ride back onto the player on exit exactly as
  * they were, since the gadget hotbar swap leaves the live effects untouched but a restore from a different
  * session must be able to put them back.

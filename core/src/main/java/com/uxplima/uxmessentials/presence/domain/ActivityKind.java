@@ -16,10 +16,10 @@ import java.util.Optional;
  */
 public enum ActivityKind {
 
-    /** A real position change — a block hop, the canonical "the player is doing something" signal. */
+    /** A real position change: a block hop, the canonical "the player is doing something" signal. */
     MOVE("move"),
 
-    /** A look-around with no position change (yaw/pitch only) — cheap to treat as non-activity for AFK farms. */
+    /** A look-around with no position change (yaw/pitch only): cheap to treat as non-activity for AFK farms. */
     ROTATE("rotate"),
 
     /** A chat line the player sent. */
@@ -31,7 +31,7 @@ public enum ActivityKind {
     /** A block break, place, or interact. */
     INTERACT("interact"),
 
-    /** A reel of the fishing rod ({@code PlayerFishEvent}) — the classic AFK-fish-farm activity source. */
+    /** A reel of the fishing rod ({@code PlayerFishEvent}), the classic AFK-fish-farm activity source. */
     FISH("fish");
 
     private final String token;

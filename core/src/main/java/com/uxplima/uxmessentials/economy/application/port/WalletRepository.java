@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * Outbound port for the durable ledger — the read/write seam behind the native {@code EconomyProvider}. Each
+ * Outbound port for the durable ledger, the read/write seam behind the native {@code EconomyProvider}. Each
  * per-currency balance is a first-class {@code (uuid, currency, balance)} row, never an opaque JSON blob
  * (the persistence anti-pattern list), so a {@link Wallet} loads from queryable rows and {@code /baltop}
  * pushes its {@code ORDER BY balance DESC LIMIT ?} to the database. The jOOQ adapter behind this port mirrors
@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p>This is where invariant (d) is honoured at the source: balances are DB-backed, never PDC, so they
  * survive a world rollback. A cache decorator may sit in front of this port for offline reads, but it is
- * never an authority — the guarded debit/credit path always reads the live row inside its transaction.
+ * never an authority: the guarded debit/credit path always reads the live row inside its transaction.
  */
 public interface WalletRepository {
 
@@ -40,7 +40,7 @@ public interface WalletRepository {
     /**
      * Atomic two-sided move in one transaction: the guarded debit of {@code from} and the clamp-checked credit
      * of {@code to} commit together or not at all. Returns {@link TransferError#INSUFFICIENT_FUNDS} when the
-     * guarded {@code UPDATE} changed no rows — the database, not the JVM, serialises the contention — or
+     * guarded {@code UPDATE} changed no rows (the database, not the JVM, serialises the contention) or
      * {@link TransferError#BALANCE_MAX_EXCEEDED} when crediting {@code to} would push it past the currency's
      * {@code max-balance}, in which case the debit is rolled back and nothing moves.
      */
@@ -60,7 +60,7 @@ public interface WalletRepository {
      * {@code debit} (the source currency) and the clamp-checked credit of {@code credit} (the target currency)
      * commit together or not at all. Returns {@link TransferError#INSUFFICIENT_FUNDS} when the guarded debit
      * changed no rows and {@link TransferError#BALANCE_MAX_EXCEEDED} when the credit would push the target
-     * balance past its {@code max-balance} — in either case nothing is mutated. This is the {@code /exchange}
+     * balance past its {@code max-balance}: in either case nothing is mutated. This is the {@code /exchange}
      * seam: it mirrors {@link #transfer} but moves between two currencies of the same owner, so a conversion can
      * never debit one currency without crediting the other.
      */

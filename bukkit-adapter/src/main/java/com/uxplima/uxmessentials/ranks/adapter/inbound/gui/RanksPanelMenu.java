@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@code /ranks} ladder panel (config-gated on {@code gui.enabled}), registered with the menu engine and
  * opened from the command. A three-row window: the player's current rank and prestige, the next rank with its
  * cost and requirements, a rank-up button that runs the {@link Rankup} pipeline, and a close button. It holds no
- * new domain logic — it resolves the viewer's {@link RankStanding} through {@link CurrentRank} off the tick thread
+ * new domain logic. It resolves the viewer's {@link RankStanding} through {@link CurrentRank} off the tick thread
  * when the panel opens, precomputes the display strings into the {@link RanksSubject} the display items read
  * through the {@code ranks_*} placeholders, then opens the panel through {@link Menus} (which hops to the viewer's
  * entity thread to touch the live inventory). Every visible string resolves from the ranks catalog.

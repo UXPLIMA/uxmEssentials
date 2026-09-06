@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
 /**
  * {@code /movewarp <name>}: re-anchor an existing warp to the staff member's current position, keeping its
  * name, owner, creation time, and gates. Distinct from {@code /setwarp} on an existing name only in
- * intent — it requires the warp to already exist (rejecting a missing name) and never creates one. The
+ * intent: it requires the warp to already exist (rejecting a missing name) and never creates one. The
  * operator-only permission is enforced at the command gate.
  */
 public final class MoveWarp {

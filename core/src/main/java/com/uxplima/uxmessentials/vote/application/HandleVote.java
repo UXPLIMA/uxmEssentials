@@ -29,9 +29,9 @@ import com.uxplima.uxmessentials.vote.domain.reward.RewardGrant;
  * the {@link RewardApplier}. An online voter has the grants applied at once (commands run, messages and
  * items delivered) with {@link VoteReceived} published; an offline voter has the grants queued for their
  * next join (the applier queues the commands). Whether the credited vote is then announced is decided by
- * {@link BroadcastDecision} against the configured {@link BroadcastSettings} — when it is, the thank-you
+ * {@link BroadcastDecision} against the configured {@link BroadcastSettings}. When it is, the thank-you
  * fans out through the {@link com.uxplima.uxmessentials.vote.application.port.VoteBroadcaster} across the
- * configured channels. Then the global party counter advances — when it reaches the configured threshold a
+ * configured channels. Then the global party counter advances. When it reaches the configured threshold a
  * party fires (the party reward runs for every eligible online player,
  * {@link com.uxplima.uxmessentials.vote.domain.event.VotePartyTriggered} is published, and the counter
  * resets to zero), otherwise the incremented count is persisted.

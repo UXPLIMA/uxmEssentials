@@ -133,7 +133,7 @@ class IndexedVotePlaceholderTest {
     void topAtNameFallsBackToUuidWhenResolverUnknown() {
         UUID ghostUuid = UUID.randomUUID();
         repository.topResult = List.of(new VoteRanking(new PlayerRef(ghostUuid, ghostUuid.toString()), 50));
-        // Resolver that never knows anyone — returns the UUID string.
+        // Resolver that never knows anyone: returns the UUID string.
         RepositoryVotePlaceholders resolving = new RepositoryVotePlaceholders(repository, 25, UUID::toString);
         PlaceholderResolver localResolver = new PlaceholderResolver(
                 PlaceholderContexts.builder().vote(resolving).build());

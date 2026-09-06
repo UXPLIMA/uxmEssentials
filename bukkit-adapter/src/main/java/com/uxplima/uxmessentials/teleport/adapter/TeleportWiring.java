@@ -100,7 +100,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Constructs the teleport context's adapters and use cases over the injected kernel ports, and produces
  * everything the plugin must register: the Brigadier command list, the move/death/quit listener, and the
- * TTL expiry sweep. This is the one place the teleport context is wired — nothing else news up its
+ * TTL expiry sweep. This is the one place the teleport context is wired. Nothing else news up its
  * classes. The {@code Plugin} handle stays inside bootstrap; the adapters take only the {@code Plugin}
  * interface and the kernel ports.
  *
@@ -110,11 +110,11 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class TeleportWiring {
 
-    // A couple of ticks between rescheduled RTP search attempts — enough to slice a long search across ticks so
+    // A couple of ticks between rescheduled RTP search attempts. Enough to slice a long search across ticks so
     // it never fires every candidate at once or monopolises an async worker.
     private static final Duration RTP_RETRY_INTERVAL = Duration.ofMillis(100);
 
-    // How far (blocks) a biome-targeted sample may sit from a known hotspot chunk — wide enough to spread candidates
+    // How far (blocks) a biome-targeted sample may sit from a known hotspot chunk. Wide enough to spread candidates
     // over a biome patch, tight enough that the sample stays in the target biome most of the time.
     private static final int BIOME_HOTSPOT_RADIUS = 512;
 
@@ -210,8 +210,8 @@ public final class TeleportWiring {
                 org.bukkit.Material.ENDER_PEARL,
                 "uxmessentials.teleport.gui",
                 settingsView::open));
-        // The /rtp menu-engine world picker (opened by /rtp gui). Registered with the shared menu bindings — its
-        // list source, tile placeholders, and world-click action — so the shipped rtp.conf spec resolves cleanly.
+        // The /rtp menu-engine world picker (opened by /rtp gui). Registered with the shared menu bindings, its
+        // list source, tile placeholders, and world-click action, so the shipped rtp.conf spec resolves cleanly.
         RtpMenu rtpMenu = new RtpMenu(menus, kernel.scheduler(), kernel.messages(), plugin.getServer(), services);
         rtpMenu.register(menuBindings, plugin.getDataFolder().toPath(), kernel.log());
         List<CommandRegistration> commands =
@@ -315,8 +315,8 @@ public final class TeleportWiring {
     }
 
     /**
-     * Assemble the RTP engine: the async finder, the budgeted search, the in-memory pre-warmed queue, and — when the
-     * persisted pool is enabled in config — the durable {@link RtpPoolStore}, the persist-on-validate {@link
+     * Assemble the RTP engine: the async finder, the budgeted search, the in-memory pre-warmed queue, and, when the
+     * persisted pool is enabled in config, the durable {@link RtpPoolStore}, the persist-on-validate {@link
      * RtpPoolWriter} the queue records through, and the enable-time {@link RtpPoolWarmup} that pre-warms each world's
      * queue from disk. With the pool disabled the sink is {@link RtpPoolSink#NONE} and there is no warmup, so the
      * queue runs purely in memory.
@@ -332,7 +332,7 @@ public final class TeleportWiring {
         // The safe-search probe loads each candidate's chunk asynchronously through BukkitChunkAccess, so no RTP
         // probe generates a far chunk on a tick thread and every probed-but-unserved chunk is released again. The
         // budgeted search wraps the finder so a single search terminates within its budget and tick-slices its
-        // retries through the scheduler — no worker blocks on a candidate any more.
+        // retries through the scheduler: no worker blocks on a candidate any more.
         //
         // The claim + WorldGuard protection check rides along on the probe's region-thread snapshot callback (no
         // extra hop), setting each candidate's insideClaim flag so the pure policy keeps the shared pool out of
@@ -411,7 +411,7 @@ public final class TeleportWiring {
      * The claim seam the RTP protection check consults, resolved just like the poses gate: the shared provider
      * detection bound to a {@link ClaimServiceImpl}, or the no-op {@link AlwaysAllowClaimService} when
      * {@code respect-claims} is off (nothing to detect, nothing to log). RTP asks only the player-agnostic
-     * {@link ClaimService#isProtected} — is any claim here — so the placement knobs are left at their inert
+     * {@link ClaimService#isProtected}, is any claim here, so the placement knobs are left at their inert
      * defaults; only presence-of-claim matters.
      */
     private static ClaimService buildClaimService(
@@ -426,7 +426,7 @@ public final class TeleportWiring {
 
     /**
      * The wired RTP engine: the servable queue and, when the pool is persisted, the enable-time warmup, plus the
-     * biome-targeting pieces — the shared area source, the biome-key catalog, the {@code /rtp biome} search, and
+     * biome-targeting pieces. The shared area source, the biome-key catalog, the {@code /rtp biome} search, and
      * (when biome-targeting is on) the passive rare-biome chunk-load listener.
      */
     private record RtpBundle(

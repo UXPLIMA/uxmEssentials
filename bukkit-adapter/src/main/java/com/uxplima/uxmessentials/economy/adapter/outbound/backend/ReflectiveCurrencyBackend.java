@@ -23,8 +23,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared scaffolding for the backends reached purely by reflection (PlayerPoints, CoinsEngine, zEssentials). A
- * subclass names the Bukkit plugin it integrates with and implements two reflective primitives — read a balance,
- * change a balance — while this base owns the load-safe contract around them: every call is gated by the
+ * subclass names the Bukkit plugin it integrates with and implements two reflective primitives, read a balance,
+ * change a balance, while this base owns the load-safe contract around them: every call is gated by the
  * plugin-present guard, and any reflective failure (the API absent, or its shape shifted under a version bump) is
  * logged exactly once and degraded to {@link TransferError#CURRENCY_UNSUPPORTED} instead of propagating.
  *

@@ -12,8 +12,8 @@ import org.jspecify.annotations.Nullable;
  * The set of materials a vault refuses to store, matched case-insensitively. Material names are plain strings
  * (e.g. {@code "bedrock"}) so the model stays free of any Bukkit type: the adapter maps each {@code ItemStack}
  * to its {@code Material.name()} and asks {@link #isBlocked(String)} before the contents are saved, returning
- * any blocked item to the player. The set is normalised once on construction — every entry lowercased and
- * trimmed — so configured {@code "Bedrock"} and a queried {@code "BEDROCK"} compare equal.
+ * any blocked item to the player. The set is normalised once on construction. Every entry lowercased and
+ * trimmed, so configured {@code "Bedrock"} and a queried {@code "BEDROCK"} compare equal.
  *
  * @param blockedMaterials the lowercased, trimmed material names to refuse; never {@code null} and immutable
  */
@@ -26,7 +26,7 @@ public record VaultItemPolicy(Set<String> blockedMaterials) {
                 .collect(toUnmodifiableSet());
     }
 
-    /** A policy that refuses nothing — every material is storable. */
+    /** A policy that refuses nothing: every material is storable. */
     public static VaultItemPolicy allowAll() {
         return new VaultItemPolicy(Set.of());
     }

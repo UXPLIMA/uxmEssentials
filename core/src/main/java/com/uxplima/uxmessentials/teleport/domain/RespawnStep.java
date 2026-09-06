@@ -8,8 +8,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * One ordered entry in a {@link RespawnChain}: a {@link RespawnStepKind} and, for the kinds that need
- * it, an argument (a {@code WARP} step carries the warp name). Parsed from the configured chain token —
- * {@code spawn}, {@code warp:hub}, {@code home} — into a structured step the chain resolves in order.
+ * it, an argument (a {@code WARP} step carries the warp name). Parsed from the configured chain token
+ * {@code spawn}, {@code warp:hub}, {@code home}: into a structured step the chain resolves in order.
  *
  * @param kind which kind of respawn target this step names
  * @param argument the step's argument (the warp name for {@link RespawnStepKind#WARP}), or {@code null}

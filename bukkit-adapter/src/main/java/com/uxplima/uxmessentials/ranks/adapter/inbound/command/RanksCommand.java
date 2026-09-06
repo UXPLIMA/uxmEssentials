@@ -25,14 +25,14 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /ranks}: the ranks context's root command. It carries the admin {@code /ranks setrank <player> <rank>}
- * subcommand — the escape hatch that sets a player's rank pointer directly through {@link SetRank}, bypassing the
+ * subcommand. The escape hatch that sets a player's rank pointer directly through {@link SetRank}, bypassing the
  * requirements, cost and actions {@code /rankup} runs (the player argument is a standard selector resolving to an
  * online target; the rank argument completes against the ladder's rank ids and is refused when it names no rung).
  * {@code setrank} is gated on {@code uxmessentials.ranks.admin}.
  *
  * <p>When the ladder GUI is enabled ({@code modules.ranks.gui.enabled}), a bare {@code /ranks} opens the
- * {@link RanksPanelMenu ladder panel} — the player's current rank/prestige, the next rank's requirements and cost,
- * and a rank-up button — gated on the self-service {@code uxmessentials.ranks.gui}. The panel is injected as an
+ * {@link RanksPanelMenu ladder panel}. The player's current rank/prestige, the next rank's requirements and cost,
+ * and a rank-up button: gated on the self-service {@code uxmessentials.ranks.gui}. The panel is injected as an
  * {@link Optional}: when GUI is off, the no-argument open is not wired and the root gates on admin alone, so a
  * disabled GUI publishes exactly the {@code setrank}-only surface it always did.
  */

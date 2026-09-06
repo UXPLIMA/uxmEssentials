@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * regardless of the casing it was configured or queried in, a material that is not on the list is storable,
  * {@link VaultItemPolicy#allowAll()} refuses nothing, a {@code null} query is never blocked, and the policy
  * keeps a defensive immutable copy so mutating the source set after construction leaves it unchanged. The
- * model is pure — names are plain strings — so every rule holds here without a Bukkit {@code Material}.
+ * model is pure, names are plain strings, so every rule holds here without a Bukkit {@code Material}.
  */
 class VaultItemPolicyTest {
 

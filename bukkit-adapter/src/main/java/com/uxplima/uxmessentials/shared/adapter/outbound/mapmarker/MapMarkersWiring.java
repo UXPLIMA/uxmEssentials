@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * Wires the map-plugin marker integration: a cross-cutting feature owned by no single context (it spans the
  * server's warps and spawns), so it is wired here in the bootstrap surface rather than as a {@code
  * FeatureModule}. It does nothing when {@code map-markers.enabled} is false or when neither Dynmap nor
- * squaremap is installed — in either case the discoverer hands back the no-op publisher and no source is
+ * squaremap is installed. In either case the discoverer hands back the no-op publisher and no source is
  * read, so the integration holds no runtime state.
  *
  * <p>When a map plugin is present the wiring builds the {@link MapMarkerService} over read-side warp/spawn
@@ -84,7 +84,7 @@ public final class MapMarkersWiring {
     private static List<MapMarkerSource> sources(Server server, Persistence persistence, MapMarkerSettings settings) {
         // Only warps and spawns have an enumerable source for the on-enable refresh. Homes have no
         // all-owners list (and are private), so they populate only via the opt-in HomeCreated/HomeDeleted
-        // events the service handles directly — never bulk-rendered.
+        // events the service handles directly: never bulk-rendered.
         return List.of(
                 new WarpMarkerSource(WarpRepositories.cached(persistence), settings),
                 new SpawnMarkerSource(server, SpawnDirectories.jooq(persistence), settings));

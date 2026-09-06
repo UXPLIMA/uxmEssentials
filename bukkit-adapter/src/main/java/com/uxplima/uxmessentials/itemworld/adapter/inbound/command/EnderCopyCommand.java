@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandSuggestio
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /endercopy <player>}: copy an online target's ender-chest contents into your own — the ender-chest
+ * {@code /endercopy <player>}: copy an online target's ender-chest contents into your own, the ender-chest
  * sibling of {@code /copyinv}. The named target must resolve online (else
  * {@link ItemworldMessageKey#UNKNOWN_TARGET}).
  *

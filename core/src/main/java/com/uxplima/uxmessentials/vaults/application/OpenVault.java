@@ -17,8 +17,8 @@ import com.uxplima.uxmessentials.vaults.domain.VaultSize;
  * {@code /vault <n>}: resolve and hand back the vault a player wants to open. The amount quota
  * ({@code uxmessentials.vault.amount.<n>}) gates which indices the owner may reach; the size quota
  * ({@code uxmessentials.vault.size.<rows>}) sets how tall a freshly allocated or re-opened vault is. An
- * already-owned vault re-opens regardless of a since-shrunk amount quota — a player never loses access to
- * items they already stored — and adopts the owner's current size on open. A not-yet-allocated vault within
+ * already-owned vault re-opens regardless of a since-shrunk amount quota. A player never loses access to
+ * items they already stored, and adopts the owner's current size on open. A not-yet-allocated vault within
  * the amount quota is created empty.
  *
  * <p>The economy charge is gated through {@link VaultCharge} in the same quota→charge→allocate order

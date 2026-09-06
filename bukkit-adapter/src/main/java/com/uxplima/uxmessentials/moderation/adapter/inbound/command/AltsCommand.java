@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /alts <player>}: list the accounts that share the target's last-known IP (alt detection). A read-only
- * companion of {@code /seenip} — the {@code ListAlts} use case runs the bounded seen/altsByIp lookup and
+ * companion of {@code /seenip}. The {@code ListAlts} use case runs the bounded seen/altsByIp lookup and
  * renders the alt set as a list. It shares the {@code uxmessentials.moderation.seen} node with {@code /seen}
  * and {@code /seenip}, the same last-seen/last-IP read surface. The lookup is hopped off the tick thread
  * through the {@link Scheduler} port so a large seen table never blocks the command.

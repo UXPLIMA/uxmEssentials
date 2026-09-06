@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * The set of {@link RemoteSyncListener}s the bus client dispatches an inbound frame to. Contexts register
  * their listener as they wire (all on the main thread at enable, before any frame can arrive); the bus reads
  * the set when a frame lands. Backed by a {@link CopyOnWriteArrayList} so registration during wiring and the
- * off-tick dispatch never need a shared lock — registration is rare and dispatch is read-only.
+ * off-tick dispatch never need a shared lock: registration is rare and dispatch is read-only.
  *
  * <p>This is the single seam every context opts into cross-server sync through: homes and economy register
  * here today; warps and vaults register the same way with no change to the bus. The registry is owned by the

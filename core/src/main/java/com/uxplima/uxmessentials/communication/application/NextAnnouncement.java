@@ -15,13 +15,13 @@ import com.uxplima.uxmessentials.communication.domain.AnnouncerCursor;
  * rule. The adapter's {@code Scheduler}-port timer calls {@link #pick(int)} with the current online count; this
  * use case reads the live {@link AnnouncerConfig} from the supplied holder (so a reload that swaps the config
  * takes effect on the next tick), checks the gate, advances the {@link AnnouncerCursor}, and returns the chosen
- * {@link Announcement} to broadcast — or empty when the tick is skipped.
+ * {@link Announcement} to broadcast, or empty when the tick is skipped.
  *
  * <p>The cursor is the only mutable state: it is held in an {@code AtomicReference} and advanced with {@code
  * updateAndGet} so two ticks can never read the same position, keeping the no-repeat rule honest under the
  * fire-and-forget scheduler. Randomness flows through the injected {@link RandomSource}, leaving the domain cursor
  * pure. The returned announcement carries operator-authored lines for the adapter to render through MiniMessage,
- * gate per viewer by the announcement's condition, and deliver across its channels — never a {@code MessageKey}.
+ * gate per viewer by the announcement's condition, and deliver across its channels, never a {@code MessageKey}.
  */
 public final class NextAnnouncement {
 

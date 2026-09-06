@@ -17,8 +17,8 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
 /**
  * {@code /hologram action <name> add <trigger> <type> <value…>}: append one typed {@link ClickAction} to the end
  * of a hologram's action chain and save the new snapshot. A name no hologram exists at is rejected with
- * {@link HologramError#NOT_FOUND}. Appending does not change the rendered text — the click listener reads the
- * action chain from the repository when the hologram is clicked — so there is no re-render. The operator-only
+ * {@link HologramError#NOT_FOUND}. Appending does not change the rendered text. The click listener reads the
+ * action chain from the repository when the hologram is clicked, so there is no re-render. The operator-only
  * permission is enforced at the command gate.
  */
 public final class AddHologramAction {

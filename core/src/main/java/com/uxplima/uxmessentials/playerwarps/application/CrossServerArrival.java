@@ -21,8 +21,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * The arrival half of a cross-server teleport. When a player joins this backend the inbound listener hands them
  * here; if the shared store holds a pending teleport that targets this backend and is still fresh, the warp is
  * resolved and the player is hopped locally after a short settling delay, exactly as if they had run
- * {@code /pwarp} here. A stale row (aimed at another backend, or older than the request TTL) is cleared instead —
- * with the origin's charge refunded on expiry — and a warp that is gone, suspended, or has since moved off this
+ * {@code /pwarp} here. A stale row (aimed at another backend, or older than the request TTL) is cleared instead
+ * with the origin's charge refunded on expiry, and a warp that is gone, suspended, or has since moved off this
  * backend clears the row, refunds the charge, and tells the player it could not be reached.
  *
  * <p>Every store and repository read runs off the tick thread through the {@link Scheduler} port; only the final

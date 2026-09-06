@@ -71,7 +71,7 @@ class EnterStaffModeTest {
         var result = enterMode(fakes, true).enter(ACTOR);
 
         assertThat(result.isErr()).isTrue();
-        // No capture, no save, no swap — the committed loadout is the one true copy.
+        // No capture, no save, no swap: the committed loadout is the one true copy.
         assertThat(fakes.calls).isEmpty();
         assertThat(fakes.repository.rows).doesNotContainKey(ACTOR.uuid());
         assertThat(fakes.sentKeys).containsExactly(StaffMessageKey.STAFF_MODE_ALREADY);
@@ -80,7 +80,7 @@ class EnterStaffModeTest {
     @Test
     void enterWithAPreExistingRowRecoversItRatherThanOverwriting() {
         // The crash signature: a loadout row survives but the in-memory active marker is gone. Entering must NOT
-        // capture the (gadget-hotbar) live inventory over the one true copy — it must recover the existing row.
+        // capture the (gadget-hotbar) live inventory over the one true copy: it must recover the existing row.
         StaffTestFakes fakes = new StaffTestFakes();
         SavedLoadout real = StaffTestFakes.sampleLoadout();
         fakes.repository.rows.put(ACTOR.uuid(), real);

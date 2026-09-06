@@ -6,7 +6,7 @@ package com.uxplima.uxmessentials.teleport.domain;
  * <p>A request is born {@link Phase#PENDING}; the target may {@code accept} it (→ {@link Phase#ACCEPTED})
  * or {@code deny} it (→ {@link Phase#DENIED}); the requester may {@code cancel} it
  * (→ {@link Phase#CANCELLED}); the TTL may {@code expire} it (→ {@link Phase#EXPIRED}); and an accepted
- * request {@code completes} on arrival (→ {@link Phase#COMPLETED}). Every terminal phase is final — a
+ * request {@code completes} on arrival (→ {@link Phase#COMPLETED}). Every terminal phase is final, a
  * resolved request never moves again, which is what lets {@link CooldownStartPhase#burnsOn} reason about
  * exactly one burning transition.
  */

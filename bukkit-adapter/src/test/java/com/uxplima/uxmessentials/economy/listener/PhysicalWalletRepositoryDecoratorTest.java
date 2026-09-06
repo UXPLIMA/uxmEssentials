@@ -372,7 +372,7 @@ class PhysicalWalletRepositoryDecoratorTest {
         when(calculations.getBalance(eq(rich), eq(gems))).thenReturn(BigDecimal.valueOf(80));
         when(calculations.getBalance(eq(poor), eq(gems))).thenReturn(BigDecimal.valueOf(20));
 
-        // Inline-on-owning-thread must complete well under the 5s marshalling timeout — a scheduled-and-blocked
+        // Inline-on-owning-thread must complete well under the 5s marshalling timeout: a scheduled-and-blocked
         // call from the owning thread would deadlock and only return after timing out.
         List<BaltopRow> rows = assertReturnsBefore(Duration.ofSeconds(2), () -> decorator.top(gems, 10));
 

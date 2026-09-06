@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
  * the behaviour run when the viewer clicks it. The editor draws one button per property at its configured
  * slot and routes a click on that slot back to {@link #onClick(ClickContext)}.
  *
- * <p>A property carries no domain logic of its own. Its {@link #onClick} performs a presentation step — cycle
- * a flag, open an anvil, step a number, open a sub-selector — and then hands the new value to a
+ * <p>A property carries no domain logic of its own. Its {@link #onClick} performs a presentation step, cycle
+ * a flag, open an anvil, step a number, open a sub-selector, and then hands the new value to a
  * caller-supplied setter (a {@code Consumer} that calls the module's existing application use case). The
  * framework is the inbound adapter; the use case is the only place the change is actually made, so the GUI and
  * the equivalent command always go through the same code.

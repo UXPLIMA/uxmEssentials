@@ -1,4 +1,4 @@
--- Schema for the security bounded context — the durable two-factor store. A
+-- Schema for the security bounded context, the durable two-factor store. A
 -- second factor that a world rollback could wipe would be no protection at all,
 -- so this row is DB-backed and never PDC (the same hard invariant the economy
 -- ledger and the rank pointer hold): the truth of who has 2FA and what it is
@@ -15,7 +15,7 @@
 
 -- One row per player. `pin_hash` is the PIN's salted one-way digest, serialised
 -- as `algorithm:salt:hash` (the same PBKDF2 hasher the player-warp password uses)
--- — the PIN plaintext is never stored. `totp_secret_enc` is the TOTP shared
+--: the PIN plaintext is never stored. `totp_secret_enc` is the TOTP shared
 -- secret encrypted with AES-GCM under a server key-file, because TOTP
 -- verification needs the secret back and so it cannot be a one-way hash; it is
 -- never stored or logged in plaintext. Both are NULL until the matching factor is

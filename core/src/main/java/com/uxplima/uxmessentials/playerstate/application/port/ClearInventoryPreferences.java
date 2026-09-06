@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * inventory outright. The default is off, preserving the historical clear-immediately behaviour.
  *
  * <p>This is a per-player preference that survives relog, so the adapter stamps it in PDC under a single
- * pre-created key — never economy-grade persisted data, just session/PDC state like the teleport flags.
+ * pre-created key: never economy-grade persisted data, just session/PDC state like the teleport flags.
  */
 public interface ClearInventoryPreferences {
 

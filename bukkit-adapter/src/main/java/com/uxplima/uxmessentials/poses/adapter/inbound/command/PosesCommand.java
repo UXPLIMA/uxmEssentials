@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /poses}: the poses context's own root command. A bare {@code /poses} (and the explicit {@code /poses gui}
- * subcommand) opens the personal settings/status panel — the current-pose status and the player-sit opt-out — gated
+ * subcommand) opens the personal settings/status panel, the current-pose status and the player-sit opt-out, gated
  * by the self-service {@code uxmessentials.poses.gui}; a non-player sender who cannot open a GUI gets the usage line
  * instead. The {@code toggle} subcommand ({@code uxmessentials.poses.toggle}) flips the opt-out from chat, the same
  * flip the panel's button makes.

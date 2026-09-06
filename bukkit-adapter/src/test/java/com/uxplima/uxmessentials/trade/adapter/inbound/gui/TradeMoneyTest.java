@@ -149,7 +149,7 @@ class TradeMoneyTest {
         server.getPluginManager().callEvent(event);
 
         assertThat(event.isCancelled()).isTrue();
-        // The offer stays empty — the blacklisted stack never entered the domain offer.
+        // The offer stays empty: the blacklisted stack never entered the domain offer.
         assertThat(exchangeOf(alice).session().offer(TradeSide.INITIATOR).items())
                 .isEmpty();
     }

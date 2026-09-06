@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuCon
  * <p>Besides id-keyed handlers, the registry carries one or more optional {@link Fallback}s: a resolver that claims
  * a family of ids by predicate rather than by exact name, so a whole prefix (the {@code papi_*} PlaceholderAPI
  * bridge, the {@code data_*}/{@code meta_*} player-data readers) resolves without a handler per token. Fallbacks are
- * consulted only when no exact handler matches, in registration order — the first that claims an id wins — and
+ * consulted only when no exact handler matches, in registration order, the first that claims an id wins, and
  * {@link #has} treats an id any fallback claims as known so {@link MenuBindings#validate} accepts a {@code %papi_*%}
  * or {@code %data_value_*%} spec.
  */
@@ -120,7 +120,7 @@ public final class PlaceholderRegistry {
     }
 
     /**
-     * Every exactly-registered placeholder id, sorted — the catalog a token picker offers. The prefix/family
+     * Every exactly-registered placeholder id, sorted: the catalog a token picker offers. The prefix/family
      * fallbacks ({@code papi_*}, {@code data_*}) claim ids by predicate, not by name, so they cannot be enumerated
      * here; a picker offers the exact tokens and leaves the open-ended families to a typed token.
      */
@@ -145,7 +145,7 @@ public final class PlaceholderRegistry {
      * Resolve every registered placeholder against {@code ctx} into an {@code id -> value} map, so a catalog
      * {@code @key} text can fill its {@code {token}} arguments from the same placeholders a {@code %token%}
      * spec uses. A resolver that throws because this context does not carry what it needs (a placeholder owned
-     * by a different menu) is skipped rather than aborting the render — the token it would fill simply stays
+     * by a different menu) is skipped rather than aborting the render. The token it would fill simply stays
      * unresolved, the same fail-soft stance the rest of the renderer takes.
      */
     public Map<String, String> resolveAll(MenuContext ctx) {

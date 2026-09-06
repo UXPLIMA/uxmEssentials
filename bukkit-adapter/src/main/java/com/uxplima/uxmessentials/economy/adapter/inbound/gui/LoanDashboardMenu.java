@@ -40,11 +40,11 @@ import org.jspecify.annotations.NullMarked;
  * Registers the {@code /loan} dashboard with the menu engine and opens it. A three-row panel: the viewer's credit
  * profile, a strip of their active loans (one book per loan), a request-a-new-loan button, and a close button. The
  * credit profile and the active loans are read off the tick thread when the panel opens and handed in as the
- * {@link LoanDashboardSubject} the profile display and the loan strip render from — exactly as the old view did;
+ * {@link LoanDashboardSubject} the profile display and the loan strip render from. Exactly as the old view did;
  * the repayment and request use cases are dispatched off-tick as the {@code /loan} command does.
  *
  * <p>Each loan in the strip is multi-gesture: every click routes through the one {@code economy:loan-entry} action,
- * which branches on the gesture — left pays an installment, right pays the loan off, and a shift-click prompts for a
+ * which branches on the gesture, left pays an installment, right pays the loan off, and a shift-click prompts for a
  * custom amount through the shared input seam, then runs the matching {@link LoanService} repayment. The request
  * button hands off to {@link LoanRequestFlow}, which picks a currency through the shared engine picker and then
  * prompts for an amount and an installment count. The menu holds no new domain logic; every visible string resolves
@@ -312,7 +312,7 @@ public final class LoanDashboardMenu {
 
     /**
      * The subject of an open dashboard: the viewer's credit score, the loan terms that score qualifies for, and
-     * their active loans — all read at open time. The profile placeholders read the score and quote directly and
+     * their active loans, all read at open time. The profile placeholders read the score and quote directly and
      * the loan strip lists the loans, so the render touches no port.
      *
      * @param creditScore the viewer's credit score, read at open time

@@ -22,8 +22,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-gesture click-action builder opened from the item editor's "Click actions" row. Its {@link #row} is a
- * {@link MenuOpenerProperty} whose click opens a gesture-list selector — one button per {@link ClickKind}, each
- * carrying the count of actions bound to it — and selecting a gesture opens that gesture's action {@link
+ * {@link MenuOpenerProperty} whose click opens a gesture-list selector, one button per {@link ClickKind}, each
+ * carrying the count of actions bound to it, and selecting a gesture opens that gesture's action {@link
  * MenuRefListEditor.RefList} (add / edit / remove / reorder, ids chosen from the schema's action catalog). Everything
  * is an engine child window routed through the row's {@link ClickContext}, so the whole flow rides the one holder and
  * teardown; the gesture list's back returns to the item editor and a gesture's list backs to the gesture list.

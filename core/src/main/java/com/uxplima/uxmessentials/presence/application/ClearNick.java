@@ -8,8 +8,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /nick off}: clear a player's display name and restore their account name. Removes the
- * {@link NickStore} stamp and confirms with {@link PresenceMessageKey#NICK_CLEARED}. Clearing is idempotent —
- * clearing a player who has no nick still restores the account name and confirms — so the command never has to
+ * {@link NickStore} stamp and confirms with {@link PresenceMessageKey#NICK_CLEARED}. Clearing is idempotent
+ * clearing a player who has no nick still restores the account name and confirms, so the command never has to
  * branch on whether a nick was set.
  */
 public final class ClearNick {

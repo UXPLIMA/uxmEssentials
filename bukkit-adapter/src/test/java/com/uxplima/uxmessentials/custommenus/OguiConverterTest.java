@@ -16,7 +16,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * Pure coverage of the OGUI → uxmEssentials converter mapping. Each test feeds an OGUI GUI YAML fragment, converts it,
- * and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle string — the
+ * and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle string, the
  * single-root GUI, the title/rows/size mapping, the two action styles (the legacy {@code commands} list and the typed
  * {@code actions} list), the {@code {player}} → {@code %player%} rewrite, the {@code close}/type navigation, the typed
  * action-type map, the condition-type map (WORLD single/whitelist/blacklist, PERMISSION, PLACEHOLDER), and the SCRIPT

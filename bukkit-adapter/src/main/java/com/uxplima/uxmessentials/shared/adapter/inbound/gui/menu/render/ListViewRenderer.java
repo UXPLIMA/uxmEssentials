@@ -21,14 +21,14 @@ import org.jspecify.annotations.NullMarked;
  * Lays an {@link EntityListSpec} into an open inventory for one viewer, the list counterpart of {@link EditorRenderer}. It
  * paints the spec's filler everywhere, then one entity icon per content slot for the requested page (sliced through
  * the shared {@link Pagination} so a page flip never re-queries), then the previous/next nav buttons, then the
- * optional create and action buttons — recording each clickable slot onto the holder's {@link ListViewState} so the
+ * optional create and action buttons. Recording each clickable slot onto the holder's {@link ListViewState} so the
  * one listener can route a later click back to the entity or button drawn there. The entity snapshot is re-read
  * fresh from the spec on every call (a page flip is just a repaint of the next slice), and the per-entity icon is
  * the caller's already-prepared {@code ItemStack}, so this renderer makes no presentation decision of its own beyond
  * the filler and the nav/create/action button names the spec resolved.
  *
- * <p>The per-page layout is byte-for-byte what the bespoke {@code EntityListView} drew — the same content slots, the
- * same nav/create/action slots and icons, the same glass filler everywhere else — so a shim that re-points the view
+ * <p>The per-page layout is byte-for-byte what the bespoke {@code EntityListView} drew. The same content slots, the
+ * same nav/create/action slots and icons, the same glass filler everywhere else, so a shim that re-points the view
  * at the engine produces a slot-for-slot identical window.
  */
 @NullMarked

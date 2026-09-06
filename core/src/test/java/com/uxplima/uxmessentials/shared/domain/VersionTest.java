@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit coverage of {@link Version} — the SemVer value object the update checker compares the running plugin
+ * Unit coverage of {@link Version}. The SemVer value object the update checker compares the running plugin
  * version against the latest release tag with. The load-bearing properties: a {@code v}-prefixed tag parses, a
  * pre-release or build suffix is ignored, a missing minor/patch reads as zero, ordering is major-then-minor-then-
  * patch, and a non-numeric body parses to empty rather than guessing a version that could fire a false update

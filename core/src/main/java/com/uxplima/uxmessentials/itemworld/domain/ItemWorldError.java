@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.itemworld.domain;
 import com.uxplima.uxmessentials.itemworld.application.ItemworldMessageKey;
 
 /**
- * The modelled, expected failures of an itemworld action — the {@code E} arm of a {@code Result} a use case
+ * The modelled, expected failures of an itemworld action, the {@code E} arm of a {@code Result} a use case
  * or a validator returns instead of throwing. Each value carries the {@link ItemworldMessageKey} the adapter
  * renders to the actor, so the failure reason and its localized text never drift apart (the same pattern the
  * moderation context's {@code ModerationError} uses).

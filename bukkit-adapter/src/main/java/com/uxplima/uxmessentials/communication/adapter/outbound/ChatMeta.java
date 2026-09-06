@@ -27,7 +27,7 @@ public record ChatMeta(String prefix, String suffix, Optional<String> primaryGro
         Objects.requireNonNull(primaryGroup, "primaryGroup");
     }
 
-    /** Empty meta — no prefix, no suffix, no group — used when no permission plugin backs the source. */
+    /** Empty meta (no prefix, no suffix, no group) used when no permission plugin backs the source. */
     public static ChatMeta empty() {
         return EMPTY;
     }

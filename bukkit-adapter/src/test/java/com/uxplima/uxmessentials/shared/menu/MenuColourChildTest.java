@@ -56,8 +56,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of increment 8: a {@link ColourProperty} clicked inside an editor running on the engine
- * editor runtime opens its colour picker as an engine child window — a {@link MenuHolder} routed by the one
- * {@link MenuListener} — rather than a uxmLib {@code SimpleGui}. The picker renders the 16-colour palette plus the
+ * editor runtime opens its colour picker as an engine child window. A {@link MenuHolder} routed by the one
+ * {@link MenuListener}, rather than a uxmLib {@code SimpleGui}. The picker renders the 16-colour palette plus the
  * custom-hex, clear, and back buttons at the layout slots; clicking a swatch hands its packed ARGB int to the
  * setter and reopens the parent editor in place, the clear button fires the clear runnable and reopens the parent,
  * and back reopens the parent. The custom-hex anvil submit branch rides the runtime-neutral apply seam

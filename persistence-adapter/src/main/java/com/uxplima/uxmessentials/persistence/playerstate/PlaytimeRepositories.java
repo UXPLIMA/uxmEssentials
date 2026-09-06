@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * (jOOQ is an {@code implementation} dependency of this module, kept off the consumer's compile classpath).
  *
  * <p>The ledger is write-heavy (one upsert per online player per sample) and read-rarely (only on
- * {@code /playtime}), so it is the plain jOOQ adapter with no Caffeine layer — a cache would buy nothing and would
+ * {@code /playtime}), so it is the plain jOOQ adapter with no Caffeine layer. A cache would buy nothing and would
  * have to be invalidated on every sample.
  */
 @NullMarked

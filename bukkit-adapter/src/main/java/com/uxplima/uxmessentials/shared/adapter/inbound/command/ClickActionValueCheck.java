@@ -12,12 +12,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Validates a click-action value against its {@link ClickActionType} at add time, so an operator gets a clear
  * rejection rather than a silently-broken action that only fails on click. Only the cheap, structural checks live
- * here — a numeric {@code DELAY}/{@code CHANCE}/{@code COST}, a positive-int {@code RANDOM} group count, and a
+ * here, a numeric {@code DELAY}/{@code CHANCE}/{@code COST}, a positive-int {@code RANDOM} group count, and a
  * resolvable {@code GIVE} material (or an accepted serialized token); the free-text gates ({@code PERMISSION},
  * {@code CONDITION}) and the operator-content effects ({@code MESSAGE}, commands, …) accept any value. A rejection
  * carries a short {@code hint} the catalog message interpolates so the operator is told the expected shape.
  *
- * <p>Shared by every command surface that edits a click-action chain — the {@code /npc action} and
+ * <p>Shared by every command surface that edits a click-action chain, the {@code /npc action} and
  * {@code /hologram action} groups both validate through this one helper, mirroring how the shared
  * {@code ClickActionRunner} runs the chain for both contexts.
  */
@@ -105,7 +105,7 @@ public final class ClickActionValueCheck {
     }
 
     /**
-     * A give value is either a serialized item token ({@code b64:…}, what {@code give hand} captures — accepted
+     * A give value is either a serialized item token ({@code b64:…}, what {@code give hand} captures, accepted
      * as-is, its shape is the codec's concern) or a {@code <material>[:amount]} the material registry resolves.
      */
     private static Result give(String value) {

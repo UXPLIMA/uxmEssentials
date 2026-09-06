@@ -34,13 +34,13 @@ import org.jspecify.annotations.NullMarked;
  * ignore-aware), {@code sendall <text>} broadcasts mail to every online player (a staff/operator action
  * behind {@code uxmessentials.mail.sendall}), and {@code clear} empties the box. Each sub-command maps to one
  * use case; the bare {@code /mail} opens the mailbox GUI (which marks the box read on open), while
- * {@code /mail read} keeps the chat rendering. Mail is text-only — there are no item attachments. The
+ * {@code /mail read} keeps the chat rendering. Mail is text-only: there are no item attachments. The
  * {@code send} target is resolved by name (mail to an offline player is valid and waits for them, so this is a
  * plain online-or-offline lookup, not the vanish-aware online-only resolution {@code /msg} uses).
  *
  * <p><strong>{@code sendall} recipient scope:</strong> v1 broadcasts to the currently-online roster only. The
  * recipient set is snapshotted on the tick thread (the only safe place to read {@code getOnlinePlayers}) and
- * the durable-mail fan-out then runs off-tick through the {@code Scheduler.async} port — a broadcast is a
+ * the durable-mail fan-out then runs off-tick through the {@code Scheduler.async} port. A broadcast is a
  * bounded DB write per recipient and never blocks the tick. Mailing every known mailbox owner (offline
  * profiles included) is a deliberate future enhancement, not v1.
  */
@@ -135,8 +135,8 @@ public final class MailCommand extends MessagingCommandSupport implements Comman
             return 0;
         }
         PlayerRef from = ref(sender);
-        // Snapshot the online roster here, on the global region thread Paper dispatches this Brigadier handler on —
-        // the one thread where Bukkit.getOnlinePlayers() is consistently readable on Folia — then fan the durable
+        // Snapshot the online roster here, on the global region thread Paper dispatches this Brigadier handler on
+        // the one thread where Bukkit.getOnlinePlayers() is consistently readable on Folia, then fan the durable
         // per-recipient mail writes off-tick so the broadcast never blocks the tick.
         List<PlayerRef> recipients = onlineRecipients();
         services.scheduler().async(() -> {

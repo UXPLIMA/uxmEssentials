@@ -200,7 +200,7 @@ class PacketNametagPresenterTest {
         presenter.show(wearer);
         presenter.show(wearer);
 
-        // A second show for the same wearer reconciles through update on the same format — still one tracked entry.
+        // A second show for the same wearer reconciles through update on the same format: still one tracked entry.
         assertThat(presenter.trackedCount()).isEqualTo(1);
     }
 
@@ -492,7 +492,7 @@ class PacketNametagPresenterTest {
         }
     }
 
-    /** A uxmLib {@link Scheduler} whose timers never fire — only the inline first frame of {@code show} runs. */
+    /** A uxmLib {@link Scheduler} whose timers never fire, only the inline first frame of {@code show} runs. */
     private static final class NoTimerScheduler implements Scheduler {
 
         @Override

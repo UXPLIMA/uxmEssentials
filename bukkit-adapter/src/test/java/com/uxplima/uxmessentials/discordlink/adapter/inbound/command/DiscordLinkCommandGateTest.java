@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the {@code /discordlink} issuing gate. A connected bridge means a code can be redeemed,
  * so issuing mints and persists one; with no bridge a code would have nothing to redeem it, so the command
- * declines with {@code discordlink.not-configured} and runs {@link BeginLink} not at all — no row is written.
+ * declines with {@code discordlink.not-configured} and runs {@link BeginLink} not at all: no row is written.
  * The gate guards only issuing; {@code /discordlink status} is unaffected.
  */
 class DiscordLinkCommandGateTest {

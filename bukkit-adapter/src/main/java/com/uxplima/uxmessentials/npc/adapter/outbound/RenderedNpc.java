@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.npc.domain.Npc;
  * name)}), so it is stable across a restart, identical on every viewer, and links the {@code textures} property
  * carried on the tab-add to the spawned entity. The entity id is allocated from the shared server counter when
  * the NPC is first tracked and kept for the NPC's whole life: a move or a re-skin reuses it (the explicit-render
- * path removes then re-spawns the fake player under the same id), and only a delete frees it — a later recreate
+ * path removes then re-spawns the fake player under the same id), and only a delete frees it, a later recreate
  * allocates a fresh one. The idempotent refresh tick never reallocates either; it only spawns/removes on a
  * range transition.
  *
@@ -40,7 +40,7 @@ record RenderedNpc(Npc npc, int entityId) {
         return profileIdFor(npc.name().value());
     }
 
-    /** The deterministic profile uuid for an NPC name — exposed so tests can assert stability. */
+    /** The deterministic profile uuid for an NPC name: exposed so tests can assert stability. */
     static UUID profileIdFor(String name) {
         return UUID.nameUUIDFromBytes((PROFILE_SEED_PREFIX + name).getBytes(StandardCharsets.UTF_8));
     }

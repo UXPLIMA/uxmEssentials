@@ -10,12 +10,12 @@ import com.uxplima.uxmessentials.trade.domain.TradeId;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One side's escrowed stake in a cross-server trade — the durable, crash-safe record of what an owner has put on the
+ * One side's escrowed stake in a cross-server trade, the durable, crash-safe record of what an owner has put on the
  * table, held in the shared {@code trade_escrow} table so both backends (and a rejoining player) can reconcile the
  * trade from it. The two participants each own one row, keyed by {@code (tradeId, owner)}; the {@code phase} tracks the
  * two-phase commit, and the two servers move only their own row's phase through single guarded transitions.
  *
- * <p>The items are an opaque, adapter-owned string ({@code itemData} — the adapter serialises the real stacks to bytes
+ * <p>The items are an opaque, adapter-owned string ({@code itemData}. The adapter serialises the real stacks to bytes
  * and encodes them to text, and decodes them back to deliver), so the application never sees a Bukkit stack, mirroring
  * the domain's opaque item handle. Money is carried per currency id (the same shape a
  * {@link com.uxplima.uxmessentials.trade.domain.TradeOffer} stakes) so a debited amount is refunded or delivered in the
@@ -85,7 +85,7 @@ public record TradeEscrow(
                 createdAt);
     }
 
-    /** The same stake at a new lifecycle phase — the immutable transition an escrow store applies to a row. */
+    /** The same stake at a new lifecycle phase: the immutable transition an escrow store applies to a row. */
     public TradeEscrow withPhase(TradeEscrowPhase next) {
         Objects.requireNonNull(next, "next");
         return new TradeEscrow(
@@ -101,7 +101,7 @@ public record TradeEscrow(
                 createdAt);
     }
 
-    /** Whether this stake holds any items — a money-only side may be settled without the recipient being online. */
+    /** Whether this stake holds any items: a money-only side may be settled without the recipient being online. */
     public boolean hasItems() {
         return !itemData.isBlank();
     }

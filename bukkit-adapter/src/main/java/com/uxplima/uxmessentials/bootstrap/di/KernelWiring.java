@@ -58,7 +58,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>This is the one place that news up the Bukkit/Paper outbound adapters for the shared cross-cutting
  * ports; the {@link Plugin} handle stays inside bootstrap (the adapters take the {@code Plugin}
- * interface, never {@code JavaPlugin}). LuckPerms is a soft dependency — the {@code MetaSource}
+ * interface, never {@code JavaPlugin}). LuckPerms is a soft dependency, the {@code MetaSource}
  * defaults to {@link MetaSource#none()} and only binds to the LuckPerms-backed source when LuckPerms is
  * installed, so the {@code net.luckperms} symbols are never loaded on a server without it.
  */
@@ -77,7 +77,7 @@ final class KernelWiring {
 
     /**
      * The wired shared kernel: the {@link KernelPorts} every module consumes, plus the i18n collaborators
-     * the bootstrap command surface and the inbound command boundary need — the per-player override
+     * the bootstrap command surface and the inbound command boundary need, the per-player override
      * {@link LocaleStore} for {@code /lang}, the {@link LocaleCatalog} for locale validation, and the
      * {@link LocaleResolver} the boundary binding folds the captured client locale into.
      *

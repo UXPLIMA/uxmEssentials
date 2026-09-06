@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Paints the engine's selector child window: the caller's filler everywhere, then each option's already-built icon
- * at its slot. Like the confirm renderer it is stateless and places only icons — the choose action each button
+ * at its slot. Like the confirm renderer it is stateless and places only icons, the choose action each button
  * carries lives on the holder's {@code SelectorState}, which the façade records so the one listener can route a
  * click back to the right option. The option icons are prepared by the property (name, lore, and selection glint
  * baked in), so this renderer makes no presentation decision and adds no user-facing text of its own.

@@ -75,15 +75,15 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The bank-list golden test: the engine-rendered {@code /bank} list must draw the exact grid the original
  * {@code BankGuiView} drew. The service returns two banks the viewer belongs to ("Vault" and "Reserve"), so the list
- * draws two CHEST icons (content slots 0 and 1 — the bank name surfaces through the {@code bank_name} token), the
- * EMERALD_BLOCK create button (slot 49), the prev ARROW (slot 45), and the next ARROW (slot 53) — the geometry the
+ * draws two CHEST icons (content slots 0 and 1. The bank name surfaces through the {@code bank_name} token), the
+ * EMERALD_BLOCK create button (slot 49), the prev ARROW (slot 45), and the next ARROW (slot 53), the geometry the
  * original list used. The engine window is snapshotted as {@code (slot -> material, plain name)} and asserted equal,
  * slot for slot, to the baseline the old view produced for this fixture, frozen here as the contract so the old class
  * could be deleted.
  *
  * <p>A left click on the first chest through the engine's own {@link MenuListener} proves the migrated path opens that
  * bank's engine {@link BankActionsMenu} hub, and the create button still drives the name prompt into the
- * currency picker and reaches {@code BankService.createBank} — so the move is faithful in both appearance and the
+ * currency picker and reaches {@code BankService.createBank}, so the move is faithful in both appearance and the
  * create flow. The {@code KeyMessages} catalog surfaces the entry name's {@code bank_name} token; every other key
  * renders verbatim, so a real rendering difference still shows up as a snapshot mismatch.
  */
@@ -174,7 +174,7 @@ class BankListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code BankGuiView} produced for this fixture (two banks
      * "Vault" and "Reserve"), captured while both paths rendered it identically and frozen here: two CHEST icons
-     * (content slots 0 and 1 — the names surface through the {@code bank_name} token), the EMERALD_BLOCK create button
+     * (content slots 0 and 1. The names surface through the {@code bank_name} token), the EMERALD_BLOCK create button
      * (slot 49), the prev ARROW (slot 45), and the next ARROW (slot 53).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

@@ -19,8 +19,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /deathback} (alias {@code /dback}): return the player specifically to their last death point, through
  * the same gated teleport machinery as {@code /back}. It shares {@code /back}'s use node and its death-back
- * gate — the {@code back.on-death} operator setting combined with the {@code uxmessentials.back.ondeath}
- * permission — so a server that disables death-back disables this command too. Unlike {@code /back}, it
+ * gate. The {@code back.on-death} operator setting combined with the {@code uxmessentials.back.ondeath}
+ * permission, so a server that disables death-back disables this command too. Unlike {@code /back}, it
  * ignores a pre-teleport capture: if the player's most recent return point is a teleport rather than a death,
  * there is no death location to return to.
  */

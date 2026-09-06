@@ -153,10 +153,10 @@ class MenuControlGoldenTest {
         open("slot");
         assertThat(counter.get()).isEqualTo(1);
 
-        leftClick(1); // refresh-slot:4 — in range for a nine-slot window
+        leftClick(1); // refresh-slot:4, in range for a nine-slot window
         assertThat(counter.get()).as("an in-range refresh-slot repaints").isEqualTo(2);
 
-        leftClick(2); // refresh-slot:99 — out of range
+        leftClick(2); // refresh-slot:99, out of range
         assertThat(counter.get())
                 .as("an out-of-range refresh-slot does nothing")
                 .isEqualTo(2);
@@ -200,7 +200,7 @@ class MenuControlGoldenTest {
     @Test
     void openAnUnknownMenuFailsLoudly() {
         // The open action is unwrapped (no fail-soft), so an unknown spec id surfaces the façade's loud failure the
-        // same way it did before paging was added — asserted directly, since a listener swallows a handler throw.
+        // same way it did before paging was added: asserted directly, since a listener swallows a handler throw.
         Consumer<MenuActionContext> open =
                 bindings.action("open").orElseThrow(() -> new AssertionError("open not registered"));
         PlayerRef ref = new PlayerRef(player.getUniqueId(), player.getName());

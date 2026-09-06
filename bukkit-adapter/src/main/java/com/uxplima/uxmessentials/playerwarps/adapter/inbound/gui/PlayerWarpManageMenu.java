@@ -48,14 +48,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers and opens the capability-gated single-warp management panel ({@code pwarp-manage}) the detail panel's
  * manage button opens. The warp and the viewer's {@link WarpRole} on it are the engine subject: {@link #open} resolves
- * both once off the tick thread — a bounded {@code findByName} plus one role read, never a full-table scan — snapshots
+ * both once off the tick thread (a bounded {@code findByName} plus one role read, never a full-table scan) snapshots
  * them into an immutable {@link Subject}, and hands that to the engine, which paints the window on the viewer's entity
  * thread. A viewer with no role (a stranger) is refused there, so the panel only opens for the owner or a delegate.
  *
  * <p>Every button is drawn only when the viewer's role grants the button's {@link WarpCapability}: the
  * {@code pwarp-viewer-can:<CAP>} view condition reads the role off the subject and answers {@link WarpRole#can}, a pure
  * read with no port call at render. So a {@code MANAGER} sees only the metadata buttons, a {@code CO_OWNER} everything
- * but transfer and delete, and the {@code OWNER} the full set — the same policy the use cases enforce, mirrored in the
+ * but transfer and delete, and the {@code OWNER} the full set. The same policy the use cases enforce, mirrored in the
  * UI so a manager never even sees the money or lifecycle controls. The gating is only presentation; each use case still
  * re-checks authority itself.
  *
@@ -64,7 +64,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link TransferPlayerWarp}; delete (a recoverable archive) through {@link ArchivePlayerWarp}. A value-carrying click
  * id is single-segment ({@code pwarp-rename}, {@code pwarp-price}, ...) because the engine splits a value token on its
  * first colon; value-free ids stay namespaced. The password rides the engine's {@code input:} step into the set action
- * and is only ever handed to the use case — never echoed, logged, or placed in a message. Every write runs off the tick
+ * and is only ever handed to the use case: never echoed, logged, or placed in a message. Every write runs off the tick
  * thread, then the panel re-opens with the re-read subject so the new state shows.
  */
 @NullMarked
@@ -144,7 +144,7 @@ public final class PlayerWarpManageMenu {
         bindings.placeholder("pwarp_manage_name", this::name);
         bindings.placeholder("pwarp_manage_lore", this::lore);
         // The capability gate: pwarp-viewer-can:<CAP> reads the role off the subject and answers role.can(CAP). It is a
-        // single-segment id because the engine splits the :CAP value on the first colon — a namespaced head would keep
+        // single-segment id because the engine splits the :CAP value on the first colon. A namespaced head would keep
         // the whole feature:action:value token and never resolve. The sponsor button is drawn only when the sponsor
         // sub-group is enabled, which the subject carries from config.
         bindings.condition("pwarp-viewer-can", this::viewerCan);
@@ -189,7 +189,7 @@ public final class PlayerWarpManageMenu {
 
     /**
      * Open the management panel for the warp named {@code name}, on {@code viewer}'s behalf. The subject is resolved
-     * off the tick thread — one bounded warp read plus the viewer's role — then the engine paints the window on the
+     * off the tick thread, one bounded warp read plus the viewer's role, then the engine paints the window on the
      * viewer's entity thread. A warp that has since gone tells the viewer it is not found; a viewer who holds no role
      * on it is refused rather than shown an empty panel.
      */
@@ -370,7 +370,7 @@ public final class PlayerWarpManageMenu {
 
     /**
      * Buy sponsorship for the warp with the term typed on the prompt (blank or unparsable falls back to the configured
-     * default). The purchase — the guarded owner debit and the slot write — runs off the tick thread through
+     * default). The purchase, the guarded owner debit and the slot write, runs off the tick thread through
      * {@link BuySponsorship}, which delivers its own success or refusal notice; the panel reopens so the new state shows.
      */
     private void buySponsor(MenuActionContext ctx) {

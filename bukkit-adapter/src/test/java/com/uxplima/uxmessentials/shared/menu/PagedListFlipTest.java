@@ -58,7 +58,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * A page flip on a paged list re-queries the source for the next page rather than re-slicing a cache the engine does
- * not hold — driven end to end through the real {@link MenuListener}, with a scheduler that queues async work so an
+ * not hold, driven end to end through the real {@link MenuListener}, with a scheduler that queues async work so an
  * in-flight query can be observed between clicks. The corpus is 200 entries over a 45-slot page (five pages); the fake
  * source labels each row with its page so a rendered slot proves which page landed, and records the scheduler zone it
  * ran in so the query is shown to run off the entity thread and the render on it.
@@ -403,7 +403,7 @@ class PagedListFlipTest {
         return rows;
     }
 
-    /** Collect what the {@link MenuListener} logs while {@code body} runs — how the flip's failure warning is read. */
+    /** Collect what the {@link MenuListener} logs while {@code body} runs: how the flip's failure warning is read. */
     private static List<LogRecord> captureListenerLog(Runnable body) {
         Logger logger = Logger.getLogger(MenuListener.class.getName());
         List<LogRecord> records = new ArrayList<>();

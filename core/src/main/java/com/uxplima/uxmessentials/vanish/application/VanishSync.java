@@ -9,8 +9,8 @@ import com.uxplima.uxmessentials.vanish.domain.VanishLevel;
 /**
  * The vanish context's cross-server change currency: one player's vanish state as it crosses the bus, decoupled from
  * the wire frame the same way {@code TradeSignal} is decoupled from {@code TradeSignalFrame}. A {@link VanishBus}
- * carries these — the application publishes one when a player vanishes, reappears, or has their level re-resolved, and
- * receives one for every remote change a peer made — without the vanish application ever naming the shared network
+ * carries these. The application publishes one when a player vanishes, reappears, or has their level re-resolved, and
+ * receives one for every remote change a peer made. Without the vanish application ever naming the shared network
  * frame types or the transport.
  *
  * <p>The player name rides along so a network-wide {@code /vanish list} on a backend where the hidden player is not

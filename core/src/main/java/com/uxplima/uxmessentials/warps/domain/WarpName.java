@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * A warp's name, normalised to its canonical lowercase form so uniqueness and lookup are
- * case-insensitive — {@code /setwarp Shop} and {@code /warp shop} address the same warp.
+ * case-insensitive: {@code /setwarp Shop} and {@code /warp shop} address the same warp.
  *
  * <p>The name is the warp's identity: warps are server-wide, so a name is unique across the whole
  * {@code warps} table rather than per owner. It is also the segment in the per-warp permission node

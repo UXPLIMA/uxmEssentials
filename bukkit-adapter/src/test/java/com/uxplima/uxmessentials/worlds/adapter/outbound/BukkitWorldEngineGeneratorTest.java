@@ -70,7 +70,7 @@ class BukkitWorldEngineGeneratorTest {
         WorldCreator creator = new WorldCreator("routing-external");
 
         // A foreign plugin ref goes through the String overload; the mock has no such plugin, so the
-        // creator's generator is left null — and is certainly never one of our resolver's instances.
+        // creator's generator is left null, and is certainly never one of our resolver's instances.
         engine(resolver).applyGenerator(creator, GeneratorRef.of("Multiverse:flat"));
 
         assertThat(creator.generator())

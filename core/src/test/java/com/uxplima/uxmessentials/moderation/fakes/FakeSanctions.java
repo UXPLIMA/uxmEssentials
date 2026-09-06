@@ -12,8 +12,8 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A {@link Sanctions} fake that records the live-player actions a use case drives — kicks, jail/release
- * teleports — and tracks the frozen set, so a test can assert that an online {@code /tempban} kicks, a
+ * A {@link Sanctions} fake that records the live-player actions a use case drives, kicks, jail/release
+ * teleports, and tracks the frozen set, so a test can assert that an online {@code /tempban} kicks, a
  * {@code /jail} teleports into the jail, and a {@code /freeze} marks the target frozen, all without a server.
  */
 public final class FakeSanctions implements Sanctions {

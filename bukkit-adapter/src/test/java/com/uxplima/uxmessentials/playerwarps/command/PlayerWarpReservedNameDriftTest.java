@@ -20,8 +20,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the reserved-name invariant from the command side: every top-level {@code /pwarp} subcommand literal — the
- * ones that compete with the bare {@code <name>} teleport argument for the first token — must be a reserved warp
+ * Pins the reserved-name invariant from the command side: every top-level {@code /pwarp} subcommand literal, the
+ * ones that compete with the bare {@code <name>} teleport argument for the first token. Must be a reserved warp
  * name in {@link ReservedWarpNames}, so a warp can never be created under a name a verb literal would shadow. A new
  * subcommand added to the tree without reserving its token fails this guard. It reads only tracked sources (the
  * command builder and the {@code :core} reserved set), so it is CI-safe and never touches {@code docs/} or the

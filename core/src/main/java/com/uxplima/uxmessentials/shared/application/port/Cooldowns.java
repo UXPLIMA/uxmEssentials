@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
  * {@code uxmessentials.<feature>.cooldown.bypass} skips the gate entirely.
  *
  * <p>Two keying styles share these mechanics. A {@link CooldownKind} keys a feature's tiered cooldown
- * (teleport, warp, kit), carrying the feature segment, the config default, and — for teleport — the
+ * (teleport, warp, kit), carrying the feature segment, the config default, and, for teleport, the
  * {@link CooldownStartPhase} that decides when the clock starts. The {@link #checkLabel}/
  * {@link #stampLabel} pair keys the generic per-command cooldown by an operator-chosen command label
  * or rule id, gated by {@code uxmessentials.cooldown.bypass.<label>} with the same min-reducer
@@ -50,7 +50,7 @@ public interface Cooldowns {
     /**
      * When a teleport cooldown begins, configured per {@code teleport.conf} (default
      * {@link #TELEPORT}). Choosing {@link #TELEPORT} or {@link #ACCEPT} means a denied, expired, or
-     * self-cancelled request never burns the requester's cooldown — a subtlety most plugins get
+     * self-cancelled request never burns the requester's cooldown. A subtlety most plugins get
      * wrong. The same enum applies to {@code /warp}, {@code /home}, {@code /rtp}, and any cooldowned
      * teleport.
      */
@@ -59,7 +59,7 @@ public interface Cooldowns {
         REQUEST,
         /** The clock starts when the target accepts. */
         ACCEPT,
-        /** The clock starts only when the player actually arrives — the safe default. */
+        /** The clock starts only when the player actually arrives, the safe default. */
         TELEPORT
     }
 
@@ -74,7 +74,7 @@ public interface Cooldowns {
      * kit resolves its wait against the shared {@code uxmessentials.kit.cooldown.<seconds>} tier
      * ({@code feature = "kit"}), but each kit stamps under its own per-id scope ({@code stampScope =
      * "kit." + id}) so claiming one kit does not start another's cooldown. The teleport and warp kinds set
-     * {@code stampScope} equal to {@code feature} — one tier, one stamp.
+     * {@code stampScope} equal to {@code feature}, one tier, one stamp.
      *
      * @param feature the node segment, e.g. {@code tp} → {@code uxmessentials.tp.cooldown.<seconds>}
      * @param stampScope the per-holder stamp key; defaults to {@code feature} for a single-stamp kind
@@ -96,12 +96,12 @@ public interface Cooldowns {
             Objects.requireNonNull(startPhase, "startPhase");
         }
 
-        /** A kind whose stamp is keyed by its own feature — the single-tier, single-stamp form. */
+        /** A kind whose stamp is keyed by its own feature, the single-tier, single-stamp form. */
         public CooldownKind(String feature, long defaultSeconds, CooldownStartPhase startPhase) {
             this(feature, feature, defaultSeconds, startPhase);
         }
 
-        /** A cooldown that starts on arrival — the canonical teleport default. */
+        /** A cooldown that starts on arrival, the canonical teleport default. */
         public static CooldownKind onTeleport(String feature, long defaultSeconds) {
             return new CooldownKind(feature, defaultSeconds, CooldownStartPhase.TELEPORT);
         }

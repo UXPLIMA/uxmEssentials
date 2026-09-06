@@ -11,11 +11,11 @@ import java.util.Objects;
  * live in the adapter.
  *
  * @param providerId the lowercase id of the ranked data source ({@code balance})
- * @param limit how many top rows to show (1–{@value #MAX_LIMIT})
+ * @param limit how many top rows to show (1 to {@value #MAX_LIMIT})
  */
 public record LeaderboardSpec(String providerId, int limit) {
 
-    /** The largest top-N a leaderboard may show — a sane cap so a hologram never asks for thousands of rows. */
+    /** The largest top-N a leaderboard may show, a sane cap so a hologram never asks for thousands of rows. */
     public static final int MAX_LIMIT = 50;
 
     public LeaderboardSpec {

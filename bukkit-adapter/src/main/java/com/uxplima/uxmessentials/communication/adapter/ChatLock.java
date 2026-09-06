@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * per-player map) because the lock is a single server-wide switch, not per-player state.
  *
  * <p><b>Ownership:</b> the toggle command is the only writer; the listener and the doctor line are readers.
- * The flag is in-memory only — a server restart clears the lock (documented on {@code /togglechat}); a chat
+ * The flag is in-memory only. A server restart clears the lock (documented on {@code /togglechat}); a chat
  * freeze is a transient incident control, not durable state, so there is nothing to persist.
  */
 @NullMarked

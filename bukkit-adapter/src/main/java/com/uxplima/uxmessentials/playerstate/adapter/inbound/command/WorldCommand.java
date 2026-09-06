@@ -22,12 +22,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /world} ({@code uxmessentials.world.use}): tell the player the name, environment, and online player
  * count of the world they are standing in, read straight from {@code Player#getWorld()}. A pure read in the
- * adapter — no use case and no state mutation. Self-only, so there is no {@code [player]} target form; it is
+ * adapter, no use case and no state mutation. Self-only, so there is no {@code [player]} target form; it is
  * always the invoking player's current world.
  *
  * <p>The player count is the per-world {@code World#getPlayers()} size rather than the server total, since a
  * "what world am I in" report is most useful scoped to that world. The environment enum name is lower-cased and
- * its underscores replaced with spaces so {@code THE_END} reads "the end" — that is data shaping for display,
+ * its underscores replaced with spaces so {@code THE_END} reads "the end". That is data shaping for display,
  * not a user-facing literal, so it feeds the {@code environment} placeholder of the localized show line.
  */
 @NullMarked

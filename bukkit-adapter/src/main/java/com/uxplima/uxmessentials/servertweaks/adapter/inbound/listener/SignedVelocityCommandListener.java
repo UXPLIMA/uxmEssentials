@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * here so the two sides stay consistent.
  *
  * <p>Runs at {@link EventPriority#LOWEST}. This event fires on the server thread, so the directive is taken from the
- * shared {@link SignedDirectiveQueue} without blocking — the queue's non-blocking poll keeps the tick thread free,
+ * shared {@link SignedDirectiveQueue} without blocking. The queue's non-blocking poll keeps the tick thread free,
  * relying on the proxy delivering its ruling ahead of the forwarded command. With no ruling queued (the no-proxy case)
  * the command runs unchanged.
  */

@@ -44,8 +44,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqPlayerWarpRepository} against the default embedded SQLite backend with the
- * Flyway V1-V70 migrations applied. It proves the two round-trip shapes the rebuild has to get right — a
- * fully-populated aggregate with every optional present and a bare one with every optional empty — plus the
+ * Flyway V1-V70 migrations applied. It proves the two round-trip shapes the rebuild has to get right, a
+ * fully-populated aggregate with every optional present and a bare one with every optional empty, plus the
  * surrogate-id upsert (insert assigns and returns an id, a second save under that id updates in place), the
  * security invariant that an update never wipes a set password, the app-managed side-table cascade on delete, the
  * atomic visit increment, and the owner-scoped queries.
@@ -294,7 +294,7 @@ class JooqPlayerWarpRepositoryTest {
         Instant now = Instant.ofEpochMilli(1_000_000L);
         seedSponsor("live-a", OWNER, now.plusSeconds(3600), 0);
         seedSponsor("live-b", OTHER, now.plusSeconds(7200), 2);
-        seedSponsor("expired", OWNER, now.minusSeconds(60), 1); // lapsed — not live
+        seedSponsor("expired", OWNER, now.minusSeconds(60), 1); // lapsed, not live
         repo.save(newWarp(OWNER, "plain", 1L)); // never sponsored
 
         assertThat(repo.activeSponsorSlots(now)).containsExactlyInAnyOrder(0, 2);
@@ -425,7 +425,7 @@ class JooqPlayerWarpRepositoryTest {
                 Instant.ofEpochMilli(2_000L));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

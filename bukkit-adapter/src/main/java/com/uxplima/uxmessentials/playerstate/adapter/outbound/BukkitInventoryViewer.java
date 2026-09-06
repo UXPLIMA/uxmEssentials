@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link InventoryViewer} implementation for {@code /invsee} and {@code /endersee}, routing by whether the
  * subject is online. When online, {@code /invsee} goes through the managed {@link InvseeView} and {@code /endersee}
  * through the managed {@link EnderseeView}: each opens a private copy the viewer edits and reconciles back on close,
- * never the live {@link org.bukkit.inventory.PlayerInventory} / {@link Player#getEnderChest()} object — handing the
+ * never the live {@link org.bukkit.inventory.PlayerInventory} / {@link Player#getEnderChest()} object, handing the
  * viewer the live container would have every later click read and write that foreign container from the viewer's
  * region thread, the cross-region hazard (and the classic dupe vector) both managed views remove. When the subject
  * is offline, both route to the {@link OfflineContainerView}, which reads the target's stored items from disk into

@@ -16,8 +16,8 @@ import org.jspecify.annotations.Nullable;
  * only when LuckPerms is installed (bootstrap probes the {@code ServicesManager} before constructing
  * it), so loading this class never happens without the LuckPerms API present.
  *
- * <p>Meta is read from the loaded user's cached data — the same snapshot the platform uses for
- * permission checks — so the read is non-blocking and reflects the player's online resolution. A
+ * <p>Meta is read from the loaded user's cached data, the same snapshot the platform uses for
+ * permission checks, so the read is non-blocking and reflects the player's online resolution. A
  * value is reported only for a currently-loaded user; an unloaded user falls through to the numbered
  * nodes, matching the "meta is never required" contract.
  */

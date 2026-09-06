@@ -6,7 +6,7 @@ import java.util.Set;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for the staff {@code /socialspy} toggle — which staff are currently observing other
+ * Outbound port for the staff {@code /socialspy} toggle, which staff are currently observing other
  * players' private messages (audit-relevant). When a private message is delivered, every spying staff
  * member who is not a party to the conversation receives a spy line. The flag is per-holder session/PDC
  * state, dropped on relog by default; the store also enumerates the observers of a given conversation so
@@ -41,7 +41,7 @@ public interface SocialSpyStore {
      * The spies who should see a private message between {@code sender} and {@code target}: every ALL-flag
      * holder, plus every targeted spy whose target set contains {@code sender} or {@code target}. The result
      * resolves to currently-online observers only; an offline spy is skipped. A spy who is a party to the
-     * conversation may still be returned here — the send path drops them when fanning out. Resolved to a
+     * conversation may still be returned here: the send path drops them when fanning out. Resolved to a
      * {@link PlayerRef} per observer (the send path's {@code deliverSpy} addresses each by ref), de-duplicated
      * by identity so a spy who is both an ALL holder and a target-matcher is delivered to once.
      */

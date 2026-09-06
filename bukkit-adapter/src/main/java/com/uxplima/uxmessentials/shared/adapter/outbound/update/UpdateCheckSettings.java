@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The update checker's typed settings, read once from the root {@code config.conf} {@code update-check} block at
- * wiring time. Off by default — the check makes an outbound network call, so an operator opts in explicitly.
+ * wiring time. Off by default: the check makes an outbound network call, so an operator opts in explicitly.
  *
  * @param enabled whether the checker runs at all; {@code false} wires nothing and makes no network call
  * @param sourceUrl the release JSON endpoint (a {@code tag_name}/{@code version} field is read from the body)

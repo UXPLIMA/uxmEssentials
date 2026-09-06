@@ -165,7 +165,7 @@ class VanishCrossServerTest {
         }
     }
 
-    /** Runs the entity task inline — models the target being online on this backend. */
+    /** Runs the entity task inline: models the target being online on this backend. */
     private static final class InlineScheduler implements Scheduler {
         @Override
         public void onGlobal(Runnable task) {
@@ -193,7 +193,7 @@ class VanishCrossServerTest {
         }
     }
 
-    /** Drops the entity task — models the target being offline here, so the Folia entity scheduler no-ops. */
+    /** Drops the entity task: models the target being offline here, so the Folia entity scheduler no-ops. */
     private static final class DroppingScheduler implements Scheduler {
         @Override
         public void onGlobal(Runnable task) {}

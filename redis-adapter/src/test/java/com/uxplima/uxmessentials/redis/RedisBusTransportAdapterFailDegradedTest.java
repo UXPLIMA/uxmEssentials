@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Fail-degraded behaviour: when Redis is unreachable a synchronous publish throw must never propagate back into
- * the bus's send path — the frame is dropped and the failure logged, so the local path keeps working while the
+ * the bus's send path. The frame is dropped and the failure logged, so the local path keeps working while the
  * cross-server fan-out is temporarily unavailable. The lib catches an asynchronous publish-future failure; this
  * pins the adapter's own guard around a synchronous throw, with the rate-limited WARN still firing.
  */

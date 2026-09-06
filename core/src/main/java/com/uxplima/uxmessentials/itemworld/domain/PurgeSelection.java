@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The selection criteria for an entity-purge verb — {@code /butcher [radius]}, {@code /killall [type]} and
+ * The selection criteria for an entity-purge verb. {@code /butcher [radius]}, {@code /killall [type]} and
  * {@code /remove <type> [radius]}. A purge is the most abusable itemworld verb (it can clear a region or a
  * whole world of entities), so the selection is a validated domain value the use case audit-logs before the
  * adapter sweeps.
@@ -32,13 +32,13 @@ public record PurgeSelection(Scope scope, int radius, Optional<String> typeId, C
         WORLD
     }
 
-    /** The class of entity a purge may remove — never players. */
+    /** The class of entity a purge may remove: never players. */
     public enum Category {
-        /** Hostile mobs only — the {@code /butcher} default. */
+        /** Hostile mobs only, the {@code /butcher} default. */
         MONSTERS,
-        /** A single named entity type — {@code /remove <type>}, {@code /killall <type>}. */
+        /** A single named entity type, {@code /remove <type>}, {@code /killall <type>}. */
         NAMED_TYPE,
-        /** Every removable entity (drops, mobs, projectiles) — the {@code /killall} all-form. */
+        /** Every removable entity (drops, mobs, projectiles), the {@code /killall} all-form. */
         ALL_ENTITIES
     }
 
@@ -62,7 +62,7 @@ public record PurgeSelection(Scope scope, int radius, Optional<String> typeId, C
                 Scope.RADIUS, clampRadius(radius, maxRadius), normaliseType(typeId), Category.NAMED_TYPE);
     }
 
-    /** A world-wide {@code /killall} — a named type, or every entity when {@code typeId} is blank. */
+    /** A world-wide {@code /killall}: a named type, or every entity when {@code typeId} is blank. */
     public static PurgeSelection killAll(String typeId) {
         Optional<String> type = normaliseType(typeId);
         return new PurgeSelection(Scope.WORLD, 0, type, type.isEmpty() ? Category.ALL_ENTITIES : Category.NAMED_TYPE);

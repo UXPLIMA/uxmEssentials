@@ -57,7 +57,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link ScoreboardVisibilityStore} FRESH each open and writes through the real {@link ToggleScoreboard} use case
  * the {@code /scoreboard} command uses: it renders at its conf slot, a click flips the stored bit, and a re-render
  * shows the new state. The board a viewer sees is resolved automatically by condition and priority, so the panel
- * exposes no board-picker — there is no use case for one. The scheduler is synchronous so the off-thread setter
+ * exposes no board-picker: there is no use case for one. The scheduler is synchronous so the off-thread setter
  * runs inline.
  */
 class ScoreboardSettingsViewTest {

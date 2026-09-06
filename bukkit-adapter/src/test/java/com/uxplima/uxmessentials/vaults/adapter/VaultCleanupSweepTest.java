@@ -45,7 +45,7 @@ class VaultCleanupSweepTest {
         VaultCleanupSweep sweep = sweep(scheduler, repository, audit, running);
 
         sweep.start();
-        // start() armed the first sweep one interval out — nothing has run yet.
+        // start() armed the first sweep one interval out: nothing has run yet.
         assertThat(repository.cutoffs).isEmpty();
         assertThat(scheduler.pending).isNotNull();
 
@@ -86,7 +86,7 @@ class VaultCleanupSweepTest {
         scheduler.runPending(); // the armed task observes running=false and bails
 
         assertThat(repository.cutoffs).isEmpty(); // no purge
-        assertThat(scheduler.pending).isNull(); // and no reschedule — the loop is dead
+        assertThat(scheduler.pending).isNull(); // and no reschedule. The loop is dead
     }
 
     private VaultCleanupSweep sweep(

@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.regions.domain;
 import java.util.Objects;
 
 /**
- * One region flag as a plain, rendered name/value pair — the domain view of a WorldGuard flag decoupled from its
+ * One region flag as a plain, rendered name/value pair. The domain view of a WorldGuard flag decoupled from its
  * {@code com.sk89q} {@code Flag} type. The adapter maps a live flag entry to this ({@code pvp = DENY},
  * {@code greeting = "Welcome"}), so the application and the (Phase 2) flag editor reason over strings rather than
  * WorldGuard's typed flag registry.

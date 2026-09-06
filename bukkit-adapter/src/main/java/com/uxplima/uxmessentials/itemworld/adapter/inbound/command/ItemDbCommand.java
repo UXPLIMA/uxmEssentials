@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandRegistrat
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /itemdb [item]}: look up an item's id and max stack size — the held item when called with no argument,
+ * {@code /itemdb [item]}: look up an item's id and max stack size. The held item when called with no argument,
  * or a named item resolved against the registry. Read-only, so no audit and no region hop is needed; the
  * report is rendered through {@link ItemworldMessageKey#ITEMDB_REPORT}. An unknown named item replies
  * {@link ItemworldMessageKey#UNKNOWN_ITEM}; an empty hand with no argument replies

@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * One optional-plugin integration. A hook names the Bukkit plugin it integrates with, knows whether that
  * plugin is installed and enabled, and resolves to a typed capability {@code T} that always has a safe
- * absent default — so a caller holding the capability never null-checks or try/catches a missing plugin.
+ * absent default, so a caller holding the capability never null-checks or try/catches a missing plugin.
  *
  * <p>The soft-depend trap this contract is shaped to avoid is {@link NoClassDefFoundError}: a hook references
  * the target plugin's SDK types only inside {@link #whenPresent}, and {@link #whenAbsent} carries none of
@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public interface PluginHook<T> {
 
-    /** The Bukkit plugin name to integrate with — the same key declared as a soft-depend in paper-plugin.yml. */
+    /** The Bukkit plugin name to integrate with: the same key declared as a soft-depend in paper-plugin.yml. */
     String pluginName();
 
     /** The capability type {@link Hooks#capability(Class)} is keyed by. */

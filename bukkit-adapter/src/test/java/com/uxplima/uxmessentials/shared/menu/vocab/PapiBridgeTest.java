@@ -37,7 +37,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  * Covers the PlaceholderAPI bridge into the menu engine: a fallback resolver lets an unregistered {@code %papi_*%}
  * token still expand, {@code has} accepts a fallback-claimed id so {@code validate} passes such a spec, and the
  * {@code papi-compare} condition compares two (placeholder-resolved) operands. A live PlaceholderAPI is never
- * required — the bridge's resolve seam is exercised through a directly-registered test fallback, and the
+ * required. The bridge's resolve seam is exercised through a directly-registered test fallback, and the
  * absent-PlaceholderAPI path is asserted to return empty rather than throw.
  */
 class PapiBridgeTest {
@@ -132,7 +132,7 @@ class PapiBridgeTest {
     @Test
     void papiFallbackReturnsEmptyWithoutLivePlaceholderApi() {
         // PapiPlaceholders wires the bridge; with no PlaceholderAPI plugin on the (MockBukkit) server, resolving a
-        // claimed token must yield empty rather than throw — the soft-depend never hard-fails.
+        // claimed token must yield empty rather than throw: the soft-depend never hard-fails.
         MenuBindings bindings = new MenuBindings();
         PapiPlaceholders.registerInto(bindings);
         MenuContext ctx = MenuContext.of(new PlayerRef(UUID.randomUUID(), "P"), null, 0);

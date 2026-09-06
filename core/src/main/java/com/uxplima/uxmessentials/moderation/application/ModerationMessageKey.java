@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The moderation context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code MUTE_APPLIED} ↔ {@code moderation.mute.applied}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in
- * the context — every message resolves through one of these.
+ * the context: every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
  * locale-parity guard sees the full {@code en} key set.
@@ -33,7 +33,7 @@ public enum ModerationMessageKey implements MessageKey {
     JAILS_ENTRY("moderation.jails.entry"),
     JAILS_EMPTY("moderation.jails.empty"),
 
-    // /sanction — aggregated read-only punishment summary for one player
+    // /sanction, aggregated read-only punishment summary for one player
     SANCTION_HEADER("moderation.sanction.header"),
     SANCTION_MUTE_ACTIVE("moderation.sanction.mute-active"),
     SANCTION_MUTE_NONE("moderation.sanction.mute-none"),
@@ -43,12 +43,12 @@ public enum ModerationMessageKey implements MessageKey {
     SANCTION_BAN_NONE("moderation.sanction.ban-none"),
     SANCTION_WARNS("moderation.sanction.warns"),
 
-    // /setjail, /jail del — define and remove a stored jail location at the staff member's position
+    // /setjail, /jail del. Define and remove a stored jail location at the staff member's position
     SETJAIL_SAVED("moderation.setjail.saved"),
     DELJAIL_DELETED("moderation.deljail.deleted"),
     DELJAIL_NOT_FOUND("moderation.deljail.not-found"),
 
-    // /jailedplayers — review of currently jailed players
+    // /jailedplayers. Review of currently jailed players
     JAILEDLIST_HEADER("moderation.jailedlist-header"),
     JAILEDLIST_ENTRY("moderation.jailedlist-entry"),
     JAILEDLIST_EMPTY("moderation.jailedlist-empty"),
@@ -57,7 +57,7 @@ public enum ModerationMessageKey implements MessageKey {
     TEMPBAN_APPLIED("moderation.tempban.applied"),
     TEMPBAN_KICK("moderation.tempban.kick"),
 
-    // /ban, /unban — permanent UUID ban and its lift
+    // /ban, /unban, permanent UUID ban and its lift
     BAN_APPLIED("moderation.ban.applied"),
     // STRICT address-strictness: a UUID ban also IP-banned the target's known addresses ({count} of them)
     MOD_BAN_STRICT_IP("moderation.ban.strict-ip"),
@@ -65,41 +65,41 @@ public enum ModerationMessageKey implements MessageKey {
     BAN_LIFTED("moderation.unban.applied"),
     BAN_NOT_BANNED("moderation.unban.not-banned"),
 
-    // /banlist — review of currently banned players
+    // /banlist. Review of currently banned players
     BANLIST_HEADER("moderation.banlist-header"),
     BANLIST_ENTRY("moderation.banlist-entry"),
     BANLIST_EMPTY("moderation.banlist-empty"),
 
-    // /mutelist — review of currently muted players
+    // /mutelist. Review of currently muted players
     MUTELIST_HEADER("moderation.mutelist-header"),
     MUTELIST_ENTRY("moderation.mutelist-entry"),
     MUTELIST_EMPTY("moderation.mutelist-empty"),
 
-    // /banhistory — a player's full ban/unban history (newest-first)
+    // /banhistory. A player's full ban/unban history (newest-first)
     BANHISTORY_HEADER("moderation.banhistory.header"),
     BANHISTORY_ENTRY("moderation.banhistory.entry"),
     BANHISTORY_EMPTY("moderation.banhistory.empty"),
 
-    // /mutehistory — a player's full mute/unmute history (newest-first)
+    // /mutehistory. A player's full mute/unmute history (newest-first)
     MUTEHISTORY_HEADER("moderation.mutehistory.header"),
     MUTEHISTORY_ENTRY("moderation.mutehistory.entry"),
     MUTEHISTORY_EMPTY("moderation.mutehistory.empty"),
 
-    // /history — a player's full sanction history of every kind (newest-first)
+    // /history. A player's full sanction history of every kind (newest-first)
     MOD_HISTORY_HEADER("moderation.history.header"),
     MOD_HISTORY_ENTRY("moderation.history.entry"),
     MOD_HISTORY_EMPTY("moderation.history.empty"),
 
-    // /staffhistory — the sanctions a staff member has issued (newest-first)
+    // /staffhistory. The sanctions a staff member has issued (newest-first)
     MOD_STAFFHISTORY_HEADER("moderation.staffhistory.header"),
     MOD_STAFFHISTORY_ENTRY("moderation.staffhistory.entry"),
     MOD_STAFFHISTORY_EMPTY("moderation.staffhistory.empty"),
 
-    // /staffrollback — revoke a staff member's still-active sanctions
+    // /staffrollback. Revoke a staff member's still-active sanctions
     MOD_STAFFROLLBACK_SUMMARY("moderation.staffrollback.summary"),
     MOD_STAFFROLLBACK_NONE("moderation.staffrollback.none"),
 
-    // /modstats — staff punishment analytics: the server-wide leaderboard and a single-staff breakdown, each
+    // /modstats. Staff punishment analytics: the server-wide leaderboard and a single-staff breakdown, each
     // with an all-time and a windowed variant so the time frame is stated in the line rather than an inline literal
     MOD_STATS_HEADER("moderation.stats.header"),
     MOD_STATS_HEADER_WINDOW("moderation.stats.header-window"),
@@ -109,7 +109,7 @@ public enum ModerationMessageKey implements MessageKey {
     MOD_STATS_STAFF_WINDOW("moderation.stats.staff-window"),
     MOD_STATS_STAFF_EMPTY("moderation.stats.staff-empty"),
 
-    // /checkban, /checkmute — present-tense "is this player banned/muted?" checks
+    // /checkban, /checkmute. Present-tense "is this player banned/muted?" checks
     MOD_CHECK_BANNED("moderation.check.banned"),
     MOD_CHECK_NOT_BANNED("moderation.check.not-banned"),
     MOD_CHECK_MUTED("moderation.check.muted"),
@@ -145,24 +145,24 @@ public enum ModerationMessageKey implements MessageKey {
     UNFREEZE_NOTIFY_TARGET("moderation.unfreeze.notify-target"),
     FREEZE_BLOCKED("moderation.freeze.blocked"),
 
-    // /commandspy — staff toggle to watch the commands other players run
+    // /commandspy. Staff toggle to watch the commands other players run
     COMMANDSPY_ON("moderation.commandspy.on"),
     COMMANDSPY_OFF("moderation.commandspy.off"),
     COMMANDSPY_OBSERVED("moderation.commandspy.observed"),
 
-    // /alts — accounts sharing a target's last IP
+    // /alts. Accounts sharing a target's last IP
     ALTS_HEADER("moderation.alts.header"),
     ALTS_ENTRY("moderation.alts.entry"),
     ALTS_NONE("moderation.alts.none"),
     ALTS_NO_IP("moderation.alts.no-ip"),
 
-    // /punish — apply a configured punishment template (preset reason + optional duration)
+    // /punish. Apply a configured punishment template (preset reason + optional duration)
     TEMPLATE_UNKNOWN("moderation.template.unknown"),
 
     // /sudo
     SUDO_DONE("moderation.sudo.done"),
 
-    // /lockdown — refuse every login except bypass-perm holders; the kick line is the disconnect screen.
+    // /lockdown: refuse every login except bypass-perm holders; the kick line is the disconnect screen.
     // The *_SELF keys are the short personal confirmation to the actor, mirroring every other moderation
     // action's distinct self-line so an actor who also receives the broadcast does not see the same line twice.
     MOD_LOCKDOWN_ENABLED("moderation.lockdown.enabled"),
@@ -193,7 +193,7 @@ public enum ModerationMessageKey implements MessageKey {
     UNKNOWN_TARGET("moderation.unknown-target"),
     MUTED_COMMAND_BLOCKED("moderation.muted-command-blocked"),
 
-    // management GUI — the active-punishments list, the per-punishment detail/manage view, and a player's history
+    // management GUI. The active-punishments list, the per-punishment detail/manage view, and a player's history
     MOD_GUI_LIST_TITLE("moderation.gui.list.title"),
     MOD_GUI_LIST_PREV("moderation.gui.list.prev"),
     MOD_GUI_LIST_NEXT("moderation.gui.list.next"),
@@ -226,7 +226,7 @@ public enum ModerationMessageKey implements MessageKey {
     MOD_GUI_HISTORY_EMPTY_NAME("moderation.gui.history.empty-name"),
     MOD_GUI_HISTORY_EMPTY_LORE("moderation.gui.history.empty-lore"),
 
-    // bare /ban and /mute GUI flow — the player picker title and the per-target confirm screen.
+    // bare /ban and /mute GUI flow, the player picker title and the per-target confirm screen.
     // The picker reuses the shared gui.player-picker.* chrome; these are the moderation-specific labels.
     MOD_GUI_PICK_BAN_TITLE("moderation.gui.pick.ban-title"),
     MOD_GUI_PICK_MUTE_TITLE("moderation.gui.pick.mute-title"),
@@ -248,7 +248,7 @@ public enum ModerationMessageKey implements MessageKey {
     MOD_GUI_CONFIRM_REASON_PROMPT("moderation.gui.confirm.reason-prompt"),
     MOD_GUI_CONFIRM_BACK("moderation.gui.confirm.back"),
 
-    // bare /tempban, /tempmute, /warn and /banip GUI flow — the picker titles, the per-verb confirm-screen
+    // bare /tempban, /tempmute, /warn and /banip GUI flow. The picker titles, the per-verb confirm-screen
     // labels, and the timed verbs' duration step. The picker reuses the shared gui.player-picker.* chrome and
     // the timed verbs reuse the shared gui.duration-picker.* chrome; these are the moderation-specific labels.
     MOD_GUI_PICK_TEMPBAN_TITLE("moderation.gui.pick.tempban-title"),

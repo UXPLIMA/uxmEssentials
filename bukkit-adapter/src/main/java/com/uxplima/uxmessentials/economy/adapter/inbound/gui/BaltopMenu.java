@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * ranked owner showing the rank, the player and the formatted balance; a click does nothing, because the
  * leaderboard is a read-only view.
  *
- * <p>The ranked rows come from the per-currency baltop snapshot cache — a lock-free, Bukkit-free read — so the
+ * <p>The ranked rows come from the per-currency baltop snapshot cache (a lock-free, Bukkit-free read) so the
  * {@code economy:baltop} list source resolves them straight off the tick thread for the opened currency, which the
  * menu carries as its subject. Each {@code baltop_*} placeholder fills a cell from the bound row, prefixed so they
  * never collide with the generic engine tokens or another menu's fields. The title's {@code {baltop_currency}}

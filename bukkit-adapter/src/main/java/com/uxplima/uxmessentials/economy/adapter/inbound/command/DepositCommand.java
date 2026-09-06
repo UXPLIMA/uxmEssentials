@@ -19,9 +19,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Handles {@code /deposit} to convert the banknote in the player's main hand back into virtual money. The
- * redemption itself — the dupe-safe remove-then-credit-then-restore-on-failure sequence and the per-token
+ * redemption itself, the dupe-safe remove-then-credit-then-restore-on-failure sequence and the per-token
  * in-flight guard shared with the right-click {@link
- * com.uxplima.uxmessentials.economy.adapter.inbound.listener.BanknoteListener} — lives in the shared {@link
+ * com.uxplima.uxmessentials.economy.adapter.inbound.listener.BanknoteListener}. Lives in the shared {@link
  * com.uxplima.uxmessentials.economy.adapter.inbound.listener.BanknoteRedeemer}; this command only locates the
  * held note and hops onto the holder's entity thread before delegating.
  */

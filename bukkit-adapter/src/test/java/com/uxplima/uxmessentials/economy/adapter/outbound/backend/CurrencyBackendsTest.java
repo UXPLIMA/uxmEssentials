@@ -135,7 +135,7 @@ class CurrencyBackendsTest {
         }
     };
 
-    /** A {@link Logger} that drops every line — these tests assert the registry, not log output. */
+    /** A {@link Logger} that drops every line: these tests assert the registry, not log output. */
     private static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

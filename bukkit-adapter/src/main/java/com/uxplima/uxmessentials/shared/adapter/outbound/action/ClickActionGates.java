@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Evaluates the four gate action types — {@code CHANCE}, {@code PERMISSION}, {@code CONDITION}, {@code COST} —
+ * Evaluates the four gate action types ({@code CHANCE}, {@code PERMISSION}, {@code CONDITION}, {@code COST})
  * for the {@link BukkitClickActionRunner} sequencer, returning a {@link Verdict} that tells the runner whether to
  * keep running the rest of the chain. Pulled out of the runner so the runner stays the thin sequencer and the
  * gate semantics (roll, node check, comparison, charge) live in one focused place.
@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  * the whole chain), so an operator typo degrades to "no gate" rather than silently swallowing every action after
  * it. {@code COST} is the one gate that also messages the viewer when it denies (insufficient funds), through the
  * {@code costDeniedKey} the owning context supplies, and the one whose charge runs through the optional
- * {@link ClickActionEconomy} seam — absent, the gate is skipped.
+ * {@link ClickActionEconomy} seam: absent, the gate is skipped.
  */
 @NullMarked
 final class ClickActionGates {

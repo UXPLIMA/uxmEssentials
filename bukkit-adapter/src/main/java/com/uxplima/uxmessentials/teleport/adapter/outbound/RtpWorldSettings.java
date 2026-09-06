@@ -36,7 +36,7 @@ public record RtpWorldSettings(
 
     /**
      * A copy of this tuning with new search radii, leaving the queue sizing and search budget untouched. This
-     * is the {@code /settpr} runtime path — an operator resets the zone without disturbing how big the
+     * is the {@code /settpr} runtime path. An operator resets the zone without disturbing how big the
      * pre-warmed queue is or how hard a single search tries. The compact constructor still enforces
      * {@code maxRadius >= minRadius}.
      */

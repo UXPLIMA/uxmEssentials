@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.warps.domain.WarpName;
 
 /**
- * A warp was removed — {@code /delwarp}. The name is freed so a later {@code /setwarp} may reuse it.
+ * A warp was removed, {@code /delwarp}. The name is freed so a later {@code /setwarp} may reuse it.
  *
  * @param name the name of the removed warp
  * @param removedBy the player who removed the warp (audit attribution)

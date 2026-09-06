@@ -6,14 +6,14 @@ import java.util.UUID;
 import com.uxplima.uxmessentials.playerwarps.domain.PlayerWarpId;
 
 /**
- * Outbound port for a warp's whitelist — the players allowed to teleport to a
+ * Outbound port for a warp's whitelist. The players allowed to teleport to a
  * {@link com.uxplima.uxmessentials.playerwarps.domain.WarpAccess#WHITELIST WHITELIST}-access warp. One row per
  * {@code (warp, player)}, so {@link #add} is idempotent: whitelisting an already-whitelisted player is a no-op,
  * not a duplicate row. The ordered access gate (P4-T3) consults {@link #contains} to decide a whitelist teleport.
  */
 public interface WarpWhitelistStore {
 
-    /** Whitelist {@code player} on {@code warp}. Idempotent — a no-op when the player is already whitelisted. */
+    /** Whitelist {@code player} on {@code warp}. Idempotent: a no-op when the player is already whitelisted. */
     void add(PlayerWarpId warp, UUID player);
 
     /** Remove {@code player} from {@code warp}'s whitelist; a no-op when the player was not whitelisted. */

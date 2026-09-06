@@ -11,15 +11,15 @@
 -- on every backend. created_at is epoch milliseconds in a BIGINT, mirroring every
 -- other instant in the schema.
 --
---   teleport_spawns        — one row per world, keyed by the world uid; the spawn
+--   teleport_spawns. One row per world, keyed by the world uid; the spawn
 --                            /setspawn writes and /removespawn clears.
---   teleport_main_spawn    — the single global main spawn /setmainspawn writes, a
+--   teleport_main_spawn. The single global main spawn /setmainspawn writes, a
 --                            singleton row pinned at id = 0 and upserted on it (the
 --                            V9 home_main pattern, global rather than per-owner);
 --                            used when a world has no spawn of its own.
---   teleport_named_spawns  — named spawns (/setspawn <name>, /spawn <name>), keyed by
+--   teleport_named_spawns. Named spawns (/setspawn <name>, /spawn <name>), keyed by
 --                            the canonical lowercase name.
---   teleport_spawn_mirrors — per-world /spawn redirects, keyed by the source world.
+--   teleport_spawn_mirrors: per-world /spawn redirects, keyed by the source world.
 --
 -- Same portability contract as V1-V9: a plain CREATE TABLE in the subset SQLite (the
 -- default, single-node servers), MySQL/MariaDB and PostgreSQL all accept, with no
@@ -66,7 +66,7 @@ CREATE TABLE teleport_named_spawns (
 );
 
 -- The mirror is the SpawnMirror domain record verbatim: a source world uid redirected
--- to a target world uid. The world names are not stored — they are resolved from the
+-- to a target world uid. The world names are not stored. They are resolved from the
 -- live world lookup at read time, the same way the moderation gate resolves a world,
 -- so a renamed world folder never leaves a stale name behind.
 CREATE TABLE teleport_spawn_mirrors (

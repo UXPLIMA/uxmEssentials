@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * A kit's identity, normalised to its canonical lowercase form so lookup and the per-kit permission node are
- * case-insensitive — {@code /kit create Starter} and {@code /kit starter} address the same kit.
+ * case-insensitive, {@code /kit create Starter} and {@code /kit starter} address the same kit.
  *
  * <p>The id is also the segment in the per-kit permission node ({@code uxmessentials.kit.<id>}) and the
  * key under which a player's claim/cooldown stamp lives in PDC, so the normalised lowercase form is what

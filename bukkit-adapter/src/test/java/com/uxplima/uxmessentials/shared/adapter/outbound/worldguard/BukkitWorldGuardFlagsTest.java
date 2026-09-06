@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
  * MockBukkit coverage of the shared WorldGuard flag seam on a server with <em>no</em> WorldGuard: the present-guard
  * short-circuits, so the {@link WorldGuardSetPwarpFlagRegistrar} registers nothing without throwing and
  * {@link BukkitWorldGuardFlags} reports "not supported" / "not denied" (the fail-open default). The
- * DENY-interpretation of a resolved {@code StateFlag.State} — the one piece of the query chain that does not need a
- * live WorldGuard — is pinned directly via {@link BukkitWorldGuardFlags#isDeny}.
+ * DENY-interpretation of a resolved {@code StateFlag.State}, the one piece of the query chain that does not need a
+ * live WorldGuard: is pinned directly via {@link BukkitWorldGuardFlags#isDeny}.
  */
 class BukkitWorldGuardFlagsTest {
 
@@ -64,13 +64,13 @@ class BukkitWorldGuardFlagsTest {
         assertThat(BukkitWorldGuardFlags.isDeny("DENY")).isFalse();
     }
 
-    /** Stand-in for WorldGuard's {@code StateFlag.State} enum — the interpretation keys off the constant name. */
+    /** Stand-in for WorldGuard's {@code StateFlag.State} enum, the interpretation keys off the constant name. */
     private enum FakeState {
         ALLOW,
         DENY
     }
 
-    /** A logger that swallows everything — the absent-WorldGuard path emits nothing anyway. */
+    /** A logger that swallows everything: the absent-WorldGuard path emits nothing anyway. */
     private static final class NoopLogger implements Logger {
         @Override
         public void info(String message, Object... args) {}

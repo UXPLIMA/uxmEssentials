@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The session-scoped freeze flag of the join-verification flow: who is currently frozen and awaiting verification. It
- * is transient in-memory state owned solely by the security adapter — the freeze listeners read {@link #isPending(UUID)}
+ * is transient in-memory state owned solely by the security adapter. The freeze listeners read {@link #isPending(UUID)}
  * to decide whether to cancel a frozen player's action. The durable, account-scoped failure counter and lockout window
  * live separately in the shared {@link com.uxplima.uxmessentials.security.application.AttemptLimiter}, so that a relog
  * clears the freeze but never the accumulated attempt budget.
@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The map is a {@link ConcurrentHashMap} because the join flow's async worker, the keypad's verify worker, and the
  * event threads all touch it; every mutation is a single atomic operation. On join the player is frozen optimistically
  * before the async enrolment lookup runs, and cleared again once that lookup proves them not-enrolled or on a trusted
- * device — so the default is "frozen until proven safe". Everything is dropped on {@link #clearAll()} at module stop,
+ * device, so the default is "frozen until proven safe". Everything is dropped on {@link #clearAll()} at module stop,
  * so a disable leaves no residual freeze.
  */
 @NullMarked
@@ -59,7 +59,7 @@ public final class VerificationSessions {
         return current != null && current == token;
     }
 
-    /** Clear {@code playerId}'s pending freeze — on a successful verification, a cleared optimistic freeze, or a quit. */
+    /** Clear {@code playerId}'s pending freeze: on a successful verification, a cleared optimistic freeze, or a quit. */
     public void clear(UUID playerId) {
         pending.remove(Objects.requireNonNull(playerId, "playerId"));
     }

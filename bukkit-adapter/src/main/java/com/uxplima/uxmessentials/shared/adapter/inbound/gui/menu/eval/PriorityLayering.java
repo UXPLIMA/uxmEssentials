@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuItemSp
 
 /**
  * Collapses a menu's overlapping items into the single item that should render in each slot. Several items can
- * claim the same slot — a high-priority decoration over a filler, say — so the winner is the visible item with
+ * claim the same slot (a high-priority decoration over a filler, say) so the winner is the visible item with
  * the greatest {@code priority}. Items are walked in their declared order, which both keeps ties stable (the
  * first author to claim a priority keeps the slot) and lets a later item only displace an earlier one when it
  * strictly outranks it. An item whose view conditions fail is dropped entirely, freeing its slots for whatever

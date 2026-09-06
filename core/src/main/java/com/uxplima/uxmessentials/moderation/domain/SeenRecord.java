@@ -7,7 +7,7 @@ import java.util.Optional;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The last-seen / last-IP record for one player — what {@code /seen} and {@code /seenip} report and what the
+ * The last-seen / last-IP record for one player. What {@code /seen} and {@code /seenip} report and what the
  * alt-detection check matches against. Upserted on join/quit: the {@code name} is the most recent name (so a
  * rename-aware {@code /seen} renders the current name), {@code lastIp} the most recent connecting address (an
  * indexed column the alt-detection lookup matches other UUIDs against), {@code firstSeen} the first-join

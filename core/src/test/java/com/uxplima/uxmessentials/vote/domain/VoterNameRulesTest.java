@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The {@link VoterNameRules} validity contract: a well-formed name passes, while blank, the literal
  * {@code "null"}, over-length, and pattern-violating names are rejected. A blank pattern reduces to
- * length-only validation, and a malformed regex is tolerated — it compiles to no pattern so only the
+ * length-only validation, and a malformed regex is tolerated. It compiles to no pattern so only the
  * length and blank/{@code "null"} checks apply. {@link java.util.regex.Pattern} has no value equality,
  * so behaviour is asserted through {@link VoterNameRules#isValid(String)} rather than record equality.
  */
@@ -65,7 +65,7 @@ class VoterNameRulesTest {
 
     @Test
     void aMalformedRegexFallsBackToLengthOnlyValidation() {
-        // "[" is an unclosed character class — it must not throw, and only length/blank/"null" apply.
+        // "[" is an unclosed character class: it must not throw, and only length/blank/"null" apply.
         VoterNameRules rules = VoterNameRules.of(5, "[");
 
         assertThat(rules.isValid("a!#")).isTrue();

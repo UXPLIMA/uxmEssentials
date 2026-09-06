@@ -13,10 +13,10 @@ import java.util.function.Predicate;
  * A bounded breadth-first flood-fill over a 3D block grid, shared by tree-feller (the connected logs of a felled
  * tree) and veinminer (the connected blocks of an ore vein). Starting from an origin the caller has already accepted,
  * it visits every neighbour the {@code matches} predicate accepts, transitively, until it runs out of matching
- * neighbours or reaches {@code maxBlocks} visited coordinates — whichever comes first.
+ * neighbours or reaches {@code maxBlocks} visited coordinates: whichever comes first.
  *
  * <p>Connectivity is the full 26-neighbourhood (every one of the twenty-six coordinates that differ by at most one on
- * each axis), so a diagonal branch of a tree or a diagonal step of a vein stays connected — the shape both mechanics
+ * each axis), so a diagonal branch of a tree or a diagonal step of a vein stays connected. The shape both mechanics
  * expect. The origin is always the first element of the result and is never re-tested against the predicate: the
  * caller only starts a search once it has already decided the origin is a log or a configured ore, so a search with
  * no matching neighbour returns exactly {@code [origin]}.

@@ -20,7 +20,7 @@ import org.mockito.ArgumentCaptor;
  * Unit coverage of the {@code ServicesManager} presence registrar the bridge advertises so the host knows a
  * link code is redeemable. The whole signal is "a {@link DiscordBridgePresence} is registered", so the test
  * proves publish registers exactly one under that type, withdraw unregisters the same instance, and both stay
- * idempotent — a doubled call neither double-registers nor throws.
+ * idempotent: a doubled call neither double-registers nor throws.
  */
 class BridgePresenceTest {
 
@@ -31,7 +31,7 @@ class BridgePresenceTest {
         BridgePresence presence = new BridgePresence(services, plugin);
 
         presence.publish();
-        presence.publish(); // idempotent — the second call must not register a second marker
+        presence.publish(); // idempotent. The second call must not register a second marker
 
         ArgumentCaptor<DiscordBridgePresence> marker = ArgumentCaptor.forClass(DiscordBridgePresence.class);
         verify(services, times(1))
@@ -51,7 +51,7 @@ class BridgePresenceTest {
                 .register(eq(DiscordBridgePresence.class), marker.capture(), eq(plugin), eq(ServicePriority.Normal));
 
         presence.withdraw();
-        presence.withdraw(); // idempotent — nothing left to unregister
+        presence.withdraw(); // idempotent. Nothing left to unregister
 
         verify(services, times(1)).unregister(marker.getValue());
     }

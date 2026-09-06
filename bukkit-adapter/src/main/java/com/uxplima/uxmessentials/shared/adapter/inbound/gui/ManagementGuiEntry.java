@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * management GUI.
  *
  * <p>A module registers exactly one of these in its own wiring (through {@link ManagementGuiRegistry}),
- * closing the {@code opener} over its already-built list view. The hub holds no module logic — it only
+ * closing the {@code opener} over its already-built list view. The hub holds no module logic: it only
  * draws the registered entries the viewer is permitted, and on a click hands control to {@code opener}.
  * The {@code label} (a {@link MessageKey}) keeps the hub's text in the catalog and the {@code icon}
  * material is read from the hub conf-supplied default unless the module overrides it; nothing is inlined.

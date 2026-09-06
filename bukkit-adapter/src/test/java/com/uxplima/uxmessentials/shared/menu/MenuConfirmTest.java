@@ -155,7 +155,7 @@ class MenuConfirmTest {
         player.closeInventory();
         player.closeInventory(); // a double-close is a harmless no-op
 
-        // A confirm window arms no refresh timer, so start and cancel both stay at zero — perfectly balanced.
+        // A confirm window arms no refresh timer, so start and cancel both stay at zero: perfectly balanced.
         assertThat(recording.scheduled).isZero();
         assertThat(recording.cancelled).isZero();
     }

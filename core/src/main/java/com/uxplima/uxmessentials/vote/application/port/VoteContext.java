@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * and the vote's service; the adapter implements it over Bukkit (world + permissions), the player lookup
  * (online), and real RNG (the roll). A test backs it with deterministic stubs.
  *
- * <p>{@link #worldOf(PlayerRef)} returns an empty string for an offline voter — the engine treats that as
+ * <p>{@link #worldOf(PlayerRef)} returns an empty string for an offline voter. The engine treats that as
  * "no world to satisfy a world filter against", so a world-filtered spec never pays an offline voter.
  */
 public interface VoteContext {

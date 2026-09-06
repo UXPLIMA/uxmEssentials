@@ -9,11 +9,11 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /ptime <value|reset>}: set a per-player client-side time without changing world time. Self-only — a
+ * {@code /ptime <value|reset>}: set a per-player client-side time without changing world time. Self-only, a
  * client-side presentation override the player sets for themselves. The {@link PlayerEffects} port applies it
  * on the player's owning region thread; the use case sends the matching set/reset confirmation. The raw
  * argument is parsed to a {@link PersonalTime} in the adapter, which renders {@link PlayerstateMessageKey#PTIME_INVALID}
- * itself when parsing fails — this use case only ever receives a valid value.
+ * itself when parsing fails: this use case only ever receives a valid value.
  */
 public final class SetPersonalTime {
 

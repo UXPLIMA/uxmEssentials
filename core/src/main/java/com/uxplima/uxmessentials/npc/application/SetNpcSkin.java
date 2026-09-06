@@ -59,7 +59,7 @@ public final class SetNpcSkin {
 
     /**
      * Clear the NPC {@code name}'s stored skin so it falls back to the default model (Steve/Alex), or reject when
-     * no such NPC exists. Unlike {@link #setSkin}, clearing is valid on any type — removing a stored skin is always
+     * no such NPC exists. Unlike {@link #setSkin}, clearing is valid on any type. Removing a stored skin is always
      * safe (a mob keeps no skin, and a fake player shows the default), so there is no player-type gate.
      */
     public Result<Unit, NpcError> clearSkin(PlayerRef actor, NpcName name) {

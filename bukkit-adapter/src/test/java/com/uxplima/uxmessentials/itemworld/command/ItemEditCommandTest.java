@@ -66,7 +66,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@code /itemedit} through the real Brigadier nodes: renaming strips the default italic
  * and sets the display name, {@code resetname} clears it, and every lore op (add/set/insert/remove/clear) mutates
- * the held item's lore list exactly as {@link com.uxplima.uxmessentials.itemworld.domain.LorePolicy} dictates —
+ * the held item's lore list exactly as {@link com.uxplima.uxmessentials.itemworld.domain.LorePolicy} dictates
  * including the out-of-range replies. The no-item, no-permission and config-disabled paths each answer with their
  * message and mutate nothing.
  *

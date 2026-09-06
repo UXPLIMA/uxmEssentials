@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared collaborators every economy Brigadier command holds: the constructed {@link EconomyServices} and the
  * {@link Messages} catalog (the latter only for the console-side rejections a player-only command may surface
- * — all player-facing feedback flows through the use cases' {@code MessageSink}). It centralises the three
+ *: all player-facing feedback flows through the use cases' {@code MessageSink}). It centralises the three
  * boundary concerns the economy commands repeat: resolving the optional {@code [currency]} argument against
  * the closed registry (an unknown id is an error listing the valid ids, never a silent default), parsing an
  * amount to the currency's precision, and running a provider call off the tick thread through the injected
@@ -97,7 +97,7 @@ abstract class EconomyCommandSupport {
         return services.currencies().find(CurrencyId.of(raw));
     }
 
-    /** The default currency — the one every command resolves to when {@code [currency]} is omitted. */
+    /** The default currency: the one every command resolves to when {@code [currency]} is omitted. */
     final Currency defaultCurrency() {
         return services.currencies().defaultCurrency();
     }

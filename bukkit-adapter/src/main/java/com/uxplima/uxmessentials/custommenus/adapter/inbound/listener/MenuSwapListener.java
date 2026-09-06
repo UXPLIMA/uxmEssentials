@@ -15,8 +15,8 @@ import com.uxplima.uxmessentials.shared.adapter.outbound.BukkitRefs;
 /**
  * Opens a configured menu when a player swaps their hand items (the F key) instead of performing the swap. The menu
  * is read live from the same swapped {@link Supplier} the openers use, so a {@code /menu reload} that changes or
- * clears {@code swap-offhand-menu} takes effect on the next swap. When no swap menu is configured — or the configured
- * one is no longer a registered menu — the event is left alone and the vanilla hand swap happens as normal.
+ * clears {@code swap-offhand-menu} takes effect on the next swap. When no swap menu is configured, or the configured
+ * one is no longer a registered menu: the event is left alone and the vanilla hand swap happens as normal.
  *
  * <p>The event fires on the swapping player's own region thread and the {@link Menus} facade opens the window on that
  * same thread; the handler touches only that one player and never scans the roster, so it stays Folia-safe without an

@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>This sits between the {@link CatalogBinding} and the {@link UsageBinding} at the registration
  * chokepoint. A command that opens a screen on bare input ({@code /kit}, {@code /warp}, {@code /uxmess})
  * exposes its opener through {@link CommandRegistration#guiRoot()}; when the resolved {@link EffectiveCommand}
- * for that id has {@code gui} on, the root literal is rebuilt with the opener as its root executor —
+ * for that id has {@code gui} on, the root literal is rebuilt with the opener as its root executor
  * replacing any executor the command shipped with. When {@code gui} is off, the node is returned untouched,
  * so a root that carries no executor falls through to the {@link UsageBinding} and answers with its usage
  * text instead. A command with no entry in the catalog map defaults to gui-on, matching the global default

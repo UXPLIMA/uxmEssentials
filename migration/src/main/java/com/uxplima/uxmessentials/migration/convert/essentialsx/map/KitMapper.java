@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
  * Translates a parsed EssentialsX kit into a domain {@link KitDefinition} (docs/12-migration §5.1). The
  * EssentialsX {@code delay} (seconds) becomes the kit cooldown; each raw item descriptor line becomes an
  * opaque {@link KitItem} whose {@code data} is the descriptor and whose amount is the trailing quantity
- * token (defaulting to 1). The descriptor stays opaque — the bukkit-side writer round-trips it through
- * Bukkit's item codec — so this mapper never imports an {@code ItemStack} type.
+ * token (defaulting to 1). The descriptor stays opaque. The bukkit-side writer round-trips it through
+ * Bukkit's item codec, so this mapper never imports an {@code ItemStack} type.
  */
 @NullMarked
 public final class KitMapper {

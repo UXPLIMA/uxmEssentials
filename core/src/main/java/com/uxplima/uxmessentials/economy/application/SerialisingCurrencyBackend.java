@@ -23,12 +23,12 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p>It closes nothing across a cluster: two servers debiting the same foreign economy hold different locks and
  * cannot be serialised by us at all. That is why {@link #atomicDebit()} keeps reporting {@code false} through
- * the wrapper — callers must keep knowing the promise is JVM-local, so that config validation can refuse to
+ * the wrapper. Callers must keep knowing the promise is JVM-local, so that config validation can refuse to
  * schedule recurring charges against such a currency unless the operator opts in.
  *
  * <p>Only {@link #debit(PlayerRef, Money)} is serialised. Credits and reads run unguarded: a lost credit cannot
  * overdraw an account, and serialising reads would turn a menu render into a queue behind whatever debit holds
- * the key. The lock is held around the delegate's {@code debit} call and nothing else — that single I/O call is
+ * the key. The lock is held around the delegate's {@code debit} call and nothing else. That single I/O call is
  * the whole reason the class exists, so it is deliberately the one thing inside the lock.
  */
 public final class SerialisingCurrencyBackend implements CurrencyBackend {
@@ -36,8 +36,8 @@ public final class SerialisingCurrencyBackend implements CurrencyBackend {
     private final CurrencyBackend delegate;
 
     // One small ReentrantLock per (owner, currency) ever debited, kept for the JVM's life. The map is bounded by
-    // the roster of players who have joined times the handful of foreign currencies — thousands of tiny entries,
-    // not an unbounded leak — and eviction is unsafe anyway: the lock only serialises when every contender shares
+    // the roster of players who have joined times the handful of foreign currencies. Thousands of tiny entries,
+    // not an unbounded leak, and eviction is unsafe anyway: the lock only serialises when every contender shares
     // the same instance, so removing one would need reference counting on the hot path that costs more than the
     // few megabytes it would reclaim.
     private final ConcurrentMap<String, ReentrantLock> locks = new ConcurrentHashMap<>();

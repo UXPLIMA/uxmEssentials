@@ -20,13 +20,13 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Discovers a foreign economy already on the server and wraps it in this plugin's {@code EconomyProvider}
- * port — Treasury first (modern, multi-currency), then Vault (legacy, single-currency)
+ * port, Treasury first (modern, multi-currency), then Vault (legacy, single-currency)
  * ({@code docs/11-economy-integration.md} §2). This is the only place that reaches the foreign SDK
  * registrations through the {@code ServicesManager}; the actual SDK imports are confined to the adapter
  * classes in the {@code treasury}/{@code vault} packages, fenced by {@code economyDomainHasNoProviderSdk}.
  *
  * <p>The lookups are gated on the soft-depend plugin being present, so the {@code me.lokka30}/{@code
- * net.milkbowl} symbols are never resolved on a server without the corresponding plugin — which is exactly
+ * net.milkbowl} symbols are never resolved on a server without the corresponding plugin, which is exactly
  * the register-or-defer condition. When neither is present the result is empty and the native ledger
  * registers as the provider.
  */

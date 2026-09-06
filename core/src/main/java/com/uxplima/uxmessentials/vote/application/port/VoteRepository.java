@@ -34,7 +34,7 @@ public interface VoteRepository {
     /**
      * Atomically add one to the global vote-party counter and return the post-increment value. The
      * increment happens in the durable store in a single statement, so two votes that land concurrently
-     * each observe a distinct count and exactly one of them sees the threshold crossing — the
+     * each observe a distinct count and exactly one of them sees the threshold crossing, the
      * read-then-write of {@link #partyCount()} plus {@link #setPartyCount(int)} cannot give that
      * guarantee and is kept only for the reset and for the hot read.
      */
@@ -72,7 +72,7 @@ public interface VoteRepository {
 
     /**
      * Record {@code player} as a participant in the current party window (they voted before the next
-     * party fires). Idempotent — calling it multiple times for the same player in the same window is
+     * party fires). Idempotent. Calling it multiple times for the same player in the same window is
      * safe.
      */
     void markPartyParticipant(PlayerRef player);
@@ -84,7 +84,7 @@ public interface VoteRepository {
     Set<UUID> partyParticipants();
 
     /**
-     * Clear the participant set — called after a party fires so the next window starts empty.
+     * Clear the participant set: called after a party fires so the next window starts empty.
      */
     void clearPartyParticipants();
 
@@ -142,7 +142,7 @@ public interface VoteRepository {
      * The instant at which {@code player} last voted on {@code site}, or empty if they have no
      * recorded vote there. Used to evaluate per-site cooldowns without touching the full tally.
      *
-     * <p>The {@code site} key is the Votifier service string — the write path records the raw
+     * <p>The {@code site} key is the Votifier service string. The write path records the raw
      * {@code vote.serviceName()} and the read paths look it up under {@code VoteSiteSpec.service()},
      * so the two line up. The persistence layer normalises case on both sides; callers pass the key
      * as configured.

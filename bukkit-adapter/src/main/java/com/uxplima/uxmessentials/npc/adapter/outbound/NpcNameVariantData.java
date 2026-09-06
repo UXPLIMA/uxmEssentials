@@ -17,11 +17,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * The by-name dynamic-registry appearance variants: a cat/wolf coat variant, a frog variant, and the chicken/cow/pig
  * temperature variants. Unlike the bounded
- * integer variants of {@link NpcVariantData}, these are data-driven registry values addressed by name — the lib
+ * integer variants of {@link NpcVariantData}, these are data-driven registry values addressed by name, the lib
  * resolves the matching {@code Holder} off the live server's cat-/frog-variant registry per call and returns null
  * fail-soft when it cannot (the server is not yet up, or the name is unknown), which {@link #apply} drops without
  * sending. Kept in its own class so {@code NpcVariantData} stays focused and under the size limit; the same
- * support-map correctness invariant holds — a name reaches only the one Bukkit type that carries that field, an
+ * support-map correctness invariant holds. A name reaches only the one Bukkit type that carries that field, an
  * unsupported key or unknown name is skipped fail-soft (logged at debug), never thrown on the render thread.
  */
 @NullMarked
@@ -124,7 +124,7 @@ final class NpcNameVariantData {
         }
     }
 
-    /** Whether {@code key} is one of the name-variant keys this class applies — the set the command validates against. */
+    /** Whether {@code key} is one of the name-variant keys this class applies: the set the command validates against. */
     static boolean isKnownKey(String key) {
         String lower = key.toLowerCase(Locale.ROOT);
         return byKey(lower) != null;

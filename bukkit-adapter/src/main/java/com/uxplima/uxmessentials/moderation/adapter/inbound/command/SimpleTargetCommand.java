@@ -19,8 +19,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * A {@code /<verb> <player>} command whose only argument is a target: {@code /unmute}, {@code /unjail},
- * {@code /freeze}, {@code /unfreeze}, {@code /seen}, {@code /seenip}, {@code /warns}. The shared shape — a
- * single word target, the permission gate, the online-or-offline resolution — lives here so each concrete
+ * {@code /freeze}, {@code /unfreeze}, {@code /seen}, {@code /seenip}, {@code /warns}. The shared shape, a
+ * single word target, the permission gate, the online-or-offline resolution, lives here so each concrete
  * verb is one constructor passing its literal, node, description and the {@code (actor, target)} action.
  */
 @NullMarked

@@ -74,11 +74,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code VaultSelectorView} drew. A player owns vaults 1 and 3 under an amount cap of 5 with locked indices shown,
  * so the picker draws two owned chests (content slots 0 and 2), three locked panes (slots 1, 3, 4), and the two
  * nav arrows (slots 21 and 23). The engine's window is snapshotted as {@code (slot -> material, plain name)} and
- * asserted equal, slot for slot, to the baseline the old view produced — captured once while both rendered the
+ * asserted equal, slot for slot, to the baseline the old view produced. Captured once while both rendered the
  * same fixture, then frozen here as the contract so the old class could be deleted. Then a click on the owned
  * vault-1 icon through the engine's own {@link MenuListener} proves the migrated path opens that vault through the
  * same {@link OpenVault}/{@link VaultView} the command drives, and a click on a locked pane sends the nudge and
- * opens nothing — so the move is faithful in both appearance and behaviour.
+ * opens nothing, so the move is faithful in both appearance and behaviour.
  */
 class VaultSelectorGoldenTest {
 

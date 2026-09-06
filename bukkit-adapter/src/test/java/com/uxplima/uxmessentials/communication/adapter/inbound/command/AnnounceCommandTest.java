@@ -244,7 +244,7 @@ class AnnounceCommandTest {
 
         // /announce editor parses (the subcommand keeps the reload/list/preview/toggle tree intact alongside it).
         assertThat(canParse(dispatcher, "announce editor")).isTrue();
-        // The bare /announce gains the editor opener via guiRoot() — the GuiRootBinding installs it on the root.
+        // The bare /announce gains the editor opener via guiRoot(): the GuiRootBinding installs it on the root.
         assertThat(command.guiRoot()).isPresent();
     }
 

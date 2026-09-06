@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by Residence, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by Residence, reached <b>entirely by reflection</b>. There is no compile
  * dependency on Residence, so this class loads and runs whether or not Residence is present. Here a "claim" is
  * a residence: the block belongs to a claim exactly when Residence reports a residence covering it, so a warp
  * can be gated to a residence you own or have build rights in.
@@ -32,20 +32,20 @@ import org.jspecify.annotations.Nullable;
  * flag, def)}). The port hands us a {@link UUID}, so every lookup first resolves that UUID to the server-known
  * name via {@code server.getOfflinePlayer(uuid).getName()}. That read consults the local user cache and is
  * safe on the region thread for a player the server has seen; for a UUID it has never seen the name is
- * {@code null}, which we treat as "no match" — an unknown player is neither owner nor trusted.
+ * {@code null}, which we treat as "no match": an unknown player is neither owner nor trusted.
  *
  * <p>Ownership is the resolved name matching the residence owner name, compared case-insensitively because
  * Residence itself compares owner names that way. Trust widens ownership to anyone the residence grants the
  * {@code build} flag, matching the owner-or-member reading the other providers use.
  *
  * <p>{@link ClaimLookup#owner()} stays empty: Residence exposes only a name, and resolving a name back to a
- * UUID for an offline player is unreliable, so there is no dependable single owner UUID to hand back — callers
+ * UUID for an offline player is unreliable, so there is no dependable single owner UUID to hand back, callers
  * gate on {@link ClaimLookup#isOwner(UUID)} instead, as they do for WorldGuard. Residence has no per-player ban
- * list — access is governed by the ambiguous {@code move} flag, which cannot be told apart from a global deny —
+ * list (access is governed by the ambiguous {@code move} flag, which cannot be told apart from a global deny)
  * so {@link ClaimLookup#isBanned} is always {@code false}, matching WorldGuard's lack of a ban concept.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code com.bekvon} type — a server without Residence loads none of its classes. The Residence
+ * active names no {@code com.bekvon} type: a server without Residence loads none of its classes. The Residence
  * API chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs once and
  * degrades to empty rather than propagating.
  */
@@ -56,7 +56,7 @@ public final class ResidenceClaimProvider implements ClaimProvider {
     private static final String RESIDENCE_CLASS = "com.bekvon.bukkit.residence.Residence";
 
     // Residences are x/z-bounded areas that (for warp-placement purposes) claim their column regardless of
-    // height — so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on
+    // height, so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on
     // Folia, matching the other providers.
     private static final int CLAIM_LOOKUP_Y = 64;
 
@@ -99,7 +99,7 @@ public final class ResidenceClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code Residence.getResidenceManager().getByLoc(Location)} — the residence at the block, or {@code null}. */
+    /** {@code Residence.getResidenceManager().getByLoc(Location)}, the residence at the block, or {@code null}. */
     private static @Nullable Object residenceAt(Location location) throws ReflectiveOperationException {
         Object manager =
                 Class.forName(RESIDENCE_CLASS).getMethod("getResidenceManager").invoke(null);
@@ -122,7 +122,7 @@ public final class ResidenceClaimProvider implements ClaimProvider {
 
     /**
      * One Residence's name-based answers, decoupled from reflection so the case-insensitive owner match, the
-     * build-flag trust widening and — crucially — the UUID-to-name resolution and its {@code null} case can be
+     * build-flag trust widening and, crucially, the UUID-to-name resolution and its {@code null} case can be
      * exercised without a live Residence. Residence is name-keyed, so resolving the port's UUID to a name is part
      * of every decision and belongs on this seam alongside the owner-name and flag questions.
      */
@@ -216,15 +216,15 @@ public final class ResidenceClaimProvider implements ClaimProvider {
         @Override
         public Optional<UUID> owner() {
             // Residence exposes only an owner name; resolving a name back to a UUID for an offline player is
-            // unreliable, so there is no dependable single owner UUID to return — callers gate on isOwner.
+            // unreliable, so there is no dependable single owner UUID to return, callers gate on isOwner.
             return Optional.empty();
         }
 
         @Override
         public boolean isBanned(UUID player) {
             Objects.requireNonNull(player, "player");
-            // Residence has no per-player ban list — access is governed by the ambiguous "move" flag, which
-            // cannot be told apart from a global deny — so no ban is inferred, matching WorldGuard.
+            // Residence has no per-player ban list. Access is governed by the ambiguous "move" flag, which
+            // cannot be told apart from a global deny, so no ban is inferred, matching WorldGuard.
             return false;
         }
     }

@@ -31,7 +31,7 @@ import com.uxplima.uxmessentials.worlds.domain.event.WorldEntryDenied;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Enforces {@link WorldAccessPolicy} on every cross-world entry vector — not just the {@code /world} enter
+ * Enforces {@link WorldAccessPolicy} on every cross-world entry vector, not just the {@code /world} enter
  * command. A cancellable {@link PlayerTeleportEvent} covers {@code /tp}, {@code /back}, ender pearls, and any
  * plugin teleport; the {@link PlayerJoinEvent} catches a player logging into a world that has since become
  * restricted, redirecting them to the default world's spawn when configured to.
@@ -73,7 +73,7 @@ public final class WorldAccessListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onTeleport(PlayerTeleportEvent event) {
         if (forcedEntries.consume(event.getPlayer().getUniqueId())) {
-            return; // a worlds-initiated (staff /worlds tp or login redirect) hand-off — already adjudicated
+            return; // a worlds-initiated (staff /worlds tp or login redirect) hand-off: already adjudicated
         }
         Location to = event.getTo();
         if (to == null || event.getFrom().getWorld().equals(to.getWorld())) {

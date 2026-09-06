@@ -31,7 +31,7 @@ public record AltGroup(UUID account, Set<UUID> alts) {
     /**
      * Group {@code account}'s alts out of {@code associations}: the accounts (other than {@code account}) that
      * appear on any IP token {@code account} itself appears on. Associations for unrelated tokens are ignored, so
-     * the collection may be the whole table or a pre-filtered slice — the result is the same.
+     * the collection may be the whole table or a pre-filtered slice: the result is the same.
      */
     public static AltGroup of(UUID account, Collection<IpAssociation> associations) {
         Objects.requireNonNull(account, "account");

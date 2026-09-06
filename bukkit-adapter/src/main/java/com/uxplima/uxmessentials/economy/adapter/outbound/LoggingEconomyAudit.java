@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link EconomyAudit} implementation that writes the economy audit trail to the operator log as
  * structured {@code event=...} lines ({@code docs/09-deployment.md} §Audit logging,
- * {@code docs/11-economy-integration.md} §8). This is the {@code com.uxplima.uxmessentials.audit} channel —
+ * {@code docs/11-economy-integration.md} §8). This is the {@code com.uxplima.uxmessentials.audit} channel
  * separate from the ledger ({@code transactions} table); the two are deliberately not conflated. Each line
  * carries the actor/target, the currency id, the amount, and the closed {@link EconomyReason} so a review can
  * {@code GROUP BY reason}; bulk verbs emit exactly one line with an affected-count, never per-target spam.

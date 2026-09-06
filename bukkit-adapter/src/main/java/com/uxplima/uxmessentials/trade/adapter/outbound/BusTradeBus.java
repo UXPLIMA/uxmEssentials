@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * Bridges the trade context's {@link TradeBus} port to the shared cross-server bus: a {@link TradeSignal} is published
  * as a {@link TradeSignalFrame} through the {@link BusPublisher}, and every inbound frame the bus dispatches to
  * {@link #onFrame} is translated back to a {@link TradeSignal} and handed to the coordinator. The wiring registers
- * {@link #onFrame} as a {@code RemoteSyncListener}, so this runs on the bus's off-tick dispatch thread — the coordinator
+ * {@link #onFrame} as a {@code RemoteSyncListener}, so this runs on the bus's off-tick dispatch thread, the coordinator
  * it feeds does its own region hops for any Bukkit touch, matching the {@code RemoteSyncListener} contract.
  */
 @NullMarked

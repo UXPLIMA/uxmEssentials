@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
  * participants are logged by UUID for stable identity, with names carried for the human-readable render, alongside each
  * side's total item quantity, staked money, and staked experience.
  *
- * <p>Audit lines are operator-facing, so they go through a {@link Logger} bound to the audit channel — never the
+ * <p>Audit lines are operator-facing, so they go through a {@link Logger} bound to the audit channel, never the
  * player-facing {@code MessageKey} catalog. The caller only invokes this when the module's {@code audit} knob is on.
  */
 @NullMarked

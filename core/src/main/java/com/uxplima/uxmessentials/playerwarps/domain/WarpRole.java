@@ -12,11 +12,11 @@ import org.jspecify.annotations.Nullable;
  * The role a non-owner player holds on a warp, in descending authority:
  *
  * <ul>
- *   <li>{@link #OWNER} — the warp's creator, with unconditional control. This constant exists so the members
+ *   <li>{@link #OWNER}: the warp's creator, with unconditional control. This constant exists so the members
  *       table can carry the owner row too when a use case wants the full roster in one place; the aggregate's
  *       own owner field remains the source of truth for ownership.
- *   <li>{@link #CO_OWNER} — a trusted delegate who may manage the warp almost as fully as the owner.
- *   <li>{@link #MANAGER} — a helper with a narrower set of management actions.
+ *   <li>{@link #CO_OWNER}: a trusted delegate who may manage the warp almost as fully as the owner.
+ *   <li>{@link #MANAGER}, a helper with a narrower set of management actions.
  * </ul>
  *
  * <p>The persisted token is the constant's {@link #name()} (uppercase); {@link #parse(String)} reads it back
@@ -40,12 +40,12 @@ public enum WarpRole {
      * Whether a holder of this role may perform {@code capability}:
      *
      * <ul>
-     *   <li>{@link #OWNER} — every capability.
-     *   <li>{@link #CO_OWNER} — every capability except {@link WarpCapability#DELETE},
+     *   <li>{@link #OWNER}, every capability.
+     *   <li>{@link #CO_OWNER}, every capability except {@link WarpCapability#DELETE},
      *       {@link WarpCapability#TRANSFER}, {@link WarpCapability#MANAGE_MEMBERS}, and
      *       {@link WarpCapability#SPONSOR} (a trusted delegate may run the warp and even withdraw its earnings, but
      *       never dispose of it, promote further delegates, or spend the owner's money on paid placement).
-     *   <li>{@link #MANAGER} — only {@link WarpCapability#EDIT_METADATA}, {@link WarpCapability#MANAGE_WHITELIST},
+     *   <li>{@link #MANAGER}, only {@link WarpCapability#EDIT_METADATA}, {@link WarpCapability#MANAGE_WHITELIST},
      *       and {@link WarpCapability#MANAGE_BANS} (presentation and the guest list, never the money or the
      *       lifecycle).
      * </ul>
@@ -61,7 +61,7 @@ public enum WarpRole {
 
     /**
      * Match a stored or user-supplied token to a constant, ignoring case and surrounding whitespace. Returns
-     * an empty result — never throws — for {@code null}, blank, or unrecognised input.
+     * an empty result, never throws, for {@code null}, blank, or unrecognised input.
      */
     public static Optional<WarpRole> parse(@Nullable String token) {
         if (token == null) {

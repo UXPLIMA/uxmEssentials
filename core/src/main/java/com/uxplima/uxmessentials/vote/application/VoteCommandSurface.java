@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  * Brigadier handlers are built in the adapter.
  *
  * <p>The {@code testreward} action is a subcommand of {@code /vote} gated by its own node, not a separate
- * command literal, so it is not in this table — only the two top-level command literals are.
+ * command literal, so it is not in this table: only the two top-level command literals are.
  */
 final class VoteCommandSurface {
 
@@ -40,6 +40,6 @@ final class VoteCommandSurface {
         return new VoteCommand(literal, description);
     }
 
-    /** The kernel-side description of one vote command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one vote command, literal and help text, no Brigadier type. */
     private record VoteCommand(String literal, String description) implements BrigadierCommand {}
 }

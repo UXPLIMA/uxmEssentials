@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /entitycount} into the itemworld context's command surface. There is no command to tally nearby
- * entities by type — {@code /near} lists players, the purge family deletes them — yet admins use a count for
+ * entities by type ({@code /near} lists players, the purge family deletes them) yet admins use a count for
  * lag diagnosis before {@code /butcher} or {@code /killall}. This guard fails if the literal drops out of the
  * surface or wires under a node other than {@code uxmessentials.entitycount.use}.
  */

@@ -53,7 +53,7 @@ class ClickActionValueCheckTest {
 
     @Test
     void giveAcceptsASerializedItemToken() {
-        // A b64: token (what 'give hand' stores) is accepted as-is — its shape is the codec's concern, not the check.
+        // A b64: token (what 'give hand' stores) is accepted as-is: its shape is the codec's concern, not the check.
         assertThat(ClickActionValueCheck.check(ClickActionType.GIVE, "b64:whatever")
                         .isValid())
                 .isTrue();

@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /staffchat <message>} (alias {@code /sc}, {@code uxmessentials.staff.chat}): send one line on the
  * staff-only channel. The {@code SendStaffChat} use case owns the fan-out to every online staff-chat holder and
  * the audit event; this handler only maps the sender and the greedy message argument. Staff chat carries no
- * sanction — it is plain communication.
+ * sanction: it is plain communication.
  */
 @NullMarked
 public final class StaffChatCommand extends StaffCommandSupport implements CommandRegistration {

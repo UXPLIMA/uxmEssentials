@@ -12,7 +12,7 @@ import org.jspecify.annotations.Nullable;
  * The {@link RowMapper}s that read a LiteBans punishment row into a {@link LiteBansRow}. There are two: the
  * ban/mute reader (no {@code warned} column) and the warning reader (which adds it). Both read columns by
  * name so the reader is insensitive to column order. A {@code BIT} discriminator is read through
- * {@link ResultSet#getBoolean} — H2, MySQL/MariaDB and PostgreSQL all map a BIT(1)/BOOLEAN to a boolean.
+ * {@link ResultSet#getBoolean}, H2, MySQL/MariaDB and PostgreSQL all map a BIT(1)/BOOLEAN to a boolean.
  *
  * <p>This is parse-layer only: it builds a {@link LiteBansRow} value and never a domain type. Translation to
  * a {@code :core} sanction happens in {@code map/}.

@@ -49,7 +49,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage of the engine's property-editor capability (increments 1–4 of the editor framework): an
+ * MockBukkit coverage of the engine's property-editor capability (increments 1 to 4 of the editor framework): an
  * editor is opened through {@link Menus#openEditor} as a {@link MenuHolder}-backed window the one
  * {@link MenuListener} recognises, draws one button per {@link EditableProperty}, routes a property click into that
  * property's {@code onClick}, and repaints the same inventory in place after the setter runs. The scheduler is
@@ -215,7 +215,7 @@ class MenuEditorTest {
         server.getPluginManager().callEvent(event);
     }
 
-    /** The first lore line of an item rendered as plain text — the value-lore the editor wrote. */
+    /** The first lore line of an item rendered as plain text, the value-lore the editor wrote. */
     private static String valueLoreOf(ItemStack item) {
         List<Component> lore = TileText.body(item);
         assertThat(lore).isNotEmpty();

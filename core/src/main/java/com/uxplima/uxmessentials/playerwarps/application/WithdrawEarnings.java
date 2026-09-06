@@ -18,12 +18,12 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /pwarp withdraw <name>}: pay the warp's accrued earnings out to its owner's balance. Allowed to the owner
- * and a co-owner by the capability matrix ({@link WarpCapability#WITHDRAW}) — a trusted delegate may release the
+ * and a co-owner by the capability matrix ({@link WarpCapability#WITHDRAW}). A trusted delegate may release the
  * takings but never redirect them. The verb resolves the warp ({@link PlayerWarpError#NOT_FOUND}) and gates the
  * actor ({@link PlayerWarpError#NO_PERMISSION}) before touching any money.
  *
  * <p><strong>The payout always goes to {@code warp.owner()}</strong>, whoever triggered it: the bank is the owner's
- * takings, so a co-owner releasing it credits the owner, not themselves. The economy seam is soft-coupled — injected
+ * takings, so a co-owner releasing it credits the owner, not themselves. The economy seam is soft-coupled, injected
  * as an {@link Optional}. With no provider present there is no money system, so a withdraw is a graceful no-op notice
  * ({@link PlayerwarpsMessageKey#PWARP_NOTHING_TO_WITHDRAW}) rather than a failure. With a provider present the payout
  * result is mapped: a successful payout (an empty bank returns success per the economy contract) notifies

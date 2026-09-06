@@ -74,7 +74,7 @@ class ScoreboardRenderTaskTest {
                 () -> true);
 
         task.start();
-        scheduler.fireNext(); // empty online set — the fan-out is a no-op, the tick completes cleanly
+        scheduler.fireNext(); // empty online set. The fan-out is a no-op, the tick completes cleanly
 
         assertThat(scheduler.pending).as("a clean tick re-arms as before").isNotNull();
         assertThat(scheduler.lastDelay).isEqualTo(INTERVAL);

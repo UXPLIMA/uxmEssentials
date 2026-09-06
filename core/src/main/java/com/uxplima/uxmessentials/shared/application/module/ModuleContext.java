@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 /**
  * The injection envelope handed to a module's {@link FeatureModule#start(ModuleContext)}.
  *
- * <p>A module never reaches for the plugin instance or news up a port — it receives what it needs
+ * <p>A module never reaches for the plugin instance or news up a port. It receives what it needs
  * here, applying constructor injection at the module seam. The envelope carries the module's own
  * {@link ModuleId}, its configuration subtree (scoped by convention to the module's
  * {@code configRoot}), and the {@link KernelPorts} bundle of shared outbound ports (scheduler,

@@ -17,9 +17,9 @@ import org.jspecify.annotations.NullMarked;
  * ordering; {@link SendStaffChat} fans the staff channel; {@link StaffInspector} drives the EXAMINE gadget; the
  * {@link StaffModeStoreImpl} is the active-staff marker the listener consults on quit and on disable.
  *
- * @param enter {@code /staffmode} entering — capture, persist, then swap to the gadget hotbar
- * @param exit {@code /staffmode} leaving — restore the real loadout, then delete the stored copy
- * @param recover finish an interrupted exit — restore an orphaned loadout row on enter or on join
+ * @param enter {@code /staffmode} entering, capture, persist, then swap to the gadget hotbar
+ * @param exit {@code /staffmode} leaving. Restore the real loadout, then delete the stored copy
+ * @param recover finish an interrupted exit. Restore an orphaned loadout row on enter or on join
  * @param staffChat {@code /staffchat} and {@code /sc}
  * @param inspector the EXAMINE gadget's inventory-open seam
  * @param store the active-staff marker, enumerated on disable to exit everyone still in staff mode

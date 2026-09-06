@@ -25,7 +25,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * <p>An offline target's row is lazily materialized before any FK-bearing write ({@code ensureUserExists},
  * docs/09-deployment) so an offline {@code /jail} or {@code /banip} never breaks referential integrity. The
  * sweep methods remove sanctions whose wall-clock expiry has passed; the online-only jail countdown is not
- * swept here — it is decremented by the join/quit tick and released by {@code /unjail}.
+ * swept here: it is decremented by the join/quit tick and released by {@code /unjail}.
  */
 public interface ModerationRepository {
 
@@ -73,7 +73,7 @@ public interface ModerationRepository {
 
     /**
      * Append one warning to {@code target}'s history and return the count of warnings still in effect at the
-     * appended warning's issue instant — a standing warning and any timed warning not yet lapsed. The history
+     * appended warning's issue instant: a standing warning and any timed warning not yet lapsed. The history
      * itself stays append-only; the count simply excludes already-lapsed timed warnings.
      */
     int appendWarn(PlayerRef target, Warn warn);

@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /kill [player]}: kill a target — the named player, the invoking player when no argument is given, or
+ * {@code /kill [player]}: kill a target. The named player, the invoking player when no argument is given, or
  * every player a selector matches ({@code /kill @a}). An abusable verb (audit-logged): killing another player
  * is a moderation-adjacent action, so each kill is recorded with actor and target. A name or selector that
  * matches no online player answers {@link ItemworldMessageKey#UNKNOWN_TARGET}.

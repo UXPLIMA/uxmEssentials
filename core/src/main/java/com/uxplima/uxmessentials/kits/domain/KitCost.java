@@ -9,7 +9,7 @@ import java.util.Objects;
  * {@code null} amount, so the "no charge" case is a first-class value the claim use case can branch on
  * without a null check.
  *
- * <p>The cost is a pure domain value — it carries no currency and no economy provider. Whether a cost is
+ * <p>The cost is a pure domain value: it carries no currency and no economy provider. Whether a cost is
  * actually charged is decided in the application layer, which soft-couples to the economy context only when
  * a provider is present; with no provider the cost is recorded on the kit but ignored at claim time. This
  * keeps kits free of any hard dependency on the economy context.
@@ -38,7 +38,7 @@ public record KitCost(BigDecimal amount, String currencyId) {
         return new KitCost(amount, currencyId);
     }
 
-    /** The "no charge" cost — a kit anyone may claim without paying. */
+    /** The "no charge" cost: a kit anyone may claim without paying. */
     public static KitCost free() {
         return FREE;
     }

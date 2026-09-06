@@ -34,13 +34,13 @@ import org.jspecify.annotations.NullMarked;
  * picker, ending in the audited {@code Jail} use case. Picking a target (an online head or a typed offline name)
  * opens a paginated list of the defined jail names; choosing a jail opens the {@link DurationPickerView} with a
  * permanent option plus the timed presets; choosing a duration jails the target. The chosen target and jail are
- * carried immutably through the hops — no live target {@link Player} is held — so a target that logs off between
+ * carried immutably through the hops, no live target {@link Player} is held, so a target that logs off between
  * steps is still jailed (an offline jail re-applied at the next login, exactly as the raw command does).
  *
  * <p>Jail has no silent variant, so there is no confirm screen: a chosen duration executes directly, which keeps
  * the flow to three clicks (target → jail → duration). The reusable views stay generic: this flow supplies the
  * moderation {@code TargetResolver} as the offline-name resolver, the unknown-target reply, and the jail-grammar
- * validator (which — unlike the tempban/tempmute flows — accepts a permanent parse). The picker's two footer
+ * validator (which, unlike the tempban/tempmute flows, accepts a permanent parse). The picker's two footer
  * buttons ([Jails] and [Jailed players]) come from the {@link Footers} hook so this flow stays free of the
  * jail-list / jailed-players view types.
  */
@@ -159,7 +159,7 @@ public final class JailGuiFlow {
                         Optional.of(() -> openChooser(viewer, viewerRef, target))));
     }
 
-    /** The permanent token followed by the standard timed presets — a jail may be permanent. */
+    /** The permanent token followed by the standard timed presets: a jail may be permanent. */
     private static List<String> permanentFirstPresets() {
         List<String> presets = new ArrayList<>();
         presets.add(PERMANENT_TOKEN);

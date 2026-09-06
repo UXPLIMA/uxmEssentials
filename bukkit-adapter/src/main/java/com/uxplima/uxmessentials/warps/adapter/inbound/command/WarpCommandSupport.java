@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared collaborators every warps Brigadier command holds: the constructed {@link WarpServices} and the
- * {@link Messages} catalog (the latter only for the players-only rejection a console may see — all
+ * {@link Messages} catalog (the latter only for the players-only rejection a console may see, all
  * player-facing feedback flows through the use cases' {@code MessageSink}). Concrete command classes extend
  * this so each stays focused on building its node and mapping one argument to one use-case call.
  */
@@ -76,7 +76,7 @@ abstract class WarpCommandSupport {
     /**
      * Run {@code feedback} on {@code viewer}'s region thread. Inline command feedback calls
      * {@code sender.sendMessage(...)}, a Bukkit interaction, so a continuation reached from an async read must
-     * bridge back to the player's entity thread before sending — the same bridge {@code /pwarp} uses.
+     * bridge back to the player's entity thread before sending, the same bridge {@code /pwarp} uses.
      */
     final void onPlayer(PlayerRef viewer, Runnable feedback) {
         services.scheduler().onEntity(viewer, feedback);

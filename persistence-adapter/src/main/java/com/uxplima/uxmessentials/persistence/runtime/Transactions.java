@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * A small transaction helper over a jOOQ {@link DSLContext}.
  *
  * <p>It runs a unit of work inside a single jOOQ transaction: the work commits if it returns normally
- * and rolls back if it throws. This is the seam the offline-row upsert relies on — the parent
+ * and rolls back if it throws. This is the seam the offline-row upsert relies on, the parent
  * {@code ensureUserExists} insert and the dependent write happen in the same transaction, so a foreign
  * key can never observe a missing parent ({@code docs/01-architecture.md} §8 persistence invariants).
  * jOOQ's {@code DataAccessException} is translated to the layer's {@link PersistenceException} so callers

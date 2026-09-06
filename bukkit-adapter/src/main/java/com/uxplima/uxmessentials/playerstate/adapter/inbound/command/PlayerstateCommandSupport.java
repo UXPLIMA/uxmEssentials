@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared collaborators every playerstate Brigadier command holds: the constructed {@link PlayerStateServices}
  * and the {@link Messages} catalog (the latter only for the players-only, unknown-player, and
- * no-permission-for-others rejections — all success feedback flows through the use cases' {@code MessageSink}).
+ * no-permission-for-others rejections: all success feedback flows through the use cases' {@code MessageSink}).
  * Concrete command classes extend this so each stays focused on building its node and mapping its arguments to
  * one use-case call.
  *
@@ -74,7 +74,7 @@ abstract class PlayerstateCommandSupport {
     /**
      * Resolve the optional {@code player} argument to one or more targets. When the argument is absent the
      * sender is the sole target; when present (a name or an {@code @a}/{@code @p}/{@code @s}/{@code @r}
-     * selector) the matched players are returned only if the sender holds {@link #OTHERS_PERMISSION} —
+     * selector) the matched players are returned only if the sender holds {@link #OTHERS_PERMISSION}
      * otherwise the no-permission rejection is sent and the list is empty. A selector that matches no online
      * player yields the unknown-player rejection and an empty list.
      *
@@ -124,7 +124,7 @@ abstract class PlayerstateCommandSupport {
      * {@link io.papermc.paper.command.brigadier.argument.ArgumentTypes#player()} argument. Used by the
      * single-target write verbs that keep a selector by design ({@code /clearinventory}, {@code /exp}), where
      * naming one player via a selector is reasonable. The single-target <em>read</em> verbs ({@code /playtime},
-     * {@code /getpos}, {@code /ping}) deliberately do <em>not</em> use this — they take a plain name through
+     * {@code /getpos}, {@code /ping}) deliberately do <em>not</em> use this. They take a plain name through
      * {@link #resolveNamedTarget} so they never surface the {@code @a} selector on a read where a fan-out is
      * nonsensical. Empty means the rejection (no-permission or unknown-player) was already sent.
      */
@@ -142,7 +142,7 @@ abstract class PlayerstateCommandSupport {
      * Resolve the optional {@code player} string argument to a single online target, for the read/report verbs
      * that name one player ({@code /playtime}, {@code /getpos}, {@code /ping}). An absent argument is the sender;
      * a present one resolves only when the sender holds {@link #OTHERS_PERMISSION}, matching exactly one online
-     * name — anything else is the unknown-player rejection. The argument is a plain {@link CommandSuggestions#playerArgument}
+     * name: anything else is the unknown-player rejection. The argument is a plain {@link CommandSuggestions#playerArgument}
      * word completing against the online roster, so these reads never expose the {@code @a}/{@code @p}/{@code @s}
      * selector syntax: showing one player's stats is a single-target read where fanning out to every player is
      * nonsensical. Empty means the rejection (no-permission or unknown-player) was already sent.
@@ -171,7 +171,7 @@ abstract class PlayerstateCommandSupport {
     /**
      * Resolve the optional {@code player} string argument to a target that may be <em>offline</em>, for the
      * storage-viewing verbs ({@code /invsee}, {@code /endersee}). An absent argument is the sender; a present one
-     * resolves only when the sender holds {@link #OTHERS_PERMISSION} — an exact online name first, then a cached
+     * resolves only when the sender holds {@link #OTHERS_PERMISSION}. An exact online name first, then a cached
      * offline profile (non-blocking, from the server's user cache); anything else is the unknown-player
      * rejection. Unlike {@link #resolveTarget}, the argument is a plain word so an offline name can be typed (an
      * online-player selector resolves online names only).
@@ -232,7 +232,7 @@ abstract class PlayerstateCommandSupport {
             }
             return resolved.stream().map(BukkitRefs::toRef).toList();
         } catch (CommandSyntaxException unmatched) {
-            // A name with no online player, or a selector that matched nothing — surfaced to the sender as the
+            // A name with no online player, or a selector that matched nothing, surfaced to the sender as the
             // same unknown-player rejection the name path used, never as a raw Brigadier parse error.
             reply(sender, UNKNOWN_PLAYER, Map.of("player", typedTarget(ctx)));
             return List.of();

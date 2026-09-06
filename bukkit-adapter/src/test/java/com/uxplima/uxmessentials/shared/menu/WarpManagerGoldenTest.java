@@ -62,13 +62,13 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code WarpManagerView} drew. The store holds two stored warps ("alpha" and "beta", both without an icon override so
  * they fall back to the ENDER_PEARL icon), so the list draws two ENDER_PEARL icons (content slots 0 and 1, the names
  * surfacing through the warp-name token), the EMERALD_BLOCK create button (slot 48), the BARRIER close button (slot 50),
- * and the BOOK categories button (slot 51) — and, as in the original, no page arrows. The engine's window is
+ * and the BOOK categories button (slot 51), and, as in the original, no page arrows. The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view
- * produced — captured once while both rendered the same fixture, then frozen here as the contract so the old class could
+ * produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old class could
  * be deleted. Then, through the engine's own {@link MenuListener}, a left click on the first warp icon proves the
  * migrated path opens that warp's engine {@link WarpEditorView}, a left click on the create button proves it reaches
  * the create prompt, and a left click on the categories button proves it opens the bespoke
- * {@link WarpCategoryManagerMenu} — so the move is faithful in both appearance and behaviour.
+ * {@link WarpCategoryManagerMenu}, so the move is faithful in both appearance and behaviour.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code warp} token, so a warp's name appears in the
  * rendered label; every other key renders verbatim. A real rendering difference (a wrong key, a wrong material, a
@@ -144,7 +144,7 @@ class WarpManagerGoldenTest {
         seed("alpha");
         openEngine();
         // Slot 51 is the manage-categories button; a left click must open the category manager, which now renders
-        // through the menu engine — so its window is a holder-backed MenuHolder, not the old bespoke holder.
+        // through the menu engine, so its window is a holder-backed MenuHolder, not the old bespoke holder.
         fireClick(51, ClickType.LEFT);
 
         assertThat(player.getOpenInventory().getTopInventory().getHolder())
@@ -154,7 +154,7 @@ class WarpManagerGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code WarpManagerView} produced for this fixture (two warps
      * without an icon override, "alpha" and "beta"), captured once while both paths rendered it identically and frozen
-     * here as the contract: two ENDER_PEARL icons (content slots 0 and 1 — the names surface through the warp-name
+     * here as the contract: two ENDER_PEARL icons (content slots 0 and 1. The names surface through the warp-name
      * token), the EMERALD_BLOCK create button (slot 48), the BARRIER close button (slot 50), and the BOOK categories
      * button (slot 51). The original warp manager drew no page arrows, so none appear here.
      */

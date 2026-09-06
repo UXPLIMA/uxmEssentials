@@ -16,13 +16,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /kick <player> [reason]}: eject one connected player. The exempt target is refused (audit-logged);
- * any other online target is kicked with the rendered reason. A kick mutates no DB state — it is a live
- * disconnect — but it is still audit-logged because it is an admin action.
+ * any other online target is kicked with the rendered reason. A kick mutates no DB state. It is a live
+ * disconnect, but it is still audit-logged because it is an admin action.
  *
  * <p>Unless the kick is silent ({@code /kick -s}), the staff broadcast announces it to everyone holding the
  * moderation broadcast node; a silent kick suppresses only that announcement, leaving the actor confirmation
  * and the target's kick screen intact. A successful kick is recorded in the append-only sanction history so it
- * surfaces in {@code /history} and {@code /staffhistory} — a kick carries no expiry.
+ * surfaces in {@code /history} and {@code /staffhistory}: a kick carries no expiry.
  */
 public final class Kick {
 

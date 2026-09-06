@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The WorldGuard side of the poses region gate, reached purely by reflection behind a plugin-present guard — the same
+ * The WorldGuard side of the poses region gate, reached purely by reflection behind a plugin-present guard, the same
  * pattern the menu vocabulary's {@code worldguard-region} condition uses. It maps each {@link PoseType} to its custom
  * flag ({@code sit} / {@code playersit} / {@code pose} / {@code crawl}, registered at load by
  * {@link WorldGuardPoseFlagRegistrar}) and reports whether a covering region has set that flag DENY at a location.
@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>Named the SDK only by string class-name ({@code com.sk89q.worldguard.WorldGuard},
  * {@code com.sk89q.worldedit.bukkit.BukkitAdapter}), so no field or method signature carries a {@code com.sk89q}
  * type: on a server without WorldGuard the present-guard short-circuits before any {@code Class.forName}, so none of
- * its classes load. The gate is fail-open — an absent plugin, an unknown world, an unregistered flag, or any
+ * its classes load. The gate is fail-open. An absent plugin, an unknown world, an unregistered flag, or any
  * reflective failure (a version bump moving the query chain) all report "not denied" and are logged at most once,
  * because wrongly blocking a harmless sit is worse than missing a rare veto.
  */

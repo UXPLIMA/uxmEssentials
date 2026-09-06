@@ -24,8 +24,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandRegistrat
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /item <item> [amount]}: give an item to yourself. Cosmetic self-give — not an abusable verb, so no
- * audit line — but the same boundary validation as {@code /give}: the item id resolves to an obtainable
+ * {@code /item <item> [amount]}: give an item to yourself. Cosmetic self-give, not an abusable verb, so no
+ * audit line, but the same boundary validation as {@code /give}: the item id resolves to an obtainable
  * {@link Material} (else {@link ItemworldMessageKey#UNKNOWN_ITEM}) and the amount validates against the
  * {@code give-cap} (else {@link ItemworldMessageKey#AMOUNT_OUT_OF_RANGE}) before any stack materialises.
  */

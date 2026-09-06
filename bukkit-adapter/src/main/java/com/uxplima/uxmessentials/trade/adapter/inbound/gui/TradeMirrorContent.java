@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The other player's half of a trade window: what they have staked, shown as display copies. The region is declared
- * read-only in the spec, so the engine cancels every gesture on it before this provider is consulted at all — which
+ * read-only in the spec, so the engine cancels every gesture on it before this provider is consulted at all, which
  * is what makes the mirror unscammable rather than any check here. It repaints on every redraw, because it shows
  * something the trade owns rather than anything this viewer put down: when the other side stakes an item, the redraw
  * is how it appears here.

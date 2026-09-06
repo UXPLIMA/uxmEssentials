@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * One AxPlayerWarps warp row with its foreign ids already resolved to names by the reader's join
  * ({@code axplayerwarps_warps} joined to {@code _worlds} / {@code _categories} / {@code _materials} /
- * {@code _currencies}). The owner is still an id — it is resolved through the pre-loaded player map, not a join, since
+ * {@code _currencies}). The owner is still an id. It is resolved through the pre-loaded player map, not a join, since
  * both the warp owner and every side-table row key on that same id. {@code access} is the ordinal of AxPlayerWarps'
  * {@code Access} enum ({@code 0=PUBLIC, 1=WHITELISTED, 2=PRIVATE}); AxPlayerWarps has no password gate. A nullable
  * column (world, description, category, material, currency) is absent when the source left it unset.

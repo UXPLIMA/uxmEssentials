@@ -10,7 +10,7 @@ import org.bukkit.ServerLinks;
 import org.junit.jupiter.api.Test;
 
 /**
- * Coverage of {@link ServerLinkSpec#parse} — the config-entry → validated-link mapping. Asserts a built-in type
+ * Coverage of {@link ServerLinkSpec#parse}: the config-entry → validated-link mapping. Asserts a built-in type
  * parses case-insensitively, a custom label parses, type wins when both are present, and every malformed shape (no
  * type/label, unknown type, blank/relative/malformed URL) is dropped to empty so the applier skips it without
  * aborting the list.

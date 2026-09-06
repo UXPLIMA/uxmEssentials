@@ -41,7 +41,7 @@ import org.jspecify.annotations.Nullable;
  * beside the trunk. With no natural leaf adjacent the group is left to break as a single vanilla block.
  *
  * <h2>Sneak semantics (the owner-shift nuance)</h2>
- * The mechanic acts on the player who broke the log — there is no block ownership involved. The config
+ * The mechanic acts on the player who broke the log: there is no block ownership involved. The config
  * {@code sneak-required} doubles as the "shift to fell" switch: when {@code true}, tree-feller fires only if the
  * player is sneaking as they break the log, so a normal break chops a single log and a shift-break fells the tree;
  * when {@code false} (the shipped default) any log break fells the tree with no shift needed. It is read fresh from
@@ -49,14 +49,14 @@ import org.jspecify.annotations.Nullable;
  *
  * <h2>Auto-drops</h2>
  * When one of the auto-* break mechanics (auto-pickup / smelt / sell) is active for the feller, the felled logs are
- * routed through the shared {@link AutoDropsPipeline} exactly as the log they broke by hand is — so a fell picks up,
+ * routed through the shared {@link AutoDropsPipeline} exactly as the log they broke by hand is, so a fell picks up,
  * smelts, and sells every log, not only the origin. The decision is resolved once per fell and reused for the whole
  * cascade; with no pipeline (the auto mechanics disabled) the logs drop naturally on the ground.
  *
  * <h2>Folia</h2>
  * The connected logs are broken inline on the event thread (see {@link SurvivalBlocks}); only the replant is
  * deferred, and it hops to the base block's own region through the injected {@link Scheduler} so it runs a tick later
- * — after the vanilla break has cleared the origin — and never mutates a foreign region from the wrong thread.
+ *, after the vanilla break has cleared the origin, and never mutates a foreign region from the wrong thread.
  */
 @NullMarked
 public final class TreeFellerListener implements Listener {

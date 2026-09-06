@@ -71,7 +71,7 @@ class VaultSyncTest {
         VaultRepository repo = VaultSync.repository(new CachedVaultRepository(new CountingDelegate()), bus);
 
         // A bulk inactive-vault purge cannot enumerate the removed ids, so it announces no per-vault frame by
-        // design — the shared DB stays authoritative and a peer re-reads an empty vault on its next open.
+        // design: the shared DB stays authoritative and a peer re-reads an empty vault on its next open.
         repo.deleteUntouchedBefore(AT);
 
         assertThat(bus.published).isEmpty();
@@ -115,7 +115,7 @@ class VaultSyncTest {
         // VaultSync invalidates exactly (owner, index); a different index of the same owner is untouched.
         VaultSync.listener(cached).onRemoteChange(new VaultChanged("peer-2", OWNER.uuid(), 2));
 
-        cached.find(primed); // still cached — only vault 2 would have been dropped
+        cached.find(primed); // still cached. Only vault 2 would have been dropped
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 
@@ -130,7 +130,7 @@ class VaultSyncTest {
 
         VaultSync.listener(cached).onRemoteChange(new HomeChanged("peer-2", OWNER.uuid()));
 
-        cached.find(id); // still cached — a non-vault frame does not invalidate
+        cached.find(id); // still cached. A non-vault frame does not invalidate
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 

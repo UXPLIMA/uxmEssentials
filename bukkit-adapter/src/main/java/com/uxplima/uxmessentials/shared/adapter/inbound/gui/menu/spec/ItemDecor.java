@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The cosmetic extras layered onto a rendered item beyond its material, name, and lore — stack amount, an
+ * The cosmetic extras layered onto a rendered item beyond its material, name, and lore, stack amount, an
  * optional custom model data id, an enchant glow, the raw item-flag tokens the renderer maps to Bukkit
  * {@code ItemFlag}s, and the richer native {@link RichMeta} (enchantments, colours, potion/banner/trim data, …).
  * Flag tokens and every {@link RichMeta} value stay as strings/ints here so the pure model never references Bukkit.
@@ -27,7 +27,7 @@ public record ItemDecor(int amount, Optional<Integer> modelData, boolean glow, L
         this(amount, modelData, glow, flagTokens, RichMeta.NONE);
     }
 
-    /** A copy with a new stack {@code amount}, every other field unchanged — the item editor's amount stepper. */
+    /** A copy with a new stack {@code amount}, every other field unchanged: the item editor's amount stepper. */
     public ItemDecor withAmount(int amount) {
         return new ItemDecor(amount, modelData, glow, flagTokens, meta);
     }
@@ -47,7 +47,7 @@ public record ItemDecor(int amount, Optional<Integer> modelData, boolean glow, L
         return new ItemDecor(amount, modelData, glow, flagTokens, meta);
     }
 
-    /** A copy carrying a new item-flag token list, every other field unchanged — the item editor's flag toggles. */
+    /** A copy carrying a new item-flag token list, every other field unchanged: the item editor's flag toggles. */
     public ItemDecor withFlagTokens(List<String> flagTokens) {
         return new ItemDecor(amount, modelData, glow, flagTokens, meta);
     }

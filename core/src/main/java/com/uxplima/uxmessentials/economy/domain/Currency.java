@@ -11,12 +11,12 @@ import org.jspecify.annotations.Nullable;
  * noun, the render {@code format}, the decimal {@code precision}, the {@code min}/{@code max} balance clamp
  * every credit and debit honours, the {@code starting} balance a fresh wallet receives, the smallest
  * {@code /pay} amount ({@code minPay}), and the {@code confirmThreshold} above which {@code /payconfirm} is
- * required. Value object — equality by value, immutable, fixed at module start; the configured set is closed
+ * required. Value object. Equality by value, immutable, fixed at module start; the configured set is closed
  * once the economy module enables and a currency is never minted at runtime (the economy GLOSSARY).
  *
  * <p>The economy is multi-currency-capable with a single default: one {@code Currency} ships out of the box
- * and operators declare more in {@code economy.currencies.<id>}. {@link Money} is currency-bound — a figure
- * in one currency never adds to a figure in another — so a {@code Currency} is the unit every {@code Money},
+ * and operators declare more in {@code economy.currencies.<id>}. {@link Money} is currency-bound, a figure
+ * in one currency never adds to a figure in another, so a {@code Currency} is the unit every {@code Money},
  * every {@link Wallet} balance entry, and every port method is implicitly scoped to. The {@code precision}
  * carried here is what {@link Money} scales its {@link BigDecimal} amount to, so rounding is decided once,
  * per currency, and never drifts.
@@ -75,7 +75,7 @@ public final class Currency {
         return new Builder(Objects.requireNonNull(id, "id"));
     }
 
-    /** The currency's stable identifier — the persisted {@code (uuid, currency)} key and the audit field. */
+    /** The currency's stable identifier: the persisted {@code (uuid, currency)} key and the audit field. */
     public CurrencyId id() {
         return id;
     }
@@ -95,7 +95,7 @@ public final class Currency {
         return format;
     }
 
-    /** Decimal places this currency is scaled to — the {@link Money} rounding scale. */
+    /** Decimal places this currency is scaled to: the {@link Money} rounding scale. */
     public int precision() {
         return precision;
     }
@@ -138,7 +138,7 @@ public final class Currency {
 
     /**
      * The operator-configured icon-material name for this currency in GUIs (e.g. {@code GOLD_INGOT}), or empty
-     * when none is set. Held as a plain name here — the domain stays free of Bukkit's {@code Material}; the
+     * when none is set. Held as a plain name here. The domain stays free of Bukkit's {@code Material}; the
      * adapter resolves and validates it once when it builds an icon, falling back to a sensible default.
      */
     public java.util.Optional<String> iconMaterial() {
@@ -170,7 +170,7 @@ public final class Currency {
     }
 
     /**
-     * The {@code CurrencyBackend} id that holds this currency's balances. {@code native} — the default — is the
+     * The {@code CurrencyBackend} id that holds this currency's balances. {@code native}, the default, is the
      * plugin's own DB-backed ledger, the only backend with a guarded compare-and-take debit. Anything else names
      * a foreign economy; see {@code docs/11-economy-integration.md}.
      */

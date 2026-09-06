@@ -26,11 +26,11 @@ import org.jspecify.annotations.NullMarked;
  * Registers the EXAMINE gadget's online-player picker ({@code staff-examine}) with the menu engine and opens it.
  * A paginated grid of player heads, one per online player; clicking a head opens that player's inventory through
  * the soft-coupled {@link StaffInspector} (a no-op when playerstate is off) and sends the {@code STAFF_EXAMINE_INFO}
- * line (ping/gamemode/health/world) regardless — so the gadget always tells the staff member something even when
+ * line (ping/gamemode/health/world) regardless, so the gadget always tells the staff member something even when
  * the inventory open degrades.
  *
  * <p>The picker reuses the shared {@code staff:players} list source and {@code staff_player_name} head label that
- * {@link StaffPlayerMenu} registers, over the same {@link PlayerHeads} subject — so the EXAMINE gadget snapshots the
+ * {@link StaffPlayerMenu} registers, over the same {@link PlayerHeads} subject, so the EXAMINE gadget snapshots the
  * online roster on the global region thread and hands it in, and the source touches no Bukkit API off-thread. Only
  * the {@code staff:examine} click is registered here. The click runs on the looker's entity thread (the engine
  * dispatches actions there), where the target's live state read and the inventory open are region-safe, mirroring
@@ -78,7 +78,7 @@ public final class StaffExamineMenu {
     }
 
     /**
-     * Left-click a head: close the picker, then — if the clicked player is still online — open their inventory
+     * Left-click a head: close the picker, then, if the clicked player is still online, open their inventory
      * through the inspector and send the info line. Runs on the looker's entity thread (the engine dispatches
      * actions there), so the target read and the inventory open are region-safe, mirroring the old view's click.
      */

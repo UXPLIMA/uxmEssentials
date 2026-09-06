@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The text of a private message, a mail item, or a help-op request, validated at construction so an
  * empty or over-long body can never reach a use case, the repository, or another player's screen. The
- * raw player input is kept verbatim apart from edge trimming — unlike a {@link com.uxplima.uxmessentials
+ * raw player input is kept verbatim apart from edge trimming. Unlike a {@link com.uxplima.uxmessentials
  * .messaging.domain} name, the message text is content, not an identifier, so it is not lower-cased.
  *
  * <p>The maximum mirrors the {@code mail.body} column width in the messaging migration, so a body that

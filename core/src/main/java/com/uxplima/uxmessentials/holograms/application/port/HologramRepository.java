@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.holograms.domain.HologramName;
 
 /**
  * Outbound port for durable, server-wide hologram storage. Every hologram fact (name, world, coordinates,
- * creation time) is a first-class column, and the ordered lines live in a separate queryable child table —
- * there is no opaque JSON blob (the architecture persistence invariant) — so a {@link Hologram} loaded from
+ * creation time) is a first-class column, and the ordered lines live in a separate queryable child table
+ * there is no opaque JSON blob (the architecture persistence invariant), so a {@link Hologram} loaded from
  * its rows is rebuilt from queryable fields, and the list query reads them in stored creation order.
  *
  * <p>Holograms are keyed by their {@link HologramName} alone, so a {@code save} upserts on the single-column

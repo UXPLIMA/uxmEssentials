@@ -47,7 +47,7 @@ import org.jspecify.annotations.NullMarked;
  * Constructs the presence context's adapters and use cases over the injected kernel ports, and produces
  * everything the plugin must register: the Brigadier command list, the move/chat activity and join/quit
  * lifecycle listeners, and the self-rescheduling AFK idle sweep. This is the one place the presence context is
- * wired — nothing else news up its classes.
+ * wired: nothing else news up its classes.
  *
  * <p>The context persists nothing: the presence map is an in-memory {@link InMemoryPresenceStore}. Its outbound
  * adapters are the store and the {@link BukkitPresenceAudience}, both sitting on the kernel {@code Scheduler} port.

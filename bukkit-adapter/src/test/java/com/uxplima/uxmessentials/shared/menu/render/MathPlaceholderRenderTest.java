@@ -33,7 +33,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  * Exercises the {@code {math: <expr>}} pass through the real {@link ItemRenderer}. The math block is evaluated after
  * the {@code %token%} substitution, so a placeholder inside the expression is a literal number by the time the sandbox
  * sees it. Integer results drop the trailing {@code .0}, a fractional result keeps its decimals, an unparseable block
- * renders blank (fail-soft), and text carrying no math block — including a catalog-shaped {@code {token}} — is left
+ * renders blank (fail-soft), and text carrying no math block, including a catalog-shaped {@code {token}}, is left
  * untouched, proving the two brace grammars do not collide.
  */
 class MathPlaceholderRenderTest {

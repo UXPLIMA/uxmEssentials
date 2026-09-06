@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * <p>The adapter looks players up by name or UUID and maps the result to a {@link PlayerRef}.
  * Resolution by name returns the online player when one matches; offline-name resolution that hits a
  * profile cache or the mojang lookup is the adapter's concern and may be empty. Application code never
- * iterates {@code Bukkit.getOnlinePlayers()} — it asks this port.
+ * iterates {@code Bukkit.getOnlinePlayers()}: it asks this port.
  */
 public interface PlayerLookup {
 

@@ -10,7 +10,7 @@
 -- for the float scale/translation/shadow values (the same shape V35 used for the uniform scale).
 --
 --   text_alignment    the text line alignment enum name (CENTER / LEFT / RIGHT); NULL = CENTER
---   see_through       0/1 — whether the text renders through blocks; NULL = false
+--   see_through       0/1. Whether the text renders through blocks; NULL = false
 --   scale_y           the spatial scale on the Y axis; NULL = the uniform `scale` (V35)
 --   scale_z           the spatial scale on the Z axis; NULL = the uniform `scale` (V35)
 --   translation_x     the display-space X offset from the anchor; NULL = 0

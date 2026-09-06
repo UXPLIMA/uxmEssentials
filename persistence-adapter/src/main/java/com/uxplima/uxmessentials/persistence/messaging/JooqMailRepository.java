@@ -22,7 +22,7 @@ import org.jooq.DSLContext;
  * (the schema's {@code id} is a portable plain {@code BIGINT}, not a dialect-specific auto-increment), so a
  * concurrent append and the id allocation stay consistent. Mark-read and clear are keyed updates/deletes,
  * and the expiry sweep deletes by send time. Every statement is typed jOOQ DSL; no SQL is ever
- * string-concatenated. Mail is text-only — there are no item attachments.
+ * string-concatenated. Mail is text-only: there are no item attachments.
  */
 public final class JooqMailRepository extends JooqRepository implements MailRepository {
 

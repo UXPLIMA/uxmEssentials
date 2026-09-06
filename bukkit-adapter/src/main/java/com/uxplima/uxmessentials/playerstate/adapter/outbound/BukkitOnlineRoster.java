@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Snapshots the online roster as plain {@link PlayerRef}s for the {@link PlaytimeSampler}. The sampler only ever
  * invokes {@link #get()} from inside a {@code scheduler.onGlobal(...)} lambda, so the {@code getOnlinePlayers()}
- * read here runs on the global region thread — the only thread on which the roster is coherent under Folia. The
+ * read here runs on the global region thread: the only thread on which the roster is coherent under Folia. The
  * snapshot copies uuid/name only and touches no other live player state, so the refs are safe to hand to the
  * sampler's off-tick writes.
  *

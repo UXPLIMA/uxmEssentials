@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * One mapped record streamed out of a source's {@link com.uxplima.uxmessentials.migration.convert.Convert#plan
  * plan}, ready for the writer. A sealed family over the importable kinds (user, warp, kit, moderation, ban,
- * IP ban, warning, hologram, world) so the writer and the dry-run accumulator dispatch exhaustively with no default branch —
+ * IP ban, warning, hologram, world) so the writer and the dry-run accumulator dispatch exhaustively with no default branch
  * adding a kind is a compile error until every site handles it. Every kind carries an already-mapped domain
  * aggregate; the record itself is platform-neutral and free of any foreign-format type. Mutes and jails ride
  * in {@link ModerationRecord}; bans, IP bans and warnings are their own kinds carrying the moderation
@@ -48,7 +48,7 @@ public sealed interface ImportRecord {
     }
 
     /**
-     * A mapped player-owned warp — the shape the player-warp importers (AxPlayerWarps, Athelion, Olzie) all
+     * A mapped player-owned warp. The shape the player-warp importers (AxPlayerWarps, Athelion, Olzie) all
      * stream. Unlike {@link WarpRecord} it carries the pre-aggregate {@link ImportedPlayerWarp}, since the writer
      * still has to sanitise and globally de-collide the name and hash the password before an aggregate exists.
      */
@@ -80,7 +80,7 @@ public sealed interface ImportRecord {
     }
 
     /**
-     * A mapped UUID ban — permanent or timed. A permanent ban is a {@link TempbanState.Active} whose expiry
+     * A mapped UUID ban: permanent or timed. A permanent ban is a {@link TempbanState.Active} whose expiry
      * is a far-future sentinel ({@code Ban.PERMANENT_SPAN}), exactly the row the live {@code /ban} writes,
      * so the importer never needs a distinct permanent shape.
      */
@@ -96,7 +96,7 @@ public sealed interface ImportRecord {
         }
     }
 
-    /** A mapped IP ban, keyed by address — permanent or timed, with the banned UUID recorded when known. */
+    /** A mapped IP ban, keyed by address: permanent or timed, with the banned UUID recorded when known. */
     record IpBanRecord(IpBan ban) implements ImportRecord {
         public IpBanRecord {
             Objects.requireNonNull(ban, "ban");
@@ -108,7 +108,7 @@ public sealed interface ImportRecord {
         }
     }
 
-    /** A mapped warning appended to the target's append-only warning history — standing or timed. */
+    /** A mapped warning appended to the target's append-only warning history: standing or timed. */
     record WarnRecord(PlayerRef target, Warn warn) implements ImportRecord {
         public WarnRecord {
             Objects.requireNonNull(target, "target");

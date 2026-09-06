@@ -5,8 +5,8 @@ import com.uxplima.uxmessentials.messaging.domain.IgnoreScope;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for the persistent ignore list. The list survives restart — ignore-aware {@code /msg}
- * resolution and the async chat-mute path both read it — so it is DB-backed, with {@code (owner, ignored)}
+ * Outbound port for the persistent ignore list. The list survives restart, ignore-aware {@code /msg}
+ * resolution and the async chat-mute path both read it, so it is DB-backed, with {@code (owner, ignored)}
  * as the primary key (a duplicate {@code /ignore} is idempotent at the database) and the {@link IgnoreScope}
  * name as a first-class column.
  *

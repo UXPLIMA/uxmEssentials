@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.staff.domain.SavedLoadout;
 import com.uxplima.uxmessentials.staff.domain.event.StaffModeEntered;
 
 /**
- * {@code /staffmode} (entering): put a staff member into staff mode. Staff mode is purely orchestration — it
+ * {@code /staffmode} (entering): put a staff member into staff mode. Staff mode is purely orchestration: it
  * captures the player's real loadout, hands them the gadget hotbar, and vanishes them; it never mutes, bans,
  * kicks, or warns.
  *
@@ -23,24 +23,24 @@ import com.uxplima.uxmessentials.staff.domain.event.StaffModeEntered;
  * the loadout is DB-backed rather than PDC: the real loadout is captured and <i>persisted to the repository
  * first</i>, and only after that durable commit is the live inventory overwritten by the gadget hotbar. So
  * if the server crashes between the swap and the next exit, the real loadout is still recoverable from the
- * database — it was never the only copy. The sequence is exactly:
+ * database: it was never the only copy. The sequence is exactly:
  *
  * <ol>
- *   <li>{@code capture.capture(actor)} — snapshot the real loadout (pure value);
- *   <li>{@code loadoutRepository.save(uuid, loadout)} — COMMIT it durably (before any swap);
- *   <li>{@code store.setActive(actor, modeName)} — mark the player in staff mode;
- *   <li>{@code events.publish(StaffModeEntered)} — announce the (already-durable) state change;
- *   <li>{@code capture.applyGadgetHotbar(actor, modeName)} — only now overwrite the live inventory;
- *   <li>{@code vanish.setVanished(actor, vanishOnEnter)} — vanish through the soft-coupled presence seam.
+ *   <li>{@code capture.capture(actor)}, snapshot the real loadout (pure value);
+ *   <li>{@code loadoutRepository.save(uuid, loadout)}, COMMIT it durably (before any swap);
+ *   <li>{@code store.setActive(actor, modeName)}, mark the player in staff mode;
+ *   <li>{@code events.publish(StaffModeEntered)}, announce the (already-durable) state change;
+ *   <li>{@code capture.applyGadgetHotbar(actor, modeName)}, only now overwrite the live inventory;
+ *   <li>{@code vanish.setVanished(actor, vanishOnEnter)}: vanish through the soft-coupled presence seam.
  * </ol>
  *
- * <p>Entering while already in staff mode is a no-op: no second capture, no second save, no double-swap —
+ * <p>Entering while already in staff mode is a no-op: no second capture, no second save, no double-swap
  * the existing committed loadout is the one true copy and must not be overwritten by the gadget hotbar.
  *
  * <p><b>Enter never overwrites an existing row (crash safety).</b> The in-memory active marker is lost on a
  * hard crash, but the loadout row survives. A player who crashed mid-mode rejoins holding the gadget hotbar
  * (autosaved) with the active marker gone; a plain {@code enter} would then capture that gadget hotbar as
- * "real" and overwrite the one true copy — permanent loss. So {@code enter} checks the repository first: when a
+ * "real" and overwrite the one true copy, permanent loss. So {@code enter} checks the repository first: when a
  * row already exists it is an un-restored loadout from an interrupted exit, and rather than capturing anything
  * it hands off to {@link RecoverStaffLoadout} to finish that exit (restore the real loadout, delete the row,
  * reveal). The capture path runs only when there is genuinely no prior row to protect.
@@ -85,13 +85,13 @@ public final class EnterStaffMode {
     public Result<Unit, Unit> enter(PlayerRef actor) {
         Objects.requireNonNull(actor, "actor");
         if (store.isActive(actor)) {
-            // Already in staff mode: do nothing destructive — the committed loadout is the one true copy.
+            // Already in staff mode: do nothing destructive: the committed loadout is the one true copy.
             notifier.send(actor, StaffMessageKey.STAFF_MODE_ALREADY);
             return Result.err(Unit.INSTANCE);
         }
         if (loadoutRepository.load(actor.uuid()).isPresent()) {
             // A row with no active marker is an un-restored loadout from an interrupted exit / crash. NEVER
-            // capture over it — recover the real loadout instead, so the one true copy is never overwritten.
+            // capture over it, recover the real loadout instead, so the one true copy is never overwritten.
             recover.recover(actor);
             return Result.err(Unit.INSTANCE);
         }

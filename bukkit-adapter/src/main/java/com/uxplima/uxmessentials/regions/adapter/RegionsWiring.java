@@ -47,7 +47,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link #regionService a plugin-present probe}: the reflective {@link WorldGuardRegionService} when WorldGuard is
  * installed, otherwise the {@link NoWorldGuardRegionService} no-op that reports "not available" and degrades the
  * command to a "WorldGuard not installed" reply. Either way the module registers exactly one permission-gated
- * command and no listener, and holds no runtime state — so there is nothing to tear down on stop.
+ * command and no listener, and holds no runtime state, so there is nothing to tear down on stop.
  *
  * <p>The region-list panel is opened through the menu engine's paginated list, so the context creates no raw
  * inventory. Its three panels (the browser, the flag editor and the roster) read their geometry from
@@ -158,7 +158,7 @@ public final class RegionsWiring {
 
     /**
      * The list-click handler: a click on a region opens its flag editor, but only for a viewer holding the flags
-     * permission — otherwise the same "no permission" line the {@code /regions flags} command would answer is sent, so
+     * permission, otherwise the same "no permission" line the {@code /regions flags} command would answer is sent, so
      * the editor's mutation surface is gated identically from the list and from the command.
      */
     private static BiConsumer<Player, RegionRef> openEditorOnClick(
@@ -176,7 +176,7 @@ public final class RegionsWiring {
 
     /**
      * The detail-panel members-button handler: it opens the roster editor for a region, but only for a viewer holding
-     * the members permission — otherwise the same "no permission" line the {@code /regions members} command would
+     * the members permission, otherwise the same "no permission" line the {@code /regions members} command would
      * answer is sent, so the roster's mutation surface is gated identically from the panel and from the command.
      */
     private static BiConsumer<Player, RegionRef> openRosterOnClick(KernelPorts kernel, RegionRosterView rosterView) {

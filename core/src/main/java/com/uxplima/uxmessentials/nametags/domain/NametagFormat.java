@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  * {@code priority} ranks the matches, while {@code lines}/{@code appearance}/{@code visibility} are the
  * nametag-specific payload. The {@code lines} are raw operator content rendered per viewer through the placeholder
  * pipeline, MiniMessage, and the animation catalog by the adapter, then newline-joined into the single
- * {@code TextDisplay}. An empty {@code lines} list is allowed and means "no nametag" — a deliberate way to author
+ * {@code TextDisplay}. An empty {@code lines} list is allowed and means "no nametag", a deliberate way to author
  * a format that suppresses the nametag for a matching group.
  *
  * @param name the format name, non-blank (the config map key; used for operator-facing identification and tie-break)

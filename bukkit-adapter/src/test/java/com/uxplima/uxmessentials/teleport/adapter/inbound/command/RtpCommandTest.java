@@ -89,7 +89,7 @@ class RtpCommandTest {
 
         command.route(staff, "Victim");
 
-        // The target — never the issuer — is routed, within the target's own world.
+        // The target, never the issuer, is routed, within the target's own world.
         verify(resolveRtp)
                 .background(new PlayerRef(victim.getUniqueId(), victim.getName()), BukkitRefs.toRef(victim.getWorld()));
         assertThat(sink.delivered).contains("teleport.rtp.searching");

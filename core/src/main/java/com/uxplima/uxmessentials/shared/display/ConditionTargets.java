@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Reads and writes the two simple targets the announcement editor exposes — a world and a permission — into and out
+ * Reads and writes the two simple targets the announcement editor exposes, a world and a permission, into and out
  * of the raw display-condition string the {@link ConditionParser} grammar understands. The editor lets an operator
  * set "which world it shows in" and "which permission sees it" without writing the condition DSL by hand; this is
  * the seam that turns those two fields into a {@code permission:X && world:Y} condition and back.
@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
  * {@link #world(String)} and {@link #permission(String)} pull the first {@code world:} / {@code permission:} atom
  * out of an {@code &&}-joined condition, so the editor's value lore shows the current target. They read the simple
  * form the editor itself writes; a hand-authored condition with {@code ||}, {@code !}, or a {@code %papi%}
- * comparison is left for the operator to edit in the file — the editor surfaces only the world and permission atoms
+ * comparison is left for the operator to edit in the file. The editor surfaces only the world and permission atoms
  * it manages.
  *
  * <h2>Write</h2>
@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  * vice versa). A blank target clears that atom. The atoms are recomposed in a stable order
  * ({@code permission} then {@code world}) joined with {@code &&}; an empty result is the unconditional blank string.
  *
- * <p>Pure value logic over the condition string — no Bukkit, no parser state — so it lives in {@code :core}
+ * <p>Pure value logic over the condition string (no Bukkit, no parser state) so it lives in {@code :core}
  * alongside the grammar it round-trips.
  */
 public final class ConditionTargets {

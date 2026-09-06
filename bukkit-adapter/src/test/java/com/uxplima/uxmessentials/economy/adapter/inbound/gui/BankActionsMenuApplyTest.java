@@ -38,7 +38,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Drives the package-private deposit/withdraw apply seam of the engine-rendered bank-actions panel, the branch the
  * anvil prompt's submit callback runs. MockBukkit cannot drive a live anvil, so the golden test (in the menu's
- * sibling package) covers the render and navigation while this test — in the menu's own package — proves a typed
+ * sibling package) covers the render and navigation while this test, in the menu's own package, proves a typed
  * amount parses against the bank's currency and reaches {@code BankService.deposit/withdraw}, exactly as the old
  * {@code BankActionsView} did, and that a malformed amount runs no op and reopens the list.
  */

@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * A single point to render on a web map: a stable {@link #id() id}, the {@link #kind() kind} that picks the
  * icon and id-namespace, the operator-facing {@link #label() label} (the tooltip), and the world name plus
- * coordinates the map plugin places the marker at. This is the kernel's map primitive — it carries a world
+ * coordinates the map plugin places the marker at. This is the kernel's map primitive. It carries a world
  * <em>name</em> (the string the map plugins address worlds by) rather than a Bukkit {@code World}, so the
  * value stays free of any platform or map-API type and the adapter resolves it at the boundary.
  *

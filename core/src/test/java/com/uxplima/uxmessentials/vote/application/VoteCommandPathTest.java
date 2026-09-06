@@ -48,7 +48,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The vote command paths through the real {@link HandleVote} use case against in-memory fakes — the same
+ * The vote command paths through the real {@link HandleVote} use case against in-memory fakes, the same
  * wiring the Votifier listener and join handler drive, minus Bukkit. It proves that a vote for an online
  * voter records the tally, resolves the per-vote reward set through the {@link RewardEngine}, and applies
  * each grant; that the Nth vote which reaches the threshold pays the party reward to every online audience
@@ -216,7 +216,7 @@ class VoteCommandPathTest {
 
     @Test
     void anOfflineVoteIsAppliedOfflineThenPaysOutOnJoin() {
-        // Bob is offline at vote time — the grant is applied offline (the real applier queues its commands).
+        // Bob is offline at vote time: the grant is applied offline (the real applier queues its commands).
         HandleVote.Outcome outcome = handle(catalogPerVote("give {player} apple 3"), partyConfig("", 25))
                 .handle(voteBy(bob));
 

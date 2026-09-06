@@ -30,19 +30,19 @@ import org.jspecify.annotations.Nullable;
  * (strip leading {@code /}, drop the arguments, lowercase), resolves the rule set for the player's current world
  * (a per-world override when one is configured, else the base rule set), consults it with the player's facts (their
  * group via the {@link PlayerGroupSource}, permission checks via Bukkit), and on {@link RuleSet.Decision#DENY}
- * cancels the dispatch and sends the configured deny line — the vanilla-style "unknown command" so a hidden command
+ * cancels the dispatch and sends the configured deny line, the vanilla-style "unknown command" so a hidden command
  * reads as nonexistent, or the "no permission" line, per config.
  *
  * <p>The gate also closes the namespace-bypass hole: a non-bypass player who prefixes a denied command with its
- * namespace — {@code /minecraft:gamemode}, {@code /plugin:cmd} — reaches the same handler as the bare command yet reads
+ * namespace ({@code /minecraft:gamemode}, {@code /plugin:cmd}) reaches the same handler as the bare command yet reads
  * as a different root, so the {@link RuleSet} alone would let it through. When {@code block-namespace-bypass} is on the
  * gate strips the prefix (via {@link NamespaceBypassRule#bareRoot}) and re-asks the world's rule set about the bare
  * form, so {@code /minecraft:gamemode} is blocked exactly when {@code /gamemode} is. The plugin-hide half of the escape
  * is handled in the visibility listener, whose {@code HidePolicy} already folds the {@code namespace:} prefix.
  *
  * <p>Runs at {@link EventPriority#HIGH} so cooperating plugins at NORMAL still see an uncancelled event but the
- * dispatch is stopped before the vanilla/dispatcher handler. The console is never gated — this listens only to the
- * player-command event — and a {@code .bypass} holder is always allowed (the {@code RuleSet} short-circuits on the
+ * dispatch is stopped before the vanilla/dispatcher handler. The console is never gated. This listens only to the
+ * player-command event, and a {@code .bypass} holder is always allowed (the {@code RuleSet} short-circuits on the
  * bypass node before any group lookup). When the world's rule set is inert (a blacklist with empty lists) the listener
  * short-circuits before any per-command work, so an operator who leaves the lists blank pays nothing.
  *

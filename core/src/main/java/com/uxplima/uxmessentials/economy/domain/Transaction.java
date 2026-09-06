@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A single credit or debit applied to a {@link Wallet} — the unit of change inside the aggregate, the
+ * A single credit or debit applied to a {@link Wallet}, the unit of change inside the aggregate, the
  * domain fact a persisted ledger row records. Entity (it has a {@link TransactionId}), but it lives
  * <em>inside</em> the Wallet aggregate and is never published or referenced from outside it; the
  * {@code WalletCredited}/{@code WalletDebited} events are what cross the aggregate boundary. The aggregate,
@@ -43,7 +43,7 @@ public record Transaction(TransactionId id, PlayerRef owner, Kind kind, Money am
         return new Transaction(TransactionId.random(), owner, Kind.DEBIT, amount, resulting, at);
     }
 
-    /** The direction of a {@link Transaction} — value entering or leaving the wallet. */
+    /** The direction of a {@link Transaction}: value entering or leaving the wallet. */
     public enum Kind {
         CREDIT,
         DEBIT

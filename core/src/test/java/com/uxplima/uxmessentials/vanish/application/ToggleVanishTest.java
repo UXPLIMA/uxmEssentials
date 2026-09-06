@@ -28,7 +28,7 @@ import com.uxplima.uxmessentials.vanish.domain.event.VanishToggled;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link ToggleVanish} flips the store, reconciles the view, and — the Phase 3 addition — applies the configured buffs
+ * {@link ToggleVanish} flips the store, reconciles the view, and, the Phase 3 addition, applies the configured buffs
  * when a player vanishes and clears them when they reappear, so a hidden player is buffed and a revealed player is not.
  * Every entry point (bare {@code /vanish}, the absolute {@link ToggleVanish#setVanished}) routes through the same
  * apply/clear here, which is what keeps buffs uniform across the command, staff-mode vanish, and the settings panel.
@@ -65,7 +65,7 @@ class ToggleVanishTest {
         toggleVanish.setVanished(who, true);
         assertThat(buffs.applied).containsExactly(who);
 
-        toggleVanish.setVanished(who, true); // already vanished — no second apply
+        toggleVanish.setVanished(who, true); // already vanished, no second apply
         assertThat(buffs.applied).containsExactly(who);
     }
 

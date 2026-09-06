@@ -35,7 +35,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The end-to-end proof for runtime {@link org.bukkit.inventory.ItemStack} provider registration through the public
  * {@link MenuApi}. The renderer is built over an {@link IconProviders} chain wired to a live
- * {@link IconProviderRegistry}, and the façade shares that same registry — exactly as bootstrap wires them — so a
+ * {@link IconProviderRegistry}, and the façade shares that same registry, exactly as bootstrap wires them, so a
  * provider a plugin registers <em>after</em> the renderer exists is still seen on the next render.
  *
  * <p>Three properties are proved: an unclaimed {@code test:foo} spec renders the {@link Material#STONE} fallback

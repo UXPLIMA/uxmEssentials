@@ -40,7 +40,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The locale binding is the one wrapper every published command flows through, so it is also the last place
  * a handler bug can be turned into something a player can read. When an executor throws an unexpected
  * {@link RuntimeException}, the binding must swallow it into the localized {@link SharedMessageKey#COMMAND_ERROR}
- * reply, record the fault for the operator, and report the command handled — never let Paper's dispatcher hand
+ * reply, record the fault for the operator, and report the command handled. Never let Paper's dispatcher hand
  * the player a raw red error. A {@link CommandSyntaxException} is Brigadier's own control flow (usage / parse
  * failures) and must still surface unchanged.
  */

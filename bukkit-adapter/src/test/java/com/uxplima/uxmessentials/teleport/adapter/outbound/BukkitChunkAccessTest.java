@@ -65,7 +65,7 @@ class BukkitChunkAccessTest {
     @Test
     void probeOverAnAbsentWorldCompletesEmptyRatherThanOrphaning() {
         // The world unloaded (or never existed): the old engine left this future orphaned, hanging the refill
-        // loop. It must now complete — empty — at once.
+        // loop. It must now complete, empty, at once.
         WorldRef ghost = new WorldRef(UUID.randomUUID(), "ghost");
         SafeSearchArea area = new SafeSearchArea(ghost, 0.0, 0.0, 0.0, 1_000.0, 100_000.0);
 

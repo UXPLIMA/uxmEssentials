@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.kits.domain.KitId;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A kit was claimed — a player ran {@code /kit <name>} (or a staff member gave it via {@code /kit <name>
+ * A kit was claimed, a player ran {@code /kit <name>} (or a staff member gave it via {@code /kit <name>
  * <player>}) and the items were granted. The {@code recipient} is the player who received the kit; the
  * {@code actor} is whoever triggered the claim, which equals the recipient for a self-claim and differs for
  * a staff give. This is the event the adapter bridges to Bukkit and the audit log keys its {@code kit_give}

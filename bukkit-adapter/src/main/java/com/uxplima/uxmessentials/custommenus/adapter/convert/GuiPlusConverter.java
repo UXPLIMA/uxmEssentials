@@ -31,7 +31,7 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpecLoader} loads, mirroring the sibling
  * {@link DeluxeMenusConverter}, {@link ZMenuConverter} and {@link OguiConverter}.
  *
- * <p>GUIPlus is multi-<em>scene</em> — a scene is a page/state we do not model — so only the first scene is converted
+ * <p>GUIPlus is multi-<em>scene</em> (a scene is a page/state we do not model) so only the first scene is converted
  * (the {@code '0'} key when present, else the first scene in document order); a menu with more than one scene is
  * converted from its first scene with a warning naming the rest. Each item's {@code click-events} is a map keyed by
  * event type ({@code message}, {@code money-give}, {@code teleport}, …), each carrying an optional {@code clickType}
@@ -42,7 +42,7 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
  *
  * <p>The refs are written in our engine's bare {@code id:value} form (not bracketed), the same form the sibling
  * converters emit, so the output re-enters the engine through the ordinary {@code menus/} loader. GUIPlus placeholders
- * ({@code %player%} / {@code %executor%}) are carried through verbatim — our renderer resolves both — while
+ * ({@code %player%} / {@code %executor%}) are carried through verbatim, our renderer resolves both, while
  * {@code %input%} has no engine equivalent and is left verbatim with a one-time warning.
  *
  * <p>The conversion covers the common surface and degrades gracefully everywhere else: an event or condition type with
@@ -64,7 +64,7 @@ public final class GuiPlusConverter {
     /** A {@code #rrggbb} hex colour code; carried through verbatim like {@code &}/{@code §} codes but warned once. */
     private static final Pattern HEX_COLOUR = Pattern.compile("#[0-9a-fA-F]{6}");
 
-    /** A standalone {@code =} — one not part of {@code <= >= != ==} — that a converted expression rewrites to {@code ==}. */
+    /** A standalone {@code =}, one not part of {@code <= >= != ==}, that a converted expression rewrites to {@code ==}. */
     private static final Pattern LONE_EQUALS = Pattern.compile("(?<![=<>!])=(?!=)");
 
     /** The warning emitted once when a menu still carries legacy colour codes the operator may want to move. */
@@ -119,13 +119,13 @@ public final class GuiPlusConverter {
         }
     }
 
-    /** The GUI's {@code commandAlias} as a note — our opener wiring is separate, as in the sibling converters. */
+    /** The GUI's {@code commandAlias} as a note: our opener wiring is separate, as in the sibling converters. */
     private Optional<String> openCommandNote(ConfigurationNode source) {
         String alias = source.node("commandAlias").getString("").strip();
         if (alias.isEmpty()) {
             return Optional.empty();
         }
-        return Optional.of("open command: /" + alias + " — wire this via /menu open or an openers.conf entry");
+        return Optional.of("open command: /" + alias + ". Wire this via /menu open or an openers.conf entry");
     }
 
     /** Map a non-chest {@code type} onto our {@code inventory-type}; a chest is omitted, an unknown type warns. */
@@ -320,7 +320,7 @@ public final class GuiPlusConverter {
     }
 
     /**
-     * Map one GUIPlus click-event onto our action refs. The common effects map onto registered vocabulary — a
+     * Map one GUIPlus click-event onto our action refs. The common effects map onto registered vocabulary, a
      * {@code message} to our {@code message}, a {@code money-give} to {@code give-points}, a {@code teleport} to our
      * coordinate {@code teleport}, and so on. An event with no clean engine equivalent (a set-money, a scene jump, a
      * picker, a serialized-item give, a math save-format) is skipped with a warning. {@code %player%}/{@code %executor%}
@@ -355,7 +355,7 @@ public final class GuiPlusConverter {
 
     /**
      * A {@code command} or {@code console_command} event → one ref per entry of its {@code commands} list. A
-     * {@code command} with {@code setOp: true} warns — our engine runs a player command as the player, never elevated.
+     * {@code command} with {@code setOp: true} warns, our engine runs a player command as the player, never elevated.
      */
     private List<String> commandRefs(String id, ConfigurationNode node, List<String> warnings) {
         if (node.node("setOp").getBoolean(false)) {
@@ -547,7 +547,7 @@ public final class GuiPlusConverter {
 
     // --- shared helpers -----------------------------------------------------------------------------------------
 
-    /** Record {@code warning} and return an empty ref list — the value a skipped click-event contributes. */
+    /** Record {@code warning} and return an empty ref list: the value a skipped click-event contributes. */
     private static List<String> skip(String warning, List<String> warnings) {
         warnings.add(warning);
         return List.of();

@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The seam the follow runtime drives to walk a villager: it either sets the villager pathfinding toward a target or
  * stops it. It exists so the {@link VillagerFollowService}'s tick/threading logic can be exercised in tests with a
- * recording stand-in — the live pathfinder API ({@code Mob#getPathfinder}) is not implemented by MockBukkit, so the
+ * recording stand-in. The live pathfinder API ({@code Mob#getPathfinder}) is not implemented by MockBukkit, so the
  * one real call is isolated behind this interface in {@link PathfinderVillagerMover}.
  *
  * <p>Both methods run on the villager's own region thread (the follow service hops there first), so an implementation

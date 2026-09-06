@@ -8,7 +8,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A menu's optional {@code bedrock {}} block: an explicit native CustomForm shown to a Bedrock viewer in place of
- * the chest — the form-native widgets (dropdown, slider, toggle, multi-input) the automatic SimpleForm degradation
+ * the chest. The form-native widgets (dropdown, slider, toggle, multi-input) the automatic SimpleForm degradation
  * cannot express. On submit each value widget binds its value to a {@code %name%} local placeholder and the
  * {@code onSubmit} action refs run with those values bound; a Java viewer never sees the form and keeps the chest.
  *

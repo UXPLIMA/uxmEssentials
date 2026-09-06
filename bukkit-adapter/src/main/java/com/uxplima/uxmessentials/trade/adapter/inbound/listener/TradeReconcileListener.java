@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * Reconciles a rejoining player's dangling cross-server trade escrow. A player who logged off (or whose backend
  * crashed) mid-trade left an escrow row behind; on their next join this asks the {@link CrossServerTrade} coordinator to
  * settle it (deliver the counterpart's goods when both sides escrowed) or refund it (return the stake when the
- * counterpart never did) — the crash-safety guarantee the escrow row exists for. The reconcile runs off the tick
+ * counterpart never did): the crash-safety guarantee the escrow row exists for. The reconcile runs off the tick
  * thread through the injected {@link Scheduler}, and the coordinator hops to the player's region for any delivery.
  */
 @NullMarked

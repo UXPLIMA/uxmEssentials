@@ -100,15 +100,15 @@ import org.jspecify.annotations.Nullable;
 /**
  * Constructs the npc context's adapters and use cases over the injected kernel ports, the persistence DSL, and
  * the uxmLib NPC packet stack, and produces the Brigadier command and lifecycle listener the plugin registers.
- * This is the one place the npc context is wired — nothing else news up its classes.
+ * This is the one place the npc context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a Caffeine read-cache decorator. The renderer holds the packet
- * stack — a {@link ChannelResolver} → {@link PacketSender} → {@link NmsNpcPackets} — and sends each viewer a
+ * stack, a {@link ChannelResolver} → {@link PacketSender} → {@link NmsNpcPackets}, and sends each viewer a
  * fake-player spawn (its tab entry kept unlisted) with no real entity. On wire every stored NPC is spawned to the
  * online viewers in range; a global refresh timer re-evaluates range each second so an NPC appears/disappears as
  * players move, and a faster look timer turns each looking NPC toward its nearby viewers. The interaction
  * listener runs an NPC's bound click command when a player clicks its fake entity. A {@code COST} click action
- * charges through the optional {@link ClickActionEconomy} bridge captured during economy wiring — empty on a
+ * charges through the optional {@link ClickActionEconomy} bridge captured during economy wiring, empty on a
  * server without economy, in which case the cost gate is simply skipped. On stop the {@code Wired} bundle cancels
  * both timers and removes every shown NPC from every viewer so nothing is orphaned across a reload.
  */
@@ -116,7 +116,7 @@ import org.jspecify.annotations.Nullable;
 public final class NpcWiring {
 
     private static final Duration REFRESH_PERIOD = Duration.ofSeconds(1);
-    /** The radius within which a viewer is shown an NPC — the vanilla player tracking range. */
+    /** The radius within which a viewer is shown an NPC: the vanilla player tracking range. */
     private static final double RENDER_RANGE = 48.0;
 
     private NpcWiring() {}
@@ -159,7 +159,7 @@ public final class NpcWiring {
         NpcRenderer renderer =
                 new NpcRenderer(packets, spawner, kernel.scheduler(), RENDER_RANGE, settings.lookRange());
         // Close the cross-server loop: a remote NPC change reloads exactly that NPC into the same cache the
-        // commands and renderer read, then re-renders (or despawns) the live fake player through the renderer —
+        // commands and renderer read, then re-renders (or despawns) the live fake player through the renderer
         // the same render path the local edit runs, hopped onto the global region thread by the renderer itself.
         // With the bus disabled the publisher is a no-op and this listener is never invoked, so the single-server
         // path is unchanged.
@@ -178,8 +178,8 @@ public final class NpcWiring {
         SkinService skinService = new CompositeSkinService(kernel.skins(), mineSkins);
         NpcSkinByName skinByName =
                 new NpcSkinByName(skinService, services.skin(), repository, notifier, kernel.scheduler());
-        // The management GUI: an editor exposing every NPC property over the use cases, and a list — drawn through
-        // the menu engine — that opens it. The list backs both /npc (no args) and the /uxmess gui hub entry; the
+        // The management GUI: an editor exposing every NPC property over the use cases, and a list, drawn through
+        // the menu engine: that opens it. The list backs both /npc (no args) and the /uxmess gui hub entry; the
         // editor's back button returns to it. The list registers its bindings and spec with the engine here.
         NpcListMenu listMenu =
                 buildGui(plugin, kernel, repository, services, skinByName, guiText, guiLayouts, textInput, menus);

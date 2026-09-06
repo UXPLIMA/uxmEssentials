@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * so the literal/permission pairing matches {@code permissions.md} §Economy and the kernel's
  * {@code EconomyCommandSurface}; the plugin's {@code LifecycleEvents.COMMANDS} handler registers each. Every
  * command is a thin adapter over the {@code EconomyProvider} port and runs its provider call off the tick
- * thread — none reaches into {@code economy.domain.*}.
+ * thread: none reaches into {@code economy.domain.*}.
  */
 @NullMarked
 public final class EconomyCommands {

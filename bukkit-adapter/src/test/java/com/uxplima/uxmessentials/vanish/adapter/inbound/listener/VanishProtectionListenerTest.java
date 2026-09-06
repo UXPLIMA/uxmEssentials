@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of the {@link VanishProtectionListener}: a vanished player takes no damage, does not lose hunger,
- * is dropped as a mob target, and does not pick up items unless their preference says so — each behaviour behind its
+ * is dropped as a mob target, and does not pick up items unless their preference says so, each behaviour behind its
  * config toggle, and each a no-op when the toggle is off or the player is visible.
  */
 class VanishProtectionListenerTest {

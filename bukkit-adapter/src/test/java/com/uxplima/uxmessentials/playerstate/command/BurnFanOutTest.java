@@ -67,7 +67,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * cross-cutting {@code uxmessentials.playerstate.others} node held, {@code /burn 5 @a} applies the verb once per
  * matched online player (here three), not once overall; a selector that matches nobody answers the unknown-player
  * rejection and burns no one. The {@link Burn} use case is a Mockito mock so the number of {@code burnFor} calls
- * is the observable — the effect itself is the use case's own concern and is exercised elsewhere.
+ * is the observable: the effect itself is the use case's own concern and is exercised elsewhere.
  */
 class BurnFanOutTest {
 

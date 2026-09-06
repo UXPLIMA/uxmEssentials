@@ -15,7 +15,7 @@ import org.jspecify.annotations.Nullable;
  * the config radius shrank or the world border moved since it was queued.
  *
  * <p>{@link #biome} is the biome the column validated in, carried so the durable {@link RtpColumn} can persist
- * it (the P5 per-biome pool slice). It is {@code null} when the validating candidate carried no biome — the
+ * it (the P5 per-biome pool slice). It is {@code null} when the validating candidate carried no biome, the
  * on-serve revalidation never re-reads it, so an absent biome only means the column is not indexed per biome.
  *
  * @param position the safe landing position
@@ -34,7 +34,7 @@ public record RtpSafeLocation(
         }
     }
 
-    /** A location with no recorded biome — the pre-P5 form, before the validated biome was threaded through. */
+    /** A location with no recorded biome: the pre-P5 form, before the validated biome was threaded through. */
     public RtpSafeLocation(Position position, double radius, Instant validatedAt) {
         this(position, radius, null, validatedAt);
     }
@@ -44,7 +44,7 @@ public record RtpSafeLocation(
         return Optional.ofNullable(biome);
     }
 
-    /** The world this location belongs to — the queue is keyed per world. */
+    /** The world this location belongs to: the queue is keyed per world. */
     public WorldRef world() {
         return position.world();
     }
@@ -52,7 +52,7 @@ public record RtpSafeLocation(
     /**
      * The cheap revalidation a {@code poll()} runs before serving: a location whose radius now exceeds
      * the world's current maximum (the operator shrank the radius, or the border moved inward) is
-     * discarded and the next is polled. Biome and chunk-safety are not re-read here — that is the
+     * discarded and the next is polled. Biome and chunk-safety are not re-read here: that is the
      * off-thread refill primitive's job; this is the O(1) on-serve guard only.
      */
     public boolean stillWithin(SafeSearchArea area) {

@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * One in-flight warmup's handle. The owning context calls {@link #cancel()} from its move/damage
  * listener; the countdown calls {@link #complete()} on the player's region thread when it elapses.
  * Both transitions are guarded by a single {@link AtomicReference} state machine so the move-cancel
- * and the warmup-fire can never both run their callback — whichever {@code compareAndSet}s first wins,
+ * and the warmup-fire can never both run their callback, whichever {@code compareAndSet}s first wins,
  * and the loser is a no-op.
  *
  * <h2>Concurrency</h2>

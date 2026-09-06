@@ -15,11 +15,11 @@ import org.spongepowered.configurate.serialize.SerializationException;
 /**
  * Parses FancyHolograms' single {@code plugins/FancyHolograms/holograms.yml} into one {@link DhHologram}
  * per entry under its {@code holograms} section (docs/12-migration §5.6). Each entry is keyed by the
- * hologram name and stores {@code type}, a nested {@code location.{world,x,y,z}}, and — for {@code TEXT}
- * holograms — a {@code text} string list. FancyHolograms stamps the file {@code version: 2}; an older
+ * hologram name and stores {@code type}, a nested {@code location.{world,x,y,z}}, and, for {@code TEXT}
+ * holograms: a {@code text} string list. FancyHolograms stamps the file {@code version: 2}; an older
  * layout is refused wholesale, exactly as FancyHolograms itself skips loading it. Item and block holograms
  * carry no {@code text}, so they yield no lines and the shared {@code HologramMapper} counts them skipped
- * (docs/12-migration §4). The parsed shape is the DecentHolograms one — both sources reduce to a name, a
+ * (docs/12-migration §4). The parsed shape is the DecentHolograms one. Both sources reduce to a name, a
  * world, a position, and text lines, so they share the mapped {@link DhHologram} and its ACL mapper, the
  * same way both file sources share the world resolver.
  */
@@ -33,7 +33,7 @@ public final class FhHologramParser {
         return parse(YamlSource.load(file));
     }
 
-    /** Parse from a reader — the form the golden-file tests drive. */
+    /** Parse from a reader: the form the golden-file tests drive. */
     public List<DhHologram> parse(Reader reader) throws IOException {
         return parse(YamlSource.load(reader));
     }

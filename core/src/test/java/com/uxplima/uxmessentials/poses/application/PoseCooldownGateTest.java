@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the shared pose cooldown pre-check as it is enforced through a start use case ({@link StartSit} stands in
- * for all six poses — they all consult the same {@link PoseCooldown}). A player still inside the window is turned
+ * for all six poses: they all consult the same {@link PoseCooldown}). A player still inside the window is turned
  * away with {@link SitOutcome#ON_COOLDOWN} and no seat is spawned and no session recorded; once the window elapses
  * the pose starts and the clock is stamped again; a player who holds no {@code poses.cooldown.<seconds>} tier waits
  * for nothing; and the {@code poses.cooldown.bypass} node skips the gate entirely. The cooldown port is a fake so
@@ -58,7 +58,7 @@ class PoseCooldownGateTest {
         SitOutcome second = startSit.start(WHO, SEAT, 90f, false);
 
         assertThat(second).isEqualTo(SitOutcome.ON_COOLDOWN);
-        // No seat spawned and no session recorded for the refused second attempt — the pose never started.
+        // No seat spawned and no session recorded for the refused second attempt: the pose never started.
         assertThat(seats.spawned).hasSize(1); // only the first, allowed sit spawned a seat
         assertThat(sessions.isPosing(WHO)).isFalse();
     }
@@ -77,7 +77,7 @@ class PoseCooldownGateTest {
 
     @Test
     void aPlayerWithNoCooldownTierWaitsForNothing() {
-        cooldowns.stampSeconds = 0; // no poses.cooldown.<seconds> node resolves — the zero default
+        cooldowns.stampSeconds = 0; // no poses.cooldown.<seconds> node resolves, the zero default
         StartSit startSit = newStartSit();
         startSit.start(WHO, SEAT, 90f, false);
         stopAndClear();

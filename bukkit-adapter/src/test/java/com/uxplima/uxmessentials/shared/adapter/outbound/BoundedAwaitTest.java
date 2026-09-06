@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@link BoundedAwait}: it returns a ready value, rethrows a provider failure as an unchecked
- * {@link IllegalStateException} carrying the original cause, and — the point of the class — gives up
+ * {@link IllegalStateException} carrying the original cause, and, the point of the class, gives up
  * promptly on a future that never completes instead of blocking the caller forever.
  */
 class BoundedAwaitTest {

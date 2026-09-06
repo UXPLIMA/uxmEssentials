@@ -12,8 +12,8 @@ import java.util.Set;
  * use cases this plugin owns ({@code /msg}, {@code /mail}, {@code /helpop}); this policy is the wider net that
  * also catches third-party and vanilla commands an operator names.
  *
- * <p>The match is on the bare command label only — the leading slash and any arguments are stripped by the
- * caller — and is case-insensitive, since command dispatch on Paper is. The domain never reads the live mute
+ * <p>The match is on the bare command label only. The leading slash and any arguments are stripped by the
+ * caller, and is case-insensitive, since command dispatch on Paper is. The domain never reads the live mute
  * state or the wall clock; the adapter consults {@link com.uxplima.uxmessentials.moderation.domain.MuteState}
  * first and only asks this policy whether the label is one of the blocked ones, so the rule stays a pure
  * function of its configured set.

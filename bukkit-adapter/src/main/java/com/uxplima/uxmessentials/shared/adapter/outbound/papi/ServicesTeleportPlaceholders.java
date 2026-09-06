@@ -21,8 +21,8 @@ import org.jspecify.annotations.NullMarked;
  * {@link TeleportFlags}. These are the same stores the teleport commands read, so a placeholder agrees with
  * what the player experiences.
  *
- * <p>The cooldown read uses the generic shared {@code tp} kind — the one every cooldowned verb
- * ({@code /home}, {@code /warp}, {@code /rtp}, {@code /spawn}, {@code /back}) gates against — so the
+ * <p>The cooldown read uses the generic shared {@code tp} kind. The one every cooldowned verb
+ * ({@code /home}, {@code /warp}, {@code /rtp}, {@code /spawn}, {@code /back}) gates against, so the
  * placeholder reports the same remaining wait the gate would. {@link Cooldowns#check} returns the remaining
  * duration on its error side, which is exactly what the placeholder renders; a ready cooldown is empty. The
  * warmup remaining is read from the tracker's recorded completion instant minus the clock.
@@ -57,8 +57,8 @@ public final class ServicesTeleportPlaceholders implements TeleportPlaceholders 
         this.requests = Objects.requireNonNull(requests, "requests");
         this.flags = Objects.requireNonNull(flags, "flags");
         this.clock = Objects.requireNonNull(clock, "clock");
-        // The default seconds is irrelevant to a read — check() only consults the per-holder stamp and the
-        // bypass node — so a neutral default keeps the kind valid without re-reading teleport.conf.
+        // The default seconds is irrelevant to a read. Check() only consults the per-holder stamp and the
+        // bypass node, so a neutral default keeps the kind valid without re-reading teleport.conf.
         this.cooldownKind = new CooldownKind(FEATURE, 0L, Cooldowns.CooldownStartPhase.TELEPORT);
     }
 

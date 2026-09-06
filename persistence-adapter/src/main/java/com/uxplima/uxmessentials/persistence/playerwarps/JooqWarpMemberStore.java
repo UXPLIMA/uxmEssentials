@@ -19,7 +19,7 @@ import org.jooq.DSLContext;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jOOQ-backed {@link WarpMemberStore} over the generated {@code PLAYER_WARP_MEMBERS} table — one row per
+ * jOOQ-backed {@link WarpMemberStore} over the generated {@code PLAYER_WARP_MEMBERS} table, one row per
  * {@code (warp_id, player_uuid)}. {@link #put} upserts on the composite key: granting a player a new role
  * overwrites their existing role in place rather than inserting a second row, so a player holds at most one role
  * per warp. The role persists as {@link WarpRole#name()} and reads back through {@link WarpRole#parse}; a row

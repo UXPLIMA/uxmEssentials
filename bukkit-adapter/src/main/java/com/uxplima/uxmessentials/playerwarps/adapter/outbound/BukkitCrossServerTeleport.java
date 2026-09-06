@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link CrossServerTeleport} implementation: the send half of a cross-server player-warp hop. Given a warp
  * the access gate has admitted (and, for a priced non-member, already charged), it records the intent in the
  * shared {@link PendingTeleportStore} and asks the proxy to move the player to the warp's backend through the
- * existing {@link ServerConnector} — the target backend's join handler then completes the local hop and clears
+ * existing {@link ServerConnector}. The target backend's join handler then completes the local hop and clears
  * the row. When the proxy channel is unregistered (a single server with no proxy in front), nothing is recorded:
  * the player is told the warp is unreachable and any charge is refunded, since they never moved.
  *

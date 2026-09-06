@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The {@link Item} descriptor carries the material and the (MiniMessage) name/lore the opener item is built
  * from; {@link #slot()} is the inventory slot the item is placed in on give (a slot outside {@code 0..40}, or one
- * already occupied, falls back to a free slot). {@link #giveOnJoin()} decides whether — and how often — a joining
+ * already occupied, falls back to a free slot). {@link #giveOnJoin()} decides whether, and how often, a joining
  * player is handed the item.
  *
  * <p>Immutable and validated at construction: {@code menu} must be non-blank (it is the id the opener item is
@@ -36,7 +36,7 @@ public record OpenerSpec(String menu, Item item, int slot, GiveOnJoin giveOnJoin
 
     /**
      * The item descriptor an opener is built from: the {@code material} and the raw MiniMessage {@code name} and
-     * {@code lore} the display text is rendered from. The material must be a real, non-air item — the loader parses
+     * {@code lore} the display text is rendered from. The material must be a real, non-air item: the loader parses
      * the config token to a {@link Material} and skips the whole opener when it does not resolve, so this record is
      * only ever handed a valid one. A blank name or empty lore simply leaves that part of the item untouched.
      */
@@ -52,7 +52,7 @@ public record OpenerSpec(String menu, Item item, int slot, GiveOnJoin giveOnJoin
     }
 
     /**
-     * When a joining player is handed the opener item. {@link #NEVER} is the default — the opener only ever opens
+     * When a joining player is handed the opener item. {@link #NEVER} is the default. The opener only ever opens
      * from an item a player already holds. {@link #ALWAYS} hands the item out on every join; {@link #FIRST} hands
      * it out only once, tracked by a per-opener PDC flag so a relog does not duplicate it.
      */

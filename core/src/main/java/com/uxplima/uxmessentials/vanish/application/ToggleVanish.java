@@ -20,12 +20,12 @@ import com.uxplima.uxmessentials.vanish.domain.event.VanishToggled;
  * buffs (night vision, flight) through {@link VanishBuffs}; unvanishing drops them from the store, reveals them again,
  * and clears the buffs. The actor is told their new state.
  *
- * <p>The store is the one vanish state in the plugin — messaging's {@code /msg} resolution, the nametag viewer cull,
+ * <p>The store is the one vanish state in the plugin, messaging's {@code /msg} resolution, the nametag viewer cull,
  * and staff-mode vanish all read or mutate through it (or a query backed by it), so there is never a second flag to
  * keep in sync. Staff mode asks for an absolute set through {@link #setVanished}, which toggles only when the live
  * state differs from the requested one, leaving an already-correctly-vanished player untouched. Because buffs are
- * applied here, every entry point — {@code /vanish}, {@code /vanish <player>}, the presence settings panel, and
- * staff-mode vanish — grants and clears them uniformly.
+ * applied here, every entry point. {@code /vanish}, {@code /vanish <player>}, the presence settings panel, and
+ * staff-mode vanish: grants and clears them uniformly.
  *
  * <p>Every transition is announced to the peer backends through the {@link VanishBus} so a cluster keeps one coherent
  * vanish view: vanishing publishes the new state and level, unvanishing publishes the reveal. A quit does <em>not</em>

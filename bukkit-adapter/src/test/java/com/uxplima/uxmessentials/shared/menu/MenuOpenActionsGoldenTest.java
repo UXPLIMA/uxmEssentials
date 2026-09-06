@@ -39,7 +39,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The proof that a menu's {@code open-requirement} gates its open and its {@code open-actions} fire when it opens, end
  * to end: a real {@link MenuSpecLoader} parses the spec, a real {@link Menus} wired with the live {@link MenuBindings}
  * registries opens it, and a recording action / the requirement pack's real conditions observe the effect. It also
- * pins the backward-compatible path — a {@code Menus} built with the old registry-less constructor opens exactly as
+ * pins the backward-compatible path. A {@code Menus} built with the old registry-less constructor opens exactly as
  * before, neither gating nor firing open-actions, so the roughly ninety existing call-sites are unaffected.
  */
 class MenuOpenActionsGoldenTest {

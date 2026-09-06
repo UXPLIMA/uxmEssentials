@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * Issues a fresh one-time link code for a player. It generates a code from the unambiguous alphabet, retries a
  * bounded number of times if the drawn code collides with another player's outstanding code, and upserts the
- * player's pending row with an expiry {@code ttl} from now — so a second {@code /discordlink} simply replaces
+ * player's pending row with an expiry {@code ttl} from now, so a second {@code /discordlink} simply replaces
  * the player's previous code rather than accumulating rows.
  *
  * <p>Pure application code: it returns the issued {@link LinkCode} for the command adapter to render through a

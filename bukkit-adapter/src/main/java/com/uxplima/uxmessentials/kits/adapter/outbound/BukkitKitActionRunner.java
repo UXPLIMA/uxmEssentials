@@ -21,12 +21,12 @@ import org.jspecify.annotations.NullMarked;
  * {@code PARTICLE}, {@code FIREWORK}, {@code PLAYER_COMMAND}, {@code CLEAR_INVENTORY}) run on the recipient's
  * entity region thread; the
  * server-wide effects ({@code BROADCAST}, {@code CONSOLE_COMMAND}) run on the global region thread. Both hops
- * go through the injected {@link Scheduler} port — the legacy {@code BukkitScheduler} and {@code BukkitRunnable}
+ * go through the injected {@link Scheduler} port, the legacy {@code BukkitScheduler} and {@code BukkitRunnable}
  * are never touched, so this stays Folia-correct.
  *
  * <p>{@code WAIT_TICKS} pauses the sequence: the remaining actions are re-scheduled after the stated tick count
  * through {@link Scheduler#asyncAfter} (ticks converted at the fixed 50&nbsp;ms cadence), which then hops back
- * onto the entity thread to resume — a tiny in-adapter sequencer rather than a repeating Bukkit task. The
+ * onto the entity thread to resume: a tiny in-adapter sequencer rather than a repeating Bukkit task. The
  * sequencer always resolves the next thread from the upcoming action, so a {@code wait-ticks} between a
  * broadcast and a console command still lands each on its correct thread.
  *
@@ -135,7 +135,7 @@ public final class BukkitKitActionRunner implements KitActionRunner {
         return type == KitActionType.BROADCAST || type == KitActionType.CONSOLE_COMMAND;
     }
 
-    /** Substitute the standard claim tokens — {@code %player%}, {@code {player}}, and the kit id — in {@code raw}. */
+    /** Substitute the standard claim tokens ({@code %player%}, {@code {player}}, and the kit id) in {@code raw}. */
     private static String substitute(String raw, PlayerRef who, KitDefinition kit) {
         String name = who.name();
         return raw.replace("%player%", name)

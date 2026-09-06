@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.teleport.domain.HotspotChunk;
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b>. {@code perWorld} is a {@link ConcurrentHashMap} keyed by world uid; each
  * value is a {@link ConcurrentHashMap} of biome → {@link BoundedChunks}. A {@code BoundedChunks} guards its own
- * order/dedup/sample with an intrinsic lock — {@code record} runs on the region threads the chunk-load listener fires
+ * order/dedup/sample with an intrinsic lock. {@code record} runs on the region threads the chunk-load listener fires
  * on (many at once under Folia), and {@code sample} runs on the search's async threads, so the fine-grained lock keeps
  * each biome's window consistent without a global monitor. No I/O ever runs under the lock.
  */
@@ -75,7 +75,7 @@ public final class CappedBiomeHotspots implements BiomeHotspots {
 
         synchronized void add(HotspotChunk chunk) {
             if (!present.add(chunk)) {
-                return; // already known — dedup by chunk coordinate
+                return; // already known, dedup by chunk coordinate
             }
             order.add(chunk);
             if (order.size() > cap) {

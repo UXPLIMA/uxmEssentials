@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  * its own table; a per-kind {@code save} upserts (delete-then-insert keyed by target) or, for the
  * {@code None} state, deletes the row, so {@code /unmute} and an expired-mute sweep leave no trace. The
  * {@link ModerationProfile} read rebuilds mute/jail/tempban in three keyed selects. Every statement is typed
- * jOOQ DSL — no SQL is ever string-concatenated — and writes go through the transactional {@code write} seam
+ * jOOQ DSL, no SQL is ever string-concatenated, and writes go through the transactional {@code write} seam
  * so an offline-row upsert and the dependent write share one transaction.
  */
 @NullMarked

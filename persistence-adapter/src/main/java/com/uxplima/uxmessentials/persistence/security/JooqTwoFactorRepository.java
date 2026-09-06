@@ -25,7 +25,7 @@ import org.jooq.Record;
  *
  * <p>The crypto boundary lives entirely here. The <b>PIN</b> is hashed through the shared {@link PasswordHasher}
  * (the same PBKDF2 primitive the player-warp password uses) and serialised as {@code algorithm:salt:hash} into the
- * single {@code pin_hash} column — the plaintext never reaches the DB and {@link #verifyPin} re-hashes off a value
+ * single {@code pin_hash} column. The plaintext never reaches the DB and {@link #verifyPin} re-hashes off a value
  * read outside the connection scope, exactly as the warp-password store does. The <b>TOTP secret</b> is encrypted
  * through {@link TotpSecretCipher} on write and decrypted on read, because verification needs the shared secret
  * back. Every statement is typed jOOQ DSL; no SQL is string-concatenated, and no secret is ever logged.

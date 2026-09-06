@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 import org.junit.jupiter.api.Test;
 
 /**
- * Boundary-validation coverage for the itemworld group-B domain value objects and policies — the caps, clamps
+ * Boundary-validation coverage for the itemworld group-B domain value objects and policies: the caps, clamps
  * and enum parses that protect the server before any adapter call (docs/10-feature-modules.md §15.10). These
  * are the pure {@code :core} rules the Brigadier commands lean on: a spawn count clamped to the configured cap,
  * a purge radius clamped to the ceiling, the time/weather keyword/enum parses, and the powertool bind/clear

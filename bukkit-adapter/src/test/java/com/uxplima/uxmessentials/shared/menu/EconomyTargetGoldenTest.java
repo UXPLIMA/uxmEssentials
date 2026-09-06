@@ -63,7 +63,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * original {@code EconomyTargetView} drew, and its buttons must keep the behaviour. The panel draws the target's
  * PLAYER_HEAD@4, the Give EMERALD@19 / Take REDSTONE@21 / Set COMPARATOR@23 / Reset TNT@25 buttons, the history
  * BOOK@31, the select-currency SUNFLOWER@38 (shown only when more than one currency is configured) and the back
- * ARROW@40 over a grey-glass backdrop — snapshotted as {@code (slot -> material, plain name)} and asserted equal
+ * ARROW@40 over a grey-glass backdrop, snapshotted as {@code (slot -> material, plain name)} and asserted equal
  * slot for slot to the baseline the old view produced (frozen here so the old class could be deleted). Give / Take /
  * Set fire the input prompt then run the matching {@code EcoAdmin} op with {@code Money.of(active, amount)} through
  * the package-private apply seam (MockBukkit cannot drive a live anvil); Reset is confirm-gated through the engine
@@ -165,7 +165,7 @@ class EconomyTargetGoldenTest {
 
     // Give / Take / Set capture an amount through the anvil seam, which MockBukkit leaves unimplemented (no
     // player.openAnvil), so the prompt-opening click cannot be exercised in this fixture (see MenuListChildTest).
-    // The apply seam — the branch the prompt's submit callback drives — is verified to reach EcoAdmin with
+    // The apply seam, the branch the prompt's submit callback drives, is verified to reach EcoAdmin with
     // Money.of(active, amount) in EconomyAdminGuiTest, which lives in the menu's own package and so can drive the
     // package-private applyAmount. This golden test covers the click-driven flows the engine routes: the render,
     // the reset confirm, and the select-currency picker re-open.

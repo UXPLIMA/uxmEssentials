@@ -41,8 +41,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Proves a DB-backed list source is resolved off the viewer's region thread and then cached on the holder, so the
  * region thread never blocks on a query and a page flip never re-queries. A {@link PhaseScheduler} runs every hop
- * inline (so the test stays single-threaded) but tags which phase — the off-tick {@code async} or the entity
- * render — is live while a task runs; the list source records the phase it saw and counts its calls. Opening must
+ * inline (so the test stays single-threaded) but tags which phase, the off-tick {@code async} or the entity
+ * render, is live while a task runs; the list source records the phase it saw and counts its calls. Opening must
  * resolve the source exactly once during the async phase, and a real pagination click through the live
  * {@link MenuListener} must redraw the next page from the cache without touching the source again.
  */

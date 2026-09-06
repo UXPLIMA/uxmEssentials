@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * escapes so a reason containing whitespace stays one greppable field. Every state-mutating sanction emits
  * exactly one line; {@code /kickall} emits one line with the affected count, never one per kicked player.
  *
- * <p>Audit lines are operator-facing, so they go through a {@link Logger} bound to the audit channel — never
+ * <p>Audit lines are operator-facing, so they go through a {@link Logger} bound to the audit channel, never
  * the player-facing {@code MessageKey} catalog. The actor/target are logged by UUID for stable identity, with
  * the name carried where the catalogue lists it.
  */

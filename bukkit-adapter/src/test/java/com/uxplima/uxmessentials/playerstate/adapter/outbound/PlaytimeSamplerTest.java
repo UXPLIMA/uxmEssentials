@@ -81,7 +81,7 @@ class PlaytimeSamplerTest {
         PlaytimeSampler sampler = sampler(true, List.of(active));
 
         sampler.start();
-        // start() schedules once; firing that tick must schedule the next — the self-rescheduling loop.
+        // start() schedules once; firing that tick must schedule the next: the self-rescheduling loop.
         ArgumentCaptor<Runnable> captor = ArgumentCaptor.forClass(Runnable.class);
         verify(scheduler).asyncAfter(any(), captor.capture());
         captor.getValue().run();

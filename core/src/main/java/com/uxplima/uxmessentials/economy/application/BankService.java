@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * Orchestrates joint shared banking. The money moves — deposit and withdraw — are single atomic calls into the
+ * Orchestrates joint shared banking. The money moves, deposit and withdraw, are single atomic calls into the
  * {@link BankRepository}, where the player's wallet leg and the bank-balance change commit together or not at
  * all, so no in-JVM lock is needed and a persistence failure can never create or lose money. A withdrawal's
  * sufficiency is decided by a guarded {@code UPDATE … WHERE balance >= ?} in the repository, not a JVM compare,

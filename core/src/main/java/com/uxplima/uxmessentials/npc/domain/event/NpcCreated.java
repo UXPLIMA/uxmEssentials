@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * An NPC was created — {@code /npc create} under a name no NPC existed at.
+ * An NPC was created, {@code /npc create} under a name no NPC existed at.
  *
  * @param name the name the NPC was created under
  * @param creator the player who created the NPC

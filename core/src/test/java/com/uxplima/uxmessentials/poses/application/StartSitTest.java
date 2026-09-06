@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Pins {@link StartSit}: the three refusals ({@code features.sit} off, the region gate, the one-session
  * invariant) leave no seat and no session, and a success spawns + mounts the seat, records the session with the
- * captured return location, and publishes {@link PoseStarted}. All ports are fakes — no Bukkit.
+ * captured return location, and publishes {@link PoseStarted}. All ports are fakes, no Bukkit.
  */
 class StartSitTest {
 

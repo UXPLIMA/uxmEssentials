@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The per-viewer current page of each multi-page hologram — transient runtime state, never persisted, so a
+ * The per-viewer current page of each multi-page hologram. Transient runtime state, never persisted, so a
  * viewer starts on page 0 each session. Keyed by hologram name then viewer uuid and mutated through
  * {@link ConcurrentHashMap}'s atomic compute, so a click advancing one viewer's page never races the render
  * loop reading it off another thread. A stored page is always read back clamped into the hologram's live page
@@ -43,12 +43,12 @@ public final class HologramPageState {
                 viewer, (key, current) -> Math.floorMod((current == null ? 0 : current) + 1, pageCount));
     }
 
-    /** Forget hologram {@code name}'s per-viewer pages — called when it is despawned. */
+    /** Forget hologram {@code name}'s per-viewer pages: called when it is despawned. */
     void clear(String name) {
         pages.remove(Objects.requireNonNull(name, "name"));
     }
 
-    /** Forget every hologram's per-viewer pages — called on module stop. */
+    /** Forget every hologram's per-viewer pages, called on module stop. */
     void clearAll() {
         pages.clear();
     }

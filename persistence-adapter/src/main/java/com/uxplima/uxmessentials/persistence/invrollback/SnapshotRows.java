@@ -14,8 +14,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The anti-corruption mapping between an {@code inv_snapshots} row and the domain {@link Snapshot}. The queryable
- * facts — the id (canonical 36-char text), the owner uuid, the cause constant name, and the created-at epoch
- * millis — are first-class columns; only the serialized inventory is opaque payload, stored as the base64 text of
+ * facts, the id (canonical 36-char text), the owner uuid, the cause constant name, and the created-at epoch
+ * millis. Are first-class columns; only the serialized inventory is opaque payload, stored as the base64 text of
  * the adapter's already-serialized item bytes (the architecture persistence invariant). This class is the single
  * place that translation lives, so the row shape stays identical on every backend.
  *

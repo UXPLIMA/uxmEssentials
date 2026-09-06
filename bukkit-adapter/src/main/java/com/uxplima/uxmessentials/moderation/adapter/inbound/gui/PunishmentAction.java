@@ -7,8 +7,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The sanction the bare-command GUI flow issues — {@code /ban}, {@code /mute}, {@code /tempban},
- * {@code /tempmute}, {@code /warn} or {@code /banip} — bundled with the catalog labels its picker title and
+ * The sanction the bare-command GUI flow issues, {@code /ban}, {@code /mute}, {@code /tempban},
+ * {@code /tempmute}, {@code /warn} or {@code /banip}. Bundled with the catalog labels its picker title and
  * confirm screen render under, and the use-case call its confirm buttons fire. One enum value drives the whole
  * flow so {@link PlayerPickerView}, {@link DurationPickerView} and {@link PunishmentConfirmView} stay generic
  * over the verb: the picker title, the confirm-button labels, and the {@link Executor} that performs the audited
@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>Two axes vary per verb. The timed verbs ({@code /tempban}, {@code /tempmute}) carry a duration-picker title
  * and route through {@link DurationPickerView} between the player picker and the confirm screen ({@link #timed()}
- * is true); the rest skip straight to confirm. {@code /banip} cannot be suppressed — its use case has no silent
- * form — so it declares no silent labels ({@link #silentSupported()} is false) and the confirm screen omits the
+ * is true); the rest skip straight to confirm. {@code /banip} cannot be suppressed. Its use case has no silent
+ * form, so it declares no silent labels ({@link #silentSupported()} is false) and the confirm screen omits the
  * silent button; every other verb shows both the normal and the silent confirm.
  *
  * <p>Distinct from {@link PunishmentKind} (which drives the management GUI's revoke dispatch and includes

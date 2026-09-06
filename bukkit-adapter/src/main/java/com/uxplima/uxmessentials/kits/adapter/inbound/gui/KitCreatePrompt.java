@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The kit manager's "create new kit" flow, pulled out so both the engine-rendered manager and any caller share the
- * one path: prompt for a name, sanitize it, create an empty kit, then open that kit's settings — or, on a blank or
+ * one path: prompt for a name, sanitize it, create an empty kit, then open that kit's settings, or, on a blank or
  * spaced name, send the invalid-name message and reopen the manager. Cancelling the prompt reopens the manager too.
  * The flow itself adds no domain logic: it drives {@link CreateKit} and the bespoke {@link KitSettingsView}, exactly
  * as the old manager's create button did.

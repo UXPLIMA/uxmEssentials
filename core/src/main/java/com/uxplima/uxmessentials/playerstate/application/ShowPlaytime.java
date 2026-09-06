@@ -15,11 +15,11 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /playtime [player]}: show a player's playtime breakdown — active (non-AFK) and AFK time across today, the
+ * {@code /playtime [player]}: show a player's playtime breakdown. Active (non-AFK) and AFK time across today, the
  * last seven days, the last thirty days, and all time, read from the DB-backed {@link PlaytimeRepository} the
  * periodic sampler feeds. The viewer sees their own breakdown, or another player's with the {@code .others} node;
  * the adapter has already resolved the target before this runs. The DB summary survives a world rollback (it is
- * never PDC), unlike the Bukkit lifetime statistic — which is still surfaced as one continuity line through the
+ * never PDC), unlike the Bukkit lifetime statistic, which is still surfaced as one continuity line through the
  * {@link PlayerInfo} port when the target is online, so an operator who watched the old number recognises it.
  *
  * <p>Nothing is mutated. A target with no tracked rows renders a clean all-zero breakdown rather than no answer.
@@ -51,7 +51,7 @@ public final class ShowPlaytime {
     }
 
     /**
-     * The rendered placeholder map for {@code subject}'s breakdown — the same compact-formatted today / week /
+     * The rendered placeholder map for {@code subject}'s breakdown. The same compact-formatted today / week /
      * month / all-time / lifetime values the chat lines interpolate. Exposed so the {@code /playtime} GUI renders
      * the identical figures without duplicating the formatting; reads the repository, so callers run it off-tick.
      */

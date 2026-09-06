@@ -116,10 +116,10 @@ class RtpChargeAfterSuccessTest {
 
         assertThat(result.isOk()).isTrue();
         assertThat(f.queue.polls).isEqualTo(1); // served straight from the pool, never a synchronous search
-        assertThat(f.executor.hops).isEqualTo(1); // immediate hop — no warmup gate
+        assertThat(f.executor.hops).isEqualTo(1); // immediate hop, no warmup gate
         assertThat(f.grace.applied).isEqualTo(1); // the shield still applies on the fresh drop
-        assertThat(f.cooldowns.stamps).isZero(); // involuntary — no cooldown burned
-        assertThat(f.fee.charges).isZero(); // involuntary — free
+        assertThat(f.cooldowns.stamps).isZero(); // involuntary: no cooldown burned
+        assertThat(f.fee.charges).isZero(); // involuntary, free
     }
 
     @Test

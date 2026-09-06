@@ -37,15 +37,15 @@ import org.jspecify.annotations.NullMarked;
  * invalid hex re-opens the picker without writing.
  *
  * <p>The consumer supplies the current-value getter, the ARGB setter, the clear runnable, the sentinel, and the
- * catalog keys — so the same widget edits a hologram's background colour, its glow colour, or any other packed
+ * catalog keys, so the same widget edits a hologram's background colour, its glow colour, or any other packed
  * ARGB field. Every write runs off the tick thread through the shared {@link Scheduler}, then the editor is
  * redrawn. The setters are the module's existing application use cases wrapped as callbacks; this property holds
  * no domain logic. Geometry and materials come from a {@link ColourPickerLayout} loaded from conf, so nothing is
  * hardcoded.
  *
- * <p>The picker opens as an engine child window the one menu listener routes — its swatch/custom/clear/back buttons
+ * <p>The picker opens as an engine child window the one menu listener routes. Its swatch/custom/clear/back buttons
  * are single-gesture {@code SelectorButton}s and a swatch, clear, or back reopens the parent editor through the
- * context's reopen hook — so the whole flow stays on a single holder and teardown.
+ * context's reopen hook, so the whole flow stays on a single holder and teardown.
  */
 @NullMarked
 public final class ColourProperty implements EditableProperty {
@@ -121,7 +121,7 @@ public final class ColourProperty implements EditableProperty {
      * Open the picker as an engine child window: the swatch/custom/clear/back buttons are handed to the engine opener
      * as single-gesture {@link SelectorButton}s so the one menu listener routes them. A swatch writes its packed ARGB
      * and reopens the parent editor; custom opens the anvil seam; clear fires the clear runnable then reopens the
-     * parent; back reopens the parent — all through the {@code context.reopen()} contract.
+     * parent; back reopens the parent, all through the {@code context.reopen()} contract.
      */
     private void open(ClickContext context) {
         SelectorOpener opener = context.opener();

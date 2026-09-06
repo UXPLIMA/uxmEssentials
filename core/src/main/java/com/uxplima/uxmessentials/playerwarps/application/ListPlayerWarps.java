@@ -42,8 +42,8 @@ public final class ListPlayerWarps {
     }
 
     /**
-     * Resolve the warp {@code name} by its global name and push a one-line summary — owner, access, price, visits,
-     * and average rating — to {@code viewer}, or the not-found notice when no warp bears the name. This is a pure
+     * Resolve the warp {@code name} by its global name and push a one-line summary. Owner, access, price, visits,
+     * and average rating, to {@code viewer}, or the not-found notice when no warp bears the name. This is a pure
      * read (the {@code /pwarp info} verb): it never mutates the warp, and the returned optional lets a caller reuse
      * the resolved aggregate without a second lookup.
      */
@@ -59,7 +59,7 @@ public final class ListPlayerWarps {
         return found;
     }
 
-    /** The placeholder set the {@code pwarp.info} line renders — every value is a plain, pre-formatted string. */
+    /** The placeholder set the {@code pwarp.info} line renders: every value is a plain, pre-formatted string. */
     private static Map<String, String> summary(PlayerWarp warp) {
         return Map.of(
                 "warp", warp.name().value(),

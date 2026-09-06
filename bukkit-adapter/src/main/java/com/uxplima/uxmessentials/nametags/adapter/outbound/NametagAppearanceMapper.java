@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Maps the core {@link NametagAppearance} (operator strings and primitives, no rendering library) onto the packet
- * renderer's {@link Appearance}. This is the adapter seam that keeps the appearance model itself in {@code :core} —
+ * renderer's {@link Appearance}. This is the adapter seam that keeps the appearance model itself in {@code :core}
  * the domain only validates the structural and range invariants, and the platform interpretation lives here.
  *
  * <p>Tolerant throughout, by design: a server admin's typo in a colour, billboard, or out-of-range number must never
@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  *
  * {@code y-offset} becomes the {@code translation} Y (the renderer spawns the line stack at the target's feet and
  * lifts it by this), and {@code scale} becomes a uniform {@code scale} vector. The packet {@link Appearance} has no
- * glow field, so an authored {@code glow-color} is not carried — glow is a whole-entity outline the packet path does
+ * glow field, so an authored {@code glow-color} is not carried. Glow is a whole-entity outline the packet path does
  * not drive per viewer; it is dropped tolerantly rather than failing the format.
  */
 @NullMarked

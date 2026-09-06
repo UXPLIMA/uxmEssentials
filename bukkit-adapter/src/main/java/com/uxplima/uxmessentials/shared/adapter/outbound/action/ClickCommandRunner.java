@@ -17,7 +17,7 @@ public interface ClickCommandRunner {
     void runAsPlayer(Player player, String command);
 
     /**
-     * Run {@code command} as {@code player} with operator permissions for that one dispatch — the implementation
+     * Run {@code command} as {@code player} with operator permissions for that one dispatch, the implementation
      * temporarily grants op, performs the command, and restores the prior op state (even on failure).
      */
     void runAsPlayerOp(Player player, String command);

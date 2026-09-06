@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * reconciliation, event, and feedback.
  *
  * <p>When the target stands in a no-fly world ({@code no-fly-worlds}) and the toggle would <em>enable</em>
- * flight, the command refuses with {@code FLY_WORLD_DISABLED} rather than toggling — unless the player holds
+ * flight, the command refuses with {@code FLY_WORLD_DISABLED} rather than toggling, unless the player holds
  * the {@code uxmessentials.playerstate.fly.allworlds} bypass node. Disabling flight is always allowed, and a
  * player already permitted to fly by their gamemode (creative/spectator) is left to the gamemode: the refusal
  * only fires when the toggle would grant plugin flight the world forbids.

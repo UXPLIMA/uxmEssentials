@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The itemworld context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code GIVE_GIVEN} ↔ {@code itemworld.give.given}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in the
- * context — every message resolves through one of these.
+ * context: every message resolves through one of these.
  *
  * <p>The keys cover the full ~40-verb surface grouped by sub-feature group (docs/10-feature-modules.md
  * §15.10): item utils, virtual workstations, cleanup, powertool, mob/entity, time/weather (and its aliases),
@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  */
 public enum ItemworldMessageKey implements MessageKey {
 
-    // Item utils — /give, /i
+    // Item utils, /give, /i
     GIVE_GIVEN("itemworld.give.given"),
     GIVE_RECEIVED("itemworld.give.received"),
     // /giveall
@@ -31,7 +31,7 @@ public enum ItemworldMessageKey implements MessageKey {
     ITEMLORE_SET("itemworld.itemlore.set"),
     ITEMLORE_ADDED("itemworld.itemlore.added"),
     ITEMLORE_CLEARED("itemworld.itemlore.cleared"),
-    // /itemedit — the held-item editor (name + lore)
+    // /itemedit, the held-item editor (name + lore)
     ITEMEDIT_NAME_SET("itemworld.itemedit.name-set"),
     ITEMEDIT_NAME_RESET("itemworld.itemedit.name-reset"),
     ITEMEDIT_LORE_ADDED("itemworld.itemedit.lore-added"),
@@ -40,7 +40,7 @@ public enum ItemworldMessageKey implements MessageKey {
     ITEMEDIT_LORE_REMOVED("itemworld.itemedit.lore-removed"),
     ITEMEDIT_LORE_CLEARED("itemworld.itemedit.lore-cleared"),
     ITEMEDIT_LORE_OUT_OF_RANGE("itemworld.itemedit.lore-out-of-range"),
-    // /itemedit — advanced editor (enchant, flags, attributes, durability, custom model data)
+    // /itemedit. Advanced editor (enchant, flags, attributes, durability, custom model data)
     ITEMEDIT_ENCHANTED("itemworld.itemedit.enchanted"),
     ITEMEDIT_ENCHANT_REMOVED("itemworld.itemedit.enchant-removed"),
     ITEMEDIT_ENCHANT_UNKNOWN("itemworld.itemedit.enchant-unknown"),
@@ -144,7 +144,7 @@ public enum ItemworldMessageKey implements MessageKey {
     RECIPE_SHAPED("itemworld.recipe.shaped"),
     RECIPE_SHAPELESS("itemworld.recipe.shapeless"),
     RECIPE_NONE("itemworld.recipe.none"),
-    // /recipe — the crafting-grid browse menu (bare /recipe when its gui flag is on)
+    // /recipe, the crafting-grid browse menu (bare /recipe when its gui flag is on)
     RECIPE_GUI_TITLE("itemworld.recipe.gui.title"),
     RECIPE_GUI_RESULT_NAME("itemworld.recipe.gui.result-name"),
     RECIPE_GUI_RESULT_LORE("itemworld.recipe.gui.result-lore"),
@@ -169,21 +169,21 @@ public enum ItemworldMessageKey implements MessageKey {
     ITEMINFO_HEADER("itemworld.iteminfo.header"),
     ITEMINFO_LINE("itemworld.iteminfo.line"),
 
-    // Virtual workstations — one opened line, parameterised by station name; the others form names the target
+    // Virtual workstations. One opened line, parameterised by station name; the others form names the target
     WORKSTATION_OPENED("itemworld.workstation.opened"),
     WORKSTATION_OPENED_FOR("itemworld.workstation.opened-for"),
 
-    // Shulkers — open a shulker box from the inventory. The view's title (no chat line: the GUI is the feedback).
+    // Shulkers, open a shulker box from the inventory. The view's title (no chat line: the GUI is the feedback).
     SHULKER_TITLE("itemworld.shulker.title"),
 
-    // Cleanup — /disposal
+    // Cleanup, /disposal
     DISPOSAL_OPENED("itemworld.disposal.opened"),
     DISPOSAL_TITLE("itemworld.disposal.title"),
     // /condense
     CONDENSE_DONE("itemworld.condense.done"),
     CONDENSE_NOTHING("itemworld.condense.nothing"),
 
-    // Powertool — /powertool
+    // Powertool, /powertool
     POWERTOOL_BOUND("itemworld.powertool.bound"),
     POWERTOOL_CLEARED("itemworld.powertool.cleared"),
     POWERTOOL_NO_ITEM("itemworld.powertool.no-item"),
@@ -195,7 +195,7 @@ public enum ItemworldMessageKey implements MessageKey {
     POWERTOOL_LIST_ENTRY("itemworld.powertool.list-entry"),
     POWERTOOL_LIST_EMPTY("itemworld.powertool.list-empty"),
 
-    // Mob & entity — /spawnmob
+    // Mob & entity, /spawnmob
     SPAWNMOB_SPAWNED("itemworld.spawnmob.spawned"),
     SPAWNMOB_UNKNOWN("itemworld.spawnmob.unknown"),
     // /spawner
@@ -213,7 +213,7 @@ public enum ItemworldMessageKey implements MessageKey {
     ENTITYCOUNT_HEADER("itemworld.entitycount.header"),
     ENTITYCOUNT_ENTRY("itemworld.entitycount.entry"),
     ENTITYCOUNT_NONE("itemworld.entitycount.none"),
-    // /entitycount — the tally browse menu (bare /entitycount when its gui flag is on)
+    // /entitycount, the tally browse menu (bare /entitycount when its gui flag is on)
     ENTITYCOUNT_GUI_TITLE("itemworld.entitycount.gui.title"),
     ENTITYCOUNT_GUI_PREV("itemworld.entitycount.gui.prev"),
     ENTITYCOUNT_GUI_NEXT("itemworld.entitycount.gui.next"),
@@ -224,15 +224,15 @@ public enum ItemworldMessageKey implements MessageKey {
     UNLIMITED_ENABLED("itemworld.unlimited.enabled"),
     UNLIMITED_DISABLED("itemworld.unlimited.disabled"),
 
-    // Time & weather — /time, /day, /night
+    // Time & weather, /time, /day, /night
     TIME_SET("itemworld.time.set"),
     // /weather, /sun, /rain, /thunder
     WEATHER_SET("itemworld.weather.set"),
 
-    // Admin-fun — /lightning. The self/look form has no target player, so it gets its own wording.
+    // Admin-fun, /lightning. The self/look form has no target player, so it gets its own wording.
     LIGHTNING_STRUCK("itemworld.lightning.struck"),
     LIGHTNING_STRUCK_SELF("itemworld.lightning.struck-self"),
-    // /nuke — same split: the self/look form names no target.
+    // /nuke: same split: the self/look form names no target.
     NUKE_DONE("itemworld.nuke.done"),
     NUKE_DONE_SELF("itemworld.nuke.done-self"),
     // /fireball
@@ -259,7 +259,7 @@ public enum ItemworldMessageKey implements MessageKey {
     TREE_NO_TARGET("itemworld.tree.no-target"),
     TREE_UNKNOWN_TYPE("itemworld.tree.unknown-type"),
 
-    // Utilities hub — /itemworld gui. The launcher chrome (title, button lore, back) plus one label per button.
+    // Utilities hub, /itemworld gui. The launcher chrome (title, button lore, back) plus one label per button.
     GUI_HUB_TITLE("itemworld.gui.hub.title"),
     GUI_HUB_VALUE_LORE("itemworld.gui.hub.value-lore"),
     GUI_HUB_BACK("itemworld.gui.hub.back"),

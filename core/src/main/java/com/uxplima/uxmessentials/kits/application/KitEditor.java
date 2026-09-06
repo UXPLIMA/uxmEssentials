@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * v1 surface is a re-define: the adapter loads the kit so the staff member can inspect it, then overwrites
  * its items from the current inventory through {@link #redefine}, preserving the kit's id, cooldown,
  * one-time flag, permission flag, and cost. An id no kit exists under is refused with
- * {@link KitError#NOT_FOUND} — editing is for curated kits, creating a new one is {@code /kit create}.
+ * {@link KitError#NOT_FOUND}: editing is for curated kits, creating a new one is {@code /kit create}.
  *
  * <p>The richer GUI editor (drag-and-drop slot editing) builds on the same seam: {@link #open} is the read
  * half (confirming the kit exists and returning it for the adapter to present in a window), and {@link #save}

@@ -34,7 +34,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * A command that requires arguments but carries no root executor (the {@code /gamemode}/{@code /pay} shape)
  * must, when run bare, resolve {@link SharedMessageKey#COMMAND_USAGE} and reply with the derived usage line
  * instead of falling through to Brigadier's red parse error. A command that already has a root executor is
- * left untouched — same executor instance, same dispatch behaviour. The recording {@link RecordingMessages}
+ * left untouched, same executor instance, same dispatch behaviour. The recording {@link RecordingMessages}
  * echoes the resolved key and placeholders so the rendered reply is assertable.
  */
 class UsageBindingTest {

@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code NickStore}, so the command stays a thin argument mapper.
  *
  * <p>The first {@code name} argument is overloaded: alone it is the sender's own nick (or a clear keyword), and
- * in the two-argument form it names the target player. Its completion reflects that — it offers the sender's own
+ * in the two-argument form it names the target player. Its completion reflects that. It offers the sender's own
  * account name (so {@code /nick} round-trips to your own name for an edit), the online roster (to pick a target),
  * and the {@code off}/{@code clear} clear keywords. The {@code clear} and {@code off} literal subcommands make the
  * clear path discoverable in tab-completion without losing the {@code /nick off} muscle-memory the keyword keeps.
@@ -136,7 +136,7 @@ public final class NickCommand extends PresenceCommandSupport implements Command
      * Completes the overloaded first argument: the sender's own account name (so they can round-trip to their
      * real name for an edit), every online player (the targets the two-argument form acts on), and the
      * {@code off}/{@code clear} clear keywords. Brigadier invokes this on the command thread as the player types,
-     * so it reads only in-memory state — the sender pulled from the source and the live roster — and never blocks.
+     * so it reads only in-memory state (the sender pulled from the source and the live roster) and never blocks.
      * The candidates collect into a set so a player who shares the sender's name (the sender themselves) is
      * offered once, and a prefix filter narrows them to the token typed so far.
      */

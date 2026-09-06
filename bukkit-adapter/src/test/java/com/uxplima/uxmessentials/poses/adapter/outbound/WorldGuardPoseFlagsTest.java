@@ -101,7 +101,7 @@ class WorldGuardPoseFlagsTest {
         };
     }
 
-    /** A logger that swallows everything — the absent-WorldGuard path emits nothing anyway. */
+    /** A logger that swallows everything: the absent-WorldGuard path emits nothing anyway. */
     private static final class NoopLogger implements Logger {
         @Override
         public void info(String message, Object... args) {}

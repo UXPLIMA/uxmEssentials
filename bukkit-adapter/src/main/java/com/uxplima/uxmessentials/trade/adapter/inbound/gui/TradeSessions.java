@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The in-memory registry of live same-server trades. Each open trade is one {@link TradeExchange} indexed twice — by
+ * The in-memory registry of live same-server trades. Each open trade is one {@link TradeExchange} indexed twice, by
  * its {@link TradeId} (so a view resolves the shared exchange from its holder) and by each participant's UUID (so a
  * disconnect or a {@code /trade} refusal can find the trade a player is already in). A same-server trade holds nothing
  * in the database, so this map is the whole store; a settled trade is removed from both indexes at once.
@@ -48,7 +48,7 @@ public final class TradeSessions {
         return byTrade.get(tradeId);
     }
 
-    /** Whether {@code player} is already in a trade — the {@code /trade} busy check the later phase reads. */
+    /** Whether {@code player} is already in a trade, the {@code /trade} busy check the later phase reads. */
     public boolean isTrading(UUID player) {
         Objects.requireNonNull(player, "player");
         return byPlayer.containsKey(player);

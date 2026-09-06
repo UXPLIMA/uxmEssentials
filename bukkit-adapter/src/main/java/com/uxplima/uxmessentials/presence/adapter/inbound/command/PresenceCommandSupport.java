@@ -22,10 +22,10 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared collaborators every presence Brigadier command holds: the constructed {@link PresenceServices} and the
- * {@link Messages} catalog (the latter only for the players-only rejection — all success feedback flows through
+ * {@link Messages} catalog (the latter only for the players-only rejection. All success feedback flows through
  * the use cases' {@code MessageSink}). Concrete command classes extend this so each stays focused on building
- * its node and mapping its arguments to one use-case call. Both presence commands act on the sender only —
- * there is no {@code [player]} target form — so this base needs no others-gate.
+ * its node and mapping its arguments to one use-case call. Both presence commands act on the sender only
+ * there is no {@code [player]} target form, so this base needs no others-gate.
  */
 @NullMarked
 abstract class PresenceCommandSupport {

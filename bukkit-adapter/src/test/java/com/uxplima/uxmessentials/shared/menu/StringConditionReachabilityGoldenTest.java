@@ -35,7 +35,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The proof that a valued string condition written as an {@code id:value} token in a config gates an item, and that
- * its operands are placeholder-expanded before the comparison — end to end through the real {@link MenuSpecLoader},
+ * its operands are placeholder-expanded before the comparison, end to end through the real {@link MenuSpecLoader},
  * {@link MenuBindings#validate} and {@link MenuRenderer}. A test {@code %who%} placeholder resolves to
  * {@code SteveTheKing}, so a spec whose item is gated on {@code contains:%who% Steve} renders (the resolved name
  * contains the needle) while the same gate with the needle flipped to {@code Notch} hides it. The parser leaves the

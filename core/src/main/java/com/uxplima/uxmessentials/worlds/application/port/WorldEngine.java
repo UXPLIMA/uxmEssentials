@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.worlds.domain.WorldName;
  * Anti-corruption layer over Bukkit's world APIs ({@code WorldCreator}, {@code Server#getWorld},
  * {@code unloadWorld}, the world folder on disk). The only place in the worlds context that touches
  * {@code org.bukkit.World}. World handle operations run on the global thread; file operations run
- * off-tick — both are the adapter's responsibility, invoked through the {@code Scheduler} port.
+ * off-tick: both are the adapter's responsibility, invoked through the {@code Scheduler} port.
  */
 public interface WorldEngine {
 
@@ -24,8 +24,8 @@ public interface WorldEngine {
     Result<Unit, WorldError> create(ManagedWorld world);
 
     /**
-     * Load an existing (registered or on-disk) world, re-applying its {@link ManagedWorld#spec()} —
-     * environment, type, seed, and generator — to the world handle. Re-applying the spec is what
+     * Load an existing (registered or on-disk) world, re-applying its {@link ManagedWorld#spec()}
+     * environment, type, seed, and generator, to the world handle. Re-applying the spec is what
      * keeps a built-in {@code uxmEssentials:void|flat} world's object generator in force across
      * restarts: Bukkit cannot persist an object generator, so without re-supplying it newly generated
      * chunks would fall back to vanilla terrain.
@@ -48,7 +48,7 @@ public interface WorldEngine {
     Set<WorldName> loadedWorldNames();
 
     /**
-     * The server's default (primary) world, or empty when the server has no worlds loaded — which a
+     * The server's default (primary) world, or empty when the server has no worlds loaded, which a
      * caller comparing against a name must treat as "not the default" rather than dereferencing.
      */
     Optional<WorldName> defaultWorldName();

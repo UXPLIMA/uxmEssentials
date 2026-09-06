@@ -8,12 +8,12 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * The immutable description of one browse request: which warps to include, how to order them, and which page to
- * return. Every filter is optional — an absent filter widens the result — while {@code onlyActive}, the
+ * return. Every filter is optional, an absent filter widens the result, while {@code onlyActive}, the
  * {@link WarpSort}, the page coordinates, and the {@code viewer} are always present.
  *
  * <p>This query only <em>describes</em> the listing; it does not enforce access policy. The read-model applies
  * exactly the filters it is handed and never adds a hidden access check, because a card appearing in a browse
- * never grants access — the teleport gate re-checks the real warp when a player picks one. The menu is therefore
+ * never grants access: the teleport gate re-checks the real warp when a player picks one. The menu is therefore
  * responsible for passing safe filters; {@link #publicBrowse} is the safe default it should start from.
  *
  * @param category include only warps in this category id
@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * @param sort the ordering to apply
  * @param page the zero-based page index to return
  * @param pageSize how many cards a page holds (1..100)
- * @param viewer the player viewing the browse — drives the {@code viewerFavourited} flag on each card
+ * @param viewer the player viewing the browse. Drives the {@code viewerFavourited} flag on each card
  * @param viewerPosition the viewer's location, used only by {@link WarpSort#DISTANCE}
  */
 public record WarpQuery(
@@ -66,7 +66,7 @@ public record WarpQuery(
 
     /**
      * The safe default public browse: only {@link WarpStatus#ACTIVE active}, {@link WarpAccess#PUBLIC public}
-     * warps, no other filter, ordered by {@code sort}. This is the query the menu opens with — a private,
+     * warps, no other filter, ordered by {@code sort}. This is the query the menu opens with, a private,
      * suspended, or archived warp can never leak through it.
      */
     public static WarpQuery publicBrowse(UUID viewer, WarpSort sort, int page, int pageSize) {

@@ -46,14 +46,14 @@ import org.jspecify.annotations.Nullable;
  * retries from the untouched legacy tables. A second enable then finds no legacy table and returns immediately.
  *
  * <p><b>What each legacy row becomes.</b> Each legacy name is first coerced into the V70 {@link PlayerWarpName}
- * shape — lowercase {@code [a-z0-9_-]}, {@value PlayerWarpName#MIN_LENGTH}..{@value PlayerWarpName#MAX_LENGTH}
- * characters — because the old schema let a name be any charset up to 64 characters, and a name that no longer
+ * shape, lowercase {@code [a-z0-9_-]}, {@value PlayerWarpName#MIN_LENGTH}..{@value PlayerWarpName#MAX_LENGTH}
+ * characters, because the old schema let a name be any charset up to 64 characters, and a name that no longer
  * constructs would throw on the very next read and break the browse for everyone. Rows are then read in a
  * deterministic {@code created_at, owner, name} order so the first claimant of a now-globally-unique name keeps it
  * and later duplicates are renamed ({@code base} → {@code base2}, …). A {@link PlayerWarpRenameNotice} is emitted
- * whenever the stored name ends up different from the legacy name for <em>any</em> reason — a charset or length fix
+ * whenever the stored name ends up different from the legacy name for <em>any</em> reason, a charset or length fix
  * as well as a collision suffix. {@code access} is derived from the legacy
- * flags — a set password wins ({@code PASSWORD}), then {@code is_locked} maps to owner-only {@code PRIVATE}, then
+ * flags, a set password wins ({@code PASSWORD}), then {@code is_locked} maps to owner-only {@code PRIVATE}, then
  * {@code is_public} to {@code PUBLIC}, else {@code PRIVATE}. A legacy plaintext password is run through the
  * {@link PasswordHasher} and stored only as its salted digest; the plaintext is never persisted or logged. The
  * welcome-message blob is dropped (its count is logged as one aggregate line). Ratings are rehomed onto the new
@@ -276,7 +276,7 @@ public final class PlayerWarpDataMigration extends JooqRepository {
     private static void recordRename(
             List<PlayerWarpRenameNotice> renames, PlayerWarpsV1LegacyRecord row, String resolved) {
         String legacyName = row.getName();
-        // A notice fires whenever the stored name differs from the legacy name for any reason — a charset or length
+        // A notice fires whenever the stored name differs from the legacy name for any reason, a charset or length
         // fix as much as a collision suffix. Legacy names were already lower-cased on the old write path, so a warp
         // that needed no change compares equal here and stays silent.
         if (!resolved.equals(legacyName)) {

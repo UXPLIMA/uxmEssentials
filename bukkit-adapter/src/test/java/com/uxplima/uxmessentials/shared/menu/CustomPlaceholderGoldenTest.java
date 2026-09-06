@@ -47,7 +47,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code "{math: %data_number_coins% * 2}"}) renders against a seeded data store (coins=50): the name shows the inner
  * built-in resolved and the lore shows the evaluated product, proving the custom substitute resolves the inner token
  * while the renderer's outer pass owns the math. It also proves {@code placeholders.conf} is not swept in as a menu,
- * and that a {@code /menu reload} — a second {@link CustomMenuLoader#loadFrom} — picks up an edited definition.
+ * and that a {@code /menu reload}, a second {@link CustomMenuLoader#loadFrom}, picks up an edited definition.
  */
 class CustomPlaceholderGoldenTest {
 
@@ -83,7 +83,7 @@ class CustomPlaceholderGoldenTest {
         TestMenuEngine engine = TestMenuEngine.create(new KeyMessages(), new SyncScheduler());
         menus = engine.menus();
         // The built-in %player% and the data reader %data_number_coins% a custom template references, registered
-        // before the custom fallback so the custom family is claimed last — the production ordering.
+        // before the custom fallback so the custom family is claimed last: the production ordering.
         MenuVocabulary.registerPlaceholders(engine.bindings());
         FakePlayerDataStore playerData = new FakePlayerDataStore();
         playerData.set(viewer.getUniqueId(), "coins", "50");

@@ -46,6 +46,6 @@ final class PresenceCommandSurface {
         return new PresenceCommand(literal, description);
     }
 
-    /** The kernel-side description of one presence command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one presence command, literal and help text, no Brigadier type. */
     private record PresenceCommand(String literal, String description) implements BrigadierCommand {}
 }

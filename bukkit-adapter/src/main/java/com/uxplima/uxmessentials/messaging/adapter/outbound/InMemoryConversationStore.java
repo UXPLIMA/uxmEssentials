@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link ConversationStore} implementation: each player's {@code /reply} target. A private message is
  * real-time and never persisted, so this is session state held in-memory and dropped on {@code stop()} via
  * {@link #clear()}; a player's reply target is forgotten on quit by the inbound listener. The reply-TTL rule
- * lives on the {@link LastConversation} aggregate — this store only keeps the latest entry per owner.
+ * lives on the {@link LastConversation} aggregate: this store only keeps the latest entry per owner.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b>. The map is a {@link ConcurrentHashMap} keyed by owner uuid,

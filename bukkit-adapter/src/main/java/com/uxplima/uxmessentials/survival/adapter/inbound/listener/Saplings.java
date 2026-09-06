@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The tree-feller replant lookup: which sapling belongs to a felled log, and which ground a sapling may be planted
- * on. Only the overworld species that grow from a placeable sapling are mapped — mangrove replants its propagule, and
+ * on. Only the overworld species that grow from a placeable sapling are mapped. Mangrove replants its propagule, and
  * the nether stems (crimson/warped) have no sapling, so felling them simply leaves the base empty.
  */
 @NullMarked

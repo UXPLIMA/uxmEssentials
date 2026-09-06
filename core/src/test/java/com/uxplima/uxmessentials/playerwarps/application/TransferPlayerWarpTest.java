@@ -98,7 +98,7 @@ class TransferPlayerWarpTest {
         Result<Unit, PlayerWarpError> result = transfer.transfer(owner, HUB, newOwner);
 
         assertThat(result.errorOrThrow()).isEqualTo(PlayerWarpError.SPONSORED_LOCKED);
-        // The warp stays with its owner — a sponsored slot is bought against them, so it must not move mid-term.
+        // The warp stays with its owner: a sponsored slot is bought against them, so it must not move mid-term.
         assertThat(repository.stored("hub").owner().uuid()).isEqualTo(owner.uuid());
         assertThat(sink.delivered).anyMatch(text -> text.startsWith("pwarp.sponsored-locked"));
     }

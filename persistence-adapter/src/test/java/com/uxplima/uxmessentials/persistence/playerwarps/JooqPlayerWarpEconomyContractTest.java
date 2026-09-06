@@ -53,7 +53,7 @@ import org.junit.jupiter.api.io.TempDir;
  * The {@code PlayerWarpEconomy} contract exercised against the <strong>real native provider over embedded
  * SQLite</strong> and the real {@code player_warps} bank column. The dominating property is
  * {@link #concurrentChargesNeverDoubleSpend()}: a payer funded for exactly {@code K} charges fires {@code K +
- * extra} concurrent charges, and exactly {@code K} may take — the guard is the actual SQLite guarded debit, not
+ * extra} concurrent charges, and exactly {@code K} may take. The guard is the actual SQLite guarded debit, not
  * a JVM lock. The rest pin the compensation, withdraw, auto-payout, refund and affordability paths.
  */
 class JooqPlayerWarpEconomyContractTest {
@@ -126,7 +126,7 @@ class JooqPlayerWarpEconomyContractTest {
         economy.credit(payer, Money.of(COINS, new BigDecimal("200")));
         PlayerWarpId warp = seedWarp(randomPlayer(), "spire");
         JooqPlayerWarpEconomy bridge = bridge(new BigDecimal("10"), false, true);
-        // Drop the bank table so the debit still takes but the accrue UPDATE throws — the real compensation path.
+        // Drop the bank table so the debit still takes but the accrue UPDATE throws, the real compensation path.
         dropPlayerWarps();
 
         Result<Unit, ChargeError> result = bridge.chargeAndAccrue(payer, warp, new BigDecimal("50"), "default");
@@ -152,7 +152,7 @@ class JooqPlayerWarpEconomyContractTest {
         assertThat(bank(warp)).isEqualByComparingTo(BigDecimal.ZERO);
         assertThat(economy.balance(owner, COINS).amount()).isEqualByComparingTo(new BigDecimal("90"));
 
-        // A second withdraw finds an empty bank and pays nothing more — no double credit.
+        // A second withdraw finds an empty bank and pays nothing more, no double credit.
         assertThat(bridge.withdraw(warp, owner).isOk()).isTrue();
         assertThat(economy.balance(owner, COINS).amount()).isEqualByComparingTo(new BigDecimal("90"));
     }
@@ -209,7 +209,7 @@ class JooqPlayerWarpEconomyContractTest {
         PlayerWarpId warp = seedWarp(randomPlayer(), "voidhold");
         JooqPlayerWarpEconomy bridge = bridge(new BigDecimal("10"), false, true);
         BigDecimal balanceBefore = economy.balance(payer, COINS).amount();
-        // The warp row vanishes in the window between the debit and the accrue — a concurrent /pwarp delete or
+        // The warp row vanishes in the window between the debit and the accrue, a concurrent /pwarp delete or
         // admin purge. The debit still takes, but the guarded accrue UPDATE now matches no row: this is the exact
         // silent-money-loss defect (0 rows, no throw, no compensation) the row-count check closes.
         deleteWarpRow(warp);
@@ -243,7 +243,7 @@ class JooqPlayerWarpEconomyContractTest {
                 .isTrue();
 
         assertThat(bank(warp)).isEqualByComparingTo(BigDecimal.ZERO);
-        // The payer is still debited the full price — the whole fee is the cut — the bank simply banks nothing.
+        // The payer is still debited the full price, the whole fee is the cut, the bank simply banks nothing.
         assertThat(economy.balance(payer, COINS).amount()).isEqualByComparingTo(new BigDecimal("60"));
     }
 
@@ -370,7 +370,7 @@ class JooqPlayerWarpEconomyContractTest {
                         DSL.using(configuration).dropTable(PLAYER_WARPS).execute());
     }
 
-    /** Delete one warp row, leaving the table intact — a concurrent /pwarp delete in the charge window. */
+    /** Delete one warp row, leaving the table intact, a concurrent /pwarp delete in the charge window. */
     private void deleteWarpRow(PlayerWarpId warp) {
         persistence
                 .dsl()
@@ -465,7 +465,7 @@ class JooqPlayerWarpEconomyContractTest {
         }
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

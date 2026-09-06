@@ -39,7 +39,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * that leaves the cursor untouched; and an empty cursor takes the item's ordinary click, never the drag.
  *
  * <p>MockBukkit models the view cursor ({@code getCursor}/{@code setCursor}), so the consume assertion runs for real
- * here — the same controlled write production does on the viewer's entity thread. The click stays cancelled the whole
+ * here: the same controlled write production does on the viewer's entity thread. The click stays cancelled the whole
  * time, so vanilla never moves the held item: the consume is the only mutation, and it cannot dupe.
  */
 class ItemDragGoldenTest {
@@ -98,7 +98,7 @@ class ItemDragGoldenTest {
                 .extracting(ItemStack::getType, ItemStack::getAmount)
                 .containsExactly(Material.DIAMOND, 1);
         assertThat(event.isCancelled())
-                .as("the click stays cancelled, so vanilla never moves the item — the consume is the only mutation")
+                .as("the click stays cancelled, so vanilla never moves the item. The consume is the only mutation")
                 .isTrue();
     }
 

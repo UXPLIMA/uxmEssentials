@@ -28,13 +28,13 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the ignore-list manager ({@code /ignore} with no arguments) with the menu engine and opens it. A small
  * class that registers the ignored-player list source, the placeholder its entries need, and the un-ignore and
- * add-by-name click actions, then loads the {@code messaging-ignore} spec and hands it to {@link Menus} — the same
+ * add-by-name click actions, then loads the {@code messaging-ignore} spec and hands it to {@link Menus}, the same
  * shape the vault selector and warp sound menus follow.
  *
  * <p>The owner's ignore list is a database read, so the {@code messaging:ignores} source resolves it off the
  * viewer's region thread (the engine does the hop) and touches no Bukkit API. The {@code ignore_target} placeholder
  * reads the bound entry to label each head, and the click actions route through the same {@link Unignore} and
- * {@link Ignore} use cases the {@code /unignore} and {@code /ignore <player>} verbs drive — so a notifier line still
+ * {@link Ignore} use cases the {@code /unignore} and {@code /ignore <player>} verbs drive, so a notifier line still
  * fires and the store stays consistent. The add button prompts for a name through the shared text-input seam, then
  * ignores that player and reopens, exactly as the old view's create button did.
  */

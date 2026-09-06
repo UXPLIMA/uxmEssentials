@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  * subcommand tree (the same idiom {@code /pwarp} uses).
  *
  * <ul>
- *   <li>{@code /home} (no args) opens the slot grid — teleport, create, delete, relocate, rename, re-icon all
+ *   <li>{@code /home} (no args) opens the slot grid, teleport, create, delete, relocate, rename, re-icon all
  *       live inside it. Gated by {@code uxmessentials.home.use}.
  *   <li>{@code /home visit <player> [slot]} teleports to another player's home. Gated by
  *       {@code uxmessentials.home.visit}.
@@ -197,7 +197,7 @@ public final class HomeCommand extends HomeCommandSupport implements CommandRegi
     }
 
     private int runAdminTeleport(CommandContext<CommandSourceStack> ctx) {
-        // tp requires the actor to be online — the actor teleports.
+        // tp requires the actor to be online: the actor teleports.
         return dispatchOnlineTarget(ctx, target -> services.homeAdmin().teleport(refOf(ctx), target, slotArg(ctx)));
     }
 
@@ -227,7 +227,7 @@ public final class HomeCommand extends HomeCommandSupport implements CommandRegi
         PlayerRef target = resolved.get();
         scheduler.async(() -> {
             HomeSet set = services.repository().load(target);
-            // First slot index not occupied by the target — 0 when empty, otherwise max+1.
+            // First slot index not occupied by the target, 0 when empty, otherwise max+1.
             java.util.OptionalInt maxOpt =
                     set.all().stream().mapToInt(h -> h.slot().index()).max();
             int nextIndex = maxOpt.isPresent() ? maxOpt.getAsInt() + 1 : 0;

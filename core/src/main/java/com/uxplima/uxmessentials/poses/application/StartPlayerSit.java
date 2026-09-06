@@ -15,13 +15,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * Starts a player-sit — the stacking pose where {@code who} sits on {@code target}'s shoulders (right-clicking a
+ * Starts a player-sit. The stacking pose where {@code who} sits on {@code target}'s shoulders (right-clicking a
  * player). Unlike a block-sit there is no seat entity: the rider is mounted straight onto the carrier through the
  * {@link SeatPort#mountOnPlayer port}, and because {@code addPassenger} chains, A-on-B-on-C stacking just works.
  *
  * <p>Five gates turn an attempt away before anything is mounted: the {@code features.player-sit} switch (the
  * operator's master toggle, off by default), sitting on yourself, being already posed (the one-session-per-player
- * invariant), a target whose personal {@link PlayerSitPreferences} refuses, and the {@link PoseRegionGate} — a
+ * invariant), a target whose personal {@link PlayerSitPreferences} refuses, and the {@link PoseRegionGate}, a
  * player-sit is gated at the rider's spot with the {@code playersit} region flag, so a claim or WorldGuard veto turns
  * it away just as it does a block-sit. On success it records a {@link PoseType#PLAYER_SIT} session carrying the
  * {@code target} and the rider's captured standing position (so standing up returns them there), and publishes
@@ -31,7 +31,7 @@ public final class StartPlayerSit {
 
     /**
      * The session's seat-handle for a player-sit. There is no seat entity to remove, so the handle is never used to
-     * reap one — {@code StopPose} dismounts the rider from the carrier instead. It is stored only to satisfy the
+     * reap one: {@code StopPose} dismounts the rider from the carrier instead. It is stored only to satisfy the
      * {@link PoseSession} contract's non-null handle.
      */
     private static final String NO_SEAT_HANDLE = "player-sit";
@@ -110,7 +110,7 @@ public final class StartPlayerSit {
         /** The pose began; the rider is mounted on the carrier. */
         STARTED,
 
-        /** {@code features.player-sit} is off — sitting on players is not offered. */
+        /** {@code features.player-sit} is off: sitting on players is not offered. */
         DISABLED,
 
         /** The region gate refused the pose here (a claim or WorldGuard veto on the {@code playersit} flag). */

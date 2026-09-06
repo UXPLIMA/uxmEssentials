@@ -8,13 +8,13 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import org.jspecify.annotations.Nullable;
 
 /**
- * One player's active pose — the immutable record the {@code PoseSessions} registry holds as the single source of
+ * One player's active pose. The immutable record the {@code PoseSessions} registry holds as the single source of
  * truth for who is posing. There is at most one per player (the one-session-per-player invariant the registry
  * enforces): starting a new pose replaces the old, and any of quit / move / damage / teleport / dismount ends it.
  *
  * <p>{@code returnLocation} is where the player stood the instant the pose began, so a {@code return-to-start}
  * server can put them back exactly there when the pose ends. {@code seatHandle} is the adapter's opaque handle for
- * the seat entity or client-side render behind the pose (a Phase-1+ concern) — the domain treats it as an opaque
+ * the seat entity or client-side render behind the pose (a Phase-1+ concern). The domain treats it as an opaque
  * token and never interprets it. {@code target} is populated only for {@link PoseType#PLAYER_SIT}: the player being
  * sat upon; it is {@code null} for every other pose.
  *

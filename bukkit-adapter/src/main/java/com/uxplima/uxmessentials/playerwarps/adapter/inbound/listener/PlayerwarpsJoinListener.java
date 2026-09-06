@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>When the {@code cross-server} sub-group is on, the same join is also the arrival point for a cross-server
  * teleport: the {@link CrossServerArrival} handler reads the shared pending-teleport row off-tick and, if it
  * targets this backend, completes the local hop. The handler is absent (an empty {@link Optional}) when the
- * sub-group is off, so a disabled sub-group does no arrival work at all — only the cache warm runs.
+ * sub-group is off, so a disabled sub-group does no arrival work at all, only the cache warm runs.
  */
 @NullMarked
 public final class PlayerwarpsJoinListener implements Listener {

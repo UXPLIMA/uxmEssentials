@@ -4,7 +4,7 @@
  * the {@link com.uxplima.uxmessentials.invrollback.application.InvrollbackMessageKey} catalog, and the
  * {@link com.uxplima.uxmessentials.invrollback.application.CaptureSnapshot} use case that saves a captured
  * inventory through the {@link com.uxplima.uxmessentials.invrollback.application.port.SnapshotRepository} port and
- * bounds a player's snapshots to the configured count. Orchestration only — the domain holds the rules, the ports
+ * bounds a player's snapshots to the configured count. Orchestration only. The domain holds the rules, the ports
  * reach the outside. Pure Java: no Bukkit, Paper, Kyori, or SLF4J.
  */
 @NullMarked

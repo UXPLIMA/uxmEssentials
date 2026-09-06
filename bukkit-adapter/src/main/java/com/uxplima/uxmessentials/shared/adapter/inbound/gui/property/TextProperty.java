@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * the caller's setter off the tick thread via the shared {@link Scheduler}; on a rejected submit and on cancel the
  * editor is redrawn so the viewer lands back where they were.
  *
- * <p>The {@code inputKey} identifies this field to the input config — every text field in an entity editor shares the
+ * <p>The {@code inputKey} identifies this field to the input config. Every text field in an entity editor shares the
  * one {@code editor.text-field} key, so an operator flips all editor text fields to chat (or anvil) with a single
  * override. The {@link TextInput} seam already hops the callback onto the viewer's region thread and handles the
  * cancel keywords, so this property only validates and sets.

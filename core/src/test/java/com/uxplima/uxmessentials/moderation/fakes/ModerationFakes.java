@@ -64,7 +64,7 @@ public final class ModerationFakes {
     }
 
     /**
-     * A {@link Permissions} whose quota reducer always returns {@code capSeconds} — a fixed
+     * A {@link Permissions} whose quota reducer always returns {@code capSeconds}: a fixed
      * {@code maxduration} tier for testing {@link com.uxplima.uxmessentials.moderation.application
      * .SanctionDurationLimit} reduce-to-limit. The exempt node is never held.
      */
@@ -171,7 +171,7 @@ public final class ModerationFakes {
     }
 
     /**
-     * A {@link MessageSink} recording every delivery as a {@code (viewer, key)} pair — since the messages fake
+     * A {@link MessageSink} recording every delivery as a {@code (viewer, key)} pair, since the messages fake
      * echoes the key as the rendered text, {@code renderedText} is the catalog key, so a test can assert that
      * a given viewer was sent a given {@link MessageKey}.
      */

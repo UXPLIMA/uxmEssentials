@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * The adapter's {@link PlayerFacts} over a live {@code Player}, shared by the gate, the tab-completion
  * filter and the published check so all three answer from the same facts: permission checks go straight to
  * {@code player.hasPermission}, and the primary group is resolved lazily through the {@link PlayerGroupSource} and
- * memoised. The lazy read matters — the {@code RuleSet} checks the {@code .bypass} node before it ever asks for the
+ * memoised. The lazy read matters. The {@code RuleSet} checks the {@code .bypass} node before it ever asks for the
  * group, so a bypass holder never triggers a permission-plugin lookup, and a repeated group read within one command
  * is served from the cached value.
  */

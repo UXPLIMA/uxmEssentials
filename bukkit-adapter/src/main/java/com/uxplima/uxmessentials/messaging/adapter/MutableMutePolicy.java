@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * the moderation context lands (registry order), so its {@code SendMessage} / {@code SendMail} / {@code
  * HelpOp} use cases are built against this policy while it still delegates to {@link MutePolicy#NEVER}. When
  * moderation wires, it calls {@link #bind} to supply the real mute policy, and every already-constructed
- * messaging use case begins honouring it — no re-wiring.
+ * messaging use case begins honouring it: no re-wiring.
  *
  * <p>If moderation is disabled the delegate stays {@link MutePolicy#NEVER}, so messaging degrades to "no one
  * is muted" exactly as the soft-couple contract requires. The reference is atomic so the rebind on the enable

@@ -6,7 +6,7 @@
  * whole catalog; the gates (permission, cost) are data-driven and optional. Whether a cost is actually
  * charged is an application decision (soft-coupled to the economy context), never a domain one. The
  * {@code KitItem} payload is an opaque serialized string the domain only carries, so no Bukkit, Paper, Kyori,
- * or logging type appears here — the model is built from value objects and the cross-cutting kernel
+ * or logging type appears here. The model is built from value objects and the cross-cutting kernel
  * primitives ({@code PlayerRef}).
  */
 @org.jspecify.annotations.NullMarked

@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The pure translation between the trade-manager window's item region and a villager's {@link MerchantRecipe} set.
- * The region is a flat run of slots in triples — buy-A, buy-B, sell — one triple per editable trade; where those
+ * The region is a flat run of slots in triples (buy-A, buy-B, sell) one triple per editable trade; where those
  * slots sit in the window is the spec file's business ({@link VillagerManagerWindow}), and only their order matters
  * here. Editing a trade means dragging its buy/sell stacks (their amounts are the trade amounts) into a triple;
  * filling an empty triple adds a trade; clearing one drops that trade.

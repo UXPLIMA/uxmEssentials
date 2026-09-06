@@ -18,10 +18,10 @@ public interface PosesPlaceholders {
     /** Whether {@code who} is currently sitting. */
     boolean sitting(PlayerRef who);
 
-    /** Whether {@code who} currently holds a free pose — a {@code /lay}, {@code /bellyflop}, or {@code /spin}. */
+    /** Whether {@code who} currently holds a free pose, a {@code /lay}, {@code /bellyflop}, or {@code /spin}. */
     boolean posing(PlayerRef who);
 
-    /** {@code who}'s current pose name — {@code sit}/{@code lay}/{@code bellyflop}/{@code spin}, or {@code none}. */
+    /** {@code who}'s current pose name, {@code sit}/{@code lay}/{@code bellyflop}/{@code spin}, or {@code none}. */
     String pose(PlayerRef who);
 
     /** Whether {@code who} currently allows other players to sit on them (the {@code /poses toggle} state). */

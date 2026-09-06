@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
  * The single-target read verbs {@code /getpos} and {@code /ping} take a plain online-player name, never a Paper
- * entity selector — so they no longer surface {@code @a}/{@code @p}/{@code @s} in tab-completion (showing one
+ * entity selector, so they no longer surface {@code @a}/{@code @p}/{@code @s} in tab-completion (showing one
  * player's position or ping is a single-target read where fanning out is nonsensical). Asserting the {@code player}
  * argument is a Brigadier {@link StringArgumentType} word, not a selector argument, proves the conversion held.
  */

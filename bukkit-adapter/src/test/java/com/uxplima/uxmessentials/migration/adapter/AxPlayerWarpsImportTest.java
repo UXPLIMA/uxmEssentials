@@ -41,7 +41,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The AxPlayerWarps end-to-end golden-file: it seeds an AxPlayerWarps H2 fixture, drives the real
  * {@link AxPlayerWarpsConvert} plan into the shared {@link PlayerWarpRecordWriter}, and asserts the warps land on the
- * new V70 player-warp schema over the default embedded SQLite backend. It proves the whole chain — the source name is
+ * new V70 player-warp schema over the default embedded SQLite backend. It proves the whole chain. The source name is
  * sanitised into the value-object shape, the {@code Access} ordinal maps to our access axis, the category / description
  * / icon / price carry across, the ratings / whitelist / blacklist (as bans) / favourites / visit tally land in their
  * stores, a warp in an unknown world is dropped, and a second run of the same import writes nothing new.
@@ -214,7 +214,7 @@ class AxPlayerWarpsImportTest {
         }
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

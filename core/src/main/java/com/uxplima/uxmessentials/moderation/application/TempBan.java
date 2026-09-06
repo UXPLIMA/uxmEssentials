@@ -25,7 +25,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * {@code /tempban <player> <duration> [reason]}: ban a player until a wall-clock expiry. Unlike a mute or
- * jail there is no permanent form — a permanent ban is an {@code /banip} or the external ban-list — so a
+ * jail there is no permanent form (a permanent ban is an {@code /banip} or the external ban-list) so a
  * blank/malformed/zero duration is refused. The exempt target is refused. On success the tempban row is
  * upserted, an online target is kicked immediately via {@link Sanctions}, {@code PlayerTempbanned} is
  * published, and the ban-on-login listener bars their reconnection until the expiry passes.

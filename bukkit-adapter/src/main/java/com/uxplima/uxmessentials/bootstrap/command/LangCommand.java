@@ -27,7 +27,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /lang} — the per-player {@code /lang} locale override (docs/13-i18n §7). Cross-cutting rather
+ * {@code /lang}, the per-player {@code /lang} locale override (docs/13-i18n §7). Cross-cutting rather
  * than owned by a feature context, so it lives in the bootstrap command surface alongside
  * {@code /uxmess}. Permission node {@code uxmessentials.lang.use} (default true).
  *

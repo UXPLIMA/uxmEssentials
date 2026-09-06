@@ -116,7 +116,7 @@ class NametagContentCodecTest {
         NametagContentCodec.Parsed parsed = NametagContentCodec.read(root, LOG);
 
         NametagFormat showAll = select(parsed, n -> false, "world");
-        // 0 is kept verbatim — it disables the renderer's distance cull (show to all online).
+        // 0 is kept verbatim: it disables the renderer's distance cull (show to all online).
         assertThat(showAll.visibility().viewerDistance()).hasValue(0.0);
         NametagFormat typo = select(parsed, "uxmessentials.staff"::equals, "world");
         // A negative authored value is treated as absent so a typo falls back to the default radius, never blanking

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /settpr} into the teleport context's command surface — the admin command that sets the
+ * Pins {@code /settpr} into the teleport context's command surface, the admin command that sets the
  * {@code /rtp} search zone at runtime by swapping the live pre-warmed queue's radii. This guard fails if the
  * literal drops out of the surface or ever wires under a node other than its own
  * {@code uxmessentials.teleport.settpr}, which would otherwise drift the permissions reference and

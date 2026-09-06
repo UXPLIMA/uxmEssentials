@@ -28,7 +28,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /giveall <item> [amount]}: hand an item to every online player at once — the bulk sibling of
+ * {@code /giveall <item> [amount]}: hand an item to every online player at once. The bulk sibling of
  * {@code /give}, gated on its own {@code uxmessentials.giveall.use} node so a network can grant the
  * server-wide handout independently of the per-target give (docs/permissions.md §Itemworld,
  * docs/10-feature-modules.md §15.10).
@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullMarked;
  * and resolves to an obtainable {@link Material} (else {@link ItemworldMessageKey#UNKNOWN_ITEM}); the amount
  * validates to an {@link AmountSpec} within the {@code give-cap} (else
  * {@link ItemworldMessageKey#AMOUNT_OUT_OF_RANGE}) before any stack materialises. Each recipient's stack is
- * added on that player's own region thread through the kernel {@code Scheduler}, and — being a bulk handout —
+ * added on that player's own region thread through the kernel {@code Scheduler}, and, being a bulk handout,
  * each delivery is audit-logged when the amount crosses the configured threshold.
  */
 @NullMarked

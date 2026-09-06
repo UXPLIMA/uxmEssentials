@@ -19,8 +19,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuItemSp
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The engine-backed {@link MenuApi}: each registration delegates to the matching {@link MenuBindings} method — the
- * same registries the renderer and click listener resolve against — so a handler registered through the façade is
+ * The engine-backed {@link MenuApi}: each registration delegates to the matching {@link MenuBindings} method, the
+ * same registries the renderer and click listener resolve against, so a handler registered through the façade is
  * seen by the already-built engine, and a duplicate id throws just as an internal registration would. {@link
  * #buildItem} defers to the composition-root {@link ItemRenderer}, so a custom-built item resolves its material
  * providers and placeholders identically to a menu icon. {@link #registerIconProvider} appends to the same live

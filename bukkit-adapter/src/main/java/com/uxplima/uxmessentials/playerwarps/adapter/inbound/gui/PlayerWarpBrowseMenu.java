@@ -50,12 +50,12 @@ import org.jspecify.annotations.Nullable;
  * engine's paged-list SPI. Where the {@code /pwarp} management list snapshots a whole owner-scoped set, this menu
  * binds a {@code playerwarps:browse} paged source: the engine holds the viewer's page, sort, and filter state and
  * asks the source for exactly one page per draw or flip, off the tick thread, so opening the browse costs one
- * bounded page query regardless of how many warps the server holds — it never materialises the table.
+ * bounded page query regardless of how many warps the server holds: it never materialises the table.
  *
  * <p>The source reads the viewer's {@link PageRequest}, maps its sort token and filters onto a {@link WarpQuery}
  * layered over the safe {@link WarpQuery#publicBrowse public browse} default (only active, public warps), asks the
  * {@link PlayerWarpBrowse} read model for that page, and maps each {@link WarpCard} to a lightweight {@link Tile}.
- * The mapping is pure data — no message resolution and no Bukkit call — so it is safe on the off-thread query. The
+ * The mapping is pure data, no message resolution and no Bukkit call, so it is safe on the off-thread query. The
  * {@code %pwarp_browse_icon%} / {@code %pwarp_browse_name%} / {@code %pwarp_browse_lore%} placeholders then resolve
  * each tile's icon, display name, and catalog lore on the viewer's entity thread when the renderer draws the page.
  *
@@ -198,8 +198,8 @@ public final class PlayerWarpBrowseMenu {
             return PagedResult.of(tiles, page.totalCount());
         }
         // Pinned sponsors claim the top content slots on every page, so the flow only has the remaining slots to fill:
-        // window the read by that effective size and report a total that makes the engine's pageCount — which divides
-        // by the full grid size — page the flow correctly over the smaller window. The pinned warps are dropped from
+        // window the read by that effective size and report a total that makes the engine's pageCount, which divides
+        // by the full grid size, page the flow correctly over the smaller window. The pinned warps are dropped from
         // the flow so a sponsor is never drawn twice.
         int effective = Math.max(1, request.size() - pinned.size());
         WarpQuery query = query(
@@ -237,8 +237,8 @@ public final class PlayerWarpBrowseMenu {
     }
 
     /**
-     * The total to report so the engine's {@code pageCount(size)} — which divides the reported total by the full grid
-     * {@code size} — yields the number of pages a flow windowed by {@code effective} actually needs. Only the page-nav
+     * The total to report so the engine's {@code pageCount(size)}, which divides the reported total by the full grid
+     * {@code size}: yields the number of pages a flow windowed by {@code effective} actually needs. Only the page-nav
      * bounding reads this total; the browse shows no count.
      */
     private static long reportedTotal(long realTotal, int effective, int size) {
@@ -287,13 +287,13 @@ public final class PlayerWarpBrowseMenu {
         return ctx.entry(Tile.class);
     }
 
-    /** The tile's icon token — the card's own icon resolved through the rich icon schemes, else the fallback. */
+    /** The tile's icon token: the card's own icon resolved through the rich icon schemes, else the fallback. */
     private String icon(Tile tile) {
         String token = tile.icon();
         return token != null && !token.isBlank() ? token : FALLBACK_ICON.name();
     }
 
-    /** The tile's rendered display name in the viewer's locale — the display name, or the warp name when unset. */
+    /** The tile's rendered display name in the viewer's locale, the display name, or the warp name when unset. */
     private String name(MenuContext ctx) {
         Tile tile = tileOf(ctx);
         if (tile == EMPTY) {
@@ -304,7 +304,7 @@ public final class PlayerWarpBrowseMenu {
     }
 
     /**
-     * The tile's full lore as the catalog lines joined by {@code \n} in a fixed order — owner, world, optional server,
+     * The tile's full lore as the catalog lines joined by {@code \n} in a fixed order, owner, world, optional server,
      * visits, rating, favourites, optional price, access, then the click hint. The engine's multi-line placeholder
      * expansion splits this back into one lore component per line, each rendered as MiniMessage.
      */
@@ -388,7 +388,7 @@ public final class PlayerWarpBrowseMenu {
 
     /**
      * Map a read-model card to a tile pinned to {@code pinnedSlot} (or {@link Tile#FLOWS} to scroll with the flow).
-     * Pure data — no message resolution and no Bukkit call — so it is safe on the off-thread page query.
+     * Pure data, no message resolution and no Bukkit call, so it is safe on the off-thread page query.
      */
     private static Tile toTile(WarpCard card, int pinnedSlot) {
         return new Tile(

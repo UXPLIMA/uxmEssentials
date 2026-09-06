@@ -12,7 +12,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The pure decision behind op-command protection: given the command a player is about to run and when they last
  * proved their second factor, decide whether the command is a protected one that needs a fresh re-authentication.
- * It is a value object so the rule is unit-testable without a player, a keypad, or the Bukkit command map — the
+ * It is a value object so the rule is unit-testable without a player, a keypad, or the Bukkit command map, the
  * listener feeds it the typed command root and the in-memory last-verified instant and acts on the verdict.
  *
  * <p>Matching is forgiving on purpose: a configured entry and the incoming root are both normalised the same way
@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * inside the re-auth window, and otherwise requires a fresh proof.
  *
  * @param protectedCommands the normalised roots that demand a recent verification
- * @param window how long a verification counts as recent — a verify at or before {@code now - window} has lapsed
+ * @param window how long a verification counts as recent, a verify at or before {@code now - window} has lapsed
  */
 public record ReauthPolicy(Set<String> protectedCommands, Duration window) {
 
@@ -87,10 +87,10 @@ public record ReauthPolicy(Set<String> protectedCommands, Duration window) {
     /** The verdict {@link ReauthPolicy#decide} returns: let the command run, or demand a fresh second-factor proof. */
     public enum Decision {
 
-        /** The command is not protected, or the player verified recently enough — let it run. */
+        /** The command is not protected, or the player verified recently enough, let it run. */
         ALLOW,
 
-        /** The command is protected and the player has not verified inside the window — prompt a re-auth. */
+        /** The command is protected and the player has not verified inside the window, prompt a re-auth. */
         REQUIRE_REAUTH
     }
 }

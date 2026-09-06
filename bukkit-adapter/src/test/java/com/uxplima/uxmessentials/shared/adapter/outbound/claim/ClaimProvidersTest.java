@@ -19,9 +19,9 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
  * The claim-provider discoverer's plugin-present guard. With no claim plugin registered (the MockBukkit
- * default, with most claim SDKs also absent from the test classpath and uxmClaims not loaded — the Lands and
+ * default, with most claim SDKs also absent from the test classpath and uxmClaims not loaded: the Lands and
  * GriefPrevention API types resolve only because the ownership tests stub them) {@link
- * ClaimProviders#detectAll} must bind an inactive provider whose {@code claimAt} is empty — and,
+ * ClaimProviders#detectAll} must bind an inactive provider whose {@code claimAt} is empty, and,
  * crucially, probing each candidate must not throw {@link NoClassDefFoundError}, proving each typed provider
  * keeps its SDK references behind its own present-guard so merely constructing and asking {@code active()}
  * never force-loads a claim-plugin class.
@@ -71,7 +71,7 @@ class ClaimProvidersTest {
     void everyCandidate_constructsAndProbesWithoutLoadingItsSdk() {
         // Each provider added in phase 2 must keep its SDK (typed compileOnly jar) or reflective API
         // references behind its plugin-present guard. With no claim plugin installed, constructing one and
-        // asking active() / claimAt() must report inactive+empty and must NOT throw NoClassDefFoundError —
+        // asking active() / claimAt() must report inactive+empty and must NOT throw NoClassDefFoundError
         // the same lazy-structure proof the discoverer relies on, asserted per provider.
         WorldRef world = new WorldRef(UUID.randomUUID(), "world");
         for (ClaimProvider provider : candidates()) {

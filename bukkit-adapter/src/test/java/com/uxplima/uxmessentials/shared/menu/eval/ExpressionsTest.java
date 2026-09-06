@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Exercises the sandboxed expression evaluator end to end through its public facade. The grammar (precedence,
  * parentheses, power, functions, comparators, boolean logic) is covered alongside the failure modes a hostile or
- * fat-fingered menu config can throw at it — malformed input, division by zero, an identifier outside the
- * allow-list, and an oversized/over-nested expression — each of which must surface as an {@link ExpressionException}
+ * fat-fingered menu config can throw at it, malformed input, division by zero, an identifier outside the
+ * allow-list, and an oversized/over-nested expression. Each of which must surface as an {@link ExpressionException}
  * rather than a crash or a runaway evaluation.
  */
 class ExpressionsTest {

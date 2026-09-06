@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.economy.domain.PendingPay;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port holding the one outstanding {@code /pay} confirmation per payer — a per-payer
+ * Outbound port holding the one outstanding {@code /pay} confirmation per payer, a per-payer
  * {@code AtomicReference<PendingPay>} ({@code docs/11-economy-integration.md} §9.2). A second large
  * {@code /pay} replaces the first and re-prompts; an expiry timer discards a stale one. Staging never
  * debits, so a dropped pending pay loses no money.
@@ -22,9 +22,9 @@ public interface PendingPayRegistry {
     /** The payer's outstanding confirmation, if one is still live. */
     Optional<PendingPay> peek(PlayerRef payer);
 
-    /** Take and clear the payer's outstanding confirmation, if any — the {@code /payconfirm} consume step. */
+    /** Take and clear the payer's outstanding confirmation, if any, the {@code /payconfirm} consume step. */
     Optional<PendingPay> take(PlayerRef payer);
 
-    /** Drop the payer's outstanding confirmation without consuming it — the expiry path. */
+    /** Drop the payer's outstanding confirmation without consuming it, the expiry path. */
     void clear(PlayerRef payer);
 }

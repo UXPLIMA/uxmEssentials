@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by Towny town plots, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by Towny town plots, reached <b>entirely by reflection</b>. There is no compile
  * dependency on Towny, so this class loads and runs whether or not Towny is present. Here a "claim" is a town
  * plot: the block belongs to a claim exactly when Towny reports a {@code TownBlock} covering it, so a warp can
  * be gated to a plot you own or a town you belong to.
@@ -29,14 +29,14 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Ownership follows Towny's two plot shapes. A plot with a personal owner
  * ({@code TownBlock.getResidentOrNull()}) is owned by that resident. A town-owned plot has no personal owner, so
- * for our purposes it is owned by the town mayor ({@code Town.getMayor()}) — a warp on the town's communal land
+ * for our purposes it is owned by the town mayor ({@code Town.getMayor()}). A warp on the town's communal land
  * is the mayor's to place. Trust widens ownership to town membership ({@code Town.hasResident(UUID)}), matching
  * the owner-or-member reading the other providers use. A ban is a Towny outlaw: {@link ClaimLookup#isBanned}
  * resolves the resident with {@code TownyAPI.getResident(UUID)} and asks the owning town
  * {@code Town.hasOutlaw(Resident)}.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code com.palmergames} type — a server without Towny loads none of its classes. The Towny API
+ * active names no {@code com.palmergames} type: a server without Towny loads none of its classes. The Towny API
  * chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs once and degrades
  * to empty rather than propagating.
  */
@@ -47,7 +47,7 @@ public final class TownyClaimProvider implements ClaimProvider {
     private static final String API_CLASS = "com.palmergames.bukkit.towny.TownyAPI";
     private static final String RESIDENT_CLASS = "com.palmergames.bukkit.towny.object.Resident";
 
-    // Towny plots are 2D chunk-keyed claims — a warp is on a plot regardless of height — so a constant Y keeps
+    // Towny plots are 2D chunk-keyed claims, a warp is on a plot regardless of height, so a constant Y keeps
     // the lookup off getHighestBlockYAt(), which is region-bound and unsafe on Folia, matching the other providers.
     private static final int CLAIM_LOOKUP_Y = 64;
 
@@ -91,12 +91,12 @@ public final class TownyClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code TownyAPI.getInstance()} — the API singleton, reached only past the plugin-present guard. */
+    /** {@code TownyAPI.getInstance()}: the API singleton, reached only past the plugin-present guard. */
     private static Object townyApi() throws ReflectiveOperationException {
         return Class.forName(API_CLASS).getMethod("getInstance").invoke(null);
     }
 
-    /** {@code TownyAPI.getTownBlock(Location)} — the plot covering the block, or {@code null} in wilderness. */
+    /** {@code TownyAPI.getTownBlock(Location)}: the plot covering the block, or {@code null} in wilderness. */
     private static @Nullable Object townBlockAt(Object api, Location location) throws ReflectiveOperationException {
         return api.getClass().getMethod("getTownBlock", Location.class).invoke(api, location);
     }
@@ -127,7 +127,7 @@ public final class TownyClaimProvider implements ClaimProvider {
         /** Whether {@code player} is a resident (member) of the owning town. */
         boolean isResident(UUID player);
 
-        /** Whether {@code player} is an outlaw of the owning town — Towny's per-town ban. */
+        /** Whether {@code player} is an outlaw of the owning town, Towny's per-town ban. */
         boolean isOutlaw(UUID player);
     }
 

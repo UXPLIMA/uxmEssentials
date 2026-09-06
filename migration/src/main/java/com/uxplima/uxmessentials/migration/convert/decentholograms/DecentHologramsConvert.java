@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.migration.convert.essentialsx.map.WorldNameReso
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The DecentHolograms {@link Convert} — a file-backed source for server-wide holograms (docs/12-migration
+ * The DecentHolograms {@link Convert}. A file-backed source for server-wide holograms (docs/12-migration
  * §1.2). DecentHolograms stores one YAML file per hologram under {@code plugins/DecentHolograms/holograms/},
  * so unlike the player-data sources this one reads from a fixed plugin directory rather than the shared
  * {@code import.source-path}; it is handed that directory at construction, the same way the LiteBans source

@@ -9,7 +9,7 @@ import java.util.Objects;
  *
  * <p>This is the write half of the catalog: {@link CommandCatalogConfig} reads the same shape back. The
  * file is keyed by the stable {@link CommandId} rather than the renameable name, because the permission
- * node binds to the id — an operator who renames {@code home} to {@code casa} keeps the same permission.
+ * node binds to the id: an operator who renames {@code home} to {@code casa} keeps the same permission.
  * Commands are emitted in the order they were resolved so a regenerated file diffs cleanly against an
  * earlier one, and names and aliases are quoted so values with spaces or quotes survive the round-trip.
  */

@@ -294,7 +294,7 @@ class VoteSitesMenuTest {
 
         execute(dispatcher, "vote");
 
-        // In chat mode the links use case was called — messages were resolved rather than opening a GUI.
+        // In chat mode the links use case was called: messages were resolved rather than opening a GUI.
         assertThat(messages.resolvedKeys).isNotEmpty();
     }
 

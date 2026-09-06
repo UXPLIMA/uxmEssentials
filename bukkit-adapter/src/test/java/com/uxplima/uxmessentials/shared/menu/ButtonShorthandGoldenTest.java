@@ -36,8 +36,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The proof that the two operator convenience shorthands on a menu item — {@code permission = "<node>"} and
- * {@code pages = "<ranges>"} — expand into the item's {@code view} visibility gate and are honoured end to end. The
+ * The proof that the two operator convenience shorthands on a menu item, {@code permission = "<node>"} and
+ * {@code pages = "<ranges>"}: expand into the item's {@code view} visibility gate and are honoured end to end. The
  * real {@link MenuSpecLoader}, the generic {@code perm}/{@code on-page} conditions, {@link MenuRenderer} and
  * {@link Menus} all run, so what the operator writes decides what the viewer sees: an item with a {@code permission}
  * key is hidden until the viewer holds the node, and an item with a {@code pages} key shows only on the listed pages.

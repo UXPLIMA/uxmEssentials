@@ -77,7 +77,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * are engine-native on this path: clicking the visibility (enum) slot opens an engine selector child (a selector
  * {@link MenuHolder}, not a uxmLib {@code SimpleGui}), and clicking the delete button opens an engine confirm child (a
  * confirm {@link MenuHolder}) whose yes button runs the same {@link ArchivePlayerWarp} use case the {@code /pwarp del}
- * command drives — recorded here through the repository.
+ * command drives, recorded here through the repository.
  */
 class PlayerWarpEditorGoldenTest {
 
@@ -251,7 +251,7 @@ class PlayerWarpEditorGoldenTest {
 
     /**
      * One editor-capable engine plus its single listener, the engine path the production wiring uses: the façade is
-     * built first so the listener can borrow its selector and confirm openers — what a property's click hook hands a
+     * built first so the listener can borrow its selector and confirm openers. What a property's click hook hands a
      * picker or a remove-confirm to open as an engine child window.
      */
     private Menus engine() {

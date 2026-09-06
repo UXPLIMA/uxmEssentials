@@ -16,7 +16,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * The text-input seam's operator config, loaded once at wiring time from {@code text-input.conf} and held in an
- * {@link AtomicReference} so a reload swaps a fresh parse whole — a reader sees either the previous or the new
+ * {@link AtomicReference} so a reload swaps a fresh parse whole. A reader sees either the previous or the new
  * content, never a half-applied tree (CLAUDE.md "swapped atomically via AtomicReference on reload"). The file
  * carries the global {@code default-mode}, the per-key {@code modes} overrides, and the {@code cancel-keywords}; an
  * absent or unreadable file yields the shipped defaults (anvil everywhere, {@code cancel}/{@code iptal}) so a server
@@ -39,7 +39,7 @@ public final class InputSettings {
         this.parsed = new AtomicReference<>(InputContentCodec.read(load(configFile, log, false), log));
     }
 
-    /** The configured mode for {@code key} — its per-key override if set, otherwise the global default. */
+    /** The configured mode for {@code key}, its per-key override if set, otherwise the global default. */
     public InputMode modeFor(String key) {
         Objects.requireNonNull(key, "key");
         return current().modeFor(key);

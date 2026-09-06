@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * re-anchor an existing one of the same name. The upsert and the confirmation are the
  * {@link com.uxplima.uxmessentials.moderation.application.SetJail} use case's job; this handler maps the name
  * and the position. The command reuses the shared {@code uxmessentials.moderation.jail} node (matching
- * {@code /jails} and {@code /jailedplayers}), and a console source is rejected — the position is the sender's.
+ * {@code /jails} and {@code /jailedplayers}), and a console source is rejected: the position is the sender's.
  */
 @NullMarked
 public final class SetJailCommand extends ModerationCommandSupport implements CommandRegistration {

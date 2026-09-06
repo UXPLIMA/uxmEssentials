@@ -20,13 +20,13 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The AxPlayerWarps {@link Convert} — the first of the three player-warp importers (docs/12-migration). It reads the
+ * The AxPlayerWarps {@link Convert}: the first of the three player-warp importers (docs/12-migration). It reads the
  * {@code axplayerwarps_*} tables over JDBC and maps each warp, with its whitelist / blacklist / favourite / rating /
  * visit side rows, into the shared {@code ImportedPlayerWarp} the player-warp writer lands on the new schema. Like the
  * LiteBans source it is a database source, not a path source: its data location is the configured database (or the
  * discovered H2 file), so {@code plan} reads from {@link AxPlayerWarpsConfig} and ignores {@code options.sourcePath()}.
  *
- * <p>The id is {@code axplayerwarps} (a source id is a single lowercase word — a hyphen is outside its charset), so
+ * <p>The id is {@code axplayerwarps} (a source id is a single lowercase word. A hyphen is outside its charset), so
  * {@code /uxmess import axplayerwarps} resolves it. Stateless beyond its injected config, world resolver, and logger.
  */
 @NullMarked

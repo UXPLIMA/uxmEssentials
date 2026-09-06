@@ -59,9 +59,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The ordered access gate of {@code UsePlayerWarp} against configurable fakes for every port and a fixed
- * {@link Clock}. Each case asserts both the {@link Result} and the observable side effects — whether the
+ * {@link Clock}. Each case asserts both the {@link Result} and the observable side effects, whether the
  * teleport fired, whether the visit was recorded, whether the economy was charged, and whether a password
- * attempt was stamped — because the gate's whole value is in what it refuses to do.
+ * attempt was stamped, because the gate's whole value is in what it refuses to do.
  *
  * <p>The precedence matrix under test is exactly the spec order: status(1) → ban(2) → membership(3) →
  * access(4) → safe-landing(5) → cost(6). The closing jqwik property pins the security invariant that the new
@@ -69,8 +69,8 @@ import org.junit.jupiter.api.Test;
  * password, being on the whitelist, or membership.
  *
  * <p>A final section covers the post-gate <em>routing</em> decision: a warp tagged for another backend hands off
- * to the {@link CrossServerTeleport} seam (carrying the exact charge) instead of the local teleporter, and — when
- * the seam is absent because the sub-group is off — is refused with a refund rather than a broken local hop.
+ * to the {@link CrossServerTeleport} seam (carrying the exact charge) instead of the local teleporter, and, when
+ * the seam is absent because the sub-group is off: is refused with a refund rather than a broken local hop.
  */
 class UsePlayerWarpGateTest {
 
@@ -406,7 +406,7 @@ class UsePlayerWarpGateTest {
     void anAbsentEconomyMakesAPricedWarpFree() {
         Fixture f = new Fixture();
         f.put(warp(WarpAccess.PUBLIC, WarpStatus.ACTIVE, PRICE));
-        // economyPort stays empty — the soft-coupling precedent: no provider means no charge.
+        // economyPort stays empty: the soft-coupling precedent: no provider means no charge.
 
         Result<Unit, PlayerWarpError> result = f.gate().useFor(VISITOR, NAME);
 
@@ -446,7 +446,7 @@ class UsePlayerWarpGateTest {
 
     /**
      * The T5 stub admitted a non-owner only when the warp was PUBLIC. The new gate may only ever <em>widen</em>
-     * that with the legitimate additions membership brought — a correct password, being whitelisted, or being a
+     * that with the legitimate additions membership brought. A correct password, being whitelisted, or being a
      * co-owner/manager. With no bypass nodes granted, a fixed-active, unbanned, safe, free warp, and a non-owner
      * actor, any admission must trace to exactly one of those four widenings.
      */
@@ -539,7 +539,7 @@ class UsePlayerWarpGateTest {
         Fixture f = new Fixture();
         f.put(remoteWarp(PRICE));
         f.economyPort = Optional.of(f.economy);
-        // crossServerPort stays empty — the sub-group is off.
+        // crossServerPort stays empty: the sub-group is off.
 
         Result<Unit, PlayerWarpError> result = f.gate().useFor(VISITOR, NAME);
 
@@ -838,7 +838,7 @@ class UsePlayerWarpGateTest {
 
     /**
      * A cooldown fake modelling the per-warp attempt limiter: a stamped label is immediately active, so a stamp
-     * followed by another check reads as rate-limited — exactly the "second wrong attempt is throttled" behaviour.
+     * followed by another check reads as rate-limited: exactly the "second wrong attempt is throttled" behaviour.
      */
     private static final class FakeCooldowns implements Cooldowns {
         private final Set<String> active = new HashSet<>();

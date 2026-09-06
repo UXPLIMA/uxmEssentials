@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  */
 public final class SetNpcRange {
 
-    /** Which per-NPC range the command edits — the render (view) distance or the look-at (turn) distance. */
+    /** Which per-NPC range the command edits, the render (view) distance or the look-at (turn) distance. */
     public enum Kind {
         VIEW,
         TURN

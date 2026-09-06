@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * and publishes {@link BroadcastOptOutToggled} so an audit line and any observer see the change. The announcer's
  * {@code NextAnnouncement} fan-out reads the same store, so an opted-out player is skipped on the next tick.
  *
- * <p>The opt-out bit is the plugin's own per-player state — the confirmation is a {@code MessageKey}, not operator
+ * <p>The opt-out bit is the plugin's own per-player state. The confirmation is a {@code MessageKey}, not operator
  * content. The use case never renders an announcer line itself; it only governs the subscription.
  */
 public final class BroadcastOptOut {

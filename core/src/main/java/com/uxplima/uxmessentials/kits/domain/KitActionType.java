@@ -8,7 +8,7 @@ import java.util.Optional;
  * token an operator writes for it in a kit's {@code claim-actions}/{@code deny-actions} block ({@code SOUND} ↔
  * {@code sound}, {@code CONSOLE_COMMAND} ↔ {@code console-command}); {@link #parse(String)} maps a written token
  * back to the constant so the codec never branches on the symbol. The kernel only models <em>which</em> effect
- * to run — the {@code KitActionRunner} adapter owns how each one is performed on the server.
+ * to run, the {@code KitActionRunner} adapter owns how each one is performed on the server.
  *
  * <p>{@link #PARTICLE} is included so the legacy single-{@code particles} field maps cleanly into one action,
  * and {@link #WAIT_TICKS} carries the inter-action delay the runner's sequencer honours (the remaining actions
@@ -44,7 +44,7 @@ public enum KitActionType {
     PLAYER_COMMAND("player-command"),
 
     /**
-     * Empty the recipient's inventory. Carries no value — operators put it in a kit's {@code claim-actions}
+     * Empty the recipient's inventory. Carries no value. Operators put it in a kit's {@code claim-actions}
      * block with {@code before-items: true} so a PvP or loadout kit wipes the inventory before its items are
      * granted, dealing a clean set rather than topping up whatever the player was holding.
      */

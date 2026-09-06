@@ -20,14 +20,14 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The Olzie PlayerWarps {@link Convert} — the last of the three player-warp importers (docs/12-migration), and the
+ * The Olzie PlayerWarps {@link Convert}. The last of the three player-warp importers (docs/12-migration), and the
  * richest: it reads the {@code playerwarps_*} tables over JDBC and maps each warp, with its rating / whitelist /
  * manager / ban / favourite / visit side rows, into the shared {@code ImportedPlayerWarp} the player-warp writer lands
  * on the new schema. Like the AxPlayerWarps and LiteBans sources it is a database source, not a path source: its data
  * location is the configured database (or the discovered SQLite file), so {@code plan} reads from
  * {@link OlziePlayerWarpsConfig} and ignores {@code options.sourcePath()}.
  *
- * <p>The id is {@code olzieplayerwarps} (a source id is a single lowercase word — a hyphen is outside its charset), so
+ * <p>The id is {@code olzieplayerwarps} (a source id is a single lowercase word. A hyphen is outside its charset), so
  * {@code /uxmess import olzieplayerwarps} resolves it. Stateless beyond its injected config, world resolver, and logger.
  */
 @NullMarked

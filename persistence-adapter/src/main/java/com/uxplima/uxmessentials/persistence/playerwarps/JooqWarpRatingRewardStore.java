@@ -13,11 +13,11 @@ import org.jooq.DSLContext;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jOOQ-backed {@link WarpRatingRewardStore} over the generated {@code PLAYER_WARP_RATING_REWARDS} table — one row per
+ * jOOQ-backed {@link WarpRatingRewardStore} over the generated {@code PLAYER_WARP_RATING_REWARDS} table, one row per
  * {@code (subject_uuid, warp_id, reward_id)}, the primary key that dedups a rating reward so it cannot be farmed.
  * {@link #record} inserts with {@code ON CONFLICT DO NOTHING}, so recording the same grant twice is a silent no-op
  * rather than a duplicate row or a moved timestamp, and {@link #hasAwarded} is a bare {@code fetchExists} on the key.
- * The subject uuid is canonical 36-char text, the warp id the surrogate {@code long}, and the instant epoch-millis —
+ * The subject uuid is canonical 36-char text, the warp id the surrogate {@code long}, and the instant epoch-millis
  * the schema-wide convention. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */
 @NullMarked

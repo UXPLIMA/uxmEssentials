@@ -47,12 +47,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code DIAMOND}-iconed "pvp" and a default-BOOK "misc") over the six-row layout (content slots 0..44, gray-glass
  * filler), so page 0 places one icon per category at content slots 0 and 1, the EMERALD_BLOCK "create category" button
  * at slot 49, and the back ARROW at slot 53. The window is snapshotted as {@code (slot -> material, plain name)} and
- * asserted equal, slot for slot, to the analytic baseline the old view produced — category icons, the two fixed
+ * asserted equal, slot for slot, to the analytic baseline the old view produced. Category icons, the two fixed
  * buttons, and the engine's mandatory nav arrows at 45/46.
  *
  * <p>Then, through the engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener},
  * a left click on the first category opens that category's still-bespoke 27-slot settings panel, the back button
- * invokes the manager's back seam, and the create seam saves a new category and opens its settings — proving the
+ * invokes the manager's back seam, and the create seam saves a new category and opens its settings, proving the
  * migrated path runs what the old click did, in both appearance and behaviour.
  */
 class WarpCategoryManagerGoldenTest {
@@ -231,7 +231,7 @@ class WarpCategoryManagerGoldenTest {
             this.categories = new ArrayList<>(categories);
         }
 
-        /** The last category {@link #save} stored, or empty if none was saved — read by the create-seam assertions. */
+        /** The last category {@link #save} stored, or empty if none was saved: read by the create-seam assertions. */
         Optional<WarpCategory> lastSaved() {
             return Optional.ofNullable(saved);
         }

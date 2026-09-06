@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandSuggestio
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /enderclear [player]} (alias {@code /clearec}): empty an ender chest — your own, or another online
+ * {@code /enderclear [player]} (alias {@code /clearec}): empty an ender chest, your own, or another online
  * player's when a name is given. A cleanup verb that mirrors {@code /clearinventory} but targets
  * {@code Player#getEnderChest()}; a named target must resolve online (else
  * {@link ItemworldMessageKey#UNKNOWN_TARGET}).

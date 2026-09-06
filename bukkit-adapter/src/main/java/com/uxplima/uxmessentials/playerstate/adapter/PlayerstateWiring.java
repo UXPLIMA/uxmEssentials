@@ -79,7 +79,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the playerstate context's adapters and use cases over the injected kernel ports, and produces
  * everything the plugin must register: the Brigadier command list and the join/quit/respawn listener. This is
- * the one place the playerstate context is wired — nothing else news up its classes. The context needs no
+ * the one place the playerstate context is wired: nothing else news up its classes. The context needs no
  * database and no {@code Plugin} handle: its only outbound adapters are the in-memory snapshot store, the
  * reconciler, the effects bridge, and the nearby scan, all of which sit on the kernel {@code Scheduler} port.
  *
@@ -129,8 +129,8 @@ public final class PlayerstateWiring {
         PlayerStateServices services = assemble(kernel, config, clock, ports);
         PlayerstateSettings settings = new PlayerstateSettings(config);
         NoFlyWorldPolicy noFlyWorlds = new NoFlyWorldPolicy(settings.noFlyWorlds());
-        // The AFK source is rebound when presence wires (presence lands after playerstate); until then — or when
-        // presence is disabled — the holder reports no one AFK, so every sample counts as active time.
+        // The AFK source is rebound when presence wires (presence lands after playerstate); until then, or when
+        // presence is disabled: the holder reports no one AFK, so every sample counts as active time.
         MutablePlaytimeAfkStatus afkStatus = new MutablePlaytimeAfkStatus();
         PlaytimeSampler sampler = new PlaytimeSampler(
                 kernel.scheduler(),

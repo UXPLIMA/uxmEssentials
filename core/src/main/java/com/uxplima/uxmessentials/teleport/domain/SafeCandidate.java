@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
  * @param position the candidate landing position (with a safe-Y already resolved by the adapter)
  * @param biome the biome at the candidate, for the excluded-biome check
  * @param standingSafe whether the resolved column has solid ground and breathable space (adapter-read)
- * @param insideClaim whether the candidate falls on protected land — inside a land claim or a WorldGuard
+ * @param insideClaim whether the candidate falls on protected land, inside a land claim or a WorldGuard
  *     region (adapter-read on the region thread; false when neither is present, or when the matching
  *     {@code respect-*} toggle is off)
  * @param landingBlock the material of the block the player would stand on, for the avoid-blocks check, or
@@ -34,7 +34,7 @@ public record SafeCandidate(
         Objects.requireNonNull(biome, "biome");
     }
 
-    /** A candidate with no read landing material — the avoid-blocks check passes by default. */
+    /** A candidate with no read landing material: the avoid-blocks check passes by default. */
     public SafeCandidate(Position position, BiomeName biome, boolean standingSafe, boolean insideClaim) {
         this(position, biome, standingSafe, insideClaim, null);
     }

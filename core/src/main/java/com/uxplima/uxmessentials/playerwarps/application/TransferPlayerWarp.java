@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /pwarp transfer <name> <player>}: hand ownership of a warp to another player. Owner-only by the capability
- * matrix — {@link WarpCapability#TRANSFER} is denied to co-owners and managers — so a delegate can never spirit a
+ * matrix, {@link WarpCapability#TRANSFER} is denied to co-owners and managers, so a delegate can never spirit a
  * warp away from under its owner. The transfer resolves the warp by its global name
  * ({@link PlayerWarpError#NOT_FOUND} when absent), gates the actor ({@link PlayerWarpError#NO_PERMISSION} when they
  * are not the owner), then re-owns the warp in place: the members, whitelist, bans, accrued earnings, and history
@@ -72,7 +72,7 @@ public final class TransferPlayerWarp {
     /**
      * Operator reassignment of the warp with surrogate id {@code id} to {@code newOwner}, skipping the per-warp role
      * gate. This is the by-id admin path {@code /pwarp admin setowner} runs; the command's {@code admin} node is the
-     * authorization, so ownership moves without re-checking a role — a missing id is
+     * authorization, so ownership moves without re-checking a role. A missing id is
      * {@link PlayerWarpError#NOT_FOUND}. Only the owner identity and cached name change; the warp keeps its members,
      * whitelist, bans, earnings, and history. The command renders the operator-facing result itself.
      */
@@ -84,7 +84,7 @@ public final class TransferPlayerWarp {
             return Result.err(PlayerWarpError.NOT_FOUND);
         }
         PlayerWarp warp = found.get();
-        // The admin path is by-id and skips the role gate, but the sponsored-lock is not an authorization rule — it
+        // The admin path is by-id and skips the role gate, but the sponsored-lock is not an authorization rule: it
         // protects the sponsorship invariants, which an operator reassignment would break just as an owner one would,
         // so it holds here too. The command renders the operator-facing result itself.
         if (isSponsored(warp)) {

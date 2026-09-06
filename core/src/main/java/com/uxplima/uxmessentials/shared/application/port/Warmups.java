@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for teleport warmups — a countdown the player can cancel by moving.
+ * Outbound port for teleport warmups: a countdown the player can cancel by moving.
  *
  * <p>A warmup is in-flight runtime state, not a stamp: nothing is written to PDC, and the owning
  * module drops every pending warmup on {@code stop()}. The duration is resolved from numbered
@@ -69,7 +69,7 @@ public interface Warmups {
     /**
      * A handle to one in-flight warmup. The owning context cancels it when its move/damage listener
      * fires; cancellation is idempotent and is a no-op once the warmup has completed. The handle holds
-     * no scheduler resource — the countdown re-checks its own cancelled flag rather than carrying a
+     * no scheduler resource. The countdown re-checks its own cancelled flag rather than carrying a
      * cancellable scheduled handle (the {@link Scheduler} port is fire-and-forget).
      */
     interface WarmupHandle {

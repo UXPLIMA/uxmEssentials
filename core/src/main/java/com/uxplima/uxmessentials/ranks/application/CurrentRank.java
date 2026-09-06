@@ -12,14 +12,14 @@ import com.uxplima.uxmessentials.ranks.domain.RankLadder;
 import com.uxplima.uxmessentials.ranks.domain.RankStanding;
 
 /**
- * Read use case: resolve a player's current {@link RankStanding} — the ladder {@link Rank} they hold and their
- * {@link Prestige} — from the stored pointer.
+ * Read use case: resolve a player's current {@link RankStanding}, the ladder {@link Rank} they hold and their
+ * {@link Prestige}: from the stored pointer.
  *
  * <p>The rules are deliberately forgiving so the read never fails on operator config drift: a player with no
  * stored pointer stands on the ladder's first rank at prestige zero; a player whose stored id is still on the
  * ladder resolves to that rank; a player whose stored id was removed from the ladder falls back to the first
- * rank but keeps their prestige. The only case that yields no standing is an empty ladder — there is no rank to
- * stand on — which callers surface as "ranks not configured" rather than a crash.
+ * rank but keeps their prestige. The only case that yields no standing is an empty ladder. There is no rank to
+ * stand on, which callers surface as "ranks not configured" rather than a crash.
  */
 public final class CurrentRank {
 

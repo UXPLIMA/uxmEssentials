@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /kit <name>}: grant a player a kit's items, gating on the per-kit permission, the one-time stamp,
- * the cooldown, and — only when an economy provider is present — the per-kit cost. The kit is resolved by id,
+ * the cooldown, and, only when an economy provider is present, the per-kit cost. The kit is resolved by id,
  * run through the {@link KitAccess} gate, and only then are the items handed to the {@link KitGranter}. The
  * cooldown clock and the one-time mark are recorded after the grant, never before, so a failed grant leaves
  * the player able to retry.
@@ -38,13 +38,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * <p>The kit's typed {@link KitAction action engine} is sequenced here, the one place that knows both the gate
  * result and the moment of the grant: on a refused claim the kit's deny actions run for the recipient; on a
  * successful claim the before-items claim actions run, then the items are granted, then the after-items claim
- * actions run — so an operator can clear the inventory before the grant and fire a celebration after it. The
+ * actions run, so an operator can clear the inventory before the grant and fire a celebration after it. The
  * actual effects (sound, title, firework, commands, the {@code wait-ticks} delay) are the
  * {@link KitActionRunner}'s job; this orchestrator only decides what runs and when.
  *
  * <p>A kit set to {@code on-full: deny} is space-checked before it is charged: once the cheap gates pass, the
  * granter is asked whether the recipient's inventory has room, and if not the claim is refused exactly like any
- * other gate — the deny actions run and the player keeps the claim, with no cooldown, one-time stamp, stock
+ * other gate. The deny actions run and the player keeps the claim, with no cooldown, one-time stamp, stock
  * decrement, charge, or reward deposit applied. The check sits ahead of the irreversible reserve-and-charge
  * step precisely so a space refusal leaves nothing to compensate.
  */
@@ -60,7 +60,7 @@ public final class ClaimKit {
     private final Optional<KitActionRunner> actions;
     private final DomainGate gate;
 
-    /** Wire the claim path with no action runner — a kit's claim/deny actions are then recorded but not run. */
+    /** Wire the claim path with no action runner: a kit's claim/deny actions are then recorded but not run. */
     public ClaimKit(
             KitRepository repository,
             KitAccess access,
@@ -174,7 +174,7 @@ public final class ClaimKit {
 
     /**
      * Whether a kit set to {@code on-full: deny} must refuse {@code recipient} for want of inventory space. The
-     * check runs before the kit is admitted — ahead of any stock reservation or charge — so a space refusal
+     * check runs before the kit is admitted, ahead of any stock reservation or charge, so a space refusal
      * leaves nothing to compensate; a {@code drop} kit always returns false here and overflows at grant time.
      */
     private boolean deniesForFullInventory(PlayerRef recipient, KitDefinition granted) {

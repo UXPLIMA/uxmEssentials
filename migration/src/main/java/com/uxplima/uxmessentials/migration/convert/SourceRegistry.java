@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The registry of <em>built</em> sources the import command resolves a {@link Convert} from
  * (docs/12-migration §1.1). Only built sources have an entry; planned sources (CMI, HuskHomes,
- * PlayerVaultX, CoinsEngine, SunLight, AxVault) never appear here and never tab-complete — planned ≠
+ * PlayerVaultX, CoinsEngine, SunLight, AxVault) never appear here and never tab-complete, planned ≠
  * stubbed (§1.2). A source name the registry does not know resolves to {@link Optional#empty()}, which
  * the command turns into an actionable "unknown source" message listing the built ids, never a silent
  * no-op. {@code MigrationSourceRegistryDriftTest} keeps these keys in lock-step with the roster and the

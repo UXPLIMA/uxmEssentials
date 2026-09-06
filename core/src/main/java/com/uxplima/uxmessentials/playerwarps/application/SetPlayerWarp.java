@@ -24,11 +24,11 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /setpwarp <name>}: create a player-owned warp at the player's current position, or re-anchor an
  * existing one of the same name in place. Because warp names are now server-wide unique, a {@code /setpwarp}
- * onto a name that already exists is only a re-anchor when the caller owns that name — it keeps the warp's
+ * onto a name that already exists is only a re-anchor when the caller owns that name. It keeps the warp's
  * access, status, and creation time and saves with the {@code moved} feedback. A name held by <em>another</em>
  * player is refused with {@link PlayerWarpError#NAME_TAKEN}: the whole point of global names is that they cannot
- * collide across owners. A brand-new name is gated against the owner's resolved {@link PlayerWarpLimit} — hitting
- * the cap returns {@link PlayerWarpError#LIMIT_REACHED} — otherwise it is stored as a new private warp and
+ * collide across owners. A brand-new name is gated against the owner's resolved {@link PlayerWarpLimit}, hitting
+ * the cap returns {@link PlayerWarpError#LIMIT_REACHED}. Otherwise it is stored as a new private warp and
  * publishes {@code PlayerWarpCreated}.
  *
  * <p>The owner's limit is resolved through {@link PlayerWarpQuota} scoped to the warp's world, so a world-scoped

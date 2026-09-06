@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.api.link.DiscordBridgePresence;
  * is connected and the host's confirmation seam is wired, and unregisters it on shutdown.
  *
  * <p>The shared {@link DiscordBridgePresence} type lives in {@code :api} (the only module both jars depend on),
- * so the host sees this registration by the same class identity across the joined classpath — there is no
+ * so the host sees this registration by the same class identity across the joined classpath: there is no
  * compile-time link between the two jars, the same pattern the confirmation seam already uses. The live marker
  * is held in an {@link AtomicReference} so a disable racing the async connect either unregisters the whole
  * registration or finds none, and a double {@link #publish} or {@link #withdraw} stays idempotent.

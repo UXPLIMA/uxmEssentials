@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.worlds.domain.WorldName;
  * backup exists) and stages a confirmation without touching the world; {@code confirm} consumes the
  * staged restore and hands off to {@link WorldArchive#restore}, which evacuates players, replaces the
  * folder, and reloads off-tick before firing the {@code WORLD_RESTORED} / {@code WORLD_RESTORE_FAILED}
- * completion notification. The default world is protected — it cannot be unloaded to swap its folder.
+ * completion notification. The default world is protected: it cannot be unloaded to swap its folder.
  */
 public final class RestoreWorld {
 

@@ -23,7 +23,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 /**
  * The geometry of the shared colour-picker sub-menu: the row count, the slots the 16-colour palette is drawn
  * into and the per-swatch material for each of those slots, the custom-hex / clear / back button slots and their
- * icons, and the background filler. Nothing is hardcoded — every slot and material comes from
+ * icons, and the background filler. Nothing is hardcoded. Every slot and material comes from
  * {@code modules/management/gui/colour-picker.conf} (operator copy on disk, then the bundled resource, then the
  * code default), the same disk-first fallback the editor sub-layouts use, so a typo never stops the picker
  * opening.

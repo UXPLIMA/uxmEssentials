@@ -13,7 +13,7 @@ import java.util.Set;
  *
  * <p>The chance is a percentage in {@code 0..100}: the engine rolls {@code 1..100} and grants the spec
  * when the roll is at most {@code chancePercent} (so {@code 100} always grants, {@code 0} never does).
- * The world filter is inclusive — an empty set means "any world"; a non-empty set means the voter must be
+ * The world filter is inclusive. An empty set means "any world"; a non-empty set means the voter must be
  * in one of the named worlds (which the engine only knows for an online voter).
  *
  * @param chancePercent the grant probability as a percentage in {@code 0..100}

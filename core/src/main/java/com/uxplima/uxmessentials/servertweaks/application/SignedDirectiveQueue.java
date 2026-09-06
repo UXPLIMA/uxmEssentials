@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.servertweaks.domain.SignedVelocityFrame;
  * <p>Each bucket is bounded ({@value #MAX_PENDING_PER_KEY}): directives and events pair up one-to-one in normal use,
  * so a bucket that grows past the bound signals a proxy sending faster than events consume, and the oldest directive is
  * dropped rather than pinning memory. A poll on an empty bucket yields {@link Optional#empty()}, which the listeners
- * treat as "no proxy ruling — leave the event alone"; that is why an install with no SignedVelocity proxy present is
+ * treat as "no proxy ruling. Leave the event alone"; that is why an install with no SignedVelocity proxy present is
  * inert.
  */
 public final class SignedDirectiveQueue {

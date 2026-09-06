@@ -42,7 +42,7 @@ import org.jspecify.annotations.NullMarked;
  * Brigadier subcommand tree (the same idiom {@code /warp} and {@code /home} use).
  *
  * <ul>
- *   <li>{@code /kit <name> [player]} claims a kit — with no trailing player the sender claims it for
+ *   <li>{@code /kit <name> [player]} claims a kit. With no trailing player the sender claims it for
  *       themselves; with one, and {@code uxmessentials.kit.others}, staff give the kit to that player. The
  *       per-kit permission, the one-time stamp, the cooldown, and the optional cost are the
  *       {@link com.uxplima.uxmessentials.kits.application.ClaimKit} use case's job. Gated by
@@ -64,7 +64,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The positional {@code <name>} could in principle collide with a subcommand literal (a kit literally
  * named {@code list}), but Brigadier matches literal children before the {@code name} argument, so the
- * literals always win — the same disambiguation {@code /warp} and {@code /pwarp} rely on, with no
+ * literals always win, the same disambiguation {@code /warp} and {@code /pwarp} rely on, with no
  * reserved-name guard. Per-subcommand permissions are enforced by Brigadier {@code .requires(...)} on each
  * node, so only {@code kit} is a command-catalog id; the subcommands are literals inside the tree.
  */
@@ -139,7 +139,7 @@ public final class KitCommand extends KitCommandSupport implements CommandRegist
     }
 
     /**
-     * Bare {@code /kit} opens the browse menu — the same view {@code /kit list} opens. Installed on the root
+     * Bare {@code /kit} opens the browse menu: the same view {@code /kit list} opens. Installed on the root
      * only when the command's catalog {@code gui} flag is on; with it off the bare root falls back to the
      * usage line.
      */
@@ -167,14 +167,14 @@ public final class KitCommand extends KitCommandSupport implements CommandRegist
         PlayerRef recipient = target.get();
         KitId kit = KitId.of(ctx.getArgument("name", String.class));
         // The grant mutates the RECIPIENT's inventory/world (BukkitKitGranter) and spawns effects in their world,
-        // so it must run on the recipient's region thread, not the giving sender's — hop onto the recipient's
+        // so it must run on the recipient's region thread, not the giving sender's. Hop onto the recipient's
         // entity thread. A self-claim goes through claimSelf and stays on the player's own thread.
         scheduler.onEntity(recipient, () -> services.claimKit().claimFor(actor, recipient, kit));
         return Command.SINGLE_SUCCESS;
     }
 
     /**
-     * {@code /kit list}: open the kits browse menu — the read-only {@code PaginatedGui} the browse command
+     * {@code /kit list}: open the kits browse menu, the read-only {@code PaginatedGui} the browse command
      * opens. A console has no inventory and the operator-selectable {@code chat} display mode both fall back
      * to the clickable chat list, sharing the same {@link com.uxplima.uxmessentials.kits.application.ListKits}
      * filter so the two presentations never disagree. The mode is read live so a reload takes effect at once.

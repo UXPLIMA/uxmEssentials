@@ -7,10 +7,10 @@ import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
- * What a {@link Hologram} displays: its {@link HologramType} and the content that type renders — ordered text
+ * What a {@link Hologram} displays: its {@link HologramType} and the content that type renders, ordered text
  * {@link HologramLine}s for {@link HologramType#TEXT}, an item-material name for {@link HologramType#ITEM}, or a
  * BlockData string for {@link HologramType#BLOCK}. Grouping the content fields into one immutable value object
- * keeps the {@link Hologram} aggregate small while leaving its public surface unchanged — {@code Hologram}
+ * keeps the {@link Hologram} aggregate small while leaving its public surface unchanged, {@code Hologram}
  * delegates every content transition and accessor here.
  *
  * <p>The type invariants live here so they hold wherever content is built: a {@code TEXT} hologram always carries

@@ -3,8 +3,8 @@
 -- indexes it needs that the V70 rebuild does not already carry.
 --
 -- random_sort is a persistence-only ordering column, never a fact on the aggregate. A shuffled browse cannot be
--- paged with ORDER BY RANDOM() — the order would change between page reads and the same warp could appear on two
--- pages or none — so each warp is stamped an application-random long on insert and RANDOM browse orders by it.
+-- paged with ORDER BY RANDOM(). The order would change between page reads and the same warp could appear on two
+-- pages or none, so each warp is stamped an application-random long on insert and RANDOM browse orders by it.
 -- A scheduled reshuffle rewrites the column so the order is not frozen forever.
 --
 -- The three indexes cover the browse's filter and sort shapes V70 lacks: the composite category/server filter

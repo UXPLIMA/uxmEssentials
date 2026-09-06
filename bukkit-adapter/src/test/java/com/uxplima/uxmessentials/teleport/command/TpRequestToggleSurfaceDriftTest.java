@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the explicit on/off teleport-request verbs — {@code /tpon} and {@code /tpoff} — into the teleport
+ * Pins the explicit on/off teleport-request verbs, {@code /tpon} and {@code /tpoff}, into the teleport
  * context's command surface. These are the idempotent on/off verbs that sit alongside
  * the flip-style {@code /tptoggle}; this guard fails if either drops out of the surface or wires under a
  * permission node other than the shared {@code uxmessentials.tpa.toggle} {@code /tptoggle} already uses,

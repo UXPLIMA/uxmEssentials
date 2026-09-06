@@ -15,16 +15,16 @@ import org.junit.jupiter.api.Test;
 
 /**
  * A coherence guard over the {@link PlaceholderResolver}: it keeps the enriched placeholder surface honest as
- * families are added. It is not a docs-parity catalogue — it proves three structural invariants that every key
+ * families are added. It is not a docs-parity catalogue. It proves three structural invariants that every key
  * must satisfy, so a future context cannot quietly add a dead key or one that throws.
  *
  * <ol>
  *   <li><b>No dead family.</b> Every {@code <ctx>_} prefix the resolver dispatches resolves to a present value
- *       even with no seam wired (the dash, or "no" for the moderation booleans) — never {@code Optional.empty()},
+ *       even with no seam wired (the dash, or "no" for the moderation booleans), never {@code Optional.empty()},
  *       which would leave the raw token on screen and signal a branch that silently fell through.</li>
  *   <li><b>Unknown key stays raw.</b> A key that matches no family resolves to {@code Optional.empty()} so
  *       PlaceholderAPI leaves the literal token in place rather than blanking it.</li>
- *   <li><b>Never throws.</b> A fuzz of random keys — bare, prefixed, and adversarial — resolves without an
+ *   <li><b>Never throws.</b> A fuzz of random keys (bare, prefixed, and adversarial) resolves without an
  *       exception against both an empty bundle and a fully wired one.</li>
  * </ol>
  */

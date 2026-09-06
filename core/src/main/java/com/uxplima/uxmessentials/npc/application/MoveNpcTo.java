@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /npc moveto <name> <x> <y> <z> [yaw] [pitch]}: re-anchor an existing NPC to explicit coordinates within
  * its current world (the sibling of {@code /npc movehere}, which uses the operator's position). The world is kept
- * — coordinates do not change which world an NPC lives in — and the new snapshot is saved and re-rendered at the
+ * (coordinates do not change which world an NPC lives in) and the new snapshot is saved and re-rendered at the
  * new spot. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. {@code NpcMoved} is published so
  * anything pinned to the NPC (a hologram linked to it) re-anchors. The operator-only permission is enforced at
  * the adapter gate.

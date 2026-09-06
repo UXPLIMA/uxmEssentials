@@ -30,7 +30,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * In-process round-trip for the Olzie PlayerWarps JDBC source. It stands up a real SQLite database with the Olzie
- * schema — whose warps table has no id column, so the side tables key on the SQLite {@code rowid} — seeds a small warp
+ * schema (whose warps table has no id column, so the side tables key on the SQLite {@code rowid}) seeds a small warp
  * network (a password-gated warp with a category / icon / price / description plus ratings, a ban with a reason, a
  * manager, a favourite and repeat visits; a whitelist warp; a locked warp; and a warp in a world the server no longer
  * knows), then drives {@link OlziePlayerWarpsConvert#plan} and asserts the mapped {@link ImportedPlayerWarp}s. This is

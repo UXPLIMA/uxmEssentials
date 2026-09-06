@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * code-registered feature menu does.
  *
  * <p>Command dispatch reuses the shared {@link ClickCommandRunner} the npc/holograms click chains already run
- * through — in particular the temporary-op grant/perform/revoke of {@link ClickCommandRunner#runAsPlayerOp}, so the
+ * through, in particular the temporary-op grant/perform/revoke of {@link ClickCommandRunner#runAsPlayerOp}, so the
  * elevation logic is not reimplemented here. The two elevated actions ({@code command-as-op} and {@code
  * console-random}) are gated behind the same {@code custommenus.allow-console} flag as {@link MenuVocabulary}'s
  * {@code console} action: menu-driven privileged dispatch stays opt-in, and when the flag is off the action warns
@@ -32,7 +32,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * commandevent}, {@code command-random}) run as the viewer and carry no elevation, so they are ungated.
  *
  * <p>Every action is fail-soft through {@link #safe}: a blank or malformed argument, or a dispatch that throws,
- * becomes a logged-or-silent no-op rather than an exception thrown back into the click — one bad effect must not
+ * becomes a logged-or-silent no-op rather than an exception thrown back into the click. One bad effect must not
  * abort the rest of a chain or spill a stack trace onto the tick thread. A single leading {@code /} is stripped from
  * every command argument, since {@code performCommand} / {@code dispatchCommand} expect the bare command, matching
  * the existing {@code command} action.
@@ -46,7 +46,7 @@ public final class CommandActions {
      * the elevated and player command actions run through (reusing its op grant/revoke); {@code allowConsole} gates
      * the two elevated actions exactly as it gates {@link MenuVocabulary}'s {@code console} action; {@code log} is the
      * operator console logger a fail-soft or disabled-gate action warns through. Left separate from
-     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched — the composition
+     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched, the composition
      * root calls both.
      */
     public static void register(
@@ -69,7 +69,7 @@ public final class CommandActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract {@link MessagingActions} and the npc/
+     * than escaping into the click dispatch. The same fail-soft contract {@link MessagingActions} and the npc/
      * holograms click runner apply to their effect actions.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
@@ -110,7 +110,7 @@ public final class CommandActions {
     private static void runAsOp(MenuActionContext ctx, ClickCommandRunner runner) {
         String command = stripSlash(ctx.arg());
         if (command.isBlank()) {
-            return; // nothing to elevate — skip rather than toggle op for an empty command
+            return; // nothing to elevate, skip rather than toggle op for an empty command
         }
         runner.runAsPlayerOp(ctx.player(), command);
     }
@@ -118,7 +118,7 @@ public final class CommandActions {
     /**
      * Dispatch {@code arg} through the command <em>event</em> so another plugin can intercept or cancel it before it
      * runs: fire a {@link PlayerCommandPreprocessEvent} for the viewer, and unless a listener cancels it, perform the
-     * (possibly rewritten) command as the viewer. Ungated — this runs with the viewer's own permissions.
+     * (possibly rewritten) command as the viewer. Ungated: this runs with the viewer's own permissions.
      */
     private static void commandEvent(MenuActionContext ctx) {
         String command = stripSlash(ctx.arg());
@@ -129,7 +129,7 @@ public final class CommandActions {
         PlayerCommandPreprocessEvent event = new PlayerCommandPreprocessEvent(player, "/" + command);
         Bukkit.getPluginManager().callEvent(event);
         if (event.isCancelled()) {
-            return; // a listener vetoed the command — respect the veto and dispatch nothing
+            return; // a listener vetoed the command. Respect the veto and dispatch nothing
         }
         player.performCommand(stripSlash(event.getMessage()));
     }

@@ -32,14 +32,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers and opens the player-warps landing ({@code pwarp-categories}) that a bare {@code /pwarp} opens. It is a
  * hub, not a warp list: four quick-entry buttons each open the paged {@link PlayerWarpBrowseMenu} with a preset filter
- * — the public browse, the viewer's own warps ({@code owner=<uuid>}), their favourites ({@code favouritesOf=<uuid>}),
- * and the top-rated view — and a button per defined category drills into the browse filtered to that category
+ *. The public browse, the viewer's own warps ({@code owner=<uuid>}), their favourites ({@code favouritesOf=<uuid>}),
+ * and the top-rated view, and a button per defined category drills into the browse filtered to that category
  * ({@code category=<id>}). The landing never materialises the warp table; every entry hands off to the browse, whose
  * one bounded page query does the work.
  *
  * <p>The category buttons are the {@code playerwarps:categories} list source: a bounded snapshot of the shared
  * {@code warp_categories} set (player-warps share the categories the warps context defines) taken off the tick thread
- * when the menu opens and carried on the engine {@link Subject}. The snapshot is defensive — a read failure or an empty
+ * when the menu opens and carried on the engine {@link Subject}. The snapshot is defensive, a read failure or an empty
  * set simply draws no category buttons rather than aborting the open. The sponsor slots render the currently-active
  * sponsors ({@code sponsored_until > now}, ordered by slot) as a second bounded snapshot; each drills into the
  * sponsored warp's {@code pwarp-view}. When the sponsor sub-group is off the snapshot is empty and the slots stay blank.
@@ -174,12 +174,12 @@ public final class PlayerWarpCategoriesMenu {
         openView.accept(ctx.viewer(), PlayerWarpName.of(sponsor.name()));
     }
 
-    /** The category cell's icon token — the category's configured display material, else the fallback. */
+    /** The category cell's icon token: the category's configured display material, else the fallback. */
     private String icon(MenuContext ctx) {
         return ctx.entry(WarpCategory.class).displayMaterial().orElse(FALLBACK_ICON.name());
     }
 
-    /** The sponsor cell's icon token — the warp's own icon, else the sponsor fallback. */
+    /** The sponsor cell's icon token: the warp's own icon, else the sponsor fallback. */
     private String sponsorIcon(MenuContext ctx) {
         String token = ctx.entry(WarpCard.class).icon();
         return token != null && !token.isBlank() ? token : SPONSOR_FALLBACK_ICON.name();

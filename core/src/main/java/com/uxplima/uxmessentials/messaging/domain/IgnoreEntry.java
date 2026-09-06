@@ -20,7 +20,7 @@ public record IgnoreEntry(PlayerRef ignored, IgnoreScope scope) {
         Objects.requireNonNull(scope, "scope");
     }
 
-    /** An entry ignoring {@code ignored} across every channel — the {@code /ignore <player>} default. */
+    /** An entry ignoring {@code ignored} across every channel, the {@code /ignore <player>} default. */
     public static IgnoreEntry all(PlayerRef ignored) {
         return new IgnoreEntry(ignored, IgnoreScope.ALL);
     }

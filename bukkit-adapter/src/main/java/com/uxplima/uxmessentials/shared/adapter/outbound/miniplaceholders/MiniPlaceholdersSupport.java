@@ -12,11 +12,11 @@ import org.jspecify.annotations.NullMarked;
  * is reached only through this class and only past {@link #isPresent()}, so a server without MiniPlaceholders never
  * resolves those classes and the plugin runs unchanged.
  *
- * <p>Unlike PlaceholderAPI — whose {@code %token%} values are a pre-parse string transform — MiniPlaceholders is
+ * <p>Unlike PlaceholderAPI, whose {@code %token%} values are a pre-parse string transform, MiniPlaceholders is
  * MiniMessage-native: it contributes {@link TagResolver}s that MiniMessage consults <em>during</em> {@code
  * deserialize}. {@link #globalResolver()} returns the server-global resolver (audience-free tags like {@code
- * <server_online>}/{@code <server_tps>}) when the plugin is present, or {@link TagResolver#empty()} — a no-op that
- * makes {@code deserialize(text, resolver)} identical to the plain parse — when it is absent. Audience-relative
+ * <server_online>}/{@code <server_tps>}) when the plugin is present, or {@link TagResolver#empty()}, a no-op that
+ * makes {@code deserialize(text, resolver)} identical to the plain parse: when it is absent. Audience-relative
  * MiniPlaceholders (per-viewer tags) are a separate concern that would drive per-viewer rendering, as the
  * per-viewer PlaceholderAPI path does; this support exposes only the global resolver.
  */

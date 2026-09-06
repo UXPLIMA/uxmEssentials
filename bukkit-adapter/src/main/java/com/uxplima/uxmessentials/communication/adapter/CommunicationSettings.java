@@ -27,7 +27,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * The communication context's operator content, loaded once at wiring time from the {@code join-quit.conf},
  * {@code announcer.conf}, {@code advancements.conf}, {@code info-pages.conf}, and {@code chat.conf} siblings under
  * {@code modules/communication/} and held in an
- * {@link AtomicReference} so a reload swaps a fresh {@link CommunicationContent} whole — readers see either the
+ * {@link AtomicReference} so a reload swaps a fresh {@link CommunicationContent} whole, readers see either the
  * previous or the new content, never a half-applied tree (CLAUDE.md "swapped atomically via AtomicReference on
  * reload"). The three files are merged at the root into one tree before the codec reads them, so the parsed model
  * is identical to the old single-file layout. An absent directory, an absent sibling, or an unreadable file yields

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@link MenuBindings#validate} learns the paged list source. A {@code list.source} may now name an in-memory list
  * or a paged one; naming neither is still an unresolved reference. And {@code page-size}/{@code sorts} are paged-only
- * knobs — declared against a plain in-memory source they do nothing, so that misuse is reported rather than silently
+ * knobs. Declared against a plain in-memory source they do nothing, so that misuse is reported rather than silently
  * dropped, which would let an operator believe their menu pages or sorts when it does not.
  */
 class MenuBindingsValidatePagedTest {
@@ -135,8 +135,8 @@ class MenuBindingsValidatePagedTest {
 
     /**
      * A one-item menu whose single item is a list backed by {@code source}, optionally carrying a {@code page-size}
-     * and a {@code sorts} line. The template is deliberately inert — a bare material and a literal name, no
-     * placeholders or actions — so the only thing {@code validate} can report is the list source itself.
+     * and a {@code sorts} line. The template is deliberately inert, a bare material and a literal name, no
+     * placeholders or actions, so the only thing {@code validate} can report is the list source itself.
      */
     private static MenuSpec listMenu(String itemId, String source, String pageSizeLine, String sortsLine) {
         String hocon = """

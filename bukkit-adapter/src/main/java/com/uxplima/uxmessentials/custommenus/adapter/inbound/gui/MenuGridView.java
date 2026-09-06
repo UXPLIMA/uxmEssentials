@@ -46,9 +46,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The slot-grid canvas of the {@code /menu editor}: a visual mirror of a menu's slots where an operator places, moves
- * and clears items before saving. It is a thin consumer of the engine's {@link Menus#openGrid} primitive — the canvas
+ * and clears items before saving. It is a thin consumer of the engine's {@link Menus#openGrid} primitive: the canvas
  * is an engine {@code MenuHolder} window, every preview is rendered engine-side from a {@link MenuItemSpec}, and the
- * shift-click clear gates behind the engine's confirm — so no raw Bukkit inventory is ever built here and the grid
+ * shift-click clear gates behind the engine's confirm, so no raw Bukkit inventory is ever built here and the grid
  * stays on the engine like every other editor surface.
  *
  * <p>An open clones the registered {@link MenuSpec} into a {@link MenuEditSession} held per viewer, so every edit
@@ -60,14 +60,14 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The operator can also arrange the canvas by dragging or placing their own items straight onto it: the engine's
  * capture grid cancels every real transfer touching the top canvas and instead copies the held item's definition into
- * the slot ({@link #onCapture}), so a hotbar item stamps a cell without ever leaving the operator's inventory — no item
+ * the slot ({@link #onCapture}), so a hotbar item stamps a cell without ever leaving the operator's inventory, no item
  * moves, so no dupe. A shift-click out of their inventory appends an item to the next free slot; their own inventory
  * otherwise stays freely interactive so they can pick an item onto the cursor to stamp with.
  */
 @NullMarked
 public final class MenuGridView {
 
-    /** The material a freshly placed item starts as — a neutral stone the operator then re-skins in the item editor. */
+    /** The material a freshly placed item starts as: a neutral stone the operator then re-skins in the item editor. */
     private static final String DEFAULT_MATERIAL = "STONE";
 
     /** The 36 viewer-inventory slots a bottom-inventory menu addresses on top of its {@code rows * 9} chest slots. */
@@ -124,7 +124,7 @@ public final class MenuGridView {
      * Open the slot grid for {@code menuId}: take the menu's edit lock, clone the registered spec into a fresh edit
      * session for this viewer, then show the canvas. A menu that is no longer registered simply tells the viewer so and
      * opens nothing; a menu another operator already has open in the editor is refused with a "being edited by …" line,
-     * so two sessions can never edit — and then save over — the same menu.
+     * so two sessions can never edit, and then save over, the same menu.
      */
     public void open(Player player, PlayerRef viewer, String menuId) {
         Objects.requireNonNull(player, "player");
@@ -152,7 +152,7 @@ public final class MenuGridView {
     }
 
     /**
-     * Reopen the grid for {@code viewer} over the session they were editing — the item editor's Back target. A no-op
+     * Reopen the grid for {@code viewer} over the session they were editing: the item editor's Back target. A no-op
      * when the viewer holds no open grid session (they closed it), so a late Back never opens a blank canvas.
      */
     public void reopenGrid(PlayerRef viewer) {
@@ -164,7 +164,7 @@ public final class MenuGridView {
     }
 
     /**
-     * Capture the player's main-hand item into {@code slot} of the menu they are currently editing — the body of
+     * Capture the player's main-hand item into {@code slot} of the menu they are currently editing, the body of
      * {@code /menu captureitem <slot>}. It resolves the viewer's live grid session (the working copy they opened, which
      * survives closing the grid window to type the command), copies the held item with all its NBT into a {@code b64:}
      * token, and either updates the material of whatever item already occupies the slot or adds a fresh one there. It
@@ -246,8 +246,8 @@ public final class MenuGridView {
     }
 
     /**
-     * Open the working copy as a live preview through the engine — the real renderer paints {@code session.toSpec()}
-     * exactly as a player would see it, without touching disk — so the operator can look over their unsaved edits.
+     * Open the working copy as a live preview through the engine. The real renderer paints {@code session.toSpec()}
+     * exactly as a player would see it, without touching disk, so the operator can look over their unsaved edits.
      * Closing the preview steps back to this grid (the engine's close hook), and the working copy is unchanged, so no
      * edit is lost by looking.
      */
@@ -273,7 +273,7 @@ public final class MenuGridView {
     }
 
     /**
-     * Route a content-cell click made with an empty cursor — the editor gestures. A pending pick-up takes priority —
+     * Route a content-cell click made with an empty cursor: the editor gestures. A pending pick-up takes priority
      * the next click drops it onto the clicked cell (moving, or swapping with whatever is there). Otherwise a
      * shift-click clears a filled cell (behind a confirm), a right-click picks a filled cell up, a left-click on a
      * filled cell opens its item editor, and a left-click on an empty cell adds a default item and opens that editor.
@@ -312,12 +312,12 @@ public final class MenuGridView {
     }
 
     /**
-     * Copy a dragged / placed item's full definition into {@code menuSlot} of the working copy — the capture seam the
+     * Copy a dragged / placed item's full definition into {@code menuSlot} of the working copy, the capture seam the
      * engine calls when the operator drops one of their own items onto the canvas (a cursor place, a drag across cells,
      * or a shift-click out of their inventory). The item is encoded to a {@code b64:} token (all its NBT) and either
      * re-skins whatever already occupies the slot or is added as a fresh item there, then the canvas re-renders. It
      * sends no chat line: the repaint is the feedback, so stamping a whole row stays quiet. The operator's real item is
-     * never moved — only its definition is copied — so no duplicate can be produced.
+     * never moved, only its definition is copied, so no duplicate can be produced.
      */
     private void onCapture(GridEditState state, GridView view, int menuSlot, ItemStack item) {
         if (item.getType().isAir()) {
@@ -394,7 +394,7 @@ public final class MenuGridView {
     }
 
     /**
-     * Open the item property editor for whatever occupies {@code menuSlot} — the routing seam a filled cell (and a
+     * Open the item property editor for whatever occupies {@code menuSlot}. The routing seam a filled cell (and a
      * freshly added one) lands on. The editor mutates this viewer's working copy in place and its Back reopens the
      * grid, so an edit shows on the canvas the moment the operator returns. A cell that holds nothing is a no-op.
      */
@@ -443,7 +443,7 @@ public final class MenuGridView {
         return "item-" + n;
     }
 
-    /** A minimal valid item at {@code menuSlot}: a plain stone with no name, lore, decor or actions — a P3 canvas. */
+    /** A minimal valid item at {@code menuSlot}: a plain stone with no name, lore, decor or actions: a P3 canvas. */
     private static MenuItemSpec defaultItem(int menuSlot) {
         return new MenuItemSpec(
                 new SlotSet(List.of(menuSlot)),
@@ -459,12 +459,12 @@ public final class MenuGridView {
                 ItemType.NONE);
     }
 
-    /** A minimal item at {@code menuSlot} carrying {@code material} — a captured {@code b64:} token or any token. */
+    /** A minimal item at {@code menuSlot} carrying {@code material}: a captured {@code b64:} token or any token. */
     private static MenuItemSpec capturedItem(int menuSlot, String material) {
         return defaultItem(menuSlot).withMaterial(material);
     }
 
-    /** A copy of {@code item} with its enchant glow on — how the picked-up cell is shown as selected on the canvas. */
+    /** A copy of {@code item} with its enchant glow on: how the picked-up cell is shown as selected on the canvas. */
     private static MenuItemSpec withGlow(MenuItemSpec item) {
         return item.withDecor(item.decor().withGlow(true));
     }
@@ -476,7 +476,7 @@ public final class MenuGridView {
 
     /**
      * The empty-cell placeholder: a one-word name plus the "click to add" hint on a separate lore line. The hint lives
-     * in lore, not the name — a display name can't hold a line break, so folding it in rendered as a stray glyph box.
+     * in lore, not the name, a display name can't hold a line break, so folding it in rendered as a stray glyph box.
      */
     private ItemStack emptyIcon(PlayerRef viewer) {
         return ItemBuilder.of(EMPTY_ICON)

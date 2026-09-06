@@ -53,13 +53,13 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Pins that {@code /warp rate} and {@code /warp rating} resolve the rating store <em>off</em> the command
  * (tick/region) thread. The warp name resolve is served from the in-memory set, but a rating is deliberately
- * not cached — {@code rate}/{@code averageRating} pass straight through to the database — so those two paths
+ * not cached ({@code rate}/{@code averageRating} pass straight through to the database) so those two paths
  * must hand the read/write to {@link Scheduler#async} and bridge their feedback back to the player's region
  * thread, the same shape {@code /pwarp rate}/{@code /pwarp rating} use.
  *
  * <p>The scheduler here is a <em>deferring</em> double: {@code async} captures the task without running it, and
  * {@code onEntity} runs inline (the region bridge). So after dispatch the rating store has seen zero
- * read/writes — proving the database touch did not run on the command thread — and only once the captured task
+ * read/writes (proving the database touch did not run on the command thread) and only once the captured task
  * is drained does the rating land and the feedback reach the player.
  */
 class WarpRatingOffThreadReadTest {
@@ -94,7 +94,7 @@ class WarpRatingOffThreadReadTest {
 
         execute(dispatcher, "warp rate spawn 5.0");
 
-        // The command returned without writing the rating — the write was handed to scheduler.async.
+        // The command returned without writing the rating: the write was handed to scheduler.async.
         assertThat(repository.rateWrites).isZero();
         assertThat(scheduler.deferred).hasSize(1);
 

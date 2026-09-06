@@ -17,11 +17,11 @@ import org.jooq.Record;
 /**
  * The anti-corruption mapping between a {@code mail} row and the domain {@link MailItem}. UUIDs are stored as
  * their canonical 36-character text and the send time as epoch milliseconds, the read flag as a {@code 0/1}
- * smallint — so the column shape is identical on every backend; this class is the single place that
+ * smallint, so the column shape is identical on every backend; this class is the single place that
  * translation lives.
  *
  * <p>The recipient name is not persisted (only the uuid is), so a {@link MailItem} rebuilt from a row carries
- * the recipient uuid with the name the caller already holds — the repository passes the queried
+ * the recipient uuid with the name the caller already holds. The repository passes the queried
  * {@link PlayerRef} through rather than inventing a display name from the row. The sender keeps both its
  * (nullable) uuid and the name at send time.
  */

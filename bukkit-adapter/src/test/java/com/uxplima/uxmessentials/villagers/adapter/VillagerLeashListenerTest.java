@@ -27,7 +27,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
  *
  * <p>MockBukkit's {@code isLeashed()} reports {@code leashHolder instanceof Mob}, so a <em>player</em> holder never
  * reads back as leashed even though {@code setLeashHolder} succeeds and stores it. The leash's success is therefore
- * asserted through its observable side effects — the interaction is cancelled and one lead is consumed — both of which
+ * asserted through its observable side effects, the interaction is cancelled and one lead is consumed, both of which
  * the listener performs only after {@code setLeashHolder} returns {@code true}.
  */
 class VillagerLeashListenerTest {

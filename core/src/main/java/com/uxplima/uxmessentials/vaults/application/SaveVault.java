@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultContents;
  * the owning {@link Vault} from the inventory holder, serialises the live inventory into opaque
  * {@link VaultContents}, and hands both here; this use case applies the {@link Vault#withContents} transition,
  * persists the result through the repository, and publishes the {@code VaultContentsChanged} event. A vault is
- * the authority for its items, not the GUI — so the close is what makes the stored state durable, and a
+ * the authority for its items, not the GUI, so the close is what makes the stored state durable, and a
  * region-safe save is the adapter's job to schedule before calling in.
  */
 public final class SaveVault {

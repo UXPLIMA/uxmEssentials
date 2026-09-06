@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
  * Parses a sample {@code rewards} block and asserts the resulting {@link RewardCatalog}: that per-vote specs
  * carry their chance and items, that per-site keys land under their service name, that a first-vote spec is
  * read, and that both milestone shapes ({@code at} and {@code every}) and both streak shapes are parsed.
- * Also checks the tolerant defaults — an absent block and malformed entries yield an empty/clean catalog
+ * Also checks the tolerant defaults. An absent block and malformed entries yield an empty/clean catalog
  * rather than failing.
  */
 class RewardCatalogLoaderTest {

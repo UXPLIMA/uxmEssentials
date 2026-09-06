@@ -26,12 +26,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the admin warp manager list (opened by {@code /warp editor} with no warp name, or the category manager's
  * back button) with the menu engine and opens it. One icon per stored warp across the top five rows, with a create, a
- * manage-categories, and a close button on the bottom row — and, like the original, no page arrows, so the grid is a
+ * manage-categories, and a close button on the bottom row, and, like the original, no page arrows, so the grid is a
  * single page that truncates past what fits, exactly as the old view did.
  *
  * <p>The grid is the {@code warps:manager} list source. The repository read happens on the viewer's entity thread at
  * open and the rows are handed to the engine as the menu subject, so the engine renders off that snapshot without a
- * repository read of its own — mirroring {@link com.uxplima.uxmessentials.kits.adapter.inbound.gui.KitManagerMenu}. The
+ * repository read of its own: mirroring {@link com.uxplima.uxmessentials.kits.adapter.inbound.gui.KitManagerMenu}. The
  * {@code warp_manager_icon} / {@code warp_manager_name} placeholders and the fixed catalog-key lore (category, location,
  * a spacer, the edit hint) read the bound row, reproducing the old fixed warp manager's icon slot for slot.
  *

@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Builds the messaging context's Brigadier command surface (docs/10-feature-modules.md §15.7 — NO public
+ * Builds the messaging context's Brigadier command surface (docs/10-feature-modules.md §15.7, NO public
  * chat) as {@link CommandRegistration}s over the constructed {@link MessagingServices}. Collected in one
  * greppable table so the literal/permission pairing matches the permissions reference and the kernel's
  * {@code MessagingCommandSurface}; the plugin's {@code LifecycleEvents.COMMANDS} handler registers each.

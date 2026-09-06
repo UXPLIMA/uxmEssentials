@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /tempwarn} into the moderation context's command surface. It is the timed sibling of
- * {@code /warn} — a warning that lapses on its own — and like {@code /warns} and {@code /unwarn} it shares the
+ * {@code /warn}, a warning that lapses on its own, and like {@code /warns} and {@code /unwarn} it shares the
  * {@code uxmessentials.moderation.warn} node. This guard fails if the literal drops out of the surface or
  * wires under a different node.
  */

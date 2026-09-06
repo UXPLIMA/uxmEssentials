@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared collaborators every player-warps Brigadier command holds: the constructed {@link PlayerWarpServices}
  * and the {@link Messages} catalog (the latter only for the players-only and unknown-player rejections a
- * console or a bad name may see — all player-facing feedback flows through the use cases' {@code MessageSink}).
+ * console or a bad name may see: all player-facing feedback flows through the use cases' {@code MessageSink}).
  * Concrete command classes extend this so each stays focused on building its node and mapping one argument to
  * one use-case call.
  */
@@ -90,7 +90,7 @@ abstract class PlayerWarpCommandSupport {
     /**
      * Run {@code feedback} on {@code viewer}'s region thread. Inline command feedback calls
      * {@code sender.sendMessage(...)}, a Bukkit interaction, so a continuation reached from an async read must
-     * bridge back to the player's entity thread before sending — the homes async-read pattern.
+     * bridge back to the player's entity thread before sending: the homes async-read pattern.
      */
     final void onPlayer(PlayerRef viewer, Runnable feedback) {
         services.scheduler().onEntity(viewer, feedback);
@@ -112,7 +112,7 @@ abstract class PlayerWarpCommandSupport {
 
     /**
      * Resolve the {@code name} argument into a {@link PlayerWarpName} paired with the invoking player and its
-     * {@link PlayerRef}, or {@code null} — after the players-only or invalid-name notice — for a console source or
+     * {@link PlayerRef}, or {@code null}, after the players-only or invalid-name notice, for a console source or
      * a malformed name. This is a cheap tick-thread parse; the caller then hands the resolved target to the
      * scheduler so the repository I/O runs off the command thread.
      */
@@ -174,7 +174,7 @@ abstract class PlayerWarpCommandSupport {
     }
 
     /**
-     * Resolve {@code playerName} to a (possibly offline) profile, then run {@code action} on it — the shared shape of
+     * Resolve {@code playerName} to a (possibly offline) profile, then run {@code action} on it. The shared shape of
      * every verb that takes a player target ({@code transfer}, {@code members}, {@code ban}, {@code whitelist}). Runs
      * inside a scheduler task: an unknown target bridges the not-found notice back to the actor's region thread
      * rather than acting on nobody, so the caller need not repeat the lookup-or-reject dance.

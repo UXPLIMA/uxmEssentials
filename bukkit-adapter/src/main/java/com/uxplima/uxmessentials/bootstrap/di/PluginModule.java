@@ -335,12 +335,12 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The single hand-rolled DI site. Consults the {@link ModuleRegistry} so a disabled module wires
- * nothing — no adapters, no commands, no listeners, no migrations, no runtime state.
+ * nothing: no adapters, no commands, no listeners, no migrations, no runtime state.
  *
  * <p>The wiring invariant: the only path to constructing a context's adapters is through its enabled
  * {@code FeatureModule}. Nothing here news up a context's classes directly; the loop starts each
  * enabled module and the module owns its own construction inside {@code start}. The {@code JavaPlugin}
- * is held only here, in bootstrap — it never leaks into application or adapter code.
+ * is held only here, in bootstrap: it never leaks into application or adapter code.
  */
 @NullMarked
 public final class PluginModule {
@@ -475,7 +475,7 @@ public final class PluginModule {
         // otherwise. The Vault economy/permission, NBT-API and HeadDatabase hooks join the worked PlaceholderAPI
         // example here; later integration features (the item providers) add their hook the same way and read
         // their capability from resources.hooks(). A missing soft-depend never loads an
-        // external class — the no-op default carries none, so there is no NoClassDefFoundError path. Resolved
+        // external class: the no-op default carries none, so there is no NoClassDefFoundError path. Resolved
         // before the menu engine so the renderer's skull provider can read the HeadDatabase capability for hdb:<id>.
         Hooks hooks = Hooks.resolve(
                 plugin.getServer(),
@@ -498,7 +498,7 @@ public final class PluginModule {
         // ItemRenderer used by feature menus uses only the no-dependency default chain (skull + equipment); this
         // composition-root renderer adds the plugin-backed sources. The runtime tail is the seam the dev-API adds
         // to: one shared IconProviderRegistry the renderer's chain consults after every built-in, so a plugin that
-        // registers a custom material-spec prefix through MenuApi resolves on the very next render — and, being
+        // registers a custom material-spec prefix through MenuApi resolves on the very next render, and, being
         // last, can never shadow a built-in prefix.
         IconProviderRegistry runtimeIcons = new IconProviderRegistry();
         ItemRenderer menuItemRenderer = new ItemRenderer(
@@ -555,12 +555,12 @@ public final class PluginModule {
         // The editor renderer is the typed-property capability the same engine grows: a property editor is a
         // MenuHolder window the one listener routes and the one shutdown tears down, so the renderer is threaded into
         // both the listener (it repaints an editor after a property click) and the façade (it opens one). The façade
-        // is built first so the listener can borrow its selector and confirm openers — what a property's click hook
-        // uses to open a picker or a remove-confirm as an engine child window — and thread them into the editor click
+        // is built first so the listener can borrow its selector and confirm openers. What a property's click hook
+        // uses to open a picker or a remove-confirm as an engine child window, and thread them into the editor click
         // context.
         EditorRenderer menuEditorRenderer = new EditorRenderer(guiText);
         // The action and condition registries are handed to the façade too, so an open runs a spec's open-actions and
-        // gates on its open-requirement — the same registries the click listener resolves against, so an open-action
+        // gates on its open-requirement. The same registries the click listener resolves against, so an open-action
         // and a click action reach the identical handler. A menu's open-command opening it (see MenuOpenCommand)
         // therefore fires that menu's open-actions on open, which is what "pre-open" command actions reduce to.
         // The reopen tracker /menu last reads: one instance owned by the engine, remembering the last subject-less
@@ -605,7 +605,7 @@ public final class PluginModule {
                 config.scoped(ModuleId.of("custommenus").configRoot()).getLong("click-cooldown-ms", 0L);
         // The text-input seam an input: menu step drives is built later, inside wireModules (it needs the shared anvil
         // and the resolved Bedrock detector). The listener is built here, so its capability is threaded in through a
-        // deferred reference the seam populates on enable, before any menu can be clicked — the same late-init pattern
+        // deferred reference the seam populates on enable, before any menu can be clicked, the same late-init pattern
         // the economy backends use. A confirm: step needs only the confirm opener, already available above.
         AtomicReference<TextInput> menuTextInputRef = new AtomicReference<>();
         MenuTextPrompt menuTextPrompt = (player, key, prompt, initialText, onSubmit, onCancel) -> {
@@ -632,7 +632,7 @@ public final class PluginModule {
                 menuBindings.contents());
         menuListener.install();
         // The console action in an operator menu is privileged, so it stays off unless the operator opts in via
-        // modules/custommenus/config.conf (allow-console). Our own code-registered feature menus are unrestricted —
+        // modules/custommenus/config.conf (allow-console). Our own code-registered feature menus are unrestricted
         // this flag only governs the generic console action a disk-loaded menu can reference.
         boolean allowMenuConsole =
                 config.scoped(ModuleId.of("custommenus").configRoot()).getBoolean("allow-console", false);
@@ -668,13 +668,13 @@ public final class PluginModule {
         InfoPlaceholders.register(menuBindings);
         // The two ready-made live roster sources (online-players, worlds) every custom menu can page with no code.
         // They reuse the engine's own Scheduler so a source can hop onto the global region thread to snapshot live
-        // server state before serving it back to the off-tick list resolver — the entity/world API is off-limits on
+        // server state before serving it back to the off-tick list resolver. The entity/world API is off-limits on
         // the async thread a source runs on, so the global snapshot is the Folia-safe seam.
         LiveDataSources.register(menuBindings, kernel.scheduler());
         // The ready-made luckperms-groups source: every LuckPerms group as a menu entry (a rank list / rank-picker
         // with no feature code). LuckPerms is a soft-depend reached purely by reflection past a plugin-present guard
         // (an absent one loads no SDK class), and it is async-safe by design, so the source reads directly on the
-        // async list thread with no region hop — hence no Scheduler is threaded here, only the server (present-guard
+        // async list thread with no region hop. Hence no Scheduler is threaded here, only the server (present-guard
         // + ServicesManager lookup) and the operator logger the fail-closed degrade warns through.
         LuckPermsGroupSource.register(menuBindings, plugin.getServer(), kernel.log());
         // The messaging slice of the vocabulary (message-to/whisper, broadcast(+json/legacy), action-bar, title,
@@ -697,11 +697,11 @@ public final class PluginModule {
         // The menu-control slice (refresh, refresh-slot, reset-pagination/reset-page) registers alongside the other
         // slices; like them it has its own entry point so the MenuVocabulary signature stays untouched. Its actions
         // drive the very window they fire in through the MenuControl the click supplies, so they need only the shared
-        // bindings and the operator logger — no live handle is threaded here.
+        // bindings and the operator logger: no live handle is threaded here.
         MenuControlActions.register(menuBindings, kernel.log());
         // The paged-list-control slice (list-sort, list-filter, list-search) registers alongside the other slices;
         // like them it has its own entry point so the MenuVocabulary signature stays untouched. Its actions drive the
-        // very paged list they name through the MenuControl the click supplies — the same page-flip re-query path — so
+        // very paged list they name through the MenuControl the click supplies, the same page-flip re-query path, so
         // they need only the shared bindings and the operator logger; the search prompt reuses the shared text-input
         // seam the input: step already drives.
         ListControlActions.register(menuBindings, kernel.log());
@@ -720,7 +720,7 @@ public final class PluginModule {
         // spend through the same backend. The configured default currency (custommenus config, vault out of the box)
         // is what an action with no explicit currency spec falls back to; Phase-2/3 vocab reads this façade from
         // resources.currencies(). The economy module wires much later (wireEconomy, below), so the façade takes a
-        // deferred reference to the registries and reads it on the first click — filled the moment economy is up.
+        // deferred reference to the registries and reads it on the first click: filled the moment economy is up.
         AtomicReference<EconomyBackends> menuCurrencyBackends = new AtomicReference<>();
         String defaultCurrency =
                 config.scoped(ModuleId.of("custommenus").configRoot()).getString("default-currency", "vault");
@@ -729,7 +729,7 @@ public final class PluginModule {
         // The economy slice of the vocabulary (give/take/set-money, give/take exp|levels|permission, points) is the
         // first consumer of that façade; it also grants/revokes permission nodes through the Vault permission seam,
         // a graceful no-op when Vault is absent. Registered here, after the currencies exist, into the same live
-        // MenuBindings the earlier slices wrote to — its actions() registry is shared, so a click sees it at once.
+        // MenuBindings the earlier slices wrote to: its actions() registry is shared, so a click sees it at once.
         EconomyActions.register(menuBindings, menuCurrencies, hooks.capability(PermissionQuery.class), kernel.log());
 
         // The persistent player-data store reuses the plugin database (the same Flyway+jOOQ pattern every context
@@ -750,7 +750,7 @@ public final class PluginModule {
         ItemActions.register(menuBindings, kernel.log());
         DataActions.register(menuBindings, playerData, menuPlayerMeta, kernel.log());
         // The read side of the same two stores: %data_value_<k>%/%data_number_<k>% surface the durable player-data the
-        // data-* actions write, and %meta_value_<k>% surfaces the PDC the meta-* actions write — so an operator can
+        // data-* actions write, and %meta_value_<k>% surfaces the PDC the meta-* actions write, so an operator can
         // display what a click stored. One placeholder fallback over the same store and PlayerMeta instances.
         PlayerDataPlaceholders.register(menuBindings, playerData, menuPlayerMeta);
         // The requirement slice of the condition vocabulary (has-money/exp/level/item/meta/empty-slots,
@@ -799,8 +799,8 @@ public final class PluginModule {
         bus.start();
         registerPlaceholders(plugin, placeholders, resources, kernel.log());
         // Cross-cutting server-integration polish (1.21+ pause-menu links + opt-in update checker + map-marker
-        // integration). These belong to no feature context: server links apply once on enable, the update checker —
-        // off by default, built on the uxmLib update toolkit — self-registers its permission-gated join notice and
+        // integration). These belong to no feature context: server links apply once on enable, the update checker
+        // off by default, built on the uxmLib update toolkit. Self-registers its permission-gated join notice and
         // returns a stop hook for its recurring check, and the map-marker integration renders warps/spawns onto
         // Dynmap/squaremap when one is installed (homes opt-in).
         IntegrationsWiring.Wired integrations = IntegrationsWiring.wire(plugin, config, kernel, persistence);
@@ -840,7 +840,7 @@ public final class PluginModule {
                 kernel.scheduler(),
                 kernel.log()));
         // /help is cross-cutting too. It reads the same resolved, module-filtered registration set the plugin
-        // publishes — supplied lazily so it reflects every catalog rename and disable — and filters it per the
+        // publishes (supplied lazily so it reflects every catalog rename and disable) and filters it per the
         // sender's own permission. The supplier is evaluated on each invocation, well after wiring completes.
         resources.addCommand(new HelpCommand(resources::commands, kernel.messages()));
         // Resolved last, once every module and the bootstrap commands have contributed, so the catalog sees
@@ -915,7 +915,7 @@ public final class PluginModule {
         // The migration adapter is command-gated, not a steady-state feature context, so it is wired here in
         // the operator surface rather than registered in the feature-module registry. Its enable gate ships
         // disabled; an enabled module publishes a live /uxmess import, a disabled one a dormant command that
-        // reports the importer off. Nothing runs at enable — the importer fires only on the command.
+        // reports the importer off. Nothing runs at enable: the importer fires only on the command.
         MigrationModule module = new MigrationModule();
         MigrationImportService service = MigrationWiring.wire(
                 plugin,
@@ -1065,7 +1065,7 @@ public final class PluginModule {
                 "text-input", input.settings()::reload, "input modes and cancel keywords re-read from disk"));
         TextInput textInput = input.textInput();
         // Hand the just-built seam to the menu listener's deferred reference so an input: menu step can prompt. Set
-        // here, on enable, before any menu can be clicked — the listener was constructed earlier (it installs before
+        // here, on enable, before any menu can be clicked. The listener was constructed earlier (it installs before
         // the modules wire), so this late-init is what closes the ordering gap between the two.
         menuTextInputRef.set(textInput);
         // The one shared target picker. It is infrastructure rather than a module's own screen (moderation's
@@ -1115,7 +1115,7 @@ public final class PluginModule {
                     claimProviders,
                     ipCapture);
         });
-        // The server-metrics seam belongs to no feature context — it reads Bukkit/JVM globals — so it is wired
+        // The server-metrics seam belongs to no feature context, it reads Bukkit/JVM globals, so it is wired
         // unconditionally here, after the modules, with the plugin-enable timestamp so its uptime is measured
         // from this enable (a reload restarts it) rather than the whole JVM's age.
         links.placeholders.serverMetrics(new BukkitServerMetrics(plugin.getServer(), Instant.now()));
@@ -1137,7 +1137,7 @@ public final class PluginModule {
         if (links.tradeSessions != null) {
             links.placeholders.trade(new SessionsTradePlaceholders(links.tradeSessions));
         }
-        // The menu-engine source seam belongs to no feature context either — it reads the always-present engine's
+        // The menu-engine source seam belongs to no feature context either. It reads the always-present engine's
         // own runtime state (whether the requester is in a menu, which one, its page/rows, and a typed argument) so
         // scoreboards and tab can read %uxmessentials_menu_*%. Wired unconditionally over the same Menus façade the
         // modules opened their menus through.
@@ -1401,7 +1401,7 @@ public final class PluginModule {
         // the wiring registers only the effects an operator has opted into. When f3-brand is on, a join listener
         // re-sends the configured brand over the minecraft:brand channel so it shows on F3; when console-filter is on,
         // a Log4j2 filter is attached to the root logger to drop exactly the configured console spam. The context
-        // persists nothing — each effect is a live side effect on the running server — and its stop hook unwinds every
+        // persists nothing (each effect is a live side effect on the running server) and its stop hook unwinds every
         // one (unregister the channel, detach the filter) so a disable or reload leaves the server as it was found. A
         // disabled module wires none of this.
         ServerTweaksWiring.Wired wired = ServerTweaksWiring.wire(plugin, ctx);
@@ -1490,7 +1490,7 @@ public final class PluginModule {
             MenuBindings menuBindings) {
         // villagers persists nothing relational: the last-restock stamp, the disable flag, and the manager's custom
         // recipe set are all PDC state on the villager entity, and the config is read once into an immutable snapshot.
-        // Each feature wires only when its config switch is on — the trade listener under infinite/instant restock, the
+        // Each feature wires only when its config switch is on, the trade listener under infinite/instant restock, the
         // restock sweep under the restock timer, the /villager manager command + its menu-engine window + the
         // load-time recipe reapply under trade-manager, and the click-to-trade listener under click-to-trade, while the
         // disable-trades listener always registers so it can honour the per-villager flag the manager sets. The sweep's
@@ -1587,7 +1587,7 @@ public final class PluginModule {
         // command and sends the configured deny line; the visibility listener scrubs the sent command list, tab
         // completion, and the scrub-help output so disallowed and hidden commands stay invisible. Both read the
         // player's group (LuckPerms when installed, empty otherwise) and permission facts. There is no runtime state to
-        // drain on stop — unregistering the listeners is enough.
+        // drain on stop: unregistering the listeners is enough.
         CommandControlWiring.Wired wired = CommandControlWiring.wire(plugin.getServer(), ctx);
         wired.listeners().forEach(resources::addListener);
         // The published check answers from the same rules and the same facts the gate uses, so a plugin hiding a
@@ -1620,8 +1620,8 @@ public final class PluginModule {
         // its per-trade TradeExchange), and the config is read once into an immutable snapshot. The window view and its
         // click/drag/close/quit listener stand up here; Phase 3 adds the money row over the shared TextInput seam and
         // the trade economy port, bridged from the provider captured at economy-wiring time (trade registers after
-        // economy) — or left empty when economy is disabled, in which case a trade moves items only. closeAll() drains
-        // every live trade on module stop or reload — returning both sides' offered items — so a disable leaves
+        // economy), or left empty when economy is disabled, in which case a trade moves items only. closeAll() drains
+        // every live trade on module stop or reload, returning both sides' offered items, so a disable leaves
         // nothing.
         var provider = links.economyProvider;
         var currency = links.economyCurrency;
@@ -1658,7 +1658,7 @@ public final class PluginModule {
         // ranks stands up the DB-backed rank pointer, the parsed ladder and the CurrentRank read over the shared
         // persistence DSL (through the ranks persistence factory, so no jOOQ type reaches this layer), then the
         // /rankup and /ranks setrank verbs over the Rankup/SetRank use cases. The rank cost charges through the
-        // economy provider captured at economy-wiring time (ranks registers after economy) — bridged here into the
+        // economy provider captured at economy-wiring time (ranks registers after economy), bridged here into the
         // narrow RankEconomy seam, or left empty when economy is disabled, in which case a priced rank is free. The
         // config-gated /ranks ladder panel registers its spec and bindings into the shared menu engine when on.
         var provider = links.economyProvider;
@@ -1701,7 +1701,7 @@ public final class PluginModule {
         // read once into an immutable snapshot. Each mechanic wires only when its config gate is on, so a disabled
         // tree-feller or veinminer contributes no command and no listener. Its one cross-context collaborator is the
         // economy provider auto-sell credits through: survival registers after economy, so the provider captured at
-        // economy-wiring time is bridged here into the narrow SurvivalSales seam — or left empty when economy is
+        // economy-wiring time is bridged here into the narrow SurvivalSales seam, or left empty when economy is
         // disabled, in which case auto-sell is inert. There is no runtime state to drain on stop.
         var provider = links.economyProvider;
         var currency = links.economyCurrency;
@@ -1728,7 +1728,7 @@ public final class PluginModule {
             ClaimProvidersConfig claimProviders) {
         // Sit on blocks (/sit) and, when features.player-sit is on, sit on players (right-click, /poses toggle to
         // opt out). The seat is a real, tagged, non-persistent marker armour stand for block-sits; a player-sit has
-        // no seat entity — the rider mounts straight onto the carrier and addPassenger chains for stacking.
+        // no seat entity: the rider mounts straight onto the carrier and addPassenger chains for stacking.
         // sweepOrphans() runs on enable to reap any seat a prior crash left behind (ghost-prevention), and stop()
         // drains every live seat and clears the registry so a disable or reload leaves zero residual state and no
         // ghost entity. PoseSessions is the single source of truth for who is posing; it plus the PDC-backed
@@ -1757,7 +1757,7 @@ public final class PluginModule {
             MenuBindings menuBindings) {
         // custommenus consumes the always-on menu engine (the façade + bindings built in PluginModule): it loads the
         // operator's menus/*.conf into the engine on enable and registers the /menu command. There is no per-context
-        // repository or listener — the single menu click listener is installed once in bootstrap — so the wiring is a
+        // repository or listener (the single menu click listener is installed once in bootstrap) so the wiring is a
         // loader run plus the command. The console-dispatch flag is read once in PluginModule and threaded into the
         // engine's action vocabulary there, not here. The /menu editor picker (and the /uxmess gui hub entry) opens
         // through the shared GUI framework, so the layouts, the text-input seam and the hub registry are threaded in.
@@ -1874,7 +1874,7 @@ public final class PluginModule {
             MenuBindings menuBindings) {
         // worlds builds its cached jOOQ WorldRepository over persistence.dsl() and its BukkitWorldEngine over the
         // plugin's Server. It delegates /worlds tp and /worlds spawn execution to the captured teleport engine (wired
-        // earlier) and charges the per-world entry fee through the economy bridge — but economy lands after worlds, so
+        // earlier) and charges the per-world entry fee through the economy bridge, but economy lands after worlds, so
         // the fee resolves its provider/currency lazily at charge time (free until economy is up, free for good when
         // economy is disabled). The enable-time reconcile (adopt already-loaded worlds, auto-load registered ones) is
         // kicked on the global region thread the moment wiring completes, then drops the warm snapshot and refreshes
@@ -2244,7 +2244,7 @@ public final class PluginModule {
         // Captured for staff (wired last), which binds its EXAMINE gadget to this /invsee open use case.
         links.staffOpenContainer = wired.services().openContainer();
         // Captured so presence (wired later) rebinds the playtime sampler's AFK seam to its live store, so the
-        // sampler splits active vs AFK seconds. Until then — or when presence is disabled — it counts all active.
+        // sampler splits active vs AFK seconds. Until then, or when presence is disabled, it counts all active.
         links.playtimeAfkStatus = wired.afkStatus();
     }
 
@@ -2311,7 +2311,7 @@ public final class PluginModule {
                         ctx.kernel().playerLookup(),
                         ctx.kernel().scheduler(),
                         source));
-        // Register two /uxmess gui hub entries — the settings panel and the mailbox — gated by the messaging GUI
+        // Register two /uxmess gui hub entries, the settings panel and the mailbox, gated by the messaging GUI
         // node. The ignore-list opens from /ignore with no args; it is not a hub entry of its own.
         guiRegistry.register(new com.uxplima.uxmessentials.shared.adapter.inbound.gui.ManagementGuiEntry(
                 "messaging-settings",
@@ -2344,7 +2344,7 @@ public final class PluginModule {
             IpCapture ipCapture) {
         // moderation builds its jOOQ ModerationRepository over persistence.dsl(), the audit logger on the
         // dedicated audit channel, and the login/join/freeze listeners. It rebinds the messaging mute gate and
-        // the teleport jail gate captured during their wiring to the real policies — when either context is
+        // the teleport jail gate captured during their wiring to the real policies. When either context is
         // disabled its holder is absent, so the bind is a no-op and that gate stays NEVER. It opts into
         // cross-server live enforcement through the bus handle: a ban on a peer kicks the player here if they
         // are online (the durable ban is already enforced on every backend's login regardless of the bus).
@@ -2459,7 +2459,7 @@ public final class PluginModule {
             MenuBindings menuBindings) {
         // vaults builds its cached jOOQ VaultRepository over persistence.dsl(), the audit logger on the dedicated
         // audit channel, the inventory-holder GUI and the InventoryClose save listener. It opts into cross-server
-        // sync through the bus handle — a remote vault save invalidates exactly that vault here. The economy
+        // sync through the bus handle: a remote vault save invalidates exactly that vault here. The economy
         // bridge captured during economy wiring is handed in so a configured vault cost can be charged; when it
         // is absent a configured cost is recorded but never charged. The selector is registered with and opened
         // through the shared menu engine. On stop the still-open vault windows are close-and-saved before the pool
@@ -2572,8 +2572,8 @@ public final class PluginModule {
             ManagementGuiRegistry guiRegistry,
             Menus menus) {
         // presence persists nothing: the per-player PlayerPresence map is transient in-memory state. Vanish now lives
-        // in its own context (wired earlier), so presence receives that authority's isVanished lookup — overlaid onto
-        // its store so the %..._vanished% placeholder and the sleep exclusion reflect the one vanish state — and a
+        // in its own context (wired earlier), so presence receives that authority's isVanished lookup, overlaid onto
+        // its store so the %..._vanished% placeholder and the sleep exclusion reflect the one vanish state, and a
         // vanish-toggle handle for the settings panel; both degrade to no-ops when the vanish module is off. The
         // AFK soft-couple: presence rebinds messaging's MutableAfkStatus (captured during the earlier messaging
         // wiring) to a PresenceAfkStatus over this store so /msg adds the AFK courtesy notice.
@@ -2674,7 +2674,7 @@ public final class PluginModule {
                 links.balanceLeaderboard == null ? Map.of() : Map.of("balance", links.balanceLeaderboard));
         // The same shared economy bridge npc charges its COST click actions through (captured during economy
         // wiring, which lands long before holograms); absent on a server without economy, so a hologram COST gate
-        // is simply skipped there. It is a generic ClickActionEconomy, not an npc handle — holograms reaches no npc.
+        // is simply skipped there. It is a generic ClickActionEconomy, not an npc handle: holograms reaches no npc.
         // The management GUI consumes the SP0 framework: a GuiText over the shared catalog and the data-folder
         // layout loader (disk-first, then bundled). The list view (built inside HologramsWiring with the
         // repository + use cases) opens for /hologram with no args and from the /uxmess gui hub.
@@ -2850,7 +2850,7 @@ public final class PluginModule {
     private static void wireTablist(
             JavaPlugin plugin, ModuleContext ctx, CloseableResources resources, ContextLinks links) {
         // tablist persists nothing: the header/footer content is config-authored under modules/tablist/config.conf. It
-        // carries no cross-context bridge — its only collaborators are the shared Scheduler and log ports — so nothing
+        // carries no cross-context bridge (its only collaborators are the shared Scheduler and log ports) so nothing
         // is captured for a later context, and the tablist is always-on (no per-player toggle) so it publishes no
         // command. The renderer dogfoods uxmlib-hud's Tablist; the render timer on the Scheduler port is stopped and
         // every active header/footer cleared on disable.
@@ -2985,7 +2985,7 @@ public final class PluginModule {
             Menus menus,
             MenuBindings menuBindings) {
         // staff persists the captured loadout through the jOOQ StaffLoadoutRepository over persistence.dsl() (the
-        // staff_loadout table ships in the persistence V29 baseline, always applied) — the item-loss-safe net, so
+        // staff_loadout table ships in the persistence V29 baseline, always applied), the item-loss-safe net, so
         // a crash mid-mode leaves the real loadout recoverable. It wires last, so it binds its three soft-couple
         // holders to the presence/playerstate/messaging seams captured during those contexts' wiring; a seam is
         // absent when its source module is disabled, leaving that gadget or staff chat on NONE (degrade, not fail).
@@ -3030,9 +3030,9 @@ public final class PluginModule {
         // vote builds its counter-cached jOOQ VoteRepository over persistence.dsl() (the vote_party counter and
         // vote_queue offline reward batches ship in the persistence V15 baseline, always applied), the console
         // reward dispatcher on the global region thread, and the online audience for the party rewards and
-        // thank-you broadcast. It syncs the server-wide party counter through the bus handle — a counter
+        // thank-you broadcast. It syncs the server-wide party counter through the bus handle, a counter
         // mutation here announces a VoteCounterChanged, a remote one drops the cached counter, and a remote
-        // VotePartyFired echoes the party announcement (never the reward) — but carries no cross-context bridge.
+        // VotePartyFired echoes the party announcement (never the reward), but carries no cross-context bridge.
         // The reflective Votifier listener self-registers behind a plugin-present guard on start and is dropped
         // on disable, so the module runs unchanged whether or not Votifier is installed. The repository and
         // threshold are surfaced for the PAPI vote placeholder seam registered after all contexts have wired.
@@ -3044,8 +3044,8 @@ public final class PluginModule {
         wired.listeners().forEach(resources::addListener);
         wired.startBackgroundWork();
         resources.onClose(wired::stop);
-        // Resolve leaderboard UUIDs to display names for votes_top_<period>_<n>_name — the same lookup
-        // /vote top uses — so the placeholder shows a name, not the UUID the repository stores.
+        // Resolve leaderboard UUIDs to display names for votes_top_<period>_<n>_name, the same lookup
+        // /vote top uses, so the placeholder shows a name, not the UUID the repository stores.
         com.uxplima.uxmessentials.shared.application.port.PlayerLookup lookup =
                 ctx.kernel().playerLookup();
         java.util.function.Function<java.util.UUID, String> nameResolver = uuid -> lookup.findByUuid(uuid)
@@ -3074,7 +3074,7 @@ public final class PluginModule {
         // discordlink builds its un-cached jOOQ store over persistence.dsl() (the discord_link_pending and
         // discord_links tables ship in the persistence V16 baseline, always applied) and the /discordlink and
         // /discordunlink commands. It registers its ConfirmLink seam into the ServicesManager so the optional
-        // Discord bridge — a separate jar with no compile-time link to this one — can redeem a /link code through
+        // Discord bridge (a separate jar with no compile-time link to this one) can redeem a /link code through
         // the same use case; the registration is dropped on disable so a reload re-exposes it cleanly. The bridge
         // looks the service up once its gateway is ready and forwards nothing while it is absent. The link-status
         // panel consumes the SP0 GUI framework (a GuiText over the shared catalog, the data-folder layout loader)
@@ -3224,7 +3224,7 @@ public final class PluginModule {
         LoadCondition condition = module.loadCondition();
         Optional<String> unmet = condition.unmetReason(ctx);
         if (unmet.isPresent()) {
-            log.warning("module " + module.id() + " skipped — " + unmet.get());
+            log.warning("module " + module.id() + " skipped, " + unmet.get());
             return true;
         }
         return false;
@@ -3238,7 +3238,7 @@ public final class PluginModule {
 
     /**
      * Loads each module inside its own fault boundary. A module that throws while starting or wiring is rolled
-     * back to the checkpoint taken before it ran and skipped, leaving every sibling module — and the plugin —
+     * back to the checkpoint taken before it ran and skipped, leaving every sibling module, and the plugin,
      * up; the failure is logged with its cause. A capability-skipped module registers nothing, so its clean
      * skip inside the loader needs no rollback.
      */
@@ -3252,7 +3252,7 @@ public final class PluginModule {
                 resources.rollbackTo(scope);
                 log.log(
                         Level.SEVERE,
-                        "module " + module.id() + " failed to load — skipped; other modules unaffected",
+                        "module " + module.id() + " failed to load. Skipped; other modules unaffected",
                         failure);
             }
         }

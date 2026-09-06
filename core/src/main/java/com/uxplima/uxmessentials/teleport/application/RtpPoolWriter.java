@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.teleport.domain.RtpColumn;
 /**
  * The persist-on-validate half of the durable RTP pool: it accumulates validated columns per world and, when a
  * refill cycle flushes, writes the batch to the {@link RtpPoolStore} <strong>off the tick thread</strong> through
- * the {@link Scheduler} port — never one synchronous row-insert per candidate. Batching per refill cycle keeps the
+ * the {@link Scheduler} port: never one synchronous row-insert per candidate. Batching per refill cycle keeps the
  * single-writer SQLite backend from being hammered, and dispatching the save async keeps the relational I/O off any
  * region thread.
  *

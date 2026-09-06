@@ -37,10 +37,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The warps command paths through the real use cases against an in-memory repository and a recording
- * teleporter — the same wiring the Brigadier handlers drive, minus Bukkit. It proves that {@code /setwarp}
+ * teleporter: the same wiring the Brigadier handlers drive, minus Bukkit. It proves that {@code /setwarp}
  * persists a warp and refuses no one (re-anchor in place), that {@code /warp} delegates execution to the
  * teleport context rather than moving the player itself, that the per-warp permission gate is enforced, and
- * — the headline of this context — that the per-warp cost <em>soft-couples</em> to economy: with a provider
+ *, the headline of this context, that the per-warp cost <em>soft-couples</em> to economy: with a provider
  * present the charge gates the hop, and with no provider a priced warp is usable for free.
  */
 class WarpCommandPathTest {

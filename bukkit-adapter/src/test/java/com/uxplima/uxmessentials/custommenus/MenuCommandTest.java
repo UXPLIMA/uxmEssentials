@@ -639,7 +639,7 @@ class MenuCommandTest {
     @Test
     void lastReplaysWithoutGrowingTheBackHistory() {
         // A single open records one entry; /menu last replays it without re-recording, so the history stays one deep
-        // however many times it is reopened — a back from it then finds nothing beneath.
+        // however many times it is reopened: a back from it then finds nothing beneath.
         menus.open(BukkitRefs.toRef(player), "shop", null, 0, Map.of());
         execute("menu last", player);
         execute("menu last", player);
@@ -715,14 +715,14 @@ class MenuCommandTest {
 
     /**
      * Dispatch when the sender is expected to lack the gating node: Brigadier hides a {@code requires}-gated branch
-     * from a sender without the permission, so the input fails to parse — that parse failure is the denial we assert.
+     * from a sender without the permission, so the input fails to parse: that parse failure is the denial we assert.
      */
     private void executeExpectingDenial(String input, org.bukkit.command.CommandSender who) {
         try {
             dispatcherFor().execute(input, CommandSourceStackMock.from(who));
             throw new AssertionError("expected a permission denial for: " + input);
         } catch (com.mojang.brigadier.exceptions.CommandSyntaxException expected) {
-            // The gated branch is invisible to this sender, so the dispatch is rejected — the denial we wanted.
+            // The gated branch is invisible to this sender, so the dispatch is rejected: the denial we wanted.
         }
     }
 
@@ -786,7 +786,7 @@ class MenuCommandTest {
             return byKey.getOrDefault(key, Map.of());
         }
 
-        /** Every placeholder map delivered under {@code key}, in send order — for a line the command emits per item. */
+        /** Every placeholder map delivered under {@code key}, in send order: for a line the command emits per item. */
         List<Map<String, String>> allPlaceholdersFor(String key) {
             return allByKey.getOrDefault(key, List.of());
         }

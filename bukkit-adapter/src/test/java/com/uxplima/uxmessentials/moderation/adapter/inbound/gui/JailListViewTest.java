@@ -236,7 +236,7 @@ class JailListViewTest {
 
     /**
      * Echoes the key and any placeholder values it carried, so a rendered lore line exposes the substituted
-     * values (the coordinates) the production catalog would interpolate — there is no catalog file under test.
+     * values (the coordinates) the production catalog would interpolate: there is no catalog file under test.
      */
     private static final class KeyMessages implements Messages {
         @Override

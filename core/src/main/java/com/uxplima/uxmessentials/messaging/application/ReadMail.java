@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /mail read}: show the reader their persistent mailbox newest-first and mark every item read. An
  * empty box reports {@link MessagingError#MAILBOX_EMPTY} rather than rendering a header with no entries.
- * Reading is a one-shot side-effect — the header, one line per item, then a single {@code markAllRead} so a
+ * Reading is a one-shot side-effect, the header, one line per item, then a single {@code markAllRead} so a
  * second {@code /mail read} shows the same mail with no unread flag and no fresh notify.
  */
 public final class ReadMail {

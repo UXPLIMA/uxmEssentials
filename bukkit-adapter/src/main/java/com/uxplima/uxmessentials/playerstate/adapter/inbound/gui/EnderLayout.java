@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The slot map of the {@code /endersee} menu — a flat 27-slot ender chest — plus the reconciliation directions over
+ * The slot map of the {@code /endersee} menu, a flat 27-slot ender chest, plus the reconciliation directions over
  * it. The ender chest is a single fixed-size container with no filler region, so every slot is editable. This is
  * the ender-chest counterpart of {@link InvseeLayout}: {@link #fromPlayer} / {@link #seedSlots} clone the items
  * <em>into</em> the menu and {@link #writeBack} / {@link #readSlots} clone the edited region back <em>onto</em> the

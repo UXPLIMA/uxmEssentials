@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * history across every actor and renders a most-active-staff leaderboard; the per-staff view scans one staff
  * member's actions and renders their breakdown. Both fold an optional {@code days} window through the injected
  * {@link Clock}, hand the fetched rows to the pure {@link PunishmentStats} aggregation, and render the result
- * through the {@link Notifier} — the read is bounded ({@link #SCAN_LIMIT}) and the command runs it off
+ * through the {@link Notifier}. The read is bounded ({@link #SCAN_LIMIT}) and the command runs it off
  * the tick thread.
  *
  * <p>The all-time and windowed renderings use distinct catalog keys so the time frame is phrased in the catalog

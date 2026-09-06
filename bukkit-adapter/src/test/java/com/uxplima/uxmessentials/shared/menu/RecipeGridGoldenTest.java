@@ -38,11 +38,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The itemworld {@code /recipe} golden test: the engine-rendered crafting grid must draw the exact window the
- * original {@code RecipeGridView} drew. The fixture is a boat-like recipe — oak planks at the top-left and
- * top-right grid cells, every other cell empty, the result an oak boat — so the window draws two plank
+ * original {@code RecipeGridView} drew. The fixture is a boat-like recipe. Oak planks at the top-left and
+ * top-right grid cells, every other cell empty, the result an oak boat, so the window draws two plank
  * ingredients (slots 0 and 2), seven empty-slot panes in the rest of the 3x3 grid, the boat in the result slot
  * (15), and a glass backdrop everywhere else. The engine's window is snapshotted as {@code (slot -> material,
- * plain name)} and asserted equal, slot for slot, to the baseline the old view produced — captured once while
+ * plain name)} and asserted equal, slot for slot, to the baseline the old view produced, captured once while
  * both rendered the same fixture, then frozen here as the contract so the old class could be deleted. A second
  * case proves the no-recipe path opens the one-row empty-state title.
  */

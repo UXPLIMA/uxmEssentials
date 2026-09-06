@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.shared.application.message;
 
 /**
- * The cross-cutting management-GUI message keys — the {@code gui.*} block the central hub and any
+ * The cross-cutting management-GUI message keys, the {@code gui.*} block the central hub and any
  * shared GUI scaffolding owns, distinct from a feature context's own menu keys.
  *
  * <p>The {@code /uxmess gui} hub lists every module's registered management-GUI entry as a clickable
@@ -23,7 +23,7 @@ public enum GuiMessageKey implements MessageKey {
     HUB_PREV("gui.hub.prev"),
     HUB_NEXT("gui.hub.next"),
 
-    // the shared text-input seam — the cancel acknowledgement and the chat-mode cancel hint
+    // the shared text-input seam, the cancel acknowledgement and the chat-mode cancel hint
     INPUT_CANCELLED("gui.input.cancelled"),
     INPUT_CANCEL_HINT("gui.input.cancel-hint"),
 
@@ -33,22 +33,22 @@ public enum GuiMessageKey implements MessageKey {
     INPUT_DIALOG_SUBMIT("gui.input.dialog-submit"),
     INPUT_DIALOG_CANCEL("gui.input.dialog-cancel"),
 
-    // the shared confirm window — the two button labels a Bedrock ModalForm needs (the chest paints wordless wool)
+    // the shared confirm window. The two button labels a Bedrock ModalForm needs (the chest paints wordless wool)
     CONFIRM_YES("gui.confirm.yes"),
     CONFIRM_NO("gui.confirm.no"),
 
-    // the shared paged form — the Previous/Next nav buttons a Bedrock SimpleForm adds when a list spans pages
+    // the shared paged form. The Previous/Next nav buttons a Bedrock SimpleForm adds when a list spans pages
     PAGE_PREVIOUS("gui.page.previous"),
     PAGE_NEXT("gui.page.next"),
 
-    // the shared colour-picker widget — its chrome buttons
+    // the shared colour-picker widget: its chrome buttons
     COLOUR_PICKER_TITLE("gui.colour-picker.title"),
     COLOUR_PICKER_CUSTOM("gui.colour-picker.custom"),
     COLOUR_PICKER_CUSTOM_PROMPT("gui.colour-picker.custom-prompt"),
     COLOUR_PICKER_CLEAR("gui.colour-picker.clear"),
     COLOUR_PICKER_BACK("gui.colour-picker.back"),
 
-    // the shared player-picker widget — online head entries plus the offline-name anvil button and nav
+    // the shared player-picker widget. Online head entries plus the offline-name anvil button and nav
     PLAYER_PICKER_HEAD_NAME("gui.player-picker.head-name"),
     PLAYER_PICKER_HEAD_LORE("gui.player-picker.head-lore"),
     PLAYER_PICKER_CUSTOM("gui.player-picker.custom"),
@@ -57,7 +57,7 @@ public enum GuiMessageKey implements MessageKey {
     PLAYER_PICKER_PREV("gui.player-picker.prev"),
     PLAYER_PICKER_NEXT("gui.player-picker.next"),
 
-    // the shared duration-picker widget — preset duration buttons plus the custom-span anvil button and back
+    // the shared duration-picker widget. Preset duration buttons plus the custom-span anvil button and back
     DURATION_PICKER_PRESET_NAME("gui.duration-picker.preset-name"),
     DURATION_PICKER_PRESET_LORE("gui.duration-picker.preset-lore"),
     DURATION_PICKER_CUSTOM("gui.duration-picker.custom"),
@@ -65,7 +65,7 @@ public enum GuiMessageKey implements MessageKey {
     DURATION_PICKER_CUSTOM_PROMPT("gui.duration-picker.custom-prompt"),
     DURATION_PICKER_BACK("gui.duration-picker.back"),
 
-    // the shared colour-picker widget — the 16 standard named-colour swatches
+    // the shared colour-picker widget. The 16 standard named-colour swatches
     COLOUR_WHITE("gui.colour.white"),
     COLOUR_ORANGE("gui.colour.orange"),
     COLOUR_MAGENTA("gui.colour.magenta"),

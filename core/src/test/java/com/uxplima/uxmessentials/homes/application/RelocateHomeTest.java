@@ -91,7 +91,7 @@ class RelocateHomeTest {
         assertThat(result.errorOrThrow()).isEqualTo(HomeError.UNSAFE_LOCATION);
         assertThat(notifier.lastKey).isEqualTo(HomesMessageKey.HOME_UNSAFE_LOCATION);
         assertThat(events.published).isEmpty();
-        // The home should still be at the original position — save was not called with the new position.
+        // The home should still be at the original position: save was not called with the new position.
         assertThat(repository.findSlot(OWNER, HomeSlot.of(0)))
                 .isPresent()
                 .get()

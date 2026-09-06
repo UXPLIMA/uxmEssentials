@@ -24,8 +24,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The cross-server trade window as the operator sees it: the spec in {@code modules/trade/gui/trade-cross.conf} plus
- * the bindings behind it. It reads like the same-server window but each side stakes alone — the counterpart's items
- * are on their own backend and arrive through the escrow — so this window has one content region, the viewer's own,
+ * the bindings behind it. It reads like the same-server window but each side stakes alone: the counterpart's items
+ * are on their own backend and arrive through the escrow, so this window has one content region, the viewer's own,
  * and no mirror to fill.
  */
 @NullMarked
@@ -90,7 +90,7 @@ public final class CrossTradeWindow {
         return ContentRegions.read(inv, offerSlots);
     }
 
-    /** Empty the staked region — the originals leave the window, so nothing is returned twice. */
+    /** Empty the staked region: the originals leave the window, so nothing is returned twice. */
     void clearOffer(Inventory inv) {
         ContentRegions.clear(inv, offerSlots);
     }

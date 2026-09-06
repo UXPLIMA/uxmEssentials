@@ -4,17 +4,17 @@
 -- columns cannot hold one on the backends that enforce VARCHAR length (MySQL/MariaDB, PostgreSQL).
 --
 -- We cannot widen the V40 columns in place: SQLite (the default backend) supports only RENAME / ADD / DROP in
--- ALTER TABLE — it has no ALTER COLUMN ... TYPE — and the three engines spell a type change differently
+-- ALTER TABLE: it has no ALTER COLUMN ... TYPE, and the three engines spell a type change differently
 -- (MySQL MODIFY, PostgreSQL ALTER COLUMN ... TYPE), so no single portable ALTER COLUMN statement exists. The
 -- portable move, and the shape the vaults (V6) and staff (V29) contexts already use for a base64 ItemStack
--- payload, is a plain ALTER TABLE ... ADD COLUMN ... TEXT — the same statement form V40 itself used, accepted
+-- payload, is a plain ALTER TABLE ... ADD COLUMN ... TEXT. The same statement form V40 itself used, accepted
 -- unchanged on SQLite, MySQL/MariaDB and PostgreSQL.
 --
 -- So this adds six new TEXT columns alongside the V40 ones. Going forward the mapper writes a slot's token to
 -- the new equip_<slot>_b64 column and reads the new column first, falling back to the old VARCHAR column when
 -- the new one is NULL. An existing NPC keeps its gear: its material name still lives in the V40 column and is
 -- read by the fallback, so old NPCs render exactly as before while new ones can carry full items. The new token
--- is itself self-describing — a b64: prefix marks a serialized item, a bare name is a legacy material — so the
+-- is itself self-describing (a b64: prefix marks a serialized item, a bare name is a legacy material) so the
 -- two shapes never collide.
 --
 -- Same portability contract as V1-V44: plain ALTER TABLE ... ADD COLUMN statements in the subset all three

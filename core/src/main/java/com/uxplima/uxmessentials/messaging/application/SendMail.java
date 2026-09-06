@@ -22,13 +22,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /mail send <player> <text>}: leave a piece of persistent, text-only mail. Mail is DB-backed and
- * survives restart (the hard messaging invariant) — the recipient may be offline; the row waits and is read
+ * survives restart (the hard messaging invariant). The recipient may be offline; the row waits and is read
  * on next join. The send is mute-gated (a muted sender cannot leave mail) and ignore-aware (a recipient who
  * ignores the sender silently drops the mail, the sender still seeing a sent confirmation so the ignore is
  * not observable, mirroring {@code /msg}).
  *
  * <p>On delivery it appends the item to the recipient's box (assigning its id), publishes
- * {@code MailDelivered}, and — when the recipient is online — notifies them of new mail subject to the
+ * {@code MailDelivered}, and, when the recipient is online, notifies them of new mail subject to the
  * notify cooldown the adapter applies. There are no item attachments (out of scope); the body is the whole
  * payload.
  */

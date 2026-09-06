@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * the context wiring and shared read-only across the command surface.
  *
  * <p>itemworld is stateless and ACL-thin: there are no per-context use-case objects here as in the
- * persistence-backed contexts — the validating value objects live in {@code :core} and the live mutation runs
+ * persistence-backed contexts. The validating value objects live in {@code :core} and the live mutation runs
  * at the adapter boundary on the kernel {@link com.uxplima.uxmessentials.shared.application.port.Scheduler}.
  * The bundle therefore carries the {@link KernelPorts} the commands schedule and render through, the
  * {@link ItemworldAudit} the abusable verbs emit on, and the {@link ItemworldConfig} the per-group and

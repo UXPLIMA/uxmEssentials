@@ -18,7 +18,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * The tablist context's operator content, loaded once at wiring time from {@code modules/tablist/config.conf} and held
- * in an {@link AtomicReference} so a reload swaps a fresh parse whole — readers see either the previous or the new
+ * in an {@link AtomicReference} so a reload swaps a fresh parse whole. Readers see either the previous or the new
  * content, never a half-applied tree (CLAUDE.md "swapped atomically via AtomicReference on reload"). An absent or
  * unreadable file yields the inert default, so a server that enables the module without authoring the file gets the
  * do-nothing default: no formats, no header/footer change.

@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /mutehistory <player>}: review a player's full mute/unmute history newest-first. A read-only
- * companion to the mute family — the {@code ReviewMuteHistory} use case runs the bounded, append-only history
+ * companion to the mute family. The {@code ReviewMuteHistory} use case runs the bounded, append-only history
  * query. It reuses the {@code uxmessentials.moderation.mute} node ({@code /mute}/{@code /tempmute}), the same
  * surface staff already hold to act on mutes. The lookup is hopped off the tick thread through the
  * {@link Scheduler} port so a large history table never blocks the command.

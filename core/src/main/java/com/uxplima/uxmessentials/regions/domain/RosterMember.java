@@ -7,7 +7,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * One classified line of a region's roster — a member or owner entry as the members/owners editor reasons about it,
+ * One classified line of a region's roster. A member or owner entry as the members/owners editor reasons about it,
  * derived purely from the identifier string the {@code RegionService} roster reads return. WorldGuard stores a roster
  * entry as a player uuid, a legacy player name, or a {@code g:}-prefixed group; only a uuid-backed entry can be
  * removed through the uuid-keyed {@link RegionMemberChange}, so this value carries the parsed {@link #player() uuid}

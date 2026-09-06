@@ -43,7 +43,7 @@ import org.jspecify.annotations.NullMarked;
  * surface). Two specs cover the two windows: {@code communication-admin} draws the panel and
  * {@code communication-announcer} the read-only list.
  *
- * <p>The menu holds no domain logic of its own — every action routes through a surface the commands already use.
+ * <p>The menu holds no domain logic of its own: every action routes through a surface the commands already use.
  * Every visible string is a {@link CommunicationMessageKey}; the clearchat fan-out runs on the kernel
  * {@link Scheduler}, and the broadcast prompt's callbacks are hopped onto the viewer's region thread by the
  * {@link TextInput} seam, exactly as the original view did.
@@ -150,7 +150,7 @@ public final class CommunicationAdminMenu {
     }
 
     /**
-     * Flush online players' chat exactly as {@code /clearchat} does — a screenful of blank lines (skipping the
+     * Flush online players' chat exactly as {@code /clearchat} does. A screenful of blank lines (skipping the
      * exempt) through the {@link MessageSink}, then the cleared/by notices through the {@link Notifier},
      * each hopping to the viewer's region thread inside the sink. Package-private so the golden test can drive it.
      */

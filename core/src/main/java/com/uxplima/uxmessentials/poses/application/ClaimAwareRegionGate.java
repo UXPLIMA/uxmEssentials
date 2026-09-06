@@ -11,16 +11,16 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * The real {@link PoseRegionGate} wired from Phase 5: a pose is allowed unless a land claim or a WorldGuard region
- * flag forbids it here. It composes two seams — the shared {@link ClaimService} the homes and warps contexts already
- * consult, and the poses {@link PoseRegionFlags} WorldGuard seam — behind the two {@code respect-*} config toggles,
+ * flag forbids it here. It composes two seams. The shared {@link ClaimService} the homes and warps contexts already
+ * consult, and the poses {@link PoseRegionFlags} WorldGuard seam. Behind the two {@code respect-*} config toggles,
  * so it stays a thin, Bukkit-free decision the adapter feeds real backends into.
  *
  * <p>Claims use {@link ClaimService#canAccess canAccess} rather than {@code canPlace}: sitting is being present at a
- * spot, so the question is "may this player act in the claim covering it", not "may they build a home here" — the
+ * spot, so the question is "may this player act in the claim covering it", not "may they build a home here", the
  * latter would also fire the require-a-claim and proximity rules and wrongly forbid sitting out in the wilderness.
  * A non-{@code ALLOWED} decision denies the pose. Each toggle is honoured independently: with {@code respect-claims}
  * off the claim seam is skipped even when a real claim service is wired, and likewise for {@code respect-worldguard}.
- * When both are off, or neither backend objects, the pose is allowed — the graceful default a server with no region
+ * When both are off, or neither backend objects, the pose is allowed, the graceful default a server with no region
  * plugin also lands on.
  */
 public final class ClaimAwareRegionGate implements PoseRegionGate {

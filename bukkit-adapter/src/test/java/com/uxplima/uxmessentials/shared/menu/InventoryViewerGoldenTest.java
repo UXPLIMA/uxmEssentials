@@ -35,8 +35,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  *
  * <p>The snapshot hand-off resolves under the test scheduler: it reports itself off the viewer's region (the
  * {@link Scheduler} default {@code ownsEntity}) and runs {@code onEntity} synchronously, so the source's latch
- * completes the moment the read is scheduled. The read is defensive — the source clones each stack and the icon
- * provider clones again — so the rendered tiles can never mutate the viewer's real items.
+ * completes the moment the read is scheduled. The read is defensive. The source clones each stack and the icon
+ * provider clones again, so the rendered tiles can never mutate the viewer's real items.
  */
 class InventoryViewerGoldenTest {
 
@@ -123,7 +123,7 @@ class InventoryViewerGoldenTest {
         Inventory top = viewerPlayer.getOpenInventory().getTopInventory();
         ItemStack tile = top.getItem(0);
         assertThat(tile).isNotNull();
-        // Mutating the rendered tile must not touch the backing inventory item — the double clone (source + provider).
+        // Mutating the rendered tile must not touch the backing inventory item, the double clone (source + provider).
         tile.setAmount(1);
         assertThat(viewerPlayer.getInventory().getItem(0)).isEqualTo(new ItemStack(Material.DIAMOND, 3));
     }
@@ -143,7 +143,7 @@ class InventoryViewerGoldenTest {
     }
 
     /**
-     * A synchronous scheduler that runs every hop inline, including {@code onEntity} — so the storage source's
+     * A synchronous scheduler that runs every hop inline, including {@code onEntity}, so the storage source's
      * snapshot latch is released the moment it is scheduled, exercising the helper's latch path (it reports itself
      * off the viewer's entity region, the {@link Scheduler} default {@code ownsEntity}).
      */

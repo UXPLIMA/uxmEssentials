@@ -15,8 +15,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The teleport bounded context as a first-class {@link FeatureModule}: it owns all movement
- * orchestration and the shared cooldown/warmup machinery — the tpa suite, {@code /back}, {@code /rtp},
- * spawn, the admin and positional verbs — plus the move-cancels-warmup invariant. The module declares
+ * orchestration and the shared cooldown/warmup machinery, the tpa suite, {@code /back}, {@code /rtp},
+ * spawn, the admin and positional verbs, plus the move-cancels-warmup invariant. The module declares
  * its command surface and its enable gate here; {@code start} constructs the use cases over the injected
  * kernel ports and the context's own ports, and {@code stop} drains them so a disabled module holds zero
  * runtime state.

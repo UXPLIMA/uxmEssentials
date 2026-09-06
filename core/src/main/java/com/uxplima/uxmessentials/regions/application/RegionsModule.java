@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The regions bounded context as a first-class {@link FeatureModule}: a GUI to manage WorldGuard regions (Phase 1
- * lists them; the flag and members/owners editors land with the later phases). WorldGuard is a soft dependency —
+ * lists them; the flag and members/owners editors land with the later phases). WorldGuard is a soft dependency
  * the adapter wiring probes for it and, when it is absent, binds a no-op {@code RegionService} so the module is
  * inert (the {@code /regions} command reports "WorldGuard not installed" and opens nothing).
  *

@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The activity listener feeding the AFK clock (docs/02-concurrency.md §6.9): a player who moves, chats, or
  * reels a fishing rod is active, so their idle clock resets and an AFK player returns on the first sign of
- * life — unless the operator's anti-machine {@link ActivityPolicy} ignores that kind, in which case an AFK-farm
+ * life, unless the operator's anti-machine {@link ActivityPolicy} ignores that kind, in which case an AFK-farm
  * machine producing only ignored activity still drifts idle and goes AFK.
  *
  * <p>The Bukkit event → {@link ActivityKind} mapping is this adapter's job; the which-kinds-count decision is
@@ -32,10 +32,10 @@ import org.jspecify.annotations.NullMarked;
  * {@link ActivityKind#ROTATE} (the operator may ignore it, so a piston nudge does not keep a farm awake).
  *
  * <ul>
- *   <li><b>Move / fish</b> — fire on the player's own region thread (sync); when the kind counts, activity is
+ *   <li><b>Move / fish</b>. Fire on the player's own region thread (sync); when the kind counts, activity is
  *       recorded directly, valid because the use case only touches the {@code ConcurrentHashMap} via
  *       {@code compute}.
- *   <li><b>Chat</b> — {@link AsyncChatEvent} fires off the main thread, so the handler bridges back to the
+ *   <li><b>Chat</b>. {@link AsyncChatEvent} fires off the main thread, so the handler bridges back to the
  *       player's region thread through the {@link Scheduler} port before recording activity.
  * </ul>
  */

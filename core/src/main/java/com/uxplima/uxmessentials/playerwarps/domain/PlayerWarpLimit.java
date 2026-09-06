@@ -20,7 +20,7 @@ public record PlayerWarpLimit(int cap, boolean unlimited) {
         return new PlayerWarpLimit(cap, false);
     }
 
-    /** The "no limit at all" quota — a player with the {@code -1} sentinel or unlimited meta. */
+    /** The "no limit at all" quota: a player with the {@code -1} sentinel or unlimited meta. */
     public static PlayerWarpLimit noLimit() {
         return new PlayerWarpLimit(Integer.MAX_VALUE, true);
     }

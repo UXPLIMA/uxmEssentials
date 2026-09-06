@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The reusable editor of a {@code List<Ref>} the click-action and view-requirement builders share: an engine selector
  * child window listing one button per ref (drawn as its {@code id:value} token), gesture-aware like the shared
- * {@code ListProperty} — left/right reorder, shift-left edit, shift-right remove (confirm-gated) — plus an add button
+ * {@code ListProperty} (left/right reorder, shift-left edit, shift-right remove (confirm-gated)) plus an add button
  * and a back button. Add and edit route through the {@link MenuIdPicker} (choose a registered id) then a
  * {@link TextInput} for the value/arg, so every ref an author builds names an id the engine can actually resolve. Each
  * mutation rewrites the whole list through the caller's setter off the tick thread and re-opens the list so the change
@@ -38,7 +38,7 @@ public final class MenuRefListEditor {
 
     private static final int ROWS = 6;
 
-    /** The 45 entry slots (rows 0–4) a ref button may occupy; the sixth row carries the add and back controls. */
+    /** The 45 entry slots (rows 0 to 4) a ref button may occupy; the sixth row carries the add and back controls. */
     private static final List<Integer> ENTRY_SLOTS = entrySlots();
 
     private static final int ADD_SLOT = 48;

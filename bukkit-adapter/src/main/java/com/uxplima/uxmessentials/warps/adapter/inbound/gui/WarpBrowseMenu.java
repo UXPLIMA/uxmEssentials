@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
  * drill-in category tiles (sorted by their slot) with the warps at the current tree level, exactly as the old
  * view did; clicking a category drills in, the back button steps up to the parent, and clicking a warp warps
  * the viewer through the same {@link UseWarp} use case the {@code /warp} command drives. With no categories the
- * legacy flat list is the root level with no sub-categories — one spec serves both modes.
+ * legacy flat list is the root level with no sub-categories: one spec serves both modes.
  *
  * <p>The level's tiles and their full lore strings are resolved up front on the viewer's entity thread (where
  * {@link #open} is called from) and handed to the engine as the menu subject, mirroring {@link WarpManagerMenu}:
@@ -56,7 +56,7 @@ public final class WarpBrowseMenu {
     /** Disk-first then bundled, mirroring the GUI-layout loader, so an operator edit to the spec takes effect. */
     private static final String SPEC_RESOURCE = "modules/warps/gui/warp-browse.conf";
 
-    /** The single material every warp tile uses, since warps carry no item — matches the old view's fallback. */
+    /** The single material every warp tile uses, since warps carry no item: matches the old view's fallback. */
     private static final Material WARP_FALLBACK_ICON = Material.ENDER_PEARL;
 
     /** The kind a browse tile stands for, so one list source can mix drill-in categories and warp tiles. */
@@ -286,7 +286,7 @@ public final class WarpBrowseMenu {
      * material name, the rendered display name, and the full lore as {@code \n}-joined catalog lines.
      *
      * @param kind whether this tile drills into a category or warps to a warp
-     * @param id the clicked identity — the category id to drill into, or the warp name to warp to
+     * @param id the clicked identity, the category id to drill into, or the warp name to warp to
      * @param icon the icon material name
      * @param name the rendered display name in the viewer's locale
      * @param lore the full lore, the catalog lines joined by {@code \n} for the engine to expand

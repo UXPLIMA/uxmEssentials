@@ -25,7 +25,7 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportRequest.Transition;
  * computed from {@link TeleportSettings#requestTtl()} against an injected {@link Clock}, so expiry is
  * deterministic and the domain never reads the wall clock itself.
  *
- * <p>Vanish-awareness — a request to a player the requester cannot see is silently refused — is applied
+ * <p>Vanish-awareness (a request to a player the requester cannot see is silently refused) is applied
  * by the adapter's {@code canSee} check before reaching this use case, mirroring the presence-context
  * integration; this layer enforces the toggle and block gates the domain owns.
  */

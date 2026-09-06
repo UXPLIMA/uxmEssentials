@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The native data-components an operator layers onto a menu item beyond {@link RichMeta}'s enchants/colours/trim —
+ * The native data-components an operator layers onto a menu item beyond {@link RichMeta}'s enchants/colours/trim
  * a display rarity, a tooltip-style key, the hide-tooltip and enchant-glint toggles, an enchantability rating,
  * attribute modifiers, and the food/tool components. Every value is a plain string, int, double, boolean, or list
- * — never a Bukkit type — so this model stays in the pure, Bukkit-free spec core; the renderer resolves each token
+ *, never a Bukkit type, so this model stays in the pure, Bukkit-free spec core; the renderer resolves each token
  * against the live registries at draw time and silently skips anything that does not resolve.
  *
  * <p>The toggles are {@link Optional}{@code <Boolean>} rather than a bare {@code boolean} on purpose: an unset
@@ -32,7 +32,7 @@ public record DataComponents(
         Optional<FoodSpec> food,
         Optional<ToolSpec> tool) {
 
-    /** The empty data-components — the default an item carries when its {@code decor} block declares none. */
+    /** The empty data-components: the default an item carries when its {@code decor} block declares none. */
     public static final DataComponents NONE = new DataComponents(
             Optional.empty(),
             Optional.empty(),
@@ -80,7 +80,7 @@ public record DataComponents(
      */
     public record FoodSpec(Optional<Integer> nutrition, Optional<Double> saturation, Optional<Boolean> canAlwaysEat) {
 
-        /** The empty food spec — no overrides. */
+        /** The empty food spec: no overrides. */
         public static final FoodSpec NONE = new FoodSpec(Optional.empty(), Optional.empty(), Optional.empty());
 
         public FoodSpec {
@@ -93,7 +93,7 @@ public record DataComponents(
     /** The tool component: the base mining speed against blocks the tool is not suited to, and durability per block. */
     public record ToolSpec(Optional<Double> defaultMiningSpeed, Optional<Integer> damagePerBlock) {
 
-        /** The empty tool spec — no overrides. */
+        /** The empty tool spec: no overrides. */
         public static final ToolSpec NONE = new ToolSpec(Optional.empty(), Optional.empty());
 
         public ToolSpec {

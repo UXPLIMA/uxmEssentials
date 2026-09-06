@@ -27,7 +27,7 @@ import me.lokka30.treasury.api.economy.transaction.EconomyTransactionInitiator;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Bridges a foreign Treasury economy into this plugin's {@link EconomyProvider} port — the primary bridge
+ * Bridges a foreign Treasury economy into this plugin's {@link EconomyProvider} port, the primary bridge
  * when Treasury is on the server ({@code docs/11-economy-integration.md} §2, §6). This is one of only two
  * classes (with {@code VaultEconomyAdapter}) allowed to import a provider SDK; the ArchUnit fence
  * {@code economyDomainHasNoProviderSdk} forbids {@code me.lokka30.treasury..} anywhere above this adapter.

@@ -15,12 +15,12 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The dialog backend of the text-input seam: prompts through uxmLib's native {@link DialogInputScreen} — the Paper
- * server-side Dialog carrying one line of text, added in Minecraft 1.21.6 — and reports the typed line. A dialog field
+ * The dialog backend of the text-input seam: prompts through uxmLib's native {@link DialogInputScreen}, the Paper
+ * server-side Dialog carrying one line of text, added in Minecraft 1.21.6, and reports the typed line. A dialog field
  * can be pre-seeded, so unlike the sign backend this honours {@code initialText}. The uxmLib screen delivers its submit
  * and cancel on the main server thread; the entity-thread hop and the cancel-keyword check live upstream in
  * {@link TextInput} (its outcome wrapper marshals every backend's result onto the viewer's region), so this stays a thin
- * adapter exactly like {@link SignTextBackend} — it never schedules for itself.
+ * adapter exactly like {@link SignTextBackend}: it never schedules for itself.
  *
  * <p>A live {@link DialogInputScreen} cannot be driven under MockBukkit, so the show step is the {@link Prompt} seam:
  * production supplies the native, screen-backed one via {@link #paperNative(GuiText)}; a test supplies a fake that drives the

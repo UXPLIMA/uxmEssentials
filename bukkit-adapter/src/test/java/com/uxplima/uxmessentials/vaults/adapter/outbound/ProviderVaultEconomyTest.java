@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit coverage of {@link ProviderVaultEconomy}: it bridges the vaults {@code VaultEconomy} seam onto the
  * resolved {@link EconomyProvider}, denominating the bare amount in the configured currency. {@code canAfford}
- * is a balance read against the fee, {@code withdraw} is the guarded debit and {@code deposit} is a credit —
+ * is a balance read against the fee, {@code withdraw} is the guarded debit and {@code deposit} is a credit
  * each delegated to the provider with the right currency, which a recording fake provider verifies.
  * {@code withdraw}/{@code deposit} report the provider's {@code Result}: {@code true} on {@code isOk()},
  * {@code false} when the guarded debit/credit was rejected.

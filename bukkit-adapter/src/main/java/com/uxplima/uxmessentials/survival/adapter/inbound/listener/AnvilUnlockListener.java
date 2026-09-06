@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * Anvil-unlocker: lifts vanilla's anvil caps so a high-level combine is not rejected with "Too Expensive!". On
  * {@link PrepareAnvilEvent} it raises the anvil's maximum repair cost to remove the level ceiling ({@code
  * remove-level-limit}) and, when {@code remove-cost-limit} is set, zeroes the level price so the unlocked combine is
- * also free. Purely an event tweak — no per-player state, no command; it applies to every anvil while the mechanic is
+ * also free. Purely an event tweak. No per-player state, no command; it applies to every anvil while the mechanic is
  * enabled.
  *
  * <p>{@link PrepareAnvilEvent} is not cancellable, so the handler runs at {@link EventPriority#HIGH} to sit after any

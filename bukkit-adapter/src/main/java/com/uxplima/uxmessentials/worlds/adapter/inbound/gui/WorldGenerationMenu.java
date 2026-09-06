@@ -22,8 +22,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Registers the read-only generation summary for one world with the menu engine and opens it. A three-row panel
- * reporting the world's immutable spec — environment, generation type, seed, and external generator (or
- * {@code vanilla} when none) — over a single back button to the per-world hub. None of the four info slots mutate
+ * reporting the world's immutable spec, environment, generation type, seed, and external generator (or
+ * {@code vanilla} when none), over a single back button to the per-world hub. None of the four info slots mutate
  * anything; the spec is fixed at creation, so this screen only shows it.
  *
  * <p>The world's spec is read on the viewer's entity thread at open and handed in as the {@link Subject}, so each info
@@ -109,8 +109,8 @@ public final class WorldGenerationMenu {
     }
 
     /**
-     * The subject of an open generation summary: the world and the spec values it shows — environment, type, seed
-     * (or {@code (random)}) and generator (or {@code vanilla}) — read on the viewer's entity thread before the open
+     * The subject of an open generation summary: the world and the spec values it shows, environment, type, seed
+     * (or {@code (random)}) and generator (or {@code vanilla}). Read on the viewer's entity thread before the open
      * so the engine renders without a port read. The placeholders read this directly.
      *
      * @param world the world this summary describes

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /lockdown} into the moderation context's command surface — the server-wide login gate that
+ * Pins {@code /lockdown} into the moderation context's command surface, the server-wide login gate that
  * refuses every join but holders of the bypass permission. This guard fails if the literal drops out of the
  * surface or ever wires under a node other than {@code uxmessentials.moderation.lockdown}.
  */

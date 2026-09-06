@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link LocaleStore} implementation: a player's {@code /lang} override stamped in PDC under a single
  * pre-created key, so the choice survives a relog without a DB round-trip.
  *
- * <p>PDC is the default backing because a lost language preference is harmless — it does not need to
+ * <p>PDC is the default backing because a lost language preference is harmless. It does not need to
  * survive a world rollback the way an economy balance does (docs/13-i18n §7). The stored value is the
  * locale's language tag ({@code tr}, {@code en}); an empty container means no override and the resolver
  * falls back to the client locale.

@@ -35,7 +35,7 @@ class TradeRequestsTest {
         TradeRequests.Match match = requests.resolve(BOB.uuid(), null);
         assertThat(match.status()).isEqualTo(TradeRequests.Status.MATCHED);
         assertThat(requesterOf(match)).isEqualTo(ALICE);
-        // Resolving consumed it — a second lookup finds nothing.
+        // Resolving consumed it: a second lookup finds nothing.
         assertThat(requests.resolve(BOB.uuid(), null).status()).isEqualTo(TradeRequests.Status.NONE);
     }
 

@@ -157,7 +157,7 @@ class PresenceAdapterTest {
     }
 
     /**
-     * A {@code running} supplier that stays true long enough for exactly one sweep cycle, then false — so the
+     * A {@code running} supplier that stays true long enough for exactly one sweep cycle, then false, so the
      * inline scheduler's synchronous self-reschedule terminates instead of recursing. The real
      * {@code asyncAfter} genuinely defers, so production never recurses.
      */

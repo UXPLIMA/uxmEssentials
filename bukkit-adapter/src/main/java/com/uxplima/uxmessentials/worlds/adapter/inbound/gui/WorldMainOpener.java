@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The seam {@code WorldsServices} exposes so {@code /world gui <world>} opens the engine-rendered per-world editor hub
  * without the command (or the services holder) depending on the menu engine directly. Worlds wiring binds it to
- * {@code WorldMainMenu.open} once that menu is built — the same indirection the world-list open seam uses.
+ * {@code WorldMainMenu.open} once that menu is built, the same indirection the world-list open seam uses.
  */
 @FunctionalInterface
 @NullMarked

@@ -21,13 +21,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /pwarp members add|remove}: grant or revoke a co-owner / manager on a warp. Owner-only by the capability
- * matrix — {@link WarpCapability#MANAGE_MEMBERS} is denied to co-owners and managers — so a delegate can never
+ * matrix ({@link WarpCapability#MANAGE_MEMBERS} is denied to co-owners and managers) so a delegate can never
  * promote further delegates. Each verb resolves the warp by its global name ({@link PlayerWarpError#NOT_FOUND}
  * when absent), gates the actor ({@link PlayerWarpError#NO_PERMISSION} when they may not manage members), then
  * upserts or removes the membership row and notifies.
  *
- * <p>Two grants are refused after the gate: {@link WarpRole#OWNER} is never a grantable role — a warp keeps its
- * single owner, so a member may only be a co-owner or manager ({@link PlayerWarpError#INVALID_ROLE}) — and the
+ * <p>Two grants are refused after the gate: {@link WarpRole#OWNER} is never a grantable role. A warp keeps its
+ * single owner, so a member may only be a co-owner or manager ({@link PlayerWarpError#INVALID_ROLE}), and the
  * warp's own owner is never added as a member ({@link PlayerWarpError#CANNOT_TARGET_OWNER}); ownership already
  * confers every capability, and the aggregate's owner field, not a member row, is the source of truth for it.
  */

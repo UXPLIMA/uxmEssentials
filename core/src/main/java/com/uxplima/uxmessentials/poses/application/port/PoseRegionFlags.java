@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * "nothing denied".
  *
  * <p>Only an <em>explicit</em> deny matters. A {@code StateFlag} defaults to ALLOW, so a location no region touches
- * — and every location on a server without WorldGuard — answers {@code false} here; the flag has to be set DENY on a
+ *, and every location on a server without WorldGuard, answers {@code false} here; the flag has to be set DENY on a
  * covering region for a pose to be turned away. The seam is fail-open: a lookup it cannot evaluate reports
  * {@code false} rather than blocking a harmless sit.
  */

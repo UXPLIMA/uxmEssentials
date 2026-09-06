@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * A Caffeine read-cache decorator over a delegate {@link HomeRepository}, keyed by owner uuid. A load
  * misses through to the database once and is served from memory until a write to that owner invalidates
- * the entry — write-through at the delegate, invalidate here, never a write-back cache that could lose a
+ * the entry, write-through at the delegate, invalidate here, never a write-back cache that could lose a
  * mutation. The durable source of truth is always the delegate; this only spares repeated reads of a hot
  * owner's small set.
  *
@@ -99,7 +99,7 @@ public final class CachedHomeRepository implements HomeRepository {
 
     /**
      * Drop one cached owner so the next read reloads it from the database. Called by the cross-server bus
-     * client when a peer reports this owner's homes changed on another backend — the shared DB already holds
+     * client when a peer reports this owner's homes changed on another backend. The shared DB already holds
      * the authoritative rows, so dropping the cached set lets the next {@code /home} on this backend resolve
      * the fresh location.
      */

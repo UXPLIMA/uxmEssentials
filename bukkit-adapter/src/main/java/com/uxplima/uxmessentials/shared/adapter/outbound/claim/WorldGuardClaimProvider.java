@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.WorldRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@link ClaimProvider} backed by WorldGuard regions, reached <b>entirely by reflection</b> — there is no
+ * {@link ClaimProvider} backed by WorldGuard regions, reached <b>entirely by reflection</b>: there is no
  * compile dependency on WorldGuard, so this class loads and runs whether or not WorldGuard is present. Here a
  * "claim" is a region a player owns or is a member of, so a warp can be gated to land the player has a stake in.
  *
@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  * covering regions.
  *
  * <p>The {@code __global__} region covers every block in a world and usually has no owner, so a location covered
- * only by it is treated as unclaimed and {@link #claimAt} returns empty — otherwise no warp could ever be set in
+ * only by it is treated as unclaimed and {@link #claimAt} returns empty. Otherwise no warp could ever be set in
  * unregioned wilderness. A lookup therefore answers over the covering <em>named</em> regions only.
  *
  * <p>{@link ClaimLookup#owner()} stays empty: a region's owners are a domain that may hold several UUIDs, so there
@@ -41,7 +41,7 @@ import org.jspecify.annotations.NullMarked;
  * per-region ban concept, so {@link ClaimLookup#isBanned} is always {@code false}.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code com.sk89q} type — a server without WorldGuard loads none of its classes. The region
+ * active names no {@code com.sk89q} type: a server without WorldGuard loads none of its classes. The region
  * chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs once and degrades to
  * empty rather than propagating.
  */
@@ -51,7 +51,7 @@ public final class WorldGuardClaimProvider implements ClaimProvider {
     /** The id of WorldGuard's world-wide region, excluded so unregioned wilderness reads as unclaimed. */
     static final String GLOBAL_REGION = "__global__";
 
-    // Region membership is a 2D question here — a warp is on land the player holds regardless of height — and a
+    // Region membership is a 2D question here (a warp is on land the player holds regardless of height) and a
     // constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on Folia when the
     // proximity scan reads neighbour columns owned by a different region.
     private static final int CLAIM_LOOKUP_Y = 64;
@@ -212,7 +212,7 @@ public final class WorldGuardClaimProvider implements ClaimProvider {
         @Override
         public boolean isBanned(UUID player) {
             Objects.requireNonNull(player, "player");
-            // WorldGuard regions have no per-player ban concept — access is expressed through owners/members only.
+            // WorldGuard regions have no per-player ban concept: access is expressed through owners/members only.
             return false;
         }
     }

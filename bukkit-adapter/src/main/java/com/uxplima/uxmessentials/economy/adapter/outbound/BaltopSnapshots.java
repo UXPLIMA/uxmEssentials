@@ -100,7 +100,7 @@ public final class BaltopSnapshots {
             throw new IllegalArgumentException("baltop limit must be positive: " + limit);
         }
         if (!currency.leaderboardEnabled()) {
-            return List.of(); // hidden from leaderboards by its capability flag — never primed, never built
+            return List.of(); // hidden from leaderboards by its capability flag. Never primed, never built
         }
         AtomicReference<List<BaltopRow>> slot = snapshots.get(currency);
         List<BaltopRow> snapshot = slot == null ? null : slot.get();

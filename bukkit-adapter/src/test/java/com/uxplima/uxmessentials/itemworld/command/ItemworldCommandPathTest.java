@@ -53,8 +53,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the itemworld command paths through the real Brigadier nodes against a real (mock)
  * server: {@code /give} validation (an over-cap amount is refused before any stack materialises, a valid amount
- * delivers and an unknown item is rejected), {@code /disposal} opening a window, and — the headline
- * sub-feature-group disable — a command whose group is switched off in {@code itemworld.conf} answering
+ * delivers and an unknown item is rejected), {@code /disposal} opening a window, and, the headline
+ * sub-feature-group disable. A command whose group is switched off in {@code itemworld.conf} answering
  * {@code COMMAND_DISABLED} and mutating nothing.
  *
  * <p>The commands' {@code build()} nodes are registered into a Brigadier {@link CommandDispatcher} and executed

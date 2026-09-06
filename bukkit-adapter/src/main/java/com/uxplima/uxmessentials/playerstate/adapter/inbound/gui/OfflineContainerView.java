@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
  * live inventory on their own entity thread instead (a disk write would be lost under their live session). Offline
  * {@code /invsee} respects the {@code uxmessentials.invsee.modify} gate just like the online view; offline
  * {@code /endersee} is editable, mirroring the live ender-chest open. Every open window is tracked so a single
- * write-back claims it — whichever of the close or {@link #flushAll} (on module stop) reaches it first.
+ * write-back claims it, whichever of the close or {@link #flushAll} (on module stop) reaches it first.
  */
 @NullMarked
 public final class OfflineContainerView {

@@ -19,10 +19,10 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>A hard crash loses the in-memory active marker but not the DB-backed loadout row, so a player who crashed
  * mid-mode rejoins holding the autosaved gadget hotbar while their real loadout still sits safe in the row. On
- * join, when a row exists for the player but they hold no active marker — the signature of an orphaned row — this
+ * join, when a row exists for the player but they hold no active marker, the signature of an orphaned row, this
  * hands off to {@link com.uxplima.uxmessentials.staff.application.RecoverStaffLoadout} to restore the real
  * loadout, delete the row, and restore the pre-mode vanish state. It runs on the player's entity region thread
- * (the recovery touches the live inventory), and BEFORE the player can reach {@code /staffmode} — so enter never
+ * (the recovery touches the live inventory), and BEFORE the player can reach {@code /staffmode}, so enter never
  * sees the gadget hotbar as their real inventory.
  *
  * <p>The cheap repository pre-check keeps the common case (no orphaned row) off the entity-thread hop entirely;
@@ -45,7 +45,7 @@ public final class StaffJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         PlayerRef who = BukkitRefs.toRef(event.getPlayer());
         if (services.store().isActive(who) || repository.load(who.uuid()).isEmpty()) {
-            // Either a live session this listener must not disturb, or no orphaned row — nothing to recover.
+            // Either a live session this listener must not disturb, or no orphaned row: nothing to recover.
             return;
         }
         // An orphaned row from a crash / interrupted exit: finish that exit on the entity thread, before the

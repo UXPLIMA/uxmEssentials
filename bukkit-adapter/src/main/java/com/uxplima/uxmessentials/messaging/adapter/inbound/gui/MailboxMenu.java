@@ -27,16 +27,16 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the mailbox ({@code /mail} with no arguments, or the mailbox entry on the {@code /uxmess gui} hub) with
  * the menu engine and opens it. Two specs cover the two windows: {@code messaging-mailbox} draws the paginated
- * newest-first mail grid and {@code messaging-mail-detail} the read-only per-mail detail — the same shape the
+ * newest-first mail grid and {@code messaging-mail-detail} the read-only per-mail detail, the same shape the
  * communication panel and its announcer list follow.
  *
  * <p>The box is a database read, so the {@code messaging:mail} source loads it off the viewer's region thread,
- * snapshots the (immutable) items, and marks the box read in the same hop — the GUI equivalent of {@code /mail
- * read} — so the icons still render from the pre-mark snapshot and unread mail reads as new on first open. The
+ * snapshots the (immutable) items, and marks the box read in the same hop, the GUI equivalent of {@code /mail
+ * read}, so the icons still render from the pre-mark snapshot and unread mail reads as new on first open. The
  * {@code mail_icon} placeholder picks the read/unread material and the {@code mail_sender} / {@code mail_time} /
  * {@code mail_snippet} / {@code mail_message} placeholders fill each entry and the detail from the bound mail. A
  * left click opens that mail's detail (carrying the {@link MailItem} as the subject); the clear button empties the
- * box behind a confirm through the same {@link ClearMail} use case {@code /mail clear} drives — so the mailbox adds
+ * box behind a confirm through the same {@link ClearMail} use case {@code /mail clear} drives, so the mailbox adds
  * no domain logic of its own.
  */
 @NullMarked
@@ -96,7 +96,7 @@ public final class MailboxMenu {
 
     /**
      * The viewer's mail newest-first, loaded off the region thread (a database read). Opening the mailbox is the
-     * GUI's read action, so the box is marked read in the same hop — the icons still render from this pre-mark
+     * GUI's read action, so the box is marked read in the same hop. The icons still render from this pre-mark
      * snapshot (the items are immutable value objects) so unread mail reads as new. Touches no Bukkit API.
      */
     private List<MailItem> items(MenuContext ctx) {

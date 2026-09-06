@@ -7,8 +7,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Read seam the expansion queries for the {@code muted}/{@code jailed} bare keys and the {@code moderation_*}
- * family. It is an adapter over the moderation context's read sides — the mute/jail gates, the
- * {@code ModerationRepository} ban/mute state, the {@code Sanctions} freeze read and the warning count — wired
+ * family. It is an adapter over the moderation context's read sides. The mute/jail gates, the
+ * {@code ModerationRepository} ban/mute state, the {@code Sanctions} freeze read and the warning count, wired
  * during bootstrap; when the moderation module is disabled the seam is absent and the resolver degrades the
  * boolean placeholders to "no" and the rest to the dash.
  *
@@ -40,7 +40,7 @@ public interface ModerationPlaceholders {
     Optional<JailView> activeJail(PlayerRef who);
 
     /**
-     * A flattened view of an active sanction — the remaining wait, the reason and the issuer — so the resolver
+     * A flattened view of an active sanction (the remaining wait, the reason and the issuer) so the resolver
      * renders the placeholders without importing a moderation domain type. {@code remaining} is empty for a
      * permanent sanction (a {@code /ban} or a permanent {@code /mute}), which the resolver renders as
      * {@code permanent}.

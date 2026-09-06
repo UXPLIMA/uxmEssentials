@@ -57,12 +57,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the messaging context's adapters and use cases over the injected kernel ports and the
  * persistence DSL, and produces everything the plugin must register: the Brigadier command list and the
- * self-rescheduling mail-expiry sweep. This is the one place the messaging context is wired — nothing else
+ * self-rescheduling mail-expiry sweep. This is the one place the messaging context is wired: nothing else
  * news up its classes.
  *
  * <p>Three cross-context gates are soft-coupled here: the mute gate is bound to {@link MutePolicy#NEVER} until
  * the moderation context lands (the caller may hand a real policy through {@code wire}); vanish-aware
- * visibility is the {@code vanish} gate handed in by bootstrap — the authority-reading adapter over the vanish
+ * visibility is the {@code vanish} gate handed in by bootstrap. The authority-reading adapter over the vanish
  * store, or {@link VanishVisibility#ALWAYS_VISIBLE} when the vanish module is disabled ("no one is hidden");
  * and the AFK status is a {@link MutableAfkStatus} bound to {@code AfkStatus.NEVER} until the presence context
  * lands and rebinds it (presence wires after messaging, so the binding arrives through the rebindable holder).
@@ -264,7 +264,7 @@ public final class MessagingWiring {
 
         /**
          * The PAPI read seam over this module's mail, conversation, message-toggle, social-spy, and ignore
-         * stores — the same stores the {@code /mail}, {@code /reply}, {@code /msgtoggle}, {@code /socialspy},
+         * stores. The same stores the {@code /mail}, {@code /reply}, {@code /msgtoggle}, {@code /socialspy},
          * and {@code /ignore} use cases hold, so a placeholder matches the player's in-game state.
          */
         public StoresMessagingPlaceholders placeholders() {

@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * The parsed {@code command {}} block of a custom menu: the operator-declared open command a menu registers for
  * itself. {@code name} is the primary literal ({@code /shop}), {@code aliases} the extra literals it answers to
  * ({@code /store}), {@code permission} an optional node gating who may open it, {@code denyMessage} the optional
- * MiniMessage line shown when that gate fails (operator content, rendered verbatim — not a catalog key),
+ * MiniMessage line shown when that gate fails (operator content, rendered verbatim, not a catalog key),
  * {@code consoleAllowed} whether a non-player sender may invoke it at all, {@code arguments} the ordered typed
  * positional arguments the command takes ({@code /gift <target> <amount>}), and {@code usage} the optional usage
  * line surfaced as the command's description.
@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * are normalised the same way and de-duplicated (dropping any blank, malformed, or self-referential entry), and a
  * blank {@code permission}/{@code deny-message}/{@code usage} collapses to absent so an empty config value never
  * gates or shows an empty line. The five-argument constructor keeps every call site that predates typed arguments
- * compiling unchanged — it defaults to no arguments and no usage.
+ * compiling unchanged: it defaults to no arguments and no usage.
  */
 @NullMarked
 public record OpenCommandSpec(
@@ -63,32 +63,32 @@ public record OpenCommandSpec(
         this(name, aliases, permission, denyMessage, consoleAllowed, List.of(), Optional.empty());
     }
 
-    /** A copy under a new primary command literal — the command editor's name field. Re-normalises at construction. */
+    /** A copy under a new primary command literal: the command editor's name field. Re-normalises at construction. */
     public OpenCommandSpec withName(String name) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
 
-    /** A copy answering to a new alias set — the command editor's aliases list. Blanks / duplicates drop as ever. */
+    /** A copy answering to a new alias set: the command editor's aliases list. Blanks / duplicates drop as ever. */
     public OpenCommandSpec withAliases(List<String> aliases) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
 
-    /** A copy gated by a new permission node ({@link Optional#empty()} clears the gate) — the permission field. */
+    /** A copy gated by a new permission node ({@link Optional#empty()} clears the gate), the permission field. */
     public OpenCommandSpec withPermission(Optional<String> permission) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
 
-    /** A copy showing a new deny line when the gate fails ({@link Optional#empty()} clears it) — the deny field. */
+    /** A copy showing a new deny line when the gate fails ({@link Optional#empty()} clears it), the deny field. */
     public OpenCommandSpec withDenyMessage(Optional<String> denyMessage) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
 
-    /** A copy toggling whether a non-player sender may invoke the command — the console toggle. */
+    /** A copy toggling whether a non-player sender may invoke the command, the console toggle. */
     public OpenCommandSpec withConsoleAllowed(boolean consoleAllowed) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
 
-    /** A copy carrying a new usage line ({@link Optional#empty()} clears it) — the usage field. */
+    /** A copy carrying a new usage line ({@link Optional#empty()} clears it), the usage field. */
     public OpenCommandSpec withUsage(Optional<String> usage) {
         return new OpenCommandSpec(name, aliases, permission, denyMessage, consoleAllowed, arguments, usage);
     }
@@ -104,7 +104,7 @@ public record OpenCommandSpec(
 
     /**
      * Normalise the declared aliases: each is lowercased and trimmed, blanks and malformed tokens are dropped, an
-     * alias equal to the primary name is dropped (the literal is already registered), and duplicates collapse — so
+     * alias equal to the primary name is dropped (the literal is already registered), and duplicates collapse, so
      * a typo in one alias never aborts the command, it is simply skipped.
      */
     private static List<String> normaliseAliases(List<String> raw, String name) {

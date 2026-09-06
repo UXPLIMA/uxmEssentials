@@ -29,11 +29,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Paints the real player's own tab-list row for a {@link TablistRenderer}'s selected format: the list name, the sort
- * order, and — the one thing native Paper cannot do — a custom-skin texture. Split out of the renderer so each class stays
+ * order, and, the one thing native Paper cannot do, a custom-skin texture. Split out of the renderer so each class stays
  * a cohesive size: the renderer owns format selection, the header/footer, and the filler grid orchestration; this owns
  * everything that decides how the real player themselves appears in the tab.
  *
- * <p><strong>Two paths.</strong> A format with no {@link TablistFormat#skin() skin} takes the native path — the list name
+ * <p><strong>Two paths.</strong> A format with no {@link TablistFormat#skin() skin} takes the native path, the list name
  * via {@link Player#playerListName(Component)} and the order via {@link Player#setPlayerListOrder(int)}. A format with a
  * skin instead delivers the row (name + order + texture) to <em>every</em> viewer through uxmLib's
  * {@link TabListPackets#addOrUpdate}, re-adding the player's entry with the texture seated on the profile, because the
@@ -73,7 +73,7 @@ final class RealPlayerRowPainter {
     /**
      * The last skin row painted through packets for each player, keyed by player UUID. An absent key means the player is
      * on the native path (no skin). The tuple is the name source, order, and skin source so a tick that changes none of
-     * them re-sends no packet, while a format switch — or an offline skin fetch completing — re-paints.
+     * them re-sends no packet, while a format switch, or an offline skin fetch completing, re-paints.
      */
     private final Map<UUID, AppliedSkin> appliedSkin = new ConcurrentHashMap<>();
 
@@ -135,7 +135,7 @@ final class RealPlayerRowPainter {
      * Re-send every currently-skinned online player's packet entry to a single newly-joined {@code viewer}, so a late
      * joiner sees the custom skins the steady-state tick would not repaint for them. Native Paper replicates a player's
      * list name and order to every viewer including late joiners, so those need no handling; the packet skin path does
-     * not — the server adds an already-online skinned player to the joiner's tab with that player's <em>real</em> profile.
+     * not: the server adds an already-online skinned player to the joiner's tab with that player's <em>real</em> profile.
      * For each skinned target still online (including the joining viewer themselves) the steady-state tuple is rebuilt
      * into a {@link TabEntry} and sent to the one joining viewer. A target whose skin is still resolving was never
      * recorded, so it is skipped; the next steady tick repaints it to all viewers once the texture lands.
@@ -147,7 +147,7 @@ final class RealPlayerRowPainter {
             AppliedSkin skin = painted.getValue();
             // Rebuilding the entry reads the TARGET's live name and world (through the name renderer); on Folia those
             // belong to the target's region thread, not the joiner's. Hop to the target's entity thread to build the
-            // TabEntry, then send the finished packet to the joiner from there — the channel send is thread-agnostic.
+            // TabEntry, then send the finished packet to the joiner from there: the channel send is thread-agnostic.
             scheduler.onEntity(new PlayerRef(targetId, skin.nameSource()), () -> {
                 Player target = Bukkit.getPlayer(targetId);
                 if (target != null && target.isOnline()) {
@@ -201,7 +201,7 @@ final class RealPlayerRowPainter {
      * {@link TablistFormat#sortOrder() sort order} always wins (so an operator's order is honoured even alongside a
      * filler grid); otherwise, when the format paints a {@link TablistLayout#isEmpty() filler grid}, the player is given
      * the {@link TablistLayout#realPlayerOrder() real-player order} so they sort above every filler into the early slots.
-     * A format with neither yields an empty order — the vanilla path, untouched.
+     * A format with neither yields an empty order: the vanilla path, untouched.
      */
     private static OptionalInt effectiveOrder(TablistFormat format) {
         if (format.sortOrder().isPresent()) {
@@ -216,7 +216,7 @@ final class RealPlayerRowPainter {
      * Paint {@code player}'s row through a packet carrying the resolved skin, sent to every viewer. Applied only when the
      * tuple (name source, order, skin source) changed for the player, so a steady-state tick re-sends nothing and a real
      * online player's entry is not re-added every tick. A skin source that resolves to no texture yet (an offline fetch
-     * still in flight) falls back to the native path this tick — the resolver fills its cache and a later tick repaints.
+     * still in flight) falls back to the native path this tick: the resolver fills its cache and a later tick repaints.
      */
     private void applySkinRow(
             Player player,
@@ -333,14 +333,14 @@ final class RealPlayerRowPainter {
         return textRenderer.render(player, source, tick);
     }
 
-    /** The player's plain name as a component — the fallback display when a skin row carries no name format. */
+    /** The player's plain name as a component: the fallback display when a skin row carries no name format. */
     private static Component displayName(Player player) {
         return Component.text(player.getName());
     }
 
     /**
      * The skin row last painted for a player: the name-format source, sort order, and skin source. Two paints with an
-     * equal tuple are the same row, so the packet is not re-sent — this is what keeps a real online player's entry from
+     * equal tuple are the same row, so the packet is not re-sent. This is what keeps a real online player's entry from
      * being re-added every refresh tick (the flicker guard). A change in any field re-paints.
      */
     private record AppliedSkin(String nameSource, int order, TablistSkinSource skinSource) {}

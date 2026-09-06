@@ -31,11 +31,11 @@ import com.uxplima.uxmessentials.teleport.domain.YBand;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the startup pre-warm — the payoff of the persisted pool. Given a store returning persisted columns and a
+ * Pins the startup pre-warm: the payoff of the persisted pool. Given a store returning persisted columns and a
  * chunk-access port that re-probes each (some now safe, some no longer), the prewarm re-runs the real {@link
  * SafeSearchPolicy} over every column and offers only the still-valid ones to the queue sink: a column the world
  * changed under is re-validated to empty and dropped, never served blind. It also proves the load is bounded by
- * {@code limit} and that the whole thing is non-blocking (nothing here joins a future — the inline scheduler shows
+ * {@code limit} and that the whole thing is non-blocking (nothing here joins a future. The inline scheduler shows
  * the chain composes rather than awaits).
  */
 class RtpPoolPrewarmTest {

@@ -24,13 +24,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * Warp removal, split into the recoverable default and the irreversible admin path (spec invariant 5). The
  * everyday {@code /pwarp del} {@link #archive(PlayerRef, PlayerWarpName) archives}: it flips the warp to
- * {@link WarpStatus#ARCHIVED} and saves the row, so the name is retired from listings but the warp — and its
- * whitelist, bans, earnings, and history — survive a world rollback and can be {@link #restore restored}. Only the
+ * {@link WarpStatus#ARCHIVED} and saves the row, so the name is retired from listings but the warp, and its
+ * whitelist, bans, earnings, and history: survive a world rollback and can be {@link #restore restored}. Only the
  * admin-gated, confirm-guarded {@link #hardDelete hardDelete} actually drops the row and frees the name for reuse,
  * publishing {@code PlayerWarpDeleted} so downstream (cross-server invalidation, cascade cleanup) can react.
  *
  * <p>All three verbs gate on {@link WarpCapability#DELETE} through {@link WarpAuthorization}, which only the owner
- * holds — co-owners, managers, and strangers are refused, since removing a warp out from under its owner is not a
+ * holds. Co-owners, managers, and strangers are refused, since removing a warp out from under its owner is not a
  * delegable act. Resolving the warp first
  * means a name no warp exists under is {@link PlayerWarpError#NOT_FOUND}, distinct from a warp the actor may not
  * touch ({@link PlayerWarpError#NO_PERMISSION}). The command layer, not this use case, decides which verb a given
@@ -70,7 +70,7 @@ public final class ArchivePlayerWarp {
         this.clock = Objects.requireNonNull(clock, "clock");
     }
 
-    /** Retire {@code name} to {@link WarpStatus#ARCHIVED} — recoverable, the row is kept. Gate DELETE. */
+    /** Retire {@code name} to {@link WarpStatus#ARCHIVED}: recoverable, the row is kept. Gate DELETE. */
     public Result<Unit, PlayerWarpError> archive(PlayerRef actor, PlayerWarpName name) {
         return gated(actor, name, warp -> {
             repository.save(warp.withStatus(WarpStatus.ARCHIVED, clock.instant()));
@@ -110,7 +110,7 @@ public final class ArchivePlayerWarp {
     /**
      * Operator restore of the warp with surrogate id {@code id} to {@link WarpStatus#ACTIVE}, skipping the per-warp
      * role gate. This is the by-id admin path {@code /pwarp admin restore} runs; the command's {@code admin} node is
-     * the authorization, so this method resolves the warp and settles its status without re-checking a role — a
+     * the authorization, so this method resolves the warp and settles its status without re-checking a role, a
      * missing id is {@link PlayerWarpError#NOT_FOUND}. The command renders the operator-facing result itself.
      */
     public Result<Unit, PlayerWarpError> adminRestore(PlayerWarpId id) {

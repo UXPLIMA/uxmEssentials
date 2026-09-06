@@ -38,7 +38,7 @@ import org.jspecify.annotations.NullMarked;
  * Brigadier subcommand tree (the same idiom {@code /pwarp} uses).
  *
  * <ul>
- *   <li>{@code /warp <name> [player]} teleports to a server warp — with no trailing player the sender warps
+ *   <li>{@code /warp <name> [player]} teleports to a server warp. With no trailing player the sender warps
  *       themselves; with one, and {@code uxmessentials.warp.others}, staff send that player instead. Gated by
  *       {@code uxmessentials.warp.use}.
  *   <li>{@code /warp list} opens the warps browse menu (or the chat list when the operator selects
@@ -56,7 +56,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The positional {@code <name>} could in principle collide with a subcommand literal (a warp literally
  * named {@code set}), but Brigadier matches literal children before the {@code name} argument, so the
- * literals always win — the same disambiguation {@code /pwarp} relies on, with no reserved-name guard on
+ * literals always win. The same disambiguation {@code /pwarp} relies on, with no reserved-name guard on
  * either side. Per-subcommand permissions are enforced by Brigadier {@code .requires(...)} on each node, so
  * only {@code warp} is a command-catalog id; the subcommands are literals inside the tree.
  */
@@ -154,7 +154,7 @@ public final class WarpCommand extends WarpCommandSupport implements CommandRegi
     }
 
     /**
-     * Bare {@code /warp} opens the warps browse menu — the same view {@code /warp list} opens. Installed on
+     * Bare {@code /warp} opens the warps browse menu: the same view {@code /warp list} opens. Installed on
      * the root only when the command's catalog {@code gui} flag is on; with it off the bare root falls back
      * to the usage line.
      */
@@ -163,7 +163,7 @@ public final class WarpCommand extends WarpCommandSupport implements CommandRegi
         return Optional.of(this::runList);
     }
 
-    /** Bare {@code /warp editor} opens the admin warp manager GUI — the kit-editor-style manager. */
+    /** Bare {@code /warp editor} opens the admin warp manager GUI, the kit-editor-style manager. */
     private int openWarpManager(CommandContext<CommandSourceStack> ctx) {
         Player sender = player(ctx);
         if (sender == null) {
@@ -221,7 +221,7 @@ public final class WarpCommand extends WarpCommandSupport implements CommandRegi
     }
 
     /**
-     * {@code /warp list}: open the warps browse menu — the same {@code PaginatedGui} bare {@code /warps} used
+     * {@code /warp list}: open the warps browse menu. The same {@code PaginatedGui} bare {@code /warps} used
      * to open. A console has no inventory and the operator-selectable {@code chat} display mode both fall back
      * to the clickable chat list, sharing the same {@link com.uxplima.uxmessentials.warps.application.ListWarps}
      * filter so the two presentations never disagree. The mode is read live so a reload takes effect at once.
@@ -338,8 +338,8 @@ public final class WarpCommand extends WarpCommandSupport implements CommandRegi
         String warpName = ctx.getArgument("name", String.class);
         double rating = ctx.getArgument("rating", Double.class);
 
-        // The existence check is served from the in-memory set, but the rating write is not cached — it touches
-        // the database — so run it off the tick thread and bridge the confirmation back to the player's region.
+        // The existence check is served from the in-memory set, but the rating write is not cached: it touches
+        // the database, so run it off the tick thread and bridge the confirmation back to the player's region.
         if (!services.repository().exists(WarpName.of(warpName))) {
             feedback.send(sender, WarpsMessageKey.WARP_NOT_FOUND, Map.of("warp", warpName));
             return 0;

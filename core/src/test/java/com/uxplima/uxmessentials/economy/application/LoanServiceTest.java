@@ -179,7 +179,7 @@ class LoanServiceTest {
         Result<?, LoanError> result = service.payInstallment(debtor, loan.id(), Money.of(Currencies.COINS, 9_999_999));
 
         assertThat(result.isOk()).isTrue();
-        // Only the residual was debited — never the over-offer.
+        // Only the residual was debited, never the over-offer.
         Money walletAfter = wallets.findByOwner(debtor).orElseThrow().balanceOf(Currencies.COINS);
         assertThat(walletBefore.minus(walletAfter)).isEqualTo(residual);
         // The loan is fully settled and closed.

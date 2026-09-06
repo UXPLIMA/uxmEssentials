@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * where to hold the player; the move-follow re-states the same hold as they walk, and {@code StopPose} releases it.
  *
  * <p>Like the other starters it gates on {@code features.crawl}, the {@link PoseRegionGate}, and the
- * one-session-per-player invariant (a player already posing — sitting, laying, or crawling — is turned away rather
+ * one-session-per-player invariant (a player already posing (sitting, laying, or crawling) is turned away rather
  * than double-posed). {@code /crawl} is a toggle, but the toggle-off is the plain {@code StopPose}, so this use
  * case only ever starts a crawl; a second {@code /crawl} on an already-crawling player is routed to {@code StopPose}
  * by the command, not here.
@@ -91,7 +91,7 @@ public final class StartCrawl {
         /** The crawl began; the player is held prone and the session recorded. */
         STARTED,
 
-        /** {@code features.crawl} is off — crawling is not offered. */
+        /** {@code features.crawl} is off: crawling is not offered. */
         DISABLED,
 
         /** The region gate refused the crawl here (a claim or WorldGuard veto). */

@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.holograms.domain.HologramName;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A hologram was removed — {@code /hologram delete}. The name is freed so a later {@code /hologram create}
+ * A hologram was removed, {@code /hologram delete}. The name is freed so a later {@code /hologram create}
  * may reuse it.
  *
  * @param name the name of the removed hologram

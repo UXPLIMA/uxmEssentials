@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The narrow outbound seam the rent reminder pass uses to leave an owner a piece of durable mail — a rent-due
+ * The narrow outbound seam the rent reminder pass uses to leave an owner a piece of durable mail, a rent-due
  * heads-up that survives the owner being offline and is read on their next join. It is expressed purely in this
  * context's own terms (a {@link PlayerRef} recipient plus a {@link MessageKey} and its placeholders), so the
  * player-warps context never imports a messaging type: the adapter behind this port resolves the key in the

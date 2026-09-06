@@ -7,12 +7,12 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * Outbound port that renders and delivers the messaging context's player-facing lines to a viewer. It pairs
  * the kernel {@code Messages} resolution with the {@code MessageSink} delivery for the messaging-specific
- * shapes — a private message has both a sender-echo and a recipient line, a help-op fans out to staff — that
+ * shapes (a private message has both a sender-echo and a recipient line, a help-op fans out to staff) that
  * a generic notifier cannot express in one call.
  *
  * <p>Every line resolves a {@link com.uxplima.uxmessentials.messaging.application.MessagingMessageKey} in the
  * viewer's locale and hops to their region thread, silently no-opping when the viewer is offline (mail still
- * persists for an offline recipient — see {@link MailRepository}). The message body is passed as a literal
+ * persists for an offline recipient, see {@link MailRepository}). The message body is passed as a literal
  * placeholder value; whether MiniMessage tags in it are parsed depends on the {@code uxmessentials.msg.color}
  * node, which the adapter resolves.
  */

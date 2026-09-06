@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /ping [player]}: show a player's round-trip latency in milliseconds. A read-only query through the
- * {@link PlayerInfo} port — nothing is mutated. The viewer sees their own ping, or another player's with the
+ * {@link PlayerInfo} port: nothing is mutated. The viewer sees their own ping, or another player's with the
  * {@code .others} node; an offline target is a silent no-op the adapter has already rejected before this runs.
  */
 public final class ShowPing {

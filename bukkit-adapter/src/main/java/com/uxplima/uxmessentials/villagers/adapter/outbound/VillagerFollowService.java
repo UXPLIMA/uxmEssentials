@@ -24,15 +24,15 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The follow runtime: a single repeating task on the {@link Scheduler} port that, every tick period, walks each
- * following villager toward its owner while the owner is in range. It owns no range rule of its own — the pure
- * {@link FollowRange} decides whether a villager should move — and delegates the actual pathfinding to the
+ * following villager toward its owner while the owner is in range. It owns no range rule of its own, the pure
+ * {@link FollowRange} decides whether a villager should move, and delegates the actual pathfinding to the
  * {@link VillagerMover} seam.
  *
  * <p><b>State.</b> The villager→owner sessions ride a {@link ConcurrentHashMap} mutated only through {@code put} /
  * {@code remove}, and each session's owner is mirrored into the villager's PDC ({@link PdcVillagerFlags}) so the
  * pairing is durable and inspectable. {@code /villager follow} flips both through {@link #toggle}.
  *
- * <p><b>Threading (Folia).</b> The repeating task runs on the global region thread — the one thread that can read
+ * <p><b>Threading (Folia).</b> The repeating task runs on the global region thread. The one thread that can read
  * the whole roster of villagers and their owners coherently, exactly like {@link VillagerRestockSweep}. There
  * {@link #tick} resolves each session's villager and owner by uuid, snapshots their owning-region positions, decides
  * move-or-stop, and hops the walk onto the villager's region via {@link Scheduler#onRegion}. It never reads or
@@ -46,7 +46,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class VillagerFollowService {
 
-    /** How often the follow sweep re-targets each following villager (half a second — smooth without churn). */
+    /** How often the follow sweep re-targets each following villager (half a second, smooth without churn). */
     private static final Duration FOLLOW_PERIOD = Duration.ofMillis(500);
 
     private final Server server;
@@ -150,7 +150,7 @@ public final class VillagerFollowService {
 
     private void advanceSession(UUID villagerId, UUID ownerId) {
         if (!(server.getEntity(villagerId) instanceof Villager villager) || !villager.isValid()) {
-            sessions.remove(villagerId); // the villager despawned or died — drop the dead session
+            sessions.remove(villagerId); // the villager despawned or died, drop the dead session
             return;
         }
         Player owner = server.getPlayer(ownerId);

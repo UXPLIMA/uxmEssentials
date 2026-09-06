@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.teleport.domain.BackLocation;
 /**
  * Outbound port for a player's current {@code /back} return point. Each player has at most one capture
  * (the most recent supersedes the last), held as in-flight runtime state the teleport module drops on
- * {@code stop()} and re-arms on relog — never PDC-stamped, since a {@code /back} point is transient
+ * {@code stop()} and re-arms on relog. Never PDC-stamped, since a {@code /back} point is transient
  * session state, not persisted data.
  */
 public interface BackLocationStore {

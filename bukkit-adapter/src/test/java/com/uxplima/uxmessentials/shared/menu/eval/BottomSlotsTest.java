@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the pure raw-slot arithmetic a bottom-inventory menu paints through. For a 54-slot chest top the four
- * corners of the player-inventory mapping must land where Bukkit shows them — the 27 main slots first, the 9 hotbar
- * slots last — and a chest-top raw slot passes through untouched so the caller never paints it into the player
+ * corners of the player-inventory mapping must land where Bukkit shows them. The 27 main slots first, the 9 hotbar
+ * slots last, and a chest-top raw slot passes through untouched so the caller never paints it into the player
  * inventory. No server is needed: the mapping is plain integer math.
  */
 class BottomSlotsTest {

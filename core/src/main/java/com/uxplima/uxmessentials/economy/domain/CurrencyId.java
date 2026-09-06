@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * The stable identifier of a {@link Currency} — the {@code <id>} under {@code economy.currencies.<id>}
+ * The stable identifier of a {@link Currency}. The {@code <id>} under {@code economy.currencies.<id>}
  * an operator configures, normalised to its canonical lowercase form so {@code COINS} and {@code coins}
  * name the same currency. It is the currency's identity across config, the persisted {@code (uuid,
  * currency)} key, the optional {@code [currency]} command argument, and the audit {@code currency} field;

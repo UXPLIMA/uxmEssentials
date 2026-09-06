@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.teleport.domain.SafeSearchArea;
 
 /**
  * The random-point sampler the safe-search draws candidate columns from. For an ordinary (untargeted) search it
- * samples uniformly over the world's annulus — {@code r = sqrt(rand·(max² − min²) + min²)} with an independent
+ * samples uniformly over the world's annulus, {@code r = sqrt(rand·(max² − min²) + min²)} with an independent
  * uniform angle, the classic disc-uniform draw that avoids clumping toward the centre. For a biome-targeted search
  * ({@code /rtp biome <biome>}) it biases toward a learned {@link BiomeHotspots hotspot}: with probability {@code
  * hotspotWeight} it draws a point near a known hotspot chunk, otherwise (and whenever no hotspot is known yet) it
@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.teleport.domain.SafeSearchArea;
  *
  * <p>The sampler is pure: it takes the {@link RandomGenerator} on each call rather than owning one, so a test can
  * drive it with a seeded generator and assert the clustering statistically. Every point it returns is inside the
- * area's {@code [minRadius, maxRadius]} annulus — a hotspot offset that would fall outside the band is rejected and
+ * area's {@code [minRadius, maxRadius]} annulus. A hotspot offset that would fall outside the band is rejected and
  * the uniform draw is used instead.
  */
 public final class HotspotBiasedSampler {

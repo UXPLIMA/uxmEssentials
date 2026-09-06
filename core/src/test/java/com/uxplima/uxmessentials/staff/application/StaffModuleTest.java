@@ -22,7 +22,7 @@ class StaffModuleTest {
     void shipsEnabledByDefault() {
         StaffModule module = new StaffModule();
 
-        // With no override the module is on — it ships a default gadget hotbar and every command/gadget is
+        // With no override the module is on. It ships a default gadget hotbar and every command/gadget is
         // permission-gated, so a regular player sees nothing change until granted the staff nodes.
         assertThat(module.enabled(new FixedConfig(Map.of()))).isTrue();
         // An explicit disable in modules.conf turns it off.

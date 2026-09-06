@@ -21,8 +21,8 @@ import org.spongepowered.configurate.ConfigurationNode;
  * {@link AnimationSpec.AnimationType#GRADIENT GRADIENT} colour-stops/steps live here, in the adapter, where the
  * registry binds uxmLib's {@code ScrollingText}/{@code GradientText}.
  *
- * <p>The extra fields are only consulted for the matching type — {@link #scroll} for SCROLL, {@link #gradient} for
- * GRADIENT — and are empty for FRAMES, which the spec resolves on its own. Both are {@link Optional} so a missing block
+ * <p>The extra fields are only consulted for the matching type, {@link #scroll} for SCROLL, {@link #gradient} for
+ * GRADIENT, and are empty for FRAMES, which the spec resolves on its own. Both are {@link Optional} so a missing block
  * falls back to the animator's own defaults rather than failing the parse.
  *
  * @param spec the pure animation spec; its {@code intervalTicks} drives the step cadence for every type

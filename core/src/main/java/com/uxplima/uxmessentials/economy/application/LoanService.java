@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Orchestrates loan disbursement, repayment, and credit scoring. Every money move is one atomic call into the
- * {@link LoanRepository} — the wallet leg and the loan-row change commit together or not at all — so no
+ * {@link LoanRepository} (the wallet leg and the loan-row change commit together or not at all) so no
  * in-JVM lock is needed and a persistence failure can never create or lose money. The economics (limit,
  * interest band, installment cycle, score deltas) come from the injected {@link LoanPolicy}, not from
  * hardcoded constants.
@@ -95,7 +95,7 @@ public final class LoanService {
             return Result.err(LoanError.WRONG_DEBTOR);
         }
 
-        // The settlement never exceeds the residual — the final installment clears the exact remainder, and an
+        // The settlement never exceeds the residual. The final installment clears the exact remainder, and an
         // over-offer is trimmed here so the debtor is never debited more than they owe.
         Money settlement = loan.settlementFor(amount);
         Loan updated = loan.afterPayment(settlement).withNextPayment(nextCycle());
@@ -158,7 +158,7 @@ public final class LoanService {
      * The read-only loan terms a debtor of {@code creditScore} qualifies for, computed from the same
      * {@link LoanPolicy} {@link #takeLoan} and {@link #buildLoan} use. The dashboard renders these figures so
      * the displayed limit and interest never disagree with what a loan actually charges once an operator tunes
-     * the policy — the GUI does no loan math of its own.
+     * the policy: the GUI does no loan math of its own.
      */
     public LoanQuote quote(int creditScore) {
         return new LoanQuote(policy.limitFor(creditScore), policy.interestFor(creditScore));

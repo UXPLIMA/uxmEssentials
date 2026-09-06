@@ -30,12 +30,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of the movement action pack. {@code teleport} rides Paper's {@code teleportAsync}, which
- * MockBukkit stubs to throw {@code UnimplementedOperationException} — so the fail-soft wrapper swallows it and the
+ * MockBukkit stubs to throw {@code UnimplementedOperationException}, so the fail-soft wrapper swallows it and the
  * mock never actually moves. The valid-destination cases are therefore asserted as no-crash, with the coordinate
  * mapping pinned by the pure {@link MovementActions.ParsedTeleport} grammar tests plus a real synchronous teleport
  * (a path MockBukkit does model) that lands on the same location the action would build. The skip paths (unknown
- * world, malformed coordinates) and {@code connect} — proved against a {@link RecordingConnector} fake and the real
- * {@link BukkitServerConnector} — carry concrete assertions.
+ * world, malformed coordinates) and {@code connect}, proved against a {@link RecordingConnector} fake and the real
+ * {@link BukkitServerConnector}: carry concrete assertions.
  */
 class MovementActionsTest {
 

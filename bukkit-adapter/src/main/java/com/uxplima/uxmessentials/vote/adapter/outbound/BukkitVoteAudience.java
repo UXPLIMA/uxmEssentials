@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The Bukkit {@link VoteAudience}: snapshots the currently online players as {@link PlayerRef}s so a vote
  * party can reward everyone connected and the thank-you can broadcast to them. This is the single place the
- * vote context reads {@code Bukkit.getOnlinePlayers()} — the application asks the port.
+ * vote context reads {@code Bukkit.getOnlinePlayers()}, the application asks the port.
  *
  * <p>Both callers reach this off any region tick thread: {@code ForceParty} runs inside a
  * {@code Scheduler.async} hop from {@code /voteparty}, and {@code HandleVote} runs inside a
@@ -65,7 +65,7 @@ public final class BukkitVoteAudience implements VoteAudience {
         return await(future);
     }
 
-    /** Snapshot the online roster to refs — only legal on the global region thread. */
+    /** Snapshot the online roster to refs, only legal on the global region thread. */
     private static List<PlayerRef> snapshot() {
         List<PlayerRef> refs = new ArrayList<>();
         for (Player player : Bukkit.getOnlinePlayers()) {

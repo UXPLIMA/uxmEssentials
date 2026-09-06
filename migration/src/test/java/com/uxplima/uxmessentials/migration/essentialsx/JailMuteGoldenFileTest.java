@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Golden-file round-trip for the EssentialsX jail/mute path (docs/12-migration §8.2, §5.1): parse the
  * checked-in userdata fixtures and assert the resulting {@code ModerationProfile} equals the expected
- * mute/jail state. This is the moderation leg of the three-way drift equality — code ⇄ doc ⇄ fixture —
+ * mute/jail state. This is the moderation leg of the three-way drift equality, code ⇄ doc ⇄ fixture,
  * and it catches the failure mode the drift guard cannot: the parser silently mis-reading a sanction
  * layout variant.
  */
@@ -45,7 +45,7 @@ class JailMuteGoldenFileTest {
         assertThat(result.hasMute()).isTrue();
         assertThat(result.hasJail()).isFalse();
         assertThat(result.profile().mute()).isInstanceOf(MuteState.Timed.class);
-        // muteTimeout: 1700100000000 — the legacy top-level expiry key is read as a fallback.
+        // muteTimeout: 1700100000000: the legacy top-level expiry key is read as a fallback.
         assertThat(result.profile().mute().expiry()).contains(Instant.ofEpochMilli(1_700_100_000_000L));
     }
 

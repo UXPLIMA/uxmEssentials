@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Direct coverage of {@link RemoteSyncRegistry#dispatch}: every registered listener is invoked for an inbound
- * frame, and — the property the registry exists to guarantee — a listener that throws is reported to the
+ * frame, and, the property the registry exists to guarantee, a listener that throws is reported to the
  * failure sink without starving the listeners registered after it. This is the one seam every context's
  * cross-server sync rides through, so without that isolation a single context's broken cache-invalidation would
  * swallow every other context's sync on the same frame.
@@ -53,7 +53,7 @@ class RemoteSyncRegistryTest {
         List<Failure> failures = new ArrayList<>();
         registry.dispatch(FRAME, capture(failures));
 
-        // The listener before the throw ran, and the one after it still ran — the throw did not break the loop.
+        // The listener before the throw ran, and the one after it still ran: the throw did not break the loop.
         assertThat(before.applied).containsExactly(FRAME);
         assertThat(after.applied).containsExactly(FRAME);
         // The failure surfaced exactly once, carrying the offending frame and the original exception.
@@ -70,7 +70,7 @@ class RemoteSyncRegistryTest {
     /** One reported listener failure, so the test can assert which frame failed and with what exception. */
     private record Failure(NetworkMessage message, RuntimeException cause) {}
 
-    /** Records every frame the registry delivered — the stand-in for a context's cache-invalidation listener. */
+    /** Records every frame the registry delivered: the stand-in for a context's cache-invalidation listener. */
     private static final class RecordingListener implements RemoteSyncListener {
 
         private final List<NetworkMessage> applied = new ArrayList<>();

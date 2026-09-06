@@ -25,7 +25,7 @@ import com.uxplima.uxmlib.item.SkullData;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /skull [player]}: get a player-head skull — the named player's head, or the sender's own when no name
+ * {@code /skull [player]}: get a player-head skull. The named player's head, or the sender's own when no name
  * is given. The owning profile is resolved by name off the region thread; the skull is added to the player's
  * inventory on their region thread and reported through {@link ItemworldMessageKey#SKULL_GIVEN}.
  */

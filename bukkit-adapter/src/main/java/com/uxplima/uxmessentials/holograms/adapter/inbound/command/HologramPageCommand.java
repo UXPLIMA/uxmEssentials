@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The multi-page subcommands under {@code /hologram}: {@code /hologram page <name> add <text…>} appends a page,
- * {@code remove <index>} drops one, and {@code list} shows the page set. A page may carry several lines — the
+ * {@code remove <index>} drops one, and {@code list} shows the page set. A page may carry several lines, the
  * {@code add} text is split on a literal {@code \n}, so {@code add Welcome\nto spawn} adds a two-line page;
  * blank segments are dropped (a spacer uses a non-blank placeholder, like every hologram line). Page indices
  * are 1-based at the command boundary and converted to 0-based for the use cases. Collected here so the main

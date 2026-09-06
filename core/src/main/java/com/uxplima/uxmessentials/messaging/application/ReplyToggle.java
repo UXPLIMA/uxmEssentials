@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /rtoggle}: flip whether the player takes part in reply routing. With reply routing off, a
  * {@code /reply} aimed at them is declined as if there were no fresh conversation, but a named {@code /msg}
- * still reaches them and mail still delivers — the toggle gates only the back-channel reply convenience. The
+ * still reaches them and mail still delivers: the toggle gates only the back-channel reply convenience. The
  * new state is reported to the player. The flag itself lives in the {@link ReplyRoutingStore} (per-holder PDC
  * state, mirroring {@code /msgtoggle}); this use case just flips it and renders the outcome.
  */

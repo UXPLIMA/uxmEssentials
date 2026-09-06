@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import com.uxplima.uxmessentials.teleport.domain.TeleportKind;
 
 /**
- * A player completed a teleport — the warmup (if any) elapsed and the hop was issued. The
+ * A player completed a teleport: the warmup (if any) elapsed and the hop was issued. The
  * {@code presence} context's adapter subscribes to the Bukkit-bridged form of this event to clear AFK.
  *
  * @param player the teleported player

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * Stable identifier for a {@link FeatureModule} — {@code "homes"}, {@code "economy"}, and so on.
+ * Stable identifier for a {@link FeatureModule}: {@code "homes"}, {@code "economy"}, and so on.
  *
  * <p>The value is the single source of truth for the module's config subtree
  * ({@code modules.<id>}), its {@code uxmessentials.module.<id>} permission node, the

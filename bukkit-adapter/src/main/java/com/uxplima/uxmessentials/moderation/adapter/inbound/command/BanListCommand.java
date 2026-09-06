@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /banlist}: list the players currently banned. A read-only companion to the ban family — the
+ * {@code /banlist}: list the players currently banned. A read-only companion to the ban family, the
  * {@code ListBans} use case runs the bounded DB query and renders the page. The query is hopped off the tick
  * thread through the {@link Scheduler} port so a large ban table never blocks the command; the use case's
  * notifier hops each reply back to the actor's region thread.

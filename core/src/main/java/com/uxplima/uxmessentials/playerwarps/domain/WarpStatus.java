@@ -9,10 +9,10 @@ import org.jspecify.annotations.Nullable;
  * The lifecycle state of a player-warp:
  *
  * <ul>
- *   <li>{@link #ACTIVE} — listed and usable.
- *   <li>{@link #SUSPENDED} — hidden and unusable for now, but recoverable (for example while rent is unpaid or
+ *   <li>{@link #ACTIVE}, listed and usable.
+ *   <li>{@link #SUSPENDED}, hidden and unusable for now, but recoverable (for example while rent is unpaid or
  *       a staff member is reviewing it); the row is retained.
- *   <li>{@link #ARCHIVED} — retired from normal use, kept only for history.
+ *   <li>{@link #ARCHIVED}, retired from normal use, kept only for history.
  * </ul>
  *
  * <p>This axis is orthogonal to {@link WarpAccess}: access controls who may use an active warp, status controls
@@ -26,7 +26,7 @@ public enum WarpStatus {
 
     /**
      * Match a stored or user-supplied token to a constant, ignoring case and surrounding whitespace. Returns
-     * an empty result — never throws — for {@code null}, blank, or unrecognised input.
+     * an empty result, never throws, for {@code null}, blank, or unrecognised input.
      */
     public static Optional<WarpStatus> parse(@Nullable String token) {
         if (token == null) {

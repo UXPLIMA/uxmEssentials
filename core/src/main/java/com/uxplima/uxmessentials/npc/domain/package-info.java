@@ -6,7 +6,7 @@
  * lives in the shared kernel ({@code shared.domain.action}) because it is shared with other click targets such as
  * holograms. NPCs are server-wide, so an {@code NpcName} is unique across the whole table; moving, re-skinning, or
  * rebinding a click command produces new validated instances rather than mutating in place. How an NPC renders (a
- * fake-player spawn packet to each viewer) and how its click command runs are adapter concerns — the domain stores
+ * fake-player spawn packet to each viewer) and how its click command runs are adapter concerns: the domain stores
  * raw values. No Bukkit, Paper, Kyori, or logging type appears here.
  */
 @org.jspecify.annotations.NullMarked

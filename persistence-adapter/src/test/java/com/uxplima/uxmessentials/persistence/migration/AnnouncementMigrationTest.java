@@ -21,11 +21,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * Pins V65 ({@code communication_announcement}) — the DB-backed announcement set the {@code /announce} editor owns.
+ * Pins V65 ({@code communication_announcement}): the DB-backed announcement set the {@code /announce} editor owns.
  * The table did not exist before V65, so this proves the migration creates it (a select fails at V64 and succeeds
  * after V65), that a row round-trips with the enabled flag, raw condition string, and nullable interval intact, and
  * that the id primary key rejects a duplicate. It drives Flyway directly with {@link MigrationVersion} targets via
- * {@link #migrateTo} so it can stop at V64, prove the table is absent, then apply V65 — the documented way to run a
+ * {@link #migrateTo} so it can stop at V64, prove the table is absent, then apply V65. The documented way to run a
  * migration sub-range, the same shape {@code PlaytimeMigrationTest} and {@code StaffLoadoutBackfillMigrationTest}
  * use.
  */
@@ -139,7 +139,7 @@ class AnnouncementMigrationTest {
                 .fetchOne();
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

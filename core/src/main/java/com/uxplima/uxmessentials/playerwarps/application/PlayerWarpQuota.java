@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
  */
 public final class PlayerWarpQuota {
 
-    /** The quota family for player-warp limits — the {@code MAX}-direction reducer over the numbered nodes. */
+    /** The quota family for player-warp limits: the {@code MAX}-direction reducer over the numbered nodes. */
     public static final QuotaFamily FAMILY = QuotaFamily.quota("uxmessentials.pwarp.limit");
 
     private final Permissions permissions;

@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Routes the click and drag events for {@code /kit show} preview menus, recognised by their
  * {@link KitPreviewHolder}. The policy is the simplest one: a preview is read-only, so every interaction with the
- * menu is cancelled — a plain click, a shift-click that would shove an item in, a drag that touches the menu — so
+ * menu is cancelled (a plain click, a shift-click that would shove an item in, a drag that touches the menu) so
  * the player can look but never take. A click in the player's own inventory while a preview is open is left
  * alone; it cannot move anything into the cancelled top. The preview holds no state, so its close needs no
  * handler.

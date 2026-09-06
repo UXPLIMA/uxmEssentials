@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /rtp} (alias {@code /wild}): served O(1) from the pre-warmed per-world safe-location queue. The
  * bare command reads the player's current world, sends the searching notice, and hands the background path to
  * {@link com.uxplima.uxmessentials.teleport.application.ResolveRtp}; the requester never waits on a chunk
- * load — the queue is polled and a refill is fired asynchronously.
+ * load: the queue is polled and a refill is fired asynchronously.
  *
  * <p>The bare {@code /rtp} follows the {@code rtp.command-opens-gui} config toggle (default {@code true}): on it opens
  * the menu-engine world picker; off it random-teleports the sender within their current world. {@code /rtp gui} (gated
@@ -44,7 +44,7 @@ import org.jspecify.annotations.NullMarked;
  * (with {@code uxmessentials.rtp.others}) forces <em>that player</em> to random-teleport within their own world; a
  * loaded world name random-teleports the sender within that world; anything else is reported as an unknown target.
  * {@code biome} and {@code gui} stay explicit literals, so Brigadier matches them first and the {@code target}
- * argument is the fallback — the suggestions offer both online players and loaded world names.
+ * argument is the fallback: the suggestions offer both online players and loaded world names.
  */
 @NullMarked
 public final class RtpCommand extends TeleportCommandSupport implements CommandRegistration {
@@ -144,7 +144,7 @@ public final class RtpCommand extends TeleportCommandSupport implements CommandR
     /**
      * Disambiguate {@code raw}: an online player (with {@code uxmessentials.rtp.others}) is forced to random-teleport
      * within their own world; a loaded world name random-teleports the sender there; anything else is reported. A
-     * staff force routes the <em>target</em> through the resolver — the issuer is never charged.
+     * staff force routes the <em>target</em> through the resolver: the issuer is never charged.
      */
     void route(Player sender, String raw) {
         PlayerRef who = ref(sender);
@@ -173,7 +173,7 @@ public final class RtpCommand extends TeleportCommandSupport implements CommandR
         WorldRef world = BukkitRefs.toRef(sender.getWorld());
         String biome = ctx.getArgument("biome", String.class);
         // The use case resolves the biome key (an unknown one is reported), gates cost/cooldown, sends the
-        // searching notice, and runs the async biome-targeted search — the command only forwards the raw key.
+        // searching notice, and runs the async biome-targeted search: the command only forwards the raw key.
         services.resolveBiomeRtp().targeted(who, world, biome);
         return Command.SINGLE_SUCCESS;
     }

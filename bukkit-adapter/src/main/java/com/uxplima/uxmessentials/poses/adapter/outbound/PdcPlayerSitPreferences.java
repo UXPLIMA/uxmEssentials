@@ -13,9 +13,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link PlayerSitPreferences} implementation. The {@code /poses toggle} opt-out is a per-player preference that
- * survives relog, so it is stamped in PDC under a single pre-created key — the sanctioned use for transient
+ * survives relog, so it is stamped in PDC under a single pre-created key. The sanctioned use for transient
  * per-holder state, like the teleport and message toggles. The stored byte holds the <em>allow</em> state directly:
- * an absent key defaults to allow (the GSit convention — a player who never touched it can be sat on), so a first
+ * an absent key defaults to allow (the GSit convention. A player who never touched it can be sat on), so a first
  * toggle writes a refusing {@code (byte) 0}.
  *
  * <h2>Concurrency</h2>

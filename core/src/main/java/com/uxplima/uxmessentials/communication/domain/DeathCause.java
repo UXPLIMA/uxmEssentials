@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.communication.domain;
 
 /**
- * The cause of a player's death, in the communication context's own vocabulary — the key an operator selects a
+ * The cause of a player's death, in the communication context's own vocabulary. The key an operator selects a
  * per-cause death template by in {@code join-quit.conf}. It is a pure domain enum: the adapter maps a live Bukkit
  * death (its {@code DamageCause} plus who dealt the final blow) onto one of these, so the domain never sees a
  * Bukkit type.
@@ -9,7 +9,7 @@ package com.uxplima.uxmessentials.communication.domain;
  * <p>Two of the values have no direct {@code DamageCause} counterpart and are decided by <em>who</em> struck the
  * final blow rather than <em>how</em>: {@link #PVP} is a death at another player's hand, {@link #MOB} a death at a
  * non-player creature's. The rest mirror the environmental damage kinds. {@link #OTHER} is the catch-all the
- * adapter falls back to for a cause it does not translate, and it carries no per-cause template of its own — a
+ * adapter falls back to for a cause it does not translate, and it carries no per-cause template of its own, a
  * death classified {@code OTHER} simply takes the default death policy.
  */
 public enum DeathCause {

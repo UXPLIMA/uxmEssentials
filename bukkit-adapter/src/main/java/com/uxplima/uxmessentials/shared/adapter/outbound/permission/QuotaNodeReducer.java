@@ -11,8 +11,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The pure numeric core of the numbered/world quota reducer (docs/permissions.md "Uniform numeric
- * reducer"). It folds individual matching nodes into one value by the family's direction — the
- * maximum for quotas (more is better), the minimum for cooldowns and warmups (less is better) — and
+ * reducer"). It folds individual matching nodes into one value by the family's direction, the
+ * maximum for quotas (more is better), the minimum for cooldowns and warmups (less is better), and
  * tracks the {@code -1} unlimited sentinel for quota families.
  *
  * <p>The Bukkit-specific enumeration of which nodes a player holds lives in {@code BukkitPermissions};
@@ -52,7 +52,7 @@ final class QuotaNodeReducer {
      * Seed the fold with the config default so a player with no matching node still resolves.
      *
      * <p>For {@link QuotaReduction#STACK} the default is stored separately and returned only when no
-     * tier node was seen — it is never added on top of the summed tiers.
+     * tier node was seen: it is never added on top of the summed tiers.
      */
     void seedDefault(long configDefault) {
         if (family.direction() == QuotaReduction.STACK) {

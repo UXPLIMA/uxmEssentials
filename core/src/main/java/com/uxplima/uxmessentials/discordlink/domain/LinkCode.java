@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * A one-time code a player presents in Discord to bind their account. The code is a short, uppercase
- * alphanumeric token drawn from an unambiguous alphabet — the letters {@code O} and {@code I} and the digits
+ * alphanumeric token drawn from an unambiguous alphabet. The letters {@code O} and {@code I} and the digits
  * {@code 0} and {@code 1} are omitted so a player never mistypes a code that looks like another character.
  *
  * <p>The value is normalised to its canonical uppercase, whitespace-stripped form so {@code /link abc234} and

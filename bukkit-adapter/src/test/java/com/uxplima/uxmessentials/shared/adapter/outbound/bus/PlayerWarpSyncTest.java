@@ -29,8 +29,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the player-warps cross-server sync seam: the broadcasting decorator publishes a {@link PlayerWarpChanged}
- * carrying the affected owner after every local write that changes that owner's set — a {@code save} (a set, a
- * move, or a visibility flip all upsert the same row) and a {@code deleteById} — and the listener drops exactly that
+ * carrying the affected owner after every local write that changes that owner's set, a {@code save} (a set, a
+ * move, or a visibility flip all upsert the same row) and a {@code deleteById}, and the listener drops exactly that
  * owner from the {@link CachedPlayerWarpRepository} on a remote frame so the next {@code /pwarp} reloads the
  * authoritative row. A frame of another type leaves the cache untouched. This mirrors {@code WalletSyncTest}.
  */
@@ -107,7 +107,7 @@ class PlayerWarpSyncTest {
                 PlayerWarpSync.repository(new CachedPlayerWarpRepository(new RecordingDelegate()), bus);
 
         // A visit count is high-frequency, eventually-consistent data, so the decorator forwards it without a
-        // frame — peers are not invalidated per teleport.
+        // frame: peers are not invalidated per teleport.
         repo.recordVisit(PlayerWarpId.of(1));
 
         assertThat(bus.published).isEmpty();
@@ -138,7 +138,7 @@ class PlayerWarpSyncTest {
 
         PlayerWarpSync.listener(cached).onRemoteChange(new HomeChanged("peer-2", OWNER.uuid()));
 
-        cached.ownedBy(OWNER); // still cached — a non-player-warp frame does not invalidate
+        cached.ownedBy(OWNER); // still cached. A non-player-warp frame does not invalidate
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 

@@ -129,7 +129,7 @@ class BukkitWorldSettingApplierTest {
     }
 
     // MockBukkit's WorldMock#setSpawnLocation(int,int,int,float) throws UnimplementedOperationException
-    // (a TestAbortedException), so the applier's spawn path — which carries yaw — can only be verified
+    // (a TestAbortedException), so the applier's spawn path, which carries yaw, can only be verified
     // end-to-end on a real server. We assert the parser yields exactly the components the applier feeds
     // setSpawnLocation; the apply call below either lands them (real server) or aborts on the known gap.
     @Test

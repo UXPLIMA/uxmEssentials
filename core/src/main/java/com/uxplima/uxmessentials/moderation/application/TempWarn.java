@@ -22,8 +22,8 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * {@code /tempwarn <player> <duration> [reason]}: append a warning that lapses on its own. It is the timed
- * sibling of {@code /warn} ({@link IssueWarn}) — same exempt refusal, same append-only history, same
- * {@code PlayerWarned} event and audit line, same warn permission, same staff broadcast and same escalation —
+ * sibling of {@code /warn} ({@link IssueWarn}), same exempt refusal, same append-only history, same
+ * {@code PlayerWarned} event and audit line, same warn permission, same staff broadcast and same escalation
  * differing only in that the warning carries a wall-clock expiry, so it stops counting once the span elapses
  * without an operator running {@code /unwarn}.
  *

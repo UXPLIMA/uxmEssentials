@@ -19,18 +19,18 @@ import org.jspecify.annotations.Nullable;
  * effective permissions. A numbered node {@code uxmessentials.vanish.use.level<N>} / {@code .see.level<N>} contributes
  * level {@code N}; the highest such node a player holds wins. The plain {@code .use} / {@code .see} node (no number)
  * counts as level 1, so with layered permissions off every vanished player is use level 1 and every {@code .see}
- * holder is see level 1 — the flat behaviour. A player with no see node at all resolves to
+ * holder is see level 1, the flat behaviour. A player with no see node at all resolves to
  * {@link VanishLevels#NO_SEE_LEVEL} (0) and sees no vanished player.
  *
  * <p>Op and wildcard grants ({@code *}) are handled by probing an impossibly-high level node: only op or a wildcard
  * covering the family answers {@code true} for {@code base.level<probe>}, since an explicit numbered grant never covers
- * a level it does not name. Such a player resolves to {@link #WILDCARD_LEVEL} — high enough to clear every realistic
+ * a level it does not name. Such a player resolves to {@link #WILDCARD_LEVEL}, high enough to clear every realistic
  * use level (an op sees every vanished player) and, for their own use level, to hide from every non-op viewer.
  *
  * <p>Numbered nodes are read from {@code getEffectivePermissions}, the same enumeration {@code BukkitPermissions} uses,
  * so LuckPerms-published nodes fold in for free. An offline player cannot be permission-checked, so use level falls
  * back to {@link VanishLevel#MIN_LEVEL} (a vanished player is always at least level 1) and see level to
- * {@code NO_SEE_LEVEL} — the conservative default.
+ * {@code NO_SEE_LEVEL}, the conservative default.
  */
 @NullMarked
 public final class BukkitVanishLevelResolver implements VanishLevelResolver {

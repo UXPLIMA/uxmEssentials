@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.vanish.domain.VanishLevel;
  *
  * <p>The Phase 4 connection illusions default on too. {@code fake-join-quit} makes a vanishing player broadcast a fake
  * "left the game" line (and a fake "joined the game" on reappear) so no viewer notices they merely went invisible; the
- * two staff variants let a different line — or nothing, when left blank — go to viewers who <em>can</em> see them. The
+ * two staff variants let a different line (or nothing, when left blank) go to viewers who <em>can</em> see them. The
  * template strings are operator MiniMessage content ({@code {player}} is substituted), never a {@code MessageKey}, so
  * they mirror how the connection-message context treats join/quit lines. {@code action-bar} drives the persistent
  * "you are vanished" indicator (its text is the {@code vanish.actionbar} catalog key), and {@code join-vanished} lets a

@@ -22,7 +22,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * Turns a menu's HOCON spec into the immutable {@link MenuSpec} model the renderer and runtime consume. Parsing
- * is fail-fast: any malformed value — a bad row count, an out-of-range slot, an unknown item type — surfaces as
+ * is fail-fast: any malformed value (a bad row count, an out-of-range slot, an unknown item type) surfaces as
  * a {@link MenuSpecException} naming the file, so a typo is a loud configuration error the operator fixes rather
  * than a silently half-built menu. The model produced here never references Bukkit; material and text strings
  * are carried verbatim for the Bukkit-side renderer to resolve later.
@@ -58,7 +58,7 @@ public final class MenuSpecLoader {
     /**
      * Parse a spec held in memory, resolving its item patterns against a shared {@code globalPatterns} block as well
      * as the menu's own {@code patterns}. A menu-local pattern of the same name wins the merge. Passing an empty node
-     * makes this behave exactly like {@link #parse(String)} — the target that overload delegates to.
+     * makes this behave exactly like {@link #parse(String)}: the target that overload delegates to.
      */
     public MenuSpec parse(String hocon, ConfigurationNode globalPatterns) {
         Objects.requireNonNull(hocon, "hocon");
@@ -82,10 +82,10 @@ public final class MenuSpecLoader {
     }
 
     /**
-     * Load and parse a spec from disk, resolving its item patterns against a shared {@code globalPatterns} block —
-     * patterns defined once in a shared file reusable across every menu — as well as the menu's own {@code patterns}.
+     * Load and parse a spec from disk, resolving its item patterns against a shared {@code globalPatterns} block
+     * patterns defined once in a shared file reusable across every menu: as well as the menu's own {@code patterns}.
      * A menu-local pattern of the same name wins the merge. Passing an empty node makes this behave exactly like
-     * {@link #load(Path)} — the target that overload delegates to.
+     * {@link #load(Path)}: the target that overload delegates to.
      */
     public MenuSpec load(Path file, ConfigurationNode globalPatterns) {
         Objects.requireNonNull(file, "file");
@@ -115,7 +115,7 @@ public final class MenuSpecLoader {
         Optional<String> declaredType = optionalString(root.node("inventory-type"));
         // A bottom-inventory menu paints into the player's own 36 slots below a full 54-slot chest top, and that
         // raw-slot geometry only lines up for a chest. So it ignores any inventory-type the author also set (warning
-        // once), and is fixed at six top rows — the double-chest whose raw slots 54..89 are exactly the player
+        // once), and is fixed at six top rows. The double-chest whose raw slots 54..89 are exactly the player
         // inventory the mapping targets.
         if (bottomInventory && declaredType.isPresent()) {
             LOG.warning("menu in " + origin + " sets bottom-inventory and inventory-type '" + declaredType.get()
@@ -146,7 +146,7 @@ public final class MenuSpecLoader {
                     refs(root.node("close-actions")),
                     items,
                     inventoryType,
-                    // The menu's own `placeholders {}` block — custom %name% tokens scoped to this one menu, distinct
+                    // The menu's own `placeholders {}` block. Custom %name% tokens scoped to this one menu, distinct
                     // from the `patterns {}` block above and from the shared menus/placeholders.conf file. A missing
                     // block flattens to an empty map, so a menu without it is unchanged.
                     varMap(root.node("placeholders")),
@@ -155,10 +155,10 @@ public final class MenuSpecLoader {
                     root.node("click-cooldown").getLong(0),
                     bottomInventory,
                     chestOnly,
-                    // The optional `bedrock {}` native CustomForm override — absent → empty, so a menu without it
+                    // The optional `bedrock {}` native CustomForm override, absent → empty, so a menu without it
                     // keeps the automatic Bedrock degradation unchanged.
                     parseBedrock(root.node("bedrock")),
-                    // The optional `content {}` block — the slot regions a feature's provider owns. Absent → empty,
+                    // The optional `content {}` block: the slot regions a feature's provider owns. Absent → empty,
                     // so a menu the engine draws entirely from its own items is unchanged.
                     parseContent(root.node("content"), slotCeiling));
         } catch (IllegalArgumentException invalid) {
@@ -216,7 +216,7 @@ public final class MenuSpecLoader {
      * {@code label}, or a value widget ({@code input}/{@code dropdown}/{@code slider}/{@code toggle}) carrying a
      * {@code name} its submitted value binds to. Numeric fields read through {@code getInt} with sane defaults, a
      * dropdown's {@code options} through the string-list parser. A widget with a missing or unknown {@code type} is a
-     * config mistake — logged and skipped so one bad widget does not abort the menu.
+     * config mistake: logged and skipped so one bad widget does not abort the menu.
      */
     private Optional<BedrockWidget> parseWidget(ConfigurationNode node) {
         String type = node.node("type").getString("").strip().toLowerCase(java.util.Locale.ROOT);
@@ -312,7 +312,7 @@ public final class MenuSpecLoader {
 
     /**
      * Parse the {@code items} block. An item whose id is a single character present in the menu's {@code layout} grid
-     * takes its slots from that grid — the drawing wins over any {@code slot}/{@code slots} it declares — while every
+     * takes its slots from that grid (the drawing wins over any {@code slot}/{@code slots} it declares) while every
      * other item keeps its own slots. A menu with no {@code layout} passes an empty grid, so no id is ever a grid
      * character and every item parses exactly as it did before.
      */
@@ -365,7 +365,7 @@ public final class MenuSpecLoader {
     }
 
     /**
-     * Add the {@code fill-item} — a background icon painted into every slot no item occupies — once every real item's
+     * Add the {@code fill-item} (a background icon painted into every slot no item occupies) once every real item's
      * slots are known. It is an ordinary static item (it may carry a name, lore, decor) built at the lowest priority and
      * stored under {@link #FILL_ITEM_ID}, so even were an empty slot to overlap a real item the real item would still
      * win. An absent {@code fill-item} node adds nothing, so a menu without one parses exactly as before.
@@ -382,7 +382,7 @@ public final class MenuSpecLoader {
         items.put(FILL_ITEM_ID, fillItem(node, emptySlots(items, rows), slotCeiling, patterns));
     }
 
-    /** Every slot in the sized window that no already-parsed item holds, in ascending order — the fill's territory. */
+    /** Every slot in the sized window that no already-parsed item holds, in ascending order: the fill's territory. */
     private static List<Integer> emptySlots(Map<String, MenuItemSpec> items, int rows) {
         Set<Integer> occupied = new HashSet<>();
         for (MenuItemSpec item : items.values()) {
@@ -423,9 +423,9 @@ public final class MenuSpecLoader {
 
     /**
      * Parse one item, honouring an optional layout slot override. When {@code slotOverride} is non-null the item's
-     * slots come straight from the grid the menu {@code layout} drew — any {@code slot}/{@code slots} it declares is
-     * ignored, the grid position winning — otherwise its slots are parsed from its own tokens exactly as before. The
-     * {@code slotCeiling} is the number of addressable slots a declared index is bounds-checked against — {@code
+     * slots come straight from the grid the menu {@code layout} drew. Any {@code slot}/{@code slots} it declares is
+     * ignored, the grid position winning: otherwise its slots are parsed from its own tokens exactly as before. The
+     * {@code slotCeiling} is the number of addressable slots a declared index is bounds-checked against, {@code
      * rows*9} for a plain chest, or that plus the 36 player slots for a bottom-inventory menu.
      */
     private MenuItemSpec parseItem(
@@ -494,7 +494,7 @@ public final class MenuSpecLoader {
 
     /**
      * Read a {@code patterns} block into reusable item templates keyed by name. Each template is a deep copy of its
-     * spec node — a shared template must never be mutated when an item fills its {@code %var%}s — with the optional
+     * spec node (a shared template must never be mutated when an item fills its {@code %var%}s) with the optional
      * {@code defaults { var = value … }} child split out into that pattern's default var values and removed from the
      * copy so it is never mistaken for an item field. An absent block yields an empty map, so a menu declaring no
      * patterns parses exactly as it did before.
@@ -516,11 +516,11 @@ public final class MenuSpecLoader {
      * returned unchanged, so a pattern-free spec parses byte-identically; a {@code pattern} naming no declared
      * template is warned about and the item parsed from its own fields (its {@code pattern}/{@code vars} keys are
      * simply not among the fields read). Otherwise the effective node is the template with the item's own fields
-     * overlaid — the item wins, its {@code name}/{@code slots}/{@code click} replacing the template's — and every
+     * overlaid (the item wins, its {@code name}/{@code slots}/{@code click} replacing the template's) and every
      * {@code %var%} then filled from the item's {@code vars} merged over the pattern's {@code defaults}. Overlaying
      * before substituting is deliberate: it lets an item's own override reference a {@code %var%} too (the worked
-     * grammar's {@code name = "<aqua>%label% (deal)"}). Resolution runs once, on the raw item — never on the node it
-     * returns — so a {@code pattern} key on the template itself is ignored: patterns nest one level only.
+     * grammar's {@code name = "<aqua>%label% (deal)"}). Resolution runs once, on the raw item, never on the node it
+     * returns, so a {@code pattern} key on the template itself is ignored: patterns nest one level only.
      */
     private ConfigurationNode resolvePattern(ConfigurationNode itemNode, Map<String, Pattern> templates) {
         ConfigurationNode ref = itemNode.node("pattern");
@@ -542,9 +542,9 @@ public final class MenuSpecLoader {
 
     /**
      * Copy the item's own fields onto the template, the item winning: for every key except {@code pattern} and
-     * {@code vars} the item's node replaces the template's node at that key. The granularity is per top-level key —
+     * {@code vars} the item's node replaces the template's node at that key. The granularity is per top-level key
      * an item {@code click { right = […] }} replaces the template's whole {@code click} (its {@code left} included)
-     * rather than merging gesture-by-gesture — which keeps the override rule simple and predictable.
+     * rather than merging gesture-by-gesture, which keeps the override rule simple and predictable.
      */
     private static void overlay(ConfigurationNode base, ConfigurationNode overrides) {
         for (Map.Entry<Object, ? extends ConfigurationNode> entry :
@@ -633,12 +633,12 @@ public final class MenuSpecLoader {
     }
 
     /**
-     * Parse an item's {@code view} gate into a {@link RequirementSpec}. It accepts either the historic flat list —
+     * Parse an item's {@code view} gate into a {@link RequirementSpec}. It accepts either the historic flat list
      * {@code view = ["perm:vip", "!has-empty-slots:1"]}, where a leading {@code !} on an entry inverts it and every
-     * entry is mandatory (AND) — or a block map {@code view = { requirements = [...], minimum = N }} that brings the
+     * entry is mandatory (AND), or a block map {@code view = { requirements = [...], minimum = N }} that brings the
      * same minimum (OR / N-of-M) power the click requirement blocks have. A flat list with no {@code !} builds the
      * same all-mandatory block it always did, so an existing spec renders identically. A view gate is a pure yes/no,
-     * so it carries no {@code deny}, {@code success}, or {@code stop-at-success} — those keys play no part here even
+     * so it carries no {@code deny}, {@code success}, or {@code stop-at-success}. Those keys play no part here even
      * if a block map names them by habit.
      */
     private RequirementSpec parseView(ConfigurationNode node) {
@@ -663,7 +663,7 @@ public final class MenuSpecLoader {
      * before this seam.
      *
      * <p>Edge case: a view with a positive {@code minimum} (an OR / N-of-M block) folds the appended shorthand into that
-     * same pool rather than nesting an outer AND — so for such a view an operator should place the permission inside the
+     * same pool rather than nesting an outer AND, so for such a view an operator should place the permission inside the
      * {@code view} block instead. The shorthand is designed for the common no-view / AND-view case.
      */
     private RequirementSpec applyViewShorthands(RequirementSpec view, ConfigurationNode item) {
@@ -689,7 +689,7 @@ public final class MenuSpecLoader {
 
     /**
      * Parse the {@code click} block. Each gesture key ({@code left}, {@code shift-right}, {@code any}, …) maps to
-     * either a bare action list — the historic form, unchanged — or a map that adds a requirement block:
+     * either a bare action list (the historic form, unchanged) or a map that adds a requirement block:
      * {@code { click|actions|do = [...], requirements = ["has-money:100", "!has-empty-slots:1"], minimum = 1,
      * deny = ["message:no"], stop-at-success = false }}. The actions come from whichever of {@code click}/
      * {@code actions}/{@code do} is present; a requirements entry is either a token with an optional leading {@code !}
@@ -698,10 +698,10 @@ public final class MenuSpecLoader {
      * circuits once the minimum is met; block-level {@code deny} is the action list run when the block fails. A bare
      * list yields {@link RequirementSpec#NONE}, so it behaves exactly as it did before requirement blocks existed.
      *
-     * <p>A gesture map may also carry an {@code else} block — a fallback branch tried when the main requirement fails:
+     * <p>A gesture map may also carry an {@code else} block. A fallback branch tried when the main requirement fails:
      * {@code else = { requirements = [...], click|actions|do = [...], minimum, stop-at-success, deny = [...], else = {
      * ... } }}. Its requirements gate it exactly like the main block, its actions run when that gate passes, and its own
-     * nested {@code else} is the next branch tried if it fails — an if / else-if / else ladder. A terminal {@code else}
+     * nested {@code else} is the next branch tried if it fails, an if / else-if / else ladder. A terminal {@code else}
      * with no {@code requirements} always passes, so it is the unconditional "otherwise" arm.
      */
     private ClickSpec parseClick(ConfigurationNode node) {
@@ -733,8 +733,8 @@ public final class MenuSpecLoader {
             Map<ClickKind, RequirementSpec> requirements,
             Map<ClickKind, ClickBranch> orElse) {
         if (value.isMap()) {
-            // A gesture written as a bare continuation map — {@code left = { do = "input:…", prompt = … }} or
-            // {@code right = { do = "confirm:…", title = …, yes = […], no = […] }} — is a single continuation step,
+            // A gesture written as a bare continuation map. {@code left = { do = "input:…", prompt = … }} or
+            // {@code right = { do = "confirm:…", title = …, yes = […], no = […] }}, is a single continuation step,
             // not a requirement block. Its prompt/title/yes/no/deny keys are read by modifiedRef; treating it as a
             // requirement block would drop them, so it is recognised here and parsed as a one-ref action list.
             if (isContinuationMap(value)) {
@@ -763,9 +763,9 @@ public final class MenuSpecLoader {
 
     /**
      * Parse an {@code else} node into a {@link ClickBranch}, recursing on its own nested {@code else} so a fallback
-     * ladder of any depth builds bottom-up. A branch reads its gate as a full requirement block — the same {@code
+     * ladder of any depth builds bottom-up. A branch reads its gate as a full requirement block, the same {@code
      * requirements}/{@code minimum}/{@code deny}/{@code stop-at-success} grammar the main block uses, via {@link
-     * #parseRequirementSpec} — its actions from {@code click}/{@code actions}/{@code do}, and its {@code orElse} from
+     * #parseRequirementSpec}. Its actions from {@code click}/{@code actions}/{@code do}, and its {@code orElse} from
      * the next {@code else}. A branch that names no requirements resolves to {@link RequirementSpec#NONE}, which always
      * passes: that is the terminal else, the unconditional "otherwise" arm. A missing or non-map {@code else} node
      * yields no branch, so a plain gesture (and the tail of a chain) simply has no fallback.
@@ -812,7 +812,7 @@ public final class MenuSpecLoader {
 
     /**
      * Parse the {@code requirements} entries into a requirement list. An entry is either a compact string token (the
-     * historic form: an optional leading {@code !} negates the rest) or a map that adds per-requirement structure —
+     * historic form: an optional leading {@code !} negates the rest) or a map that adds per-requirement structure
      * {@code { require|requirement = "<token>", optional = bool, success = [...], deny = [...] }}. Blank or
      * {@code require}-less entries are skipped, mirroring the map-without-action skip on the action path.
      */
@@ -844,7 +844,7 @@ public final class MenuSpecLoader {
      * A map-form requirement: {@code require} (or its {@code requirement} alias) is the condition token (a leading
      * {@code !} negates it, as in the string form), {@code optional} marks it non-blocking, and {@code success}/
      * {@code deny} are the per-requirement action lists run on its own pass or failure. An entry with no condition token
-     * is a config mistake — logged and skipped so one bad requirement does not abort the menu.
+     * is a config mistake: logged and skipped so one bad requirement does not abort the menu.
      */
     private Optional<Requirement> mapRequirement(ConfigurationNode entry) {
         String token = requireToken(entry);
@@ -1062,7 +1062,7 @@ public final class MenuSpecLoader {
     /**
      * A map-form action entry: {@code do} (or its {@code action} alias) is the action token, and the optional
      * {@code delay} (ticks), {@code chance} (percent), and {@code deny} (a fallback action token) modify it. An
-     * entry with no action token is a config mistake — logged and skipped so one bad button does not abort the menu.
+     * entry with no action token is a config mistake: logged and skipped so one bad button does not abort the menu.
      */
     private Optional<Ref> modifiedRef(ConfigurationNode entry) {
         String token = actionToken(entry);
@@ -1083,7 +1083,7 @@ public final class MenuSpecLoader {
         return Optional.of(base.withModifiers(delay, chance, denyRef(entry)));
     }
 
-    /** The token head before its first colon — {@code input} in {@code input:pwarp.rename} — trimmed, or the whole token. */
+    /** The token head before its first colon, {@code input} in {@code input:pwarp.rename}, trimmed, or the whole token. */
     private static String continuationHead(String token) {
         int colon = token.indexOf(':');
         return (colon < 0 ? token : token.substring(0, colon)).strip();
@@ -1092,7 +1092,7 @@ public final class MenuSpecLoader {
     /**
      * Build an {@code input:} step from its map entry. The point key is the token tail after {@code input:} (the key
      * the operator's per-key anvil/chat/sign mode is looked up by); {@code prompt}/{@code default} are the label and
-     * pre-fill, carried verbatim for render-time resolution; {@code deny} is the ref list run on a cancel — read as a
+     * pre-fill, carried verbatim for render-time resolution; {@code deny} is the ref list run on a cancel, read as a
      * list here, unlike the scalar chance-fallback {@code deny} an ordinary action modifier map carries.
      */
     private Continuation inputContinuation(String token, ConfigurationNode entry) {

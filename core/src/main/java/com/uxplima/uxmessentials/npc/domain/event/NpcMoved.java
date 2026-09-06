@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.npc.domain.NpcName;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * An NPC was re-anchored — {@code /npc movehere} or {@code /npc moveto}. Carries the NPC's new position so a
+ * An NPC was re-anchored, {@code /npc movehere} or {@code /npc moveto}. Carries the NPC's new position so a
  * subscriber re-anchors anything pinned to the NPC (a hologram linked to it) without re-reading the repository.
  *
  * @param name the name of the moved NPC

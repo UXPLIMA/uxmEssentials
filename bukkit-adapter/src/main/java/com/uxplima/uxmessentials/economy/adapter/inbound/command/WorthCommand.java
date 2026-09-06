@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /worth [item]}: report the configured sell value of an item before a player commits to {@code /sell}.
  * Called with no argument it prices the held item and its stack; called with a name it prices a single unit of
  * that material. The pricing read itself is the {@link com.uxplima.uxmessentials.economy.application.LookupWorth}
- * use case's job — this handler resolves the material at the boundary and runs the report off the tick thread,
+ * use case's job. This handler resolves the material at the boundary and runs the report off the tick thread,
  * the same off-tick shape {@link BalanceCommand} uses so a worth lookup never blocks the command.
  */
 @NullMarked

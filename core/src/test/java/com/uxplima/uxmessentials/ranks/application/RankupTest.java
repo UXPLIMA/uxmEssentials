@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@link Rankup}'s ordering — requirements → charge → advance → actions — and its four terminal outcomes: a
+ * Pins {@link Rankup}'s ordering, requirements → charge → advance → actions, and its four terminal outcomes: a
  * met rankup advances the pointer, charges the cost and fires the actions; a failed requirement and a short
  * balance both refuse without advancing, charging or acting; and a player at the top rank has nothing to advance
  * to. The economy, requirement evaluator and action runner are fakes, so the decision logic is exercised in pure

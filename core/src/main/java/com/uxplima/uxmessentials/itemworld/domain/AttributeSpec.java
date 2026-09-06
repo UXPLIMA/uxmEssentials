@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
  * A validated attribute-modifier request for {@code /itemedit attribute add <attribute> <amount> [slot]}: a
  * normalised attribute id, a finite modifier amount, and an equipment-slot-group token.
  *
- * <p>The domain does not know Bukkit {@code Attribute} or {@code EquipmentSlotGroup} — it normalises the id to
+ * <p>The domain does not know Bukkit {@code Attribute} or {@code EquipmentSlotGroup}. It normalises the id to
  * the canonical lowercase {@code namespace:path} shape (stripping a legacy category prefix such as
  * {@code generic.} so {@code generic.attack_damage} and the modern flat {@code attack_damage} both resolve) and
  * lower-cases the slot token, and the adapter resolves both against the live registries. An {@code add_number}

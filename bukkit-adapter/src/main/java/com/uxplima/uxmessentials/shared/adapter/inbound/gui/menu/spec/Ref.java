@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A parsed reference to engine behaviour — an action, condition, placeholder, or list source the registries
+ * A parsed reference to engine behaviour, an action, condition, placeholder, or list source the registries
  * later resolve by {@link #id()}. A reference carries optional string arguments so a spec can write a single
  * compact token instead of a HOCON block.
  *
@@ -46,7 +46,7 @@ public record Ref(
     /**
      * The compact two-argument form every existing call-site uses: a ref with the no-modifier defaults (fires
      * immediately, always, with no fallback). It delegates to the canonical constructor so {@link #parse},
-     * {@link #of}, and every {@code new Ref(id, args)} keep compiling unchanged — only the loader's map form
+     * {@link #of}, and every {@code new Ref(id, args)} keep compiling unchanged. Only the loader's map form
      * reaches for {@link #withModifiers}.
      */
     public Ref(String id, Map<String, String> args) {
@@ -88,7 +88,7 @@ public record Ref(
     }
 
     /**
-     * A copy of this ref carrying {@code continuation} — the {@code input:}/{@code confirm:} step the loader attaches
+     * A copy of this ref carrying {@code continuation}, the {@code input:}/{@code confirm:} step the loader attaches
      * when it parses one of those map entries. Every other builder leaves the continuation empty, so only a ref the
      * loader recognised as a continuation step ever carries one.
      */
@@ -100,7 +100,7 @@ public record Ref(
     /**
      * A copy of this ref re-keyed to a new {@code id} and {@code args} but carrying the SAME per-action modifiers
      * (delay, chance, deny). The runtime uses it to re-split a registry-blind {@code id:value} token the parser left
-     * whole — see {@code MenuListener.resolveEffective} — without losing the delay, chance, or deny fallback a
+     * whole, see {@code MenuListener.resolveEffective}, without losing the delay, chance, or deny fallback a
      * map-form action attached. The canonical constructor is only reachable inside this record, so this is how the
      * runtime, in another package, rebuilds a ref. Pure: no Bukkit, just the fields.
      */
@@ -110,15 +110,15 @@ public record Ref(
 
     /**
      * Resolve this ref against a registry of ids, doing the split {@link #parse} is too registry-blind to do. When the
-     * whole id is already registered, or it carries no colon, the ref is returned unchanged — a feature ref
+     * whole id is already registered, or it carries no colon, the ref is returned unchanged, a feature ref
      * ({@code economy:open-bank}) and an already-split generic ({@code sound:x}) both take that path, so their identity
      * is preserved byte-for-byte. Otherwise the token is split on its first colon, and when the head is a registered id
      * this returns a copy re-keyed to that head with the tail carried as {@code value} (the per-action modifiers ride
      * along through {@link #withIdAndArgs}); when neither the whole id nor the head is known, the ref is returned
      * unchanged so it misses the registry exactly as it would have.
      *
-     * <p>Pure by design: the caller supplies {@code isRegistered} — an action registry's or a condition registry's
-     * {@code has} — so this stays Bukkit-free and is shared by both the runtime's action path and the three condition
+     * <p>Pure by design: the caller supplies {@code isRegistered}. An action registry's or a condition registry's
+     * {@code has}, so this stays Bukkit-free and is shared by both the runtime's action path and the three condition
      * sites (startup validation, click gating, view gating). A valued condition written {@code has-money:100} therefore
      * resolves the same way {@code give-money:100} does on the action side.
      */
@@ -152,12 +152,12 @@ public record Ref(
     }
 
     /**
-     * A best-effort fast path only. {@link #parse} is registry-blind — it cannot see which action ids are actually
-     * registered — so this hardcoded allowlist just lets a handful of well-known generic prefixes split their
+     * A best-effort fast path only. {@link #parse} is registry-blind. It cannot see which action ids are actually
+     * registered, so this hardcoded allowlist just lets a handful of well-known generic prefixes split their
      * {@code id:value} token at parse time. It is deliberately NOT exhaustive: the ~40 later generic actions are not
      * listed here. The authoritative split lives in {@code MenuListener.resolveEffective}, which has the action
      * registry and re-splits any {@code id:value} token whose head is a registered action. Do not "complete" this
-     * list by hand — the registry, not this set, is the source of truth.
+     * list by hand: the registry, not this set, is the source of truth.
      */
     private static boolean isGeneric(String head) {
         return Set.of("sound", "command", "console", "message", "perm", "open", "expr", "refresh-slot")

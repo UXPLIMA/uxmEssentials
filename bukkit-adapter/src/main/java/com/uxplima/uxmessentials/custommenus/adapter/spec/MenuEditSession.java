@@ -25,14 +25,14 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The mutable working copy of a {@link MenuSpec} the in-game menu editor edits before it writes. It is the middle of
- * the editor's spec service — the loader turns a file into an immutable {@link MenuSpec}, this clones that into an
+ * the editor's spec service. The loader turns a file into an immutable {@link MenuSpec}, this clones that into an
  * editable model an operator mutates through the GUI, and {@link #toSpec()} freezes it back into an immutable spec the
  * {@link MenuSpecWriter} serialises. So an edit is a clone, a sequence of mutations, and a re-freeze, never a
  * hand-built HOCON string.
  *
  * <p>Bukkit-free like the spec model it holds: it references only the {@code spec/} records and the menu's
  * {@code command {}} value object, so it is exercised by plain JUnit and can be mutated off the tick thread. It carries
- * the whole menu surface — the menu-level fields, the item map, and the optional open-command block — even though the
+ * the whole menu surface (the menu-level fields, the item map, and the optional open-command block) even though the
  * P1 editor only wires the menu-level setters and the item CRUD; the later phases (slot grid, item and action editors)
  * mutate the rest through the same model.
  *
@@ -42,7 +42,7 @@ import org.jspecify.annotations.Nullable;
  */
 public final class MenuEditSession {
 
-    /** The viewer's own inventory slots a bottom-inventory menu additionally paints into — mirrors {@code MenuSpec}. */
+    /** The viewer's own inventory slots a bottom-inventory menu additionally paints into, mirrors {@code MenuSpec}. */
     private static final int BOTTOM_SLOTS = 36;
 
     private String title;
@@ -107,7 +107,7 @@ public final class MenuEditSession {
 
     /**
      * Move the item stored under {@code id} to {@code slots}, keeping every other field of the item. A no-op when no
-     * item carries that id — the grid editor never moves a slot that holds nothing.
+     * item carries that id: the grid editor never moves a slot that holds nothing.
      */
     public MenuEditSession moveItem(String id, SlotSet slots) {
         Objects.requireNonNull(slots, "slots");
@@ -115,7 +115,7 @@ public final class MenuEditSession {
     }
 
     /**
-     * Replace the item stored under {@code id} with {@code mutation}'s result, keeping the map key — the primitive the
+     * Replace the item stored under {@code id} with {@code mutation}'s result, keeping the map key, the primitive the
      * item property editor's every field setter runs through, since {@link MenuItemSpec} is immutable. A no-op when no
      * item carries that id, so a stale editor click never re-inserts a removed item.
      */
@@ -129,7 +129,7 @@ public final class MenuEditSession {
         return this;
     }
 
-    /** The item stored under {@code id}, or empty when none is — the read the grid editor resolves a clicked slot by. */
+    /** The item stored under {@code id}, or empty when none is: the read the grid editor resolves a clicked slot by. */
     public Optional<MenuItemSpec> item(String id) {
         Objects.requireNonNull(id, "id");
         return Optional.ofNullable(items.get(id));
@@ -137,7 +137,7 @@ public final class MenuEditSession {
 
     // --- per-item field setters (the item property editor mutates one field per click) --------------------------
 
-    /** Set the raw material token of the item under {@code id} — a plain name, {@code head:…}, or a {@code b64:…} stack. */
+    /** Set the raw material token of the item under {@code id}, a plain name, {@code head:…}, or a {@code b64:…} stack. */
     public MenuEditSession setMaterial(String id, String material) {
         Objects.requireNonNull(material, "material");
         return updateItem(id, item -> item.withMaterial(material));
@@ -155,7 +155,7 @@ public final class MenuEditSession {
         return updateItem(id, item -> item.withLore(lore));
     }
 
-    /** Set the slots the item under {@code id} occupies — the item editor's slot-assignment field. */
+    /** Set the slots the item under {@code id} occupies: the item editor's slot-assignment field. */
     public MenuEditSession setSlots(String id, SlotSet slots) {
         Objects.requireNonNull(slots, "slots");
         return updateItem(id, item -> item.withSlots(slots));
@@ -207,7 +207,7 @@ public final class MenuEditSession {
         });
     }
 
-    /** Replace the item-flag tokens of the item under {@code id} — the item editor's per-flag toggles. */
+    /** Replace the item-flag tokens of the item under {@code id}: the item editor's per-flag toggles. */
     public MenuEditSession setFlags(String id, List<String> flags) {
         Objects.requireNonNull(flags, "flags");
         return updateItem(id, item -> item.withDecor(item.decor().withFlagTokens(flags)));
@@ -215,14 +215,14 @@ public final class MenuEditSession {
 
     // --- per-gesture click actions (the click-actions editor mutates one gesture per edit) -----------------------
 
-    /** The action refs bound to {@code kind} on the item under {@code id} — the gesture's own list, not the {@code ANY} merge. */
+    /** The action refs bound to {@code kind} on the item under {@code id}: the gesture's own list, not the {@code ANY} merge. */
     public List<Ref> clickActions(String id, ClickKind kind) {
         Objects.requireNonNull(kind, "kind");
         return item(id).map(item -> item.click().actions().getOrDefault(kind, List.of()))
                 .orElseGet(List::of);
     }
 
-    /** Replace the whole action list bound to {@code kind} — the workhorse the click-actions ref-list editor writes through. */
+    /** Replace the whole action list bound to {@code kind}: the workhorse the click-actions ref-list editor writes through. */
     public MenuEditSession setClickActions(String id, ClickKind kind, List<Ref> refs) {
         Objects.requireNonNull(kind, "kind");
         Objects.requireNonNull(refs, "refs");
@@ -256,7 +256,7 @@ public final class MenuEditSession {
         return setClickActions(id, kind, next);
     }
 
-    /** Set {@code kind}'s requirement block on the item under {@code id} — the per-gesture click gate. */
+    /** Set {@code kind}'s requirement block on the item under {@code id}, the per-gesture click gate. */
     public MenuEditSession setClickRequirement(String id, ClickKind kind, RequirementSpec requirement) {
         Objects.requireNonNull(kind, "kind");
         Objects.requireNonNull(requirement, "requirement");
@@ -265,7 +265,7 @@ public final class MenuEditSession {
 
     // --- view requirements (the requirements editor gates an item's visibility) ---------------------------------
 
-    /** The condition refs of the item under {@code id}'s {@code view} gate, in order — the ref-list editor's read. */
+    /** The condition refs of the item under {@code id}'s {@code view} gate, in order: the ref-list editor's read. */
     public List<Ref> viewConditions(String id) {
         return item(id).map(item -> item.view().requirements().stream()
                         .map(Requirement::condition)
@@ -274,7 +274,7 @@ public final class MenuEditSession {
     }
 
     /**
-     * Replace the item under {@code id}'s view requirements from a flat condition-ref list — the ref-list editor's
+     * Replace the item under {@code id}'s view requirements from a flat condition-ref list: the ref-list editor's
      * write. Each ref becomes a plain mandatory, non-inverted {@link Requirement}; a hand-written {@code !condition} or
      * optional flag is normalised away by a GUI edit, so an author who needs inversion keeps it in the file.
      */
@@ -312,12 +312,12 @@ public final class MenuEditSession {
         return setViewConditions(id, next);
     }
 
-    /** Set the item under {@code id}'s view {@code minimum} — the AND / OR / N-of-M combinator over its requirements. */
+    /** Set the item under {@code id}'s view {@code minimum}: the AND / OR / N-of-M combinator over its requirements. */
     public MenuEditSession setViewMinimum(String id, int minimum) {
         return updateItem(id, item -> item.withView(item.view().withMinimum(minimum)));
     }
 
-    /** Set the item under {@code id}'s view {@code deny} action list — what runs when the visibility gate fails. */
+    /** Set the item under {@code id}'s view {@code deny} action list: what runs when the visibility gate fails. */
     public MenuEditSession setViewDeny(String id, List<Ref> deny) {
         Objects.requireNonNull(deny, "deny");
         return updateItem(id, item -> item.withView(item.view().withDeny(deny)));
@@ -359,7 +359,7 @@ public final class MenuEditSession {
     }
 
     /**
-     * Set the refresh policy from an enabled flag and an interval — the two properties the menu editor surfaces as a
+     * Set the refresh policy from an enabled flag and an interval. The two properties the menu editor surfaces as a
      * toggle and a stepper. Enabling with a non-positive interval is snapped up to one tick, since {@link RefreshSpec}
      * forbids an enabled zero-interval loop, so the toggle can flip refresh on without the operator first setting an
      * interval.
@@ -445,22 +445,22 @@ public final class MenuEditSession {
         return chestOnly;
     }
 
-    /** The menu's refresh policy — the toggle-and-interval pair the menu editor's two refresh rows read. */
+    /** The menu's refresh policy: the toggle-and-interval pair the menu editor's two refresh rows read. */
     public RefreshSpec refresh() {
         return refresh;
     }
 
-    /** The condition refs gating who may open the menu, in order — the open-requirement ref-list editor's read. */
+    /** The condition refs gating who may open the menu, in order: the open-requirement ref-list editor's read. */
     public List<Ref> openRequirement() {
         return openRequirement;
     }
 
-    /** The action refs run when the menu opens, in order — the open-actions ref-list editor's read. */
+    /** The action refs run when the menu opens, in order: the open-actions ref-list editor's read. */
     public List<Ref> openActions() {
         return openActions;
     }
 
-    /** The action refs run when the menu closes, in order — the close-actions ref-list editor's read. */
+    /** The action refs run when the menu closes, in order: the close-actions ref-list editor's read. */
     public List<Ref> closeActions() {
         return closeActions;
     }

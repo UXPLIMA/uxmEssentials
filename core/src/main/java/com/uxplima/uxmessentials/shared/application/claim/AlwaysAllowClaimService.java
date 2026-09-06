@@ -26,7 +26,7 @@ public final class AlwaysAllowClaimService implements ClaimService {
 
     @Override
     public boolean isProtected(Position at) {
-        // No claim plugin is active, so no land is claimed — nothing to keep random-teleport out of.
+        // No claim plugin is active, so no land is claimed: nothing to keep random-teleport out of.
         return false;
     }
 }

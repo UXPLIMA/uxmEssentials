@@ -172,7 +172,7 @@ public final class JooqBankRepository extends JooqRepository implements BankRepo
         Objects.requireNonNull(player, "player");
         Objects.requireNonNull(amount, "amount");
         // The guarded wallet debit and the bank-balance add commit together: a debit short of funds changes no
-        // rows and the bank is left untouched. The bank add is guarded by its own row count — if the bank was
+        // rows and the bank is left untouched. The bank add is guarded by its own row count. If the bank was
         // deleted concurrently the UPDATE matches no rows. Because the debit has already taken by then, a
         // returned err would commit it (the write helper only rolls back on a throw), so the no-rows case throws
         // a rollback signal to undo the debit rather than debiting the player while the money vanishes.
@@ -204,7 +204,7 @@ public final class JooqBankRepository extends JooqRepository implements BankRepo
         // both overdraw it. The clamp is checked read-only before any mutation, and the no-rows-changed guard
         // fires before the wallet credit, so no failure path ever returns after a committed change (the
         // transaction only commits when this block returns ok). A no-rows-changed update covers both a bank short
-        // of funds and a bank deleted concurrently — neither can leave the wallet credited.
+        // of funds and a bank deleted concurrently: neither can leave the wallet credited.
         return write(dsl -> {
             if (!WalletLegs.creditFitsClamp(dsl, player, amount)) {
                 return Result.err(BankError.BALANCE_MAX_EXCEEDED);

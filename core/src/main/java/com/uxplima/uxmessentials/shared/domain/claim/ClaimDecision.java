@@ -7,7 +7,7 @@ package com.uxplima.uxmessentials.shared.domain.claim;
  */
 public enum ClaimDecision {
 
-    /** The action is permitted — no claim policy objection. */
+    /** The action is permitted, no claim policy objection. */
     ALLOWED,
 
     /** The target block is inside another player's claim and the foreign-claim rule is active. */

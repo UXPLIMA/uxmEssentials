@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * flag, no domain event), then a confirmation to the viewer naming whose storage they are looking at.
  *
  * <p>There is no self/other split here: the target is always someone, and viewing your own storage via
- * {@code /invsee} is harmless, so a single {@code {player}}-keyed confirmation covers both — the default target
+ * {@code /invsee} is harmless, so a single {@code {player}}-keyed confirmation covers both, the default target
  * (yourself) simply yields your own name in the placeholder.
  */
 public final class OpenContainer {

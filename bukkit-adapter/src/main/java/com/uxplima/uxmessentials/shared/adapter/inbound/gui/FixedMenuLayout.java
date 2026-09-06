@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
  * The externalised presentation of a fixed-action menu (one with a known set of buttons at fixed slots, not a
  * paginated list): the row count, the filler {@link Material} for the empty background, and a per-element slot
  * and {@link Material} keyed by a stable element name (e.g. {@code "deposit"}, {@code "close"}). Titles, button
- * labels, and lore stay in the message catalog as {@code MessageKey} lookups — this record holds layout
- * integers and materials only, never localised strings — so a translated catalog and an operator-edited layout
+ * labels, and lore stay in the message catalog as {@code MessageKey} lookups. This record holds layout
+ * integers and materials only, never localised strings, so a translated catalog and an operator-edited layout
  * never collide.
  *
  * <p>Immutable and built once at load time from {@code modules/<m>/gui/<name>.conf}; the

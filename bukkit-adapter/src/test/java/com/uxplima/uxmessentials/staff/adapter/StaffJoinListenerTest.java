@@ -101,7 +101,7 @@ class StaffJoinListenerTest {
 
         listener.onJoin(new PlayerJoinEvent(player, Component.empty()));
 
-        // The real sword is back on the player and the row is gone — the interrupted exit is finished.
+        // The real sword is back on the player and the row is gone: the interrupted exit is finished.
         assertThat(player.getInventory().getItem(0)).isNotNull();
         assertThat(player.getInventory().getItem(0).getType()).isEqualTo(Material.DIAMOND_SWORD);
         assertThat(repository.rows).doesNotContainKey(who.uuid());

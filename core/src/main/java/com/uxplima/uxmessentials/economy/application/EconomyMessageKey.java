@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The economy context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code WALLET_BALANCE} ↔ {@code wallet.balance}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in
- * the context — every message resolves through one of these, and the keys mirror the economy GLOSSARY
+ * the context. Every message resolves through one of these, and the keys mirror the economy GLOSSARY
  * terms ({@code wallet.*}, {@code pay.*}, {@code baltop.*}, {@code currency.*}).
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
@@ -318,7 +318,7 @@ public enum EconomyMessageKey implements MessageKey {
     PHYSICAL_PENDING_RECEIVED("eco.physical.pending-received"),
     PHYSICAL_PLAYER_OFFLINE("eco.physical.player-offline"),
 
-    // Eco-admin GUI (bare /eco) — hub
+    // Eco-admin GUI (bare /eco), hub
     ECO_ADMIN_GUI_TITLE("eco.admin-gui.title"),
     ECO_ADMIN_GUI_MANAGE_NAME("eco.admin-gui.manage-name"),
     ECO_ADMIN_GUI_MANAGE_LORE("eco.admin-gui.manage-lore"),
@@ -329,7 +329,7 @@ public enum EconomyMessageKey implements MessageKey {
     ECO_ADMIN_GUI_CLOSE("eco.admin-gui.close"),
     ECO_ADMIN_GUI_PICK_TITLE("eco.admin-gui.pick-title"),
 
-    // Eco-admin GUI — per-player manage screen
+    // Eco-admin GUI, per-player manage screen
     ECO_ADMIN_GUI_TARGET_TITLE("eco.admin-gui.target-title"),
     ECO_ADMIN_GUI_TARGET_HEAD_NAME("eco.admin-gui.target-head-name"),
     ECO_ADMIN_GUI_TARGET_HEAD_LORE("eco.admin-gui.target-head-lore"),
@@ -350,7 +350,7 @@ public enum EconomyMessageKey implements MessageKey {
     ECO_ADMIN_GUI_BACK("eco.admin-gui.back"),
     ECO_ADMIN_GUI_AMOUNT_PROMPT("eco.admin-gui.amount-prompt"),
 
-    // Eco-admin GUI — server-wide bulk screen
+    // Eco-admin GUI, server-wide bulk screen
     ECO_ADMIN_GUI_BULK_TITLE("eco.admin-gui.bulk-title"),
     ECO_ADMIN_GUI_GIVEALL_NAME("eco.admin-gui.giveall-name"),
     ECO_ADMIN_GUI_GIVEALL_LORE("eco.admin-gui.giveall-lore"),
@@ -358,7 +358,7 @@ public enum EconomyMessageKey implements MessageKey {
     ECO_ADMIN_GUI_RESETALL_LORE("eco.admin-gui.resetall-lore"),
     ECO_ADMIN_GUI_RESETALL_CONFIRM_TITLE("eco.admin-gui.resetall-confirm-title"),
 
-    // Eco-admin GUI — currency picker (paginated, shared by the manage and bulk screens)
+    // Eco-admin GUI. Currency picker (paginated, shared by the manage and bulk screens)
     ECO_ADMIN_GUI_SELECT_CURRENCY_NAME("eco.admin-gui.select-currency-name"),
     ECO_ADMIN_GUI_SELECT_CURRENCY_LORE("eco.admin-gui.select-currency-lore"),
     ECO_ADMIN_GUI_CURRENCY_PICKER_TITLE("eco.admin-gui.currency-picker-title"),

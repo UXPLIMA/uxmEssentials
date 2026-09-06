@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * {@code WorldCommand.runCreate} exactly so a GUI-built world is byte-for-byte identical to a command-built one.
  *
  * <p>The {@code generator} field holds a bare built-in id ({@code void}/{@code flat}) or {@code null} for vanilla
- * generation — only the two built-ins are offered in the GUI, the same set {@code WorldGenerationMenu} reports and the
+ * generation. Only the two built-ins are offered in the GUI, the same set {@code WorldGenerationMenu} reports and the
  * {@code /worlds create} generator tab-completion suggests. {@link #toSpec()} maps a built-in id onto the namespaced
  * {@link BuiltInGenerators} ref the engine resolves, leaving the seed and dimension empty exactly as the command does.
  */
@@ -68,7 +68,7 @@ public record WorldCreateDraft(
         return Optional.ofNullable(generator);
     }
 
-    /** Whether a non-blank name has been entered — the create button only acts once a name is present. */
+    /** Whether a non-blank name has been entered, the create button only acts once a name is present. */
     public boolean hasName() {
         return !name.isBlank();
     }

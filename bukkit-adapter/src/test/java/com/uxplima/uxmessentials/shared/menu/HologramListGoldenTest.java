@@ -107,10 +107,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code HologramListView} drew. The store holds two holograms ("alpha", "beta"), so the list draws two ARMOR_STAND
  * icons (content slots 0 and 1), the LIME_DYE create button (slot 49), and the two ARROW nav buttons (slots 48 and
  * 50). The engine's window is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for
- * slot, to the baseline the old view produced — captured once while both rendered the same fixture, then frozen here
+ * slot, to the baseline the old view produced. Captured once while both rendered the same fixture, then frozen here
  * as the contract so the old class could be deleted. Then a left click on the first hologram icon through the
  * engine's own {@link MenuListener} proves the migrated path opens that hologram's bespoke {@link HologramEditorView}
- * — so the move is faithful in both appearance and behaviour.
+ *, so the move is faithful in both appearance and behaviour.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code hologram_name} token, so a hologram's name
  * appears in the rendered label; every other key renders verbatim. A real rendering difference (a wrong key, a wrong
@@ -184,7 +184,7 @@ class HologramListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code HologramListView} produced for this fixture (two
      * holograms "alpha" and "beta", no create disabled), captured once while both paths rendered it identically and
-     * frozen here as the contract: two ARMOR_STAND icons (content slots 0 and 1 — the names surface through the
+     * frozen here as the contract: two ARMOR_STAND icons (content slots 0 and 1. The names surface through the
      * {@code hologram_name} token), the LIME_DYE create button (slot 49), and the two nav ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

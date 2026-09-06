@@ -149,7 +149,7 @@ class NpcInteractionListenerTest {
         assertThat(listener.trackedClicks()).isEqualTo(1);
 
         now.set(600); // past the 500 ms window
-        // The expired stamp drops out on its own — the map does not retain the (now idle) player/NPC pair.
+        // The expired stamp drops out on its own: the map does not retain the (now idle) player/NPC pair.
         assertThat(listener.trackedClicks()).isZero();
 
         // And a click after expiry runs again (cooldown elapsed == evicted entry, same semantics as before).

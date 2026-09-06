@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.ranks.domain.Rank;
 /**
  * The typed outcome of a {@link Rankup} attempt: which of the four terminal states it reached and, on a
  * successful advance, the {@link Rank} the player moved up to. Modelling the outcome as a value the command
- * boundary renders — rather than sending a message from the use case — keeps the decision logic pure and free
+ * boundary renders, rather than sending a message from the use case, keeps the decision logic pure and free
  * of any {@code Messages} dependency, mirroring how the poses context returns an outcome the command maps to a
  * catalog key.
  *
@@ -23,7 +23,7 @@ public record RankupResult(Status status, Optional<Rank> newRank) {
         /** The player advanced to the next rank; {@link RankupResult#newRank()} carries it. */
         RANKED_UP,
 
-        /** There is no next rank — the player is already at the top (or the ladder holds no ranks). */
+        /** There is no next rank: the player is already at the top (or the ladder holds no ranks). */
         ALREADY_MAX,
 
         /** The next rank's requirements were not met; nothing was charged and the pointer did not move. */

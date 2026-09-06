@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * A hologram's name, normalised to its canonical lowercase form so uniqueness and lookup are
- * case-insensitive — {@code /hologram create Spawn} and {@code /hologram delete spawn} address the same
+ * case-insensitive, {@code /hologram create Spawn} and {@code /hologram delete spawn} address the same
  * hologram.
  *
  * <p>The name is the hologram's identity: holograms are server-wide, so a name is unique across the whole

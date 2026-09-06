@@ -9,8 +9,8 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the two grenade-style admin-fun verbs — {@code /antioch} (alias {@code /grenade}) and {@code /beezooka}
- * (alias {@code /beecannon}) — into the itemworld command surface, the way {@code BigTreeSurfaceDriftTest}
+ * Pins the two grenade-style admin-fun verbs. {@code /antioch} (alias {@code /grenade}) and {@code /beezooka}
+ * (alias {@code /beecannon}), into the itemworld command surface, the way {@code BigTreeSurfaceDriftTest}
  * pins {@code /bigtree}. Each is the abusable, audit-logged sibling of {@code /fireball} and {@code
  * /kittycannon}; this guard fails if either drops out of the surface or wires under a node other than its own
  * {@code uxmessentials.<verb>.use}, which would drift the permissions reference and the permission catalogue.

@@ -92,7 +92,7 @@ class MenuContextTest {
 
         assertThat(ctx.executor()).isEqualTo(opener);
         assertThat(ctx.viewer())
-                .as("the viewer is untouched — only who triggered the open changes")
+                .as("the viewer is untouched. Only who triggered the open changes")
                 .isEqualTo(viewer);
     }
 

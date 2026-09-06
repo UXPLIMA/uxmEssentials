@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A {@link ModerationAudit} decorator that, when the module's {@code discord-notify} knob is on, additionally
  * emits a human-readable {@code event=punishment_notify} line on the shared
- * {@code com.uxplima.uxmessentials.audit} channel for each successful punishment — a "who punished whom" notice
+ * {@code com.uxplima.uxmessentials.audit} channel for each successful punishment. A "who punished whom" notice
  * (staff, target, type, reason, duration) rendered with player <em>names</em> rather than the operator audit's
  * UUIDs, so the optional Discord bridge that forwards the audit channel surfaces a readable message. It wraps
  * the real operator audit unchanged: every call is delegated first, and the extra notice is best-effort and

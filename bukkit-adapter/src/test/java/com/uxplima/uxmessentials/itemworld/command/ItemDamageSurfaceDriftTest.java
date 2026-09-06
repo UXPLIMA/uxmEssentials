@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /itemdamage} (alias {@code /durability}) into the itemworld context's command surface — the
+ * Pins {@code /itemdamage} (alias {@code /durability}) into the itemworld context's command surface, the
  * held-item editor that sets durability damage, the inverse of {@code /repair}. This guard fails if the
  * literal drops out of the surface or wires under a node other than {@code uxmessentials.itemdamage.use}.
  */

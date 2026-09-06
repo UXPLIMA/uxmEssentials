@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * A home was created — {@code /sethome} into a slot the owner did not already have a home in. Relocating
+ * A home was created: {@code /sethome} into a slot the owner did not already have a home in. Relocating
  * a home already in a slot raises {@link HomeRelocated}, not this; that path is a move, not a creation.
  *
  * @param owner the player who now owns the home

@@ -6,9 +6,9 @@ import java.util.Optional;
 
 /**
  * The native item metadata an operator layers onto a menu item beyond {@link ItemDecor}'s amount, model data,
- * glow, and flags — enchantments, an unbreakable mark, a leather/potion colour, banner patterns, an armour trim,
+ * glow, and flags, enchantments, an unbreakable mark, a leather/potion colour, banner patterns, an armour trim,
  * durability, an item-model override, and the two placeholder-driven {@code dynamic*} overrides. Every value is
- * kept as a plain string, int, or list — never a Bukkit type — so this model stays in the pure, Bukkit-free spec
+ * kept as a plain string, int, or list, never a Bukkit type, so this model stays in the pure, Bukkit-free spec
  * core. The renderer resolves each token against the live registries at draw time and silently skips anything
  * that does not resolve (an unknown enchant, an unsupported colour, a registry the runtime cannot model), exactly
  * the way the flag tokens already degrade rather than abort a render.
@@ -37,7 +37,7 @@ public record RichMeta(
         DataComponents components,
         Optional<String> dynamicGlow) {
 
-    /** The empty rich meta — the default an item carries when it declares no extra native metadata. */
+    /** The empty rich meta: the default an item carries when it declares no extra native metadata. */
     public static final RichMeta NONE = new RichMeta(
             false,
             List.of(),
@@ -157,7 +157,7 @@ public record RichMeta(
      */
     public record PotionSpec(Optional<String> type, Optional<String> color, List<String> effects) {
 
-        /** The empty potion spec — no base type, no colour, no custom effects. */
+        /** The empty potion spec: no base type, no colour, no custom effects. */
         public static final PotionSpec NONE = new PotionSpec(Optional.empty(), Optional.empty(), List.of());
 
         public PotionSpec {

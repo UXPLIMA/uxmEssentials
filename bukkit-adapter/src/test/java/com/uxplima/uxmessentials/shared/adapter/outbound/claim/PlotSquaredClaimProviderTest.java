@@ -21,14 +21,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The PlotSquared provider with PlotSquared absent — the case on the test classpath, where no
+ * The PlotSquared provider with PlotSquared absent, the case on the test classpath, where no
  * {@code com.plotsquared} class resolves. {@link PlotSquaredClaimProvider#active()} must report inactive without
  * naming a PlotSquared type and {@link PlotSquaredClaimProvider#claimAt} must degrade to empty, proving the
  * present-guard keeps the reflective PlotSquared chain from loading on a server without PlotSquared.
  *
  * <p>The PlotSquared API chain cannot be stood up under MockBukkit, so the ownership decisions that do not need a
- * live PlotSquared — an owner, an added-but-not-owner member as trust, the real owner UUID (empty when unowned),
- * and the deny-list ban — are exercised against the pure {@link PlotView} seam instead. The unclaimed branch (a
+ * live PlotSquared, an owner, an added-but-not-owner member as trust, the real owner UUID (empty when unowned),
+ * and the deny-list ban: are exercised against the pure {@link PlotView} seam instead. The unclaimed branch (a
  * live PlotSquared returning {@code null} from {@code getOwnedPlot}) needs a running PlotSquared and is not
  * reproducible here.
  */

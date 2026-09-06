@@ -62,11 +62,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * to the CHEST icon), so the list draws two CHEST icons (content slots 0 and 1, the names surfacing through the kit-id
  * token), the EMERALD_BLOCK create button (slot 49), the BOOK categories button (slot 51), the BARRIER close button
  * (slot 53), and the two ARROW nav buttons (slots 45 and 46). The engine's window is snapshotted as
- * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced —
+ * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced
  * captured once while both rendered the same fixture, then frozen here as the contract so the old class could be
  * deleted. Then, through the engine's own {@link MenuListener}, a left click on the first kit icon proves the migrated
  * path opens that kit's bespoke {@link KitSettingsView}, and a left click on the categories button proves it opens the
- * bespoke {@link KitCategoryManagerMenu} — so the move is faithful in both appearance and behaviour.
+ * bespoke {@link KitCategoryManagerMenu}, so the move is faithful in both appearance and behaviour.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code kit} token, so a kit's id appears in the rendered
  * label; every other key renders verbatim. A real rendering difference (a wrong key, a wrong material, a misplaced
@@ -142,7 +142,7 @@ class KitManagerGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code KitManagerView} produced for this fixture (two item-less
      * kits, "alpha" and "beta"), captured once while both paths rendered it identically and frozen here as the contract:
-     * two CHEST icons (content slots 0 and 1 — the names surface through the kit-id token), the EMERALD_BLOCK create
+     * two CHEST icons (content slots 0 and 1. The names surface through the kit-id token), the EMERALD_BLOCK create
      * button (slot 49), the BOOK categories button (slot 51), the BARRIER close button (slot 53), and the two nav ARROWs
      * (slots 45 and 46).
      */

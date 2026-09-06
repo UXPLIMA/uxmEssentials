@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
  * The bare {@code /checkban} and {@code /checkmute} prompt flow: prompt for a player name through the shared
  * text-input seam, resolve the submitted name through the moderation {@code TargetResolver}, and hand the resolved
  * target to the existing chat-output check use case ({@code CheckBan.show} / {@code CheckMute.show}). The
- * maintainer's requirement is "sonuç chatta çıkar" — the prompt only captures the name; the result is the same
+ * maintainer's requirement is "sonuç chatta çıkar". The prompt only captures the name; the result is the same
  * chat line the raw {@code /checkban <player>} / {@code /checkmute <player>} subcommand prints, not a GUI screen.
  *
  * <p>One instance per check command, parameterised by its input key, prompt key and use-case call. The name
@@ -63,7 +63,7 @@ final class CheckTargetPrompt {
 
     /**
      * Open the name prompt for {@code viewer}; a submitted name flows through {@link #checkByName}. A cancel is a
-     * no-op — the raw {@code /checkban}/{@code /checkmute} opener simply does nothing when no name is given.
+     * no-op, the raw {@code /checkban}/{@code /checkmute} opener simply does nothing when no name is given.
      */
     void open(Player viewer) {
         Objects.requireNonNull(viewer, "viewer");

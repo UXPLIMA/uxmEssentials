@@ -18,7 +18,7 @@ import org.junit.jupiter.api.io.TempDir;
  * Unit coverage of the {@link GuiLayouts} loader: an on-disk conf wins over the bundled default, a missing
  * conf falls back to the bundled classpath resource (and finally the code default), an unknown material name
  * degrades to the default material, and a malformed file logs and returns the code default rather than
- * throwing. No MockBukkit server is needed — the loader only parses HOCON and resolves {@link Material} names.
+ * throwing. No MockBukkit server is needed: the loader only parses HOCON and resolves {@link Material} names.
  */
 class GuiLayoutsLoaderTest {
 

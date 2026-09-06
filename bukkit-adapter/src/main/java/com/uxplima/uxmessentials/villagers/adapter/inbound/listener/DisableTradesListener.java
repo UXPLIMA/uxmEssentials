@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  * player is told why. A villager counts as disabled when the global {@code disable-trades} switch is on (every villager
  * is disabled) <em>or</em> when the individual villager carries the per-villager disable flag the Phase-2 trade manager
  * sets. The per-villager flag is honoured whether or not the global switch is on, which is why this listener registers
- * for the whole module rather than only under the global switch — with the switch off and no flag it is a plain no-op
+ * for the whole module rather than only under the global switch, with the switch off and no flag it is a plain no-op
  * on every villager interaction.
  *
  * <h2>Folia</h2>

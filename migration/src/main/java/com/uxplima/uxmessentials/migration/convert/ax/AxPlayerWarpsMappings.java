@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The AxPlayerWarps source's {@code SupportedMappings} rows — its claim of what it migrates (docs/12-migration §5).
+ * The AxPlayerWarps source's {@code SupportedMappings} rows: its claim of what it migrates (docs/12-migration §5).
  * Each row ties an AxPlayerWarps table to the player-warp facet it seeds, the mapper that performs the translation, and
  * the identity the write path keys on. The single {@code AxWarpMapper} produces the whole {@code ImportedPlayerWarp};
  * the side rows (ratings, whitelist, blacklist, favourites, visits) ride along on it into their stores, so they name

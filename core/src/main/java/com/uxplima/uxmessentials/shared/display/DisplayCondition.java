@@ -7,7 +7,7 @@ import java.util.OptionalDouble;
 /**
  * A pure, recursive model of "show this display element only when …". A condition is parsed once from operator
  * config (see {@link ConditionParser}) and then evaluated per viewer against a {@link ConditionContext} via
- * {@link #matches(ConditionContext)}. The model is value-object only — no Bukkit, no rendering — so it lives in
+ * {@link #matches(ConditionContext)}. The model is value-object only (no Bukkit, no rendering) so it lives in
  * {@code :core} and is reused by the scoreboard, tablist, and nametags modules alike. It mirrors vote's
  * {@code RewardSpec}/{@code RewardContext} split: the condition is the pure spec, the context supplies runtime
  * values through predicates and functions.

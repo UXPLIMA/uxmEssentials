@@ -34,7 +34,7 @@ public final class ListWarps {
     }
 
     /**
-     * The warps {@code viewer} may use, in stored creation order, with no side effect — a warp whose per-warp
+     * The warps {@code viewer} may use, in stored creation order, with no side effect, a warp whose per-warp
      * permission they lack or whose optional extra permission they do not hold is dropped. This is the same
      * filter the chat {@link #list} renders; the {@code /warps} browse menu calls this directly so the GUI and
      * the text list never disagree on what a player may warp to.

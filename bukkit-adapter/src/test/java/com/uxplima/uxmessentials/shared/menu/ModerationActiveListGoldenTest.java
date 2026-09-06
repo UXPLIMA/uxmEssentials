@@ -69,14 +69,14 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The active-punishments golden test: the engine-rendered management list must draw the exact grid the original
- * {@code ActivePunishmentsView} drew. The store holds three active sanctions — a ban on "Mallory", a mute on "Eve",
- * and a jail on "Trent" — so the list draws a BARRIER, a BOOK, and an IRON_BARS icon (content slots 0, 1 and 2 — the
+ * {@code ActivePunishmentsView} drew. The store holds three active sanctions, a ban on "Mallory", a mute on "Eve",
+ * and a jail on "Trent" (so the list draws a BARRIER, a BOOK, and an IRON_BARS icon (content slots 0, 1 and 2) the
  * per-kind icon material each row resolves to, with the target name surfacing through the {@code mod_active_player}
  * token) and the two ARROW nav buttons (slots 48 and 50). The engine window is snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced for
  * this fixture, then frozen here as the contract so the old class could be deleted. Then a left click on the ban icon
  * through the engine's own {@link MenuListener} proves the migrated path opens that punishment's
- * {@link PunishmentDetailView} — now itself an engine editor reached through the same {@code Menus}: the detail
+ * {@link PunishmentDetailView}. Now itself an engine editor reached through the same {@code Menus}: the detail
  * editor's distinctive PLAYER_HEAD target label and LAVA_BUCKET revoke button replace the list, and the target label
  * carries the clicked punishment's target name.
  *
@@ -187,7 +187,7 @@ class ModerationActiveListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code ActivePunishmentsView} produced for this fixture (a
      * ban on "Mallory", a mute on "Eve", a jail on "Trent"), captured while both paths rendered it identically and
-     * frozen here: a BARRIER, a BOOK and an IRON_BARS icon (content slots 0, 1 and 2 — the names surface through the
+     * frozen here: a BARRIER, a BOOK and an IRON_BARS icon (content slots 0, 1 and 2. The names surface through the
      * {@code mod_active_player} token) and the two nav ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

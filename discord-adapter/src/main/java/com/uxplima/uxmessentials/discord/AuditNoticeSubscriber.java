@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * are guarded by an {@link AtomicReference} holding the live {@link NotificationSource.Subscription}.
  *
  * <h2>Loop sentinel and ordering</h2>
- * The loop guard is applied first inside the formatter — a bridge-originated notice
+ * The loop guard is applied first inside the formatter: a bridge-originated notice
  * ({@code originServer = "discord"}) is dropped before the rate limiter even sees it, so a mirrored action can
  * never consume budget or be forwarded twice (docs/09-deployment.md Path C). A notice dropped by the loop guard
  * or a disabled/unmapped category is therefore <em>not</em> counted against the flood budget.

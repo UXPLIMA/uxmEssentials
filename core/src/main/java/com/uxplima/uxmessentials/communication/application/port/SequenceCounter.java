@@ -7,7 +7,7 @@ package com.uxplima.uxmessentials.communication.application.port;
  * {@code MessagePolicy} wraps the returned index modulo its template count, so the counter never needs to know
  * how many templates a channel has.
  *
- * <p>The adapter backs this with an in-memory {@code AtomicLong} per channel — transient state dropped on module
+ * <p>The adapter backs this with an in-memory {@code AtomicLong} per channel. Transient state dropped on module
  * stop, never persisted. {@link #next} returns the current value and advances atomically, so two joins arriving
  * on different region threads never read the same index.
  */

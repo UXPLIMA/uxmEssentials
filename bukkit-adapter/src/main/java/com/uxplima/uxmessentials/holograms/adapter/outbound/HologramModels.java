@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The anti-corruption resolution of an item or block hologram's stored content — a {@code Material} name and a
- * BlockData string, both pure strings in the domain — into the live Bukkit types the lib needs. Both are
+ * The anti-corruption resolution of an item or block hologram's stored content, a {@code Material} name and a
+ * BlockData string, both pure strings in the domain: into the live Bukkit types the lib needs. Both are
  * fail-soft: an unknown material name or an unparseable BlockData string yields {@code null} rather than
  * throwing, so the renderer can log and skip one bad hologram without crashing the whole render pass.
  */

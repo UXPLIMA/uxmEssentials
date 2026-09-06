@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Plain-JUnit coverage of the generic menu conditions and placeholders. The {@code perm} condition reads the
- * permission node from the condition ref's arguments — the same arg-carrier actions use — so a spec writes
+ * permission node from the condition ref's arguments, the same arg-carrier actions use, so a spec writes
  * {@code perm:some.node} and the engine threads {@code some.node} through to the {@link Permissions} port. The
  * {@code on-page} condition reads the open context's one-based page against a range spec, and the {@code player} and
  * {@code page} placeholders expand against the per-open {@link MenuContext}.
@@ -68,7 +68,7 @@ class GenericConditionsTest {
         assertThat(MenuVocabulary.pageInRanges(3, "2")).isFalse();
         // Whitespace around the numbers and the dash is tolerated.
         assertThat(MenuVocabulary.pageInRanges(2, " 1 - 3 ")).isTrue();
-        // Blank and malformed specs match nothing — fail closed.
+        // Blank and malformed specs match nothing: fail closed.
         assertThat(MenuVocabulary.pageInRanges(2, "")).isFalse();
         assertThat(MenuVocabulary.pageInRanges(2, "x")).isFalse();
         assertThat(MenuVocabulary.pageInRanges(3, "3-")).isFalse();

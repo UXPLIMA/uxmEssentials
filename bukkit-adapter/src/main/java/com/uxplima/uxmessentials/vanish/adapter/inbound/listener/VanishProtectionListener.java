@@ -23,13 +23,13 @@ import org.jspecify.annotations.NullMarked;
  * {@link VanishConfig} snapshot:
  *
  * <ul>
- *   <li><b>no-damage</b> — cancel any incoming {@link EntityDamageEvent} on a vanished player, so they are invulnerable
+ *   <li><b>no-damage</b>. Cancel any incoming {@link EntityDamageEvent} on a vanished player, so they are invulnerable
  *       while hidden.
- *   <li><b>no-hunger</b> — cancel a {@link FoodLevelChangeEvent} that would <em>lower</em> a vanished player's food, so
+ *   <li><b>no-hunger</b>. Cancel a {@link FoodLevelChangeEvent} that would <em>lower</em> a vanished player's food, so
  *       hunger stops draining while still allowing a deliberate eat to top it back up.
- *   <li><b>mob-target</b> — drop a mob's target the moment it acquires a vanished player, cancelling the
+ *   <li><b>mob-target</b>. Drop a mob's target the moment it acquires a vanished player, cancelling the
  *       {@link EntityTargetLivingEntityEvent}, so no mob paths to or attacks a hidden player.
- *   <li><b>pickup</b> — cancel a vanished player's item pickup unless their {@link VanishPickupPreferences} say
+ *   <li><b>pickup</b>. Cancel a vanished player's item pickup unless their {@link VanishPickupPreferences} say
  *       otherwise (the {@code /vanish pickup} toggle, defaulting to the {@code pickup-items} config value), covering
  *       both the attempt and entity pickup entry points.
  * </ul>

@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * bars the login, and disallows the connection <em>before</em> player data loads (kick-before-data-load) when
  * it does. The connecting IP is read from the event's real address, so the IP ban and the alt-detection check
  * are real lookups, not a UUID-only gate. The lockdown bypass is a live permission read off the connecting
- * {@code Player} — the one place that permission can be resolved before data load — passed into the pure use
+ * {@code Player} (the one place that permission can be resolved before data load) passed into the pure use
  * case so it stays free of the Bukkit permission API.
  *
  * <p>HIGHEST runs after lower-priority listeners but before MONITOR, so a plugin observing the final decision

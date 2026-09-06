@@ -21,14 +21,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The Towny provider with Towny absent — the case on the test classpath, where no {@code com.palmergames} class
+ * The Towny provider with Towny absent, the case on the test classpath, where no {@code com.palmergames} class
  * resolves. {@link TownyClaimProvider#active()} must report inactive without naming a Towny type and {@link
  * TownyClaimProvider#claimAt} must degrade to empty, proving the present-guard keeps the reflective Towny chain
  * from loading on a server without Towny.
  *
  * <p>The Towny API chain cannot be stood up under MockBukkit, so the ownership decisions that do not need a live
- * Towny — a personal-owner plot, a town-owned plot (mayor stands in), town membership as trust, and the outlaw
- * ban — are exercised against the pure {@link PlotView} seam instead. The wilderness branch (a live Towny
+ * Towny. A personal-owner plot, a town-owned plot (mayor stands in), town membership as trust, and the outlaw
+ * ban: are exercised against the pure {@link PlotView} seam instead. The wilderness branch (a live Towny
  * returning a {@code null} town block) needs a running Towny and is not reproducible here.
  */
 class TownyClaimProviderTest {

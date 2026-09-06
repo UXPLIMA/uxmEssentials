@@ -4,8 +4,8 @@ import java.time.Duration;
 
 /**
  * Renders a {@link Duration} into the compact {@code 1h2m3s} form the {@code afk_duration} and {@code
- * kit_cooldown_<id>} placeholders carry. Whole seconds only — sub-second precision is meaningless on a
- * placeholder surface — and a non-positive duration renders {@code 0s}. Only non-zero units appear, so a
+ * kit_cooldown_<id>} placeholders carry. Whole seconds only. Sub-second precision is meaningless on a
+ * placeholder surface, and a non-positive duration renders {@code 0s}. Only non-zero units appear, so a
  * two-hour wait reads {@code 2h} rather than {@code 2h0m0s} and ninety seconds reads {@code 1m30s}.
  */
 final class PlaceholderDurations {

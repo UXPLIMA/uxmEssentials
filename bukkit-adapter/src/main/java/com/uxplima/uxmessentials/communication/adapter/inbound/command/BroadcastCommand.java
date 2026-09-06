@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * announcement. Unlike the per-player {@code /broadcasttoggle}, this is an operator action and is allowed from the
  * console, so it does not extend the players-only {@link CommunicationCommandSupport} gate.
  *
- * <p>The body is operator-authored MiniMessage content — exactly like announcer lines and info pages — so it flows
+ * <p>The body is operator-authored MiniMessage content, exactly like announcer lines and info pages, so it flows
  * through the {@link BukkitAnnouncerBroadcaster} (and the {@code MessageSink} beneath it) as a raw source string
  * rather than a {@code MessageKey}, and is never parity-checked. The shared broadcaster reuses the same fan-out the
  * scheduled announcer uses: it skips players who opted out via {@code /broadcasttoggle} and hops to each viewer's

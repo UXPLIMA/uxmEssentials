@@ -44,12 +44,12 @@ import org.jspecify.annotations.Nullable;
 /**
  * The brain of the join-verification freeze: it decides on join whether a player must prove their second factor,
  * freezes them by marking a {@link VerificationSessions} entry, and drives the outcome of every submitted PIN or code
- * through to an unfreeze, a re-prompt, or a lockout kick. The keypad and the listeners are the hands — this class holds
+ * through to an unfreeze, a re-prompt, or a lockout kick. The keypad and the listeners are the hands: this class holds
  * the judgement the GUI has no business knowing.
  *
  * <p>Every DB read (the registration, the device-trust check) and write (recording a trust) runs off the tick thread
  * through the injected {@link Scheduler}, and every player touch (the prompt, the keypad, the kick) hops back onto the
- * player's region thread — so the flow is Folia-safe and never blocks a tick on I/O. A submitted PIN or code is held
+ * player's region thread, so the flow is Folia-safe and never blocks a tick on I/O. A submitted PIN or code is held
  * only for the length of the verify and is never logged.
  */
 @NullMarked
@@ -144,7 +144,7 @@ public final class VerificationController implements KeypadActions {
     /**
      * Freeze {@code player} synchronously on join, then decide off the tick thread whether the freeze must stay. The
      * pending flag is set before the async enrolment lookup runs, so a queued command/chat/interaction packet fired in
-     * the join window is already cancelled by the freeze listeners — "frozen until proven safe". The async decision
+     * the join window is already cancelled by the freeze listeners, "frozen until proven safe". The async decision
      * clears the freeze again for players who turn out to be not-enrolled, on a trusted device, or locked out.
      */
     public void onJoin(Player player) {
@@ -316,7 +316,7 @@ public final class VerificationController implements KeypadActions {
             return;
         }
         if (config.trustDevices() && ipHash != null && trustStore.isTrusted(ref.uuid(), ipHash, now)) {
-            sessions.clear(ref.uuid()); // a trusted device skips the prompt — lift the optimistic freeze
+            sessions.clear(ref.uuid()); // a trusted device skips the prompt, lift the optimistic freeze
             return;
         }
         boolean totpEnabled = registration.totpEnabled();

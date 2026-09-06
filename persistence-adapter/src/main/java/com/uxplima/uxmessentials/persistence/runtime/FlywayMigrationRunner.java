@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  * repair realigns the schema-history checksums with the resolved scripts before applying anything, so a
  * cosmetic edit to an already-applied script (e.g. a reworded comment) self-heals on the next start
  * instead of failing validation and blocking enable on a server that ran the old script. The same scripts
- * run on every backend — the portable DDL means SQLite, MySQL and PostgreSQL converge on the same schema
+ * run on every backend. The portable DDL means SQLite, MySQL and PostgreSQL converge on the same schema
  * (the backend-parity invariant). A migration failure is fatal and surfaced, never swallowed.
  */
 @NullMarked

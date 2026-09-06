@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * The server economy as a currency backend, reached through the already-resolved {@link EconomyQuery} hook. No
- * provider SDK type appears here — the hook is the seam, and its absent default already no-ops when no Vault economy
+ * provider SDK type appears here. The hook is the seam, and its absent default already no-ops when no Vault economy
  * is registered, which this backend reports as {@link TransferError#CURRENCY_UNSUPPORTED}.
  *
  * <p>Vault's economy exposes read and take as separate calls, so a debit reads then withdraws and cannot be a

@@ -44,12 +44,12 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The owned and locked indices collapse into one {@link VaultSlot} list template: an entry is owned when it
  * carries a {@link VaultSummary} and locked otherwise. The {@code vault:slots} source replicates the old view's
- * build logic — it lists the player's vaults, resolves the amount cap, and emits index {@code 1..cap}, including a
+ * build logic. It lists the player's vaults, resolves the amount cap, and emits index {@code 1..cap}, including a
  * locked index only when {@code show-locked} is on. It reads the database, so the engine resolves it off the
  * viewer's region thread; it touches no Bukkit API. The {@code vault_icon}/{@code vault_name} placeholders read the
  * bound entry to render the right material and label, and {@code vault:open-slot} opens an owned vault through the
  * same {@link OpenVault} use case and {@link VaultView} the {@code /vault <n>} command drives, or nudges a locked
- * one — so the selector adds no quota, charge, or persistence logic of its own.
+ * one, so the selector adds no quota, charge, or persistence logic of its own.
  */
 @NullMarked
 public final class VaultSelectorMenu {
@@ -124,7 +124,7 @@ public final class VaultSelectorMenu {
 
     /**
      * The slot list, built off the viewer's region thread (it reads the database). Lists the player's vaults into
-     * an index map, resolves the amount cap clamped to the highest owned index, and emits index {@code 1..cap} —
+     * an index map, resolves the amount cap clamped to the highest owned index, and emits index {@code 1..cap}
      * each owned when in the map, else locked. A locked index is included only when {@code show-locked} is on, so
      * with show-locked off the list is exactly the owned indices.
      */

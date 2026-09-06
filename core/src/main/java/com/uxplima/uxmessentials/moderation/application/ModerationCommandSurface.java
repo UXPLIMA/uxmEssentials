@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  * {@code /warns} and {@code /unwarn} share the warn node, {@code /jails}, {@code /jailedplayers} and
  * {@code /setjail} share the jail node (as does {@code /jail del}, a subcommand of {@code /jail} rather than a
  * separate literal), {@code /tempbanip} and {@code /unbanip} share the banip node, {@code /unfreeze} shares the
- * freeze node, and {@code /checkban} and {@code /checkmute} share the check node — matching the node table.
+ * freeze node, and {@code /checkban} and {@code /checkmute} share the check node, matching the node table.
  */
 final class ModerationCommandSurface {
 
@@ -82,6 +82,6 @@ final class ModerationCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of one moderation command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one moderation command, literal and help text, no Brigadier type. */
     private record ModerationCommand(String literal, String description) implements BrigadierCommand {}
 }

@@ -12,9 +12,9 @@ import com.uxplima.uxmessentials.shared.application.port.PlayerLookup;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /mutelist}: review the mutes still in effect — the companion of {@code /banlist}. A read-only, bounded
+ * {@code /mutelist}: review the mutes still in effect, the companion of {@code /banlist}. A read-only, bounded
  * query against the DB-backed sanction store rendering a header with the count, one entry per mute (target,
- * issuer, reason, expiry — {@code permanent} when the mute never expires), or an empty notice when nobody is
+ * issuer, reason, expiry. {@code permanent} when the mute never expires), or an empty notice when nobody is
  * muted. The query is capped at {@link #PAGE_LIMIT} rows so the read stays within the main-thread budget; the
  * command runs it off the tick thread.
  */

@@ -10,12 +10,12 @@ import com.uxplima.uxmessentials.teleport.domain.HotspotChunk;
 /**
  * The passive rare-biome registry: a bounded, per-world biome → sampled-chunk map that learns where rare biomes
  * are as the world is explored. The adapter's {@code ChunkLoadEvent} listener records each freshly loaded chunk's
- * biome once (reading the already-resident chunk — no extra chunk load), and a biome-targeted search samples a
+ * biome once (reading the already-resident chunk. No extra chunk load), and a biome-targeted search samples a
  * known hotspot to bias its candidate points toward it, so a rare biome converges instead of the search
  * random-hammering the whole radius.
  *
- * <p>The registry is deliberately Bukkit-free — it deals only in {@link WorldRef}, {@link BiomeName}, and chunk
- * grid coordinates — so the pure sampler and the search stay testable without a live server. Every implementation
+ * <p>The registry is deliberately Bukkit-free. It deals only in {@link WorldRef}, {@link BiomeName}, and chunk
+ * grid coordinates, so the pure sampler and the search stay testable without a live server. Every implementation
  * is bounded (a cap per biome and an eviction policy) so the map can never grow without limit as players explore.
  */
 public interface BiomeHotspots {
@@ -33,7 +33,7 @@ public interface BiomeHotspots {
      */
     Optional<HotspotChunk> sample(WorldRef world, BiomeName biome, RandomGenerator random);
 
-    /** A registry that learns and returns nothing — wired when biome hotspot targeting is disabled. */
+    /** A registry that learns and returns nothing: wired when biome hotspot targeting is disabled. */
     BiomeHotspots NONE = new BiomeHotspots() {
         @Override
         public void record(WorldRef world, BiomeName biome, int chunkX, int chunkZ) {

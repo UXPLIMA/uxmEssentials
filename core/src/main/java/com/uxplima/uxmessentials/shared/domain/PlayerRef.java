@@ -7,7 +7,7 @@ import java.util.UUID;
  * Identity of a player, decoupled from any Bukkit {@code Player} handle.
  *
  * <p>The kernel and every bounded context address players by this value object so application code
- * never holds a live entity reference across a thread or region hop — the adapter resolves the live
+ * never holds a live entity reference across a thread or region hop. The adapter resolves the live
  * {@code Player} from the {@link #uuid()} at the boundary, and silently no-ops when the player is
  * offline. The display name is carried only as a convenience for rendering and audit attribution; it
  * is never used for identity or equality.

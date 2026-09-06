@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * A small in-memory {@link PlayerWarpRepository} test double on the surrogate-id model, shared by the player-warp
  * GUI and golden tests so they do not each re-declare the same fake. Warp names are globally unique, so it keys on
- * the name and assigns a fresh {@link PlayerWarpId} on the first save of a warp that has none — mirroring the real
+ * the name and assigns a fresh {@link PlayerWarpId} on the first save of a warp that has none, mirroring the real
  * store, so every stored warp carries an id and the use cases that resolve a warp's id (delete, visit) work against
  * it. Insertion order is preserved so a list read renders in the order warps were stored.
  */

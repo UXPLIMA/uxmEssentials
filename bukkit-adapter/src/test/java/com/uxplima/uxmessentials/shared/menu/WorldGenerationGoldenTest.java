@@ -32,7 +32,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The world generation-summary golden test: the engine-rendered read-only generation screen must draw the four info
- * slots the original {@code WorldGenerationView} drew — environment (GRASS_BLOCK at 10), world type (MAP at 12), seed
+ * slots the original {@code WorldGenerationView} drew. Environment (GRASS_BLOCK at 10), world type (MAP at 12), seed
  * (WHEAT_SEEDS at 14) and external generator (COMMAND_BLOCK at 16), over the ARROW back button at 22. The engine's
  * window is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline
  * the old view produced. Then, through the engine's own {@code MenuListener}, the back button is clicked to prove the
@@ -122,7 +122,7 @@ class WorldGenerationGoldenTest {
         return player.getOpenInventory().getTopInventory();
     }
 
-    /** A real SetWorldProperty over the recording repository — only needed to satisfy the grid menu the hub binds. */
+    /** A real SetWorldProperty over the recording repository: only needed to satisfy the grid menu the hub binds. */
     private com.uxplima.uxmessentials.worlds.application.SetWorldProperty setProperty() {
         return new com.uxplima.uxmessentials.worlds.application.SetWorldProperty(
                 repository,

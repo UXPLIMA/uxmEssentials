@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /checkban <player>}: report whether a player is currently banned, and if so the issuer, reason and
  * expiry of the active ban. A read-only point lookup against the DB-backed sanction store ({@code loadTempban})
- * — unlike {@code /banhistory}, which lists the full record, this answers the single "is this player banned
+ *. Unlike {@code /banhistory}, which lists the full record, this answers the single "is this player banned
  * right now?" question staff ask before a fresh sanction. The command runs the read off the tick thread.
  *
  * <p>A timed ban whose expiry has already passed reports as not banned, so the check reflects the live gate the

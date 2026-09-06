@@ -22,8 +22,8 @@ import org.jspecify.annotations.Nullable;
  * region threads reach the same instance, so every read and write of the session and the snapshots runs under this
  * object's monitor; the offered stacks themselves are read and delivered outside the lock (no blocking I/O is held).
  *
- * <p>The {@code settled} flag is the single-winner gate: whichever path — a both-confirm commit, a window close, a
- * disconnect, a world change, or a plugin stop — first flips it owns the settlement and returns or swaps the items;
+ * <p>The {@code settled} flag is the single-winner gate: whichever path, a both-confirm commit, a window close, a
+ * disconnect, a world change, or a plugin stop. First flips it owns the settlement and returns or swaps the items;
  * every later path sees the flag already set and does nothing, so no stack is delivered twice.
  */
 @NullMarked
@@ -81,7 +81,7 @@ final class TradeExchange {
 
     /**
      * Set {@code side}'s staked money for {@code currencyId} (a non-positive amount clears that currency) and re-stake
-     * the whole offer, which clears both confirmations — the same anti-scam invariant an item change triggers. A no-op
+     * the whole offer, which clears both confirmations: the same anti-scam invariant an item change triggers. A no-op
      * once the trade has settled.
      */
     synchronized void setMoney(TradeSide side, String currencyId, BigDecimal amount) {
@@ -128,7 +128,7 @@ final class TradeExchange {
 
     /**
      * Overwrite {@code side}'s positional item snapshot with a fresh live read <em>without</em> touching the domain
-     * session — the commit path's two-hop live read (the Folia sub-tick fix). Because the session has already reached
+     * session: the commit path's two-hop live read (the Folia sub-tick fix). Because the session has already reached
      * its terminal {@code COMMITTED} state when this runs, the money is settled from the confirmed session while the
      * items delivered are exactly what physically sits in the window at freeze time, so a stack placed in the same tick
      * as the counterpart's confirm is delivered rather than discarded.

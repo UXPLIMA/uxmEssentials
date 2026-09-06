@@ -21,7 +21,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 /**
  * The catalog binding is what turns an operator's rename/alias/disable choices into the actual tree that
  * gets registered, so it has to rewrite only the root literal and alias list while leaving the children
- * and every executor untouched — the catalog configures naming, never execution. A command with no entry
+ * and every executor untouched: the catalog configures naming, never execution. A command with no entry
  * passes through unchanged, and a disabled one drops out before registration. MockBukkit boots Paper's
  * Brigadier so {@link Commands#literal} is wired before the nodes are built.
  */

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * {@code /ignorelist}: the read-only companion to {@code /ignore} that reports who the owner ignores. It
- * proves the three shapes the existing catalog keys describe — an empty list reports only the empty key, a
+ * proves the three shapes the existing catalog keys describe. An empty list reports only the empty key, a
  * populated list opens with the header carrying the count and then one entry per ignored player in the stable
  * insertion order {@link IgnoreList#entries()} preserves.
  */

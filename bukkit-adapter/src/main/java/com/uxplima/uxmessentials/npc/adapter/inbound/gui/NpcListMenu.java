@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * the placeholders its entries need, the edit and create click actions, then loads the {@code npc-list} spec and
  * hands it to {@link Menus}.
  *
- * <p>The grid is the {@code npc:list} source — it reads the cached NPC registry directly (the warm in-memory set
+ * <p>The grid is the {@code npc:list} source. It reads the cached NPC registry directly (the warm in-memory set
  * behind the Caffeine cache, never the database, never the Bukkit API), so the engine may resolve it off the
  * viewer's region thread. Each NPC's icon is its type icon (a player head for the default fake player, that mob's
  * spawn egg otherwise) through the {@code npc_icon} placeholder; the {@code npc_name} / {@code npc_type} /
@@ -40,7 +40,7 @@ import org.jspecify.annotations.NullMarked;
  * and rounded coordinates into the catalog entry. A left click runs {@code npc:edit}, which opens the still-bespoke
  * {@link NpcEditorView} for the clicked NPC; the create button runs {@code npc:create}, which prompts for a name and
  * creates a fresh fake-player NPC at the operator's feet with their own skin through the same {@link
- * NpcServices#create()} use case {@code /npc create} drives — so the list adds no domain logic of its own.
+ * NpcServices#create()} use case {@code /npc create} drives, so the list adds no domain logic of its own.
  */
 @NullMarked
 public final class NpcListMenu {
@@ -114,7 +114,7 @@ public final class NpcListMenu {
 
     /**
      * Left-click the create button: prompt for a name, then create a fresh fake-player NPC at the operator's feet,
-     * reopening the list on cancel — exactly what the old create button did.
+     * reopening the list on cancel: exactly what the old create button did.
      */
     private void create(MenuActionContext ctx) {
         Player player = ctx.player();
@@ -129,7 +129,7 @@ public final class NpcListMenu {
 
     /**
      * Create the named fake-player NPC at the operator's feet off the click thread, then reopen the list. A blank
-     * name simply reopens the list. The NPC is created at the operator's feet with their own skin — exactly
+     * name simply reopens the list. The NPC is created at the operator's feet with their own skin, exactly
      * {@code /npc create}.
      */
     private void handleCreate(Player player, PlayerRef viewer, String text) {

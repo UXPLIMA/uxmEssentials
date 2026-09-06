@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * The authoritative list of every {@link FeatureModule}, consulted by the bootstrap.
  *
  * <p>There is exactly one registration site, so the registry is the single answer to "which contexts
- * exist?" Registration is explicit — no classpath scanning, no reflection, no service loader — so the
+ * exist?" Registration is explicit (no classpath scanning, no reflection, no service loader) so the
  * set stays greppable and the drift guard can compare it against the package tree and {@code
  * modules.conf}.
  *

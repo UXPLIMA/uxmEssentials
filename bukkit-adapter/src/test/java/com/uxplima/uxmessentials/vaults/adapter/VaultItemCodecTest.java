@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
- * MockBukkit coverage of {@link VaultItemCodec#decodeAll} — the decode-all variant the overflow rescue needs.
+ * MockBukkit coverage of {@link VaultItemCodec#decodeAll}: the decode-all variant the overflow rescue needs.
  * It must round-trip every stored slot, sizing the result to the array length {@code encode} wrote rather than
  * truncating to a passed size, so an item in a slot beyond the current quota is still visible. The size-bounded
  * {@link VaultItemCodec#decode} is unchanged: it still clamps to the requested size.

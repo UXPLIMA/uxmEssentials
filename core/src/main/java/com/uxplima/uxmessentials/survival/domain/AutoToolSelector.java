@@ -8,14 +8,14 @@ import java.util.Set;
 
 /**
  * The pure "best tool for a block, among the tools the player is holding" selection behind autotool. Given the block
- * being broken and the player's hotbar, it names the slot holding the strongest tool of the family that block needs —
- * a diamond pickaxe over a wooden one for stone, an axe for a log — so the adapter can swap the held slot before the
+ * being broken and the player's hotbar, it names the slot holding the strongest tool of the family that block needs
+ * a diamond pickaxe over a wooden one for stone, an axe for a log, so the adapter can swap the held slot before the
  * break lands. Both the block → tool-family classification and the tier ranking are here, off any Bukkit type, so the
  * whole decision is unit-testable on material names.
  *
  * <p>Faithful to AutoTool's intent (switch to the block's proper tool) but without its NMS destroy-speed reflection:
  * the block's required {@link ToolType} is classified by material family, and among the player's matching tools the one
- * with the highest {@link #tier(String) tier} wins — netherite over diamond over iron over stone over gold over wood.
+ * with the highest {@link #tier(String) tier} wins, netherite over diamond over iron over stone over gold over wood.
  * Ties resolve to the lowest slot, so the selection is stable. A block that needs no particular tool, or a hotbar with
  * no matching tool, yields {@link OptionalInt#empty()} and the adapter leaves the held slot alone.
  */

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The key correctness proof for the DeluxeMenus converter: its output is not merely well-shaped HOCON, it is HOCON
  * our own {@link MenuSpecLoader} loads into a valid {@link MenuSpec}. A representative DeluxeMenus menu is converted,
- * written to a {@code .conf} on disk, and loaded back through the real loader — so a passing test means an operator's
+ * written to a {@code .conf} on disk, and loaded back through the real loader, so a passing test means an operator's
  * converted menu opens on the engine, title, rows, item, slots, click actions and view gate intact.
  */
 class DeluxeMenusRoundTripTest {

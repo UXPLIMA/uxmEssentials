@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The anti-corruption mapping between a {@code player_warps} row and the domain {@link PlayerWarp}. Every warp
- * fact is a first-class typed column — there is no JSON blob anywhere in this table — so the mapping is a plain
+ * fact is a first-class typed column, there is no JSON blob anywhere in this table, so the mapping is a plain
  * column-by-column translation: uuids as their canonical 36-character text, instants as {@code BIGINT} epoch
  * milliseconds, money as {@code DECIMAL(20,4)}, and the {@link WarpAccess}/{@link WarpStatus} axes as their
  * uppercase enum names. This class is the single place that translation lives.
@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  * back to the {@code names} resolver when a legacy row left it null, so a browse always renders a name rather than a
  * raw uuid. And the password is never mapped back onto the aggregate: the domain carries only a {@code passwordSet}
  * flag (derived from whether {@code password_algorithm} is present), and {@link #apply} deliberately never writes the
- * three {@code password_*} columns — a save that flips visibility must never disturb a set password. Password writes
+ * three {@code password_*} columns: a save that flips visibility must never disturb a set password. Password writes
  * are a separate concern handled outside this mapping.
  */
 final class PlayerWarpRows {
@@ -78,7 +78,7 @@ final class PlayerWarpRows {
     }
 
     /**
-     * Populate {@code record} from {@code warp} for an insert or update — every column <em>except</em> the surrogate
+     * Populate {@code record} from {@code warp} for an insert or update, every column <em>except</em> the surrogate
      * {@code id} (the repository owns that: it stamps a fresh id on insert and uses it as the update key) and the
      * three {@code password_*} columns (never carried on the aggregate; see the class note).
      */
@@ -159,7 +159,7 @@ final class PlayerWarpRows {
         Long until = row.getSponsoredUntil();
         Integer slot = row.getSponsorSlot();
         // A sponsorship is a promotion in a numbered slot, so it needs both facets. The expiry sweep frees the slot
-        // (NULL) while leaving the now-past sponsored_until behind, so a slot-freed row carries no live sponsorship —
+        // (NULL) while leaving the now-past sponsored_until behind, so a slot-freed row carries no live sponsorship
         // and a subsequent whole-aggregate save writes both back as NULL, self-healing the stale timestamp.
         if (until == null || slot == null) {
             return Optional.empty();

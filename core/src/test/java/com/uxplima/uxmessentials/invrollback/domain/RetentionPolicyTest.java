@@ -37,7 +37,7 @@ class RetentionPolicyTest {
     @Test
     void overAgePrunesEverythingOlderThanTheCutoffAndKeepsTheRest() {
         Snapshot fresh = at(NOW.minus(Duration.ofDays(10)));
-        Snapshot borderline = at(NOW.minus(Duration.ofDays(30))); // exactly the cutoff — kept (not strictly older)
+        Snapshot borderline = at(NOW.minus(Duration.ofDays(30))); // exactly the cutoff, kept (not strictly older)
         Snapshot stale = at(NOW.minus(Duration.ofDays(31)));
         Snapshot ancient = at(NOW.minus(Duration.ofDays(90)));
 

@@ -12,7 +12,7 @@ import com.uxplima.uxmlib.hologram.ModelHologram;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@link RenderedHologram#textEntityId()} — the entity id the renderer targets a per-viewer text-override
+ * Pins {@link RenderedHologram#textEntityId()}. The entity id the renderer targets a per-viewer text-override
  * packet at. A text hologram exposes its backing {@code TextDisplay}'s id; an item or block hologram carries no
  * overridable text component and reports {@link RenderedHologram#NO_ENTITY}, so the renderer never sends it an
  * override.

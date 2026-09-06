@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Bare {@code /checkban} (no arguments) prompts for a player name through the shared text-input seam when the
  * command's catalog {@code gui} flag is on; a submitted name resolves through the {@code TargetResolver} and runs the
- * same {@code CheckBan.show} chat output the raw form does — the prompt captures the name only, the result is chat,
+ * same {@code CheckBan.show} chat output the raw form does. The prompt captures the name only, the result is chat,
  * not a GUI. The raw {@code /checkban <player>} child is unchanged either way, and the same {@code .requires}
  * permission gate covers the bare-root opener.
  */

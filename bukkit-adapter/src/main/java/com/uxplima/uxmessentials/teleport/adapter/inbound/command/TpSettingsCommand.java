@@ -17,10 +17,10 @@ import com.uxplima.uxmessentials.teleport.adapter.inbound.gui.TeleportSettingsVi
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /tpsettings}: open the per-player teleport settings panel — the accept-requests ({@code /tptoggle}) and
+ * {@code /tpsettings}: open the per-player teleport settings panel. The accept-requests ({@code /tptoggle}) and
  * auto-accept ({@code /tpauto}) toggles a player flips for themselves. A players-only, self-service command gated
  * by {@code uxmessentials.tpsettings.use}; it opens the same {@link TeleportSettingsView} the {@code /uxmess gui}
- * hub does. It mutates nothing itself — every flip in the panel routes through the existing {@code TeleportFlags}
+ * hub does. It mutates nothing itself. Every flip in the panel routes through the existing {@code TeleportFlags}
  * port the toggle commands already use.
  */
 @NullMarked

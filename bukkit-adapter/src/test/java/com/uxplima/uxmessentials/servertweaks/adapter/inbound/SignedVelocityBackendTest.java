@@ -39,7 +39,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The backend half of the SignedVelocity handshake, end to end over the shared {@link SignedDirectiveQueue}: the
  * channel listener decodes a proxy frame onto the queue (ignoring other channels and logging malformed frames), and
- * the chat and command listeners then apply the queued ruling — cancel, modify, or leave alone when nothing is queued
+ * the chat and command listeners then apply the queued ruling. Cancel, modify, or leave alone when nothing is queued
  * (the no-proxy case). The quit listener forgets a player's buffered rulings.
  */
 class SignedVelocityBackendTest {

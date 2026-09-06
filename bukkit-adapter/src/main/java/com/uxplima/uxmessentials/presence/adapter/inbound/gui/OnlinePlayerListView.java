@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@code /list} browse menu: a config-driven, paginated grid of the online players' heads, drawn through the
- * shared {@link EntityListView}. It is the visual twin of the {@code /list} chat line — same vanish-aware roster
+ * shared {@link EntityListView}. It is the visual twin of the {@code /list} chat line, same vanish-aware roster
  * (a player only sees those their {@code canSee} graph allows), here one head per player with the same world and
  * AFK/vanish status the chat path already knows. The view is read-only: a click is a no-op, there is no pick
  * action.
@@ -65,8 +65,8 @@ public final class OnlinePlayerListView {
     /**
      * Open the roster menu for {@code viewer} over the already-snapshotted {@code roster}. The caller enumerated
      * the visible online set on the global region thread; this only renders it. An empty roster opens the same engine
-     * list under its empty-state title — the engine draws just the filler and nav, an empty-state panel rather than a
-     * head grid — so even the empty case is one holder-backed engine window, never a bespoke menu.
+     * list under its empty-state title. The engine draws just the filler and nav, an empty-state panel rather than a
+     * head grid, so even the empty case is one holder-backed engine window, never a bespoke menu.
      */
     public void open(Player player, PlayerRef viewer, List<Entry> roster) {
         Objects.requireNonNull(player, "player");

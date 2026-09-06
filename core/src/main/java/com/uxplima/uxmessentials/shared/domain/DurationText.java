@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.Objects;
 
 /**
- * Formats a {@link Duration} as a compact human-readable label for player-facing displays — for
+ * Formats a {@link Duration} as a compact human-readable label for player-facing displays, for
  * example {@code 2d 3h}, {@code 1h 30m}, {@code 45s}. Components that are zero are omitted;
  * resolution stops at whole days (no weeks). Used by the vote cooldown and reminder displays to
  * fill {@code {time}} placeholders without pulling in any Bukkit type.

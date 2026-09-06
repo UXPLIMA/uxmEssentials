@@ -53,7 +53,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The per-announcement properties read their current value fresh from the store on each open (the list-click
  * snapshot would go stale after an edit, the same reason the hologram editor re-reads its repository). The world and
- * permission targets do not write the condition directly — they compose into the stored display-condition string
+ * permission targets do not write the condition directly. They compose into the stored display-condition string
  * through {@link ConditionTargets}, so setting one target preserves the other. The view holds no domain logic: a
  * property mutates by saving a {@link StoredAnnouncement} carrying the changed field; the announcer's merge step
  * does the rest.
@@ -80,7 +80,7 @@ public final class AnnouncementEditorView {
     /** The last slot of the six-row list chest, where the announcer-settings button sits. */
     private static final int SETTINGS_BUTTON_SLOT = 53;
 
-    /** The two settings-screen property slots and its back button — a single three-row chest. */
+    /** The two settings-screen property slots and its back button, a single three-row chest. */
     private static final List<Integer> SETTINGS_PROPERTY_SLOTS = List.of(11, 15);
 
     private static final int SETTINGS_BACK_SLOT = 22;
@@ -95,7 +95,7 @@ public final class AnnouncementEditorView {
     /**
      * The stable synthetic actor a GUI value-lore word ("None", "On") is resolved for. A value-lore render has no
      * viewer handle (the property reads the bare value), so the locale-independent word is resolved against a fixed
-     * ref rather than the live viewer — the same shape the hologram editor uses for its "none"/"default" words.
+     * ref rather than the live viewer, the same shape the hologram editor uses for its "none"/"default" words.
      */
     private static final PlayerRef GUI_ACTOR = new PlayerRef(new java.util.UUID(0L, 0L), "announce-gui");
 
@@ -196,12 +196,12 @@ public final class AnnouncementEditorView {
         list.open(player, viewer);
     }
 
-    /** Reopen the editor list — the back target and the post-delete landing, read at click time. */
+    /** Reopen the editor list: the back target and the post-delete landing, read at click time. */
     private void openList(Player player, PlayerRef viewer) {
         list.open(player, viewer);
     }
 
-    /** Open the global announcer-settings screen — the list GUI's last-slot button opens it. */
+    /** Open the global announcer-settings screen: the list GUI's last-slot button opens it. */
     private void openSettings(Player player) {
         settings.open(player, BukkitRefs.toRef(player), SETTINGS_SINGLETON);
     }

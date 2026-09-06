@@ -7,16 +7,16 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * Parses a human-typed amount token into an exact {@link Money} in a given {@link Currency}. Accepts the
- * shorthand operators reach for at the command line — a magnitude suffix ({@code k}=10^3, {@code m}=10^6,
+ * shorthand operators reach for at the command line, a magnitude suffix ({@code k}=10^3, {@code m}=10^6,
  * {@code b}=10^9, {@code t}=10^12, {@code q}=10^15, case-insensitive) and thousands separators ({@code 1,000}
  * or {@code 1.000})
- * — while staying {@link BigDecimal}-exact throughout: the suffix multiply is a {@code BigDecimal} scale, never
+ *, while staying {@link BigDecimal}-exact throughout: the suffix multiply is a {@code BigDecimal} scale, never
  * a {@code double}, so {@code 1.5m} is exactly {@code 1500000} and rounding drift stays impossible (the economy
  * GLOSSARY invariant (b)).
  *
  * <p>Separator handling is locale-agnostic and deterministic. With both {@code ,} and {@code .} present the
  * rightmost is the decimal point and the other is grouping ({@code 1.000,50} and {@code 1,000.50} both parse to
- * {@code 1000.50}). A single separator reads as grouping only when it cleanly delimits thousands groups — a
+ * {@code 1000.50}). A single separator reads as grouping only when it cleanly delimits thousands groups, a
  * 1-3 digit lead followed by groups of exactly three ({@code 1,000} -> {@code 1000}, {@code 1.234.567} ->
  * {@code 1234567}); otherwise it is a decimal point ({@code 1.5} -> {@code 1.5}, {@code 1,5} -> {@code 1.5},
  * {@code 1.2345} -> {@code 1.2345}). A malformed grouping like {@code 1.2.3} is rejected rather than silently

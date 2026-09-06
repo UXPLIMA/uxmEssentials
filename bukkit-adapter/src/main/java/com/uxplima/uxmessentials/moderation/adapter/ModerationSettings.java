@@ -87,7 +87,7 @@ public final class ModerationSettings {
 
     /**
      * How far a UUID ban reaches across the target's known addresses. {@code NORMAL} (the default) bans the
-     * one account; {@code STRICT} also IP-bans every address the target has connected from (opt-in — it
+     * one account; {@code STRICT} also IP-bans every address the target has connected from (opt-in: it
      * broadens IP retention and catches anyone sharing the connection).
      */
     public AddressStrictness addressStrictness() {

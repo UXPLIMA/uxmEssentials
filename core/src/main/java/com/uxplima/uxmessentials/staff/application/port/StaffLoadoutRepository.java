@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.staff.domain.SavedLoadout;
 
 /**
  * Outbound port for the durable storage of a player's captured pre-staff-mode loadout. The loadout is
- * DB-backed (never PDC) so it survives a restart or world rollback — the item-loss-safe invariant of staff
+ * DB-backed (never PDC) so it survives a restart or world rollback, the item-loss-safe invariant of staff
  * mode rests on this: the loadout is {@link #save saved} before the inventory is swapped, so a crash
  * mid-mode leaves the real loadout recoverable, and it is {@link #delete deleted} only after a successful
  * restore on exit.

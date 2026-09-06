@@ -21,9 +21,9 @@ import org.jspecify.annotations.NullMarked;
  * {@code /broadcasttoggle} commands, and the operator-configured info pages ({@code /rules}, {@code /motd},
  * {@code /info}) registered dynamically from the {@code InfoRegistry}.
  *
- * <p><b>Ships enabled by default.</b> Every content file ships inert — the join/quit/death channels default to
+ * <p><b>Ships enabled by default.</b> Every content file ships inert. The join/quit/death channels default to
  * the vanilla message (DEFAULT mode), the first-join line and death info page are blank, and the announcer has no
- * announcements — so out of the box this context changes nothing visible even while enabled: no message is overridden,
+ * announcements, so out of the box this context changes nothing visible even while enabled: no message is overridden,
  * no announcer line fires. An operator authors the templates/announcements they want and they take effect with no
  * further toggle. The {@link #enabled(ConfigStore)} gate therefore defaults to {@code true} (like the
  * landed contexts), and the four-way module guard keys off {@code modules.communication}.
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  * are config-authored operator content in the module's content siblings, rendered through MiniMessage and never
  * parity-checked. The use cases, the announcer timer, the connection/death listeners, the opt-out store, and the
  * info-page commands are constructed in the adapter wiring once the module has started; the lifecycle bookkeeping
- * here keeps {@code stop()} honest — the announcer timer observes the running flag and exits cleanly on disable.
+ * here keeps {@code stop()} honest: the announcer timer observes the running flag and exits cleanly on disable.
  */
 @NullMarked
 public final class CommunicationModule implements FeatureModule {
@@ -58,8 +58,8 @@ public final class CommunicationModule implements FeatureModule {
     @Override
     public List<CommandSpec> commands() {
         // The static surface only: /broadcast and /broadcasttoggle. The operator-configured info-page commands
-        // (/rules, /motd, …) are dynamic — built from the config-derived InfoRegistry at start and registered by
-        // the adapter — so they are not part of this fixed table.
+        // (/rules, /motd, …) are dynamic. Built from the config-derived InfoRegistry at start and registered by
+        // the adapter, so they are not part of this fixed table.
         return CommunicationCommandSurface.staticCommands();
     }
 

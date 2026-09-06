@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The set of command labels a clickable fixture's bound command or click action may not run, matched
  * case-insensitively on the command's first word (its label) with any leading slash stripped. An empty set blocks
- * nothing — the default, so a server that configures no blocklist behaves exactly as before. Pure of any Bukkit
+ * nothing: the default, so a server that configures no blocklist behaves exactly as before. Pure of any Bukkit
  * reference so the matching is unit-testable; {@link FilteredClickCommandRunner} consults it before every
  * fixture-driven dispatch, and each context's module config supplies the labels. The blocklist guards a
  * player-owned fixture's command actions from invoking dangerous operator commands.

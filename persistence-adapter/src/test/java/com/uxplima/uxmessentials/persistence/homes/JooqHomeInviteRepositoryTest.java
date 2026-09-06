@@ -65,7 +65,7 @@ class JooqHomeInviteRepositoryTest {
     @Test
     void addInviteIsIdempotentWhenCalledTwice() {
         repository.addInvite(owner, slot0, guestA);
-        repository.addInvite(owner, slot0, guestA); // duplicate — PK deduplication
+        repository.addInvite(owner, slot0, guestA); // duplicate, PK deduplication
 
         assertThat(repository.invites(owner, slot0)).containsExactly(guestA);
     }
@@ -123,7 +123,7 @@ class JooqHomeInviteRepositoryTest {
         assertThat(repository.invites(other, slot0)).containsExactly(guestB);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

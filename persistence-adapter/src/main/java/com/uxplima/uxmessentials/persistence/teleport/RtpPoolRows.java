@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.teleport.domain.RtpColumn;
  * world uid, the block {@code x}/{@code z}, the nullable biome, and the validation instant as epoch milliseconds;
  * the column value carries them plus the world it was loaded for.
  *
- * <p>The world name is not stored — a pool load is always scoped to a world the caller already holds (it drives the
+ * <p>The world name is not stored. A pool load is always scoped to a world the caller already holds (it drives the
  * per-world query), so {@link #toColumn} rebuilds the column against that live {@link WorldRef} rather than
  * reconstructing a possibly-stale name from the row. This is the single place the {@code rtp_pool} translation lives.
  */

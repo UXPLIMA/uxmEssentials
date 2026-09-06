@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  * persistence DSL, and produces both the Brigadier command list the plugin registers and the
  * {@link DiscordLinkConfirmation} seam implementation the plugin exposes through the {@code ServicesManager} so
  * the optional Discord bridge can redeem a {@code /link} code. This is the one place the discord-link context is
- * wired — nothing else news up its classes.
+ * wired: nothing else news up its classes.
  *
  * <p>The store is the un-cached jOOQ adapter (linking is low-traffic). The one-time code's lifetime is the
  * module's {@code code-ttl-seconds} config value; codes are drawn from a {@link SecureRandom}-seeded generator

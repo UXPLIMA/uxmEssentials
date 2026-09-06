@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public enum Billboard {
 
-    /** Always faces the viewer (pivots on both axes) — the default. */
+    /** Always faces the viewer (pivots on both axes), the default. */
     CENTER,
 
     /** Never turns; renders at its placed orientation. */

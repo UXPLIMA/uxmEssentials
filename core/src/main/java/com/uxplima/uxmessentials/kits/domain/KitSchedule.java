@@ -10,20 +10,20 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * An optional availability window deciding when a kit may be claimed — a rotating or limited-time kit. Four
+ * An optional availability window deciding when a kit may be claimed: a rotating or limited-time kit. Four
  * independent constraints, each optional and all ANDed together:
  *
  * <ul>
- *   <li>{@code days} — the weekdays the kit is claimable on; empty means every day.
- *   <li>{@code dailyStart}/{@code dailyEnd} — a daily time-of-day window {@code [start, end)}. When the start
- *       is later than the end the window wraps past midnight (e.g. {@code 22:00}–{@code 06:00}). A bound left
+ *   <li>{@code days}: the weekdays the kit is claimable on; empty means every day.
+ *   <li>{@code dailyStart}/{@code dailyEnd}, a daily time-of-day window {@code [start, end)}. When the start
+ *       is later than the end the window wraps past midnight (e.g. {@code 22:00} to {@code 06:00}). A bound left
  *       absent extends the window to the start ({@code 00:00}) or end of the day.
- *   <li>{@code from}/{@code until} — an absolute calendar window {@code [from, until)} for a one-off event.
+ *   <li>{@code from}/{@code until}, an absolute calendar window {@code [from, until)} for a one-off event.
  * </ul>
  *
  * <p>The {@link #always() empty schedule} imposes no constraint and is the default every kit carries, so a kit
  * authored with no {@code schedule} block stays claimable exactly as before. All times are evaluated in the
- * server's local zone — the zone an operator naturally authors the window in.
+ * server's local zone: the zone an operator naturally authors the window in.
  *
  * @param days the weekdays the kit may be claimed on, in enum order; empty for every day
  * @param dailyStart the inclusive daily window start, or empty for the start of the day
@@ -84,7 +84,7 @@ public record KitSchedule(
         if (!start.isAfter(end)) {
             return !time.isBefore(start) && time.isBefore(end);
         }
-        // start later than end: the window wraps past midnight (e.g. 22:00–06:00).
+        // start later than end: the window wraps past midnight (e.g. 22:00 to 06:00).
         return !time.isBefore(start) || time.isBefore(end);
     }
 }

@@ -66,7 +66,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit coverage of the {@code /menu editor} menu-property editor: opening it renders a holder-backed engine
  * editor whose rows are the menu-level fields, a {@link TextProperty} edits the title, a {@link NumberProperty} resizes
  * the menu, a {@link ToggleProperty} flips chest-only, the ref-list editor appends an open action, and the command
- * sub-editor sets an open-command name — all mutating the per-viewer working copy, with Save writing the reloaded menu.
+ * sub-editor sets an open-command name: all mutating the per-viewer working copy, with Save writing the reloaded menu.
  * Everything is an engine window, so the editor never touches a raw Bukkit inventory.
  */
 class MenuPropertiesViewTest {

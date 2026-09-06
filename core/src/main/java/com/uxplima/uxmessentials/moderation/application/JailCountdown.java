@@ -19,13 +19,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * quit.
  *
  * <ul>
- *   <li><b>{@link #onJoin}</b> — re-apply the jail (the same offline-jail enforcement the login path uses):
+ *   <li><b>{@link #onJoin}</b>, re-apply the jail (the same offline-jail enforcement the login path uses):
  *       a still-active jail re-teleports the player into the jail world so they cannot escape by relogging.
  *       The caller records the join instant as the session start; nothing is decremented yet.
- *   <li><b>{@link #onTick}</b> — burn the online time elapsed since {@code sessionStart} off an online-only
+ *   <li><b>{@link #onTick}</b>. Burn the online time elapsed since {@code sessionStart} off an online-only
  *       remainder. If the remainder is exhausted the player is released (row deleted, teleported out,
  *       {@code PlayerUnjailed} published); otherwise the decremented remainder is persisted so a later quit
- *       freezes it. A permanent or wall-clock jail is left untouched — only the online-only form ticks here.
+ *       freezes it. A permanent or wall-clock jail is left untouched: only the online-only form ticks here.
  * </ul>
  *
  * <p>Pure: the elapsed online span and the now instant are passed in, so the countdown is deterministic and

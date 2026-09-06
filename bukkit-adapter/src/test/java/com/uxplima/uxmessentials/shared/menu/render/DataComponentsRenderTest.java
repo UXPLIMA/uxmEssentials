@@ -32,11 +32,11 @@ import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
- * Golden renders of the native data-component {@code decor} block — rarity, tooltip-style, hide-tooltip,
- * enchant-glint, enchantable, attribute modifiers, food, and tool — driven through the real {@link ItemRenderer}
+ * Golden renders of the native data-component {@code decor} block, rarity, tooltip-style, hide-tooltip,
+ * enchant-glint, enchantable, attribute modifiers, food, and tool, driven through the real {@link ItemRenderer}
  * against MockBukkit. The components MockBukkit carries across a stack copy (rarity, hide-tooltip, enchant-glint,
  * enchantable, attribute modifiers) are asserted on a concrete {@link ItemStack}; the three its {@code ItemMeta}
- * copy constructor drops (tooltip-style, food, tool) are asserted only to render a valid item without throwing —
+ * copy constructor drops (tooltip-style, food, tool) are asserted only to render a valid item without throwing
  * they apply on real Paper, where the copy preserves them, and the renderer's fail-soft contract is what keeps the
  * test runtime from aborting either way.
  */

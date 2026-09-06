@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * once rather than lagging up to a full refresh tick.
  *
  * <p>Join and quit fire on the joining/quitting player's region thread, so reading the live player and touching their
- * board is region-local — no scheduler hop is needed there. The world- and game-mode-change events also fire on the
+ * board is region-local: no scheduler hop is needed there. The world- and game-mode-change events also fire on the
  * player's region thread, but the re-render is still routed through the {@code Scheduler} port onto the owning entity
  * thread (re-fetching the live player by UUID) so it stays valid on Folia, mirroring the playerstate listeners.
  */

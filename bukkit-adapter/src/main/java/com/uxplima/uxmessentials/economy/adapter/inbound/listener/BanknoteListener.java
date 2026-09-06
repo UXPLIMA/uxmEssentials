@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Listens to players right-clicking physical banknotes to deposit them back into their virtual account. The
- * interaction fires on the clicking player's region thread, so the redemption — which mutates the held item —
+ * interaction fires on the clicking player's region thread, so the redemption, which mutates the held item,
  * runs inline through the shared {@link BanknoteRedeemer}, which owns the dupe-safe ordering and the per-token
  * in-flight guard that keeps this listener and {@code /deposit} from both consuming one note on a tick.
  */

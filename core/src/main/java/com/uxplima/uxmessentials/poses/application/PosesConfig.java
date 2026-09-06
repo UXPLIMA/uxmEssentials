@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * The typed, immutable view of {@code modules/poses/config.conf}: the enable gate, the per-verb feature switches,
  * and the sit/pose tunables (sittable materials, seat reach, return-to-start, snoring, and the two region gates).
  * It is resolved once from the module's scoped {@link ConfigStore} when the module starts and, per the atomic-reload
- * rule, swapped whole on reload — so a command dispatched mid-reload sees one coherent snapshot.
+ * rule, swapped whole on reload, so a command dispatched mid-reload sees one coherent snapshot.
  *
  * <p>The HOCON keys are kebab-case ({@code player-sit}, {@code sit-on-blocks}, {@code max-distance}); the record
  * components are the camelCase views the application reads. Every knob carries the default the bundled config ships,
@@ -36,7 +36,7 @@ public record PosesConfig(
         boolean respectClaims,
         boolean respectWorldguard) {
 
-    /** The default sittable-material set — stairs, slabs, and carpets — matching the bundled config. */
+    /** The default sittable-material set (stairs, slabs, and carpets) matching the bundled config. */
     private static final List<String> DEFAULT_SITTABLE = List.of("*_STAIRS", "*_SLAB", "*_CARPET");
 
     /** The default seat reach in blocks. */

@@ -5,11 +5,11 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * The small, ordered token map an operator template is rendered against — {@code {player}}, {@code {count}},
+ * The small, ordered token map an operator template is rendered against, {@code {player}}, {@code {count}},
  * {@code {world}}, and the handful of other tokens a channel offers. The substitution contract is the pure half
  * of rendering a template: it replaces every {@code {token}} it knows with the bound value and leaves an unknown
  * {@code {token}} untouched, so an operator typo surfaces verbatim rather than silently vanishing. MiniMessage
- * parsing happens later in the adapter, on the already-substituted string — placeholders are resolved first so a
+ * parsing happens later in the adapter, on the already-substituted string. Placeholders are resolved first so a
  * value that itself contains a tag-like sequence is not reinterpreted as markup.
  *
  * <p>The map is copied defensively and the order is preserved only for deterministic iteration in tests; it
@@ -24,7 +24,7 @@ public final class PlaceholderBindings {
         this.tokens = new LinkedHashMap<>(Objects.requireNonNull(tokens, "tokens"));
     }
 
-    /** Empty bindings — every {@code {token}} is left as written. */
+    /** Empty bindings: every {@code {token}} is left as written. */
     public static PlaceholderBindings empty() {
         return new PlaceholderBindings(Map.of());
     }

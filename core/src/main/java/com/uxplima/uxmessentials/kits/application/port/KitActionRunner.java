@@ -8,11 +8,11 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Runs a kit's ordered, typed claim/deny {@link KitAction actions} for a player. The {@code :core} layer asks
- * for a list of actions to be performed — it never decides how a sound is played, a title shown, a firework
+ * for a list of actions to be performed. It never decides how a sound is played, a title shown, a firework
  * launched, or a command dispatched, nor on which thread. The adapter executes each action type on the correct
  * Folia scheduler (player-targeted effects on the player's entity thread, broadcasts and console commands on the
  * global thread) and honours a {@code WAIT_TICKS} action by re-scheduling the remaining actions after the stated
- * delay through the Scheduler port — never a {@code BukkitRunnable}.
+ * delay through the Scheduler port, never a {@code BukkitRunnable}.
  *
  * <p>{@link com.uxplima.uxmessentials.kits.application.ClaimKit} owns the ordering: it splits the kit's claim
  * actions into the before-items and after-items halves and grants the items between the two {@code run} calls,

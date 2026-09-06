@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuCon
 import com.uxplima.uxmessentials.shared.adapter.outbound.action.SerializedItems;
 
 /**
- * Turns a {@code b64:<base64>} material spec into the fully-deserialized {@link ItemStack} it encodes — every
+ * Turns a {@code b64:<base64>} material spec into the fully-deserialized {@link ItemStack} it encodes, every
  * component, enchantment, name, and lore the operator captured. This is the same {@code b64:} codec the give
  * actions and NPC equipment use ({@link SerializedItems}), reused here so the marker lives in exactly one place.
  *

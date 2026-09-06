@@ -15,7 +15,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 /**
  * Pure coverage of the DeluxeMenus → uxmEssentials converter mapping. Each test feeds a DeluxeMenus YAML fragment,
  * converts it, and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle
- * string — the title/size/items/click/requirement mappings, the click-tag map, the requirement-type map, the
+ * string. The title/size/items/click/requirement mappings, the click-tag map, the requirement-type map, the
  * JavaScript skip, the unknown-tag fallback, and the size-to-rows clamp.
  */
 class DeluxeMenusConverterTest {

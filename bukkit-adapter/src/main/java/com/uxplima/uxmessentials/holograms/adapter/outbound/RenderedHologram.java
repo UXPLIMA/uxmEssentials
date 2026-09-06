@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The renderer's view of a live uxmLib hologram, unifying the only operations the renderer performs on a
- * spawned entity — despawn, restrict-to-viewers, and per-viewer show/hide — across the text {@code Hologram}
+ * spawned entity (despawn, restrict-to-viewers, and per-viewer show/hide) across the text {@code Hologram}
  * and the item/block {@link ModelHologram}, which share that lifecycle but no common Java interface in the lib.
  * Each hologram type's spawn returns one of the two adapters below so the renderer's spawn, despawn and
  * visibility code is type-agnostic past the dispatch point.
@@ -102,7 +102,7 @@ interface RenderedHologram {
 
     /**
      * A {@link RenderedHologram} over a frozen decorative {@code entity} (an ENTITY hologram). The mob is the whole
-     * hologram — there is no Display — so despawn removes the entity, visibility uses Paper's per-player entity
+     * hologram, there is no Display, so despawn removes the entity, visibility uses Paper's per-player entity
      * show/hide (and the default-visible toggle for the restrict-to-viewers modes), and there is no text component.
      */
     static RenderedHologram ofEntity(org.bukkit.entity.Entity entity) {
@@ -135,7 +135,7 @@ interface RenderedHologram {
     }
 
     /**
-     * Wrap {@code delegate} so its lifecycle also owns the {@code clickBox} — the {@code Interaction} entity spawned
+     * Wrap {@code delegate} so its lifecycle also owns the {@code clickBox}. The {@code Interaction} entity spawned
      * beside a clickable hologram. Despawning the hologram (on stop, move, edit) removes the box too, so a hologram
      * never leaves an orphaned hitbox; visibility and the text-entity id pass straight through to the delegate (the
      * box is a non-persistent, invisible hitbox, not something a viewer is shown or hidden).

@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * announcer's {@code NextAnnouncement} fan-out reads the same opt-out set the toggle wrote.
  *
  * @param subject the player who toggled their broadcast subscription
- * @param optedOut the new state — true when the player now opts out of announcements
+ * @param optedOut the new state, true when the player now opts out of announcements
  * @param at when the toggle happened
  */
 public record BroadcastOptOutToggled(PlayerRef subject, boolean optedOut, Instant at) implements CommunicationEvent {

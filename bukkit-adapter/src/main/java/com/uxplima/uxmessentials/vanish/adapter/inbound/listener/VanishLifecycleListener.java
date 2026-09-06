@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
  * Keeps the vanish view coherent across join and quit, and owns the join-vanished behaviour.
  *
  * <ul>
- *   <li><b>Join</b> — the joiner's cross-server vanish is reconciled first through the {@link JoinVanishReconciler}: a
+ *   <li><b>Join</b>. The joiner's cross-server vanish is reconciled first through the {@link JoinVanishReconciler}: a
  *       player vanished on another backend is seeded into this server's store so they arrive already hidden. Then a
  *       joiner who holds {@code uxmessentials.vanish.persist} (and with {@code join-vanished} on) is re-vanished before
  *       anyone sees them, so a staff member rejoins already hidden; otherwise the joiner's own use level is re-derived
@@ -35,13 +35,13 @@ import org.jspecify.annotations.Nullable;
  *       vanished (a reload, or a cross-server hop) is re-hidden. Either way, once the joiner ends up vanished their real
  *       join line is suppressed. Every currently-vanished <em>other</em> player is then re-hidden from the joiner, so a
  *       hidden staff member does not flash into view the moment someone connects.
- *   <li><b>Quit</b> — suppress the quit line for a vanished player (they already appeared offline to those who could
+ *   <li><b>Quit</b>. Suppress the quit line for a vanished player (they already appeared offline to those who could
  *       not see them), then drop them from the vanish store so a disconnected player holds no vanish state; a later
  *       reconnect re-derives it from the persist permission.
  * </ul>
  *
  * <p>The events fire on the player's region thread; every hide still routes through the {@link VanishView}, which hops
- * to the owning entity thread via the {@code Scheduler} port — valid on Folia.
+ * to the owning entity thread via the {@code Scheduler} port, valid on Folia.
  */
 @NullMarked
 public final class VanishLifecycleListener implements Listener {

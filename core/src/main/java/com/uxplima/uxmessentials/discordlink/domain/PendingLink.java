@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * A link code a player has generated but not yet redeemed in Discord. There is at most one pending row per
- * player — a fresh {@code /discordlink} replaces the previous one — keyed by the player's account uuid, with
+ * player, a fresh {@code /discordlink} replaces the previous one, keyed by the player's account uuid, with
  * the code the unique handle the {@code /link} slash command looks the row up by.
  *
  * <p>The code expires at {@link #expiresAt()}; a redemption after that instant is rejected and the stale row

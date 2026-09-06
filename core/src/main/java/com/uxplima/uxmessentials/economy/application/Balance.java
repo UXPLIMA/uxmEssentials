@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * boundary before this use case runs ({@link Currency} in hand), defaulting to the configured default when
  * the optional argument is omitted.
  *
- * <p>An offline target is legitimate — {@code /balance <player>} works for a player who is not online,
+ * <p>An offline target is legitimate. {@code /balance <player>} works for a player who is not online,
  * served from the offline read-cache the provider sits in front of, so this use case asks for the balance
  * and renders it without caring about presence.
  */

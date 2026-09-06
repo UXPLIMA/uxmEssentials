@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The placeholder resolution logic, exercised behind the {@link PlaceholderResolver} seam against fakes of
- * the context read seams — no live PlaceholderAPI and no Bukkit. It proves each placeholder maps to the
+ * the context read seams, no live PlaceholderAPI and no Bukkit. It proves each placeholder maps to the
  * right read, that an unknown key resolves to {@code empty} (the raw-token signal), that a disabled context
  * degrades its placeholders to the empty/"-" default, and that the offline guard suppresses the
  * session-only presence placeholders.
@@ -1335,7 +1335,7 @@ class PlaceholderResolverTest {
         PlaceholderResolver resolver = resolverWith(
                 PlaceholderContexts.builder().serverMetrics(metrics).build());
 
-        // The requesting player and online flag are irrelevant — every value is server-wide.
+        // The requesting player and online flag are irrelevant: every value is server-wide.
         assertThat(resolver.resolve(ALICE, false, "server_online")).contains("12");
         assertThat(resolver.resolve(BOB, true, "server_max_players")).contains("50");
         assertThat(resolver.resolve(ALICE, true, "server_version")).contains("1.21.11");
@@ -2261,7 +2261,7 @@ class PlaceholderResolverTest {
         return new PlaceholderResolver(contexts);
     }
 
-    /** A configurable {@link EconomyPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link EconomyPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeEconomy implements EconomyPlaceholders {
 
         private final java.util.Map<PlayerRef, Money> defaultBalances = new java.util.HashMap<>();
@@ -2354,7 +2354,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link TeleportPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link TeleportPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeTeleport implements TeleportPlaceholders {
 
         private Optional<Duration> cooldown = Optional.empty();
@@ -2425,7 +2425,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link ModerationPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link ModerationPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeModeration implements ModerationPlaceholders {
 
         private boolean muted;
@@ -2509,7 +2509,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link KitsPlaceholders} fake — every read returns the value the test seeded, else empty. */
+    /** A configurable {@link KitsPlaceholders} fake: every read returns the value the test seeded, else empty. */
     private static final class FakeKits implements KitsPlaceholders {
 
         private final java.util.Map<String, Duration> cooldowns = new java.util.HashMap<>();
@@ -2580,7 +2580,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link WarpsPlaceholders} fake — only the seeded (visible) warps are counted/listed/found. */
+    /** A configurable {@link WarpsPlaceholders} fake: only the seeded (visible) warps are counted/listed/found. */
     private static final class FakeWarps implements WarpsPlaceholders {
 
         private final java.util.LinkedHashMap<String, WarpView> visible = new java.util.LinkedHashMap<>();
@@ -2611,7 +2611,7 @@ class PlaceholderResolverTest {
         return new WarpsPlaceholders.WarpView(world, x, y, z, visits, owner, new BigDecimal(cost));
     }
 
-    /** A configurable {@link PlayerwarpsPlaceholders} fake — only the seeded (owned) warps are counted/listed/found. */
+    /** A configurable {@link PlayerwarpsPlaceholders} fake: only the seeded (owned) warps are counted/listed/found. */
     private static final class FakePlayerwarps implements PlayerwarpsPlaceholders {
 
         private final java.util.LinkedHashMap<String, PlayerWarpView> owned = new java.util.LinkedHashMap<>();
@@ -2654,7 +2654,7 @@ class PlaceholderResolverTest {
         return new PlayerwarpsPlaceholders.PlayerWarpView(name, owner, world, x, y, z, visits);
     }
 
-    /** A configurable {@link MessagingPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link MessagingPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeMessaging implements MessagingPlaceholders {
 
         private long unread;
@@ -2737,7 +2737,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link StaffPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link StaffPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeStaff implements StaffPlaceholders {
 
         private final java.util.Set<PlayerRef> inMode = new java.util.HashSet<>();
@@ -2768,7 +2768,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link ScoreboardPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link ScoreboardPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeScoreboard implements ScoreboardPlaceholders {
 
         private final java.util.Set<PlayerRef> shown = new java.util.HashSet<>();
@@ -2799,7 +2799,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link DiscordlinkPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link DiscordlinkPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeDiscordlink implements DiscordlinkPlaceholders {
 
         private final java.util.Map<PlayerRef, String> ids = new java.util.HashMap<>();
@@ -2820,7 +2820,7 @@ class PlaceholderResolverTest {
         }
     }
 
-    /** A configurable {@link CommunicationPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link CommunicationPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeCommunication implements CommunicationPlaceholders {
 
         private final java.util.Set<PlayerRef> receiving = new java.util.HashSet<>();
@@ -2895,7 +2895,7 @@ class PlaceholderResolverTest {
         };
     }
 
-    /** A configurable {@link ServerMetricsPlaceholders} fake — every read returns the value the test seeded. */
+    /** A configurable {@link ServerMetricsPlaceholders} fake: every read returns the value the test seeded. */
     private static final class FakeServerMetrics implements ServerMetricsPlaceholders {
 
         private final java.util.Map<String, Integer> worldPlayers = new java.util.HashMap<>();

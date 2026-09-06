@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The per-player cooldown between {@code /trade} requests — an in-memory stamp per requester, driven by the injected
+ * The per-player cooldown between {@code /trade} requests, an in-memory stamp per requester, driven by the injected
  * {@link Clock}. {@link #remainingSeconds} returns how many whole seconds a player must still wait (rounded up, so a
  * partial second still reads as "wait 1s"); {@code 0} means they may send now, which is always the case when the
  * configured window is zero. The decision is pure and unit-testable with a controllable clock.

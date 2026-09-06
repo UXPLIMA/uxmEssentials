@@ -32,7 +32,7 @@ final class StaffAdapterFakes {
 
     private StaffAdapterFakes() {}
 
-    /** A {@link StaffSettings} parsed from all-default config — the shipped vanish+examine gadget hotbar. */
+    /** A {@link StaffSettings} parsed from all-default config: the shipped vanish+examine gadget hotbar. */
     static StaffSettings defaultSettings() {
         return new StaffSettings(new DefaultConfig(), new NoopLogger());
     }

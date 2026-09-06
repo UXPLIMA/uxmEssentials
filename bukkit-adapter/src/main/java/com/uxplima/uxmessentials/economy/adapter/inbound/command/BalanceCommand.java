@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /balance [player] [currency]} (aliases {@code /bal}, {@code /money}): report a wallet's balance in
  * one currency. Reading another player's balance is gated by {@code uxmessentials.economy.balance.others} and
- * works for an offline target — the provider serves it from its offline read-cache. The currency is resolved
+ * works for an offline target: the provider serves it from its offline read-cache. The currency is resolved
  * at this boundary (an unknown id is an error listing the valid ids); the read runs off the tick thread so a
  * foreign provider never blocks the command, and the use case hops the reply back to the requester's region
  * thread.

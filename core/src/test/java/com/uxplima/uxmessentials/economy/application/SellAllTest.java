@@ -125,8 +125,8 @@ class SellAllTest {
                 cappedCoins,
                 Currencies.GEMS);
         Map<String, Integer> inventory = new LinkedHashMap<>();
-        inventory.put("diamond", 4); // 40 coins — over the cap of 20, so the coins credit is rejected
-        inventory.put("emerald", 5); // 15 gems — settles
+        inventory.put("diamond", 4); // 40 coins. Over the cap of 20, so the coins credit is rejected
+        inventory.put("emerald", 5); // 15 gems, settles
 
         SellAllOutcome outcome = sellAll.sellAll(seller, inventory);
 

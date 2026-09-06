@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by the in-house uxmClaims plugin, reached <b>entirely by reflection</b> — there
+ * {@link ClaimProvider} backed by the in-house uxmClaims plugin, reached <b>entirely by reflection</b>: there
  * is no compile dependency on uxmClaims, so this class loads and runs whether or not uxmClaims is present.
  *
  * <p>The API chain runs through the {@code UxmClaimsHook}: {@code UxmClaimBukkitAPI.getInstance()} →
@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>{@link #active()} is {@code true} only when the API class resolves and {@code getInstance()} is non-null.
  * Reflective handles are resolved on first success and cached. Any reflective failure logs once and degrades
- * to inactive/empty — it never propagates.
+ * to inactive/empty: it never propagates.
  */
 @NullMarked
 public final class UxmClaimsClaimProvider implements ClaimProvider {

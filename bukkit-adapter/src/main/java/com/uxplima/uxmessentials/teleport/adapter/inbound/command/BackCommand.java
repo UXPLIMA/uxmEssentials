@@ -16,9 +16,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /back}: return the player to their captured location through the gated teleport machinery.
- * Death-back is gated separately — the use case is told whether the player may return to a death point by
+ * Death-back is gated separately. The use case is told whether the player may return to a death point by
  * combining the operator's {@code back.on-death} setting with the player's
- * {@code uxmessentials.back.ondeath} permission — so a server can offer {@code /back} after a teleport but
+ * {@code uxmessentials.back.ondeath} permission, so a server can offer {@code /back} after a teleport but
  * not after dying.
  */
 @NullMarked

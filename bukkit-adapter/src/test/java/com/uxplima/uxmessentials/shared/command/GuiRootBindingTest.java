@@ -153,7 +153,7 @@ class GuiRootBindingTest {
         }
     }
 
-    /** A command that does not open a GUI on bare input — must never be reshaped. */
+    /** A command that does not open a GUI on bare input: must never be reshaped. */
     private record NoOpenerStub(String id) implements CommandRegistration {
         @Override
         public LiteralCommandNode<CommandSourceStack> build() {

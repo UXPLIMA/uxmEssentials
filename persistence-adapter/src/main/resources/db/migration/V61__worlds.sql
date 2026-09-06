@@ -1,4 +1,4 @@
--- V61__worlds.sql — world-management metadata (sub-project A).
+-- V61__worlds.sql, world-management metadata (sub-project A).
 -- Portable subset (SQLite default / MySQL / PostgreSQL): UUID as VARCHAR(36), instant as BIGINT
 -- epoch-ms, boolean as INT 0/1. World files stay on disk; this is the managed metadata only.
 CREATE TABLE world (

@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.teleport.domain;
 
 /**
  * The vertical band a random-teleport candidate's landing Y must fall within. Operators clamp RTP to a
- * sensible altitude range — above bedrock caverns, below the build limit — so a candidate that resolves
+ * sensible altitude range (above bedrock caverns, below the build limit) so a candidate that resolves
  * to a deep cave or a sky island is rejected before it reaches the queue.
  *
  * <p>An {@link #unbounded()} band accepts every finite Y, which is the default when neither

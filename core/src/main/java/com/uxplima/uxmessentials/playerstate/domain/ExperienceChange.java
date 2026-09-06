@@ -6,7 +6,7 @@ import java.util.Optional;
 /**
  * A decision for {@code /exp}: how a player's experience should change, expressed in the domain so the adapter
  * only ever computes a clamped non-negative target from the player's current total. The operation pairs with a
- * unit — {@link Unit#POINTS} acts on the raw experience-point total, {@link Unit#LEVELS} on whole levels — so
+ * unit ({@link Unit#POINTS} acts on the raw experience-point total, {@link Unit#LEVELS} on whole levels) so
  * {@code /exp give 30} and {@code /exp set 30 levels} read naturally while the maths stays here.
  *
  * <p>{@link #resolve(long)} turns the operation into the new total against a current total: {@code SET} replaces

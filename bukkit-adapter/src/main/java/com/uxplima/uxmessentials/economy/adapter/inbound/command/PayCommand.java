@@ -28,8 +28,8 @@ import org.jspecify.annotations.NullMarked;
  * provider call off the tick thread so a foreign provider can never wedge the command (§4.3).
  *
  * <p>The currency is resolved before any provider call (an unknown id is an error listing the valid ids).
- * Above the currency's confirm-threshold the use case stages the pay for {@code /payconfirm} — no money moves
- * — and below it the transfer is immediate.
+ * Above the currency's confirm-threshold the use case stages the pay for {@code /payconfirm}: no money moves
+ *, and below it the transfer is immediate.
  */
 @NullMarked
 public final class PayCommand extends EconomyCommandSupport implements CommandRegistration {

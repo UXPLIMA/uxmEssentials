@@ -9,10 +9,10 @@ import com.uxplima.uxmessentials.economy.fakes.Currencies;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit coverage of {@link Money} arithmetic — the value object every balance, port method, and domain event
+ * Unit coverage of {@link Money} arithmetic, the value object every balance, port method, and domain event
  * carries. The load-bearing properties: arithmetic is exact (BigDecimal scaled to the currency precision,
  * never a {@code double}, so rounding drift is impossible), it is currency-bound (combining across currencies
- * throws rather than silently converting — the GLOSSARY invariant (b)), and the comparisons the clamp and the
+ * throws rather than silently converting. The GLOSSARY invariant (b)), and the comparisons the clamp and the
  * {@code min-pay} gate rely on are correct at the boundary.
  */
 class MoneyTest {

@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A property whose click runs a one-shot navigation action — the "do-it-now" button the value editors do not
+ * A property whose click runs a one-shot navigation action. The "do-it-now" button the value editors do not
  * cover. The motivating case here is the detail view's "view player history" button: it does not change a
  * value, it opens another menu. The handler is invoked on the viewer's entity thread with the live
  * {@link Player} and a {@code reopen} runnable, so it can open a sub-view (or re-render) safely. It carries no

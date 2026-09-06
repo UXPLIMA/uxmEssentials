@@ -23,14 +23,14 @@ import org.jspecify.annotations.Nullable;
  * numbered (and optionally world-scoped) nodes through {@link QuotaNodeReducer}; a LuckPerms meta
  * value, when present, is one more input to the same fold. An offline player cannot be
  * permission-checked, so {@code has} returns {@code false} and {@code resolveQuota} returns the config
- * default — the canonical conservative behaviour.
+ * default, the canonical conservative behaviour.
  */
 @NullMarked
 public final class BukkitPermissions implements Permissions {
 
     private final MetaSource meta;
 
-    /** Build with no meta source — pure Bukkit-permission resolution. */
+    /** Build with no meta source, pure Bukkit-permission resolution. */
     public BukkitPermissions() {
         this(MetaSource.none());
     }

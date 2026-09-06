@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Pins the pure {@link SearchBudget}: it rejects non-positive ceilings at construction and answers
  * {@link SearchBudget#allowsAnotherAttempt(int, int, long)} by letting a search continue only while every
- * ceiling — attempts, chunk loads, and elapsed wall clock — still has room. Any one ceiling reaching its
+ * ceiling (attempts, chunk loads, and elapsed wall clock) still has room. Any one ceiling reaching its
  * cap stops the search, which is what guarantees termination.
  */
 class SearchBudgetTest {

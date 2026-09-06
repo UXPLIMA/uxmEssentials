@@ -61,10 +61,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The currency-exchange dashboard golden test: the engine-rendered panel must draw the exact window the original
  * {@code ExchangeGuiView} drew, and its buttons must keep the behaviour. The panel draws the source icon (the
  * source currency's per-currency icon @11), the convert SUNFLOWER@13 (a no-rate BARRIER in the same slot when no
- * rate is configured), the target icon @15 and the close BARRIER@22 over a grey-glass backdrop — snapshotted as
+ * rate is configured), the target icon @15 and the close BARRIER@22 over a grey-glass backdrop, snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal slot for slot to the baseline the old view produced
  * (frozen here so the old class could be deleted). The convert button fires the input prompt then runs the exchange
- * use case through the package-private apply seam (MockBukkit cannot drive a live anvil — see
+ * use case through the package-private apply seam (MockBukkit cannot drive a live anvil, see
  * EconomyExchangeMenuApplyTest); the source/target icons open the shared engine picker and choosing a currency
  * re-opens this panel with that side switched.
  */

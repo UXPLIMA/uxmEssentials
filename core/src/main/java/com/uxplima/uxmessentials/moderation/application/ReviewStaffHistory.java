@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.application.port.PlayerLookup;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /staffhistory <staff>}: review the sanctions a staff member has issued — every ban/mute/warn/kick they
+ * {@code /staffhistory <staff>}: review the sanctions a staff member has issued, every ban/mute/warn/kick they
  * applied, of any kind, folded into one newest-first timeline. The mirror image of {@link ReviewSanctionHistory}:
  * where that one scopes by who was punished, this scopes by who did the punishing, so an operator can audit a
  * staff member's disciplinary activity.

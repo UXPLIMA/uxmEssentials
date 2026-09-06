@@ -14,7 +14,7 @@ import org.spongepowered.configurate.ConfigurationNode;
 /**
  * Parses one DecentHolograms {@code holograms/<name>.yml} into a {@link DhHologram}. The hologram's name
  * is the file-name stem (DecentHolograms names each file after the hologram). The location is the {@code
- * location} string — {@code world:x:y:z} with three decimals, the form
+ * location} string. {@code world:x:y:z} with three decimals, the form
  * {@code LocationUtils.asString(loc, false)} writes; a comma decimal separator is normalised to a dot
  * before the colon split, exactly as DecentHolograms itself parses it. Lines come from the first page's
  * {@code lines[].content}, falling back to the legacy top-level {@code lines} section older files carry. A
@@ -29,7 +29,7 @@ public final class DhHologramParser {
         return parse(stem(file.getFileName().toString()), YamlSource.load(file));
     }
 
-    /** Parse from a reader with an explicit hologram name — the form the golden-file tests drive. */
+    /** Parse from a reader with an explicit hologram name: the form the golden-file tests drive. */
     public @Nullable DhHologram parse(String name, Reader reader) throws IOException {
         return parse(name, YamlSource.load(reader));
     }
@@ -67,7 +67,7 @@ public final class DhHologramParser {
         return contents;
     }
 
-    /** Drain a {@code lines} node — a list of {@code {content: …}} maps, a list of strings, or a numbered map. */
+    /** Drain a {@code lines} node, a list of {@code {content: …}} maps, a list of strings, or a numbered map. */
     private static void collectLines(ConfigurationNode lines, List<String> out) {
         if (!lines.childrenList().isEmpty()) {
             for (ConfigurationNode line : lines.childrenList()) {

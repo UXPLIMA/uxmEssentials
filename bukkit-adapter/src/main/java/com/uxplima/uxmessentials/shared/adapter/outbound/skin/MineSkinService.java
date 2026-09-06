@@ -25,10 +25,10 @@ import org.jspecify.annotations.Nullable;
  * class owns input validation, the async hop, the fail-soft contract, and the URL-keyed cache.
  *
  * <p>The blocking HTTP and the bounded inter-poll/backoff sleep run on the {@link Scheduler}'s async pool, never a
- * tick thread; the returned future is completed from there. Every miss — a malformed image URL, a generation
+ * tick thread; the returned future is completed from there. Every miss. A malformed image URL, a generation
  * error, a rate limit ({@code 429}) that outlasts the bounded backoff, a queued job not ready within the bounded
  * polls, a timeout, a response carrying no texture, malformed JSON, or any unexpected throw from the fetcher or
- * parser — completes the future with {@link Optional#empty()} after logging the cause with the URL; the future
+ * parser, completes the future with {@link Optional#empty()} after logging the cause with the URL; the future
  * never completes exceptionally and never stays uncompleted, so the command never hangs on the "generating" line.
  * Two bounded Caffeine caches keyed by the image URL hold the result: a generated texture is held for several
  * hours (a stable URL's texture does not change, so a re-skin of the same image is served from cache rather than
@@ -144,8 +144,8 @@ public final class MineSkinService {
 
     /**
      * The blocking v2 generate for an already-validated {@code imageUrl}, caching and returning the outcome. A
-     * generated texture is cached long (a stable URL's texture does not change); a miss — an error, a {@code 429}
-     * rate limit, a timeout, a textureless response, an exhausted poll — is cached only briefly so a transient
+     * generated texture is cached long (a stable URL's texture does not change); a miss, an error, a {@code 429}
+     * rate limit, a timeout, a textureless response, an exhausted poll. Is cached only briefly so a transient
      * MineSkin outage does not block that URL for the full positive TTL, while still absorbing a burst of retries.
      */
     private Optional<SignedSkin> load(String imageUrl, @Nullable String variant) {

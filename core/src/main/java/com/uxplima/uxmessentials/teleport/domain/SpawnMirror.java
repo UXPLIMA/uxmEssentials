@@ -8,7 +8,7 @@ import java.util.UUID;
  * {@link #targetWorld}'s spawn instead of the source's own. This lets an operator funnel several worlds
  * to one hub spawn without copying the location. Configured under {@code teleport.spawn.mirror.<world>}.
  *
- * <p>Only the redirect rule lives in the domain — the actual spawn {@code Position} for the target world
+ * <p>Only the redirect rule lives in the domain, the actual spawn {@code Position} for the target world
  * is read through the spawn directory port at resolve time, so a mirror never goes stale when the
  * target's spawn is moved.
  *

@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The jOOQ-backed {@link HomeInviteRepository} over the generated {@code home_invites} table. All
- * mutations use the {@code (owner, slot, invited)} primary key to keep invite grants idempotent — a
+ * mutations use the {@code (owner, slot, invited)} primary key to keep invite grants idempotent, a
  * duplicate insert does nothing rather than failing. Reads return an immutable {@link Set}; ownership
  * of the guest list is with the caller's use-case.
  */

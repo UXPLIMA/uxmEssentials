@@ -18,8 +18,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@link KitsPlaceholders} over the kits context's {@link KitRepository} catalog and the {@link KitAccess}
- * gate. Every per-kit answer is read through the same {@link KitAccess} the {@code /kit} claim path uses — its
- * permission check, its cooldown clock (keyed per kit id), and its one-time-claim store — so what a
+ * gate. Every per-kit answer is read through the same {@link KitAccess} the {@code /kit} claim path uses, its
+ * permission check, its cooldown clock (keyed per kit id), and its one-time-claim store, so what a
  * placeholder reports matches what a claim would enforce. The usable-ids list is the {@link ListKits} filter
  * the {@code /kit list} surface renders.
  *

@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.economy.domain.Money;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A player moved money from their wallet into a shared bank — the deposit leg of {@code /bank deposit}. Carries
+ * A player moved money from their wallet into a shared bank, the deposit leg of {@code /bank deposit}. Carries
  * the bank id, the depositing player, the amount moved, and the bank balance after the deposit, so audit and
  * any consuming context observe each deposit exactly once. Maps to one {@code event=bank_deposit} audit line.
  *

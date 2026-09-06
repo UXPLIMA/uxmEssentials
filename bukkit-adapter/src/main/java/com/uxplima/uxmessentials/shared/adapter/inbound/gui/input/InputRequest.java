@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The key is the contract between code and config: it is the dotted token an operator writes under
  * {@code input.modes} to flip this point between anvil and chat (e.g. {@code home.rename}, {@code loan.amount}).
- * It is descriptive and stable — renaming it is a config-breaking change, so it reads like the action it captures.
+ * It is descriptive and stable: renaming it is a config-breaking change, so it reads like the action it captures.
  *
  * @param key the stable input-point identifier the per-key mode override is looked up by
  * @param label the prompt catalog line, resolved in the viewer's locale
@@ -39,7 +39,7 @@ public record InputRequest(
         }
     }
 
-    /** A request with no placeholders and no anvil pre-fill — the field starts empty. */
+    /** A request with no placeholders and no anvil pre-fill: the field starts empty. */
     public static InputRequest of(String key, MessageKey label) {
         return new InputRequest(key, label, Map.of(), null);
     }

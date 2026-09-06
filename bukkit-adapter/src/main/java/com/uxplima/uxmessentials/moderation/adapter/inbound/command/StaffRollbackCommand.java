@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /staffrollback <staff> [limit]}: revoke a (rogue or mistaken) staff member's still-active sanctions —
+ * {@code /staffrollback <staff> [limit]}: revoke a (rogue or mistaken) staff member's still-active sanctions
  * un-ban, un-mute and clear-warns the targets they sanctioned that remain under that sanction now. The
  * {@code StaffRollback} use case reads the staff member's recent history (newest-first, capped at {@code limit}),
  * gates every revoke on a live-state read so a lifted, lapsed or re-applied sanction is left alone, and reports a

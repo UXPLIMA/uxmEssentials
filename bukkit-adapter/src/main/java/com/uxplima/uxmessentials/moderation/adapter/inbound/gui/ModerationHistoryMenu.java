@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The history read is a DB query, so {@link #open} resolves it off the tick thread and hands the already-read,
  * already-bounded entries in as the menu subject; the {@code moderation:history} list source only reads that subject
- * — it touches no port off-thread. The {@code mod_history_action} / {@code mod_history_issuer} /
+ *: it touches no port off-thread. The {@code mod_history_action} / {@code mod_history_issuer} /
  * {@code mod_history_reason} / {@code mod_history_at} placeholders fill each icon from the bound entry, prefixed so
  * they never collide with the jailed-list tokens that carry the same field names. Every label resolves from the
  * moderation catalog, so no user-facing text lives here. The geometry mirrors the original paginated list: a grid

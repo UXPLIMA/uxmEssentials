@@ -19,8 +19,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Auto-tool: as the player starts breaking a block, their held hotbar slot is switched to the strongest tool of the
- * family that block needs (a pickaxe for stone, an axe for a log). It listens on {@code BlockDamageEvent} — the first
- * tick of mining, before the break resolves — so the correct tool is in hand when the block finally breaks and its
+ * family that block needs (a pickaxe for stone, an axe for a log). It listens on {@code BlockDamageEvent}, the first
+ * tick of mining, before the break resolves, so the correct tool is in hand when the block finally breaks and its
  * drops (and durability) are computed against the right tool. Gated by the {@code uxmessentials.survival.autotool}
  * permission and the per-player toggle.
  *

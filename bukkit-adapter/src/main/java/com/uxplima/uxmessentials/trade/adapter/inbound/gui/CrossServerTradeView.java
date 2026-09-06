@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class CrossServerTradeView {
 
-    /** The placeholder id an {@code INVITE} carries for the not-yet-resolved target — matched by name, not uuid. */
+    /** The placeholder id an {@code INVITE} carries for the not-yet-resolved target, matched by name, not uuid. */
     private static final UUID UNRESOLVED = new UUID(0L, 0L);
 
     private final Messages messages;
@@ -68,12 +68,12 @@ public final class CrossServerTradeView {
         window.register(bindings, this);
     }
 
-    /** The lifecycle listener bound to this view — the wiring registers it. */
+    /** The lifecycle listener bound to this view: the wiring registers it. */
     public CrossServerTradeListener newListener() {
         return new CrossServerTradeListener(this);
     }
 
-    /** Whether {@code player} is already in a cross-server trade — the {@code /trade} busy check reads it. */
+    /** Whether {@code player} is already in a cross-server trade: the {@code /trade} busy check reads it. */
     public boolean isTrading(UUID player) {
         return sessions.containsKey(player);
     }
@@ -152,7 +152,7 @@ public final class CrossServerTradeView {
         return !holder.escrowed();
     }
 
-    /** A confirm click — read the live window, escrow the items, and close; the coordinator settles from here. */
+    /** A confirm click: read the live window, escrow the items, and close; the coordinator settles from here. */
     void confirm(CrossTradeHolder holder) {
         if (!holder.beginEscrow()) {
             return;
@@ -177,7 +177,7 @@ public final class CrossServerTradeView {
     }
 
     /**
-     * A window closed before confirming — return what was staked in it and abort the other side. The escrow gate wins
+     * A window closed before confirming: return what was staked in it and abort the other side. The escrow gate wins
      * here only when no confirm ran first: a plain close is the real abort and takes this path exactly once, while
      * the close a confirm causes loses the gate (the confirm already claimed it) and does nothing, so it never fires
      * a spurious {@code ABORT} that would tear the counterpart down. The items come from the window itself rather
@@ -195,7 +195,7 @@ public final class CrossServerTradeView {
     }
 
     /**
-     * End this side from outside its window — the peer aborted, the player quit, or the module is stopping — by
+     * End this side from outside its window (the peer aborted, the player quit, or the module is stopping) by
      * reading whatever is still staked back out of the live window and returning it. {@code tellPeer} is false only
      * when the peer is the one who aborted, since they need no telling.
      */
@@ -224,7 +224,7 @@ public final class CrossServerTradeView {
         }
     }
 
-    /** The window a player quit belonged to a cross-server trade — treat the disconnect as a close. */
+    /** The window a player quit belonged to a cross-server trade, treat the disconnect as a close. */
     public void onQuit(Player quitter) {
         CrossTradeHolder holder = sessions.get(quitter.getUniqueId());
         if (holder != null) {

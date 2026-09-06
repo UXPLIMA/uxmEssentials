@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.economy.domain.PendingPay;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A hand-rolled {@link PendingPayRegistry} for the pay-confirm tests — one outstanding {@link PendingPay} per
+ * A hand-rolled {@link PendingPayRegistry} for the pay-confirm tests. One outstanding {@link PendingPay} per
  * payer, replaced on re-stage and cleared on take. The real adapter adds the {@code Scheduler.asyncAfter}
  * expiry; the use-case tests only need stage/peek/take/clear.
  */

@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
  * resolved from the message catalog. Gated by the {@code teleport.arrival-title} toggle and configured
  * per-verb under {@code arrival-messages}.
  *
- * <p>{@link #arrived} touches the live player, so the caller must invoke it on the player's region thread —
+ * <p>{@link #arrived} touches the live player, so the caller must invoke it on the player's region thread
  * the teleport executor does, from its arrival callback.
  */
 @NullMarked

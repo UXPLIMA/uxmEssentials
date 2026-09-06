@@ -7,11 +7,11 @@ import java.util.Objects;
  * {@code §c} sequence) rather than MiniMessage. A permission plugin may report a group's prefix in either dialect,
  * and the two must be parsed differently: MiniMessage through the normal parser, legacy through Adventure's legacy
  * serializer. This helper answers only "which dialect is this?" so the adapter can pick the right parser without
- * double-parsing — it holds no Adventure type and never renders anything, keeping the decision unit-testable
+ * double-parsing. It holds no Adventure type and never renders anything, keeping the decision unit-testable
  * without Bukkit.
  *
- * <p>A string counts as legacy when it contains a colour/format marker — {@code &} (ampersand) or the section sign
- * — immediately followed by a recognised code character ({@code 0-9}, {@code a-f}, {@code k-o}, {@code r}, or the
+ * <p>A string counts as legacy when it contains a colour/format marker, {@code &} (ampersand) or the section sign
+ *. Immediately followed by a recognised code character ({@code 0-9}, {@code a-f}, {@code k-o}, {@code r}, or the
  * {@code x} hex marker, case-insensitively). A lone {@code &} that introduces no code (as in {@code "Tom & Jerry"})
  * is not a legacy string, so a plain ampersand in a prefix does not force the legacy parser.
  */

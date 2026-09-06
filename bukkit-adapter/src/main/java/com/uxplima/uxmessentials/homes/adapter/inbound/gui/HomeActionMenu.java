@@ -44,14 +44,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the per-home action menu (opened by clicking a home in the {@code /home} grid) with the menu engine and
  * opens it. The home is the engine subject; each button routes through the same homes use case the old
- * {@code HomeActionView} drove — teleport, delete, relocate-here, rename, change icon, toggle visibility, manage
+ * {@code HomeActionView} drove, teleport, delete, relocate-here, rename, change icon, toggle visibility, manage
  * invites, and back. The placeholders fill the title and info label from that home, and a pair of {@code home-public}
  * / {@code home-private} view conditions pick the right visibility cell.
  *
  * <p>Each mutating use case runs off the click thread (the write hits SQLite); the menu re-opens through {@link Menus}
  * with the (re-read) home subject so a flip or rename shows immediately. Delete and relocate optionally confirm
  * through {@link Menus#confirm} first, and teleport reads the destination region for claim access and an unsafe-tp
- * warning — exactly the threads and decisions the old view used. The icon picker, invited-players list, and the grid
+ * warning: exactly the threads and decisions the old view used. The icon picker, invited-players list, and the grid
  * are reached through injected seams so this menu does not need to know which renders them.
  */
 @NullMarked

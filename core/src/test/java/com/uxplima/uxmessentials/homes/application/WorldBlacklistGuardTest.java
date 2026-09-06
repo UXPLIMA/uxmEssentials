@@ -46,7 +46,7 @@ class WorldBlacklistGuardTest {
 
     @Test
     void matchingIsCaseInsensitive() {
-        // Config entry is uppercase; world name from the server is lowercase — must still match.
+        // Config entry is uppercase; world name from the server is lowercase, must still match.
         WorldBlacklistGuard guard = new WorldBlacklistGuard(Set.of("WORLD_NETHER"));
         Position at = Position.of(new WorldRef(UUID.randomUUID(), "world_nether"), 0, 64, 0);
 

@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * Boundary helpers shared by the teleport Brigadier commands: narrow a command source to a {@link Player}
  * (rejecting console with the players-only message) and render an operator-facing failure component for a
  * source that has no per-player locale. Player-facing feedback flows through the {@code MessageSink}; only
- * the players-only / unknown-player rejection — which a console may see — is rendered here, still through
+ * the players-only / unknown-player rejection, which a console may see, is rendered here, still through
  * the {@link Messages} catalog so no inline literal exists.
  */
 @NullMarked

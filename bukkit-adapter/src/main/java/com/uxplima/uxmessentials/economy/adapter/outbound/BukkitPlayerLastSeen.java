@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * Resolves a wallet owner's last-seen time for the purge filter. A currently-online player reports "now" so the
  * maintenance task never purges someone who is playing; otherwise the value is the offline player's recorded
  * last-seen ({@code 0} when the server has never seen them, which the task treats as "don't purge").
- * {@code getOfflinePlayer(UUID)} is the non-blocking, UUID-keyed lookup — no Mojang round-trip — so it is safe on
+ * {@code getOfflinePlayer(UUID)} is the non-blocking, UUID-keyed lookup, no Mojang round-trip, so it is safe on
  * the async lane the task runs on.
  */
 @NullMarked

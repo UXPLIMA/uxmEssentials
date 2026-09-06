@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * two-player local {@code TradeHolder}, only one of the two participants is on this backend, so the holder carries
  * the local player, the remote counterparty, the counterparty's backend id, and the trade id both backends agree on.
  * The {@code escrowed} flag is the single-winner gate that guarantees the local player's items are removed into
- * escrow exactly once — a confirm and a close can both fire, and only the first flips it.
+ * escrow exactly once: a confirm and a close can both fire, and only the first flips it.
  */
 @NullMarked
 final class CrossTradeHolder {
@@ -52,7 +52,7 @@ final class CrossTradeHolder {
         return escrowed.compareAndSet(false, true);
     }
 
-    /** Whether this side has already been staked or returned — a plain read, unlike {@link #beginEscrow()}. */
+    /** Whether this side has already been staked or returned, a plain read, unlike {@link #beginEscrow()}. */
     boolean escrowed() {
         return escrowed.get();
     }

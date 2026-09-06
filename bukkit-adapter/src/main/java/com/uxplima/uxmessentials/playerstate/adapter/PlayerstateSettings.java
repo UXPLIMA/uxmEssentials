@@ -50,7 +50,7 @@ public final class PlayerstateSettings {
         return playtimeTracking;
     }
 
-    /** The sampling cadence in seconds — how much playtime each tick credits each online player. */
+    /** The sampling cadence in seconds: how much playtime each tick credits each online player. */
     public int playtimeSampleSeconds() {
         return playtimeSampleSeconds;
     }

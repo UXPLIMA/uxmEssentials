@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * the shared render tick:
  *
  * <ul>
- *   <li>{@link AnimationSpec.AnimationType#FRAMES FRAMES} are resolved purely by {@link AnimationSpec#frameAt(long)} —
+ *   <li>{@link AnimationSpec.AnimationType#FRAMES FRAMES} are resolved purely by {@link AnimationSpec#frameAt(long)}
  *       a plain frame index from the tick, with no state to advance.</li>
  *   <li>{@link AnimationSpec.AnimationType#SCROLL SCROLL} and {@link AnimationSpec.AnimationType#GRADIENT GRADIENT} bind
  *       a stateful uxmLib {@link TextAnimator} ({@code ScrollingText}/{@code GradientText}); its frame is a
@@ -69,7 +69,7 @@ public final class AnimationRegistry {
         this.animations = new AtomicReference<>(bindAll(defs));
     }
 
-    /** True when nothing is configured — no token will ever expand. */
+    /** True when nothing is configured: no token will ever expand. */
     public boolean isEmpty() {
         return snapshot().isEmpty();
     }
@@ -181,7 +181,7 @@ public final class AnimationRegistry {
 
     /**
      * One bound animation: the pure spec plus, for SCROLL/GRADIENT, the stateful uxmLib animator. {@link #advanceTo}
-     * steps the animator to a tick's absolute frame (driven on the loop thread only — so {@code appliedStep} needs no
+     * steps the animator to a tick's absolute frame (driven on the loop thread only, so {@code appliedStep} needs no
      * lock); {@link #frame} reads the current frame (called per-viewer on region threads, lock-free against the
      * volatile frame the animator publishes).
      */

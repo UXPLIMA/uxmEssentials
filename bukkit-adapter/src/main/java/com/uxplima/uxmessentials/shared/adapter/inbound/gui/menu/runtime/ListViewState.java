@@ -19,8 +19,8 @@ import org.jspecify.annotations.NullMarked;
  * <p>It also owns the slot routing for one rendered page. An entity slot maps to the entity drawn there on the
  * current page; the click listener consults {@link #entityAt} to route a click into the spec's {@code onSelect} for
  * that entity. The previous/next nav slots are recorded so a page flip re-paginates the same holder, and the
- * optional create/action buttons map to a {@link Runnable} the listener runs as-is. Keeping these maps here — off
- * the spec {@code clickMap} and off the editor/selector/confirm maps — is what lets the one listener tell a list
+ * optional create/action buttons map to a {@link Runnable} the listener runs as-is. Keeping these maps here, off
+ * the spec {@code clickMap} and off the editor/selector/confirm maps, is what lets the one listener tell a list
  * apart from the other menu kinds without giving any of them a slot it has no item for.
  *
  * <p>The {@code spec} is held as {@link Object} so this runtime class needs no compile dependency on the public

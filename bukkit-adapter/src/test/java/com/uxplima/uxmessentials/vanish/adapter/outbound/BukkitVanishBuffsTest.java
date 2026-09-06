@@ -19,7 +19,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@link BukkitVanishBuffs}: applying the buffs grants night vision and a flight allowance, and
- * clearing them removes the night vision and (for a survival player) the flight allowance again — so a reappearing
+ * clearing them removes the night vision and (for a survival player) the flight allowance again, so a reappearing
  * player is left with no residual buff. A buff whose toggle is off is never granted.
  */
 class BukkitVanishBuffsTest {

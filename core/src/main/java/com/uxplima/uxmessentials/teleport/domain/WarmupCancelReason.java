@@ -7,7 +7,7 @@ package com.uxplima.uxmessentials.teleport.domain;
  */
 public enum WarmupCancelReason {
 
-    /** The player's origin block changed — the always-on move-cancels-warmup invariant. */
+    /** The player's origin block changed, the always-on move-cancels-warmup invariant. */
     MOVED,
 
     /** The player turned their head and rotation-cancel is enabled. */

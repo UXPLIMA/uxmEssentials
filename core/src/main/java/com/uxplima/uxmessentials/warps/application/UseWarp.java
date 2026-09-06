@@ -19,15 +19,15 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
 
 /**
  * {@code /warp <name>}: teleport a player to a server warp. The warp is resolved by name, the player is run
- * through the {@link WarpAccess} gate (per-warp permission, the warp's optional extra permission, and — only
- * when an economy provider is present — the per-warp cost), and only then is execution <em>delegated</em> to
+ * through the {@link WarpAccess} gate (per-warp permission, the warp's optional extra permission, and, only
+ * when an economy provider is present. The per-warp cost), and only then is execution <em>delegated</em> to
  * the teleport context through {@link WarpTeleporter}. This use case never moves the player itself, so the
  * shared cooldown, the move-cancellable warmup, and the region-aware async hop are all the teleport
  * context's concern.
  *
  * <p>The charge (if any) is taken inside the access gate before the hop is queued, so a warp the player
  * cannot afford never teleports them. With no economy provider wired, a priced warp's cost is ignored and
- * the warp is usable for free — the soft coupling to the economy context.
+ * the warp is usable for free: the soft coupling to the economy context.
  */
 public final class UseWarp {
 
@@ -67,8 +67,8 @@ public final class UseWarp {
 
     /**
      * Send {@code recipient} to the warp {@code name}, triggered by {@code actor} (a staff send when the two
-     * differ). The access gate and the optional cost apply to the <em>recipient</em> — staff send another
-     * player only to a warp that player may use — and the recipient is the one teleported. On a cross-player
+     * differ). The access gate and the optional cost apply to the <em>recipient</em>, staff send another
+     * player only to a warp that player may use, and the recipient is the one teleported. On a cross-player
      * success the actor is told the send went through; a self-send (actor == recipient) takes the usual
      * teleporting path with no extra notice.
      */
@@ -136,7 +136,7 @@ public final class UseWarp {
         }
 
         // Increment the visitor counter. The write persists to the DB (a single-writer SQLite by default),
-        // so it is handed to the async scheduler rather than run on the caller's region thread — the counter
+        // so it is handed to the async scheduler rather than run on the caller's region thread, the counter
         // is a display statistic the teleport does not depend on, and the in-memory {@code updated} warp
         // already carries the new count for the hop below.
         Warp updated = warp.incrementedVisitors();

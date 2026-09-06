@@ -24,10 +24,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqWarpCategoryRepository} against the default embedded SQLite backend with
- * the Flyway migrations applied — the same shape {@link JooqWarpRepositoryTest} uses for warps. It proves the
+ * the Flyway migrations applied: the same shape {@link JooqWarpRepositoryTest} uses for warps. It proves the
  * category round-trip (save → find with optional material, lore list, slot, and parent), the id-key upsert (an
- * edit overwrites in place rather than inserting), the delete, the id-ordered list, and — the cross-table
- * invariant the feature relies on — that a warp assigned to a category persists its reference and is found
+ * edit overwrites in place rather than inserting), the delete, the id-ordered list, and, the cross-table
+ * invariant the feature relies on. That a warp assigned to a category persists its reference and is found
  * under that category id.
  */
 class JooqWarpCategoryRepositoryTest {
@@ -85,7 +85,7 @@ class JooqWarpCategoryRepositoryTest {
     @Test
     void saveUpsertsOnTheIdKeyRatherThanInserting() {
         categories.save(category("pvp"));
-        categories.save(category("pvp").withDisplayName("Renamed")); // same id — an edit
+        categories.save(category("pvp").withDisplayName("Renamed")); // same id, an edit
 
         assertThat(categories.all()).hasSize(1);
         assertThat(categories.find("pvp").orElseThrow().displayName()).isEqualTo("Renamed");
@@ -138,7 +138,7 @@ class JooqWarpCategoryRepositoryTest {
         return new WarpCategory(id, id, Optional.empty(), List.of(), 0, Optional.empty());
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

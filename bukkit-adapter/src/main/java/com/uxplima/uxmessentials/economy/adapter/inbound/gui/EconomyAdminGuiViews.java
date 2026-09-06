@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code EconomyWiring}; the command's {@code guiRoot()} delegates here.
  *
  * <p>The hub is now an engine-rendered menu too; only its [Manage a player] entry opens the still-bespoke shared
- * {@link PlayerPickerView} — a transitional cross-runtime seam — before routing the picked target back through the
+ * {@link PlayerPickerView}, a transitional cross-runtime seam, before routing the picked target back through the
  * engine manage screen. The bulk and history entries route straight through the {@link Menus} façade.
  */
 @NullMarked

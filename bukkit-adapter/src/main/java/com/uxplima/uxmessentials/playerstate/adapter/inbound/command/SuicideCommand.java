@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /suicide} ({@code uxmessentials.suicide.use}): kill yourself. Self-only — there is no target form
+ * {@code /suicide} ({@code uxmessentials.suicide.use}): kill yourself. Self-only. There is no target form
  * (§15.6), so the command takes no player argument and a console source is rejected. The {@code Suicide} use
  * case owns the live kill and the confirmation.
  */

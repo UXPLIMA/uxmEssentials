@@ -25,12 +25,12 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * manager by the capability matrix ({@link WarpCapability#MANAGE_BANS}). Each verb resolves the warp
  * ({@link PlayerWarpError#NOT_FOUND}), gates the actor ({@link PlayerWarpError#NO_PERMISSION}), then upserts or
  * lifts the ban row and notifies with a key distinct from the access gate's {@link PlayerWarpError#BANNED} refusal
- * — this is the manager's confirmation, not the visitor's rejection.
+ *: this is the manager's confirmation, not the visitor's rejection.
  *
  * <p>Banning the warp's own owner is refused ({@link PlayerWarpError#CANNOT_TARGET_OWNER}) so no delegate can lock
  * the owner out of their own warp. An empty {@code duration} is a permanent ban (an empty {@code until}); a present
  * duration is stored as the absolute instant {@code now + duration}, so a slow later read can never silently extend
- * it. The imposing actor is recorded as {@code bannedBy}, and the {@link Clock} — never the domain — mints both the
+ * it. The imposing actor is recorded as {@code bannedBy}, and the {@link Clock}, never the domain, mints both the
  * {@code bannedAt} stamp and the expiry base.
  */
 public final class ManageBans {
@@ -54,7 +54,7 @@ public final class ManageBans {
         this.clock = Objects.requireNonNull(clock, "clock");
     }
 
-    /** Ban {@code target} from warp {@code name} — permanent when {@code duration} is empty — unless they own it. */
+    /** Ban {@code target} from warp {@code name}, permanent when {@code duration} is empty, unless they own it. */
     public Result<Unit, PlayerWarpError> ban(
             PlayerRef actor,
             PlayerWarpName name,

@@ -23,8 +23,8 @@ import com.uxplima.uxmessentials.staff.application.port.StaffTeleport;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Registers the two staff teleport pickers — the COMPASS navigator ({@code staff-navigator}) and {@code /stafflist}
- * ({@code staff-list}) — with the menu engine and opens them. Both draw a paginated grid of player heads and, on a
+ * Registers the two staff teleport pickers. The COMPASS navigator ({@code staff-navigator}) and {@code /stafflist}
+ * ({@code staff-list}): with the menu engine and opens them. Both draw a paginated grid of player heads and, on a
  * head click, teleport the looking staff member onto that player through the soft-coupled {@link StaffTeleport}
  * (a no-op feedback when teleport is off), sending {@link StaffMessageKey#STAFF_TELEPORTED} or
  * {@link StaffMessageKey#STAFF_TELEPORT_FAILED}. The two specs differ only in their candidate roster and title; the
@@ -33,10 +33,10 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The candidate roster is read from the online players on the global region thread (iterating the online list
  * off it is illegal on Folia), so each open site computes the visible-player list there and hands it in as the
- * {@link PlayerHeads} subject; the {@code staff:players} source only reads that subject — it touches no Bukkit API.
+ * {@link PlayerHeads} subject; the {@code staff:players} source only reads that subject: it touches no Bukkit API.
  * Building and opening the window runs on the looker's entity thread (the engine hops there), and the head click
  * fires its action there too (the {@code MenuListener} dispatches actions on the viewer's entity thread), where the
- * target is re-resolved and the admin teleport runs — exactly the threads the old bespoke picker base used.
+ * target is re-resolved and the admin teleport runs: exactly the threads the old bespoke picker base used.
  */
 @NullMarked
 public final class StaffPlayerMenu {

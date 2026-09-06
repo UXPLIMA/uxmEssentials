@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Register-or-defer through Bukkit's {@link ServicesManager} (ADR-0004,
  * {@code docs/11-economy-integration.md} §4.1). The economy module is ON by default and registers the native
- * provider as the {@link EconomyProvider} service — <em>unless</em> a provider is already registered (a
+ * provider as the {@link EconomyProvider} service. <em>unless</em> a provider is already registered (a
  * foreign economy plugin loaded first), in which case it defers, logs, and returns the incumbent so every
  * consumer in this plugin uses the authoritative economy. The decision is made once, at module start; there
  * is no per-call {@code getRegistration} on the hot path.

@@ -27,17 +27,17 @@ import com.uxplima.uxmessentials.warps.domain.WarpCost;
 
 /**
  * The single-warp edit verbs a {@code /pwarp manage} menu and the {@code /pwarp} subcommands drive: rename, display
- * name, description, icon, category, access, password, price, and move. Each verb follows the same shape — resolve
+ * name, description, icon, category, access, password, price, and move. Each verb follows the same shape, resolve
  * the warp by its global name ({@link PlayerWarpError#NOT_FOUND} when absent), gate the actor through
  * {@link WarpAuthorization#allows} on the verb's {@link WarpCapability} ({@link PlayerWarpError#NO_PERMISSION} when
- * denied), apply the immutable transition, persist it, and notify — so authority is enforced uniformly and no verb
+ * denied), apply the immutable transition, persist it, and notify, so authority is enforced uniformly and no verb
  * re-implements the ownership check.
  *
  * <p>The edit timestamp always comes from the injected {@link Clock}, never the domain. Two verbs carry extra rules:
  * a price change to a different currency is refused while the earnings bank still holds funds
- * ({@link PlayerWarpError#CURRENCY_LOCKED} — withdraw first, so a settlement is never split across currencies), and a
+ * ({@link PlayerWarpError#CURRENCY_LOCKED}. Withdraw first, so a settlement is never split across currencies), and a
  * rename onto a name another warp already holds is refused ({@link PlayerWarpError#NAME_TAKEN}). Password writes go
- * through the {@link PlayerWarpPasswordStore} seam and never touch the plaintext beyond handing it to that store —
+ * through the {@link PlayerWarpPasswordStore} seam and never touch the plaintext beyond handing it to that store
  * it is never rendered back to the actor or logged. Setting a password does not by itself flip the access axis to
  * {@link WarpAccess#PASSWORD}; the two are independent operations the manage UI happens to pair.
  */
@@ -146,7 +146,7 @@ public final class EditPlayerWarp {
     /**
      * Set {@code name}'s entry price. Gate {@link WarpCapability#EDIT_PRICE}. Changing to a different currency while
      * the earnings bank still holds funds is refused ({@link PlayerWarpError#CURRENCY_LOCKED}) so a later payout is
-     * never denominated in two currencies — the owner withdraws first, then re-prices.
+     * never denominated in two currencies: the owner withdraws first, then re-prices.
      */
     public Result<Unit, PlayerWarpError> setPrice(PlayerRef actor, PlayerWarpName name, WarpCost price) {
         Objects.requireNonNull(price, "price");
@@ -198,7 +198,7 @@ public final class EditPlayerWarp {
         });
     }
 
-    /** Resolve, gate, apply the transition, save, and notify — the shape every metadata/access/move verb shares. */
+    /** Resolve, gate, apply the transition, save, and notify: the shape every metadata/access/move verb shares. */
     private Result<Unit, PlayerWarpError> transition(
             PlayerRef actor,
             PlayerWarpName name,

@@ -64,7 +64,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@code /vault info} through the real Brigadier {@code /vault} node. A player who owns
  * vaults 1 and 3 (allocated by opening them) with an amount quota of 5 and a 3-row (27-slot) size quota sees an
- * info line carrying owned-count 2, cap 5 and slot size 27 — a read-only diagnostic that opens no window.
+ * info line carrying owned-count 2, cap 5 and slot size 27: a read-only diagnostic that opens no window.
  */
 class VaultInfoTest {
 

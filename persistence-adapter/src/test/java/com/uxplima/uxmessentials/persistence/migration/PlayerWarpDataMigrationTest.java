@@ -42,10 +42,10 @@ import org.junit.jupiter.api.io.TempDir;
  * would have left them, runs the one-shot migration, and proves each rule from the migration contract: the
  * globally-unique name collision is resolved deterministically, a plaintext password is hashed and never stored in
  * the clear, {@code access} is derived from the legacy flags, ratings are rehomed onto the surrogate id with clamped
- * stars and a recomputed summary, exactly one rename notice is emitted, and the run is idempotent — the legacy
+ * stars and a recomputed summary, exactly one rename notice is emitted, and the run is idempotent, the legacy
  * tables are dropped and a second run is a no-op. A dedicated case seeds names the old schema allowed but the V70
  * {@link PlayerWarpName} rejects (too short, an internal space, over length) and proves every migrated row still
- * reads back through {@link JooqPlayerWarpRepository} — the read path that would throw on an unsanitised name and
+ * reads back through {@link JooqPlayerWarpRepository}. The read path that would throw on an unsanitised name and
  * break the global browse for everyone.
  *
  * <p>Infrastructure mirrors {@code PlayerWarpsRebuildMigrationTest}: the production
@@ -332,7 +332,7 @@ class PlayerWarpDataMigrationTest {
                 .migrate();
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

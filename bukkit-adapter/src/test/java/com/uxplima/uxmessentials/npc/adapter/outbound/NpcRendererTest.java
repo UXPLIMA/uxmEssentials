@@ -63,7 +63,7 @@ class NpcRendererTest {
         InlineScheduler scheduler = new InlineScheduler();
         NpcRenderer renderer = newRenderer(scheduler, new NoopLogger());
 
-        renderer.render(npcAt(viewer, 1.0)); // one block away — in range
+        renderer.render(npcAt(viewer, 1.0)); // one block away, in range
 
         // Exactly one bundle (tab-add + spawn) reached the viewer, plus the two look packets.
         assertThat(packets.bundlesSentTo(viewer.getUniqueId())).hasSize(1);
@@ -71,7 +71,7 @@ class NpcRendererTest {
         assertThat(packets.bundles.get(0)).hasSize(2); // tab-add + spawn travel together
         assertThat(packets.tabAdds).hasSize(1);
         assertThat(packets.spawns).hasSize(1);
-        // The entry is added unlisted so the body renders without a tab-list row, and it is kept — no tab-remove
+        // The entry is added unlisted so the body renders without a tab-list row, and it is kept, no tab-remove
         // is sent on spawn (removing the entry would de-render the fake player; the renderer drops it on despawn).
         assertThat(packets.tabAdds.get(0).listed()).isFalse();
         assertThat(packets.tabRemovesSentTo(viewer.getUniqueId())).isEmpty();
@@ -126,7 +126,7 @@ class NpcRendererTest {
         PlayerMock viewer = server.addPlayer();
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
 
-        renderer.render(npcAt(viewer, 100.0)); // far away — out of range
+        renderer.render(npcAt(viewer, 100.0)); // far away, out of range
 
         assertThat(packets.spawns).isEmpty();
         assertThat(packets.bundlesSentTo(viewer.getUniqueId())).isEmpty();
@@ -155,7 +155,7 @@ class NpcRendererTest {
         renderer.render(npcAt(viewer, 1.0));
         int sendsBefore = packets.removes.size();
 
-        // On quit the channel is closing, so forget only drops the tracking — no remove packet is sent to a dead
+        // On quit the channel is closing, so forget only drops the tracking. No remove packet is sent to a dead
         // client.
         renderer.forget(viewer);
 
@@ -175,11 +175,11 @@ class NpcRendererTest {
         renderer.refresh();
 
         // The refresh tick is idempotent: a stationary, already-shown viewer gets no second spawn bundle and no
-        // second tab-add — this is the fix for the once-a-second re-spawn flood and tab flicker (B1).
+        // second tab-add: this is the fix for the once-a-second re-spawn flood and tab flicker (B1).
         assertThat(packets.bundlesSentTo(viewer.getUniqueId())).hasSize(1);
         assertThat(packets.spawns).hasSize(1);
         assertThat(packets.tabAdds).hasSize(1);
-        // No churn: a stationary refresh sends neither a remove nor a tab-remove — the kept entry is never touched.
+        // No churn: a stationary refresh sends neither a remove nor a tab-remove: the kept entry is never touched.
         assertThat(packets.removesSentTo(viewer.getUniqueId())).isEmpty();
         assertThat(packets.tabRemovesSentTo(viewer.getUniqueId())).isEmpty();
     }
@@ -193,7 +193,7 @@ class NpcRendererTest {
         renderer.render(npc(locationOf(viewer), new NpcSkin("newtex", "newsig"))); // re-skin edit
 
         // The explicit render forces a fresh re-render for the already-shown viewer: a remove, then a second spawn
-        // bundle carrying the NEW skin (S1) — not the skipped no-op the idempotent refresh would do.
+        // bundle carrying the NEW skin (S1), not the skipped no-op the idempotent refresh would do.
         assertThat(packets.removesSentTo(viewer.getUniqueId())).hasSize(1);
         assertThat(packets.bundlesSentTo(viewer.getUniqueId())).hasSize(2);
         assertThat(packets.spawns).hasSize(2);
@@ -359,7 +359,7 @@ class NpcRendererTest {
         assertThat(packets.collidables.get(0).collidable()).isFalse();
         assertThat(packets.collidables.get(0).color()).isNull();
 
-        // A collidable, non-glowing NPC needs no team at all — the no-team default already collides with no colour.
+        // A collidable, non-glowing NPC needs no team at all: the no-team default already collides with no colour.
         packets.collidables.clear();
         renderer.render(npcAt(viewer, 1.0).withCollidable(true));
         assertThat(packets.collidables).isEmpty();
@@ -428,8 +428,8 @@ class NpcRendererTest {
 
         renderer.render(npcAt(viewer, 1.0)); // showInTab defaults off
 
-        // The default fake-player NPC renders its body via an unlisted entry — present to the client but never a
-        // tab-list row — so no phantom row appears and no remove is needed.
+        // The default fake-player NPC renders its body via an unlisted entry, present to the client but never a
+        // tab-list row, so no phantom row appears and no remove is needed.
         assertThat(packets.tabAdds.get(0).listed()).isFalse();
         assertThat(packets.tabRemovesSentTo(viewer.getUniqueId())).isEmpty();
     }
@@ -440,7 +440,7 @@ class NpcRendererTest {
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
 
         // A mirror-skin NPC carries no stored skin; the tab-add uses the viewer's own profile skin (or none under
-        // MockBukkit, which is the fail-soft path) — the point is it does not throw and the spawn still goes out.
+        // MockBukkit, which is the fail-soft path): the point is it does not throw and the spawn still goes out.
         assertThatCode(() -> renderer.render(npcAt(viewer, 1.0).withMirrorSkin(true)))
                 .doesNotThrowAnyException();
         assertThat(packets.tabAdds).hasSize(1);
@@ -507,7 +507,7 @@ class NpcRendererTest {
         PlayerMock viewer = server.addPlayer();
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
 
-        renderer.render(npcAt(viewer, 1.0)); // STANDING, scale 1.0 — the entity already renders this way
+        renderer.render(npcAt(viewer, 1.0)); // STANDING, scale 1.0. The entity already renders this way
 
         assertThat(packets.poses).isEmpty();
         assertThat(packets.scales).isEmpty();
@@ -518,7 +518,7 @@ class NpcRendererTest {
         PlayerMock viewer = server.addPlayer();
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
 
-        // An unknown pose name renders standing rather than failing — no pose packet, but the spawn still went out.
+        // An unknown pose name renders standing rather than failing, no pose packet, but the spawn still went out.
         Npc npc = npcAt(viewer, 1.0).withPose("NOT_A_REAL_POSE");
         assertThatCode(() -> renderer.render(npc)).doesNotThrowAnyException();
 
@@ -1124,7 +1124,7 @@ class NpcRendererTest {
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
         packets.dropNameVariants = true; // mimic the live registry being unavailable / the name unresolved
 
-        // A null packet from the lib (its fail-soft signal) is dropped, never sent — the spawn still succeeds.
+        // A null packet from the lib (its fail-soft signal) is dropped, never sent: the spawn still succeeds.
         assertThatCode(() ->
                         renderer.render(npcAt(viewer, 1.0).withEntityType("CAT").withTypeData("cat_variant", "calico")))
                 .doesNotThrowAnyException();
@@ -1142,7 +1142,7 @@ class NpcRendererTest {
         NpcRenderer renderer = newRenderer(new InlineScheduler(), new NoopLogger());
 
         // A horse colour on a cow, a sheep colour on a pig: each unsupported key is skipped, not sent, and the
-        // spawn still goes out — a variant value never reaches a type that has no such field.
+        // spawn still goes out: a variant value never reaches a type that has no such field.
         assertThatCode(() -> renderer.render(npcAt(viewer, 1.0)
                         .withEntityType("COW")
                         .withTypeData("horse_color", "3")
@@ -1307,7 +1307,7 @@ class NpcRendererTest {
                         EquipmentPayloads.serialize(sword));
         renderer.render(npc);
 
-        // The serialized payload deserializes back to the full item — enchantments and custom name survive the
+        // The serialized payload deserializes back to the full item, enchantments and custom name survive the
         // round-trip through the stored token.
         assertThat(packets.equipments).hasSize(1);
         ItemStack sent = java.util.Objects.requireNonNull(
@@ -1343,7 +1343,7 @@ class NpcRendererTest {
                 .withEquipment(com.uxplima.uxmessentials.npc.domain.EquipmentSlot.HEAD, "NOT_A_REAL_MATERIAL");
         renderer.render(npc);
 
-        // The unknown name is dropped, so the equipment packet carries no slots — the spawn itself still went out.
+        // The unknown name is dropped, so the equipment packet carries no slots, the spawn itself still went out.
         assertThat(packets.equipments).hasSize(1);
         assertThat(packets.equipments.get(0).items()).isEmpty();
         assertThat(packets.spawns).hasSize(1);
@@ -1448,7 +1448,7 @@ class NpcRendererTest {
 
         renderer.render(npcAt(viewer, 1.0).withEntityType("VILLAGER")); // type change → force re-render
 
-        // The force path removes the old (player) entity and re-adds it as the mob — no ghost of the old type.
+        // The force path removes the old (player) entity and re-adds it as the mob, no ghost of the old type.
         assertThat(packets.removesSentTo(viewer.getUniqueId())).hasSize(1);
         assertThat(packets.spawns).hasSize(1); // the original player spawn only
         assertThat(packets.spawnEntities).hasSize(1); // the new villager spawn
@@ -1466,7 +1466,7 @@ class NpcRendererTest {
         renderer.render(npcAt(viewer, 1.0).withEntityType("NOT_A_REAL_TYPE")); // one warn
 
         // The reconcile retries the unresolvable NPC every tick (the skip never marks the viewer shown), so without
-        // the warn-once cache this would log a line per refresh per viewer — an unbounded flood for a bad row.
+        // the warn-once cache this would log a line per refresh per viewer: an unbounded flood for a bad row.
         renderer.refresh();
         renderer.refresh();
         renderer.refresh();
@@ -1484,7 +1484,7 @@ class NpcRendererTest {
 
         renderer.render(npcAt(viewer, 1.0).withEntityType("ALSO_NOT_REAL")); // a distinct bad value -> warn #2
 
-        // A change to a different unresolvable value is a new problem the operator should see, so it re-warns —
+        // A change to a different unresolvable value is a new problem the operator should see, so it re-warns
         // but only once for the new value, not per tick.
         renderer.refresh();
         renderer.refresh();
@@ -1521,7 +1521,7 @@ class NpcRendererTest {
     }
 
     // Wire the renderer over its spawner from the shared recording packets and the given logger, and the given
-    // scheduler for the renderer's own region hops — the same 48/16 ranges the renderer was always built with.
+    // scheduler for the renderer's own region hops: the same 48/16 ranges the renderer was always built with.
     private NpcRenderer newRenderer(Scheduler scheduler, com.uxplima.uxmessentials.shared.application.port.Logger log) {
         NpcViewSpawner spawner = new NpcViewSpawner(packets, log);
         return new NpcRenderer(packets, spawner, scheduler, 48.0, 16.0);
@@ -2323,7 +2323,7 @@ class NpcRendererTest {
         private record Bundle(List<Object> packets) {}
     }
 
-    /** A logger that swallows every line — the renderer's fail-soft warn has nothing to assert beyond not throwing. */
+    /** A logger that swallows every line: the renderer's fail-soft warn has nothing to assert beyond not throwing. */
     private static final class NoopLogger implements com.uxplima.uxmessentials.shared.application.port.Logger {
         @Override
         public void info(String message, Object... args) {}

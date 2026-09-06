@@ -8,8 +8,8 @@ import com.uxplima.uxmessentials.economy.domain.Money;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Bundles the three pay-tax collaborators — the {@link TaxPolicy} rule, the {@link TaxSink} destination, and the
- * {@link TaxExemption} gate — so {@link Pay} takes one collaborator rather than three. {@link #collect} is called
+ * Bundles the three pay-tax collaborators, the {@link TaxPolicy} rule, the {@link TaxSink} destination, and the
+ * {@link TaxExemption} gate, so {@link Pay} takes one collaborator rather than three. {@link #collect} is called
  * after the gross transfer has credited the receiver: it works out the tax, routes it out of the receiver, and
  * returns what was taken (zero when the payer is exempt, the policy is off, or the cut rounds to nothing). A zero
  * return means {@code Pay} behaves exactly as an untaxed transfer.
@@ -26,7 +26,7 @@ public final class PayTaxation {
         this.exemption = Objects.requireNonNull(exemption, "exemption");
     }
 
-    /** A no-op taxation — disabled policy, no exemptions — for callers that don't tax. */
+    /** A no-op taxation (disabled policy, no exemptions) for callers that don't tax. */
     public static PayTaxation none() {
         return new PayTaxation(TaxPolicy.disabled(), (receiver, tax) -> {}, payer -> false);
     }

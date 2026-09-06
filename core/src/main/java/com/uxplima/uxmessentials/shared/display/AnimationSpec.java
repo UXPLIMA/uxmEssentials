@@ -8,7 +8,7 @@ import java.util.Objects;
  * the source {@code frames}, and how many server ticks each step lasts. Animations are declared once in operator
  * config and referenced by name from scoreboard/tablist/nametag lines, so the same catalog drives every module.
  *
- * <p>This is the <em>spec</em> only — it carries no rendering library. The {@link AnimationType#FRAMES} kind is
+ * <p>This is the <em>spec</em> only: it carries no rendering library. The {@link AnimationType#FRAMES} kind is
  * fully resolved here by {@link #frameAt(long)} (plain frame cycling, which is pure tick arithmetic). The
  * {@link AnimationType#SCROLL} and {@link AnimationType#GRADIENT} kinds are <strong>adapter-bound</strong>: this
  * class models their declaration and exposes the raw source string, but the actual scrolling/gradient effect is
@@ -52,7 +52,7 @@ public record AnimationSpec(String name, AnimationType type, List<String> frames
     /**
      * The source string for the given absolute server {@code tick}. For {@link AnimationType#FRAMES} this cycles
      * the frame list ({@code frames.get((tick / intervalTicks) % size)}). For {@link AnimationType#SCROLL} and
-     * {@link AnimationType#GRADIENT} this returns the raw first frame — those kinds are rendered by the adapter
+     * {@link AnimationType#GRADIENT} this returns the raw first frame. Those kinds are rendered by the adapter
      * (see the class docs), and this method only supplies their source string.
      *
      * @param tick a non-negative absolute server tick count

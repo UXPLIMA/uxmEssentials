@@ -5,7 +5,7 @@
  * jOOQ adapter, mirroring {@code JooqHomeRepository}); {@code PayPreferences}, {@code BaltopExemption}, and
  * {@code EconomyAudit} carry the {@code /paytoggle} flag, the {@code /baltop} exemption check, and the audit
  * trail. {@code BaltopRow} is the ranked read-model row the port returns. None of these import a Vault or
- * Treasury type — the SDKs live only in the outbound adapter, ArchUnit-fenced.
+ * Treasury type, the SDKs live only in the outbound adapter, ArchUnit-fenced.
  */
 @org.jspecify.annotations.NullMarked
 package com.uxplima.uxmessentials.economy.application.port;

@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.playerwarps.domain;
 /**
  * A single management action a {@link WarpRole} may or may not perform on a warp. Every management use case gates
  * on one of these through {@code WarpRole#can(WarpCapability)}, so the role-to-action policy lives in exactly one
- * place — the capability matrix on {@link WarpRole} — rather than being re-derived (and drifting) at each call
+ * place, the capability matrix on {@link WarpRole}, rather than being re-derived (and drifting) at each call
  * site. The owner holds every capability; delegates hold a narrowing subset by role.
  *
  * <p>The axis is intentionally finer-grained than the roles: splitting metadata, access, and price into separate
@@ -45,6 +45,6 @@ public enum WarpCapability {
     /** Withdraw the warp's accrued earnings to the owner's balance. */
     WITHDRAW,
 
-    /** Buy a paid, time-limited sponsored browse slot for the warp — spends the owner's own money, owner-only. */
+    /** Buy a paid, time-limited sponsored browse slot for the warp: spends the owner's own money, owner-only. */
     SPONSOR
 }

@@ -43,7 +43,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The end-to-end proof for slice 2 of click requirements: per-requirement success/deny actions, optional (non-blocking)
  * requirements, and {@code stop-at-success} short-circuiting. The real {@link MenuSpecLoader} reads the map form, the
  * real {@link RequirementConditions} back the {@code has-empty-slots} gate, and the live {@link MenuListener} evaluates
- * the block — so these drive config → open → click → effect. A recording {@code record} action captures which branch
+ * the block, so these drive config → open → click → effect. A recording {@code record} action captures which branch
  * ran and in what order, and the viewer's real inventory drives whether each gate holds.
  */
 class ClickRequirementRoutingGoldenTest {

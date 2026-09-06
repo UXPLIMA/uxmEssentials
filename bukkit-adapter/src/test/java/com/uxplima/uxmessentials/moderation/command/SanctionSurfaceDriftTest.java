@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /sanction} into the moderation context's command surface — the read-only aggregator that shows a
+ * Pins {@code /sanction} into the moderation context's command surface. The read-only aggregator that shows a
  * player's current mute, jail and ban state plus the active warning count in one read. This guard fails if the
  * literal drops out of the surface or ever wires under a node other than its own
  * {@code uxmessentials.moderation.sanction}.

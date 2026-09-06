@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The pair the player-warps editor is generic over: the {@link PlayerRef owner} the warp belongs to and the
  * {@link PlayerWarp} snapshot taken when the list row was clicked. A player-warp is keyed {@code (owner, name)},
- * so a property cannot be resolved or written without the owner — the snapshot's {@link PlayerWarp#owner()}
+ * so a property cannot be resolved or written without the owner. The snapshot's {@link PlayerWarp#owner()}
  * carries it, but bundling it explicitly keeps the editor's fresh-state reads and writes owner-scoped without
  * re-deriving it. The warp field is only the open-time snapshot; every property re-reads the live row from the
  * repository so an edit never works against a stale copy.

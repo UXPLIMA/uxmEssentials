@@ -28,8 +28,8 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportKind;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The vertical / line-of-sight positional verbs — {@code /top}, {@code /bottom}, {@code /jump},
- * {@code /up}, {@code /down}, {@code /ascend}, {@code /descend}, {@code /thru} — sharing one node builder
+ * The vertical / line-of-sight positional verbs, {@code /top}, {@code /bottom}, {@code /jump},
+ * {@code /up}, {@code /down}, {@code /ascend}, {@code /descend}, {@code /thru}, sharing one node builder
  * and differing only by {@link Kind}. Each resolves a destination from the player's column or line of
  * sight on the region thread, then issues an instant hop through the async executor. {@code /jump},
  * {@code /down}, {@code /ascend}, {@code /descend} and {@code /thru} report "no target block" when nothing
@@ -183,7 +183,7 @@ public final class VerticalCommand extends TeleportCommandSupport implements Com
         return new Position(current.world(), x + 0.5, y, z + 0.5, current.yaw(), current.pitch());
     }
 
-    /** A solid floor at {@code y} with two air blocks above — a gap a player can stand in. */
+    /** A solid floor at {@code y} with two air blocks above: a gap a player can stand in. */
     private static boolean standable(World world, int x, int y, int z) {
         return world.getBlockAt(x, y, z).getType().isSolid()
                 && world.getBlockAt(x, y + 1, z).getType().isAir()

@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.regions.domain.RegionRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One row of the {@code /regions} list: a region and the three facts the list icon shows — its priority and how
+ * One row of the {@code /regions} list: a region and the three facts the list icon shows, its priority and how
  * many members and owners it carries. The counts are read from the {@link com.uxplima.uxmessentials.regions
  * .application.port.RegionService} once, off the tick thread, before the panel opens, so the icon renderer paints
  * from this snapshot and never re-queries WorldGuard on the entity thread.

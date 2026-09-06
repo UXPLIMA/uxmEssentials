@@ -23,8 +23,8 @@ class MigrationMappingDriftTest {
     void essentialsxRowsMatchTheDocumentedTargets() {
         Set<String> targets =
                 EssentialsXMappings.rows().stream().map(MappingRow::target).collect(Collectors.toSet());
-        // The §5.1 documented targets the EssentialsX source claims (the deliberate gaps — vaults,
-        // nickname, chat — are documented as not-migrated and carry no row). ModerationProfile is the single
+        // The §5.1 documented targets the EssentialsX source claims (the deliberate gaps, vaults,
+        // nickname, chat: are documented as not-migrated and carry no row). ModerationProfile is the single
         // target of both the jail and the mute rows.
         assertThat(targets)
                 .containsExactlyInAnyOrder("Home", "Wallet", "Mailbox", "Warp", "KitDefinition", "ModerationProfile");

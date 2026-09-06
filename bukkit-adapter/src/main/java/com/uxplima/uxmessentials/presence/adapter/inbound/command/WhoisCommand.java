@@ -29,10 +29,10 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /whois <player>} ({@code uxmessentials.whois.use}): a staff identity and status summary for one online
- * player — account name, display name, uuid, gamemode, health, ping and world in a single line. The query
+ * player, account name, display name, uuid, gamemode, health, ping and world in a single line. The query
  * matches either a player's account name or their rendered display name, case-insensitively, against the online
- * set filtered through the sender's {@code canSee} graph — the same seam {@code /list} and {@code /realname} read
- * — so a vanished player the sender may not see is unresolvable, never leaking details they could not otherwise
+ * set filtered through the sender's {@code canSee} graph, the same seam {@code /list} and {@code /realname} read
+ *, so a vanished player the sender may not see is unresolvable, never leaking details they could not otherwise
  * learn. The console has no {@code canSee} graph and may resolve anyone. A pure read: no use case, no state
  * mutation, just a scan of the visible online set and one resolved reply.
  */

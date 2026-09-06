@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * A player-warp was created — {@code /setpwarp} under a name the owner had no warp at. A {@code /setpwarp}
+ * A player-warp was created: {@code /setpwarp} under a name the owner had no warp at. A {@code /setpwarp}
  * onto an existing name re-anchors that warp and raises nothing here; that path is a move, not a creation.
  *
  * @param owner the player who created the warp

@@ -11,7 +11,7 @@ import org.jspecify.annotations.Nullable;
  * static facade {@code com.nexomc.nexo.api.NexoItems.itemFromId(String)} that returns a Nexo {@code ItemBuilder} (or
  * {@code null} for an unknown id), whose {@code build()} yields the finished {@link ItemStack}.
  *
- * <p>No {@code com.nexomc} type is named here — the SDK is reached only by string class-name through reflection — so a
+ * <p>No {@code com.nexomc} type is named here (the SDK is reached only by string class-name through reflection) so a
  * server without Nexo loads none of its classes and the present-guard in {@link ReflectiveItemProvider}
  * short-circuits before any lookup runs.
  */

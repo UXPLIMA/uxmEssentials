@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * silently no-op. The operator-only permission is enforced at the command gate.
  *
  * <p>This clears the persisted one-time mark held in PDC; it does not touch the cooldown clock, which expires
- * on its own — resetting the one-time state is the operator's tool to let a player re-take a consumed
+ * on its own. Resetting the one-time state is the operator's tool to let a player re-take a consumed
  * starter or donor kit. The target is addressed by {@link PlayerRef}; an offline target has no PDC to clear,
  * so the reset no-ops at the store while still reporting success to the operator.
  */

@@ -78,7 +78,7 @@ public final class SanctionHistoryRecorder {
         append(SanctionAction.WARN, target.uuid(), actor, reason, expiry, Optional.empty());
     }
 
-    /** Record a kick of {@code target} (a live disconnect — never a stored expiry, never IP-scoped). */
+    /** Record a kick of {@code target} (a live disconnect: never a stored expiry, never IP-scoped). */
     public void kick(PlayerRef actor, PlayerRef target, Optional<String> reason) {
         Objects.requireNonNull(target, "target");
         append(SanctionAction.KICK, target.uuid(), actor, reason, Optional.empty(), Optional.empty());

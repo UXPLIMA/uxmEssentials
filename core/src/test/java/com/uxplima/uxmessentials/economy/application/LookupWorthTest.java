@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@code /worth}: report the configured sell value of a held item. A priced single item renders the unit
  * worth, a priced stack renders the unit worth and the stack total, and an unpriced material renders the
- * not-sellable notice. The use case never touches a balance — it is a pure pricing read.
+ * not-sellable notice. The use case never touches a balance: it is a pure pricing read.
  */
 class LookupWorthTest {
 

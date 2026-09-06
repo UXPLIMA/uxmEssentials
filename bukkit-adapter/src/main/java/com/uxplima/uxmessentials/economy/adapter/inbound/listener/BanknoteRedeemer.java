@@ -35,7 +35,7 @@ import org.jspecify.annotations.Nullable;
  * note into money on the same tick.
  *
  * <p>A minted banknote carries a unique per-note token in its persistent data, so one item carries exactly one
- * token and one value — redeeming consumes one note and credits one note's value. The sequence is ordered for
+ * token and one value: redeeming consumes one note and credits one note's value. The sequence is ordered for
  * safety: the item is decremented <em>first</em> (optimistic removal), then the token is redeemed and the wallet
  * credited. If the redeem fails, the credit returns an error, or anything throws, the item is restored to its
  * prior amount and the token is re-registered, so a failed deposit can neither lose the note nor mint money.

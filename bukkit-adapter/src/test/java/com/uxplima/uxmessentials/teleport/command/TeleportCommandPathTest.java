@@ -49,8 +49,8 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of two teleport command paths against a real (mock) Bukkit server: the {@code /tpa}
  * accept handshake (request stored, then resolved on accept) and {@code /spawn} resolution to a world's
- * spawn through the outbound adapters. The outbound adapters are the real ones — the request registry,
- * the spawn directory over the live world spawn, the PDC flags, and the async executor — so this exercises
+ * spawn through the outbound adapters. The outbound adapters are the real ones, the request registry,
+ * the spawn directory over the live world spawn, the PDC flags, and the async executor, so this exercises
  * the same wiring the Brigadier commands drive. The scheduler is a synchronous test double so the
  * teleport effect is observable without ticking the Folia entity scheduler.
  */
@@ -79,7 +79,7 @@ class TeleportCommandPathTest {
         VanillaFallbackSpawnDirectory spawns = new VanillaFallbackSpawnDirectory(new InMemorySpawnDirectory(), server);
         // MockBukkit stubs Entity#teleportAsync (UnimplementedOperationException), so the recording
         // executor stands in for the entity hop; the real AsyncTeleportExecutor is exercised on a live
-        // server. Every other adapter here — registry, spawn directory, PDC flags, world lookup — is real.
+        // server. Every other adapter here (registry, spawn directory, PDC flags, world lookup) is real.
         executor = new RecordingExecutor();
         TeleportEngine engine = new TeleportEngine(
                 new NoCooldowns(),

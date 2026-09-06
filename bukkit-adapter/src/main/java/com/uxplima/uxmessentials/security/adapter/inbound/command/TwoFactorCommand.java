@@ -34,13 +34,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /2fa}: the authenticator factor's own self-service surface — {@code setup} (generate a secret and show the
+ * {@code /2fa}: the authenticator factor's own self-service surface, {@code setup} (generate a secret and show the
  * {@code otpauth://} URI), {@code confirm <code>} (prove a code, which enables the factor), and {@code disable
  * <code>} (remove it, proving it first). Bare {@code /2fa} reports whether an authenticator is enrolled. Gated on
  * {@code uxmessentials.security.2fa}, which ships {@code true} so every player may protect their own account.
  *
- * <p>This command owns the authenticator and nothing else. It never reads, proves, or removes a PIN — that is
- * {@code /pin}'s surface — so a player who holds both keeps two independent protections and neither can be used to
+ * <p>This command owns the authenticator and nothing else. It never reads, proves, or removes a PIN: that is
+ * {@code /pin}'s surface, so a player who holds both keeps two independent protections and neither can be used to
  * strip the other. The operator verbs that act on <em>another</em> player (force a re-verify, reset a lost factor)
  * live on {@code /security}, which keeps this command entirely self-service.
  *
@@ -192,7 +192,7 @@ public final class TwoFactorCommand extends SecurityCommandSupport implements Co
 
     /**
      * {@code /2fa disable <code>}: drop the authenticator factor after proving it with a current code. Unlike setup
-     * and confirm this is <b>not</b> gated on the enrolment switches — an operator who turns authenticator enrolment
+     * and confirm this is <b>not</b> gated on the enrolment switches. An operator who turns authenticator enrolment
      * off must not strand the players who already hold one with no way to take it back off.
      */
     private int disableFactor(CommandContext<CommandSourceStack> ctx) {

@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by SuperiorSkyblock2 islands, reached <b>entirely by reflection</b> — there is no
+ * {@link ClaimProvider} backed by SuperiorSkyblock2 islands, reached <b>entirely by reflection</b>: there is no
  * compile dependency on SuperiorSkyblock2, so this class loads and runs whether or not it is present. Here a
  * "claim" is an island: the block belongs to a claim exactly when SuperiorSkyblock reports an island covering it,
  * so a warp can be gated to an island you own or are a member of.
@@ -36,11 +36,11 @@ import org.jspecify.annotations.Nullable;
  * <p>SuperiorSkyblock's membership and ban checks take a {@code SuperiorPlayer} wrapper, not a UUID, so the
  * reflective view resolves one through the static {@code SuperiorSkyblockAPI.getPlayer(UUID)} first. That resolver
  * returns {@code null} for a UUID SuperiorSkyblock has never seen; a null wrapper is read as neither a member nor
- * banned, so the island API is never handed a {@code null} player. Ownership needs no wrapper — it compares the
+ * banned, so the island API is never handed a {@code null} player. Ownership needs no wrapper: it compares the
  * queried UUID with the owner's UUID directly.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code com.bgsoftware} type — a server without SuperiorSkyblock2 loads none of its classes. The
+ * active names no {@code com.bgsoftware} type: a server without SuperiorSkyblock2 loads none of its classes. The
  * SuperiorSkyblock API chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs
  * once and degrades to empty rather than propagating.
  */
@@ -52,8 +52,8 @@ public final class SuperiorSkyblockClaimProvider implements ClaimProvider {
     private static final String ISLAND_CLASS = "com.bgsoftware.superiorskyblock.api.island.Island";
     private static final String SUPERIOR_PLAYER_CLASS = "com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer";
 
-    // SuperiorSkyblock islands are x/z-bounded areas spanning the full world height — a warp is on an island
-    // regardless of height — so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and
+    // SuperiorSkyblock islands are x/z-bounded areas spanning the full world height. A warp is on an island
+    // regardless of height, so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and
     // unsafe on Folia, matching the other providers.
     private static final int CLAIM_LOOKUP_Y = 64;
 
@@ -96,12 +96,12 @@ public final class SuperiorSkyblockClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code SuperiorSkyblockAPI.getIslandAt(Location)} — the island at the block, or {@code null} off any island. */
+    /** {@code SuperiorSkyblockAPI.getIslandAt(Location)}, the island at the block, or {@code null} off any island. */
     private static @Nullable Object islandAt(Location location) throws ReflectiveOperationException {
         return Class.forName(API_CLASS).getMethod("getIslandAt", Location.class).invoke(null, location);
     }
 
-    /** {@code SuperiorSkyblockAPI.getPlayer(UUID)} — the wrapper for the UUID, or {@code null} when unknown. */
+    /** {@code SuperiorSkyblockAPI.getPlayer(UUID)}, the wrapper for the UUID, or {@code null} when unknown. */
     private static @Nullable Object superiorPlayer(UUID player) throws ReflectiveOperationException {
         return Class.forName(API_CLASS).getMethod("getPlayer", UUID.class).invoke(null, player);
     }
@@ -172,7 +172,7 @@ public final class SuperiorSkyblockClaimProvider implements ClaimProvider {
 
         /**
          * Resolve the {@code SuperiorPlayer} wrapper and defer to {@code Island.<method>(SuperiorPlayer)}. A UUID
-         * SuperiorSkyblock has no wrapper for reads as {@code false} — the guarded null keeps the island API from
+         * SuperiorSkyblock has no wrapper for reads as {@code false}. The guarded null keeps the island API from
          * being handed a {@code null} player.
          */
         private boolean islandCheck(String method, UUID player) {

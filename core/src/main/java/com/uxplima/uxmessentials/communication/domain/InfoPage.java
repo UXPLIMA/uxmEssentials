@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * One operator-authored info page: a command name ({@code rules}, {@code motd}, {@code info}) bound to the lines
  * shown when a player runs it. The lines are MiniMessage content the operator writes in {@code info-pages.conf}
- * (or an included text file) and are rendered, one Component per line, by the adapter — they are operator data,
+ * (or an included text file) and are rendered, one Component per line, by the adapter. They are operator data,
  * never plugin {@code MessageKey}s, so they are not parity-checked.
  *
  * <p>The {@link #command} is the dynamic literal the module registers ({@code /rules} → this page). It is
@@ -64,7 +64,7 @@ public record InfoPage(String command, List<String> lines, int pageSize) {
         return lines.isEmpty();
     }
 
-    /** The total number of pages the body spans at the configured {@link #pageSize} — at least one. */
+    /** The total number of pages the body spans at the configured {@link #pageSize}, at least one. */
     public int pageCount() {
         if (lines.isEmpty()) {
             return 1;

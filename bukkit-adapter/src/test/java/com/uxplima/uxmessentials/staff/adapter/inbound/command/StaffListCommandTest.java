@@ -49,7 +49,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * {@code /stafflist} routing: the command reads the vanish-aware staff roster on the global region thread and either
  * opens the engine picker over it or, when no staff are online, sends {@link StaffMessageKey#STAFF_LIST_EMPTY}
- * instead of opening an empty window — the empty-roster behaviour the old {@code StaffListView} owned, now in the
+ * instead of opening an empty window. The empty-roster behaviour the old {@code StaffListView} owned, now in the
  * command. The picker rendering and the head-click teleport are proven slot-for-slot by the engine golden test.
  */
 class StaffListCommandTest {
@@ -67,7 +67,7 @@ class StaffListCommandTest {
         server = MockBukkit.mock();
         plugin = MockBukkit.createMockPlugin();
         looker = server.addPlayer("Looker");
-        // Grant only the command's own node, not op — an op would also hold the staff-member node and so count
+        // Grant only the command's own node, not op. An op would also hold the staff-member node and so count
         // itself as staff, defeating the empty-roster case.
         looker.addAttachment(plugin, STAFF_LIST_NODE, true);
         sink = new RecordingSink();
@@ -100,7 +100,7 @@ class StaffListCommandTest {
         dispatch();
 
         Inventory top = looker.getOpenInventory().getTopInventory();
-        // No picker opened, so the top view is whatever default the player already had — never the 54-slot picker.
+        // No picker opened, so the top view is whatever default the player already had, never the 54-slot picker.
         assertThat(top == null ? 0 : top.getSize()).isNotEqualTo(54);
         assertThat(sink.keys).contains(StaffMessageKey.STAFF_LIST_EMPTY);
     }

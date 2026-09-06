@@ -45,7 +45,7 @@ import org.jspecify.annotations.NullMarked;
  * cycling with the same picker the eco-admin screens use. The convert button captures an amount through the shared
  * input seam, then runs {@link ExchangeService#exchange}. When no rate is configured between the two currencies the
  * convert button is replaced in place by a no-rate marker through a pair of mutually-exclusive view conditions. The
- * menu holds no new domain logic — it replays the old view's handlers through the engine. Every visible string
+ * menu holds no new domain logic: it replays the old view's handlers through the engine. Every visible string
  * resolves from the economy catalog.
  */
 @NullMarked
@@ -131,7 +131,7 @@ public final class EconomyExchangeMenu {
 
     /**
      * Open the dashboard for {@code source}/{@code target}. The two balances are read off the tick thread, then the
-     * panel is opened through the engine, which renders it on the viewer's entity thread — the old view's threading.
+     * panel is opened through the engine, which renders it on the viewer's entity thread: the old view's threading.
      */
     public void open(Player viewer, Currency source, Currency target) {
         Objects.requireNonNull(viewer, "viewer");
@@ -175,7 +175,7 @@ public final class EconomyExchangeMenu {
 
     /**
      * Convert button: capture an amount through the input seam, then run the exchange off the tick thread, exactly as
-     * the old custom-amount path did. A malformed amount sends the existing rejection and re-opens — no exchange runs.
+     * the old custom-amount path did. A malformed amount sends the existing rejection and re-opens, no exchange runs.
      */
     private void promptConvert(MenuActionContext ctx) {
         Player viewer = ctx.player();
@@ -193,7 +193,7 @@ public final class EconomyExchangeMenu {
 
     /**
      * Parse the typed amount and, when valid, run the exchange off the tick thread, then re-open. A malformed amount
-     * sends the existing rejection and re-opens — no exchange runs. Package-private so the amount branch is
+     * sends the existing rejection and re-opens, no exchange runs. Package-private so the amount branch is
      * unit-tested without driving a live anvil, mirroring the old view.
      */
     void applyConvert(Player viewer, PlayerRef viewerRef, Currency source, Currency target, String raw) {

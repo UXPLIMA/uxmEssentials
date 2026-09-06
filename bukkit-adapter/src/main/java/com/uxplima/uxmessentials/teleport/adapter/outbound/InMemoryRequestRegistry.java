@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * In-memory {@link RequestRegistry}: the in-flight {@code tpa} handshakes, keyed by request id with a
- * per-target pending index. Nothing is persisted — a {@code tpa} request is session state the teleport
+ * per-target pending index. Nothing is persisted. A {@code tpa} request is session state the teleport
  * module drops on {@code stop()} via {@link #clear()}.
  *
  * <h2>Concurrency</h2>

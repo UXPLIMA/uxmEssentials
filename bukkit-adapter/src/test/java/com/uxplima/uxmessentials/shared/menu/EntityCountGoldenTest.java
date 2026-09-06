@@ -38,11 +38,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The itemworld {@code /entitycount} golden test: the engine-rendered tally grid must draw the exact window the
- * original {@code EntityCountListView} drew. The fixture is a two-type tally taken at radius 64 — seven zombies
- * and three cows, already sorted — so the window draws a zombie spawn egg at content slot 0, a cow spawn egg at
+ * original {@code EntityCountListView} drew. The fixture is a two-type tally taken at radius 64: seven zombies
+ * and three cows, already sorted, so the window draws a zombie spawn egg at content slot 0, a cow spawn egg at
  * slot 1, the rest of the content grid empty, the glass backdrop on the bottom row, and the two nav arrows at
  * slots 48 and 50. The engine's window is snapshotted as {@code (slot -> material, plain name)} and asserted
- * equal, slot for slot, to the baseline the old view produced — captured once while both rendered the same
+ * equal, slot for slot, to the baseline the old view produced. Captured once while both rendered the same
  * fixture, then frozen here as the contract so the old class could be deleted. A second case proves the empty
  * tally opens the one-row empty-state title. The grid is read-only, so there is no click effect to assert.
  */

@@ -18,12 +18,12 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 
 /**
  * The sound slice of the menu action vocabulary: the two ways a click (or an operator's {@code /menu} spec) can
- * play a sound beyond the viewer's own single {@code sound} effect — {@code broadcast-sound}, which every online
+ * play a sound beyond the viewer's own single {@code sound} effect, {@code broadcast-sound}, which every online
  * player hears at their own location, and {@code rawsound}, which plays a verbatim namespaced key for a
  * resource-pack custom sound. Registered once at startup into the shared {@link MenuBindings} alongside
  * {@link MenuVocabulary}, so a disk-loaded spec resolves them the same way a code-registered feature menu does.
  *
- * <p>A sound key is operator content — a key and two optional numbers from the spec, not a code-authored string —
+ * <p>A sound key is operator content (a key and two optional numbers from the spec, not a code-authored string)
  * so no {@code MessageKey} is involved; the only text either action produces is a diagnostic line on the operator
  * {@code log}. Both actions share the {@code <key> [volume] [pitch]} grammar of {@link SoundArg}, which is the one
  * parser {@link MenuVocabulary}'s in-place {@code sound} action reads too, so the three sound effects speak the
@@ -32,8 +32,8 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * <p>{@code broadcast-sound} resolves its key through the vanilla registry the same way {@code sound} does, so
  * either the dotted key or the UPPER_SNAKE constant names the same sound. {@code rawsound} does the opposite on purpose: it passes the key through untouched to the
  * Adventure sound API so a resource-pack key (say {@code myserver:custom.ding}) or a precise vanilla key reaches
- * the client exactly as written. Every handler is wrapped in {@link #safe}, so a malformed key — an Adventure
- * {@code Key} the client would reject throws while being built — becomes a logged no-op rather than an exception
+ * the client exactly as written. Every handler is wrapped in {@link #safe}, so a malformed key, an Adventure
+ * {@code Key} the client would reject throws while being built. Becomes a logged no-op rather than an exception
  * escaping into the click dispatch. A blank key is a silent no-op in either action.
  */
 public final class SoundActions {
@@ -43,7 +43,7 @@ public final class SoundActions {
     /**
      * Register the sound actions into {@code bindings}. {@code log} is the operator console logger a fail-soft or
      * skipped action warns through. Left separate from {@link MenuVocabulary#registerActions} so that method's
-     * existing call-sites stay untouched — the composition root calls both.
+     * existing call-sites stay untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -58,7 +58,7 @@ public final class SoundActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op
-     * rather than escaping into the click dispatch — the same fail-soft contract {@link MovementActions} and
+     * rather than escaping into the click dispatch. The same fail-soft contract {@link MovementActions} and
      * {@link MessagingActions} apply to their effect actions. This is what turns an invalid namespaced key (the
      * Adventure {@code Key} builder throws) into a logged skip instead of a stack trace on the tick thread.
      */
@@ -90,8 +90,8 @@ public final class SoundActions {
     }
 
     /**
-     * Play {@code <namespaced-key> [volume] [pitch]} to the viewer verbatim through the Adventure sound API — no
-     * lowercasing, no vanilla-registry lookup — so a resource-pack custom sound or a precise vanilla key is sent to
+     * Play {@code <namespaced-key> [volume] [pitch]} to the viewer verbatim through the Adventure sound API, no
+     * lowercasing, no vanilla-registry lookup, so a resource-pack custom sound or a precise vanilla key is sent to
      * the client exactly as written. A blank key is a silent no-op; an invalid key throws while the Adventure
      * {@link Key} is built and is caught by {@link #safe} as a fail-soft skip.
      */

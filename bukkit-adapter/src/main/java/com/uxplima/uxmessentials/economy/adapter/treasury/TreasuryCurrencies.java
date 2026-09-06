@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * nothing above {@link TreasuryEconomyAdapter} sees a Treasury type ({@code docs/11-economy-integration.md}
  * §5, §6). A configured {@link Currency} is matched to a Treasury currency by id; only currencies the
  * foreign provider can actually serve are reported by {@link #served()}, so a {@code transfer} in a currency
- * Treasury does not hold resolves to {@code CURRENCY_UNSUPPORTED} rather than silently converting — there is
+ * Treasury does not hold resolves to {@code CURRENCY_UNSUPPORTED} rather than silently converting: there is
  * no implicit cross-currency conversion anywhere in this plugin.
  */
 @NullMarked

@@ -7,7 +7,7 @@
  * feature consumes an integration without ever null-checking or try/catching a missing plugin.
  *
  * <p>Every hook keeps the target plugin's SDK types behind {@code whenPresent}, and the no-op default carries
- * none of them — the same lazy-structure the claim-provider adapters use. Because {@code Hooks} calls
+ * none of them: the same lazy-structure the claim-provider adapters use. Because {@code Hooks} calls
  * {@code whenPresent} only past the present-guard, a server without the soft-depend never constructs the real
  * implementation and never loads its external classes: there is no {@link java.lang.NoClassDefFoundError} path
  * when a soft-depend is absent.

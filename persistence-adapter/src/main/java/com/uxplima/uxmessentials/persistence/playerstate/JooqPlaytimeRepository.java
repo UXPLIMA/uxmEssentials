@@ -63,7 +63,7 @@ public final class JooqPlaytimeRepository extends JooqRepository implements Play
                     .set(PLAYERSTATE_PLAYTIME.AFK_SECONDS, afkDelta)
                     .onConflict(PLAYERSTATE_PLAYTIME.UUID, PLAYERSTATE_PLAYTIME.DAY)
                     .doUpdate()
-                    // Accumulate onto the stored value rather than overwriting it — each sample is a delta.
+                    // Accumulate onto the stored value rather than overwriting it: each sample is a delta.
                     .set(PLAYERSTATE_PLAYTIME.ACTIVE_SECONDS, PLAYERSTATE_PLAYTIME.ACTIVE_SECONDS.plus(activeDelta))
                     .set(PLAYERSTATE_PLAYTIME.AFK_SECONDS, PLAYERSTATE_PLAYTIME.AFK_SECONDS.plus(afkDelta))
                     .execute();
@@ -119,7 +119,7 @@ public final class JooqPlaytimeRepository extends JooqRepository implements Play
         write(dsl -> dsl.deleteFrom(PLAYERSTATE_PLAYTIME).execute());
     }
 
-    /** SUM of {@code column} over the rows where {@code inWindow} holds, zero outside it — one window's total. */
+    /** SUM of {@code column} over the rows where {@code inWindow} holds, zero outside it: one window's total. */
     private static Field<Long> windowed(Field<Long> column, org.jooq.Condition inWindow) {
         return org.jooq
                 .impl
@@ -128,7 +128,7 @@ public final class JooqPlaytimeRepository extends JooqRepository implements Play
                 .cast(Long.class);
     }
 
-    /** SUM of {@code column} over every row — the all-time total. */
+    /** SUM of {@code column} over every row, the all-time total. */
     private static Field<Long> total(Field<Long> column) {
         return org.jooq.impl.DSL.sum(column).cast(Long.class);
     }

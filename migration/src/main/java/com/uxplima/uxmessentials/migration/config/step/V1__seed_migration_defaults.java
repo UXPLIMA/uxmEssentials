@@ -9,7 +9,7 @@ import org.spongepowered.configurate.serialize.SerializationException;
 
 /**
  * The first config-version step for {@code migration.conf}: seeds the source path and conflict knobs that
- * the importer reads (docs/12-migration §10, §12). A pure node transform — each key is set only when absent
+ * the importer reads (docs/12-migration §10, §12). A pure node transform. Each key is set only when absent
  * ({@code node.virtual()}), so re-running on an already-seeded config rewrites nothing. Naming mirrors the
  * Flyway DB-migration convention ({@code V1__…}) so config and schema evolution read identically.
  */

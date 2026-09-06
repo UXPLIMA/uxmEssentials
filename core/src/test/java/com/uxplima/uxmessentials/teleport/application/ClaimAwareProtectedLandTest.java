@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@link ClaimAwareProtectedLand}: the RTP land-protection composite that keeps the shared pre-warmed pool out
- * of claimed land and WorldGuard regions. The two seams — the player-agnostic {@link ClaimService#isProtected} and
- * the WorldGuard {@link ProtectedLand} — gate independently, each honours its {@code respect-*} toggle, and with both
+ * of claimed land and WorldGuard regions. The two seams. The player-agnostic {@link ClaimService#isProtected} and
+ * the WorldGuard {@link ProtectedLand}. Gate independently, each honours its {@code respect-*} toggle, and with both
  * off nothing is ever reported protected. All backends are fakes: no Bukkit, no claim plugin, no WorldGuard.
  */
 class ClaimAwareProtectedLandTest {

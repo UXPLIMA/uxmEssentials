@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * is PDC (a lost language preference is harmless, so it need not survive a world rollback), but the port
  * hides the storage so a server can back it with the DB instead without touching the resolver.
  *
- * <p>An absent override is the common case — a player who has never run {@code /lang} — and is modelled
+ * <p>An absent override is the common case, a player who has never run {@code /lang}, and is modelled
  * as {@link Optional#empty()} so the resolver falls through to the client locale.
  */
 public interface LocaleStore {

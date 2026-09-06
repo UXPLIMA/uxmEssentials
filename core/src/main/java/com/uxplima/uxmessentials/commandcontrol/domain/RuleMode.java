@@ -9,9 +9,9 @@ import org.jspecify.annotations.Nullable;
  * The two ways a {@link RuleSet} reads its command lists.
  *
  * <ul>
- *   <li>{@link #WHITELIST} — only the listed commands are allowed; everything else is denied. A useful lock-down
+ *   <li>{@link #WHITELIST}: only the listed commands are allowed; everything else is denied. A useful lock-down
  *       mode where an operator names the short list of commands a group may run.
- *   <li>{@link #BLACKLIST} — the listed commands are denied; everything else is allowed. The forgiving mode where an
+ *   <li>{@link #BLACKLIST}: the listed commands are denied; everything else is allowed. The forgiving mode where an
  *       operator names only the handful of commands to hide.
  * </ul>
  *

@@ -31,8 +31,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * jOOQ-backed {@link LoanRepository} over the generated {@code ECONOMY_LOANS} and
- * {@code ECONOMY_CREDIT_SCORES} tables. Every statement is typed jOOQ DSL — jOOQ renders the per-dialect
- * upsert ({@code ON CONFLICT} on SQLite/Postgres, {@code ON DUPLICATE KEY UPDATE} on MySQL) — and the debtor
+ * {@code ECONOMY_CREDIT_SCORES} tables. Every statement is typed jOOQ DSL. JOOQ renders the per-dialect
+ * upsert ({@code ON CONFLICT} on SQLite/Postgres, {@code ON DUPLICATE KEY UPDATE} on MySQL), and the debtor
  * name is resolved with a single {@code LEFT JOIN} on {@code ECONOMY_OWNERS} rather than a per-loan lookup.
  */
 @NullMarked

@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * reads the live store the AFK sweep and the vanish lookups already share, plus the rendered display name
  * the {@code /nick} feature sets on the live {@link Player}.
  *
- * <p>The AFK duration is measured from the player's last-activity stamp, which an AFK transition preserves —
+ * <p>The AFK duration is measured from the player's last-activity stamp, which an AFK transition preserves
  * so for an AFK player {@code now - lastActivity} is how long they have been idle. The store read is via
  * {@link PresenceStore#current}, which never mutates the map. The nickname read resolves the online player
  * and renders {@code displayName()} to plain text, falling back to the account name when the player is not

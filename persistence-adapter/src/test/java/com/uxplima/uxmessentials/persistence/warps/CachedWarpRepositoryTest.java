@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  * warm-loaded in-memory set, never a synchronous SQLite query on that thread. So after a single warm load (which
  * the wiring triggers on enable), any number of command-style {@code exists}/{@code find}/{@code all} reads hit
  * the delegate zero further times, while a {@code save} makes the new warp immediately findable and a
- * {@code delete} immediately absent — both write-through at the delegate and reflected in memory with no extra
+ * {@code delete} immediately absent. Both write-through at the delegate and reflected in memory with no extra
  * delegate read. {@code rate}/{@code averageRating} are not part of the cached set and pass straight through.
  */
 class CachedWarpRepositoryTest {
@@ -105,7 +105,7 @@ class CachedWarpRepositoryTest {
         CachedWarpRepository cached = new CachedWarpRepository(delegate);
 
         // Even without an explicit warm load, the first lookup loads the set, then every later read is served
-        // from memory — a later miss never re-queries the delegate.
+        // from memory: a later miss never re-queries the delegate.
         assertThat(cached.exists(SPAWN)).isTrue();
         for (int i = 0; i < 50; i++) {
             assertThat(cached.exists(SHOP)).isFalse();
@@ -123,7 +123,7 @@ class CachedWarpRepositoryTest {
 
         cached.all(); // warm load
         delegate.store(warp(SHOP)); // a peer wrote a new warp straight to the shared database
-        assertThat(cached.exists(SHOP)).isFalse(); // not yet visible — still serving the loaded set
+        assertThat(cached.exists(SHOP)).isFalse(); // not yet visible. Still serving the loaded set
 
         cached.invalidateAll(); // a cross-server change drops the loaded set
 

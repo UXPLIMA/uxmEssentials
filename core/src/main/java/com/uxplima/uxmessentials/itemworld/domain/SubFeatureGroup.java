@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * The named sub-feature groups the itemworld surface splits into (docs/10-feature-modules.md §15.10).
  * The module is large enough that, on top of the module-level enable switch, each group is
- * independently disableable via its own {@code itemworld.conf} flag — and every command additionally
+ * independently disableable via its own {@code itemworld.conf} flag, and every command additionally
  * carries a per-command disable on top of its group.
  *
  * <p>Each constant carries the lowercase {@link #configKey() config key} an operator toggles under

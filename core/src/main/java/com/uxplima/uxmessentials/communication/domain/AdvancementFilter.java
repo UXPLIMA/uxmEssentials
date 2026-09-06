@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * The pure decision logic for the advancement-notification feature: given an {@link AdvancementNoticeConfig} and the
  * facts about a single earned advancement, decide whether the server announces it and which template renders it. It
- * holds no state and touches no Bukkit type — the adapter extracts the advancement key, its recipe-ness, and whether
+ * holds no state and touches no Bukkit type. The adapter extracts the advancement key, its recipe-ness, and whether
  * the vanilla display marks it announce-to-chat, then defers every yes/no decision here.
  *
  * <p>The advancement is identified by its namespaced key as a string (for example {@code minecraft:end/kill_dragon}).

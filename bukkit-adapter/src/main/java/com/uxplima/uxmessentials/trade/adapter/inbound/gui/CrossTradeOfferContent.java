@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
  * and is never repainted while it is up, because what is in it exists only in the window until the confirm reads it
  * into escrow. Movements are refused the moment the side is escrowed, so nothing can be pulled back out from under a
  * two-phase commit already in flight, and whatever is still there when the window closes is returned through
- * {@link #readBack} — the trade's single return path for an abort.
+ * {@link #readBack}: the trade's single return path for an abort.
  */
 @NullMarked
 final class CrossTradeOfferContent implements ContentProvider {

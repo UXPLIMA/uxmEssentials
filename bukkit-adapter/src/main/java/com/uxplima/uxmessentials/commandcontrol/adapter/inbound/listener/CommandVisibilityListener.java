@@ -35,13 +35,13 @@ import org.jspecify.annotations.Nullable;
  * The command-visibility half of command-control: it keeps disallowed and hidden commands out of what a client sees.
  *
  * <ul>
- *   <li>{@link PlayerCommandSendEvent} — scrubs the server-side command list sent to a client, removing every command
+ *   <li>{@link PlayerCommandSendEvent}, scrubs the server-side command list sent to a client, removing every command
  *       the world's {@link RuleSet} denies (respecting the vanilla permission the command already carries) and every
  *       plugin-listing command the world's {@link HidePolicy} hides, so a disallowed command neither autocompletes nor
  *       appears in the client command graph. The list is client-agnostic - Bedrock / Geyser players receive it too.
- *   <li>{@link AsyncTabCompleteEvent} — drops the argument suggestions of a command whose root is filtered, so the
+ *   <li>{@link AsyncTabCompleteEvent}. Drops the argument suggestions of a command whose root is filtered, so the
  *       arguments of a command a player cannot run never leak through completion.
- *   <li>{@link PlayerCommandPreprocessEvent} — the scrub-help block: when {@code deny-list-commands} is on, a
+ *   <li>{@link PlayerCommandPreprocessEvent}. The scrub-help block: when {@code deny-list-commands} is on, a
  *       {@code /plugins} or {@code /help} typed by a player who may not see the plugin list is cancelled and answered
  *       with the deny line, so plugin names are not leaked through the built-in help output.
  *   <li>{@link PlayerChangedWorldEvent} - when a per-world override is configured, re-sends the command graph on a

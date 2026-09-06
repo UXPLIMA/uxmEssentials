@@ -9,7 +9,7 @@ import java.util.Objects;
  * the item, so there is no dupe), validates the cursor against {@link #rules}, and on a pass fires {@link #actions}
  * with the dropped item exposed as {@code %drag_material%}/{@code %drag_amount%}/{@code %drag_name%} placeholders.
  * When {@link #consume} is true the matched amount is then removed from the cursor. A cursor that fails the rules is
- * left untouched — a silent deny, since a "wrong item" message would spam a mis-drop.
+ * left untouched, a silent deny, since a "wrong item" message would spam a mis-drop.
  *
  * <p>Bukkit-free by design, like every {@code spec/} type: the {@code ItemStack} matching and the cursor mutation
  * live in the runtime listener, which is the only place allowed to touch Bukkit.

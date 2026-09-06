@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
  * <p>Slot positions matter for a stored container (a chest's layout is meaningful), so the payload is a
  * slot-indexed stream: a header of the slot count, then for each occupied slot its index and the item's own
  * serialized bytes (Paper's {@link ItemStack#serializeAsBytes()} / {@link ItemStack#deserializeBytes(byte[])},
- * which round-trips the full item — components, enchantments, custom name). Empty slots write nothing, so a
+ * which round-trips the full item: components, enchantments, custom name). Empty slots write nothing, so a
  * sparsely filled vault stays compact. {@link #encode} of an all-empty array yields {@link VaultContents#empty()},
  * so no blob is written for a vault holding nothing.
  */
@@ -69,7 +69,7 @@ public final class VaultItemCodec {
 
     /**
      * Deserialize {@code contents} into a {@code ItemStack[]} sized to the stored slot count (the array length
-     * written by {@link #encode}), so every saved slot is visible — nothing is truncated. The overflow rescue
+     * written by {@link #encode}), so every saved slot is visible: nothing is truncated. The overflow rescue
      * needs this: when the size quota has shrunk below the stored slot count, the items in the now-out-of-range
      * slots must be seen to be handed back rather than silently dropped by a size-bounded {@link #decode}. An
      * empty payload yields a zero-length array.
@@ -91,7 +91,7 @@ public final class VaultItemCodec {
 
     private static void readInto(byte[] payload, ItemStack[] slots) {
         try (DataInputStream in = new DataInputStream(new ByteArrayInputStream(payload))) {
-            in.readInt(); // stored array length, informational — the live size governs the target array
+            in.readInt(); // stored array length, informational. The live size governs the target array
             int slot;
             while ((slot = in.readInt()) != -1) {
                 byte[] item = PayloadLimits.readItemBytes(in);

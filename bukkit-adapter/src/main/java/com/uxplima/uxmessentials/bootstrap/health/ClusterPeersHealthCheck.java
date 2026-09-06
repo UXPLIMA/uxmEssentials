@@ -12,14 +12,14 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Reports how many peer backends this one currently sees on the cross-server bus, for {@code /uxmess doctor}.
- * The figure is the live count from the {@link ClusterPeers} roster — peers that have heartbeated within the
- * liveness window — plus how long ago the most recent peer activity was, so an operator can tell a healthy
+ * The figure is the live count from the {@link ClusterPeers} roster. Peers that have heartbeated within the
+ * liveness window, plus how long ago the most recent peer activity was, so an operator can tell a healthy
  * multi-backend cluster ("3 peer(s) seen, last activity 4s ago") from a single standalone server ("standalone")
  * from a cluster that has gone silent (peers seen, but last activity minutes ago).
  *
  * <p>This check is registered only for an enabled backend; a backend with network sync off has no roster and
  * is standalone by definition, which the {@link BusTransportHealthCheck} line already reports. It is purely a
- * read of an in-memory roster — no blocking, no Bukkit API — so it is safe on the doctor run thread.
+ * read of an in-memory roster (no blocking, no Bukkit API) so it is safe on the doctor run thread.
  */
 @NullMarked
 public final class ClusterPeersHealthCheck implements HealthCheck {

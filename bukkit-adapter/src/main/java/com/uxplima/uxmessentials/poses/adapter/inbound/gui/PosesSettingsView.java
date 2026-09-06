@@ -27,13 +27,13 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The per-player poses panel opened by a bare {@code /poses} (and the poses entry on the {@code /uxmess gui} hub):
  * a personal settings/status window. It shows whether the viewer is currently posing (a live read of the
- * {@link PoseSessions} registry) and lets them flip the {@code /poses toggle} opt-out — whether other players may
- * sit on them — without leaving the screen. Both buttons hold no logic of their own: the status reads the registry
+ * {@link PoseSessions} registry) and lets them flip the {@code /poses toggle} opt-out. Whether other players may
+ * sit on them: without leaving the screen. Both buttons hold no logic of their own: the status reads the registry
  * fresh on every draw, and the opt-out routes a flip through the same {@link TogglePlayerSit} use case the
  * {@code /poses toggle} command uses, so the panel and the command always agree.
  *
  * <p>The opt-out is a {@link PlayerSitPreferences} PDC preference owned by the viewer's own region thread, so it is
- * flipped from an {@link ActionProperty} (whose click runs on that thread) rather than an async toggle — a click
+ * flipped from an {@link ActionProperty} (whose click runs on that thread) rather than an async toggle, a click
  * flips the byte and redraws, and the value lore shows the new {@code allow}/{@code refuse} state. The panel mirrors
  * the presence settings panel: it rides the shared {@link SettingsPanelView} over a {@code modules/poses/gui} layout
  * and the message catalog, so its geometry is operator-editable and none of its text is inlined.

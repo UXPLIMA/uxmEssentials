@@ -4,7 +4,7 @@
  * {@code /npc} command surface, the create / delete / list / move / skin / command use cases, the
  * {@code Notifier} send surface, the {@code NpcMessageKey} catalog handles, and the {@code NpcRepository} /
  * {@code NpcView} outbound ports (under {@code port/}). The use cases orchestrate the {@code Npc} aggregate
- * through those ports and never touch Bukkit, Paper, Kyori, or logging types — the adapters supply the
+ * through those ports and never touch Bukkit, Paper, Kyori, or logging types. The adapters supply the
  * implementations.
  *
  * <p>Where "the command gate" in these use cases points, and where it does not. {@code /npc} requires

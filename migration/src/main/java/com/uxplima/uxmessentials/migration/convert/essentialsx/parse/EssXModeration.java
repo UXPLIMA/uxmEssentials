@@ -24,7 +24,7 @@ public record EssXModeration(Optional<EssXMute> mute, Optional<EssXJail> jail) {
         Objects.requireNonNull(jail, "jail");
     }
 
-    /** The clean block — no mute, no jail. */
+    /** The clean block, no mute, no jail. */
     public static EssXModeration none() {
         return NONE;
     }

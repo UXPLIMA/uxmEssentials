@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The ready-made {@code luckperms-groups} live source: every LuckPerms group as a menu entry, so a spec can page a
- * rank list or a rank-picker with no feature code — {@code list { source = luckperms-groups, template { … } }} draws
+ * rank list or a rank-picker with no feature code. {@code list { source = luckperms-groups, template { … } }} draws
  * one tile per group. Registered once at startup into the shared {@link MenuBindings} alongside the other live
  * sources in {@link LiveDataSources}; on a server without LuckPerms the source serves an empty list, so the grid
  * renders blank rather than crashing.
@@ -29,12 +29,12 @@ import org.jspecify.annotations.Nullable;
  * signature here carries a LuckPerms type: constructing the helper on a server without LuckPerms loads none of its
  * classes, and the present-guard short-circuits before any reflection runs. Any {@link ReflectiveOperationException}
  * (the API absent, or its shape shifted under a version bump) or unchecked failure is logged exactly once through an
- * {@link AtomicBoolean} and degraded to an empty list — the source never throws into the render path. The permission
+ * {@link AtomicBoolean} and degraded to an empty list: the source never throws into the render path. The permission
  * adapter's own LuckPerms meta source uses the SDK directly; the menu vocab is deliberately reflection-only to keep
  * the SDK off the class-load path of a LuckPerms-less server.
  *
  * <p>Threading: unlike the roster sources, this needs no region hop. A list source runs on the async list-resolution
- * thread ({@code Menus} resolves a spec's lists off the tick thread), and LuckPerms is async-safe by design —
+ * thread ({@code Menus} resolves a spec's lists off the tick thread), and LuckPerms is async-safe by design
  * {@code getLoadedGroups()} and each group's cached data are safe to read off the main thread. So the read happens
  * directly on that async thread; no {@link com.uxplima.uxmessentials.shared.application.port.Scheduler} is involved
  * and no entity/world roster is touched. The per-entry placeholders read only the captured {@link GroupEntry}
@@ -59,7 +59,7 @@ public final class LuckPermsGroupSource {
      * {@code server} gates the reflective lookup on LuckPerms being present and resolves the API through the Bukkit
      * ServicesManager; {@code log} is the operator console logger the fail-closed degrade warns through once. Left a
      * standalone entry point (like the sibling vocab slices) so the {@link LiveDataSources} registration signature
-     * stays untouched — the composition root calls both.
+     * stays untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Server server, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -88,7 +88,7 @@ public final class LuckPermsGroupSource {
                 .orElse("");
     }
 
-    /** Order groups highest-weight first, then by name for a stable tie — the natural rank-list order. */
+    /** Order groups highest-weight first, then by name for a stable tie, the natural rank-list order. */
     static List<GroupEntry> sortByRank(List<GroupEntry> groups) {
         List<GroupEntry> sorted = new ArrayList<>(groups);
         sorted.sort(RANK_ORDER);
@@ -100,7 +100,7 @@ public final class LuckPermsGroupSource {
      * by string class-name, so no field or method signature carries a {@code net.luckperms} type: constructing this on
      * a server without LuckPerms loads none of its classes, and the present-guard short-circuits before any reflection
      * runs. Any {@link ReflectiveOperationException} or unchecked failure is logged exactly once and degraded to an
-     * empty list — the same discipline the JobsReborn and WorldGuard gates use. The absent path plus this fail-closed
+     * empty list: the same discipline the JobsReborn and WorldGuard gates use. The absent path plus this fail-closed
      * degrade are the tested contract; the happy path degrades safely if a version bump moves the chain.
      */
     private static final class LuckPermsGroups {

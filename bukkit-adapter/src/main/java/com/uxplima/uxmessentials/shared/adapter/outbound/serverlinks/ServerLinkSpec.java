@@ -15,8 +15,8 @@ import org.jspecify.annotations.Nullable;
  * {@code type} or {@code label} is set: a built-in {@link ServerLinks.Type} (the typed pause-menu slot) or a
  * custom operator-authored label (free text). The {@code url} is a validated absolute {@link URI}.
  *
- * <p>Parsing is total and never throws: a malformed entry — both type and label missing, an unknown type name, a
- * blank or malformed URL — resolves to {@link Optional#empty()} so the applier skips it with a warning rather than
+ * <p>Parsing is total and never throws: a malformed entry. Both type and label missing, an unknown type name, a
+ * blank or malformed URL, resolves to {@link Optional#empty()} so the applier skips it with a warning rather than
  * aborting the whole list. A custom label is operator content (config data), so it carries no inline plugin
  * literal of our own.
  *

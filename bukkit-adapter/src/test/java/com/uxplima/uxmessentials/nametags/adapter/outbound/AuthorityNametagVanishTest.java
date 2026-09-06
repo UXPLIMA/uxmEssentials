@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The migrated nametags vanish gate reads the vanish {@code VanishStore} authority directly: a viewer sees a wearer's
  * nametag when the wearer is not vanished, or the viewer's see level clears the wearer's use level, and cannot when the
- * wearer is vanished above the viewer's see level — the inverse polarity of the messaging gate over the same one state.
+ * wearer is vanished above the viewer's see level: the inverse polarity of the messaging gate over the same one state.
  */
 class AuthorityNametagVanishTest {
 

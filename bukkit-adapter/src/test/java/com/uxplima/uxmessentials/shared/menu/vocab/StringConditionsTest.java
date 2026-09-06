@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * Plain-JUnit coverage of the string condition pack. Each condition is pure string work — no Bukkit, no live player —
+ * Plain-JUnit coverage of the string condition pack. Each condition is pure string work (no Bukkit, no live player)
  * so these exercise the registered {@link BiPredicate} directly against a {@link MenuContext} and a placeholder
  * registry that resolves a single {@code %who%} token to a per-test value. Both truthy and falsy cases are pinned,
  * the operand-expansion is proven by comparing the resolved {@code %who%} text, and the fail-closed contract is

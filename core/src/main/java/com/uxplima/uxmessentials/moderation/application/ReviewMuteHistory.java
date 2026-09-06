@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /mutehistory <player>}: review a player's mute-family history (every {@code /mute}, {@code /tempmute}
  * and {@code /unmute} applied to them) newest-first. A read-only, bounded query against the append-only
- * history — it renders a header with the count, one entry per row (action, issuer, reason, expiry, when), or
+ * history. It renders a header with the count, one entry per row (action, issuer, reason, expiry, when), or
  * an empty notice when the target has none. The query is capped at {@link ReviewBanHistory#PAGE_LIMIT} rows
  * so the read stays within budget; the command runs it off the tick thread.
  */

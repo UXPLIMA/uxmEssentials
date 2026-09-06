@@ -22,15 +22,15 @@ import org.jspecify.annotations.Nullable;
  * The villager saver: cancels the deaths a protected villager would otherwise suffer and keeps it loaded so it never
  * despawns. It shields against a zombie infection (an {@link EntityTransformEvent} with reason
  * {@link TransformReason#INFECTION}), a lightning strike (its {@link DamageCause#LIGHTNING} damage and the
- * villager-to-witch transform it triggers), and every other lethal {@link EntityDamageEvent} — suffocation, fire, a
- * mob's blow — and marks the villager persistent so no far-away despawn removes it. Which of those actually cancel is
+ * villager-to-witch transform it triggers), and every other lethal {@link EntityDamageEvent}, suffocation, fire, a
+ * mob's blow, and marks the villager persistent so no far-away despawn removes it. Which of those actually cancel is
  * the pure {@link VillagerProtectionPolicy}'s call; this listener only maps each Bukkit cause onto a
  * {@link VillagerThreat} and reads the villager's per-villager protection mark.
  *
  * <h2>Folia</h2>
  * Every handler runs on the region owning the villager the event names: the damage / transform handlers read that one
  * villager's PDC and cancel the event on that same thread, and {@link #onEntityAdd} re-applies persistence to a
- * protected villager as it enters a region — a per-entity, region-local touch with no whole-world enumeration.
+ * protected villager as it enters a region, a per-entity, region-local touch with no whole-world enumeration.
  */
 @NullMarked
 public final class VillagerProtectionListener implements Listener {

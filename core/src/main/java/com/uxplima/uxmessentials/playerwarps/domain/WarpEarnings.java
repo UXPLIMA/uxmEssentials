@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * Owner earnings that have accrued on a warp but not yet been paid out — the running tally a rented or sponsored
+ * Owner earnings that have accrued on a warp but not yet been paid out. The running tally a rented or sponsored
  * warp builds up between payouts. Modelled as an exact {@link BigDecimal} so the balance never picks up
  * binary floating-point drift, exactly like {@code warps.domain.WarpCost}.
  *
@@ -43,7 +43,7 @@ public record WarpEarnings(BigDecimal amount, String currencyId) {
 
     /**
      * Apply a change to the balance, keeping the same currency. A positive delta accrues more; a negative delta
-     * settles part of it, but only as far as zero — a delta that would drive the balance negative is rejected,
+     * settles part of it, but only as far as zero. A delta that would drive the balance negative is rejected,
      * since a warp can never owe money to its owner.
      */
     public WarpEarnings plus(BigDecimal delta) {

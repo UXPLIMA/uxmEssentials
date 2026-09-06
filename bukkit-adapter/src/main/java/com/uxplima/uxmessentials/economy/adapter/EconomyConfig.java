@@ -27,8 +27,8 @@ import org.jspecify.annotations.NullMarked;
  * {@code ServicePriority} for register-or-defer, the {@code /pay} confirm timeout and toggle default, the
  * baltop page size / cache TTL / exempt node, and the persistence debounce/flush windows.
  *
- * <p>A fresh install ships exactly one currency — the configured default with a sensible symbol/format/
- * precision — and every command that omits {@code [currency]} resolves to it. Operators declare more under
+ * <p>A fresh install ships exactly one currency. The configured default with a sensible symbol/format/
+ * precision, and every command that omits {@code [currency]} resolves to it. Operators declare more under
  * {@code currencies.<id>}; this reader builds only the default currency from the well-known keys, with the
  * additional-currency map a documented follow-up that needs a structured-list config read not on the narrow
  * {@link ConfigStore} contract (the registry, port, and commands already carry a multi-currency set, so
@@ -243,7 +243,7 @@ public final class EconomyConfig {
         return config.getBoolean("pay.toggle-default", true);
     }
 
-    /** How balances render — {@code full} (grouped, the default) or {@code compact} (suffix-abbreviated). */
+    /** How balances render: {@code full} (grouped, the default) or {@code compact} (suffix-abbreviated). */
     public AmountFormat amountFormat() {
         return AmountFormat.fromConfig(config.getString("amount-format", AmountFormat.FULL.token()));
     }
@@ -389,7 +389,7 @@ public final class EconomyConfig {
 
     /**
      * Where the pay tax goes: a configured holding wallet when {@code pay.tax.sink = "account:<uuid>"}, otherwise
-     * (the default {@code "void"} or a malformed value) destroyed. The account name is cosmetic — the wallet is
+     * (the default {@code "void"} or a malformed value) destroyed. The account name is cosmetic: the wallet is
      * keyed by the uuid.
      */
     public java.util.Optional<com.uxplima.uxmessentials.shared.domain.PlayerRef> taxSinkAccount() {

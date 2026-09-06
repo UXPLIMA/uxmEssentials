@@ -11,7 +11,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A mutable builder for {@link Hologram}, kept package-private so it is purely an internal mechanism: each
  * {@link Hologram} transition reads {@link Hologram#toBuilder()}, changes the one field it owns, and calls
- * {@link #build()} — which routes through the canonical {@code Hologram} constructor, so every validation and
+ * {@link #build()}, which routes through the canonical {@code Hologram} constructor, so every validation and
  * range check still fires. Extracting the per-field copy boilerplate here keeps {@code Hologram} small without
  * changing its public surface.
  */

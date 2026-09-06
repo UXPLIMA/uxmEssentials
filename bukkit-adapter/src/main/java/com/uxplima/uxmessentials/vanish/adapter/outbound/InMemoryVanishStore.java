@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * only the currently-vanished players. Reads and writes are lock-free map operations, so a sync command, the async
  * messaging resolution, and the nametag viewer cull all observe a coherent value from any thread.
  *
- * <p>Nothing here is persisted. A player is added by {@code /vanish}, read by every consumer, and dropped on quit —
+ * <p>Nothing here is persisted. A player is added by {@code /vanish}, read by every consumer, and dropped on quit
  * so a fresh join is never vanished (the state was forgotten), and the cross-server persist edge is a later phase. On
  * module stop {@link #clear()} drops every entry so a disable or reload leaves zero residual state.
  */

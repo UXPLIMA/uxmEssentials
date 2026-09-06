@@ -22,14 +22,14 @@ import org.jspecify.annotations.NullMarked;
  * {@code /vanish} transition emits in their place.
  *
  * <p>The lines are operator MiniMessage content from {@link VanishConfig} ({@code {player}} substituted), never a
- * {@code MessageKey} — the same treatment the connection-message context gives real join/quit templates. Each viewer's
+ * {@code MessageKey}: the same treatment the connection-message context gives real join/quit templates. Each viewer's
  * variant is chosen by whether they can see the vanishing player: a viewer whose see level clears the player's use
  * level (staff) gets the {@code *-staff} template, everyone else gets the public one; a blank template sends that group
  * nothing. The whole broadcast is a no-op when {@code fake-join-quit} is off.
  *
  * <p>The online roster is enumerated on the global region thread (Folia forbids reading {@code getOnlinePlayers()} off
  * it), and delivery to each viewer hops to their region thread inside the {@link MessageSink}. The vanishing player
- * themselves is skipped — they already know, and get their own {@code /vanish} confirmation.
+ * themselves is skipped: they already know, and get their own {@code /vanish} confirmation.
  */
 @NullMarked
 public final class VanishConnectionMessenger {

@@ -192,7 +192,7 @@ class NumericSpatialConditionsTest {
         return test(id, arg, new PlayerRef(viewer.getUniqueId(), viewer.getName()));
     }
 
-    /** Fire condition {@code id} for a viewer UUID with no live player — the fail-closed offline case. */
+    /** Fire condition {@code id} for a viewer UUID with no live player: the fail-closed offline case. */
     private boolean testOffline(String id, String arg) {
         return test(id, arg, new PlayerRef(UUID.randomUUID(), "Ghost"));
     }

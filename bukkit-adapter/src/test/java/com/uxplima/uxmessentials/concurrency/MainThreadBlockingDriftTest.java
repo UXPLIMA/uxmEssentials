@@ -28,12 +28,12 @@ import org.junit.jupiter.api.Test;
  *
  * <p><strong>Scope and honest limits.</strong> This is a line-level source scan of the inbound layer, not a
  * call-graph analysis. It catches the blocking <em>primitives</em> named above where they appear directly in a
- * command or listener class — which is where they would actually stall a tick. It deliberately does NOT try to
+ * command or listener class, which is where they would actually stall a tick. It deliberately does NOT try to
  * flag a blocking {@code future.get()} / {@code future.join()}: {@code get(}/{@code join(} collide with
  * {@code List.get}, {@code Optional.get}, {@code Map.get}, {@code String.join}, {@code Collectors.joining}, so a
  * line regex cannot tell a blocking future call from an innocent one without a flood of false positives. A
  * blocking future call on the tick thread therefore stays a review-time concern (CLAUDE.md §3 lists it as
- * "no guard — thread-context-dependent"). Nor does it follow a handler into a helper it delegates to; the
+ * "no guard, thread-context-dependent"). Nor does it follow a handler into a helper it delegates to; the
  * primitives it does catch are the ones that, in practice, leak into the inbound layer.
  *
  * <p>A genuinely-safe exception can be annotated with a trailing {@code // allow-blocking: <reason>} comment on
@@ -122,7 +122,7 @@ class MainThreadBlockingDriftTest {
         }
     }
 
-    /** The {@code src/main/java} root of the bukkit adapter — the only module with an inbound handler layer. */
+    /** The {@code src/main/java} root of the bukkit adapter, the only module with an inbound handler layer. */
     private static List<Path> sourceRoots() {
         Path src = repoRoot().resolve("bukkit-adapter").resolve("src/main/java");
         assertThat(Files.isDirectory(src))

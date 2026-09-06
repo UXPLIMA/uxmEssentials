@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
  * The single owner of everything one open menu needs: the spec it was built from, the live context (whose page
  * can change as the viewer pages through a list), the click map routing each filled slot back to the spec that
  * produced it, and the refresh task to stop when the menu closes. Being the {@link InventoryHolder} of its own
- * inventory is what lets the click listener recover all of this from the event alone — no player-keyed side map,
+ * inventory is what lets the click listener recover all of this from the event alone. No player-keyed side map,
  * so nothing can leak when a player quits mid-menu.
  */
 public final class MenuHolder implements InventoryHolder {
@@ -34,7 +34,7 @@ public final class MenuHolder implements InventoryHolder {
 
     /**
      * The list-source entries this open resolved once off the viewer's region thread, keyed by source id. Every
-     * redraw — a page flip, a refresh tick — re-renders from this cache rather than re-querying, so a database-backed
+     * redraw (a page flip, a refresh tick) re-renders from this cache rather than re-querying, so a database-backed
      * source is touched once per open and never on the region thread.
      */
     private Map<String, List<?>> resolvedLists = Map.of();
@@ -60,8 +60,8 @@ public final class MenuHolder implements InventoryHolder {
     /**
      * The viewer's own 36 inventory slots as they were the instant a bottom-inventory menu opened, saved so the
      * engine can put them back when the menu closes (or drop them in place of the menu tiles on death). Null for an
-     * ordinary menu, which never touches the player inventory. It lives on the holder — GC'd with the open menu on
-     * close — so the snapshot needs no player-keyed side map and cannot leak when a viewer quits; the close handler
+     * ordinary menu, which never touches the player inventory. It lives on the holder, GC'd with the open menu on
+     * close, so the snapshot needs no player-keyed side map and cannot leak when a viewer quits; the close handler
      * threads the closing player in from the event, since the holder deliberately does not hold a live entity.
      */
     private @Nullable ItemStack @Nullable [] bottomSnapshot;
@@ -82,8 +82,8 @@ public final class MenuHolder implements InventoryHolder {
 
     /**
      * Whether a paged list's page flip has fired its off-thread re-query and is still waiting for that page to land.
-     * A flip sets it before hopping to the query and clears it on the viewer's entity thread on every exit — the
-     * render completing, the query failing, or the window having closed in the gap — so a viewer mashing the arrow
+     * A flip sets it before hopping to the query and clears it on the viewer's entity thread on every exit, the
+     * render completing, the query failing, or the window having closed in the gap, so a viewer mashing the arrow
      * issues one query at a time rather than stacking a queue of them, and can never see an earlier page painted over
      * a later one that returned first. Plain like the holder's other fields: one viewer owns it, read and written only
      * on their own entity thread inside the click handler, so the check-and-set is single-threaded and needs no lock.
@@ -144,7 +144,7 @@ public final class MenuHolder implements InventoryHolder {
         return ctx;
     }
 
-    /** Swaps the live context — used when paging, where only the context's page changes. */
+    /** Swaps the live context: used when paging, where only the context's page changes. */
     public void setCtx(MenuContext ctx) {
         this.ctx = Objects.requireNonNull(ctx, "ctx");
     }
@@ -288,7 +288,7 @@ public final class MenuHolder implements InventoryHolder {
     }
 
     /**
-     * Run this window's close callback, if it has one, exactly once — the seam the menu editor's live preview uses to
+     * Run this window's close callback, if it has one, exactly once. The seam the menu editor's live preview uses to
      * step back to the grid editor when the preview closes. The hook is cleared before it runs, so a double close (a
      * close immediately followed by a quit close) can never re-run it. A menu with no hook (every non-preview menu) is
      * a harmless no-op.

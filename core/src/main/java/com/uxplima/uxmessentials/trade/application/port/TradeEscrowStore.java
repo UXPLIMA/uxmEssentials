@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.trade.domain.TradeId;
 /**
  * The durable escrow of the two sides of a cross-server trade, backing the two-phase commit. It is the source of truth
  * a crashed or rejoining backend reconciles from (the bus signal is only a poke to re-read it), so every state change
- * is a single guarded transition that either wins or is a no-op — a duplicate signal, a double region hop, or a
+ * is a single guarded transition that either wins or is a no-op, a duplicate signal, a double region hop, or a
  * rejoin can never move a side's goods twice.
  *
  * <p>Both participants' rows live in one shared network database (SQLite is single-server, so cross-server trading runs
@@ -26,7 +26,7 @@ public interface TradeEscrowStore {
     /** The stake a player escrowed for a trade, or empty when they hold none (never staked, or already resolved). */
     Optional<TradeEscrow> find(TradeId tradeId, UUID owner);
 
-    /** Every stake a player currently owns across all trades — the set a rejoining player reconciles. */
+    /** Every stake a player currently owns across all trades: the set a rejoining player reconciles. */
     List<TradeEscrow> findByOwner(UUID owner);
 
     /**
@@ -51,6 +51,6 @@ public interface TradeEscrowStore {
      */
     boolean beginRefund(TradeId tradeId, UUID owner);
 
-    /** Unconditionally drop a resolved row — cleanup once both sides of a trade have been claimed. */
+    /** Unconditionally drop a resolved row: cleanup once both sides of a trade have been claimed. */
     void clear(TradeId tradeId, UUID owner);
 }

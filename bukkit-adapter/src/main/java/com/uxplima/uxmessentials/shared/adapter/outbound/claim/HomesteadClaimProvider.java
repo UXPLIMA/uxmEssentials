@@ -15,24 +15,24 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by Homestead, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by Homestead, reached <b>entirely by reflection</b>. There is no compile
  * dependency on Homestead, so this class loads and runs whether or not Homestead is present.
  *
  * <p>Homestead publishes its API jar only to GitHub Packages, which requires an authenticated token to
- * resolve — so it cannot be verified by the canon check nor pulled anonymously in CI, ruling out a typed
+ * resolve, so it cannot be verified by the canon check nor pulled anonymously in CI, ruling out a typed
  * {@code compileOnly} dependency. Its API surface is a set of stable static manager classes, which this
  * provider reaches reflectively.
  *
  * <p>Homestead is chunk-based, claiming chunks under a {@code Region}. The lookup is
- * {@code ChunkManager.findChunk(UUID worldId, int chunkX, int chunkZ)} — a pure position-indexed cache read
- * that never loads a chunk (Folia-safe) — returning a {@code RegionChunk} whose {@code getRegion()} yields the
+ * {@code ChunkManager.findChunk(UUID worldId, int chunkX, int chunkZ)}. A pure position-indexed cache read
+ * that never loads a chunk (Folia-safe). Returning a {@code RegionChunk} whose {@code getRegion()} yields the
  * owning {@code Region}. Trust is the region owner ({@code Region.getOwnerId()}) or a region member
  * ({@code MemberManager.isMemberOfRegion(long regionId, UUID)}); Homestead has a real per-region ban list
  * ({@code BanManager.isBanned(long regionId, UUID)}).
  *
  * <p>{@link #active()} is {@code true} only when Homestead is enabled and the manager class resolves.
  * Reflective handles are resolved on first success and cached; any reflective failure logs once and degrades
- * to inactive/empty — it never propagates.
+ * to inactive/empty: it never propagates.
  */
 @NullMarked
 public final class HomesteadClaimProvider implements ClaimProvider {
@@ -89,7 +89,7 @@ public final class HomesteadClaimProvider implements ClaimProvider {
 
     private Optional<ClaimLookup> lookup(WorldRef world, int blockX, int blockZ) throws Exception {
         resolveHandles();
-        // findChunk(worldId, chunkX, chunkZ) is a position-indexed cache read — no chunk load, Folia-safe.
+        // findChunk(worldId, chunkX, chunkZ) is a position-indexed cache read, no chunk load, Folia-safe.
         Object regionChunk = requireHandle(findChunk).invoke(null, world.uid(), blockX >> 4, blockZ >> 4);
         if (regionChunk == null) {
             return Optional.empty();

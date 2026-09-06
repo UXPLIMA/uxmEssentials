@@ -28,8 +28,8 @@ import org.jspecify.annotations.Nullable;
  * locale. {@link #clear(PlayerRef)} wipes the lingering bar the moment a player reappears rather than waiting for it to
  * fade. Both are a no-op when {@code action-bar} is off.
  *
- * <p>The vanished roster is enumerated on the global region thread (Folia forbids reading {@code getOnlinePlayers()} —
- * and here the online view of the store's keys — off it), then each {@code sendActionBar} hops to that player's own
+ * <p>The vanished roster is enumerated on the global region thread (Folia forbids reading {@code getOnlinePlayers()}
+ * and here the online view of the store's keys, off it), then each {@code sendActionBar} hops to that player's own
  * entity thread, where the per-player send is valid under Folia. An offline player on either hop is a silent no-op.
  */
 @NullMarked

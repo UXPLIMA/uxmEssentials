@@ -19,7 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The key correctness proof for the OGUI converter: its output is not merely well-shaped HOCON, it is HOCON our own
  * {@link MenuSpecLoader} loads into a valid {@link MenuSpec}. A representative OGUI GUI is converted, written to a
- * {@code .conf} on disk, and loaded back through the real loader — so a passing test means an operator's converted
+ * {@code .conf} on disk, and loaded back through the real loader, so a passing test means an operator's converted
  * menu opens on the engine, title, rows, item, slots, click actions and view gate intact, all as bare {@code id:value}
  * refs the loader parses.
  */
@@ -101,7 +101,7 @@ class OguiRoundTripTest {
         return refs.stream().map(ref -> ref.id() + "=" + ref.value()).toList();
     }
 
-    /** The parse-time id of each view requirement's condition ref — a registry-blind {@code world:world} stays whole. */
+    /** The parse-time id of each view requirement's condition ref: a registry-blind {@code world:world} stays whole. */
     private static List<String> conditionIds(List<Requirement> requirements) {
         return requirements.stream().map(req -> req.condition().id()).toList();
     }

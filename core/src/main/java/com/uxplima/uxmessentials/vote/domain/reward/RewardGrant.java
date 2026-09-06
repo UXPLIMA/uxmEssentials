@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * The resolved effects of one granted {@link RewardSpec} — what the adapter must actually apply for a
+ * The resolved effects of one granted {@link RewardSpec}. What the adapter must actually apply for a
  * single passing spec: the console commands to run, the messages to send the voter, the broadcasts to
- * send everyone, and the items to grant. A grant carries no chance/permission/world gate — those have
+ * send everyone, and the items to grant. A grant carries no chance/permission/world gate: those have
  * already been evaluated by the engine, and a grant exists only because the spec passed every gate.
  *
  * <p>For an offline voter the adapter queues this grant's {@link #commands()} (the existing
@@ -31,7 +31,7 @@ public record RewardGrant(
         items = List.copyOf(items);
     }
 
-    /** The resolved effects of {@code spec} — its commands, messages, broadcasts, and item grants. */
+    /** The resolved effects of {@code spec}: its commands, messages, broadcasts, and item grants. */
     public static RewardGrant of(RewardSpec spec) {
         Objects.requireNonNull(spec, "spec");
         return new RewardGrant(spec.commands(), spec.messages(), spec.broadcasts(), spec.items());

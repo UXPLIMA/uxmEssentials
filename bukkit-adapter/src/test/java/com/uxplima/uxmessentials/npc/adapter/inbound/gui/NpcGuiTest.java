@@ -216,7 +216,7 @@ class NpcGuiTest {
         fireClick(TYPE_SLOT, ClickType.LEFT); // opens the type selector
 
         // The fake-player entry (the default, selected option) shows a player head; every other drawn option shows
-        // the icon NpcTypeIcon.iconFor resolves for that type — its spawn egg, or the egg fallback. Assert against
+        // the icon NpcTypeIcon.iconFor resolves for that type, its spawn egg, or the egg fallback. Assert against
         // every option actually drawn rather than one fixed type, so the test does not depend on the slot count.
         Inventory inv = player.getOpenInventory().getTopInventory();
         assertThat(selectorIcon(inv, "PLAYER")).isEqualTo(Material.PLAYER_HEAD);

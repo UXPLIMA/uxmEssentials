@@ -28,19 +28,19 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * contract is the load-safe one, exactly as the currency reflection providers prove:
  *
  * <ul>
- *   <li><b>Absent</b> — with the plugin not installed, a matching spec resolves to empty silently (the present-guard
+ *   <li><b>Absent</b>. With the plugin not installed, a matching spec resolves to empty silently (the present-guard
  *       short-circuits before any reflection, so no warning fires and no SDK class loads), and structurally no field
  *       or method signature on the provider (or the shared {@link ReflectiveItemProvider} base) names the plugin's
  *       SDK package, so loading the class on a plugin-less server pulls in none of it.
- *   <li><b>Prefix routing</b> — a provider claims only its own {@code <plugin>:} prefix, returning empty for a bare
+ *   <li><b>Prefix routing</b>. A provider claims only its own {@code <plugin>:} prefix, returning empty for a bare
  *       material or another provider's prefix, and the {@link IconProviders#full} chain therefore routes each prefix
  *       to exactly one provider while leaving plain materials and the existing skull source untouched.
- *   <li><b>Present but shape-shifted</b> — with the plugin enabled but its API class genuinely missing (the SDK is
+ *   <li><b>Present but shape-shifted</b>. With the plugin enabled but its API class genuinely missing (the SDK is
  *       not on the test classpath), the lookup runs, fails, is caught, and degrades to empty after exactly one
  *       warning, proving the prefix reached the reflective lookup and that a version bump never throws into a render.
  * </ul>
  *
- * <p>The happy path (a real custom item resolved) cannot be faked without the SDKs on the classpath — the absent and
+ * <p>The happy path (a real custom item resolved) cannot be faked without the SDKs on the classpath, the absent and
  * routing paths are the contract, exactly like the currency reflection providers.
  */
 class CustomItemIconProvidersTest {
@@ -72,7 +72,7 @@ class CustomItemIconProvidersTest {
 
     @Test
     void absentProviderAndBaseDeclareNoSdkType() {
-        // Loading any provider (and the base it inherits) on a plugin-less server must pull in zero SDK class — the
+        // Loading any provider (and the base it inherits) on a plugin-less server must pull in zero SDK class, the
         // structural guarantee that the present-guard, not a classload, is what gates the reflection.
         assertThat(referencesPackage(ItemsAdderIconProvider.class, "dev.lone")).isFalse();
         assertThat(referencesPackage(OraxenIconProvider.class, "io.th0rgal")).isFalse();
@@ -159,7 +159,7 @@ class CustomItemIconProvidersTest {
         assertReachesLookupAndWarnsOnce("ExecutableItems", log -> new ExecutableItemsIconProvider(server, log), "ei:x");
     }
 
-    /** With its plugin absent, a matching spec is empty and silent — the present-guard runs no reflection. */
+    /** With its plugin absent, a matching spec is empty and silent, the present-guard runs no reflection. */
     private void assertAbsentIsSilentEmpty(Function<Logger, IconProvider> factory, String spec) {
         CountingLogger log = new CountingLogger();
         IconProvider provider = factory.apply(log);
@@ -170,7 +170,7 @@ class CustomItemIconProvidersTest {
     /**
      * With a fake plugin of {@code pluginName} enabled but its SDK class genuinely absent from the test classpath,
      * the matching spec passes the present-guard, attempts the reflective lookup, fails, and degrades to empty after
-     * exactly one warning — even across repeat calls (warn-once). That the warning fires at all proves the prefix
+     * exactly one warning: even across repeat calls (warn-once). That the warning fires at all proves the prefix
      * reached the lookup; that nothing is thrown proves a shape shift never aborts a render.
      */
     private void assertReachesLookupAndWarnsOnce(
@@ -212,7 +212,7 @@ class CustomItemIconProvidersTest {
         return type.getName().startsWith(prefix);
     }
 
-    /** A {@link Logger} that counts warnings — these tests assert how often a reflective failure is reported. */
+    /** A {@link Logger} that counts warnings: these tests assert how often a reflective failure is reported. */
     private static final class CountingLogger implements Logger {
         private final AtomicInteger warns = new AtomicInteger();
 
@@ -235,7 +235,7 @@ class CustomItemIconProvidersTest {
         public void debug(String message, Object... args) {}
     }
 
-    /** A {@link Logger} that drops every line — for the routing tests, which assert behaviour, not log output. */
+    /** A {@link Logger} that drops every line: for the routing tests, which assert behaviour, not log output. */
     private static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

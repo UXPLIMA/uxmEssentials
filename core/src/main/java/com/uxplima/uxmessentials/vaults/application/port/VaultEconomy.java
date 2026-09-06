@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The narrow economy seam the vaults context owns so a per-action cost can be charged — and a refund paid —
+ * The narrow economy seam the vaults context owns so a per-action cost can be charged, and a refund paid,
  * <em>without</em> a hard dependency on the economy context. It is the entire economy surface vaults needs,
  * expressed in vaults' own terms: a balance check, a withdrawal (the create/open fee) and a deposit (the
  * refund paid back when a vault is deleted). The economy context supplies an adapter that bridges this to its
@@ -49,14 +49,14 @@ public interface VaultEconomy {
 
     /**
      * True when {@code who} can afford {@code amount} in the server's default currency. This is a pre-check
-     * only (e.g. {@code /vault info}); it must never gate a {@link #withdraw} — the withdraw is the guarded
+     * only (e.g. {@code /vault info}); it must never gate a {@link #withdraw}. The withdraw is the guarded
      * debit and reports its own success, so a check-then-charge sequence would reintroduce a double-spend
      * window.
      */
     boolean canAfford(PlayerRef who, BigDecimal amount);
 
     /**
-     * Withdraw {@code amount} from {@code who}'s balance — the create or open fee, charged after the quota
+     * Withdraw {@code amount} from {@code who}'s balance. The create or open fee, charged after the quota
      * gate. Returns {@code true} when the funds were debited and {@code false} when the balance was
      * insufficient (or the guarded provider otherwise rejected). The result is the gate, not a preceding
      * {@code canAfford}.
@@ -64,7 +64,7 @@ public interface VaultEconomy {
     boolean withdraw(PlayerRef who, BigDecimal amount);
 
     /**
-     * Deposit {@code amount} into {@code who}'s balance — the refund paid back when their vault is deleted.
+     * Deposit {@code amount} into {@code who}'s balance: the refund paid back when their vault is deleted.
      * Returns {@code true} when the funds were credited and {@code false} when the credit was rejected (e.g. a
      * {@code max-balance} clamp), so a dropped refund can be surfaced rather than silently lost.
      */

@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
 /**
  * B-1 behaviours: warns and kicks now land in the append-only history on the success path, and the unified
  * checks ({@code /checkban}, {@code /checkmute}) read the live sanction state. The escalation case is the
- * important one: a warn that trips a rung records the {@code WARN} once and the escalated sanction once — never
+ * important one: a warn that trips a rung records the {@code WARN} once and the escalated sanction once, never
  * a doubled warn.
  */
 class HistoryRecordingAndChecksTest {

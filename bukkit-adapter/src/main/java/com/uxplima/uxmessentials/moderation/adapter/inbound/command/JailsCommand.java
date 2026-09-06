@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /jails}: list the jails available to {@code /jail <player> <jail>} — the named jails configured in
+ * {@code /jails}: list the jails available to {@code /jail <player> <jail>}. The named jails configured in
  * {@code moderation.conf} merged with the DB-backed jails created through {@code /setjail}. A read-only
  * companion that reuses the jail permission since anyone who may jail needs to know which names are valid. The
  * {@code ListJails} use case does the rendering; this node maps the bare invocation and, like its jail
@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  * query touches the DB. The use case's notifier hops each reply back to the actor's region thread.
  *
  * <p>Bare {@code /jails} opens the jail-list management GUI (capability D) when the command's catalog
- * {@code gui} flag is on — the same jail-list manager the hub's [Jails] footer reaches, where a staff member
+ * {@code gui} flag is on. The same jail-list manager the hub's [Jails] footer reaches, where a staff member
  * re-anchors, deletes, or creates a jail. With gui off the bare form keeps its chat list. {@link #guiRoot()}
  * returns the opener and the shared {@code GuiRootBinding} installs it.
  */

@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Settles one warp's rent for the current pass: the {@link RentPolicy} decides what to do, this use case moves the
  * money through {@link PlayerWarpEconomy#collectRent} and writes the resulting lifecycle transition. It is the one
- * place the suspend-then-archive rule lives, and it never hard-deletes — a warp only ever moves
+ * place the suspend-then-archive rule lives, and it never hard-deletes. A warp only ever moves
  * ACTIVE→SUSPENDED→ARCHIVED, every step recoverable.
  *
  * <ul>
@@ -28,12 +28,12 @@ import org.jspecify.annotations.NullMarked;
  *       success the term advances, the warp is (re)activated, the suspend/archive marks are cleared, and the
  *       reminder counter resets to 0 so the next term starts fresh. On failure a due warp is suspended with a grace
  *       deadline; a failing retry is left suspended to be archived when that deadline lapses.
- *   <li>{@link RentDecision#ARCHIVE}: the grace window lapsed — archive the warp (recoverable via admin restore).
+ *   <li>{@link RentDecision#ARCHIVE}: the grace window lapsed, archive the warp (recoverable via admin restore).
  *   <li>{@link RentDecision#NONE}: nothing to do.
  * </ul>
  *
  * <p>Exempt warps (owner / category / world in config) and warps not enrolled in rent (no {@link RentState}) are
- * skipped entirely — never charged, never suspended.
+ * skipped entirely: never charged, never suspended.
  */
 @NullMarked
 public final class SettleRent {
@@ -84,7 +84,7 @@ public final class SettleRent {
             return renew(warp, rent, now, due);
         }
         // A due warp that cannot pay is suspended now; a still-failing retry is left suspended until its grace
-        // deadline lapses and the archive pass retires it — either way no money moved and nothing is deleted.
+        // deadline lapses and the archive pass retires it: either way no money moved and nothing is deleted.
         return due ? suspend(warp, rent, now) : RentOutcome.UNCHANGED;
     }
 

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * A private message was delivered from {@code sender} to {@code recipient}. Raised on a successful
  * {@code /msg} or {@code /reply}; the socialspy audit path subscribes so staff can observe the message
- * without being in the conversation. A message blocked by an ignore, a toggle, or a mute raises nothing —
+ * without being in the conversation. A message blocked by an ignore, a toggle, or a mute raises nothing
  * only a delivered message is a fact.
  *
  * @param sender who sent the message

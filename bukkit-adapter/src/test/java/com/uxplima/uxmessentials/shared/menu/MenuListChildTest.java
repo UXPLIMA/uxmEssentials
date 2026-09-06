@@ -55,8 +55,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of increment 7: a {@link ListProperty} clicked inside an editor running on the engine editor
- * runtime opens its list sub-menu as an engine child window — a {@link MenuHolder} routed by the one
- * {@link MenuListener} — rather than a uxmLib {@code SimpleGui}. The per-entry buttons branch on the click gesture
+ * runtime opens its list sub-menu as an engine child window. A {@link MenuHolder} routed by the one
+ * {@link MenuListener}, rather than a uxmLib {@code SimpleGui}. The per-entry buttons branch on the click gesture
  * (left moves up, right moves down, shift-left edits through the anvil seam, shift-right removes via the engine
  * confirm window), the add button opens the anvil seam, and the back button reopens the parent editor. Each mutation
  * reopens the list child so the change shows.
@@ -174,7 +174,7 @@ class MenuListChildTest {
     }
 
     // The shift-left (edit) and add gestures route into the runtime-neutral anvil text seam, which calls
-    // player.openAnvil — an operation MockBukkit leaves unimplemented, so a click that opens it cannot be exercised
+    // player.openAnvil. An operation MockBukkit leaves unimplemented, so a click that opens it cannot be exercised
     // here without the whole test aborting. The edit/add append-then-save behaviour is covered end to end by
     // ListPropertyApplyTest, which drives the package-private applyEdit/applyAdd seam the anvil's submit branch calls;
     // the gesture-to-handler routing those buttons share is exercised by the move and remove tests above.

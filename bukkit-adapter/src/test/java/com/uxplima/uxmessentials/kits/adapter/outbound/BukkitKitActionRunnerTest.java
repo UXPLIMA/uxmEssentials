@@ -27,7 +27,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@link BukkitKitActionRunner}: a {@code MESSAGE} action reaches the player, a {@code
  * CONSOLE_COMMAND} marshals onto the global thread, and the {@code WAIT_TICKS} sequencer runs the actions on
- * both sides of the wait — advancing through the recording {@link Scheduler} (whose {@code asyncAfter} fires
+ * both sides of the wait. Advancing through the recording {@link Scheduler} (whose {@code asyncAfter} fires
  * inline) rather than any {@code BukkitRunnable}. The scheduler also records which thread method each action was
  * dispatched on, so the test proves player effects hop to the entity thread and broadcasts/console commands hop
  * to the global thread.
@@ -92,7 +92,7 @@ class BukkitKitActionRunnerTest {
                         new KitAction(KitActionType.WAIT_TICKS, "20", false, false),
                         KitAction.of(KitActionType.MESSAGE, "after the wait")));
 
-        // The asyncAfter delay fired inline (recorded once) — 20 ticks at 50 ms each is exactly one second — and
+        // The asyncAfter delay fired inline (recorded once), 20 ticks at 50 ms each is exactly one second, and
         // both messages reached the player in order, proving the sequencer resumed without a BukkitRunnable.
         assertThat(scheduler.delays).containsExactly(Duration.ofSeconds(1));
         assertThat(nextLine()).isEqualTo("before the wait");

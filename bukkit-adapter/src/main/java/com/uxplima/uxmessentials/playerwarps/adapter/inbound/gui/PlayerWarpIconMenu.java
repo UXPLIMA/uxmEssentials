@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Registers and opens the warp-icon picker ({@code pwarp-icon}) the manage panel's icon button opens — the
+ * Registers and opens the warp-icon picker ({@code pwarp-icon}) the manage panel's icon button opens, the
  * player-warps twin of the home-icon picker. The subject warp is carried as the engine subject; a fixed material
  * palette is offered as a paged list, and a left click sets that material as the warp's browse icon through
  * {@link EditPlayerWarp#setIcon} before returning to the manage panel. The reset button clears the custom icon; the
@@ -46,7 +46,7 @@ public final class PlayerWarpIconMenu {
     private static final String SPEC_RESOURCE = "modules/playerwarps/gui/pwarp-icon.conf";
 
     /**
-     * The materials offered as warp icons — a fixed palette that fits one content page. A player who wants a material
+     * The materials offered as warp icons: a fixed palette that fits one content page. A player who wants a material
      * outside it can still type any material through {@code /pwarp icon <material>}; the picker covers the common set.
      */
     private static final List<Material> PALETTE = List.of(

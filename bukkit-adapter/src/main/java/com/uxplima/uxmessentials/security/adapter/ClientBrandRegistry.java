@@ -38,7 +38,7 @@ public final class ClientBrandRegistry {
         brands.remove(Objects.requireNonNull(playerId, "playerId"));
     }
 
-    /** Drop every recorded brand — called on module stop so a disable leaves nothing behind. */
+    /** Drop every recorded brand: called on module stop so a disable leaves nothing behind. */
     public void clearAll() {
         brands.clear();
     }

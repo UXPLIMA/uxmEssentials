@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.invrollback.domain.SnapshotCause;
  * enforces the per-player count cap at write time so a player's snapshots stay bounded (the age-based half of
  * retention runs on the scheduled sweep in a later phase).
  *
- * <p>Pure application code — it never touches a Bukkit type. The inbound listener reads the live inventory on the
+ * <p>Pure application code: it never touches a Bukkit type. The inbound listener reads the live inventory on the
  * tick thread, serializes it, and calls {@link #capture} off the tick thread through the {@code Scheduler.async}
  * port, so the DB write never blocks a region thread.
  */

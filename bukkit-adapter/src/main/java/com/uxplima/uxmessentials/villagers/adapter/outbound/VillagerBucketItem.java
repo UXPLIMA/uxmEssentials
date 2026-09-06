@@ -19,15 +19,15 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The one place a live villager is turned into the "captured villager" item and back. Picking a villager up encodes
- * everything the placed-back villager must reproduce — its profession, its biome type, its level, and its full trade
- * set — into a single {@code VILLAGER_SPAWN_EGG} carrying our marker flag; placing it decodes those back onto a freshly
+ * everything the placed-back villager must reproduce, its profession, its biome type, its level, and its full trade
+ * set. Into a single {@code VILLAGER_SPAWN_EGG} carrying our marker flag; placing it decodes those back onto a freshly
  * spawned villager. The trade set rides {@link VillagerRecipeCodec} (the same encoder the trade manager uses), so the
  * amounts and metadata of every recipe survive the round trip.
  *
  * <p>The profession and type are stored as their registry-key strings and resolved back through the Bukkit registries;
  * a key that no longer resolves (a removed data-pack profession) is simply skipped, leaving the restored villager with
  * its default, rather than failing the placement. The level is clamped into the vanilla one-to-five band on restore,
- * and the recipes are applied <em>last</em> — after the profession, which would otherwise re-roll a villager's trades.
+ * and the recipes are applied <em>last</em>: after the profession, which would otherwise re-roll a villager's trades.
  *
  * <h2>Concurrency</h2>
  * The item's PDC is read and written off any live entity (it is item state, not entity state); {@link #capture} reads
@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class VillagerBucketItem {
 
-    /** The item a captured villager becomes — a spawn egg the marker flag re-skins as our own item. */
+    /** The item a captured villager becomes: a spawn egg the marker flag re-skins as our own item. */
     private static final Material MATERIAL = Material.VILLAGER_SPAWN_EGG;
 
     /** The lowest / highest villager level the vanilla merchant accepts; a decoded level is clamped into this band. */

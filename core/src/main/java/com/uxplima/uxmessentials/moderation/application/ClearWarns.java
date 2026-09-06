@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /unwarn <player>}: wipe a player's whole warning history. The complement of the append-only
- * {@code /warn} — there is no per-entry removal, the operator clears the lot. A target with no warnings is a
+ * {@code /warn}: there is no per-entry removal, the operator clears the lot. A target with no warnings is a
  * no-op that still answers the actor and audit-logs the miss; a cleared target's rows are deleted and the
  * removed count is reported and audit-logged.
  */

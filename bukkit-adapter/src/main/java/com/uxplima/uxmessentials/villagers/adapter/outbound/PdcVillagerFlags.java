@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The per-villager state the trade features persist on the villager entity itself: the instant it last restocked its
  * trades (the restock timer's clock) and whether trading is disabled for this individual villager (the Phase-2 trade
- * manager's hook). Both are the sanctioned use for transient per-holder state — stamped in the villager's PDC under a
+ * manager's hook). Both are the sanctioned use for transient per-holder state. Stamped in the villager's PDC under a
  * single pre-created key each, so they survive a chunk reload and a server restart but never touch the database.
  *
  * <p>The last-restock is stored as epoch milliseconds ({@link PersistentDataType#LONG}); an absent stamp reads as

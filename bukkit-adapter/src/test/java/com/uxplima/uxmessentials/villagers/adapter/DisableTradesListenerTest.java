@@ -26,7 +26,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of the disable-trades listener: a right-click on a villager is cancelled when the global switch
  * is on, when the individual villager carries the per-villager disable flag (even with the global switch off), and left
- * alone when neither applies — plus the off-hand interaction is ignored so only a main-hand open is refused.
+ * alone when neither applies: plus the off-hand interaction is ignored so only a main-hand open is refused.
  */
 class DisableTradesListenerTest {
 

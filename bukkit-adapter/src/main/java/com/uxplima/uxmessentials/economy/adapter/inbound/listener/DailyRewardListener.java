@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Credits a configurable daily login reward the first time a player joins each cooldown window. The "last
  * claimed" stamp is transient per-holder state, so it lives in the player's PDC under a single pre-created key
- * (never minted on the hot path) — exactly the kind of cooldown stamp PDC is for. The PDC read/stamp runs on the
+ * (never minted on the hot path): exactly the kind of cooldown stamp PDC is for. The PDC read/stamp runs on the
  * join (entity) thread where the player is safe to touch; the credit and the confirmation are bridged off-tick
  * through the kernel {@link Scheduler}, so the ledger write never blocks the join. Disabled by default and a
  * no-op for a non-positive amount.

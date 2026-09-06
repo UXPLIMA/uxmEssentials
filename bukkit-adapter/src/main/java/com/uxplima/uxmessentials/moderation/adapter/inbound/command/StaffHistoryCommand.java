@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /staffhistory <staff>}: review the sanctions a staff member has issued, newest-first — the mirror of
+ * {@code /staffhistory <staff>}: review the sanctions a staff member has issued, newest-first, the mirror of
  * {@code /history}, scoped by who did the punishing rather than who was punished, so an operator can audit a
  * staff member's disciplinary activity. The {@code ReviewStaffHistory} use case runs the bounded, append-only
  * history query (indexed by actor) and resolves each row's target name. It is gated by its own

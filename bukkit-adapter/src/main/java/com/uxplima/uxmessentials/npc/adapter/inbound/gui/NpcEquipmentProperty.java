@@ -26,14 +26,14 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmlib.item.ItemBuilder;
 
 /**
- * The "equipment" property: its click opens a six-button grid — head, chest, legs, feet, main-hand, off-hand —
+ * The "equipment" property: its click opens a six-button grid (head, chest, legs, feet, main-hand, off-hand)
  * each button showing what the NPC currently wears in that slot. Left-clicking a slot sets it from the operator's
  * held item (serialized verbatim with its NBT, exactly as {@code /npc equip <slot> hand} does), and a shift-left
  * clears it. The reads come fresh from the supplier on each open (the list-click snapshot would go stale after an
  * edit), and writes go through the existing {@link com.uxplima.uxmessentials.npc.application.SetNpcEquipment} use
  * case wrapped as the {@code setSlot}/{@code clearSlot} consumers, so this property adds no domain logic.
  *
- * <p>The grid opens as an engine child window the one menu listener routes — each slot is a {@link SelectorButton}
+ * <p>The grid opens as an engine child window the one menu listener routes. Each slot is a {@link SelectorButton}
  * carrying a gesture-aware {@link ChildClickHandler} (left = set-from-hand, shift-left = clear) and the back button
  * reopens the parent editor via the {@link ClickContext}. The set-from-hand reads the live player's main hand inside
  * the handler, which runs on the viewer's entity thread, so a Bukkit read there is legal; the actual write hops off
@@ -186,7 +186,7 @@ final class NpcEquipmentProperty implements EditableProperty {
                 .orElseGet(() -> messages.resolve(viewer, NpcMessageKey.NPC_GUI_EQUIP_EMPTY, Map.of()));
     }
 
-    /** The slot's display word — its enum name, the same word {@code /npc equip} uses. */
+    /** The slot's display word, its enum name, the same word {@code /npc equip} uses. */
     private static String label(EquipmentSlot slot) {
         return slot.name();
     }

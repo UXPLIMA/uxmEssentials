@@ -21,14 +21,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Bridges the ranks context's {@link RankActionRunner} port to the shared {@link ClickActionRunner} the npc and
  * hologram contexts already run their interaction chains through. A rank's raw action line is
- * {@code <type> <value…>} — the same {@code type value} shape those contexts use, minus the click trigger, since
- * a rankup is not a click — so each line is parsed into a {@link ClickAction} carrying {@link ClickTrigger#ANY}
+ * {@code <type> <value…>}. The same {@code type value} shape those contexts use, minus the click trigger, since
+ * a rankup is not a click, so each line is parsed into a {@link ClickAction} carrying {@link ClickTrigger#ANY}
  * and the chain is run once as if the player had triggered it. A line whose type word is unknown, or that carries
  * no value, is logged and skipped so one operator typo never aborts the rest of the rank's actions.
  *
  * <p>Rankup runs on the player's own region thread (the {@code /rankup} command thread), which is where the
  * shared runner's Bukkit effects are safe, so the chain runs inline with no region hop. When the player is not
- * online — an autorank promotion of an offline player in a later phase — there is no viewer to act on, so the
+ * online (an autorank promotion of an offline player in a later phase) there is no viewer to act on, so the
  * call is a no-op.
  */
 @NullMarked

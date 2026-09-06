@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The one codec for a fully-serialized item stored as a click-action payload. A {@code GIVE} action (or an NPC
- * equipment slot) may carry a complete item — every component, enchantment, name, lore — rather than a bare
+ * equipment slot) may carry a complete item (every component, enchantment, name, lore) rather than a bare
  * material, encoded as a {@code b64:}-prefixed base64 of {@link ItemStack#serializeAsBytes()}. Both the producer
  * ({@code /hologram action … give hand}, {@code /npc …}) and the consumers (the runner's give-resolver, the
  * command value-check, the NPC equipment ACL) go through here, so the {@code b64:} marker lives in exactly one

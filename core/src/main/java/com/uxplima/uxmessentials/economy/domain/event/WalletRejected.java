@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.economy.domain.Money;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A wallet change refused before it could apply — a debit short of funds, or a credit that would breach the
+ * A wallet change refused before it could apply. A debit short of funds, or a credit that would breach the
  * currency's maximum. A first-class event rather than a thrown exception, so consumers (audit, the
  * requesting context's UX) observe the refusal the same way they observe success. Carries the requested
  * amount, the balance available at the time, and the {@link EconomyError} that classifies the refusal. Maps

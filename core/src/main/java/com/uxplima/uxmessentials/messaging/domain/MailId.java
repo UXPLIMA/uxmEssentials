@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.messaging.domain;
 
 /**
- * The stable identity of one mail item — the {@code mail.id} primary key. A persisted mail item has a
+ * The stable identity of one mail item, the {@code mail.id} primary key. A persisted mail item has a
  * concrete id assigned by the store; an item being composed before it is written carries
  * {@link #UNASSIGNED} so the type is the same on both sides of the save without an {@code Optional} wrapper.
  *

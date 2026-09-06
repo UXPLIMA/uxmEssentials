@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * Outbound port the holograms renderer asks "where is the NPC named {@code npcName}?" without depending on the
- * npc context's internals — the cross-context seam for a hologram linked to an NPC (the
+ * npc context's internals. The cross-context seam for a hologram linked to an NPC (the
  * link-with-NPC feature). It returns the shared {@link Position} so this contract, like the rest of the holograms
  * context, stays pure: no Bukkit, no npc-domain type.
  *

@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /hologram list}: list every server-wide hologram in stored creation order. Holograms are an
- * operator surface (the command is gated as a whole), so the list is unfiltered — every hologram is shown.
+ * operator surface (the command is gated as a whole), so the list is unfiltered: every hologram is shown.
  * The holograms are returned for the adapter to render, and the header / per-entry / empty feedback is
  * pushed through the notifier so all text resolves from {@link HologramsMessageKey}.
  */

@@ -7,7 +7,7 @@ package com.uxplima.uxmessentials.playerwarps.domain;
  * reference.
  *
  * <p>A warp that has not been saved yet has no id. That absence is modelled on the aggregate as an
- * {@code Optional<PlayerWarpId>}, not as a zero or negative sentinel here — this type only ever holds a real,
+ * {@code Optional<PlayerWarpId>}, not as a zero or negative sentinel here. This type only ever holds a real,
  * positive key.
  *
  * @param value the positive database key

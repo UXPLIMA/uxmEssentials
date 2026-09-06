@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The append-only ledger-history writer for the {@code transactions} table. Unlike the debounced settle queue
- * ({@link DebouncedWalletWriter}), telemetry rows must <strong>all</strong> survive — none may collapse — so
+ * ({@link DebouncedWalletWriter}), telemetry rows must <strong>all</strong> survive, none may collapse, so
  * they buffer in memory and flush as one batch {@code INSERT} on a fixed interval
  * ({@code docs/11-economy-integration.md} §10.1: debounce collapses, batch preserves). Each row records one
  * applied money move with its currency, type, and {@link EconomyReason} stored as their stable enum names so
@@ -80,7 +80,7 @@ public final class TransactionTelemetry extends JooqRepository implements Transa
 
     /**
      * Seed the id counter from {@code MAX(id)} already in the table so ids continue past the highest existing
-     * row after a restart — the table's {@code id} is an app-supplied {@code BIGINT} primary key (portable
+     * row after a restart. The table's {@code id} is an app-supplied {@code BIGINT} primary key (portable
      * across SQLite/MySQL/PostgreSQL), not an engine identity column, so this writer owns the sequence. An
      * empty table seeds at 0; the first {@link #nextId()} returns 1.
      *
@@ -193,7 +193,7 @@ public final class TransactionTelemetry extends JooqRepository implements Transa
     }
 
     /**
-     * Put the drained rows back so the next window retries them — a transient DB blip must not silently lose a
+     * Put the drained rows back so the next window retries them. A transient DB blip must not silently lose a
      * telemetry window (these rows are the audit ledger). Bounded by {@link #MAX_RETAINED}: once the buffer is
      * at the watermark the overflow is dropped and logged, trading the deepest history for heap safety under a
      * sustained outage. Re-add is to the tail; rows carry their own {@code ts}, and queries order by it.

@@ -23,21 +23,21 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * so {@link ClaimKit} stays a thin orchestrator. The order is deliberate: the per-kit permission first
  * (cheapest, and the most informative refusal), then the one-time stamp (a consumed one-time kit is a
  * permanent no), then the cooldown (a repeatable kit's rate limit), then the placeholder requirements, then the
- * global stock reservation, and only last the charge — so a kit whose requirements the player fails is never
+ * global stock reservation, and only last the charge, so a kit whose requirements the player fails is never
  * charged, an over-cooldown kit never burns their money, and a sold-out kit is refused before any charge.
  *
  * <p>This is where the economy and requirement <em>soft couplings</em> live. Each is an {@link Optional}
  * injected at wiring time. When the economy provider is absent, a kit's recorded cost is ignored and the kit is
  * claimable for free; when present, the cost is charged through the narrow {@link KitEconomy} seam after every
  * other gate passes. When the {@link RequirementEvaluator} is absent (PlaceholderAPI not installed), a kit with
- * no requirements is claimable but a kit that <em>declares</em> requirements fails closed — its conditions
+ * no requirements is claimable but a kit that <em>declares</em> requirements fails closed: its conditions
  * cannot be checked, so it cannot be claimed. The kits context therefore never hard-depends on the economy
  * context or on any placeholder engine.
  *
  * <p>The cooldown resolves through the shared {@link Cooldowns} port against the {@code kit} tier node
  * ({@code uxmessentials.kit.cooldown.<seconds>}, lowest wins) while keying its stamp per kit id, so each kit
  * rate-limits independently. The {@code uxmessentials.kit.cooldown.bypass} node both skips the cooldown and,
- * by convention, lets a holder re-claim a one-time kit — that bypass is checked here for the one-time gate.
+ * by convention, lets a holder re-claim a one-time kit: that bypass is checked here for the one-time gate.
  */
 public final class KitAccess {
 
@@ -94,7 +94,7 @@ public final class KitAccess {
     /**
      * Check whether {@code who} may claim {@code kit} and, when a cost applies and a provider is present,
      * charge it. Returns the first failing gate, or success once the player has been admitted (and charged,
-     * if applicable). Side effects beyond the charge — stamping the cooldown and the one-time mark — are the
+     * if applicable). Side effects beyond the charge, stamping the cooldown and the one-time mark, are the
      * caller's job, run only after the grant succeeds.
      */
     public Result<Unit, KitError> admit(PlayerRef who, KitDefinition kit) {
@@ -108,8 +108,8 @@ public final class KitAccess {
     }
 
     /**
-     * Run only the side-effect-free claim gates — permission, the one-time stamp, the cooldown, and the
-     * requirements — returning the first failing one or success. Unlike {@link #admit}, this reserves no stock
+     * Run only the side-effect-free claim gates, permission, the one-time stamp, the cooldown, and the
+     * requirements: returning the first failing one or success. Unlike {@link #admit}, this reserves no stock
      * and charges no cost, so the claim use case can interpose its own check (an {@code on-full: deny} inventory
      * pre-check) between the gates and the irreversible reserve-and-charge step.
      */
@@ -169,7 +169,7 @@ public final class KitAccess {
 
     /**
      * Whether {@code who} satisfies {@code kit}'s claim requirements. A kit with no requirements always passes.
-     * A kit that declares requirements passes only when an evaluator is present and every condition holds —
+     * A kit that declares requirements passes only when an evaluator is present and every condition holds
      * with no evaluator wired (PlaceholderAPI absent) it <em>fails closed</em>, because the conditions cannot
      * be checked. Used by the gate and by the menu renderer to pick the requirements-not-met display state.
      */
@@ -238,7 +238,7 @@ public final class KitAccess {
      * Resolve the variant of {@code kit} that applies to {@code who}: the first variant, in definition order
      * (best-first), whose permission the viewer holds, or the base kit when they hold none. Used at claim,
      * list, and preview time so the items granted and the icon shown reflect the viewer's rank. The returned
-     * definition carries the resolved variant's items and — when the variant overrides them — its cooldown
+     * definition carries the resolved variant's items and, when the variant overrides them, its cooldown
      * and cost, with every other setting inherited from the base kit.
      */
     public KitDefinition resolveVariant(PlayerRef who, KitDefinition kit) {

@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.vote.domain.VoteTally;
  * so the engine itself stays a pure function: who voted and whether they are online, the world they are
  * in (empty for an offline voter), the vote-list service the vote came from, the voter's totals after
  * this vote was recorded, whether this vote advanced their consecutive-day streak, and the three gate
- * seams the adapter supplies — a permission check, and a chance roll.
+ * seams the adapter supplies, a permission check, and a chance roll.
  *
  * <p>{@code rollPasses.test(chancePercent)} returns true when a {@code 1..100} roll lands at or below the
  * spec's chance; the adapter backs it with real RNG and a test backs it with a deterministic stub.

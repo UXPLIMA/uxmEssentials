@@ -23,7 +23,7 @@ import org.jspecify.annotations.Nullable;
  * Turns a domain {@link Hologram} into a live uxmLib hologram by its type, on the renderer's behalf: a
  * {@code TEXT} hologram from the configured builder, an {@code ITEM} hologram from the resolved {@code Material},
  * a {@code BLOCK} hologram from the parsed BlockData. An ITEM with an unknown material or a BLOCK with an
- * unparseable BlockData string is failed soft — logged and skipped (returns {@code null}) rather than thrown, so
+ * unparseable BlockData string is failed soft. Logged and skipped (returns {@code null}) rather than thrown, so
  * one bad value never breaks the render of the others. Pure of any tracking or visibility, so the renderer keeps
  * the lifecycle and this helper keeps the per-type spawn so each stays small.
  */
@@ -58,7 +58,7 @@ final class HologramSpawns {
         org.bukkit.entity.EntityType type = HologramModels.entityTypeOf(hologram.entityType());
         if (type == null) {
             log.warn(
-                    "skipping entity hologram {} — unknown or non-living entity type {}",
+                    "skipping entity hologram {}. Unknown or non-living entity type {}",
                     hologram.name().value(),
                     String.valueOf(hologram.entityType()));
             return null;
@@ -86,7 +86,7 @@ final class HologramSpawns {
         ItemStack head = HologramModels.headOf(hologram.headTexture());
         if (head == null) {
             log.warn(
-                    "skipping head hologram {} — unusable skin texture",
+                    "skipping head hologram {}, unusable skin texture",
                     hologram.name().value());
             return null;
         }
@@ -101,7 +101,7 @@ final class HologramSpawns {
         ItemStack item = HologramModels.itemOf(hologram.itemMaterial());
         if (item == null) {
             log.warn(
-                    "skipping item hologram {} — unknown material {}",
+                    "skipping item hologram {}, unknown material {}",
                     hologram.name().value(),
                     String.valueOf(hologram.itemMaterial()));
             return null;
@@ -117,7 +117,7 @@ final class HologramSpawns {
         BlockData block = HologramModels.blockOf(hologram.blockData());
         if (block == null) {
             log.warn(
-                    "skipping block hologram {} — invalid block data {}",
+                    "skipping block hologram {}, invalid block data {}",
                     hologram.name().value(),
                     String.valueOf(hologram.blockData()));
             return null;
@@ -130,7 +130,7 @@ final class HologramSpawns {
 
     /**
      * Apply a stored {@link Rotation} to a model (item/block) builder when it is non-zero. Only visible with a
-     * FIXED billboard — applied regardless, so the operator sets the billboard separately as on the text path.
+     * FIXED billboard: applied regardless, so the operator sets the billboard separately as on the text path.
      */
     private static void applyRotation(Holograms.ModelBuilder<?> builder, Hologram hologram) {
         Rotation rotation = hologram.rotation();

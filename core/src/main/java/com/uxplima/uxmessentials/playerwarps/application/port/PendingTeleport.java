@@ -14,8 +14,8 @@ import com.uxplima.uxmessentials.warps.domain.WarpCost;
  * the target backend reads the row on join and completes the hop, or refunds and clears it when the warp is no
  * longer reachable. There is at most one pending teleport per player, so the row is keyed by {@code player}.
  *
- * <p>The charged amount is carried in this context's own terms — a {@link WarpCost} of a {@code BigDecimal} amount
- * plus a {@code currencyId} string, never an economy {@code Money} — so the narrow economy seam is preserved and
+ * <p>The charged amount is carried in this context's own terms, a {@link WarpCost} of a {@code BigDecimal} amount
+ * plus a {@code currencyId} string, never an economy {@code Money}, so the narrow economy seam is preserved and
  * {@code :core} takes on no economy import. It is {@link Optional#empty()} when nothing was charged (a member, a
  * cost-bypass holder, a free warp, or no economy provider), so the arrival refund is exact.
  *

@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>Idempotent by an internal flag so a double-install (or a stop that never installed) is a safe no-op, and every
  * touch of the logging tree is followed by {@link LoggerContext#updateLoggers()} so the change takes effect. Install
- * and uninstall are called on the main thread during module enable/stop, so the flag alone is enough — no lock is
+ * and uninstall are called on the main thread during module enable/stop, so the flag alone is enough: no lock is
  * held over the logging reconfiguration.
  */
 @NullMarked

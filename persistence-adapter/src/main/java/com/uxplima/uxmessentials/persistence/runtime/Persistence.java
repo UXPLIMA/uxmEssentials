@@ -82,7 +82,7 @@ public final class Persistence implements AutoCloseable {
     /**
      * A lightweight liveness probe for the {@code /uxmess doctor} diagnostic: runs a trivial {@code SELECT 1}
      * to confirm a connection can be acquired and read the latest applied Flyway schema version from the
-     * history table. Returns a {@link Probe} carrying both rather than throwing — a dead pool surfaces as a
+     * history table. Returns a {@link Probe} carrying both rather than throwing. A dead pool surfaces as a
      * {@code reachable = false} probe so the caller reports it instead of propagating. Must be called off the
      * tick thread (it acquires a connection).
      */

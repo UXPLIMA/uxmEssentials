@@ -2,7 +2,7 @@
 -- equipment/glow, the action chain, the entity type, the widened equipment payload, the pose/scale columns and the
 -- per-type metadata child table). An NPC can now carry a shown display name distinct from its id, a slim/classic
 -- skin-model variant, a mirror-skin toggle, collision and tab-visibility toggles, per-NPC view/turn distance
--- overrides, the on-fire/invisible/silent state flags, and a per-NPC interaction-cooldown override — the full
+-- overrides, the on-fire/invisible/silent state flags, and a per-NPC interaction-cooldown override, the full
 -- per-NPC surface.
 --
 -- display_name is the shown label (a MiniMessage string), nullable so a NULL or empty value hides the name and
@@ -10,7 +10,7 @@
 -- (0 classic/Steve, 1 slim/Alex), NOT NULL DEFAULT 0 so an older row reads back classic. mirror_skin, collidable,
 -- show_in_tab, on_fire, invisible and silent are SMALLINT 0/1 toggles, each NOT NULL DEFAULT 0 so an older row reads
 -- back with the prior behaviour (no mirror, no collision, hidden from tab, not on fire, visible, audible).
--- view_distance and turn_distance are nullable REAL per-NPC overrides of the module render/look ranges — a NULL
+-- view_distance and turn_distance are nullable REAL per-NPC overrides of the module render/look ranges, a NULL
 -- means "use the module default". interaction_cooldown_millis is a BIGINT per-NPC override of the global click
 -- cooldown, NOT NULL DEFAULT 0 where 0 means "use the module default". All columns are purely additive and leave
 -- every stored NPC unchanged.

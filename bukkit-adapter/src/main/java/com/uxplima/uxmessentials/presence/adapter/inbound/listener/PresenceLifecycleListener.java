@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The presence lifecycle listener: it seeds a player's {@link PlayerPresence} on join and drops it on quit, so a
  * disconnected player holds no presence state. Vanish moved to its own {@code vanish} context, which owns the vanish
- * view and the join/quit re-hide and quit-line suppression through its own listener — so this listener no longer
+ * view and the join/quit re-hide and quit-line suppression through its own listener, so this listener no longer
  * touches visibility.
  */
 @NullMarked

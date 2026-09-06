@@ -118,7 +118,7 @@ class TablistRendererTest {
     @Test
     void doesNotReApplyTheNameOrOrderOnASteadyStateTick() {
         // No format switch -> the name/order are applied once and not re-sent. We cannot directly observe a missing
-        // re-send through MockBukkit's plain setters, so we assert the value is stable across two identical paints —
+        // re-send through MockBukkit's plain setters, so we assert the value is stable across two identical paints
         // the
         // tracking maps keep it consistent and the second paint must not throw.
         PlayerMock player = server.addPlayer();
@@ -218,7 +218,7 @@ class TablistRendererTest {
 
     @Test
     void aNameOnlyFormatDoesNotBlankTheHeaderOrFooterButAppliesTheName() {
-        // A format with an EMPTY header AND footer must NOT call sendPlayerListHeaderAndFooter at all — uxmLib's
+        // A format with an EMPTY header AND footer must NOT call sendPlayerListHeaderAndFooter at all, uxmLib's
         // Tablist.set sends both together, so sending an empty pair would wipe whatever vanilla or another plugin set.
         // The send count being zero is the observable proof the tab header/footer was left untouched.
         CapturingPlayerMock player = new CapturingPlayerMock(server, "nameonly");
@@ -229,7 +229,7 @@ class TablistRendererTest {
         renderer.renderFor(player);
 
         assertThat(player.sendCount()).isZero();
-        // The name and order still apply — a name-only/order-only format is fully functional.
+        // The name and order still apply: a name-only/order-only format is fully functional.
         assertThat(plain(player.playerListName())).isEqualTo(player.getName());
         assertThat(player.getPlayerListOrder()).isEqualTo(42);
     }
@@ -237,7 +237,7 @@ class TablistRendererTest {
     @Test
     void switchingFromAHeaderFormatToANameOnlyFormatClearsTheRenderersHeaderFooter() {
         // A player who had a header-having format and then switches to a name-only one must have THIS renderer's
-        // header/footer cleared (an empty pair) rather than left stale — the second send is the clear.
+        // header/footer cleared (an empty pair) rather than left stale: the second send is the clear.
         CapturingPlayerMock player = new CapturingPlayerMock(server, "switcher");
         server.addPlayer(player);
         AtomicReference<TablistFormatConfig> ref =
@@ -267,7 +267,7 @@ class TablistRendererTest {
     @Test
     void aNameOnlyFormatLeavesAFreshPlayerUntouchedAcrossSteadyStateTicks() {
         // A player who never had a header/footer from this renderer keeps zero sends across repeated paints of a
-        // name-only format — the renderer never blanks a tab it did not author.
+        // name-only format: the renderer never blanks a tab it did not author.
         CapturingPlayerMock player = new CapturingPlayerMock(server, "steady");
         server.addPlayer(player);
         TablistRenderer renderer =
@@ -422,7 +422,7 @@ class TablistRendererTest {
     @Test
     void repaintsASkinnedPlayersEntryToALateJoiner() {
         // A is skinned while alone, then B joins later. Native name/order replicate to B, but the custom-skin packet
-        // does not — so the join-time repaint must re-send A's custom-skin entry to B (and only B).
+        // does not, so the join-time repaint must re-send A's custom-skin entry to B (and only B).
         PlayerMock a = server.addPlayer();
         RecordingPackets packets = new RecordingPackets();
         TablistSkinSource skin = new TablistSkinSource.Texture("YS10ZXg=", Optional.of("asig"));
@@ -467,7 +467,7 @@ class TablistRendererTest {
 
     @Test
     void doesNotRepaintAnUnskinnedPlayerToALateJoiner() {
-        // A is on the native (no-skin) path, so the repaint must send nothing to a late joiner — only skinned targets
+        // A is on the native (no-skin) path, so the repaint must send nothing to a late joiner: only skinned targets
         // are repainted.
         PlayerMock a = server.addPlayer();
         RecordingPackets packets = new RecordingPackets();
@@ -483,7 +483,7 @@ class TablistRendererTest {
 
     @Test
     void doesNotRepaintAnOfflineSkinnedTargetToALateJoiner() {
-        // A is skinned, then quits (forget drops their tracking). A late joiner must not be repainted A's entry — only
+        // A is skinned, then quits (forget drops their tracking). A late joiner must not be repainted A's entry, only
         // currently-online skinned targets are repainted.
         PlayerMock a = server.addPlayer();
         RecordingPackets packets = new RecordingPackets();
@@ -789,7 +789,7 @@ class TablistRendererTest {
 
     @Test
     void forgetDropsFillerTrackingWithoutASpuriousRemovePacket() {
-        // On quit the viewer's connection is closing, so — like the skin revert — forget drops the tracking without
+        // On quit the viewer's connection is closing, so, like the skin revert, forget drops the tracking without
         // sending a remove packet to a dead channel. A relog then re-paints the grid from scratch. The next paint after
         // a forget must therefore re-send the filler (the tracking was cleared), proving forget reset the state.
         PlayerMock viewer = server.addPlayer();
@@ -932,7 +932,7 @@ class TablistRendererTest {
         // snapshot at the instant its ADD_PLAYER crosses the live interceptor. Otherwise that first paint is force-
         // unlisted and the per-cell flicker guard never repaints it, leaving the new filler permanently hidden. The
         // gate's interceptor is modelled by consulting the live suppress predicate at packet-send time for every filler
-        // entry that goes out — exactly what NmsPlayerInfoUpdates.forceUnlisted does on the wire.
+        // entry that goes out: exactly what NmsPlayerInfoUpdates.forceUnlisted does on the wire.
         PlayerMock viewer = server.addPlayer();
         SnapshotProbingPackets packets = new SnapshotProbingPackets();
         TablistSuppression suppression = new TablistSuppression(
@@ -962,7 +962,7 @@ class TablistRendererTest {
 
         UUID fillerId = fillerId(viewer.getUniqueId(), 5);
         // The filler entry was actually sent, and at the moment it crossed the (modelled) interceptor the suppress
-        // predicate kept it LISTED — proving the snapshot already protected it before the packet went out.
+        // predicate kept it LISTED: proving the snapshot already protected it before the packet went out.
         assertThat(packets.sentFillerIds).contains(fillerId);
         assertThat(packets.fillerIdsThatWouldBeHidden).doesNotContain(fillerId);
     }
@@ -986,7 +986,7 @@ class TablistRendererTest {
     /**
      * A PlayerMock that records the header/footer components handed to {@code sendPlayerListHeaderAndFooter} and counts
      * the sends. The stock PlayerMock leaves that call a no-op, so this is the only way to observe whether the renderer
-     * sent a header/footer at all — the send count distinguishes "never touched" from "cleared to empty".
+     * sent a header/footer at all: the send count distinguishes "never touched" from "cleared to empty".
      */
     private static final class CapturingPlayerMock extends PlayerMock {
         private @Nullable Component lastHeader;
@@ -1019,7 +1019,7 @@ class TablistRendererTest {
 
     /**
      * A fake {@link TabListPackets} that records each built add entry and counts sends. The packet object is the entry,
-     * so a recorded {@code (viewer, packet)} send pair carries the {@link TabEntry} that reached that viewer — this lets
+     * so a recorded {@code (viewer, packet)} send pair carries the {@link TabEntry} that reached that viewer: this lets
      * a late-joiner test assert which entries a single viewer received.
      */
     private static class RecordingPackets implements TabListPackets {
@@ -1150,7 +1150,7 @@ class TablistRendererTest {
     /**
      * A {@link RecordingPackets} that models the live suppress interceptor: at {@code addOrUpdate} send time it asks the
      * bound {@link TablistSuppression}'s predicate whether the entry's id would be forced unlisted, so a test can prove a
-     * filler is protected at the exact moment its packet crosses the wire — the ordering the real defect turned on.
+     * filler is protected at the exact moment its packet crosses the wire: the ordering the real defect turned on.
      */
     private static final class SnapshotProbingPackets extends RecordingPackets {
         private final List<UUID> sentFillerIds = new ArrayList<>();
@@ -1189,7 +1189,7 @@ class TablistRendererTest {
         }
     }
 
-    /** A scheduler that runs every hop inline — used where the resolver's async fetch should complete immediately. */
+    /** A scheduler that runs every hop inline: used where the resolver's async fetch should complete immediately. */
     private static final class InlineScheduler extends NoopScheduler {
         @Override
         public void async(Runnable task) {
@@ -1395,7 +1395,7 @@ class TablistRendererTest {
         return new TablistLayout(List.of(fillers), TablistLayout.Direction.COLUMNS, 20);
     }
 
-    /** The deterministic filler entry id the renderer mints for a (viewer, slot) cell — mirrors TablistRenderer. */
+    /** The deterministic filler entry id the renderer mints for a (viewer, slot) cell, mirrors TablistRenderer. */
     private static UUID fillerId(UUID viewer, int slot) {
         return UUID.nameUUIDFromBytes(
                 ("uxmf:" + viewer + ":" + slot).getBytes(java.nio.charset.StandardCharsets.UTF_8));

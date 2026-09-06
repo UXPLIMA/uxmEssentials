@@ -282,11 +282,11 @@ class TablistSuppressionTest {
     }
 
     private static TablistSuppression.Rewriter passThroughRewriter() {
-        // A rewriter that never rewrites (always forwards the original) — used where only the lifecycle matters.
+        // A rewriter that never rewrites (always forwards the original): used where only the lifecycle matters.
         return (packet, suppress) -> null;
     }
 
-    /** The single listener the suppression registers at construction — the shared per-connection interceptor. */
+    /** The single listener the suppression registers at construction: the shared per-connection interceptor. */
     private static PacketListener single(PacketListenerRegistry registry) {
         assertThat(registry.snapshot()).hasSize(1);
         return registry.snapshot().get(0);

@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /discordunlink}: remove the player's confirmed Discord binding. Runs the {@code Unlink} use case and
- * tells the player whether anything was unbound — a success when a binding existed, a not-linked notice when
+ * tells the player whether anything was unbound. A success when a binding existed, a not-linked notice when
  * there was none. The {@code uxmessentials.discord.link} node guards the command.
  */
 @NullMarked

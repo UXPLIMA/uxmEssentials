@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /unban <player>}: lift a player's permanent ban. The ban lives in the per-UUID tempban row (a
  * permanent ban is a far-future {@link TempbanState.Active}), so lifting it is a {@code none()} save on that
- * row — {@code /unbanip} only clears IP rows, never this one. A target who is not currently banned is refused
+ * row: {@code /unbanip} only clears IP rows, never this one. A target who is not currently banned is refused
  * (audit-logged); a banned target's row is cleared and the login enforcement stops barring reconnection.
  */
 public final class Unban {

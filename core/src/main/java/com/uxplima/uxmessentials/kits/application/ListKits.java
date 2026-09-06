@@ -13,13 +13,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /kit list}: list the kits a player may claim. The list is filtered to the kits the player can actually
- * obtain — those whose per-kit permission they hold (a kit not gated behind a permission is always shown) and
+ * obtain. Those whose per-kit permission they hold (a kit not gated behind a permission is always shown) and
  * which they have not already consumed if the kit is one-time. A one-time kit the player has claimed is
  * omitted entirely (§15.5), so the list never advertises a kit the player can no longer take.
  *
  * <p>The visible kits (in catalog order) are returned for the adapter to render as a clickable MiniMessage
  * list; the header / per-entry / empty feedback is pushed through the notifier so all text resolves from
- * {@link KitsMessageKey}. Cooldown state does <em>not</em> hide a kit — a kit on cooldown is still shown
+ * {@link KitsMessageKey}. Cooldown state does <em>not</em> hide a kit. A kit on cooldown is still shown
  * (the player will claim it when it is ready); only a consumed one-time kit drops out.
  */
 public final class ListKits {
@@ -37,7 +37,7 @@ public final class ListKits {
     }
 
     /**
-     * The kits {@code viewer} may claim, in catalog order, with no side effect — a one-time kit they have
+     * The kits {@code viewer} may claim, in catalog order, with no side effect. A one-time kit they have
      * already consumed and a permission-gated kit they lack the node for are dropped. This is the same filter
      * the chat {@link #list} renders; the {@code /kit list} browse menu calls this directly so the GUI and the
      * text list never disagree on what a player may take.

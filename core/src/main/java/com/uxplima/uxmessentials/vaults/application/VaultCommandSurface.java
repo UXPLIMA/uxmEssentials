@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
 /**
  * The vaults context's command surface (docs/10-feature-modules.md §15.11) as a platform-neutral
  * {@link CommandSpec}: the single {@code /vault} literal, gated by {@code uxmessentials.vault.use}, that
- * serves all three forms — {@code /vault} (open the default vault or list when several exist), {@code /vault
+ * serves all three forms, {@code /vault} (open the default vault or list when several exist), {@code /vault
  * <n>} (open the Nth), and {@code /vault <player> [n]} (the audit-logged staff override, gated inside the
  * handler by {@code uxmessentials.vault.others}). The vaults inbound adapter realises the Brigadier node from
  * the started module's context on the next {@code COMMANDS} fire. Collected here so {@code VaultsModule} stays
@@ -30,6 +30,6 @@ final class VaultCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of the vault command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of the vault command, literal and help text, no Brigadier type. */
     private record VaultCommand(String literal, String description) implements BrigadierCommand {}
 }

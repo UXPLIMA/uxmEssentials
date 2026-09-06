@@ -8,7 +8,7 @@ import java.util.Optional;
  * One item to grant as part of a vote reward, described as plain data so the domain stays Bukkit-free:
  * the material name (e.g. {@code DIAMOND}), how many to give, an optional display name, and optional lore
  * lines. The adapter resolves the material and builds the {@code ItemStack}; the catalog and engine only
- * carry the operator's intent. The material and name strings are written as authored — they are not
+ * carry the operator's intent. The material and name strings are written as authored: they are not
  * player-facing {@code MessageKey} content.
  *
  * @param material the material name to grant, validated non-blank (adapter resolves it to a type)

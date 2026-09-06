@@ -40,13 +40,13 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The proof that a state-switch button — one slot whose icon and actions change with a player-data flag — needs no
+ * The proof that a state-switch button (one slot whose icon and actions change with a player-data flag) needs no
  * dedicated engine construct: it falls out of the view conditions and same-slot priority layering the engine already
  * has. Two items share slot 4 with opposite view conditions on {@code %data_value_mode%}. Priority layering drops the
  * item whose view fails and renders the visible one, and a click routes to <em>that</em> rendered item's own actions,
  * so the pair reads as a switch. Clicking the visible item flips the flag through the {@code data-set} action, and the
- * next render shows the other item. Everything here — the {@code equals-ignorecase} view condition, the {@code data-set}
- * action, the {@code %data_value_mode%} placeholder — is a shipped building block; nothing switch-specific was added.
+ * next render shows the other item. Everything here, the {@code equals-ignorecase} view condition, the {@code data-set}
+ * action, the {@code %data_value_mode%} placeholder: is a shipped building block; nothing switch-specific was added.
  */
 class SwitchPatternGoldenTest {
 
@@ -112,7 +112,7 @@ class SwitchPatternGoldenTest {
         open();
         assertThat(materialAt(4))
                 .as(
-                        "re-rendered with the flipped flag, the same slot now shows the off-item — a switch, no new construct")
+                        "re-rendered with the flipped flag, the same slot now shows the off-item, a switch, no new construct")
                 .isEqualTo(Material.GRAY_DYE);
     }
 

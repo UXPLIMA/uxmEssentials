@@ -15,7 +15,7 @@ import org.jspecify.annotations.Nullable;
  * The real {@link PermissionQuery}, backed by the Vault {@link Permission} registered in the
  * {@code ServicesManager}. This is the only class in the hooks package that imports
  * {@code net.milkbowl.vault.permission}; it is reached solely from {@link VaultPermissionHook#whenPresent},
- * past {@code Hooks}' present-guard, so it loads only on a server that actually has Vault installed — the no-op
+ * past {@code Hooks}' present-guard, so it loads only on a server that actually has Vault installed, the no-op
  * {@link PermissionQuery#ABSENT} carries none of these types.
  *
  * <p>The permission service can be absent even when Vault is present: the registration is resolved once in the

@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.homes.domain;
 
 /**
- * A home's position within the owner's ordered slot grid — a zero-based index that doubles as the
+ * A home's position within the owner's ordered slot grid. A zero-based index that doubles as the
  * DB primary key component and the GUI cell index. The 1-based {@link #displayNumber()} is what the
  * player sees; internally everything is zero-based.
  *
@@ -20,7 +20,7 @@ public record HomeSlot(int index) {
         return new HomeSlot(index);
     }
 
-    /** Returns {@code index + 1} — the 1-based number shown to the player in menus and messages. */
+    /** Returns {@code index + 1}: the 1-based number shown to the player in menus and messages. */
     public int displayNumber() {
         return index + 1;
     }

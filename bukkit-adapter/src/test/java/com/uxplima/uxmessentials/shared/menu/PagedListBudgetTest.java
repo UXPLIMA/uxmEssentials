@@ -38,12 +38,12 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The budget that matters for a paged list is that opening — and, by the same path, flipping — is independent of how
+ * The budget that matters for a paged list is that opening (and, by the same path, flipping) is independent of how
  * large the corpus is: the engine asks a paged source for exactly one page and only ever holds that page, whether the
  * store behind it has forty-five rows or a million. This states that as a property a test can hold forever, not a
  * millisecond number that rots. A tripwire corpus of a million rows proves it two ways at once: the source is asked for
  * a single page sized to the slots (not to the corpus), and the corpus throws the instant anything tries to walk it
- * whole — so the old whole-list fetch would fail here loudly rather than merely run slowly.
+ * whole, so the old whole-list fetch would fail here loudly rather than merely run slowly.
  */
 class PagedListBudgetTest {
 
@@ -210,8 +210,8 @@ class PagedListBudgetTest {
 
     /**
      * A corpus that answers a bounded {@code get(index)} but throws the moment anything tries to enumerate it whole. It
-     * lets a paged source read one page's worth of rows by index while making the old whole-list fetch — materialising
-     * the corpus into a list, iterating or streaming it — an immediate, loud failure rather than a quiet slow path.
+     * lets a paged source read one page's worth of rows by index while making the old whole-list fetch, materialising
+     * the corpus into a list, iterating or streaming it, an immediate, loud failure rather than a quiet slow path.
      */
     private static final class TripwireCorpus extends AbstractList<Object> {
         private final int size;

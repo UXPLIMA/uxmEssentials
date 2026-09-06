@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * off the tick thread (the expiry decision is pure; the player-facing notice hops to the viewer's region
  * inside the message sink) and observes the module's {@code running} flag so it stops cleanly on disable.
  *
- * <p>The sweep is the only driver of expiry — the registry never expires lazily — so a request that no
+ * <p>The sweep is the only driver of expiry, the registry never expires lazily, so a request that no
  * one resolves is cleaned up within one sweep interval and both parties get the expiry message.
  */
 @NullMarked

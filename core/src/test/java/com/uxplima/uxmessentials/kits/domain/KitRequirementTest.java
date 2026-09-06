@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * config entry splits on the first operator token (two-character tokens before single ones, so {@code >=}
  * never mis-splits as {@code >}), tolerates spacing, keeps both operands as raw strings, and rejects a blank
  * side or an unknown operator by returning empty. The kernel never resolves the placeholders these operands
- * carry — that is the evaluator adapter's job — so these tests cover only the shape, not any comparison.
+ * carry, that is the evaluator adapter's job, so these tests cover only the shape, not any comparison.
  */
 class KitRequirementTest {
 

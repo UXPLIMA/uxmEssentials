@@ -44,11 +44,11 @@ import org.jspecify.annotations.Nullable;
  * override, gated by {@code uxmessentials.vault.others} on that branch so a non-staff player never sees it.
  * {@code delete <n>} removes the caller's own vault (refunding the configured amount when economy is on);
  * {@code delete <player> <n>} is the audited staff override, gated by {@code uxmessentials.vault.admin.delete},
- * and pays no refund. Deletion is direct — like PlayerVaultsX it does not prompt for confirmation — and always
+ * and pays no refund. Deletion is direct, like PlayerVaultsX it does not prompt for confirmation, and always
  * audited, so a destructive staff override is replayable from the audit channel.
  *
  * <p>{@code rename <n> [name]} and {@code icon <n> [material]} set a vault's presentation in the selector menu:
- * a name (or no name, to clear it) gated by {@code uxmessentials.vault.rename}, and an icon material — explicit
+ * a name (or no name, to clear it) gated by {@code uxmessentials.vault.rename}, and an icon material, explicit
  * or the caller's held item, gated by {@code uxmessentials.vault.icon} and the {@code appearance.allow-custom-icon}
  * config switch. The name is length-checked against {@code appearance.max-name-length} and an icon material is
  * validated against the real material registry before the write, so a bad value is refused up front.
@@ -231,7 +231,7 @@ public final class VaultCommand implements CommandRegistration {
             return Command.SINGLE_SUCCESS;
         }
         PlayerRef owner = BukkitRefs.toRef(player);
-        // A DB write — run it off the tick thread; the use case notifies the player of the outcome itself.
+        // A DB write, run it off the tick thread; the use case notifies the player of the outcome itself.
         scheduler.async(() -> services.deleteVault().delete(owner, index));
         return Command.SINGLE_SUCCESS;
     }
@@ -248,7 +248,7 @@ public final class VaultCommand implements CommandRegistration {
             notifier.unknownTarget(actor, typed);
             return Command.SINGLE_SUCCESS;
         }
-        // A DB write — run it off the tick thread; the use case audits the override and notifies the actor.
+        // A DB write, run it off the tick thread; the use case audits the override and notifies the actor.
         scheduler.async(() -> services.deleteVault().deleteOther(actor, owner.get(), index));
         return Command.SINGLE_SUCCESS;
     }
@@ -264,7 +264,7 @@ public final class VaultCommand implements CommandRegistration {
             notifier.nameTooLong(owner, services.maxNameLength());
             return Command.SINGLE_SUCCESS;
         }
-        // A DB write — run it off the tick thread; the use case notifies the player of the set/clear outcome.
+        // A DB write, run it off the tick thread; the use case notifies the player of the set/clear outcome.
         scheduler.async(() -> services.renameVault().rename(owner, index, name));
         return Command.SINGLE_SUCCESS;
     }
@@ -308,7 +308,7 @@ public final class VaultCommand implements CommandRegistration {
     }
 
     private void applyIcon(PlayerRef owner, int index, Material material) {
-        // A DB write — run it off the tick thread; the use case confirms the new icon to the player itself.
+        // A DB write, run it off the tick thread; the use case confirms the new icon to the player itself.
         scheduler.async(() -> services.setVaultIcon().setIcon(owner, index, material.name()));
     }
 

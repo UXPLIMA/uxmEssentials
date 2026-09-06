@@ -60,7 +60,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The server-wide eco-admin screen golden test: the engine-rendered panel must draw the exact window the original
  * {@code EconomyBulkView} drew, and its buttons must keep the behaviour. The panel draws Give to All
  * EMERALD_BLOCK@11, the select-currency SUNFLOWER@13 (shown only when more than one currency is configured), Reset
- * All TNT@15 and the back ARROW@22 over a grey-glass backdrop — snapshotted as {@code (slot -> material, plain
+ * All TNT@15 and the back ARROW@22 over a grey-glass backdrop, snapshotted as {@code (slot -> material, plain
  * name)} and asserted equal slot for slot to the baseline the old view produced (frozen here so the old class could
  * be deleted). Give to All fires the input prompt then credits the online roster through {@code EcoAdmin.giveAll}
  * via the package-private apply seam (MockBukkit cannot drive a live anvil); Reset All is confirm-gated through the
@@ -139,7 +139,7 @@ class EconomyBulkGoldenTest {
 
     // Give to All captures an amount through the anvil seam, which MockBukkit leaves unimplemented (no
     // player.openAnvil), so the prompt-opening click cannot be exercised here (see MenuListChildTest). The apply
-    // seam — the branch the prompt's submit callback drives — is verified to credit the online roster with
+    // seam, the branch the prompt's submit callback drives, is verified to credit the online roster with
     // Money.of(active, amount) in EconomyAdminGuiTest, which lives in the menu's own package and so can drive the
     // package-private applyGiveAll. This golden test covers the click-driven flows the engine routes: the render,
     // the reset-all confirm, and the select-currency picker re-open.
@@ -213,7 +213,7 @@ class EconomyBulkGoldenTest {
     /**
      * Build and register both engine menus over {@code currencies} on the shared bindings and return the bulk one.
      * The manage screen owns the shared {@code eco_currency} placeholder and the multi-currency condition the bulk
-     * spec also names, so it registers first — exactly as production wires the two screens together.
+     * spec also names, so it registers first: exactly as production wires the two screens together.
      */
     private EconomyBulkMenu wire(CurrencyRegistry currencies) {
         MenuBindings bindings = engine.bindings();

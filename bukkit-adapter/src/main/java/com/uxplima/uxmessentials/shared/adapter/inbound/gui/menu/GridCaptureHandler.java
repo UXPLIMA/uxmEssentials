@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
  * their own items onto a content cell, or shift-clicks one out of their inventory onto the canvas. Unlike
  * {@link GridClickHandler}, which fires for an editor gesture (pick up, move, clear, open the sub-editor), this fires
  * only when a real item's definition is being stamped into a slot. The engine has already cancelled the underlying
- * event, so the operator's real item never moves — {@code copy} is a defensive clone of it, and the consumer's job is
+ * event, so the operator's real item never moves. {@code copy} is a defensive clone of it, and the consumer's job is
  * to record its definition into the edited model (typically a serialized token) and repaint. Because nothing is ever
  * transferred into or out of the top inventory, no duplicate can be produced.
  *

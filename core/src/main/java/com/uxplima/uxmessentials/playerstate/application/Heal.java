@@ -12,8 +12,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /heal [player]}: an apply-once restore of a player's health, optionally clearing active potion
- * effects per the {@code heal-remove-effects} toggle (§15.6). It changes no persisted snapshot — the
- * {@link PlayerEffects} port restores the live player on the owning region thread — then publishes
+ * effects per the {@code heal-remove-effects} toggle (§15.6). It changes no persisted snapshot, the
+ * {@link PlayerEffects} port restores the live player on the owning region thread, then publishes
  * {@link Healed} and notifies the actor and subject.
  */
 public final class Heal {

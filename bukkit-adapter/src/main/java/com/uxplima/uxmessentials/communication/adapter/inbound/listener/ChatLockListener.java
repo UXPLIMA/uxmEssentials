@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * through a frozen chat so they can still coordinate.
  *
  * <p>{@code AsyncChatEvent} fires off the main thread; this listener only reads the atomic flag and checks a
- * permission (both thread-safe) and cancels the event — it touches no other Bukkit API on the async thread.
+ * permission (both thread-safe) and cancels the event: it touches no other Bukkit API on the async thread.
  * The blocked-notice delivery hops back to the speaker's thread inside the {@link Notifier}'s
  * sink, so the async-listener-no-Bukkit-API rule holds.
  */

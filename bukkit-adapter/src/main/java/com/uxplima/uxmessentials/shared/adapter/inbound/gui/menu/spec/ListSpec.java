@@ -11,7 +11,7 @@ import java.util.Objects;
  * store rather than in memory. A {@code pageSize} of {@code 0} means "derive the page from the item's slot count",
  * which is the historic behaviour every in-memory list still gets; {@code sorts} is the ordered list of sort keys a
  * paged source offers (empty means its default order). Both are inert for a plain in-memory source, which hands its
- * whole corpus over for the engine to slice — the binding validator rejects a spec that sets them there so the
+ * whole corpus over for the engine to slice. The binding validator rejects a spec that sets them there so the
  * mismatch is a loud configuration error rather than a knob that silently does nothing.
  */
 public record ListSpec(Ref source, MenuItemSpec template, int pageSize, List<String> sorts) {
@@ -26,8 +26,8 @@ public record ListSpec(Ref source, MenuItemSpec template, int pageSize, List<Str
     }
 
     /**
-     * The historic two-argument shape, kept so a caller that does not page — the loader's default branch and the test
-     * fixtures — reads plainly. It delegates with a {@code 0} page size (derive from slots) and no sorts, so such a
+     * The historic two-argument shape, kept so a caller that does not page. The loader's default branch and the test
+     * fixtures, reads plainly. It delegates with a {@code 0} page size (derive from slots) and no sorts, so such a
      * list behaves exactly as it did before those knobs existed.
      */
     public ListSpec(Ref source, MenuItemSpec template) {

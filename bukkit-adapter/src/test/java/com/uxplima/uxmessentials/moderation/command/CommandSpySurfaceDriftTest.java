@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /commandspy} into the moderation context's command surface — the staff toggle that mirrors
+ * Pins {@code /commandspy} into the moderation context's command surface. The staff toggle that mirrors
  * {@code /socialspy} but watches commands rather than private messages. This guard fails if the literal
  * drops out of the surface or ever wires under a node other than {@code uxmessentials.moderation.commandspy}.
  */

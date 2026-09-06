@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code /god [player]}: flip a player's damage-immunity flag. The snapshot is mutated atomically through the
  * {@link PlayerStateStore} ({@code update} runs the pure {@code toggleGod}), the new value is pushed to the
  * live player by the {@link StateReconciler} on the player's owning region thread, the {@link GodToggled}
- * event is published, and both the actor and — for a staff toggle — the subject are notified.
+ * event is published, and both the actor and, for a staff toggle, the subject are notified.
  *
  * <p>A self-toggle passes the same ref as actor and subject; the {@code .others} target form passes the
  * staff member as actor and the affected player as subject, so the subject sees the change and the staff

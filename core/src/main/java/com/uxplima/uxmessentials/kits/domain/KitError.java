@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.application.message.SharedMessageKey;
 /**
  * The modelled failures a kit operation can produce. Each value carries the {@link KitsMessageKey} the
  * command adapter renders, so a use case returns a {@code Result.err(KitError.X)} and the caller never
- * re-derives the message — the error carries it, and the failure reason and its localized text never drift
+ * re-derives the message. The error carries it, and the failure reason and its localized text never drift
  * apart.
  */
 public enum KitError {
@@ -39,7 +39,7 @@ public enum KitError {
     /** The kit's availability schedule does not admit a claim at the current time (its rotation window is closed). */
     UNAVAILABLE(KitsMessageKey.KIT_UNAVAILABLE),
 
-    /** The kit's global stock limit has been reached — no copies remain for anyone to claim. */
+    /** The kit's global stock limit has been reached: no copies remain for anyone to claim. */
     OUT_OF_STOCK(KitsMessageKey.KIT_OUT_OF_STOCK),
 
     /** The claim was cancelled by an external plugin event. */

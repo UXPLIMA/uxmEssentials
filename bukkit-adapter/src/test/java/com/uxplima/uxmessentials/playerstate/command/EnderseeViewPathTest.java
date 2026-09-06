@@ -107,7 +107,7 @@ class EnderseeViewPathTest {
         assertThat(target.getEnderChest().getItem(7)).isNotNull();
         assertThat(target.getEnderChest().getItem(7).getType()).isEqualTo(Material.DIAMOND);
         assertThat(before).isEqualTo(5);
-        assertThat(totalDiamonds(target)).isEqualTo(before); // conserved: 5 in, 5 out — no 2x
+        assertThat(totalDiamonds(target)).isEqualTo(before); // conserved: 5 in, 5 out, no 2x
     }
 
     @Test
@@ -127,7 +127,7 @@ class EnderseeViewPathTest {
         assertThat(recording.entityHops).hasSizeGreaterThanOrEqualTo(2);
         assertThat(recording.entityHops.get(0).uuid()).isEqualTo(target.getUniqueId());
         assertThat(recording.entityHops).extracting(PlayerRef::uuid).contains(viewer.getUniqueId());
-        // And the read still produced the right snapshot — the menu mirrors the target's diamond.
+        // And the read still produced the right snapshot: the menu mirrors the target's diamond.
         Inventory menu = viewer.getOpenInventory().getTopInventory();
         assertThat(menu.getItem(0)).isNotNull();
         assertThat(menu.getItem(0).getType()).isEqualTo(Material.DIAMOND);

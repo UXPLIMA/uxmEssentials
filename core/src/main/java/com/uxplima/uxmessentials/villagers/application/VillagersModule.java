@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The villagers bounded context as a first-class {@link FeatureModule}: villager trade management (Phase 1 —
+ * The villagers bounded context as a first-class {@link FeatureModule}: villager trade management (Phase 1
  * infinite trading, a configurable restock timer, instant restock, and a global/per-villager trade toggle). The
  * behaviour is almost entirely Bukkit villager and merchant-recipe handling, so the trade and interact listeners
  * and the restock sweep land with the adapter wiring; this module stands up the identity, the enable gate, and the
@@ -23,8 +23,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p><b>Ships enabled but inert.</b> {@link #enabled(ConfigStore)} defaults to {@code true} like the steady-state
  * contexts, but every sub-feature ships {@code false} in the bundled config, so a fresh install changes no villager
- * behaviour until an operator turns a feature on. It persists nothing — the per-villager last-restock stamp and the
- * disable flag are PDC state on the villager entity itself — so the module owns no Flyway location.
+ * behaviour until an operator turns a feature on. It persists nothing, the per-villager last-restock stamp and the
+ * disable flag are PDC state on the villager entity itself, so the module owns no Flyway location.
  *
  * <p>Phase 1 publishes no declarative command and registers no declarative listener: the listeners and the sweep are
  * contributed through the adapter wiring, gated per sub-feature, and a disabled module wires zero of them (the

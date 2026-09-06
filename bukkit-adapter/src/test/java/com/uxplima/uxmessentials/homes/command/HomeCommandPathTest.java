@@ -170,7 +170,7 @@ class HomeCommandPathTest {
 
     /**
      * Asserts the {@code subcommand} literal under {@code /home} is reachable only with {@code grantsAccess}
-     * and not with {@code deniedNode} alone — proving Brigadier {@code .requires(...)} gates the subcommand by
+     * and not with {@code deniedNode} alone. Proving Brigadier {@code .requires(...)} gates the subcommand by
      * its own permission rather than the root's.
      */
     private void assertCanUse(String subcommand, String grantsAccess, String deniedNode) {
@@ -227,7 +227,7 @@ class HomeCommandPathTest {
         repository.put(home(targetRef(), 1));
         CommandDispatcher<CommandSourceStack> dispatcher = register();
 
-        // No slot arg — default slot should be max+1 = 2 (index 2).
+        // No slot arg: default slot should be max+1 = 2 (index 2).
         execute(dispatcher, "home admin Bob set");
 
         assertThat(repository.findSlot(targetRef(), HomeSlot.of(2))).isPresent();
@@ -581,7 +581,7 @@ class HomeCommandPathTest {
 
     /**
      * A {@link PlayerLookup} that never resolves online but resolves a single known player via
-     * {@link #findByName} — simulates an offline player profile still known to the server.
+     * {@link #findByName}, simulates an offline player profile still known to the server.
      */
     private static final class FakeOfflinePlayerLookup implements PlayerLookup {
 

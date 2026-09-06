@@ -10,14 +10,14 @@ import java.util.Optional;
  * active sentence is one of three durations:
  *
  * <ul>
- *   <li><b>Permanent</b> — {@code /jail} with no duration: no {@code remaining}, no {@code until}; released
+ *   <li><b>Permanent</b>. {@code /jail} with no duration: no {@code remaining}, no {@code until}; released
  *       only by {@code /unjail}.
- *   <li><b>Online-only timed</b> — the default {@code /jail <player> <duration>}: the {@code remaining}
+ *   <li><b>Online-only timed</b>, the default {@code /jail <player> <duration>}: the {@code remaining}
  *       online time to serve is decremented only while the player is connected in the jail world (docs/02
  *       concurrency, docs/09-deployment). {@link Active#tickOnline(Duration)} burns elapsed online time off
  *       the remainder; the sentence is over when the remainder hits zero. Wall-clock time off the server
  *       never advances it.
- *   <li><b>Wall-clock timed</b> — when an operator opts a jail into wall-clock countdown via {@code
+ *   <li><b>Wall-clock timed</b>, when an operator opts a jail into wall-clock countdown via {@code
  *       jail-countdown} in {@code moderation.conf}: the sentence expires at the {@code until} instant
  *       regardless of online time, exactly like a tempban. The two timed forms are mutually exclusive.
  * </ul>
@@ -33,7 +33,7 @@ public sealed interface JailState permits JailState.None, JailState.Active {
         return None.INSTANCE;
     }
 
-    /** A permanent jail in {@code jail} (no expiry — {@code /unjail} only). */
+    /** A permanent jail in {@code jail} (no expiry, {@code /unjail} only). */
     static JailState permanent(String jail, Issuer issuer, Optional<String> reason, Instant issuedAt) {
         return new Active(jail, Optional.empty(), Optional.empty(), issuer, reason, issuedAt);
     }
@@ -121,7 +121,7 @@ public sealed interface JailState permits JailState.None, JailState.Active {
                 return now.isBefore(until.get());
             }
             // Permanent (empty remaining) is always active; an online-only sentence is active until the
-            // remainder is exhausted — wall-clock time at the gate never advances it.
+            // remainder is exhausted: wall-clock time at the gate never advances it.
             return remaining.map(left -> !left.isZero() && !left.isNegative()).orElse(true);
         }
 

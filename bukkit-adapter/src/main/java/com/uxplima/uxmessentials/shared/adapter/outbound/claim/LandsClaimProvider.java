@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Lands is a {@code compileOnly} soft-depend, so {@code me.angeschossen.lands.api.*} is absent from the
  * runtime and test classpaths. Every typed Lands reference lives inside a method behind {@link #active()},
- * which only consults the plugin manager — constructing this provider and asking whether it is active never
+ * which only consults the plugin manager. Constructing this provider and asking whether it is active never
  * loads a Lands class. The {@link LandsIntegration} handle is resolved lazily on the first {@link #claimAt}
  * call (again past the present guard) and cached, so a server without Lands stays on the no-throw path.
  *

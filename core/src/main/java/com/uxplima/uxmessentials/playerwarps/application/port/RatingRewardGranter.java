@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@link WarpRatingRewardStore}); this port only carries out a single grant, so the whole "does money / a command
  * touch Bukkit" surface stays in the adapter.
  *
- * <p>An {@link RewardSpec#isEmpty() empty} spec grants nothing — the implementation short-circuits both arms — so
+ * <p>An {@link RewardSpec#isEmpty() empty} spec grants nothing, the implementation short-circuits both arms, so
  * the caller may hand over an unconfigured side of a reward without a guard of its own.
  */
 public interface RatingRewardGranter {

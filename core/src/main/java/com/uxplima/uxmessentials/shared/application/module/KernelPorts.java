@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.application.port.WorldLookup;
 /**
  * The shared cross-cutting outbound ports every command-bearing context consumes, bundled into one
  * injection envelope. A {@link FeatureModule} receives this through its {@link ModuleContext} and
- * constructor-injects the ports it needs into its own adapters — the kernel is wired once in
+ * constructor-injects the ports it needs into its own adapters. The kernel is wired once in
  * bootstrap, and no module news up a port itself.
  *
  * <p>The bundle holds only interfaces from {@code shared/application/port}, so it stays in {@code

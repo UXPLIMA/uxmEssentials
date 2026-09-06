@@ -39,7 +39,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The tpa-resolution verbs must not fail in silence either: {@code /tpaccept}, {@code /tpdeny} and
  * {@code /tpcancel} with nothing pending each return {@link TeleportError#NO_PENDING_REQUEST} <em>and</em>
- * tell the invoking player so via the {@code none-pending} key — previously the verb just returned an
+ * tell the invoking player so via the {@code none-pending} key. Previously the verb just returned an
  * unread error and the player saw nothing. The empty registry is a hand-rolled fake; the engine is wired
  * but never reached on these paths.
  */

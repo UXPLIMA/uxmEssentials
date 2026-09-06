@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /rankup}: advance the invoking player one rung up the ladder. The handler resolves nothing but the
  * player's own identity and hands it to {@link Rankup}, which owns the requirement / cost / action pipeline and
- * returns a typed {@link RankupResult}; this class only maps that outcome to the matching catalog line — the
+ * returns a typed {@link RankupResult}; this class only maps that outcome to the matching catalog line, the
  * success line carrying the new rank's display name as its {@code {rank}} placeholder. Gated on
  * {@code uxmessentials.ranks.rankup}, which ships {@code true} so every player may try to progress.
  */

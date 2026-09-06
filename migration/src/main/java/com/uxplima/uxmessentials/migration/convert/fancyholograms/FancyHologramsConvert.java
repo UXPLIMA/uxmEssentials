@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.migration.convert.essentialsx.map.WorldNameReso
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The FancyHolograms {@link Convert} — a file-backed source for server-wide holograms (docs/12-migration
+ * The FancyHolograms {@link Convert}. A file-backed source for server-wide holograms (docs/12-migration
  * §1.2). Where DecentHolograms writes one file per hologram, FancyHolograms keeps the whole set in a single
  * {@code plugins/FancyHolograms/holograms.yml}; like the DecentHolograms and LiteBans sources it carries its
  * own fixed location rather than the shared {@code import.source-path}. It maps each entry into the {@code

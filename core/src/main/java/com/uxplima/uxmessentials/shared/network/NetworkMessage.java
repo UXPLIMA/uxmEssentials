@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.shared.network;
 
 /**
- * A cross-server sync frame carried over the proxy bus. Pure Java — no Bukkit, no Velocity — so the same
+ * A cross-server sync frame carried over the proxy bus. Pure Java (no Bukkit, no Velocity) so the same
  * type hierarchy is shared by the backend bus client (the bukkit adapter) and the proxy broker (the velocity
  * adapter), using a pure-Java codec pattern. The hierarchy is {@code sealed}; the
  * {@link NetworkMessageCodec} is the only encoder/decoder and every variant has a stable
@@ -10,13 +10,13 @@ package com.uxplima.uxmessentials.shared.network;
  * <p>Every message carries an {@link #originServer() origin server id}: the {@code server-id} of the backend
  * that produced it. The broker fans a frame out to every backend except its origin, and a backend's bus
  * client drops any frame whose origin equals its own id. Together these two checks are the replication-loop
- * sentinel ({@code docs/02-concurrency.md}) — a mutation made on {@code survival-1} reaches the other
+ * sentinel ({@code docs/02-concurrency.md}). A mutation made on {@code survival-1} reaches the other
  * backends once and never echoes back to bounce around the cluster.
  *
  * <p>A frame is a <strong>notification, not the source of truth</strong> ({@code docs/09-deployment.md} Path
  * B). The shared database holds the authoritative state; a frame tells a peer "owner X's homes/balance/etc.
  * changed on me, drop your cached copy" so the peer re-reads the fresh row on its next access. It never
- * carries a full aggregate to be written blindly — that would race the DB and risk a lost update.
+ * carries a full aggregate to be written blindly: that would race the DB and risk a lost update.
  */
 public sealed interface NetworkMessage
         permits BalanceChanged,
@@ -43,7 +43,7 @@ public sealed interface NetworkMessage
 
     /**
      * The closed set of wire tags. Each carries an explicit {@link #wireTag()} byte that is the on-wire
-     * discriminator — a stable assigned number, never the enum ordinal — so a variant can be added without
+     * discriminator (a stable assigned number, never the enum ordinal) so a variant can be added without
      * renumbering the others and reordering the constants cannot silently change the wire format.
      */
     enum MessageType {

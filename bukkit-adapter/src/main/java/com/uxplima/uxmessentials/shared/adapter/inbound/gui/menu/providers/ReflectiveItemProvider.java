@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
  * its {@code material} prefix (e.g. {@code itemsadder:}) and implements one reflective primitive: turn the bare id
  * into an {@link ItemStack}. This base owns the load-safe contract around it. A spec it does not own (the prefix does not
  * match) is left for the next provider; a matching spec is gated by the plugin-present guard, so a server without the
- * plugin resolves to empty — the renderer's plain-material fallback then renders the id as a material name. Any
+ * plugin resolves to empty: the renderer's plain-material fallback then renders the id as a material name. Any
  * {@link ReflectiveOperationException} (the API absent, or its shape shifted under a version bump) or unchecked
  * failure from the lookup is logged exactly once and degraded to empty rather than aborting the render.
  *
@@ -55,7 +55,7 @@ abstract class ReflectiveItemProvider implements IconProvider {
             return Optional.empty();
         }
         String id = trimmed.substring(prefix.length()).trim();
-        // Plugin absent (or a blank id) is a silent miss, not a warning — the menu degrades to the material fallback.
+        // Plugin absent (or a blank id) is a silent miss, not a warning: the menu degrades to the material fallback.
         if (id.isBlank() || !server.getPluginManager().isPluginEnabled(pluginName)) {
             return Optional.empty();
         }

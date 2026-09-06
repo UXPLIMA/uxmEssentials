@@ -18,7 +18,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The key correctness proof for the zMenu converter: its output is not merely well-shaped HOCON, it is HOCON our own
  * {@link MenuSpecLoader} loads into a valid {@link MenuSpec}. A representative zMenu inventory is converted, written to
- * a {@code .conf} on disk, and loaded back through the real loader — so a passing test means an operator's converted
+ * a {@code .conf} on disk, and loaded back through the real loader, so a passing test means an operator's converted
  * menu opens on the engine, title, rows, item, slots and click actions intact.
  */
 class ZMenuRoundTripTest {

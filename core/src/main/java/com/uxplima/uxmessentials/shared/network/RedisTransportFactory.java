@@ -13,10 +13,10 @@ import com.uxplima.uxmessentials.shared.application.port.Scheduler;
  * the companion shaded its own copy of {@code core}, the two {@code BusTransport} class objects would differ and
  * the JVM would reject the hand-off with a loader-constraint {@link LinkageError}. So the companion is a real
  * Paper plugin that joins the main's classpath ({@code paper-plugin.yml > join-classpath}) and references the
- * <em>same</em> {@link BusTransport} and this factory the main loaded — no duplicate class, no constraint
+ * <em>same</em> {@link BusTransport} and this factory the main loaded. No duplicate class, no constraint
  * violation.
  *
- * <p>Pure Java by design — no Bukkit, no Lettuce — so {@code core} can name it. The main looks it up through the
+ * <p>Pure Java by design (no Bukkit, no Lettuce) so {@code core} can name it. The main looks it up through the
  * {@code ServicesManager} after enable; a {@code null} lookup means the companion is not deployed, in which case
  * the bus degrades to local-only rather than failing.
  */

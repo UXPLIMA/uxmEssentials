@@ -43,7 +43,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link BukkitStateReconciler} pushing a snapshot's flags onto the live player, the {@link BukkitPlayerEffects}
  * apply-once/live-only verbs, the in-memory store's {@code compute}-based mutation, and the
  * {@link BukkitNearbyPlayers} scan. The {@link Scheduler} is a synchronous inline fake so the entity-thread
- * hop the adapters route through is exercised deterministically — on Folia the same call lands on the owning
+ * hop the adapters route through is exercised deterministically. On Folia the same call lands on the owning
  * region thread, but the unit under test is what gets applied, not where.
  */
 class PlayerStateReconciliationTest {

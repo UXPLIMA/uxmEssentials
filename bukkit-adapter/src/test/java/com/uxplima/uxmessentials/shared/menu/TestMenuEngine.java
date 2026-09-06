@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.application.port.Scheduler;
  * {@code shared.menu} package (the same exemption the engine's own tests rely on) so a feature's test fixtures can
  * stand up a real engine without each having to reach into those internals itself. A feature test builds the
  * engine here, registers its bindings on the returned {@link MenuBindings}, and opens specs through the returned
- * {@link Menus} — the same two public types production wiring uses. The click listener is built lazily only when a
+ * {@link Menus}: the same two public types production wiring uses. The click listener is built lazily only when a
  * test needs to dispatch clicks, so a fixture that merely opens a window need not supply a plugin.
  */
 public final class TestMenuEngine {

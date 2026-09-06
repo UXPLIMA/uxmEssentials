@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultId;
 /**
  * A Caffeine read-cache decorator over a delegate {@link VaultRepository}, keyed by {@link VaultId}. An open
  * resolves the vault's serialized contents once and is served from memory until a save to that vault
- * invalidates the entry — write-through at the delegate, invalidate here, never a write-back cache that could
+ * invalidates the entry, write-through at the delegate, invalidate here, never a write-back cache that could
  * lose a mutation. The durable source of truth is always the delegate; this only spares re-reading the same
  * vault's payload when a player re-opens it.
  *
@@ -101,7 +101,7 @@ public final class CachedVaultRepository implements VaultRepository {
 
     /**
      * Drop one cached vault so the next open reloads its contents from the database. Called by the
-     * cross-server bus client when a peer reports this vault changed on another backend — the shared DB already
+     * cross-server bus client when a peer reports this vault changed on another backend. The shared DB already
      * holds the authoritative contents, so dropping the cached payload is all that is needed for the next open
      * on this backend to reflect it.
      */

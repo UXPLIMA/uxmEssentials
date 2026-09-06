@@ -71,7 +71,7 @@ class NametagConfigTest {
 
     @Test
     void priorityTiesAreBrokenByListOrderFirstWins() {
-        // Both match (always), both priority 5 — the format earlier in the list (the codec sorts alphabetically) wins.
+        // Both match (always), both priority 5, the format earlier in the list (the codec sorts alphabetically) wins.
         NametagConfig config = new NametagConfig(
                 List.of(format("alpha", DisplayCondition.always(), 5), format("beta", DisplayCondition.always(), 5)));
 

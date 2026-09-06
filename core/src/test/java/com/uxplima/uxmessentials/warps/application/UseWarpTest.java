@@ -110,7 +110,7 @@ class UseWarpTest {
 
         useWarp.useFor(actor, recipient, WarpName.of("shop"));
 
-        // The teleport ran on the calling thread; the DB write did not — it was handed to scheduler.async, so the
+        // The teleport ran on the calling thread; the DB write did not. It was handed to scheduler.async, so the
         // counter is still unwritten until that queued task runs off the region thread.
         assertThat(teleporter.lastWho).isEqualTo(recipient);
         assertThat(repository.find(WarpName.of("shop")).orElseThrow().visitors())

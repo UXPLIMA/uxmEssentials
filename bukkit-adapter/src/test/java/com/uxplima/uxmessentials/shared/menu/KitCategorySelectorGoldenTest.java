@@ -55,10 +55,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code DIAMOND}-iconed "pvp" and a default-BOOK "misc") over the selector's six-row layout (content slots 0..44,
  * gray-glass filler), so page 0 places one icon per category at content slots 0 and 1, the "No Category" BARRIER at
  * slot 49, and the back ARROW at slot 53. The engine window is snapshotted as {@code (slot -> material, plain name)}
- * and asserted equal, slot for slot, to the analytic baseline the old view produced — category icons, the two fixed
+ * and asserted equal, slot for slot, to the analytic baseline the old view produced. Category icons, the two fixed
  * buttons, and the engine's mandatory nav arrows at 45/46. Then a left click on the first category through the
  * engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} proves the
- * migrated path runs the same assign the old click did — the kit saved with that category id — and returns the viewer
+ * migrated path runs the same assign the old click did, the kit saved with that category id, and returns the viewer
  * to its settings window, faithful in both appearance and behaviour.
  */
 class KitCategorySelectorGoldenTest {
@@ -256,7 +256,7 @@ class KitCategorySelectorGoldenTest {
         public void delete(KitId id) {}
     }
 
-    /** A category repository over a fixed, in-hand list — no Bukkit read, the snapshot the selector grids. */
+    /** A category repository over a fixed, in-hand list: no Bukkit read, the snapshot the selector grids. */
     private record FixedCategories(List<KitCategory> categories) implements KitCategoryRepository {
         @Override
         public Optional<KitCategory> find(String id) {

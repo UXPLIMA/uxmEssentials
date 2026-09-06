@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /tpa <player>} and {@code /tpahere <player>}: open a teleport request in a fixed
  * {@link RequestDirection}. The selector resolves to one online player; the request itself, the
  * toggle/block/self gates, and both notices are the {@link com.uxplima.uxmessentials.teleport.application.RequestTeleport}
- * use case's job — this command only maps the argument and the invoking player.
+ * use case's job: this command only maps the argument and the invoking player.
  */
 @NullMarked
 public final class TpaRequestCommand extends TeleportCommandSupport implements CommandRegistration {

@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * The {@code /hologram item <name> <material>} and {@code /hologram block <name> <blockdata>} commands: load the
  * hologram, switch it to an ITEM or BLOCK showing the given content, save the new snapshot, and re-render the
- * live entity so the change shows immediately. One use case backs both forms — they differ only in which
+ * live entity so the change shows immediately. One use case backs both forms. They differ only in which
  * content field they set and which feedback key they confirm with. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}; the content (a {@code Material} name / a BlockData string) is validated and
  * resolved at the adapter boundary so this use case stays Bukkit-free and never sees an invalid value.

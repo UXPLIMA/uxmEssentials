@@ -5,7 +5,7 @@ package com.uxplima.uxmessentials.shared.application.port;
  *
  * <p>Lines an operator reads in {@code latest.log} or the audit file are not player-facing, so they
  * stay as parameterized literals through this port rather than going through the {@code MessageKey}
- * catalog (the catalog is the player path; the logger is the operator path — see {@code docs/13-i18n}
+ * catalog (the catalog is the player path; the logger is the operator path, see {@code docs/13-i18n}
  * §35). Messages use {@code {}} placeholders, SLF4J-style, expanded by the adapter; application code
  * never imports SLF4J directly so {@code :core} stays free of infrastructure.
  */

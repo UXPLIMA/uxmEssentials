@@ -173,7 +173,7 @@ class StaffRollbackTest {
     void skipsABanAlreadyLiftedByTheTimeOfRollback() {
         PlayerRef victim = target("griefer");
         recordStaffBan(victim);
-        // no active ban in the repository — already lifted by someone else.
+        // no active ban in the repository: already lifted by someone else.
 
         StaffRollback.RollbackSummary summary = rollback().rollback(ACTOR, STAFF, 100);
 
@@ -313,7 +313,7 @@ class StaffRollbackTest {
     @Test
     void doesNotLiftABanNowStandingUnderAnotherStaffMember() {
         PlayerRef victim = target("griefer");
-        // The rolled-back staff banned the victim, but another staff member re-banned them afterwards — the
+        // The rolled-back staff banned the victim, but another staff member re-banned them afterwards, the
         // active ban's issuer is the colleague, so rolling back the rogue must leave it in place.
         recordStaffBan(victim);
         activeBanBy(victim, OTHER_STAFF);
@@ -368,7 +368,7 @@ class StaffRollbackTest {
     void doesNotLiftABanNowStandingUnderConsole() {
         PlayerRef victim = target("griefer");
         recordStaffBan(victim);
-        // The active ban was re-applied by a console/system actor (no issuer UUID) — never matches a staff UUID.
+        // The active ban was re-applied by a console/system actor (no issuer UUID): never matches a staff UUID.
         repository.saveTempban(
                 victim,
                 TempbanState.active(NOW.plus(Duration.ofDays(7)), Issuer.console("console"), Optional.empty(), NOW));

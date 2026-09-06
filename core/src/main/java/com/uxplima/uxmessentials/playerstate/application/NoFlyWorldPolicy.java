@@ -9,8 +9,8 @@ import java.util.Set;
 /**
  * The pure rule behind no-fly worlds: an operator lists worlds where plugin-granted flight is not allowed
  * ({@code no-fly-worlds = ["pvp", "arena"]}). This policy answers "is {@code world} a no-fly world?", and the
- * adapter uses the answer in two places — refusing a {@code /fly} that would enable flight in such a world,
- * and stripping plugin flight when a flying player walks into one — in both cases unless the player holds the
+ * adapter uses the answer in two places. Refusing a {@code /fly} that would enable flight in such a world,
+ * and stripping plugin flight when a flying player walks into one. In both cases unless the player holds the
  * bypass node.
  *
  * <p>The match on the world name is case-insensitive, matching the per-world command blocker's convention.

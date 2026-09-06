@@ -1,7 +1,7 @@
 -- The global announcer settings the /announce editor's settings screen owns. announcer.conf still ships the file
 -- defaults (default-interval-seconds, min-players); this single-row table holds an operator's in-game override of
 -- those two globals, set from the GUI rather than by editing the file. When a value here is non-negative it wins
--- over the file default; a negative sentinel means "unset — defer to the file". The announcer's merge step reads
+-- over the file default; a negative sentinel means "unset, defer to the file". The announcer's merge step reads
 -- this row each tick, so a change in the settings screen takes effect on the next rotation with no reload.
 --
 -- One sentinel row, keyed by a SMALLINT id of 0, the same single-row shape V33's moderation_lockdown uses: the

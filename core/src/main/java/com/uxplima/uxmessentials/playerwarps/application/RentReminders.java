@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * Sends a warp owner at most one "rent due soon" mail per reminder window. The window a candidate has reached maps
  * to a monotonic stage (widest window = stage 1, tightest = the last stage): as the paid term approaches, the stage
  * climbs. A mail is left only when the reached stage exceeds the {@code rent_reminded_stage} already recorded, and
- * the counter is then bumped — so the same window never mails twice, and {@code SettleRent} resets it to 0 on
+ * the counter is then bumped, so the same window never mails twice, and {@code SettleRent} resets it to 0 on
  * payment so the next term's reminders start over.
  *
  * <p>The mail itself goes through the narrow {@link RentMailer} seam (the messaging store, resolved in the owner's

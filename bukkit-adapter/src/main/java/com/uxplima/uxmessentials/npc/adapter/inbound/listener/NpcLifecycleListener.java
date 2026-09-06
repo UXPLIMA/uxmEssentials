@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Keeps each viewer's set of shown NPCs honest across connection lifecycle. On join the renderer shows every
- * in-range NPC to the joiner; on quit it forgets the viewer (dropping its shown-set so nothing leaks — the
+ * in-range NPC to the joiner; on quit it forgets the viewer (dropping its shown-set so nothing leaks, the
  * client is already gone, so no remove packet is needed); on a world change it re-evaluates every NPC for the
  * mover so the ones in the new world appear and the ones left behind are removed. The renderer routes each
  * send onto the viewer's region thread, so this listener only needs to fan the events through.

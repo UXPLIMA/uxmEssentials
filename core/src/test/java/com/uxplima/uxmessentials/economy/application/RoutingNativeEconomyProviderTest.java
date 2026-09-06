@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.economy.fakes.RecordingLogger;
 /**
  * Runs the {@link EconomyProviderContractTest} against the routing provider serving a native currency. If the
  * routing indirection had cost us the guarded UPDATE, the concurrent double-spend repetition here would be the
- * one to catch it — so this pins that the native path keeps every property the port promises.
+ * one to catch it, so this pins that the native path keeps every property the port promises.
  */
 final class RoutingNativeEconomyProviderTest extends EconomyProviderContractTest {
 

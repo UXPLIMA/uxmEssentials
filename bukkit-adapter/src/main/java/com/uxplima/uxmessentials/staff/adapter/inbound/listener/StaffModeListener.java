@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  *       directly on a player entity goes to the player path (FREEZE/FOLLOW/COMPASS act on that target). Both
  *       interactions are cancelled so the gadget item never also places/uses or harms the clicked player.
  *   <li><b>No leak.</b> Dropping a gadget item, moving it in any inventory view, or F-key swapping it into the
- *       off-hand is cancelled — so a gadget can never reach the ground, the off-hand, or survive into the restored
+ *       off-hand is cancelled, so a gadget can never reach the ground, the off-hand, or survive into the restored
  *       real inventory.
  *   <li><b>Quit safety.</b> On quit while in staff mode the real loadout is restored straight away (the quit event
  *       still has a usable player on its own region thread), so a player never logs out stranded in the gadget

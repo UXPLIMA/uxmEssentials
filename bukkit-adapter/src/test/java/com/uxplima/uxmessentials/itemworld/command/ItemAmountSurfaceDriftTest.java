@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /itemamount} (alias {@code /amount}) into the itemworld context's command surface — the held-item
+ * Pins {@code /itemamount} (alias {@code /amount}) into the itemworld context's command surface, the held-item
  * editor that sets a stack's amount, clamped to the give cap, the companion of {@code /more}. This guard fails
  * if the literal drops out of the surface or wires under a node other than {@code uxmessentials.itemamount.use}.
  */

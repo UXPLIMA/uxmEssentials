@@ -609,7 +609,7 @@ class VoteCommandPathTest {
 
         @Override
         public String resolve(PlayerRef viewer, MessageKey key, Map<String, String> placeholders) {
-            // Skip the shared "prefix" infrastructure resolve — it is not a feature message.
+            // Skip the shared "prefix" infrastructure resolve: it is not a feature message.
             if (!"prefix".equals(key.key())) {
                 resolvedKeys.add(key.key());
                 placeholdersByKey.put(key.key(), Map.copyOf(placeholders));

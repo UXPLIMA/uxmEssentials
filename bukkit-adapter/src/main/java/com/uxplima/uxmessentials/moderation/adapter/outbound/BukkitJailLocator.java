@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link JailLocator} adapter: resolves a jail's display coordinates store-first (the DB-backed
  * {@link JailLocationStore} an operator fills with {@code /setjail}), falling back to the {@link ModerationSettings}
- * config jails — the same precedence {@link BukkitSanctions#sendToJail} teleports against, so a jail's lore names
+ * config jails. The same precedence {@link BukkitSanctions#sendToJail} teleports against, so a jail's lore names
  * the very location the operator would arrive at. The coordinates are read straight from the stored
  * {@link Position} (or the config record) and floored to blocks; no live world is required, so an unloaded world
  * is no obstacle to showing where the jail is. A jail neither stored nor configured returns empty.

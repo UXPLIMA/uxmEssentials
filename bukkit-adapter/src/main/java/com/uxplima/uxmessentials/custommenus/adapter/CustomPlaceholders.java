@@ -14,16 +14,16 @@ import org.jspecify.annotations.NullMarked;
  * Backs the operator's global {@code menus/placeholders.conf}: a map of custom {@code %name%} tokens to template
  * strings any spec's name, lore or title can reference. Registered once as a placeholder fallback over the shared
  * {@link MenuBindings}, so a {@code %welcome%} spec both validates and resolves the same way the built-in and
- * {@code data_*} tokens do — without a code handler per name.
+ * {@code data_*} tokens do, without a code handler per name.
  *
  * <p>The definitions live behind an {@link AtomicReference} rather than a set of exact handlers for one reason: a
  * handler throws on a duplicate id and cannot be un-registered, so a {@code /menu reload} could neither replace nor
  * drop one. A single fallback whose {@code claims} and {@code resolve} read the live map lets a reload swap the whole
- * map in one write with no re-registration and no duplicate — a reader sees either the old or the new map, never a
+ * map in one write with no re-registration and no duplicate, a reader sees either the old or the new map, never a
  * half-applied one. The fallback is registered <em>after</em> the {@code papi_*}/{@code data_*}/{@code stat_*}
  * families (see the wiring), so an operator who misnames a custom placeholder with a reserved prefix is still claimed
  * by that prefix's fallback first, and a custom name can never shadow a built-in exact handler, since the registry
- * consults exact handlers before any fallback — built-ins always win.
+ * consults exact handlers before any fallback: built-ins always win.
  *
  * <p>A template may reference other tokens: a built-in ({@code %player%}), a data reader ({@code %data_number_coins%}),
  * a PlaceholderAPI value ({@code %papi_*%}), or another custom name. {@link #substitute} expands those inner

@@ -72,7 +72,7 @@ class ShowNextVoteTest {
         // Display name differs from the Votifier service key; the recorded cooldown is under the service.
         VoteSiteSpec spec = new VoteSiteSpec("PlanetMinecraft", "PMC", Optional.empty(), Duration.ofHours(12));
         VoteSiteCatalog catalog = new VoteSiteCatalog(List.of(spec));
-        // Recorded under the SERVICE key "PMC", 6h ago — must be found and shown on cooldown.
+        // Recorded under the SERVICE key "PMC", 6h ago: must be found and shown on cooldown.
         repository.lastVotesBySite = Map.of("PMC", NOW.minus(Duration.ofHours(6)));
 
         ShowNextVote use = new ShowNextVote(repository, catalog, notifier.voteNotifier());
@@ -111,7 +111,7 @@ class ShowNextVoteTest {
         return new VoteSiteCatalog(List.of(specs));
     }
 
-    /** Minimal fake repository — only per-site timestamp lookup matters here. */
+    /** Minimal fake repository: only per-site timestamp lookup matters here. */
     private static final class StubRepository extends FakeVoteRepositoryBase {
         Optional<Instant> lastVote = Optional.empty();
         Map<String, Instant> lastVotesBySite = Map.of();

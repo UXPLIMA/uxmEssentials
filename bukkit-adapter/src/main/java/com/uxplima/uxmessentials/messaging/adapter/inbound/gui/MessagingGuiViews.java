@@ -24,8 +24,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Assembles the messaging module's three player-facing GUIs — the settings panel, the ignore-list manager, and
- * the mailbox — over the existing use cases and stores, and hands the openers to the commands and the
+ * Assembles the messaging module's three player-facing GUIs. The settings panel, the ignore-list manager, and
+ * the mailbox. Over the existing use cases and stores, and hands the openers to the commands and the
  * {@code /uxmess gui} hub. Each view reads the raw store the corresponding command reads (so the rendered state
  * matches in-game state) and writes through the same use case (so notifiers and persistence stay consistent).
  * The views are constructed once here and reused for every viewer.

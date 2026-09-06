@@ -42,7 +42,7 @@ tasks.withType<JavaCompile>().configureEach {
         "-Xlint:-processing",
         "-Xlint:-serial",
         // JDK 23+ pedantic lint: flags /** */ comments used as section markers (not attached to a
-        // declaration). Stylistic, not a correctness signal — off, like -serial/-processing above.
+        // declaration). Stylistic, not a correctness signal: off, like -serial/-processing above.
         "-Xlint:-dangling-doc-comments",
         "-Werror",
         "-parameters"
@@ -51,7 +51,7 @@ tasks.withType<JavaCompile>().configureEach {
         disableWarningsInGeneratedCode.set(true)
         // New default check in Error Prone 2.50 (the JDK 21+ unnamed-variable feature). It would rewrite
         // the project's deliberate descriptive unused-catch-variable names (e.g. `catch (… badName)`) to
-        // `_`, contradicting the established readability convention — so it stays off.
+        // `_`, contradicting the established readability convention, so it stays off.
         disable("UnnamedVariable")
         // Other purely-stylistic checks newly enabled-by-default in Error Prone 2.50; they fire on
         // existing, correct code (arrow-switch suggestions, etc.). Kept off to keep the 2.37→2.50 bump a
@@ -63,7 +63,7 @@ tasks.withType<JavaCompile>().configureEach {
         // Javadoc-only check newly enabled in 2.50; a handful of pre-existing stale {@link} targets trip it.
         // Off to keep the bump scoped to JDK 25 / Paper 26; the broken links are a separate doc-pass follow-up.
         disable("InvalidLink")
-        // Style check newly enabled in 2.50 — flags public/protected members that are effectively private
+        // Style check newly enabled in 2.50. Flags public/protected members that are effectively private
         // (mostly test helpers). Stylistic, off to keep the bump scoped.
         disable("EffectivelyPrivate")
     }
@@ -75,7 +75,7 @@ extensions.configure<net.ltgt.gradle.nullaway.NullAwayExtension> {
 
 tasks.withType<JavaCompile>().configureEach {
     options.errorprone.nullaway {
-        // CheckSeverity is reused from the errorprone plugin — the nullaway plugin
+        // CheckSeverity is reused from the errorprone plugin, the nullaway plugin
         // does not define its own enum.
         severity.set(net.ltgt.gradle.errorprone.CheckSeverity.ERROR)
     }

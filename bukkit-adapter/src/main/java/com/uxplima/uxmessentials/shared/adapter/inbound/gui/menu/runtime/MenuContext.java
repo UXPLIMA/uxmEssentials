@@ -9,20 +9,20 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The per-open data a menu binding sees: who is viewing, the optional domain subject the menu was opened for
- * (a warp, a home owner, ...), the current page, — while a list is rendered or clicked — the live list element,
+ * (a warp, a home owner, ...), the current page,, while a list is rendered or clicked, the live list element,
  * any typed command arguments the menu was opened with (an operator {@code command {}} block's
  * {@code %argument_<name>%} values), the menu's own local placeholder definitions, and who triggered the open.
  * The engine creates it; it is public only so feature binding lambdas can read it.
  *
- * <p>The {@code viewer} is who <em>sees</em> the menu — the player it is rendered for and the one every
+ * <p>The {@code viewer} is who <em>sees</em> the menu. The player it is rendered for and the one every
  * player-scoped placeholder ({@code %player%}, {@code %stat_*%}, {@code %data_*%}, inventory, PAPI) resolves
  * against. The {@code executor} is who <em>triggered</em> the open. They are the same player for an ordinary
  * self-open, so {@code %executor%} then reads identically to {@code %player%}. They diverge only when a menu is
- * opened for another player — {@code /menu open <name> <target>} — where the viewer is the target and the executor
+ * opened for another player, {@code /menu open <name> <target>}, where the viewer is the target and the executor
  * is the opener, so a menu the target sees can show "opened for you by {@code %executor%}" distinct from the target
  * named by {@code %player%}. The executor defaults to the viewer, so every existing open is unaffected.
  *
- * <p>The {@code localPlaceholders} map is the open spec's {@code placeholders {}} block — {@code name -> template}
+ * <p>The {@code localPlaceholders} map is the open spec's {@code placeholders {}} block, {@code name -> template}
  * pairs the renderer resolves local-first, so a menu can define or override a {@code %name%} token for itself alone.
  * It is empty for a menu that declares no such block, and for every engine child window (a list/confirm/selector/
  * editor), whose minimal spec carries none.
@@ -51,7 +51,7 @@ public final class MenuContext {
     private final PlayerRef executor;
 
     /**
-     * The paged lists this render draws, keyed by list-source id — empty for every open that queried no paged source,
+     * The paged lists this render draws, keyed by list-source id. Empty for every open that queried no paged source,
      * which is the historic case. A source id present here tells the renderer the list's rows are already one page (so
      * they are placed without re-slicing) and carries the page and corpus total the page indicator reads. Each value is
      * an immutable snapshot taken from the list's {@link ListQueryState} on the viewer's entity thread, so the renderer
@@ -100,7 +100,7 @@ public final class MenuContext {
     }
 
     /**
-     * Who triggered this open — the same player as {@link #viewer()} for an ordinary self-open, and the opener when a
+     * Who triggered this open, the same player as {@link #viewer()} for an ordinary self-open, and the opener when a
      * menu was opened for another player. The renderer reads it to expand {@code %executor%}; unlike {@code %player%}
      * (the viewer, whom every player-scoped placeholder resolves against) this is never re-pointed at the subject.
      */
@@ -118,7 +118,7 @@ public final class MenuContext {
     }
 
     /**
-     * The typed command arguments the menu was opened with, keyed by argument name — empty for a menu not opened
+     * The typed command arguments the menu was opened with, keyed by argument name. Empty for a menu not opened
      * through an argument-carrying command. The renderer reads it to expand {@code %argument_<name>%}; the map is
      * immutable.
      */
@@ -127,7 +127,7 @@ public final class MenuContext {
     }
 
     /**
-     * The open spec's own {@code placeholders {}} block, keyed by custom token name — empty for a menu that declares
+     * The open spec's own {@code placeholders {}} block, keyed by custom token name. Empty for a menu that declares
      * none. The renderer reads it to resolve a {@code %name%} local-first, ahead of the shared placeholder registry,
      * so a menu-scoped token overrides a built-in or global custom for this menu alone; the map is immutable.
      */
@@ -136,7 +136,7 @@ public final class MenuContext {
     }
 
     /**
-     * The paged lists this render draws, keyed by list-source id, as immutable snapshots — empty for an open that
+     * The paged lists this render draws, keyed by list-source id, as immutable snapshots, empty for an open that
      * queried no paged source. The renderer reads it to tell a paged list (already one page) from an in-memory one
      * (the whole corpus, sliced here) and to source the paged list's {@code %page%}/{@code %max_page%}.
      */
@@ -233,7 +233,7 @@ public final class MenuContext {
     }
 
     /**
-     * A copy attributing the open to {@code executor} — who triggered it — while leaving the viewer and every other
+     * A copy attributing the open to {@code executor}, who triggered it, while leaving the viewer and every other
      * field untouched. The engine attaches this when a menu is opened for another player so {@code %executor%} names
      * the opener while {@code %player%} still names the viewing target; an ordinary self-open never calls it and keeps
      * the executor defaulted to the viewer.

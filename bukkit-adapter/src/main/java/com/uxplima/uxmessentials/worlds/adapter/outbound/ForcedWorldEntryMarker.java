@@ -10,9 +10,9 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A short-lived marker the worlds teleporter sets just before a staff-forced hand-off and the cross-world
  * access listener consumes on the resulting {@link org.bukkit.event.player.PlayerTeleportEvent}. It lets the
- * listener skip teleports the worlds module itself initiated — the staff {@code /worlds tp} override and the
+ * listener skip teleports the worlds module itself initiated. The staff {@code /worlds tp} override and the
  * restricted-login redirect, both routed through {@code WorldTeleportService.forced}, which deliberately
- * exempts staff hand-offs from the access policy — while still gating every other cross-world entry vector
+ * exempts staff hand-offs from the access policy, while still gating every other cross-world entry vector
  * ({@code /tp}, {@code /back}, ender pearls, third-party plugins) that the listener does not own.
  *
  * <p>Only the instant ADMIN hand-off is marked; the mark is removed the moment the listener observes the

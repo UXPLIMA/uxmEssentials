@@ -6,17 +6,17 @@ import java.util.Objects;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A lightweight, read-only projection of one warp for a browse listing — the flattened, display-ready columns a
+ * A lightweight, read-only projection of one warp for a browse listing. The flattened, display-ready columns a
  * card in the browse GUI needs, and nothing more. It is deliberately <em>not</em> the {@code PlayerWarp} aggregate:
  * the read-model builds a card straight from a projected row, so opening a browse over a hundred thousand warps
  * loads one page of cards rather than a hundred thousand aggregates. A card carries no password, no whitelist, no
- * rent ledger — only what a listing renders — and it never grants access: the teleport gate re-checks the real
+ * rent ledger, only what a listing renders, and it never grants access: the teleport gate re-checks the real
  * warp when a player picks a card.
  *
  * @param id the warp's surrogate key, for the follow-up teleport or detail open
  * @param name the globally-unique warp name
  * @param displayName the operator-set display name, or {@code null} to fall back to {@link #name}
- * @param ownerName the owner's resolved display name (never blank — falls back to the owner uuid at read time)
+ * @param ownerName the owner's resolved display name (never blank, falls back to the owner uuid at read time)
  * @param world the human-facing world name the warp sits in
  * @param server the server id the warp lives on in a network, or {@code null} on a single server
  * @param category the warp's category id, or {@code null} when uncategorised

@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Discovers which land-claim plugins are installed and binds a {@link CompositeClaimProvider} over every one
- * that is present and left enabled in config, or the no-op provider when none applies — mirroring how {@code
+ * that is present and left enabled in config, or the no-op provider when none applies, mirroring how {@code
  * MapMarkerPublishers} discovers a map plugin and {@code ForeignEconomyProviders} discovers an economy
  * provider.
  *
@@ -40,8 +40,8 @@ public final class ClaimProviders {
     /**
      * The one ordered registry of claim-provider candidates: each pairs a {@code claims.providers} config key
      * with the factory that builds its (lazily-guarded) provider. It is the single source of truth for the
-     * provider set — {@link #detectAll} folds every entry into the composite and {@link #candidateKeys()}
-     * exposes their keys — so a provider added here is the one edit {@code ClaimProviderCoverageDriftTest}
+     * provider set. {@link #detectAll} folds every entry into the composite and {@link #candidateKeys()}
+     * exposes their keys, so a provider added here is the one edit {@code ClaimProviderCoverageDriftTest}
      * cross-checks against {@code config.conf} and {@code paper-plugin.yml}, failing the build if either the
      * discoverable toggle line or the load-order dependency was forgotten.
      */

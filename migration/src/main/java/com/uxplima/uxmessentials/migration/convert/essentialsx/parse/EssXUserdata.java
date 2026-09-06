@@ -12,9 +12,9 @@ import org.jspecify.annotations.NullMarked;
 /**
  * One parsed EssentialsX {@code userdata/<uuid>.yml} file, source-shaped: the player uuid, the
  * last-known name, the named homes (each a raw {@link EssXLocation}), the optional balance, and the
- * mail lines. Defensive defaults are applied at parse time — a missing balance is {@link
+ * mail lines. Defensive defaults are applied at parse time. A missing balance is {@link
  * Optional#empty()} (mapped to an empty wallet, not a failed record), missing homes/mail are empty
- * lists — so the mapper downstream never has to second-guess a missing key (docs/12-migration §4).
+ * lists, so the mapper downstream never has to second-guess a missing key (docs/12-migration §4).
  *
  * @param uuid the player's account identifier
  * @param name the last-known display name

@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link PluginHook} for Vault's permission service: it integrates with the {@code Vault} plugin and
  * resolves to a {@link PermissionQuery}. It names {@link VaultPermissionService} only inside
  * {@link #whenPresent}, and that service is the single class importing {@code net.milkbowl.vault.permission};
- * so on a server without Vault the service is never constructed and the SDK is never loaded — {@code Hooks}
+ * so on a server without Vault the service is never constructed and the SDK is never loaded: {@code Hooks}
  * hands callers the no-op {@link PermissionQuery#ABSENT}.
  */
 @NullMarked

@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 /**
  * {@code /setjail <name>}: save the staff member's current position as a named jail in the DB-backed
  * {@link JailLocationStore}, or re-anchor an existing one of the same name in place. The store is keyed by
- * name, so this is an upsert and always succeeds — a brand-new name and a redefinition both publish
+ * name, so this is an upsert and always succeeds, a brand-new name and a redefinition both publish
  * {@code JailLocationDefined} and confirm with {@code SETJAIL_SAVED}. The stored jail then merges with the
  * config jails behind the combined directory, so {@code /jail <player> <name>} accepts it and the sanction
  * adapter resolves its location. The operator-only permission is enforced at the command gate.

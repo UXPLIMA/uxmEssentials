@@ -39,7 +39,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage of the {@code input:} menu step — the continuation split the click dispatcher runs when a
+ * MockBukkit coverage of the {@code input:} menu step, the continuation split the click dispatcher runs when a
  * gesture's action chain reaches a text prompt. A {@link RecordingPrompt} stands in for the text-input seam so the
  * test drives the submit and cancel callbacks by hand, exactly where the real seam would fire them (the viewer's
  * entity thread). The chain is loaded from HOCON and opened through the real {@link Menus} path, so this exercises the

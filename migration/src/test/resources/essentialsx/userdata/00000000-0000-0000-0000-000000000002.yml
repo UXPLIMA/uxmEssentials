@@ -1,4 +1,4 @@
-# A second player with no balance and no homes — exercises the defensive defaults
+# A second player with no balance and no homes. Exercises the defensive defaults
 # (missing money -> empty wallet, missing homes -> empty set), not a failed record.
 lastAccountName: alex
 mail:

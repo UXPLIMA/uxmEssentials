@@ -25,8 +25,8 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * </ul>
  *
  * <p>Each action names the source id of the paged list it targets ({@code list-sort:pw:browse}) because a menu may
- * hold more than one paged list; the id is required, never inferred. The real work — mutating the list's query state
- * and re-querying — reaches the window through the {@link MenuActionContext#control()} the live click supplied, so it
+ * hold more than one paged list; the id is required, never inferred. The real work. Mutating the list's query state
+ * and re-querying, reaches the window through the {@link MenuActionContext#control()} the live click supplied, so it
  * rides the exact page-flip path (its in-flight flag, thread hops and repaint); a context built outside a live click
  * carries a no-op control, so the same handler is a harmless no-op there. Every effect is fail-soft: {@link #safe}
  * turns anything a call unexpectedly throws into a one-line operator warning and a no-op, and a value the grammar
@@ -40,7 +40,7 @@ public final class ListControlActions {
     /**
      * Register the list-control actions into {@code bindings}. {@code log} is the operator console logger a fail-soft
      * or unparseable action warns through. Left separate from {@link MenuVocabulary#registerActions} so that method's
-     * existing call-sites stay untouched — the composition root calls both.
+     * existing call-sites stay untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -79,7 +79,7 @@ public final class ListControlActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs apply.
+     * than escaping into the click dispatch: the same fail-soft contract the sibling action packs apply.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
         return ctx -> {

@@ -8,12 +8,12 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
 
 /**
  * Outbound port for durable, server-wide warp storage. Every warp fact (name, world, coordinates, owner,
- * creation time, cost, required permission) is a first-class column — there is no opaque JSON blob (the
- * architecture persistence invariant) — so a {@link Warp} loaded from a row is rebuilt from queryable
+ * creation time, cost, required permission) is a first-class column. There is no opaque JSON blob (the
+ * architecture persistence invariant), so a {@link Warp} loaded from a row is rebuilt from queryable
  * fields, and the list query reads them in stored creation order.
  *
  * <p>Warps are keyed by their {@link WarpName} alone (they are not scoped to an owner), so a {@code save}
- * upserts on the single-column {@code name} primary key — a re-anchor overwrites the same row — and a
+ * upserts on the single-column {@code name} primary key, a re-anchor overwrites the same row, and a
  * delete is by name. A cache decorator may sit in front of this port; the contract here is the durable
  * source of truth.
  */

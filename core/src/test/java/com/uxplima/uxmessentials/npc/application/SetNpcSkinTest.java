@@ -70,7 +70,7 @@ class SetNpcSkinTest {
         Result<Unit, NpcError> result = setSkin.setSkin(actor, NpcName.of("mob"), new NpcSkin("tex", "sig"));
 
         assertThat(result.errorOrThrow()).isEqualTo(NpcError.SKIN_ONLY_PLAYER);
-        // The stored NPC is untouched (no skin applied, no render) — it stays a skinless villager.
+        // The stored NPC is untouched (no skin applied, no render): it stays a skinless villager.
         assertThat(repository.find(NpcName.of("mob")).orElseThrow().skin()).isNull();
         assertThat(view.rendered).isEmpty();
         assertThat(sink.textFor(actor)).contains(NpcMessageKey.NPC_SKIN_ONLY_PLAYER.key());

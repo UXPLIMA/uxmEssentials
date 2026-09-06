@@ -37,7 +37,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The Athelion end-to-end golden-file: it seeds an Athelion {@code data.yml} fixture, drives the real
  * {@link AthelionPlayerWarpsConvert} plan into the shared {@link PlayerWarpRecordWriter}, and asserts the warps land on
- * the new player-warp schema over the default embedded SQLite backend. It proves the whole chain — the source name is
+ * the new player-warp schema over the default embedded SQLite backend. It proves the whole chain. The source name is
  * sanitised and a global collision from a second owner is renamed, a plaintext password is hashed so it verifies through
  * the password store, the category / bans / rating rollup carry across, a password warp maps to {@code PASSWORD} access,
  * a warp in an unknown world is dropped, a dry-run preview writes nothing, and a second run imports nothing new.
@@ -261,7 +261,7 @@ class AthelionPlayerWarpsImportTest {
         return dataFile;
     }
 
-    /** The imported Alice's-shop warp — the only PASSWORD-access warp, whichever base name the collision walk gave it. */
+    /** The imported Alice's-shop warp: the only PASSWORD-access warp, whichever base name the collision walk gave it. */
     private PlayerWarp passwordShop() {
         return repository.all().stream()
                 .filter(warp -> warp.access() == WarpAccess.PASSWORD)
@@ -283,7 +283,7 @@ class AthelionPlayerWarpsImportTest {
                 .orElseThrow(() -> new AssertionError("no warp named " + name));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

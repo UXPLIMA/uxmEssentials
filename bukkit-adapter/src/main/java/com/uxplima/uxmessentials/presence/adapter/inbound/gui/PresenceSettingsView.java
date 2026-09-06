@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * state), reading the live {@link PresenceStore} (whose vanished bit is overlaid from the one vanish authority) and
  * writing through the injected {@code vanishToggle} handle onto the {@code vanish} context. When the vanish module is
  * disabled the handle is a no-op and the overlaid read stays {@code false}, so the toggle degrades cleanly. The panel
- * holds no logic of its own — it reads the current presence fresh on every open and routes a flip through the matching
+ * holds no logic of its own. It reads the current presence fresh on every open and routes a flip through the matching
  * handle, so opening it always shows the live state and a click is the same transition the command makes.
  */
 @NullMarked

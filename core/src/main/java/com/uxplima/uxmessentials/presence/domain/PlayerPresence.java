@@ -8,14 +8,14 @@ import java.util.Optional;
 /**
  * The immutable per-player presence the presence context owns: the AFK flag with its optional reason, the
  * instant of the player's last activity, and the vanish flag. Held in a
- * {@code ConcurrentHashMap<UUID, PlayerPresence>} and only ever replaced wholesale through {@code compute} —
+ * {@code ConcurrentHashMap<UUID, PlayerPresence>} and only ever replaced wholesale through {@code compute}
  * every transition here returns a new aggregate rather than mutating this one, so a reader on another region
  * thread (or the async AFK sweep) always sees a coherent value (docs/02-concurrency.md §6.9).
  *
  * <p>The aggregate owns two transition rules. The AFK auto-transition: {@link #isIdlePast} compares {@code now}
  * against {@link #lastActivity} plus the configured idle threshold, and the async sweep flips an idle,
  * not-yet-AFK player to AFK through {@link #markAfk}. Any activity (a move, a chat line, a command)
- * re-stamps {@link #lastActivity} through {@link #cleared}, which also clears an auto-AFK flag — returning
+ * re-stamps {@link #lastActivity} through {@link #cleared}, which also clears an auto-AFK flag, returning
  * from AFK on the first sign of life. Manual {@code /afk} toggles directly through {@link #markAfk} (with the
  * player's chosen reason) and {@link #cleared}.
  *
@@ -40,7 +40,7 @@ public record PlayerPresence(boolean afk, Optional<String> afkReason, Instant la
     }
 
     /**
-     * This presence re-stamped to {@code now} and cleared of any AFK flag — the player did something, so they
+     * This presence re-stamped to {@code now} and cleared of any AFK flag. The player did something, so they
      * are no longer idle and no longer AFK. The vanished flag is preserved: activity does not reveal a vanished
      * player. Callers compare {@link #afk()} before and after to decide whether a return-from-AFK occurred.
      */
@@ -49,7 +49,7 @@ public record PlayerPresence(boolean afk, Optional<String> afkReason, Instant la
         return new PlayerPresence(false, Optional.empty(), now, vanished);
     }
 
-    /** This presence re-stamped to {@code now}, keeping AFK and vanish as they are — used when only the clock moves. */
+    /** This presence re-stamped to {@code now}, keeping AFK and vanish as they are: used when only the clock moves. */
     public PlayerPresence touched(Instant now) {
         Objects.requireNonNull(now, "now");
         return new PlayerPresence(afk, afkReason, now, vanished);
@@ -72,7 +72,7 @@ public record PlayerPresence(boolean afk, Optional<String> afkReason, Instant la
     }
 
     /**
-     * Whether the player has been idle longer than {@code threshold} as of {@code now} — the auto-AFK rule.
+     * Whether the player has been idle longer than {@code threshold} as of {@code now}, the auto-AFK rule.
      * A non-positive {@code threshold} disables auto-AFK (never idle), so an operator can switch it off by
      * setting the idle window to zero. An already-AFK player is never re-flagged.
      */

@@ -13,11 +13,11 @@ import org.jspecify.annotations.NullMarked;
  * per-vote, per-party, and scheduled top-voter embeds.
  *
  * <p>{@link #enabled()} is derived: it is {@code true} only when {@code webhookUrl} is non-blank. An empty
- * URL therefore disables every piece of Discord output — nothing is subscribed and no task is scheduled —
+ * URL therefore disables every piece of Discord output, nothing is subscribed and no task is scheduled,
  * which is the default, so an installed-but-unconfigured server pays zero overhead and leaks no secret.
  *
  * @param enabled whether Discord output is active (derived: the webhook URL is non-blank)
- * @param webhookUrl the channel's incoming-webhook URL (a secret — never logged)
+ * @param webhookUrl the channel's incoming-webhook URL (a secret: never logged)
  * @param voteEnabled whether a per-vote embed is posted
  * @param voteTemplate the per-vote embed description, with {@code {player}} and {@code {service}} tokens
  * @param partyEnabled whether a per-party embed is posted

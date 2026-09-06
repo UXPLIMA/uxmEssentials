@@ -38,7 +38,7 @@ import org.jspecify.annotations.Nullable;
  * the online set, a name-sorted join, and one resolved line.
  *
  * <p>With its catalog {@code gui} flag on, the bare {@code /list} a player runs opens the
- * {@link OnlinePlayerListView} head grid instead — the same vanish-aware roster, rendered as one head per player.
+ * {@link OnlinePlayerListView} head grid instead: the same vanish-aware roster, rendered as one head per player.
  * The {@link #runGui} opener installed on the bare root by the {@code GuiRootBinding} snapshots the visible roster
  * on the global region thread (Folia forbids iterating the online set off it) and hands it to the view; a console
  * has no inventory and always falls back to the chat line. With the flag off the bare root keeps the chat
@@ -137,7 +137,7 @@ public final class ListCommand extends PresenceCommandSupport implements Command
 
     /**
      * The visible online players as menu entries, name-sorted, resolved on the global thread. Each carries the
-     * uuid (for the head skin), name, world, and a localised status word — only data already read from the live
+     * uuid (for the head skin), name, world, and a localised status word, only data already read from the live
      * {@link Player} the chat path filters, plus the world the player stands in.
      */
     private List<OnlinePlayerListView.Entry> collectVisibleEntries(Player viewer, PlayerRef viewerRef) {

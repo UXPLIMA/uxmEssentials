@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.menu.TestMenuEngine;
 
 /**
  * Builds the two trade windows over a test engine, the way production wiring does but off a data folder that holds
- * no overrides, so every fixture reads the bundled specs from the classpath — the very files the plugin ships. The
+ * no overrides, so every fixture reads the bundled specs from the classpath: the very files the plugin ships. The
  * geometry the tests assert against therefore comes from those files rather than from anything the tests declare.
  */
 public final class TradeWindows {

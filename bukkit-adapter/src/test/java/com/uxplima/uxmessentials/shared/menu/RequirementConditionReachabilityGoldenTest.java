@@ -36,7 +36,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The proof that a valued requirement written as an {@code id:value} token in a config gates an item — the coupled
+ * The proof that a valued requirement written as an {@code id:value} token in a config gates an item: the coupled
  * reachability fix and the requirement pack, end to end. The parser leaves {@code has-empty-slots:1} whole (it is
  * registry-blind), so before the shared {@code Ref.resolve} fix this menu would be rejected at startup validation and,
  * even if it loaded, the whole token would miss the condition registry at render time. Here the real
@@ -90,7 +90,7 @@ class RequirementConditionReachabilityGoldenTest {
     @Test
     void theValuedViewConditionPassesStartupValidation() {
         // The registry-aware split makes has-empty-slots:1 count as known because its head has-empty-slots is
-        // registered — without the fix, validate would report the whole token as missing and the menu would be skipped.
+        // registered: without the fix, validate would report the whole token as missing and the menu would be skipped.
         assertThat(bindings.validate(List.of(spec))).isEmpty();
     }
 

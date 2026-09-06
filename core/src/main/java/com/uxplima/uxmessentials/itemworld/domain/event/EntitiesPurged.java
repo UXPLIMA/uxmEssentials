@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.WorldRef;
 
 /**
- * An entity-purge verb ({@code /butcher}, {@code /killall}, {@code /remove}) swept entities from a world — a
+ * An entity-purge verb ({@code /butcher}, {@code /killall}, {@code /remove}) swept entities from a world, a
  * real, observable effect worth bridging to other plugins. Published after the adapter has removed the
  * entities, carrying who ran it, the validated selection, the world swept, the count actually removed, and
  * when. The use case audit-logs the same action; the event lets a listener react (e.g. a region cache

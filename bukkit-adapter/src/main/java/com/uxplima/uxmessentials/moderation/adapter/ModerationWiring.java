@@ -113,7 +113,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Constructs the moderation context's adapters and use cases over the injected kernel ports and the
  * persistence DSL, and produces everything the plugin must register: the Brigadier command list and the
- * login/join/freeze listeners. This is the one place the moderation context is wired — nothing else news up
+ * login/join/freeze listeners. This is the one place the moderation context is wired. Nothing else news up
  * its classes.
  *
  * <p>The audit trail goes to the dedicated {@code com.uxplima.uxmessentials.audit} SLF4J channel (not the
@@ -129,7 +129,7 @@ public final class ModerationWiring {
 
     private static final String AUDIT_CHANNEL = "com.uxplima.uxmessentials.audit";
 
-    /** The locale dimension the shared chat prefix is resolved against — the console has no per-viewer locale. */
+    /** The locale dimension the shared chat prefix is resolved against: the console has no per-viewer locale. */
     private static final com.uxplima.uxmessentials.shared.domain.PlayerRef BROADCAST_PREFIX_VIEWER =
             com.uxplima.uxmessentials.shared.domain.PlayerRef.system("console");
 
@@ -242,7 +242,7 @@ public final class ModerationWiring {
                 dataFolder,
                 kernel.log());
         // The bare-command GUI flow for the named sanctions (/ban /mute /tempban /tempmute /warn /banip): the
-        // reusable player picker — and, for the timed verbs, the reusable duration picker — into the per-target
+        // reusable player picker (and, for the timed verbs, the reusable duration picker) into the per-target
         // confirm screen, ending in the same audited use cases the raw subcommands take. The views stay generic:
         // the flow supplies the moderation TargetResolver as its offline-name resolver, the unknown-target reply,
         // and the SanctionDuration-backed validator for the timed verbs.
@@ -384,7 +384,7 @@ public final class ModerationWiring {
         Punish punish = new Punish(new ResolveTemplate(settings.templates()), ban, tempBan, notifier);
         WarnEscalator escalator = new WarnEscalator(settings.warnEscalation(), mute, tempBan, ban, kick, notifier);
         // The revoke use cases are built as named locals so /staffrollback drives the same instances the
-        // standalone /unmute, /unban and /unwarn commands do — one audited path, no parallel rollback logic.
+        // standalone /unmute, /unban and /unwarn commands do: one audited path, no parallel rollback logic.
         Unmute unmute = new Unmute(repository, notifier, audit, kernel.events(), history, clock);
         Unban unban = new Unban(repository, notifier, audit, history);
         ClearWarns clearWarns = new ClearWarns(repository, notifier, audit);
@@ -478,7 +478,7 @@ public final class ModerationWiring {
     /**
      * The cross-context gate sinks moderation rebinds when it wires: the messaging mute holder and the
      * teleport jail holder. Passing them as a narrow callback pair keeps {@code ModerationWiring} from
-     * importing the other contexts' adapter types directly — bootstrap supplies the binders.
+     * importing the other contexts' adapter types directly: bootstrap supplies the binders.
      *
      * @param bindMute rebinds the messaging mute gate to the supplied policy
      * @param bindJail rebinds the teleport jail gate to the supplied gate

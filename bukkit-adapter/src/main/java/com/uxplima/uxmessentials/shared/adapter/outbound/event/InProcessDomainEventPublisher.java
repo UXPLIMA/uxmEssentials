@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link DomainEvent} marker.
  *
  * <p>A failing subscriber is logged and skipped so one bad listener never blocks delivery to the
- * others — the publish call is not a transaction across subscribers.
+ * others: the publish call is not a transaction across subscribers.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b>. {@code subscribers} is a {@link CopyOnWriteArrayList}:

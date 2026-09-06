@@ -7,7 +7,7 @@ import java.util.UUID;
  * Outbound port for the network-shared record of in-flight cross-server teleports. It backs one row per player in
  * the {@code player_warp_pending_teleports} table (PK {@code player_uuid}), so the origin backend records the
  * intent before handing the player across the proxy and the target backend reads it back on join. Every method is
- * a single indexed statement keyed by the player uuid — never a scan.
+ * a single indexed statement keyed by the player uuid, never a scan.
  */
 public interface PendingTeleportStore {
 

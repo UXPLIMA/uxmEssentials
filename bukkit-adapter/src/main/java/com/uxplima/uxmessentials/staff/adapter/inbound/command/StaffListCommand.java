@@ -26,12 +26,12 @@ import com.uxplima.uxmessentials.staff.application.StaffMessageKey;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /stafflist} ({@code uxmessentials.staff.list}): open the online-staff GUI — heads of every online staff
- * member the sender can see — and teleport to whichever head they click. The {@link StaffPlayerMenu} owns the
+ * {@code /stafflist} ({@code uxmessentials.staff.list}): open the online-staff GUI, heads of every online staff
+ * member the sender can see, and teleport to whichever head they click. The {@link StaffPlayerMenu} owns the
  * engine spec, the head label, and the admin-teleport on click; this handler reads the vanish-aware staff roster on
  * the global region thread (iterating the online list off it is illegal on Folia) and hands it to the menu, or
  * sends {@link StaffMessageKey#STAFF_LIST_EMPTY} when no staff are online rather than opening an empty window. This
- * is the GUI counterpart to the presence context's text {@code /staff} roster — it agrees on who is staff via the
+ * is the GUI counterpart to the presence context's text {@code /staff} roster. It agrees on who is staff via the
  * same {@code uxmessentials.staff.member} marker.
  */
 @NullMarked
@@ -97,7 +97,7 @@ public final class StaffListCommand extends StaffCommandSupport implements Comma
 
     /**
      * Snapshot the visible online staff roster on the global region thread, then either open the picker over it or
-     * send the empty line — mirroring the old view's onGlobal open and empty-roster handling.
+     * send the empty line: mirroring the old view's onGlobal open and empty-roster handling.
      */
     private void openRoster(Player sender, PlayerRef lookerRef) {
         List<PlayerRef> roster = server.getOnlinePlayers().stream()

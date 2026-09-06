@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The join and world-change handlers hop onto the player's entity thread through the {@link Scheduler} port before
  * touching the live player or starting the lib's per-wearer refresh task (Folia). The quit handler needs no hop:
  * {@link PlayerQuitEvent} fires on the quitting player's region thread, so it drops the tracked handle, sends remove
- * packets, and removes the player's stranded entry from the hide-team on their board — all region-safe there.
+ * packets, and removes the player's stranded entry from the hide-team on their board, all region-safe there.
  */
 @NullMarked
 public final class NametagLifecycleListener implements Listener {

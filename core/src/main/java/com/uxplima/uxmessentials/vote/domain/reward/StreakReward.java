@@ -10,7 +10,7 @@ import java.util.OptionalLong;
  * absent is a config error the constructor rejects. The present value must be strictly positive.
  *
  * <p>Mirrors {@link MilestoneReward}, but it fires on the day the streak advances rather than on an
- * all-time count — the engine only evaluates these when the streak actually grew, so a same-day re-vote
+ * all-time count. The engine only evaluates these when the streak actually grew, so a same-day re-vote
  * never re-pays a streak reward.
  *
  * @param at the one-shot streak length to pay at, or empty when this is a recurring streak reward

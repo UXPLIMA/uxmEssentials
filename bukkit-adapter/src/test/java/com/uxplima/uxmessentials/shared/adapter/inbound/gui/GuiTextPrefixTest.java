@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The brand chat prefix ({@code <tag:'…'>} / {@code <etag:'…'>}) belongs to chat lines, not to inventory titles. An
  * anvil prompt renders its label through {@link GuiText#unprefixedText}, which strips that one leading token so the
- * anvil title reads as the bare prompt — no {@code uxmEssentials »} brand — while {@link GuiText#text} keeps it for
+ * anvil title reads as the bare prompt, no {@code uxmEssentials »} brand, while {@link GuiText#text} keeps it for
  * chat. These pin the strip rule and the rendered result.
  */
 class GuiTextPrefixTest {

@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The jOOQ-backed {@link JailLocationStore} over the generated {@code MODERATION_JAIL_LOCATIONS} table. Jails
  * are server-wide and keyed by name alone, so a lookup is a single-row {@code SELECT} on the {@code name}
- * primary key, {@code names} reads every name sorted, and a {@code save} upserts on that key — a {@code
+ * primary key, {@code names} reads every name sorted, and a {@code save} upserts on that key, a {@code
  * /setjail} onto an existing name overwrites the same row. Every statement is typed jOOQ DSL; no SQL is ever
  * string-concatenated.
  *

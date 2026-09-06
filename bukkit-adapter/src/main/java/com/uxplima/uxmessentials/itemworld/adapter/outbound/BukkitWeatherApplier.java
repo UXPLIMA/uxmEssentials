@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.itemworld.domain.WeatherSpec;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Translates a validated {@link WeatherSpec} onto a world's storm/thunder flags — the one side-effecting step
+ * Translates a validated {@link WeatherSpec} onto a world's storm/thunder flags. The one side-effecting step
  * the {@code /weather}, {@code /sun}, {@code /rain} and {@code /thunder} verbs share. The domain owns the closed
  * {@link WeatherSpec.Kind} set and the optional duration; this applier maps each kind to the two boolean world
  * flags and, when a duration is given, sets the matching weather-duration in ticks so the change times out.

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
  * Unit coverage of the directory-backed {@link ConfigurateKitRepository}: it reads every {@code <id>.conf}
  * in the kits folder, writes one file per kit on save, drops the file on delete, splits a legacy monolith
  * {@code kits.conf} into per-kit files on first load, and skips a malformed file without failing the load.
- * No MockBukkit server is needed — the repository only parses HOCON and carries opaque Base64 item strings.
+ * No MockBukkit server is needed: the repository only parses HOCON and carries opaque Base64 item strings.
  */
 class ConfigurateKitRepositoryTest {
 

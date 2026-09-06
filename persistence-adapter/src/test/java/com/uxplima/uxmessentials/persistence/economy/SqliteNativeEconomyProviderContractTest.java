@@ -31,7 +31,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * The {@code EconomyProviderContractTest} (docs/11-economy-integration.md §7, docs/05-testing.md §3.4)
- * exercised against the <strong>real native provider over embedded SQLite</strong> — the canonical worked
+ * exercised against the <strong>real native provider over embedded SQLite</strong>: the canonical worked
  * example proving the four pinned properties on the tested-default backend rather than an in-memory fake. The
  * core module already runs the same contract over an in-memory repository; this is the DB-backed
  * counterpart, where the double-spend guard is the actual SQLite guarded {@code UPDATE} and the single-writer
@@ -39,7 +39,7 @@ import org.junit.jupiter.api.io.TempDir;
  *
  * <p>The four properties: atomic pay, insufficient-funds rejection (rejected, never clamped, non-mutating),
  * descending baltop ordering, and the load-bearing concurrent-debit double-spend safety. Testcontainers is
- * not required here — the embedded file db runs in-process; if a future contributor adds network-backend
+ * not required here. The embedded file db runs in-process; if a future contributor adds network-backend
  * runs they subclass the same shape behind Testcontainers.
  */
 class SqliteNativeEconomyProviderContractTest {

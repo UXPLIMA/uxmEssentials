@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * adapter that crosses the boundary maps through here, so the {@code Location}/{@code Position} and
  * {@code Player}/{@code PlayerRef} translations are defined once rather than copy-pasted per adapter.
  *
- * <p>The mappers are pure static functions with no Bukkit lookups of their own — a caller already
+ * <p>The mappers are pure static functions with no Bukkit lookups of their own, a caller already
  * holding a live {@code Player} or {@code World} translates it here; resolving a handle from an id is
  * the lookup ports' job, not this class's.
  */

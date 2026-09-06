@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /ban <player> [-s] [reason]}: a permanent UUID ban. Unlike {@code /tempban} there is no duration
- * argument — the {@code Ban} use case records a far-future tempban row, kicks an online target immediately and
+ * argument. The {@code Ban} use case records a far-future tempban row, kicks an online target immediately and
  * the login listener bars reconnection. This handler maps the name and the greedy reason; a leading {@code -s}
  * in the reason suppresses the staff broadcast. An exempt target or an unknown name is reported by the use case
  * and the resolver respectively.

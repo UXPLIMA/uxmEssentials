@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.playerwarps.domain.PlayerWarpId;
 import com.uxplima.uxmessentials.playerwarps.domain.RatingTally;
 
 /**
- * Outbound port for the per-vote star ratings of a warp — one row per {@code (warp, player)}, so a player holds at
+ * Outbound port for the per-vote star ratings of a warp, one row per {@code (warp, player)}, so a player holds at
  * most one live rating on any warp and re-rating overwrites their star in place rather than stacking a second vote.
  * It owns only the vote rows; the denormalised rollup on {@code player_warps} (the sum, count, average, and the
  * Bayesian score the browse sorts on) is the rate use case's concern, recomputed from this store's {@link #tally}

@@ -7,7 +7,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@code SupportedMappings} rows for the built live sources (docs/12-migration §5). Each live source
- * migrates a single surface — a balance into the {@code Wallet} aggregate — so its table is one row. The
+ * migrates a single surface, a balance into the {@code Wallet} aggregate, so its table is one row. The
  * mapper name is the bukkit-side feed that performs the read, and the conflict unit is the player uuid,
  * matching how the economy writer keys a wallet. The drift guard ties each row to the registered source.
  */

@@ -26,8 +26,8 @@ import org.junit.jupiter.api.io.TempDir;
  *
  * <p>The repository tests ({@code Jooq*RepositoryTest}) open {@code Persistence}, which runs every migration to
  * head against a clean database, so they only ever exercise the head schema. A table-rebuild migration that drops
- * existing rows while rebuilding — the {@code CREATE new / INSERT…SELECT / DROP old / RENAME} shape SQLite forces,
- * since it cannot {@code ALTER} a primary key — would still leave those tests green: there is no pre-existing row
+ * existing rows while rebuilding, the {@code CREATE new / INSERT…SELECT / DROP old / RENAME} shape SQLite forces,
+ * since it cannot {@code ALTER} a primary key. Would still leave those tests green: there is no pre-existing row
  * to lose on a clean database. This test fills that gap. It seeds a row under the schema as it stood the version
  * before the rebuild, then runs the rebuild over it, and proves the row survives with the backfilled value rather
  * than vanishing in the {@code DROP}.
@@ -42,7 +42,7 @@ import org.junit.jupiter.api.io.TempDir;
  * <p>Infrastructure: the test reuses the production {@link DataSourceFactory}/{@link DatabaseSettings} to build the
  * real embedded-SQLite pool (single-writer WAL, the tested default backend) over a temp-folder database, exactly
  * as {@code Persistence.open} does. The one thing it cannot reuse is {@code Persistence.open} itself, which always
- * migrates to head in one shot with no version control — a backfill test must stop at the version before the
+ * migrates to head in one shot with no version control. A backfill test must stop at the version before the
  * rebuild, seed, then continue. So it drives Flyway directly with {@link MigrationVersion} targets via the small
  * {@link #migrateTo} helper, the documented and intended way to run a migration sub-range.
  */
@@ -53,10 +53,10 @@ class StaffLoadoutBackfillMigrationTest {
     /** The version immediately before the rebuild: migrate here, seed an old-schema row, then continue past it. */
     private static final String VERSION_BEFORE_REBUILD = "61";
 
-    /** The rebuild under test — {@code staff_loadout} gains {@code server_id} and a composite primary key. */
+    /** The rebuild under test: {@code staff_loadout} gains {@code server_id} and a composite primary key. */
     private static final String REBUILD_VERSION = "62";
 
-    /** The id existing rows backfill to — the default {@code network.server-id} of a single-server install. */
+    /** The id existing rows backfill to, the default {@code network.server-id} of a single-server install. */
     private static final String BACKFILL_SERVER_ID = "server-1";
 
     private HikariDataSource dataSource;
@@ -96,7 +96,7 @@ class StaffLoadoutBackfillMigrationTest {
     @Test
     void migratingTheRestOfTheWayOnAFreshDatabaseStillReachesHeadWithoutTheBackfill() {
         // The backfill's INSERT…SELECT reads zero rows on a fresh database; the rebuild must still complete and
-        // leave no staff_loadout row behind. This guards the seam between the two migrate calls — running the
+        // leave no staff_loadout row behind. This guards the seam between the two migrate calls, running the
         // rebuild over an empty table should reach head cleanly, not invent a spurious row.
         migrateTo(VERSION_BEFORE_REBUILD);
         UUID neverEnteredStaffMode = UUID.randomUUID();
@@ -125,14 +125,14 @@ class StaffLoadoutBackfillMigrationTest {
 
     /**
      * Insert a row in the pre-V62 column set (V29 base + the V30 {@code vanished_before} and V31
-     * {@code allow_flight} flags), with no {@code server_id} column — the schema as it stands at V61. The table
+     * {@code allow_flight} flags), with no {@code server_id} column: the schema as it stands at V61. The table
      * and column names are unqualified rather than the generated jOOQ class, which reflects the head (post-V62)
      * shape and so would reference a {@code server_id} column that does not exist yet at this point.
      */
     private void insertPreServerIdRow(UUID owner, OldLoadout loadout) {
         // Wrap the seed in a transaction so it commits, the same way the repository's write path does. The pool
         // runs with autoCommit off (single-writer SQLite), so an insert left outside a transaction is rolled back
-        // when the lone connection returns to the pool — and the rebuild on the next acquisition would then find
+        // when the lone connection returns to the pool, and the rebuild on the next acquisition would then find
         // nothing, masking the very loss this test exists to catch.
         dsl.transaction(configuration -> DSL.using(configuration)
                 .insertInto(DSL.table("staff_loadout"))
@@ -226,7 +226,7 @@ class StaffLoadoutBackfillMigrationTest {
         }
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

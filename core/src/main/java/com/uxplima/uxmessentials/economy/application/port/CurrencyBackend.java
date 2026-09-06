@@ -38,7 +38,7 @@ public interface CurrencyBackend {
     /** Whether this backend can be written while the owner is offline. False for Paper experience. */
     boolean worksOffline();
 
-    /** True only where check-and-take is one indivisible operation — today, only the native ledger. */
+    /** True only where check-and-take is one indivisible operation, today, only the native ledger. */
     boolean atomicDebit();
 
     /** The finest amount this backend can hold. */

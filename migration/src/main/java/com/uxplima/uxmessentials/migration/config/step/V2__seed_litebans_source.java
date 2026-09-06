@@ -8,7 +8,7 @@ import org.spongepowered.configurate.serialize.SerializationException;
 /**
  * The second config-version step for {@code migration.conf}: seeds the {@code litebans} connection subtree the
  * JDBC LiteBans source reads (docs/12-migration §10.1). Like {@link V1__seed_migration_defaults} it is a pure,
- * idempotent node transform — each key is set only when absent ({@code node.virtual()}) — so re-running on an
+ * idempotent node transform (each key is set only when absent ({@code node.virtual()})) so re-running on an
  * already-seeded config rewrites nothing. An empty {@code jdbc-url} is the on-disk default: the source then
  * falls back to discovering an H2 file under {@code plugins/LiteBans/}.
  */

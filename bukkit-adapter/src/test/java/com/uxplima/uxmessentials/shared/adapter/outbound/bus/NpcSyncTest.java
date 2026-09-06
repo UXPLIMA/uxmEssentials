@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the npc cross-server sync seam. The broadcasting decorator publishes an {@link NpcChanged} naming the
- * affected NPC after every local mutating write — a {@code save} (a create, a move, a re-skin, and every other
+ * affected NPC after every local mutating write, a {@code save} (a create, a move, a re-skin, and every other
  * edit upsert the same row through {@code save}) and a {@code delete}. On a remote frame the listener reloads
  * exactly that NPC from the shared DB into the same cache the commands and renderer read, then re-renders it: an
  * NPC that still exists is rendered (the local edit path's {@link NpcView#render}), one that was deleted on the

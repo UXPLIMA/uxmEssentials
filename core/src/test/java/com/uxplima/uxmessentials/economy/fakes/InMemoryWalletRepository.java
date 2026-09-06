@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * A hand-rolled in-memory {@link WalletRepository} for the economy tests. It stands in for the jOOQ +
- * Caffeine ledger so the domain/application can be exercised without a database, and — crucially — it models
+ * Caffeine ledger so the domain/application can be exercised without a database, and, crucially, it models
  * the guarded debit/transfer the same way the real DB does: the {@code BALANCE >= ?} check and the write are
  * one atomic step. A single global lock serialises the guarded writes exactly as the database serialises the
  * guarded {@code UPDATE}, so the concurrent double-spend contract test proves real serialisation rather than

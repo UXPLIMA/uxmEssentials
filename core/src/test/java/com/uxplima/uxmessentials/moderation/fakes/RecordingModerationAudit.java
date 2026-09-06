@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * A {@link ModerationAudit} that records each emitted line so a test can assert exactly one audit line per
- * action and read its {@code event}/{@code ok} fields. Each method appends one {@link Recorded} — a plain
+ * action and read its {@code event}/{@code ok} fields. Each method appends one {@link Recorded}, a plain
  * {@link Line} for the common case, or a {@link ClearLine} where the count matters.
  */
 public final class RecordingModerationAudit implements ModerationAudit {

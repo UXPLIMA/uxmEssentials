@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
  * published as a {@link VanishStateChanged} frame through the {@link BusPublisher}, and every inbound frame the bus
  * dispatches to {@link #onFrame} is translated back to a {@link VanishSync} and handed to the subscribed handler. The
  * wiring registers {@link #onFrame} as a {@code RemoteSyncListener}, so this runs on the bus's off-tick dispatch
- * thread — the handler it feeds ({@link VanishNetworkApplier}) does its own region hop for any Bukkit touch, matching
+ * thread. The handler it feeds ({@link VanishNetworkApplier}) does its own region hop for any Bukkit touch, matching
  * the {@code RemoteSyncListener} contract. This is {@code BusTradeBus} copied for the vanish frame.
  *
  * <p>The publisher stamps this backend's {@code server-id} as the frame origin, so the shared loop sentinel drops the

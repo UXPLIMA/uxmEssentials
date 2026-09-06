@@ -5,7 +5,7 @@
 --
 -- Same portability contract as V1-V77: the DDL stays in the subset SQLite (the default), MySQL/MariaDB and
 -- PostgreSQL all accept. The player uuid is the canonical 36-character text; `ip_token` is a one-way digest of the
--- connecting address (the raw IP is NEVER stored — the adapter hashes it before it reaches the DB), so one account
+-- connecting address (the raw IP is NEVER stored. The adapter hashes it before it reaches the DB), so one account
 -- carries one row per distinct address and one address carries one row per account. `last_seen` is the epoch-millis
 -- the link was last observed, in a BIGINT so there is no dialect-specific datetime handling. jOOQ's DDLDatabase
 -- parses this file alongside V1-V77 at build time, so the generated classes always match the runtime schema.

@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.ranks.domain;
 
 /**
- * A player's prestige level — how many times they have reset the ladder from the top back to the first rank. It
+ * A player's prestige level: how many times they have reset the ladder from the top back to the first rank. It
  * starts at {@link #INITIAL zero} for a player who has never prestiged and only ever increases. The level is
  * persisted in {@code player_ranks.prestige}, and the pure prestige rules live here as small, side-effect-free
  * methods the prestige use case leans on: the one legal transition {@link #increment()}, the level-cap check
@@ -33,7 +33,7 @@ public record Prestige(int level) {
     /**
      * Whether a player at this level may still prestige, given the operator's {@code maxLevel} cap. A cap of
      * {@code 0} or below means unlimited, so the answer is always {@code true}; otherwise the player may prestige
-     * only while their current level is strictly below the cap ({@code maxLevel} is the highest level reachable —
+     * only while their current level is strictly below the cap ({@code maxLevel} is the highest level reachable
      * at {@code level == maxLevel} there is nowhere left to go).
      */
     public boolean belowCap(int maxLevel) {

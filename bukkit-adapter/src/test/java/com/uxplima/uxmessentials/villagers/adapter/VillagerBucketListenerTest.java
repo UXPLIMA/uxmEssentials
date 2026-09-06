@@ -151,7 +151,7 @@ class VillagerBucketListenerTest {
                 .orElse(null);
     }
 
-    /** Resolves each key to its own id — enough for the GuiText path the tests do not assert text on. */
+    /** Resolves each key to its own id: enough for the GuiText path the tests do not assert text on. */
     private static final class KeyMessages implements Messages {
         @Override
         public String resolve(PlayerRef viewer, MessageKey key, Map<String, String> placeholders) {

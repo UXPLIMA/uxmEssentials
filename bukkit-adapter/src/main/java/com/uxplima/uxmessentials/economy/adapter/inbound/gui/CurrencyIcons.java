@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Resolves the GUI icon {@link Material} for a {@link Currency} from its operator-configured
  * {@code icon-material} (in {@code currencies.conf}), falling back to the caller's default when none is set or
- * the configured name does not name a real material. No currency id is hardcoded here — the icon is data, so a
+ * the configured name does not name a real material. No currency id is hardcoded here. The icon is data, so a
  * server that adds a {@code rubies} currency picks an icon in config rather than waiting on a code change.
  */
 @NullMarked

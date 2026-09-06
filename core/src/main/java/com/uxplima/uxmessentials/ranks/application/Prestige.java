@@ -20,15 +20,15 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /prestige}: a player at the very top of the ladder resets back to the first rank in exchange for a
- * permanent prestige level and its reward multiplier. It mirrors {@link Rankup}'s pipeline shape — eligibility →
- * requirements → charge → mutate → actions — so a refused prestige leaves no trace, and reuses the same
+ * permanent prestige level and its reward multiplier. It mirrors {@link Rankup}'s pipeline shape, eligibility →
+ * requirements → charge → mutate → actions, so a refused prestige leaves no trace, and reuses the same
  * requirement evaluator, action runner and economy seam a rankup goes through. This class holds no Bukkit type
  * and sends no message; it returns a typed {@link PrestigeResult} the command boundary renders.
  *
  * <h2>Eligibility and ordering</h2>
  * <ol>
  *   <li><b>At the top rank.</b> The current standing (via {@link CurrentRank}) must resolve to a rank with no
- *       {@link RankLadder#next(com.uxplima.uxmessentials.ranks.domain.RankId) next} rung — the top. Anything else
+ *       {@link RankLadder#next(com.uxplima.uxmessentials.ranks.domain.RankId) next} rung, the top. Anything else
  *       (including an empty ladder) yields {@link PrestigeResult#notAtTop()}.</li>
  *   <li><b>Below the cap.</b> The player's prestige level must be
  *       {@link com.uxplima.uxmessentials.ranks.domain.Prestige#belowCap(int) below} the configured

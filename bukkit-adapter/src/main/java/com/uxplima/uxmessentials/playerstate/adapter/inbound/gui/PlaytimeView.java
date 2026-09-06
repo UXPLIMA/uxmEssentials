@@ -30,7 +30,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The figures are read off the tick thread through the {@link Scheduler} port (the breakdown query hits the
  * DB-backed ledger), then the panel is opened on the viewer's entity thread with the already-rendered values
- * captured — so the entity-thread build does no I/O. The panel is a shared {@link SettingsPanelView} whose every
+ * captured, so the entity-thread build does no I/O. The panel is a shared {@link SettingsPanelView} whose every
  * row is a read-only {@link PlaytimeRowProperty}: a labelled fact the viewer inspects but cannot change, matching
  * the moderation detail panels. Every visible string is a {@link PlayerstateMessageKey}, resolved per viewer.
  */

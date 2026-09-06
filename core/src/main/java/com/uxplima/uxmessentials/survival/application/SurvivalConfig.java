@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * whole context off with {@code enabled = false} or leaves it on and enables exactly the mechanics they want.
  *
  * <p>It is resolved once from the module's scoped {@link ConfigStore} when the module starts and, per the
- * atomic-reload rule, swapped whole on reload — so a block-break handled mid-reload sees one coherent snapshot. The
+ * atomic-reload rule, swapped whole on reload, so a block-break handled mid-reload sees one coherent snapshot. The
  * HOCON keys are kebab-case ({@code tree-feller}, {@code require-axe}, {@code max-blocks}); the record components are
  * the camelCase views the adapter reads. Every knob carries the default the bundled config ships, so an operator who
  * deletes a line falls back to the shipped value rather than to zero.
@@ -146,7 +146,7 @@ public record SurvivalConfig(
             double hungerCost,
             boolean sneakRequired) {
 
-        /** The default trigger set — every ore, its deepslate variant, and the nether ores plus ancient debris. */
+        /** The default trigger set, every ore, its deepslate variant, and the nether ores plus ancient debris. */
         private static final List<String> DEFAULT_BLOCKS = List.of(
                 "COAL_ORE",
                 "DEEPSLATE_COAL_ORE",
@@ -215,7 +215,7 @@ public record SurvivalConfig(
     /**
      * The farmland-protection mechanic under {@code farmprotect { … }}: a personal {@code /farmprotect} toggle that,
      * while on, stops the player trampling farmland into dirt. The mechanic carries no tuning of its own beyond its
-     * enable gate — the per-player state lives in PDC.
+     * enable gate: the per-player state lives in PDC.
      *
      * @param enabled whether farmprotect runs ({@code farmprotect.enabled}, default {@code true})
      */
@@ -235,7 +235,7 @@ public record SurvivalConfig(
      */
     public record FarmAssist(boolean enabled, List<String> crops) {
 
-        /** The default crops — the four farmland crops and nether wart, each with a plantable seed. */
+        /** The default crops: the four farmland crops and nether wart, each with a plantable seed. */
         private static final List<String> DEFAULT_CROPS =
                 List.of("WHEAT", "CARROTS", "POTATOES", "BEETROOTS", "NETHER_WART");
 
@@ -253,7 +253,7 @@ public record SurvivalConfig(
 
     /**
      * The anvil-unlocker mechanic under {@code anvilunlocker { … }}: lift vanilla's anvil caps so a high-level combine
-     * is not rejected with "Too Expensive!". Purely an event tweak — it has no per-player state and no command.
+     * is not rejected with "Too Expensive!". Purely an event tweak: it has no per-player state and no command.
      *
      * @param enabled whether anvil-unlocker runs ({@code anvilunlocker.enabled}, default {@code true})
      * @param removeLevelLimit whether to lift the "Too Expensive!" level ceiling so any combine yields a result
@@ -352,7 +352,7 @@ public record SurvivalConfig(
 
     /**
      * The auto-smelt mechanic under {@code autosmelt { … }}: a broken block's smeltable drop is transformed into its
-     * smelted result before it reaches the player, so mining iron ore yields an ingot. It composes with auto-pickup —
+     * smelted result before it reaches the player, so mining iron ore yields an ingot. It composes with auto-pickup
      * the drop is smelted first, then routed. Players toggle it with {@code /autosmelt}.
      *
      * @param enabled whether auto-smelt runs ({@code autosmelt.enabled}, default {@code true}); turning it off also
@@ -477,7 +477,7 @@ public record SurvivalConfig(
     /**
      * The auto-tool mechanic under {@code autotool { … }}: as the player starts breaking a block, their held hotbar
      * slot is switched to the strongest tool of the family that block needs. Players toggle it with {@code /autotool}.
-     * It carries no tuning of its own beyond its enable gate — the selection rules live in the domain.
+     * It carries no tuning of its own beyond its enable gate: the selection rules live in the domain.
      *
      * @param enabled whether auto-tool runs ({@code autotool.enabled}, default {@code true}); turning it off also
      *     unregisters {@code /autotool}

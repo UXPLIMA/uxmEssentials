@@ -422,7 +422,7 @@ class KitSettingsGoldenTest {
             this.kits = new ArrayList<>(kits);
         }
 
-        /** The last definition {@link #save} stored, or empty if none was saved — read by the apply-seam assertions. */
+        /** The last definition {@link #save} stored, or empty if none was saved: read by the apply-seam assertions. */
         Optional<KitDefinition> lastSaved() {
             return Optional.ofNullable(saved);
         }
@@ -455,7 +455,7 @@ class KitSettingsGoldenTest {
         }
     }
 
-    /** An empty category repository — the category button is exercised only for the window it opens, not its picks. */
+    /** An empty category repository: the category button is exercised only for the window it opens, not its picks. */
     private static final class EmptyCategories implements KitCategoryRepository {
         @Override
         public Optional<KitCategory> find(String id) {

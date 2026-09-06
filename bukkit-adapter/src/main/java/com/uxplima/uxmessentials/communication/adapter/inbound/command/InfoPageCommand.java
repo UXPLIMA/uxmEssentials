@@ -26,7 +26,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One auto-registered info-page command — {@code /rules}, {@code /motd}, {@code /info}, or any custom page the
+ * One auto-registered info-page command. {@code /rules}, {@code /motd}, {@code /info}, or any custom page the
  * operator declared. Built dynamically at module start, one per {@link InfoPage} in the {@link InfoRegistry}, each
  * guarded by its per-page permission node {@code uxmessentials.communication.info.<name>}. The page body is
  * operator-authored MiniMessage content rendered through the {@link BukkitInfoSender}, never a plugin
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The command is paginated: {@code /<name> [page]} shows one page of the body, and a page longer than its
  * configured size is framed by the plugin's own {@link CommunicationMessageKey#INFO_PAGE_HEADER} and
- * {@link CommunicationMessageKey#INFO_PAGE_FOOTER} chrome (the only translated strings here — the body stays raw
+ * {@link CommunicationMessageKey#INFO_PAGE_FOOTER} chrome (the only translated strings here. The body stays raw
  * operator content). The {@link ShowInfoPage} use case clamps an over-large page request into range, so
  * {@code /info 99} on a two-page document serves page two rather than an error.
  *

@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * and particles. The teleporter records a {@link PendingWarpNotification} for the player when it launches the
  * hop; the arrival listener consumes it once the player lands. State is per-player and short-lived (one entry
  * survives only between launch and arrival), so this is a single instance owned by the warps module wiring,
- * shared with the player-warps teleporter and the arrival listener, and drained on module stop — never a
+ * shared with the player-warps teleporter and the arrival listener, and drained on module stop, never a
  * static global. Ownership: the {@link ConcurrentHashMap} is mutated only through {@code register} /
  * {@code getAndRemove} / {@code clear}, all of which are thread-safe.
  */

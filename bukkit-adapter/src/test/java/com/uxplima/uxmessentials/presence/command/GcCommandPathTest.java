@@ -36,7 +36,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@code /gc}: a server-health read-out (TPS, uptime, memory, loaded chunks and
  * entities). A pure read with no use case and no state mutation. The {@link Messages} fake echoes the resolved
- * key and its placeholders so the rendered reply — and that every health field is present — is observable
+ * key and its placeholders so the rendered reply, and that every health field is present, is observable
  * through the sender's message queue.
  */
 class GcCommandPathTest {

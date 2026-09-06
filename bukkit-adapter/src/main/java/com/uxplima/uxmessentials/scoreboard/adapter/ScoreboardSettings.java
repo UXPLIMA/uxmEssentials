@@ -18,7 +18,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * The scoreboard context's operator content, loaded once at wiring time from {@code modules/scoreboard/config.conf}
- * and held in an {@link AtomicReference} so a reload swaps a fresh parse whole — readers see either the previous or the
+ * and held in an {@link AtomicReference} so a reload swaps a fresh parse whole. Readers see either the previous or the
  * new content, never a half-applied tree (CLAUDE.md "swapped atomically via AtomicReference on reload"). An absent or
  * unreadable file yields the inert default, so a server that enables the module without authoring the file gets the
  * do-nothing default: no boards, no sidebar.
@@ -26,7 +26,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * <p>The {@link #boards()} and {@link #refreshInterval()} suppliers read the live parse on each call, so a reload takes
  * effect on the next render tick with no re-wiring. {@link #boards()} is the named-board set the renderer selects among
  * per viewer; {@link #refreshInterval()} is the single global render cadence the timer re-reads each reschedule
- * (per-board intervals are not yet honoured — see {@link ScoreboardContentCodec}). The content is operator data the
+ * (per-board intervals are not yet honoured, see {@link ScoreboardContentCodec}). The content is operator data the
  * renderer parses through MiniMessage and the placeholder pipeline; nothing here is a {@code MessageKey} or
  * parity-checked.
  */

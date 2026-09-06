@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * The warn-escalation ladder: a list of steps that turn a player's running warning count into an automatic
  * follow-up sanction. An operator configures rungs like "on the 3rd warning, tempmute for an hour; on the 5th,
- * tempban for a day"; this value object decides which rung — if any — a freshly-issued warning trips.
+ * tempban for a day"; this value object decides which rung, if any, a freshly-issued warning trips.
  *
  * <p>Matching is by exact count: {@link #stepFor(int)} returns the step whose {@link EscalationStep#atCount()}
  * equals the new total, so each rung fires once, on the warning that reaches it. (Exact match is the simplest
@@ -19,7 +19,7 @@ import java.util.Optional;
  */
 public final class WarnEscalation {
 
-    /** An escalation ladder with no rungs — every count returns empty. The default when none is configured. */
+    /** An escalation ladder with no rungs: every count returns empty. The default when none is configured. */
     public static final WarnEscalation NONE = new WarnEscalation(List.of());
 
     private final List<EscalationStep> steps;

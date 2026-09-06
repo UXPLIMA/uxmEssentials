@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
 /**
  * One named tablist format: the header/footer {@link TablistContent} to render, the {@link DisplayCondition} deciding
  * which viewers it applies to, a {@code priority} that breaks the field of matching formats, and the two per-player
- * tab-list overrides a format may carry — the viewer's own list-<em>name</em> template ({@code nameFormat}, how they
+ * tab-list overrides a format may carry. The viewer's own list-<em>name</em> template ({@code nameFormat}, how they
  * appear to everyone in the tab list) and their list <em>sort order</em> ({@code sortOrder}). A server may author
  * several formats (a staff format, a build-world format, a default) and {@link TablistFormatConfig#select} picks the
  * highest-priority one whose condition matches each viewer.
@@ -22,13 +22,13 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  *
  * <p>The {@code nameFormat}, when present, is raw operator content rendered per viewer through the placeholder pipeline
  * and MiniMessage by the adapter; it may embed the {@code {player}} token (the viewer's name) and PlaceholderAPI
- * placeholders. The {@code sortOrder}, when present, is the {@code Player.setPlayerListOrder(int)} value — a positive
+ * placeholders. The {@code sortOrder}, when present, is the {@code Player.setPlayerListOrder(int)} value, a positive
  * integer where a higher value sorts the player higher in the tab list (see the renderer for the confirmed semantics).
  *
  * <p>The optional {@code skin} is the one thing native Paper cannot do: a custom texture on the viewer's tab row. When
  * present the adapter delivers this format's row to each viewer through a player-info packet carrying the texture rather
  * than the native list-name/order setters; when absent (the default) the renderer keeps the native path unchanged. The
- * display name and order still come from {@code nameFormat}/{@code sortOrder} — only the delivery changes, plus the skin.
+ * display name and order still come from {@code nameFormat}/{@code sortOrder}: only the delivery changes, plus the skin.
  *
  * <p>The optional {@code layout} is the fixed-slot filler grid: synthetic {@link TablistFiller} rows that occupy the tab
  * cells the real players do not, each positioned by slot. When the layout {@link TablistLayout#isEmpty() carries fillers}
@@ -38,7 +38,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  * <p>The {@code suppressRealPlayers} flag is the opt-in synthetic-tab switch: when {@code true} the adapter hides the
  * real players from the viewer's tab list entirely (only this format's filler rows are drawn), delivered by rewriting the
  * outbound player-info packets to force every non-filler entry unlisted. It defaults to {@code false}, leaving the tab
- * unchanged — real players show alongside any fillers, the historical behaviour. The flag only makes visual sense with a
+ * unchanged: real players show alongside any fillers, the historical behaviour. The flag only makes visual sense with a
  * filler {@code layout}; with neither layout nor suppression the format is the plain header/footer/name case.
  *
  * @param name the format name, non-blank (the config map key; used only for operator-facing identification and tie-break)
@@ -75,7 +75,7 @@ public record TablistFormat(
         }
     }
 
-    /** A format with a layout but no real-player suppression — fillers sit alongside the real players (the default). */
+    /** A format with a layout but no real-player suppression: fillers sit alongside the real players (the default). */
     public TablistFormat(
             String name,
             DisplayCondition condition,
@@ -88,7 +88,7 @@ public record TablistFormat(
         this(name, condition, priority, content, nameFormat, sortOrder, skin, layout, false);
     }
 
-    /** A format with a custom skin but no filler layout — the skin path with the native tab grid untouched. */
+    /** A format with a custom skin but no filler layout, the skin path with the native tab grid untouched. */
     public TablistFormat(
             String name,
             DisplayCondition condition,
@@ -100,7 +100,7 @@ public record TablistFormat(
         this(name, condition, priority, content, nameFormat, sortOrder, skin, TablistLayout.empty(), false);
     }
 
-    /** A format with no custom skin and no filler layout — the common case, the native list-name/order delivery. */
+    /** A format with no custom skin and no filler layout, the common case, the native list-name/order delivery. */
     public TablistFormat(
             String name,
             DisplayCondition condition,

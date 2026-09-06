@@ -93,7 +93,7 @@ public final class HuskClaimsClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code BukkitHuskClaims.Adapter.adapt(Location)} — HuskClaims' own Bukkit-to-position conversion. */
+    /** {@code BukkitHuskClaims.Adapter.adapt(Location)}, HuskClaims' own Bukkit-to-position conversion. */
     private static Object adapt(Location location) throws ReflectiveOperationException {
         Object position =
                 Class.forName(ADAPTER_CLASS).getMethod("adapt", Location.class).invoke(null, location);

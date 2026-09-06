@@ -51,7 +51,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * and drives it, so this exercises the same seam another plugin would use.
  *
  * <p>Each register* method is proved to reach the live engine: a custom action fires on a real click, a custom
- * placeholder expands in a rendered name, a custom requirement hides an item, and a custom list source pages entries —
+ * placeholder expands in a rendered name, a custom requirement hides an item, and a custom list source pages entries
  * all through the real {@link Menus} open path. {@link MenuApi#buildItem} renders a spec to a stack, and a duplicate
  * registration throws, holding the register-once contract.
  */

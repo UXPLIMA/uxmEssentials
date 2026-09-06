@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * The teleport-backed {@link com.uxplima.uxmessentials.staff.application.port.StaffTeleport}: the COMPASS gadget
  * and {@code /stafflist} route through the existing teleport {@link TeleportEngine} as an
  * {@link TeleportKind#ADMIN} hop (no cooldown, warmup, or request prompt), so staff mode never moves the player
- * itself. The target's live {@code Location} is read here — the one place a Bukkit lookup happens — and mapped to
+ * itself. The target's live {@code Location} is read here, the one place a Bukkit lookup happens, and mapped to
  * a domain {@link Destination} through {@link BukkitRefs}.
  *
  * <p>Bound only when the teleport module is enabled; with teleport off the wiring binds

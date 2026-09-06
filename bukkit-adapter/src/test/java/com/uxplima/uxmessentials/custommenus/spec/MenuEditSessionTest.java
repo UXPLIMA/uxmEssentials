@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
  * Plain-JUnit coverage of {@link MenuEditSession}, the mutable edit model the menu editor mutates before it writes.
  * The linchpin proof is a round-trip: clone a parsed spec, mutate it through the model's operations, {@code toSpec()}
  * it, serialize with {@link MenuSpecWriter}, re-load through {@link MenuSpecLoader}, and assert it equals the spec an
- * operator would have written by hand — so the edit model and the writer compose without loss.
+ * operator would have written by hand, so the edit model and the writer compose without loss.
  */
 class MenuEditSessionTest {
 

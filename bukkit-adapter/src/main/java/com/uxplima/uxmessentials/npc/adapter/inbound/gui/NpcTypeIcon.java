@@ -31,8 +31,8 @@ final class NpcTypeIcon {
 
     /**
      * The icon material for the stored uppercase entity-type name an NPC carries. A name that no longer maps to a
-     * real Bukkit type (a removed type, a hand-edited typo) falls back to a player head — the same icon the default
-     * fake-player NPC shows — rather than breaking the list.
+     * real Bukkit type (a removed type, a hand-edited typo) falls back to a player head, the same icon the default
+     * fake-player NPC shows: rather than breaking the list.
      */
     static Material iconFor(String entityTypeName) {
         Objects.requireNonNull(entityTypeName, "entityTypeName");

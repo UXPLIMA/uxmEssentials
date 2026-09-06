@@ -5,12 +5,12 @@ package com.uxplima.uxmessentials.vanish.domain;
  * hide/show reconciliation cannot disagree. The rule, verbatim from the PremiumVanish semantics:
  *
  * <blockquote>A viewer sees a vanished player if and only if the viewer's <em>see level</em> is at least the target's
- * <em>use level</em> — a higher-or-equal see level overrides a lower-or-equal use level; a higher use level overrides a
+ * <em>use level</em>. A higher-or-equal see level overrides a lower-or-equal use level; a higher use level overrides a
  * lower see level.</blockquote>
  *
  * <p>Levels are resolved from permissions by the adapter, never here. The two anchor points a level resolver maps onto:
- * a viewer with no see permission at all resolves to {@link #NO_SEE_LEVEL} (0), which — because a vanished player is
- * always at least {@link VanishLevel#MIN_LEVEL} (1) — never clears the bar, reproducing the flat "no {@code .see} node
+ * a viewer with no see permission at all resolves to {@link #NO_SEE_LEVEL} (0), which, because a vanished player is
+ * always at least {@link VanishLevel#MIN_LEVEL} (1). Never clears the bar, reproducing the flat "no {@code .see} node
  * means you cannot see vanished players" behaviour; plain {@code .see} / {@code .use} (no numbered node) both map to
  * level 1, so with layered permissions off every vanished player is level 1 and the whole model collapses to that flat
  * rule.

@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.discordlink.application.port;
 
 /**
  * Tells the discord-link use cases whether the optional Discord bridge is available to redeem a link code right
- * now — installed, connected, and linking-capable. A link code is only useful if something on the Discord side
+ * now: installed, connected, and linking-capable. A link code is only useful if something on the Discord side
  * can redeem it, so the issuing paths consult this before minting one and decline when it answers {@code false}.
  *
  * <p>An outbound adapter implements this over the platform's service registry (the bridge advertises its

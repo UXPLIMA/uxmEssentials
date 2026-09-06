@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * pay.tax.sink = "account:<uuid>"}) routes the tax into that wallet with a transfer; the default void sink
  * ({@code pay.tax.sink = "void"}) destroys it with a guarded debit. Either is a single atomic move on the
  * receiver, who was just credited the gross, so the move never fails for lack of funds. The rare non-success (a
- * holding account already at its max-balance) leaves the tax with the receiver — money is conserved either way —
+ * holding account already at its max-balance) leaves the tax with the receiver, money is conserved either way,
  * and is logged for the operator rather than swallowed.
  */
 @NullMarked

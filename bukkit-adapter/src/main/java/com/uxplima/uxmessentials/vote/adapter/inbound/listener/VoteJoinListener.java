@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
  * On join:
  * <ol>
  *   <li>Pays out the rewards a player accrued while offline (drains the queue via {@link ApplyQueuedRewards})
- *       — only when auto-claim is enabled. With auto-claim off the queue is left for the player to drain
+ *: only when auto-claim is enabled. With auto-claim off the queue is left for the player to drain
  *       with {@code /vote claim}.
  *   <li>Warms the repository cache with the player's vote totals so the first PAPI placeholder call is
  *       cheap (no cold DB hit).
@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>All tasks run off-tick via the {@link Scheduler} port. The reminder delay uses
  * {@link Scheduler#asyncAfter(Duration, Runnable)} so the Scheduler port is the only scheduling
- * mechanism in use — no {@code BukkitScheduler}, no raw threads.
+ * mechanism in use: no {@code BukkitScheduler}, no raw threads.
  */
 @NullMarked
 public final class VoteJoinListener implements Listener {
@@ -48,14 +48,14 @@ public final class VoteJoinListener implements Listener {
     private final boolean autoClaim;
     private final boolean remindersEnabled;
     private final Duration loginDelay;
-    /** Null when {@code remindersEnabled} is false — avoids a useless object allocation. */
+    /** Null when {@code remindersEnabled} is false: avoids a useless object allocation. */
     private final @Nullable VoteReminderEligibility eligibility;
 
     private final @Nullable ReminderPreferences reminderPreferences;
     private final @Nullable Notifier notifier;
 
     /**
-     * Legacy constructor — queue drain only, no reminders (equivalent to
+     * Legacy constructor. Queue drain only, no reminders (equivalent to
      * {@code remindersEnabled = false}). Auto-claim is on, so the queue still drains on join. The
      * repository cache-warm still fires.
      */
@@ -98,7 +98,7 @@ public final class VoteJoinListener implements Listener {
         PlayerRef who = BukkitRefs.toRef(player);
 
         // Warm the PAPI cache always; drain offline rewards only when auto-claim is on (otherwise the
-        // player pays the queue out with /vote claim). Both run async — never on the join tick.
+        // player pays the queue out with /vote claim). Both run async, never on the join tick.
         scheduler.async(() -> {
             if (autoClaim) {
                 applyQueuedRewards.applyFor(who);
@@ -132,7 +132,7 @@ public final class VoteJoinListener implements Listener {
 
     /**
      * A minimal no-op repository used when the cache-warm is not needed (legacy ctor path). Keeps
-     * the main logic simple — no branches on null in {@link #onJoin}.
+     * the main logic simple: no branches on null in {@link #onJoin}.
      */
     private static final class NoopRepository implements VoteRepository {
         static final NoopRepository INSTANCE = new NoopRepository();

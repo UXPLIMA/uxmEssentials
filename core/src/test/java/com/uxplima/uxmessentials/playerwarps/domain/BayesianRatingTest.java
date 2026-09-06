@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * The Bayesian ranking policy in isolation. The headline test is the defect the spec names: a single five-star vote
- * must score below a warp with hundreds of votes averaging just under five, even though its own average is higher —
+ * must score below a warp with hundreds of votes averaging just under five, even though its own average is higher
  * the whole reason the browse sorts on the smoothed score, not the raw average.
  */
 class BayesianRatingTest {

@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The {@link MessageKey} catalog is the server-side default and covers everything a player sees
  * through {@code messages.resolve(...)}. This source serves the narrow case where a call site emits a
  * {@code Component.translatable("uxmessentials.<key>")} and wants Adventure to render it per the
- * receiving connection's locale — without the server resolving the locale itself. Each catalog key is
+ * receiving connection's locale: without the server resolving the locale itself. Each catalog key is
  * registered under the {@code uxmessentials} namespace ({@code home.teleported} →
  * {@code uxmessentials.home.teleported}) for every loaded locale, with {@code en} as the registry's
  * default so a locale missing a key falls back exactly as the catalog chain does.

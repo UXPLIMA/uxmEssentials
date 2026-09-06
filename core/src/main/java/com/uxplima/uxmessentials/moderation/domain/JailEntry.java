@@ -6,12 +6,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * One row of the active-jail read model {@code /jailedplayers} renders — a still-in-effect jail sentence. It
+ * One row of the active-jail read model {@code /jailedplayers} renders, a still-in-effect jail sentence. It
  * is a flat projection of a {@code moderation_jails} row, carrying the jailed target, the named jail, who
  * issued it, the optional reason, and how the sentence ends: a permanent jail has neither {@link #until()}
  * nor {@link #remaining()}, a wall-clock sentence carries its {@code until} expiry, and an online-only
  * sentence carries the {@code remaining} online time still to serve. The use case resolves the target's
- * display name from the projection's UUID. Read-only — only the fields the list line interpolates.
+ * display name from the projection's UUID. Read-only: only the fields the list line interpolates.
  *
  * @param target the jailed player's UUID
  * @param jail the named jail location the target is held in

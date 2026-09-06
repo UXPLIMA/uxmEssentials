@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.playerwarps.domain.RewardSpec;
  * idiom, mirroring {@link RentConfig} and {@link SponsorConfig}). When {@link #enabled} a warp rating grants
  * {@link #raterReward} to the rater (once per warp) and {@link #ownerReward} to the owner (once per unique rater).
  * Either side may be {@link RewardSpec#isEmpty() empty}, so an operator can reward only the rater, only the owner,
- * or both. A {@link #disabled()} config is the shipped default — the sub-group off, nothing granted.
+ * or both. A {@link #disabled()} config is the shipped default: the sub-group off, nothing granted.
  *
  * @param enabled whether the rating-reward sub-group runs at all
  * @param raterReward what the rater receives, once per warp they rate

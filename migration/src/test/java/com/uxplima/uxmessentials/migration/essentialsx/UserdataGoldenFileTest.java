@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Golden-file round-trip for the EssentialsX userdata path (docs/12-migration §8.2): parse a checked-in
  * fixture and assert the resulting domain aggregates equal the expected values. This catches the failure
- * mode the drift guard cannot — the parser silently mis-reading a layout variant. The world resolver is a
+ * mode the drift guard cannot: the parser silently mis-reading a layout variant. The world resolver is a
  * fake that knows the fixture's worlds, so the mapper is exercised without a live server.
  */
 class UserdataGoldenFileTest {

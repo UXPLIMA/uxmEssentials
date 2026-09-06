@@ -4,7 +4,7 @@ import com.uxplima.uxmessentials.migration.convert.jdbc.RowMapper;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The per-row readers the Olzie source binds to its {@link OlzieTables} statements — the {@code java.sql} seam from a
+ * The per-row readers the Olzie source binds to its {@link OlzieTables} statements, the {@code java.sql} seam from a
  * {@link java.sql.ResultSet} row to a parse record, one factory per table. Each reads columns by name and never
  * advances the cursor (the {@code JdbcSource} owns iteration). The two boolean access flags are stored as integers by
  * Olzie, so they are read as {@code int} and folded to {@code true} for any non-zero value; a nullable text column is

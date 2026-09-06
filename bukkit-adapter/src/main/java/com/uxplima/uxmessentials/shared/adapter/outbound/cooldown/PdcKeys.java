@@ -13,8 +13,8 @@ import org.jspecify.annotations.NullMarked;
  * A small per-plugin cache of {@link NamespacedKey} instances keyed by a logical stamp name. The
  * cooldown adapter stamps under a key per feature (and per generic command label); since the feature
  * and label spaces are open, the keys cannot all be declared as constants. They are still built only
- * once each — the first request for a name constructs the {@link NamespacedKey}, every later request
- * for the same name returns the cached instance — so the "never on a hot path" invariant holds.
+ * once each. The first request for a name constructs the {@link NamespacedKey}, every later request
+ * for the same name returns the cached instance, so the "never on a hot path" invariant holds.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b>. The cache is a {@link ConcurrentHashMap} populated via

@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /history <player>}: review a player's full disciplinary record newest-first — every ban, mute, warn
+ * {@code /history <player>}: review a player's full disciplinary record newest-first, every ban, mute, warn
  * and kick folded into one timeline, where {@code /banhistory} and {@code /mutehistory} each stay scoped to one
  * family. The {@code ReviewSanctionHistory} use case runs the bounded, append-only history query. It is gated by
  * its own {@code uxmessentials.moderation.history} node so the unified record can be granted independently of

@@ -1,9 +1,9 @@
 /**
- * The trade context's window GUI — a genuine dual item-container leaf, deliberately not a spec-menu (players place real
+ * The trade context's window GUI, a genuine dual item-container leaf, deliberately not a spec-menu (players place real
  * stacks into it), mirroring the allowlisted raw-inventory leaves (the kit item-grid, invsee).
  * {@link com.uxplima.uxmessentials.trade.adapter.inbound.gui.TradeSessions} is the in-memory registry of live
  * same-server trades; {@link com.uxplima.uxmessentials.trade.adapter.inbound.gui.TradeView} opens each participant's own
- * six-row window over the shared {@link com.uxplima.uxmessentials.trade.adapter.inbound.gui.TradeExchange} — the
+ * six-row window over the shared {@link com.uxplima.uxmessentials.trade.adapter.inbound.gui.TradeExchange}, the
  * viewer's editable offer on the left, the counterpart's offer mirrored read-only on the right
  * ({@link com.uxplima.uxmessentials.trade.adapter.inbound.gui.TradeLayout}), and a confirm button.
  *

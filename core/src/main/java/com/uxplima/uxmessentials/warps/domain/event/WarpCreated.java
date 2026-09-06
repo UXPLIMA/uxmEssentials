@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import com.uxplima.uxmessentials.warps.domain.WarpName;
 
 /**
- * A warp was created — {@code /setwarp} under a name no warp existed at. A {@code /setwarp} onto an
+ * A warp was created: {@code /setwarp} under a name no warp existed at. A {@code /setwarp} onto an
  * existing name re-anchors that warp and raises nothing here; that path is a move, not a creation.
  *
  * @param name the name the warp was created under

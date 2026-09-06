@@ -86,7 +86,7 @@ public final class ResolveBiomeRtp {
         }
         Result<Unit, TeleportError> gate = engine.gateRandom(who);
         if (gate.isErr()) {
-            return gate; // gateRandom already notified (cooldown / can't afford / jailed) — no search kicked
+            return gate; // gateRandom already notified (cooldown / can't afford / jailed): no search kicked
         }
         Optional<SafeSearchArea> area = areas.areaFor(resolved.get());
         if (area.isEmpty()) {

@@ -15,8 +15,8 @@ import org.jooq.DSLContext;
 /**
  * The jOOQ-backed {@link WorthOverrideStore} over the generated {@code ECONOMY_WORTH_OVERRIDES} table. An
  * override is keyed by its canonical lowercase material id, so a lookup is a single-row {@code SELECT} on the
- * {@code material} primary key, {@link #set} upserts on that key — a {@code /setworth} onto an existing material
- * overwrites the same row — and {@link #remove} deletes by it. Every statement is typed jOOQ DSL; no SQL is
+ * {@code material} primary key, {@link #set} upserts on that key. A {@code /setworth} onto an existing material
+ * overwrites the same row, and {@link #remove} deletes by it. Every statement is typed jOOQ DSL; no SQL is
  * ever string-concatenated.
  *
  * <p>An override carries its pay-out currency in the {@code currency} column (V63), so {@link #find} returns the

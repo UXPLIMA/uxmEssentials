@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 /**
  * The {@link PoseReturn} that puts a player back where a pose began. The return location is where the player stood
  * when they sat, which is at (or beside) the seat's own region, so the teleport runs on the player's entity thread
- * — the region that owns them under Folia — and no-ops when they are offline. A missing world is a no-op too.
+ *, the region that owns them under Folia, and no-ops when they are offline. A missing world is a no-op too.
  */
 public final class BukkitPoseReturn implements PoseReturn {
 

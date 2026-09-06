@@ -1,6 +1,6 @@
 -- Records which player owns an NPC, so a per-player creation quota (the uxmessentials.npc.limit.<n> node) and a
 -- per-owner view can be enforced. When set, owner_uuid is the creating player's UUID; an absent (NULL) value is
--- the default — a server/console-created NPC with no owner, which no per-player quota counts against. Existing
+-- the default: a server/console-created NPC with no owner, which no per-player quota counts against. Existing
 -- rows read back as NULL (owned by no one), so no NPC is retroactively attributed to a player.
 --
 -- The column is nullable with no DEFAULT clause so the ALTER stays portable across SQLite, MySQL/MariaDB and

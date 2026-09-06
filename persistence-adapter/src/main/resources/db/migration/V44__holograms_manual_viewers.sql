@@ -8,7 +8,7 @@
 -- a row that can be selected, added and removed in place. player_uuid is the viewer's uuid as canonical 36-char
 -- text, identical on every backend. The foreign-key-like relationship is enforced by the application (it deletes
 -- the viewer rows alongside the name row), kept dialect-portable by avoiding an ON DELETE CASCADE clause SQLite
--- gates behind a pragma — the hologram delete removes the viewers and the row in one transaction, mirroring
+-- gates behind a pragma. The hologram delete removes the viewers and the row in one transaction, mirroring
 -- hologram_lines (V13) and npc_action (V41).
 --
 -- Same portability contract as V1-V43: a plain CREATE TABLE / CREATE INDEX in the subset SQLite (the default),

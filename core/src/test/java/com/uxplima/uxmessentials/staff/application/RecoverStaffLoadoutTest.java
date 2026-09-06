@@ -59,7 +59,7 @@ class RecoverStaffLoadoutTest {
     void anOfflineRestoreKeepsTheRowForTheNextAttempt() {
         StaffTestFakes fakes = new StaffTestFakes();
         fakes.repository.rows.put(ACTOR.uuid(), StaffTestFakes.sampleLoadout());
-        fakes.capture.restoreReachesPlayer = false; // a disconnect race — the restore reached no online player
+        fakes.capture.restoreReachesPlayer = false; // a disconnect race. The restore reached no online player
 
         recovery(fakes).recover(ACTOR);
 

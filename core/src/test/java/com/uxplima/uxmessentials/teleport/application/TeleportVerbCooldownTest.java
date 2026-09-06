@@ -52,7 +52,7 @@ class TeleportVerbCooldownTest {
 
         Cooldowns.CooldownKind stamped = cooldowns.lastStamped;
         assertThat(stamped.feature()).isEqualTo("tp");
-        assertThat(stamped.stampScope()).isEqualTo("tp"); // shared stamp — back and home rate-limit together
+        assertThat(stamped.stampScope()).isEqualTo("tp"); // shared stamp, back and home rate-limit together
         assertThat(stamped.defaultSeconds()).isEqualTo(5L); // the shared default-cooldown
     }
 

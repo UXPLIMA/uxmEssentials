@@ -44,19 +44,19 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /regions} — the WorldGuard region management surface. The base command and each subcommand degrade to a
+ * {@code /regions}, the WorldGuard region management surface. The base command and each subcommand degrade to a
  * "WorldGuard not installed" line when the bound {@link RegionService} is the no-op fallback (WorldGuard absent), so
  * the whole surface stays inert on a server without WorldGuard.
  *
  * <ul>
- *   <li>{@code /regions [world]} ({@code uxmessentials.regions.list}) — open the region list for a world.
- *   <li>{@code /regions pos1|pos2} / {@code /regions create <id>} ({@code uxmessentials.regions.create}) — mark the
+ *   <li>{@code /regions [world]} ({@code uxmessentials.regions.list}), open the region list for a world.
+ *   <li>{@code /regions pos1|pos2} / {@code /regions create <id>} ({@code uxmessentials.regions.create}), mark the
  *       two corners of a manual selection and define a cuboid region from the WorldEdit selection or those corners.
- *   <li>{@code /regions flags <id>} ({@code uxmessentials.regions.flags}) — open the flag editor for a region.
+ *   <li>{@code /regions flags <id>} ({@code uxmessentials.regions.flags}), open the flag editor for a region.
  *   <li>{@code /regions members <id>} and {@code /regions addmember|addowner <id> <player>}
- *       ({@code uxmessentials.regions.members}) — open the roster editor and add a player to a region's members or
+ *       ({@code uxmessentials.regions.members}), open the roster editor and add a player to a region's members or
  *       owners (the target resolved offline-safe by name).
- *   <li>{@code /regions priority <id> <value>} ({@code uxmessentials.regions.admin}) — set a region's priority.
+ *   <li>{@code /regions priority <id> <value>} ({@code uxmessentials.regions.admin}): set a region's priority.
  * </ul>
  *
  * <p>Every WorldGuard read and every mutation runs on the global region thread through the injected {@link Scheduler}

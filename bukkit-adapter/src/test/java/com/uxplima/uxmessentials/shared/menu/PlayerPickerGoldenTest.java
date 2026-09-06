@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * picker's six-row layout (content slots 0..44, prev at 45, next at 53, the offline NAME_TAG button at 49, two footer
  * buttons at 47 and 51, gray-glass filler everywhere else). The engine window is snapshotted as {@code (slot ->
  * material, plain name)} and asserted equal, slot for slot, to the analytic baseline the old view produced for this
- * fixture — content heads, nav, offline button and footer buttons all included. A real click on a head through the
+ * fixture: content heads, nav, offline button and footer buttons all included. A real click on a head through the
  * engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} hands that target
  * to the recording {@code onPick}; a click on a footer button runs its own callback with the viewer. The offline-name
  * anvil branch is driven through the package-private {@code resolveTyped} apply seam, exercised in the same-package

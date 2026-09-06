@@ -12,10 +12,10 @@ import org.jspecify.annotations.Nullable;
 /**
  * Extracts the signed texture value/signature (and a queue job id) from a MineSkin generate response, isolated
  * here so the {@link MineSkinService} orchestration stays free of gson and the parsing is testable on its own.
- * The MineSkin API has carried the texture pair under several shapes across versions — {@code data.texture.value}
+ * The MineSkin API has carried the texture pair under several shapes across versions, {@code data.texture.value}
  * / {@code data.texture.signature} (the classic v1 generate-from-url response), a top-level {@code texture.value},
  * a {@code texture.data.value} nesting, and the v2 {@code skin.texture.data.value} (the shape the official v2
- * client reads) / {@code skin.data.texture.value} — so the texture object is located defensively by walking those
+ * client reads) / {@code skin.data.texture.value}, so the texture object is located defensively by walking those
  * candidate paths and the strings are read wherever they sit. The v2 queue submit can instead return a job
  * reference; {@link #jobId(String)} reads that id so the service can poll for completion. Every method is
  * fail-soft: a body that does not parse, or that lacks the texture/value/job, yields an empty {@link Optional}
@@ -76,7 +76,7 @@ final class MineSkinJson {
         return textureAtRoot(root);
     }
 
-    /** Walk the v1 root paths — {@code data.texture}, a top-level {@code texture}, or {@code texture.data}. */
+    /** Walk the v1 root paths, {@code data.texture}, a top-level {@code texture}, or {@code texture.data}. */
     private static Optional<JsonObject> textureAtRoot(JsonObject root) {
         JsonObject data = child(root, "data");
         Optional<JsonObject> underData =

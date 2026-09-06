@@ -68,7 +68,7 @@ import org.jspecify.annotations.NullMarked;
  * out through the shared {@link ChannelBroadcaster} so their multi-channel delivery, PlaceholderAPI expansion, and
  * per-viewer opt-out gating match vote's broadcaster. The advancement listener is registered unconditionally and
  * gated by its live config, so {@code /uxmess reload communication} can enable it without re-registration. This is
- * the one place the communication context is wired — nothing else news up its classes.
+ * the one place the communication context is wired: nothing else news up its classes.
  *
  * <p>The context persists nothing: the per-player opt-out bit is PDC-backed (survives relog), the sequence
  * counters are transient, and the announcer schedule and info pages are config-authored. The operator content is
@@ -133,7 +133,7 @@ public final class CommunicationWiring {
                 kernel.scheduler(), services.nextAnnouncement(), broadcaster, mergedConfig, running::get);
         // The admin panel reuses the SP0 GUI framework over the shared catalog and the data-folder layout loader. It
         // flips the live ChatLock, runs the /clearchat fan-out behind a confirm, broadcasts a captured line through
-        // the same broadcaster as /broadcast, and opens a read-only announcer list — only the surfaces the commands
+        // the same broadcaster as /broadcast, and opens a read-only announcer list. Only the surfaces the commands
         // expose, no new domain logic. /communication gui and the /uxmess gui hub entry both open it.
         GuiText guiText = new GuiText(kernel.messages());
         // The DB-backed announcement editor bare /announce (and /announce editor) opens: a list of the store
@@ -205,7 +205,7 @@ public final class CommunicationWiring {
     }
 
     /**
-     * Gather everything an announcement's display condition needs from the live player — their permission check,
+     * Gather everything an announcement's display condition needs from the live player, their permission check,
      * world and gamemode names, and the per-viewer PlaceholderAPI bridge so a {@code %papi%} comparison expands the
      * same way the rendered announcement lines do. Mirrors the scoreboard/tablist renderers' condition context.
      */
@@ -270,16 +270,16 @@ public final class CommunicationWiring {
     }
 
     /**
-     * Whether {@code earner} is currently vanished, derived from Bukkit's own {@code Player#canSee} visibility graph —
+     * Whether {@code earner} is currently vanished, derived from Bukkit's own {@code Player#canSee} visibility graph
      * the same soft-coupling seam messaging's {@code CanSeeVanishVisibility}, nametags, and teleport's {@code /tpa}
      * use. The presence module hides a vanished player from those without the vanish-see node, so an earner whom at
      * least one other online player cannot see is treated as vanished and their advancement is suppressed. When
      * presence is disabled nobody is hidden, {@code canSee} is always true, and the earner is never resolved as
      * vanished, so the feature degrades to "broadcast everyone's advancement" without depending on presence directly.
-     * A solo earner (no other online player) is never vanished here — there is no one to be hidden from.
+     * A solo earner (no other online player) is never vanished here: there is no one to be hidden from.
      *
-     * <p>This enumerates the whole roster and reads every other player's {@code canSee} visibility — a cross-region
-     * read that tears on Folia off the global region — so it is only legal on the global region thread. The
+     * <p>This enumerates the whole roster and reads every other player's {@code canSee} visibility, a cross-region
+     * read that tears on Folia off the global region, so it is only legal on the global region thread. The
      * advancement listener already runs this predicate inside a {@code scheduler.onGlobal} hop, so the read here is a
      * plain inline scan with no marshal of its own.
      */

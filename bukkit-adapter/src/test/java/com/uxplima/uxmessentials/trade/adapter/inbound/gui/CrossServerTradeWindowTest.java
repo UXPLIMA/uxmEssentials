@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage of the cross-server trade window — the solo offer view one participant stakes into while their
+ * MockBukkit coverage of the cross-server trade window. The solo offer view one participant stakes into while their
  * counterpart trades from another backend. It pins the loss- and peer-safety of the window's terminal paths, which the
  * pure {@code CrossServerTrade} coordinator test cannot reach because it never opens a view: a plain close before
  * confirming returns the staked items to the player and signals the peer to abort exactly once; a confirm-driven close
@@ -95,7 +95,7 @@ class CrossServerTradeWindowTest {
         PlayerMock target = openWindowFor("Target");
         stake(target, new ItemStack(Material.DIAMOND, 5));
 
-        // The player closes the window without confirming — the genuine abort path.
+        // The player closes the window without confirming, the genuine abort path.
         server.getPluginManager().callEvent(new InventoryCloseEvent(target.getOpenInventory()));
 
         assertThat(amount(target, Material.DIAMOND)).isEqualTo(5);
@@ -109,7 +109,7 @@ class CrossServerTradeWindowTest {
         CrossTradeHolder holder = holderOf(target);
 
         // Confirm wins the single-winner escrow gate; the window then closes, and Bukkit fires that close into the
-        // listener. That confirming close must be silent — no ABORT — or every confirm would tear the peer down.
+        // listener. That confirming close must be silent, no ABORT, or every confirm would tear the peer down.
         view.confirm(holder);
         view.onWindowClosed(holder, List.of());
 
@@ -121,7 +121,7 @@ class CrossServerTradeWindowTest {
         PlayerMock target = openWindowFor("Target");
         stake(target, new ItemStack(Material.EMERALD, 3));
 
-        // /uxmess reload trade, disable, or server stop — the wiring drains every open cross-server window.
+        // /uxmess reload trade, disable, or server stop: the wiring drains every open cross-server window.
         view.flushAll();
 
         assertThat(amount(target, Material.EMERALD)).isEqualTo(3);
@@ -182,7 +182,7 @@ class CrossServerTradeWindowTest {
         }
     }
 
-    /** A minimal in-memory escrow store — the confirm path holds one side's row through the coordinator. */
+    /** A minimal in-memory escrow store: the confirm path holds one side's row through the coordinator. */
     private static final class FakeEscrowStore implements TradeEscrowStore {
         private final Map<String, TradeEscrow> rows = new HashMap<>();
 
@@ -228,7 +228,7 @@ class CrossServerTradeWindowTest {
         }
     }
 
-    /** An economy that permits every debit — the window tests move items, not money. */
+    /** An economy that permits every debit: the window tests move items, not money. */
     private static final class PermissiveEconomy implements TradeEconomy {
         @Override
         public boolean canAfford(PlayerRef who, BigDecimal amount, String currencyId) {

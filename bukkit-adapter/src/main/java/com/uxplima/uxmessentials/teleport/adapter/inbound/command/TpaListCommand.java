@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.teleport.adapter.TeleportServices;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /tpalist} (alias {@code /tprequests}) — shows the invoking player who is waiting on their reply.
+ * {@code /tpalist} (alias {@code /tprequests}): shows the invoking player who is waiting on their reply.
  * A no-argument, self-only verb that delegates to
  * {@link com.uxplima.uxmessentials.teleport.application.ListPendingRequests}; it shares {@code tpa.use}
  * with the resolution verbs, since anyone who can {@code /tpaccept} should be able to see the queue.

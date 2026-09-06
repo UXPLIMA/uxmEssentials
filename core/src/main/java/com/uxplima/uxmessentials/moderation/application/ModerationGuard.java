@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * frozen by lower staff (docs/permissions.md). Centralised here so every use case applies the exact same
  * gate and the node name lives in one place.
  *
- * <p>The check is intentionally a plain node lookup through the kernel {@link Permissions} port — there is no
+ * <p>The check is intentionally a plain node lookup through the kernel {@link Permissions} port: there is no
  * staff-rank ladder in scope (warn-escalation ladders are explicitly out of charter), so "lower staff" means
  * "anyone; the exempt holder is simply immune". A future rank model would refine this one method.
  */

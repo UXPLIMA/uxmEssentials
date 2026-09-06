@@ -47,7 +47,7 @@ public final class BukkitServerMetrics implements ServerMetricsPlaceholders {
 
     @Override
     public int onlinePlayers() {
-        // Read on the PlaceholderAPI expansion thread, not a region tick thread — an onGlobal marshal would be
+        // Read on the PlaceholderAPI expansion thread, not a region tick thread. An onGlobal marshal would be
         // wrong (no region owns this caller) and needless: this reads only the roster size, never a player's
         // mutable entity state, so a torn read during a concurrent join/quit is at worst off by one for one
         // refresh and self-corrects next tick. The same reasoning covers worldPlayers() below.

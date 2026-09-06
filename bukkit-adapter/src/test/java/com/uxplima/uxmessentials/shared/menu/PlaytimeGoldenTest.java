@@ -67,7 +67,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * engine-rendered editor draws the exact read-only breakdown panel the bespoke view drew: same material and plain
  * name at every row slot and the back slot, and the same value-lore per row. Every row is a {@code PlaytimeRowProperty}
  * the viewer inspects but cannot change, so the test also fires a click on a row through the engine's own
- * {@link MenuListener} and asserts it is inert — no crash, no navigation. The baseline is frozen from the panel's
+ * {@link MenuListener} and asserts it is inert, no crash, no navigation. The baseline is frozen from the panel's
  * geometry + catalog keys, the way the kit/warp golden tests freeze a baseline.
  */
 class PlaytimeGoldenTest {

@@ -110,7 +110,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Constructs the holograms context's adapters and use cases over the injected kernel ports, the persistence
  * DSL, and the uxmLib native-Display hologram API, and produces the Brigadier command the plugin registers.
- * This is the one place the holograms context is wired — nothing else news up its classes.
+ * This is the one place the holograms context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a Caffeine read-cache decorator (write-through at the
  * delegate, invalidate in the cache). The renderer holds a fresh {@link HologramManager}; the uxmLib lifecycle
@@ -124,7 +124,7 @@ public final class HologramsWiring {
 
     private HologramsWiring() {}
 
-    /** The smallest cadence the refresh timer fires at — one second, the floor a refresh interval rounds to. */
+    /** The smallest cadence the refresh timer fires at: one second, the floor a refresh interval rounds to. */
     private static final Duration REFRESH_BASE = Duration.ofSeconds(1);
 
     private static final int REFRESH_BASE_TICKS = 20;
@@ -166,7 +166,7 @@ public final class HologramsWiring {
         // A hologram is one shared TextDisplay. Its broadcast text resolves placeholders server-globally (online,
         // time, TPS); the identity transform when PlaceholderAPI is absent, so a default server pays nothing. On
         // top of that base, a line embedding a placeholder additionally renders per viewer through the text-override
-        // collaborator below — each viewer sees their own resolved values over the one shared entity.
+        // collaborator below: each viewer sees their own resolved values over the one shared entity.
         // The per-viewer current page of each multi-page hologram, shared by the text-override collaborator (which
         // resolves a viewer's current page) and the renderer (which advances it on a click and clears it on despawn).
         HologramPageState pageState = new HologramPageState();
@@ -187,7 +187,7 @@ public final class HologramsWiring {
         // The NPC-link seam: a locator over the npc context's stored set kept current by the domain-event bus,
         // re-anchoring a linked hologram when its NPC moves or is removed. The locator reads the npc persistence
         // directly (the npc table ships in the persistence V38 baseline, always applied), so a hologram may link to
-        // an NPC even with the npc module disabled — it simply sees no live moves in that case.
+        // an NPC even with the npc module disabled: it simply sees no live moves in that case.
         NpcRepository npcRepository = NpcRepositories.cached(persistence);
         // Break the renderer↔locator construction cycle: the locator's re-anchor forwards through a holder the
         // renderer is written into once it exists, so a move event re-renders only the holograms linked to that NPC.
@@ -208,7 +208,7 @@ public final class HologramsWiring {
                 pageState);
         rendererHolder.set(renderer);
         // Close the cross-server loop: a remote hologram change reloads exactly that hologram into the same cache
-        // the commands and renderer read, then re-renders (or despawns) the live display through the renderer —
+        // the commands and renderer read, then re-renders (or despawns) the live display through the renderer
         // the same render path the local edit runs, hopped onto the right region thread by the renderer itself.
         // With the bus disabled the publisher is a no-op and this listener is never invoked, so the single-server
         // path is unchanged.
@@ -225,7 +225,7 @@ public final class HologramsWiring {
         plugin.getServer().getPluginManager().registerEvents(new HologramVisibilityListener(renderer), plugin);
         // The shared click-action engine: a hologram's chain runs through the same BukkitClickActionRunner npc uses,
         // built over the shared filtered command runner. Holograms ship no blocked-commands config key, so the
-        // blocklist is empty (a transparent pass-through — an operator-owned fixture, no command filtering needed yet).
+        // blocklist is empty (a transparent pass-through: an operator-owned fixture, no command filtering needed yet).
         // The b64 item resolver matches the token /hologram action … give hand stamps onto a GIVE action.
         ClickCommandRunner commandRunner = new FilteredClickCommandRunner(
                 new BukkitClickCommandRunner(), BlockedCommands.of(List.of()), kernel.log());
@@ -253,7 +253,7 @@ public final class HologramsWiring {
         }
         AutoCloseable refreshTask = scheduleRefresh(kernel.scheduler(), repository, renderer, kernel.log());
         // The cached repository's all() is the authoritative in-memory set after the one warm load, so reading
-        // names off it per keystroke is allocation-light and never touches the database — safe on the tick thread.
+        // names off it per keystroke is allocation-light and never touches the database, safe on the tick thread.
         java.util.function.Supplier<java.util.List<String>> hologramNames = () -> repository.all().stream()
                 .map(hologram -> hologram.name().value())
                 .toList();
@@ -323,7 +323,7 @@ public final class HologramsWiring {
     /**
      * A write-once holder for the renderer so the event-driven NPC locator (built before the renderer, since the
      * renderer needs it) can route a re-anchor back into the renderer once it exists. A re-anchor that somehow
-     * arrives before the renderer is set is dropped — there is nothing rendered yet to move.
+     * arrives before the renderer is set is dropped: there is nothing rendered yet to move.
      */
     private static final class RendererHolder {
 

@@ -49,7 +49,7 @@ class WarpSyncTest {
 
         cached.all(); // warm load from the delegate
         delegate.store(warp(SHOP)); // a peer wrote a new warp straight to the shared database
-        assertThat(cached.exists(SHOP)).isFalse(); // not yet visible — still serving the loaded set
+        assertThat(cached.exists(SHOP)).isFalse(); // not yet visible. Still serving the loaded set
 
         WarpSync.listener(cached).onRemoteChange(new WarpChanged("peer-2", "shop"));
 

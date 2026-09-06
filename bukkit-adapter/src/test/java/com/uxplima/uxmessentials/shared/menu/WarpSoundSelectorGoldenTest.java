@@ -55,8 +55,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * LAVA_BUCKET remove button at slot 26. The gray-glass filler slots are dropped from the snapshot.
  *
  * <p>Then a left click on the first sound through the engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener}
- * proves the migrated path runs the same set the old click did — the warp's departure sound saved through the
- * repository — and a click on remove clears it, faithful in both appearance and behaviour.
+ * proves the migrated path runs the same set the old click did. The warp's departure sound saved through the
+ * repository, and a click on remove clears it, faithful in both appearance and behaviour.
  */
 class WarpSoundSelectorGoldenTest {
 

@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
  * routes a click through its {@code clickMap}, an editor through its {@link EditorState}, a selector through its
  * {@link SelectorState} and an entity list through its {@link ListViewState}, a grid routes through this: a content
  * cell maps to the menu slot it drew and whether that slot held an item, the previous/next nav slots re-paginate the
- * same holder, and each control-bar button maps to its handler. Keeping these maps here — off the spec {@code clickMap}
- * and off the other menu kinds' maps — is what lets the one listener tell a grid apart from every other menu kind
+ * same holder, and each control-bar button maps to its handler. Keeping these maps here, off the spec {@code clickMap}
+ * and off the other menu kinds' maps, is what lets the one listener tell a grid apart from every other menu kind
  * without giving any of them a slot it has no item for.
  *
  * <p>The {@code spec} and {@code handlers} are held as {@link Object} so this runtime class needs no compile

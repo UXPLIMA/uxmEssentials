@@ -24,7 +24,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
  * Pure unit coverage for the two ready-made live sources' Bukkit-free surface: the environment→icon mapping, the
  * auto-skull convenience, each placeholder reading its record field, and the off-list resilience where a placeholder
  * used without a bound entry (or with the wrong entry type) returns an empty string rather than throwing. No
- * MockBukkit is needed — the sources' snapshot side is exercised in the golden test; here we drive the placeholders
+ * MockBukkit is needed. The sources' snapshot side is exercised in the golden test; here we drive the placeholders
  * directly against a hand-built {@link MenuContext}.
  */
 class LiveDataSourcesTest {
@@ -112,7 +112,7 @@ class LiveDataSourcesTest {
         return bindings.placeholder(id).orElseThrow(() -> new AssertionError("placeholder not registered: " + id));
     }
 
-    /** A scheduler the placeholder tests never call — registration needs one, the placeholders do not touch it. */
+    /** A scheduler the placeholder tests never call: registration needs one, the placeholders do not touch it. */
     private static final class NoopScheduler implements Scheduler {
         @Override
         public void onGlobal(Runnable task) {}

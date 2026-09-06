@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * The Layer-1 export the in-game menu editor's action / condition / placeholder / list-source pickers render from: the
  * sorted id catalog each of the four {@link MenuBindings} registries actually holds. It is the single source a picker
- * reads, so an author is offered exactly the bindings that are wired — nothing the engine cannot resolve.
+ * reads, so an author is offered exactly the bindings that are wired: nothing the engine cannot resolve.
  *
  * <p>The registries hold only an id → handler map, with no per-id argument schema, so this export carries no invented
  * arg descriptions: every ref an editor builds is a bare id or an {@code id:value} token, the value entered as free

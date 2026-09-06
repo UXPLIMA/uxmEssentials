@@ -17,7 +17,7 @@ import org.jooq.Record;
 
 /**
  * The jOOQ-backed {@link PlayerRankRepository} over the generated {@code PLAYER_RANKS} table. A point read
- * resolves one player's pointer by the {@code uuid} primary key; a {@code save} upserts on that key — a re-save
+ * resolves one player's pointer by the {@code uuid} primary key; a {@code save} upserts on that key, a re-save
  * overwrites the rank id, prestige and last-write instant in place, so an advance never inserts a duplicate row.
  * The {@code updated_at} stamp is taken from the injected {@link Clock} at write time, so it is deterministic
  * under test. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
@@ -66,7 +66,7 @@ public final class JooqPlayerRankRepository extends JooqRepository implements Pl
                 .execute();
     }
 
-    /** Rebuild a {@link PlayerRank} pointer from a queried row — the raw rank id and prestige, both first-class. */
+    /** Rebuild a {@link PlayerRank} pointer from a queried row: the raw rank id and prestige, both first-class. */
     private static PlayerRank toPlayerRank(Record row) {
         return new PlayerRank(RankId.of(row.get(PLAYER_RANKS.RANK_ID)), new Prestige(row.get(PLAYER_RANKS.PRESTIGE)));
     }

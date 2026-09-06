@@ -20,8 +20,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandRegistrat
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One quick time-alias verb — {@code /day} ({@code TimeSpec.day()}) or {@code /night} ({@code TimeSpec.night()})
- * — parameterised by the {@link TimeSpec} it sets and its own literal/permission so the two share one class
+ * One quick time-alias verb, {@code /day} ({@code TimeSpec.day()}) or {@code /night} ({@code TimeSpec.night()})
+ *, parameterised by the {@link TimeSpec} it sets and its own literal/permission so the two share one class
  * rather than two near-identical files. Each is its own command literal in the time/weather sub-feature group,
  * gated by its own per-command disable. World time is global state, so the set runs on the global region thread
  * through the kernel {@code Scheduler#onGlobal} and is reported through {@link ItemworldMessageKey#TIME_SET}.
@@ -39,12 +39,12 @@ public final class TimeAliasCommand extends ItemworldCommandSupport implements C
         this.spec = java.util.Objects.requireNonNull(spec, "spec");
     }
 
-    /** {@code /day} — set the world to daytime. */
+    /** {@code /day}, set the world to daytime. */
     public static TimeAliasCommand day(ItemworldServices services) {
         return new TimeAliasCommand(services, "day", "uxmessentials.time.alias", "Set the time to day.", TimeSpec::day);
     }
 
-    /** {@code /night} — set the world to nighttime. */
+    /** {@code /night}, set the world to nighttime. */
     public static TimeAliasCommand night(ItemworldServices services) {
         return new TimeAliasCommand(
                 services, "night", "uxmessentials.time.alias", "Set the time to night.", TimeSpec::night);

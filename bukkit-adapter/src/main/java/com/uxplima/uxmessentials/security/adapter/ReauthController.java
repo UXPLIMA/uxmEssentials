@@ -26,11 +26,11 @@ import org.jspecify.annotations.NullMarked;
  * The brain of op-command re-authentication: when the command listener blocks a protected command, this drives the
  * player through the same PIN keypad / TOTP prompt the join freeze uses, and on a successful proof stamps the re-auth
  * window and retries the original command. An un-enrolled player has nothing to prove against, so their command is
- * simply allowed through rather than soft-locked. It shares the keypad view with the join flow — a {@link KeypadRouter}
+ * simply allowed through rather than soft-locked. It shares the keypad view with the join flow, a {@link KeypadRouter}
  * sends each submission to whichever flow the player is currently in.
  *
  * <p>Every registration read and factor verification runs off the tick thread through the injected {@link Scheduler},
- * and every player touch (the prompt, the keypad, the command retry) hops back onto the player's region thread — so the
+ * and every player touch (the prompt, the keypad, the command retry) hops back onto the player's region thread, so the
  * flow is Folia-safe and never blocks a tick on I/O. A submitted PIN or code is held only for the length of the verify
  * and is never logged.
  */
@@ -112,13 +112,13 @@ public final class ReauthController implements KeypadActions {
 
     private void resolveRequirement(PlayerRef ref, String commandLine) {
         if (limiter.isLockedOut(ref.uuid(), clock.instant())) {
-            // A locked-out account cannot attempt a protected command — deny it, do not prompt or retry the command.
+            // A locked-out account cannot attempt a protected command: deny it, do not prompt or retry the command.
             scheduler.onEntity(ref, () -> notify(ref, SecurityMessageKey.SECURITY_REAUTH_LOCKED_OUT));
             return;
         }
         TwoFactorRegistration registration = repository.find(ref.uuid()).orElse(null);
         if (registration == null || !registration.hasAnyFactor()) {
-            // Nothing to prove against — allow the command through rather than soft-locking an un-enrolled player.
+            // Nothing to prove against: allow the command through rather than soft-locking an un-enrolled player.
             allow(ref, commandLine);
             return;
         }
@@ -169,7 +169,7 @@ public final class ReauthController implements KeypadActions {
     private void fail(Player player, PlayerRef viewer, boolean reopenOnFailure) {
         AttemptLimiter.Outcome outcome = limiter.recordFailure(viewer.uuid(), clock.instant());
         if (outcome.lockedOut()) {
-            // Too many wrong proofs on the shared budget — abandon the prompt and lock the account out of every
+            // Too many wrong proofs on the shared budget, abandon the prompt and lock the account out of every
             // surface.
             sessions.clear(viewer.uuid());
             keypad.closeFor(viewer);

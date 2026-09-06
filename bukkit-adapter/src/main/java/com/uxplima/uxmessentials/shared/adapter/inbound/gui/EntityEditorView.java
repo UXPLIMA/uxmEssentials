@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * through {@link Menus#openEditor}, so the window is a holder-backed engine editor routed and torn down by the one
  * menu listener and one {@code closeMenu}. The geometry, materials and catalog keys are unchanged, so the rendered
  * editor is identical slot-for-slot to the bespoke view it replaces. The enum/list/colour property children become
- * engine child menus automatically — the engine's editor {@code ClickContext} carries the selector/confirm openers —
+ * engine child menus automatically (the engine's editor {@code ClickContext} carries the selector/confirm openers)
  * and the optional delete button gates through {@link Menus#confirm} rather than a uxmLib {@code ConfirmMenu}.
  *
  * <p>The view holds no module logic: the property list, the title, and the back/delete callbacks are all supplied by
@@ -71,7 +71,7 @@ public final class EntityEditorView<T> {
         EditorSpec.Builder specBuilder = EditorSpec.builder()
                 .layout(layout)
                 // The engine spec is type-erased on the subject, so the typed title/property provider close over T
-                // and cast the Object subject back — the subject is always the entity this view was opened with, so
+                // and cast the Object subject back. The subject is always the entity this view was opened with, so
                 // a null here would be a wiring error and is rejected rather than rendered.
                 .title((viewer, subject) -> title.apply(viewer, require(subject)))
                 .valueLore(valueLore)
@@ -80,7 +80,7 @@ public final class EntityEditorView<T> {
                 .onBack(onBack);
         if (builder.deleteName != null && builder.deleteConfirmTitle != null && builder.onDelete != null) {
             // The delete button does not delete on click: it opens the engine confirm, whose yes runs the delete and
-            // whose no reopens this editor — the ConfirmMenu replacement, kept self-contained in the shim.
+            // whose no reopens this editor: the ConfirmMenu replacement, kept self-contained in the shim.
             specBuilder.onDelete(
                     builder.deleteName,
                     builder.deleteConfirmTitle,

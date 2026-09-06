@@ -41,16 +41,16 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Drives the per-wearer above-head nametag from the live {@link NametagConfig} over uxmLib's packet
  * {@link NametagRenderer}: true per-viewer text, multi-line stacks, line-of-sight fading, and a per-target refresh loop
- * the <em>lib</em> owns. Each wearer is given the format {@link NametagConfig#select selected} for them — the
+ * the <em>lib</em> owns. Each wearer is given the format {@link NametagConfig#select selected} for them, the
  * highest-priority format whose condition matches, evaluated against a {@link ConditionContext} built from the live
  * player.
  *
  * <h2>Who owns which loop</h2>
  *
- * The lib's {@code show(...)} starts a region-thread refresh task per wearer — at the operator's configured
- * {@code refresh-ticks} period, the same interval that drives this context's animation clock — that re-asks the viewer
+ * The lib's {@code show(...)} starts a region-thread refresh task per wearer. At the operator's configured
+ * {@code refresh-ticks} period, the same interval that drives this context's animation clock. That re-asks the viewer
  * supplier for the live audience, diffs it (spawn newcomers, drop departed, refresh the rest), re-resolves the
- * per-viewer text, and re-applies line-of-sight fading — so this class runs <em>no</em> render loop of its own. What
+ * per-viewer text, and re-applies line-of-sight fading, so this class runs <em>no</em> render loop of its own. What
  * this class still owns is
  * <em>format selection</em>: a permission/world/gamemode/sneak/show-when change is not something the lib loop sees, so
  * {@link #update} re-selects the wearer's format each reconcile tick and removes-then-re-shows when the selected format
@@ -95,7 +95,7 @@ public final class PacketNametagPresenter {
     /**
      * Each online player's last-known {@link Position}, refreshed on that player's <em>own</em> region thread by
      * {@link #snapshotSelf}. The viewer-distance cull needs every candidate viewer's position, but a viewer's live
-     * location is owned by the viewer's region thread, not the wearer's whose cull runs it — reading it cross-region
+     * location is owned by the viewer's region thread, not the wearer's whose cull runs it, reading it cross-region
      * is a torn read on Folia. So each player publishes their own position here on their own thread (the reconcile
      * task already hops to every player's entity thread each tick), and the cull reads the viewer's snapshot instead
      * of the live location. A one-tick staleness at the reconcile cadence is immaterial to a distance cull; a viewer
@@ -127,7 +127,7 @@ public final class PacketNametagPresenter {
         // viewer candidate for others' culls immediately rather than only after their first reconcile tick.
         snapshotSelf(wearer);
         // A wearer already shown (the reconcile tick showed for them, then a queued onJoin show arrives) must not be
-        // shown a second time — that would orphan the first handle and leak its refresh task. Reconcile instead.
+        // shown a second time: that would orphan the first handle and leak its refresh task. Reconcile instead.
         if (live.containsKey(wearer.getUniqueId())) {
             update(wearer);
             return;
@@ -208,7 +208,7 @@ public final class PacketNametagPresenter {
      * vanilla-name-hide bookkeeping (a pure map mutation) but does <em>not</em> touch the board, so it is safe from any
      * thread and is used where a re-show follows that re-hides on the player's region thread (a world change). It does
      * not restore the vanilla name on the board; the call sites that still hold the live player on its region thread do
-     * that — {@link #remove(Player)} on quit, {@link #update}'s no-format branch, and module stop — since touching a
+     * that ({@link #remove(Player)} on quit, {@link #update}'s no-format branch, and module stop) since touching a
      * {@link org.bukkit.scoreboard.Team} off the region thread is unsafe.
      */
     public void remove(UUID uuid) {
@@ -234,13 +234,13 @@ public final class PacketNametagPresenter {
             tracked.handle().remove();
         }
         // The quit path: the player is leaving, so drop their published position so the snapshot map does not grow
-        // over uptime. A world change goes through remove(uuid), which keeps the snapshot — the player is still online
+        // over uptime. A world change goes through remove(uuid), which keeps the snapshot. The player is still online
         // and re-publishes on their next reconcile.
         positionSnapshots.remove(player.getUniqueId());
         teams.clear(player);
     }
 
-    /** Remove every tracked nametag now — call on module stop so no nametag leaks. */
+    /** Remove every tracked nametag now: call on module stop so no nametag leaks. */
     public void removeAll() {
         for (UUID uuid : List.copyOf(live.keySet())) {
             // Restore the vanilla name for any wearer still online before dropping the handle, so a disable/reload
@@ -307,7 +307,7 @@ public final class PacketNametagPresenter {
     // the
     // per-wearer LineCache parses each frame once and replays it to every viewer. The resolution still flows through
     // the
-    // per-viewer callback so a relational placeholder added later needs no wiring change — that change would bypass the
+    // per-viewer callback so a relational placeholder added later needs no wiring change. That change would bypass the
     // cache for the placeholder-bearing lines and thread the viewer into the PAPI bridge.
     private PerViewerText perViewerText(NametagFormat format, Player wearer, LineCache lineCache) {
         return viewer -> lineCache.linesFor(animations.tick(), () -> renderLines(format, wearer));
@@ -325,7 +325,7 @@ public final class PacketNametagPresenter {
 
     // The eligible-viewer supplier the lib loop re-reads each refresh on the wearer's region thread: online players
     // other than the wearer, within the format's viewer-distance cull, that the vanish gate (when respected) lets see
-    // the wearer, and — unless the format hides on sneak while the wearer sneaks — at all. Returns UUIDs because that
+    // the wearer, and (unless the format hides on sneak while the wearer sneaks) at all. Returns UUIDs because that
     // is the lib audience type; the underlying cull mirrors what the old per-tick refresh computed.
     private Supplier<Set<UUID>> viewerSupplier(Player wearer, NametagFormat format) {
         return () -> {
@@ -365,8 +365,8 @@ public final class PacketNametagPresenter {
     }
 
     /**
-     * Whether {@code viewer} is within {@code maxBlocks} of {@code wearer}. The wearer's position is read live — this
-     * cull runs on the wearer's own region thread, so that read is region-local — while the viewer's position comes
+     * Whether {@code viewer} is within {@code maxBlocks} of {@code wearer}. The wearer's position is read live: this
+     * cull runs on the wearer's own region thread, so that read is region-local, while the viewer's position comes
      * from the off-thread {@link #positionSnapshots} the viewer published on their own thread, never the viewer's live
      * location (a cross-region read on Folia). A viewer with no snapshot yet, or in another world, is out of range.
      */

@@ -56,7 +56,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The bare-{@code /eco} admin-hub golden test: the engine-rendered hub must draw the exact window the original
  * {@code EconomyAdminView} drew, and its buttons must keep their routing. The hub draws a PLAYER_HEAD@11 [Manage a
  * player], a BEACON@13 [Server-wide], a BOOK@15 [Transaction history] and a BARRIER@22 close over a grey-glass
- * backdrop — snapshotted as {@code (slot -> material, plain name)} and asserted equal slot for slot to the baseline
+ * backdrop, snapshotted as {@code (slot -> material, plain name)} and asserted equal slot for slot to the baseline
  * the old view produced (frozen here so the old class could be deleted). [Manage a player] opens the shared player
  * picker (still bespoke); [Server-wide] opens the engine bulk screen; [Transaction history] opens the global
  * transaction log; the close button rides the engine's generic {@code close} action.

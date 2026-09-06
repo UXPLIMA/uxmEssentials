@@ -87,7 +87,7 @@ class DefaultResourcesLayoutTest {
 
     /** A non-{@code config.conf} sibling config (e.g. {@code rtp.conf}, {@code currencies.conf}) under a module. */
     private static boolean isNamedModuleConfig(String relative) {
-        // modules/<module>/<file>.conf — exactly two separators, so the file is not under a gui/ subfolder.
+        // modules/<module>/<file>.conf: exactly two separators, so the file is not under a gui/ subfolder.
         return relative.chars().filter(c -> c == '/').count() == 2;
     }
 

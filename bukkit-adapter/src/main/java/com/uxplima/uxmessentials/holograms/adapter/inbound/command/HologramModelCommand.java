@@ -27,8 +27,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The item/block type subcommands under {@code /hologram}: {@code /hologram item <name> <material>} switches a
  * hologram to a floating item, {@code /hologram block <name> <blockdata>} to a floating block model. Each
- * validates its content at the boundary — a {@code Material} name through {@link Material#matchMaterial} and a
- * BlockData string through {@link Bukkit#createBlockData} — so an invalid value is rejected here with a clear
+ * validates its content at the boundary, a {@code Material} name through {@link Material#matchMaterial} and a
+ * BlockData string through {@link Bukkit#createBlockData}, so an invalid value is rejected here with a clear
  * message and never reaches the {@code SetHologramModel} use case (which stays Bukkit-free). Collected here so
  * the main {@code /hologram} command class stays focused while keeping the single literal intact.
  */
@@ -119,7 +119,7 @@ final class HologramModelCommand extends HologramCommandSupport {
     /**
      * Resolve a head source to a base64 skin texture: {@code texture:<base64>} carries it directly, {@code self}
      * is the sender's own skin, and any other word is an online player whose skin is read from their profile.
-     * Returns {@code null} when the source is unusable (blank texture, unknown/offline player, no skin property) —
+     * Returns {@code null} when the source is unusable (blank texture, unknown/offline player, no skin property)
      * an offline-name Mojang lookup is a network call and is intentionally not done here.
      */
     private static @org.jspecify.annotations.Nullable String resolveTexture(String raw, CommandSender sender) {

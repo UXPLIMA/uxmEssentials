@@ -92,7 +92,7 @@ class BusTransportParityTest {
     @MethodSource("everyFrame")
     void anInboundFrameDecodesBackEqualToTheOriginal(NetworkMessage frame) {
         // The exact codec bytes arrive on the channel and travel the real transport's inbound path back to the
-        // core, which decodes them and dispatches the frame to the listener — proving the transport carried the
+        // core, which decodes them and dispatches the frame to the listener. Proving the transport carried the
         // bytes verbatim.
         pluginMessaging.onPluginMessageReceived(BusChannel.FULL, carrier(), NetworkMessageCodec.encode(frame));
 

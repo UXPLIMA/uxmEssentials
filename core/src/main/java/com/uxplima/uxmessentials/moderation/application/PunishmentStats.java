@@ -20,14 +20,14 @@ import com.uxplima.uxmessentials.moderation.domain.StaffPunishmentCount;
  * Pure aggregation of the append-only sanction history into a {@link PunishmentReport}: it groups the fetched
  * rows by the staff member who issued them and tallies the four punitive actions (ban/mute/warn/kick) each
  * issued, over an optional {@code since} window, then orders the result into a most-active-staff leaderboard.
- * It reads no port and touches no clock — the caller fetches the (bounded) rows and supplies the window
+ * It reads no port and touches no clock. The caller fetches the (bounded) rows and supplies the window
  * threshold, so the maths here is a deterministic function of its inputs and is unit-tested against fixture
  * rows.
  *
  * <p>The lifts ({@link SanctionAction#UNBAN}, {@link SanctionAction#UNMUTE}) are reversals rather than
  * punishments, so they are never counted; a staff member who only lifted sanctions therefore does not appear
- * in the leaderboard. Grouping is by issuer identity — the UUID when present, else a console key derived from
- * the name — and each group's display name is taken from its most recent row, so a since-renamed staff member
+ * in the leaderboard. Grouping is by issuer identity, the UUID when present, else a console key derived from
+ * the name, and each group's display name is taken from its most recent row, so a since-renamed staff member
  * shows their current name. The leaderboard orders by total punishments descending, breaking ties by name so
  * the ordering is stable.
  */

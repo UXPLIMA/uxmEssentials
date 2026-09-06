@@ -31,14 +31,14 @@ import org.jspecify.annotations.Nullable;
  * colour, a shulker's peek, a panda's gene, a tropical fish's variant, the goat/allay/piglin/camel/bee/vex state
  * flags, an armor stand's client flags and six poses, an interaction entity's hitbox size, and a display entity's
  * content (a block/item/text display's shown block/item/text, a display's scale/billboard/translation, and a text
- * display's background colour and line width — the text resolved per viewer). Kept in its own class so
- * {@code NpcTypeData} stays focused; the same support-map correctness invariant holds — a value is sent only to the
+ * display's background colour and line width: the text resolved per viewer). Kept in its own class so
+ * {@code NpcTypeData} stays focused; the same support-map correctness invariant holds. A value is sent only to the
  * one Bukkit type that carries that field, and an unsupported key or unparseable value is skipped fail-soft (logged
  * at debug), never thrown on the render thread.
  *
  * <p>Most variants are a bounded integer on one type, so a small {@link IntVariant} table drives them uniformly; the
  * dye-coloured ones (sheep wool, wolf collar, shulker shell) share a {@link ColorVariant} table that accepts a
- * {@link DyeColor} name or the raw 0–15 id alike; and the boolean states (goat screaming, allay/piglin dancing, camel
+ * {@link DyeColor} name or the raw 0 to 15 id alike; and the boolean states (goat screaming, allay/piglin dancing, camel
  * dash) share a {@link BoolVariant} table. The horse is the one special case: it packs a colour and a marking into
  * one packet (with {@code horse_style} a friendly {@link Horse.Style}-named alias for the marking id). The
  * by-name dynamic-registry variants (cat, frog) live in {@link NpcNameVariantData}; this class delegates the
@@ -110,19 +110,19 @@ final class NpcVariantData {
             EntityType.RAVAGER,
             EntityType.WITCH);
 
-    /** The horse coat colours (0–6) and body markings (0–4); the two pack into one variant integer. */
+    /** The horse coat colours (0 to 6) and body markings (0 to 4); the two pack into one variant integer. */
     private static final int MAX_HORSE_COLOR = 6;
 
     private static final int MAX_HORSE_MARKINGS = 4;
     /** The highest wool colour id; a {@link DyeColor} name resolves to its wool id, which never exceeds this. */
     private static final int MAX_DYE_COLOR = 15;
-    /** The killer (toast) rabbit's wire type id — valid even though it sits outside the 0–5 coat run. */
+    /** The killer (toast) rabbit's wire type id, valid even though it sits outside the 0 to 5 coat run. */
     private static final int RABBIT_KILLER = 99;
     /** The default interaction hitbox dimension (blocks) for a width/height that is absent or unparseable. */
     private static final float DEFAULT_INTERACTION_SIZE = 1.0f;
     /** A shulker shell opens from 0 (closed) to 100 (fully open). */
     private static final int MAX_SHULKER_PEEK = 100;
-    /** The seven panda genes (0–6: normal, lazy, worried, playful, brown, weak, aggressive). */
+    /** The seven panda genes (0 to 6: normal, lazy, worried, playful, brown, weak, aggressive). */
     private static final int MAX_PANDA_GENE = 6;
     /** The highest index into the server's 22 predefined common tropical-fish variants. */
     private static final int MAX_TROPICAL_FISH_VARIANT = 21;
@@ -145,7 +145,7 @@ final class NpcVariantData {
                     NpcPackets::tropicalFishVariant));
 
     /**
-     * The single-key dye-colour variants: each is one Bukkit type and the lib method that ships a 0–15 colour id,
+     * The single-key dye-colour variants: each is one Bukkit type and the lib method that ships a 0 to 15 colour id,
      * accepting a {@link DyeColor} name or the raw id alike. The wolf collar and shulker shell share the exact apply
      * and validation path; the sheep is handled separately ({@link #applySheep}) since its colour composes with the
      * sheared flag into one wool byte.
@@ -447,7 +447,7 @@ final class NpcVariantData {
     /**
      * Apply an interaction entity's hitbox size: the {@code interaction_width}/{@code interaction_height} keys set
      * the clickable box (defaulting a missing or unparseable dimension to 1 block) in one packet. An interaction
-     * NPC is invisible — the hitbox is its whole point — so this is what makes it clickable. Sent only to the
+     * NPC is invisible, the hitbox is its whole point, so this is what makes it clickable. Sent only to the
      * {@code INTERACTION} type; fail-soft on a wrong type.
      */
     private static void applyInteraction(
@@ -511,7 +511,7 @@ final class NpcVariantData {
     }
 
     /**
-     * Apply a raider's celebrating state (the {@code illager_celebrating} key) — a {@code Raider}-level field, so it
+     * Apply a raider's celebrating state (the {@code illager_celebrating} key), a {@code Raider}-level field, so it
      * reaches any raider type (pillager/vindicator/evoker/illusioner/ravager/witch). Fail-soft on a wrong type or
      * non-boolean value.
      */
@@ -534,7 +534,7 @@ final class NpcVariantData {
     }
 
     /**
-     * Apply a sheep's wool: the {@code sheep_color} (a {@link DyeColor} name or 0–15 id) and the {@code sheep_sheared}
+     * Apply a sheep's wool: the {@code sheep_color} (a {@link DyeColor} name or 0 to 15 id) and the {@code sheep_sheared}
      * flag compose into the one wool byte, so a sheared sheep keeps its colour underneath. Either key alone is
      * enough; the other defaults (white, unsheared). Fail-soft on a bad value or non-sheep type.
      */
@@ -553,7 +553,7 @@ final class NpcVariantData {
         if (colorValue != null) {
             Integer parsed = parseColorId(colorValue);
             if (parsed == null) {
-                skip(log, npc, KEY_SHEEP_COLOR, type, "value is not a dye colour or 0–15 id: " + colorValue);
+                skip(log, npc, KEY_SHEEP_COLOR, type, "value is not a dye colour or 0 to 15 id: " + colorValue);
                 return;
             }
             color = parsed;
@@ -861,9 +861,9 @@ final class NpcVariantData {
 
     /**
      * Apply a text-display entity's shown text: the {@code text} key (a MiniMessage string) is resolved <em>per
-     * viewer</em> — its {@code %papi%} tokens through that viewer's PlaceholderAPI bridge and its {@code <tag>}s
+     * viewer</em>. Its {@code %papi%} tokens through that viewer's PlaceholderAPI bridge and its {@code <tag>}s
      * through the MiniPlaceholders global resolver (both no-ops when their plugin is absent, so the text is then
-     * identical for everyone) — then deserialised. Since this runs once per viewer at render, each viewer sees
+     * identical for everyone), then deserialised. Since this runs once per viewer at render, each viewer sees
      * their own values. Sent only to {@code TEXT_DISPLAY}; a MiniMessage parse error is skipped fail-soft.
      */
     private static void applyTextDisplay(
@@ -940,14 +940,14 @@ final class NpcVariantData {
         }
     }
 
-    /** Whether {@code key} is one of the variant keys this class applies — the set the command validates against. */
+    /** Whether {@code key} is one of the variant keys this class applies: the set the command validates against. */
     static boolean isKnownKey(String key) {
         return KEYS.contains(key.toLowerCase(Locale.ROOT)) || NpcNameVariantData.isKnownKey(key);
     }
 
     /**
-     * Whether {@code value} is valid for the (already-known) variant {@code key}: a 0–max integer for the bounded
-     * coats/types, a 0–5 coat or 99 for the rabbit, and a {@link DyeColor} name or a 0–15 id for the sheep colour.
+     * Whether {@code value} is valid for the (already-known) variant {@code key}: a 0 to max integer for the bounded
+     * coats/types, a 0 to 5 coat or 99 for the rabbit, and a {@link DyeColor} name or a 0 to 15 id for the sheep colour.
      */
     static boolean isValidValue(String key, String value) {
         String lower = key.toLowerCase(Locale.ROOT);
@@ -1030,7 +1030,7 @@ final class NpcVariantData {
     }
 
     /**
-     * The horse body markings 0–4 to ship: a {@link Horse.Style} name ({@code horse_style}) when one is set (its
+     * The horse body markings 0 to 4 to ship: a {@link Horse.Style} name ({@code horse_style}) when one is set (its
      * ordinal is the wire markings id), else the raw {@code horse_markings} integer. The style key is the friendly
      * alias for the same field, so when both are present the named style wins.
      */
@@ -1039,7 +1039,7 @@ final class NpcVariantData {
         return style != null ? style : clampInt(data.get(KEY_HORSE_MARKINGS), MAX_HORSE_MARKINGS);
     }
 
-    /** A {@link Horse.Style} name resolved to its 0–4 markings id, or {@code null} when absent or not a style name. */
+    /** A {@link Horse.Style} name resolved to its 0 to 4 markings id, or {@code null} when absent or not a style name. */
     private static @Nullable Integer parseStyle(@Nullable String value) {
         if (value == null) {
             return null;
@@ -1051,7 +1051,7 @@ final class NpcVariantData {
         }
     }
 
-    /** The wire markings id for a horse style — an explicit map (not the enum ordinal, which Error Prone flags). */
+    /** The wire markings id for a horse style, an explicit map (not the enum ordinal, which Error Prone flags). */
     private static int markingsOf(Horse.Style style) {
         return switch (style) {
             case NONE -> 0;
@@ -1063,8 +1063,8 @@ final class NpcVariantData {
     }
 
     /**
-     * Resolve a sheep colour to its 0–15 wool id from either a {@link DyeColor} name (e.g. {@code red}) or a raw
-     * id, or {@code null} when the value is neither — the fail-soft signal the apply and validation paths share.
+     * Resolve a sheep colour to its 0 to 15 wool id from either a {@link DyeColor} name (e.g. {@code red}) or a raw
+     * id, or {@code null} when the value is neither: the fail-soft signal the apply and validation paths share.
      */
     private static @Nullable Integer parseColorId(String value) {
         String trimmed = value.strip();

@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * fans out to all online players instead of acting on one arbitrary match.
  *
  * <p>The argument only <em>suggests</em> the selectors it can resolve to players ({@code @a @p @r @s}), never an
- * entity selector. An entity selector such as {@code @e} is still rejected at parse time if typed by hand — it
+ * entity selector. An entity selector such as {@code @e} is still rejected at parse time if typed by hand: it
  * is simply no longer offered, so the completion list no longer advertises a token the command cannot use.
  *
  * <p>This deliberately wraps {@link ArgumentTypes#players()} rather than {@link ArgumentTypes#player()}: the
@@ -51,7 +51,7 @@ public final class PlayerTargets {
     /**
      * Resolve the {@code argName} selector to every matched online player. A single name yields one player; a
      * selector such as {@code @a} yields all matches. The list is empty when the selector matched no online
-     * player (or the name is offline) — the caller answers that with its own unknown-target message rather than
+     * player (or the name is offline). The caller answers that with its own unknown-target message rather than
      * surfacing a raw Brigadier parse error.
      */
     public static List<Player> resolveAll(CommandContext<CommandSourceStack> ctx, String argName) {
@@ -61,7 +61,7 @@ public final class PlayerTargets {
             PlayerSelectorArgumentResolver resolver = ctx.getArgument(argName, PlayerSelectorArgumentResolver.class);
             return resolver.resolve(ctx.getSource());
         } catch (CommandSyntaxException unmatched) {
-            // A name with no online player, or a selector that matched nothing — treated as "no targets" so the
+            // A name with no online player, or a selector that matched nothing. Treated as "no targets" so the
             // caller can answer with the same unknown-target reply the name path uses, never a raw parse error.
             return List.of();
         }

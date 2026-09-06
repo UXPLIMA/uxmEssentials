@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Renders an {@link InfoPage} to one viewer, line by line, through the {@link MessageSink}. Each line is
  * operator-authored MiniMessage content the sink parses into a Component once and delivers on the viewer's region
- * thread — never a plugin {@code MessageKey}, so an info page is not parity-checked. The {@code {player}}
+ * thread, never a plugin {@code MessageKey}, so an info page is not parity-checked. The {@code {player}}
  * placeholder is substituted per viewer before delivery so a page may greet the reader by name.
  *
  * <p>Shared by the dynamic info commands ({@code /rules}, {@code /motd}, …) and the optional

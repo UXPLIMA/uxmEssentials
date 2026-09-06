@@ -20,15 +20,15 @@ import com.uxplima.uxmessentials.shared.application.port.Scheduler;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /backup} — an on-demand snapshot of the plugin's own data directory. It reuses the
+ * {@code /backup}: an on-demand snapshot of the plugin's own data directory. It reuses the
  * {@link DataDirBackupSnapshot} the migration importer takes before a cutover (docs/12-migration §9), so a
- * backup is a timestamped copy of the bundled {@code .conf} state under the data folder — not a world or
+ * backup is a timestamped copy of the bundled {@code .conf} state under the data folder, not a world or
  * off-host database backup, which stay the operator's responsibility. The reply says as much.
  *
  * <p>Cross-cutting and operator-facing rather than owned by a feature context, so it lives in the bootstrap
  * command surface alongside {@code /uxmess}; its diagnostic acknowledgements are plain operator text. The
- * snapshot runs off the tick thread through the kernel {@link Scheduler#async} port — the file copy never
- * touches the tick thread — and the command returns control immediately, reporting the location once the
+ * snapshot runs off the tick thread through the kernel {@link Scheduler#async} port, the file copy never
+ * touches the tick thread, and the command returns control immediately, reporting the location once the
  * copy finishes. Permission node {@code uxmessentials.admin.backup}.
  */
 @NullMarked
@@ -40,8 +40,8 @@ public final class BackupCommand implements CommandRegistration {
 
     private static final String STARTED = "Snapshotting the plugin data directory off-tick…";
     private static final String DONE = "Data snapshot written to ";
-    private static final String SCOPE = "This backs up uxmEssentials config/data only — not worlds or the database.";
-    private static final String FAILED = "Backup failed — see the server log for details.";
+    private static final String SCOPE = "This backs up uxmEssentials config/data only, not worlds or the database.";
+    private static final String FAILED = "Backup failed. See the server log for details.";
 
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
     private static final String BODY = "<#aeb8c4>";

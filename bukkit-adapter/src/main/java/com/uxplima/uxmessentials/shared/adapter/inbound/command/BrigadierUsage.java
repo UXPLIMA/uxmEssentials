@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * Derives a command's usage suffix from a built Brigadier tree the way {@code CommandDispatcher.getSmartUsage}
  * does, but without a source: it never calls {@code canUse}, so the root's permission predicate is not
  * evaluated (there is no live sender at registration time) and a deeper branch is bracketed as optional only
- * from the static shape — whether the parent node is itself executable.
+ * from the static shape: whether the parent node is itself executable.
  *
  * <p>The result is the part of the usage line after the root literal: {@code <mode> [<player>]} for
  * {@code /gamemode}, {@code <player> <amount> [<currency>]} for {@code /pay}. A node with no children yields

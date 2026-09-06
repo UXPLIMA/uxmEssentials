@@ -21,7 +21,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The thin {@link JavaPlugin} shell: wires the DI graph on enable, closes it on disable.
  *
- * <p>The plugin instance is never exposed via a static accessor — services are constructed and
+ * <p>The plugin instance is never exposed via a static accessor. Services are constructed and
  * injected by {@link PluginModule}, which is the only holder of this reference. The {@code COMMANDS}
  * lifecycle handler publishes the already-module-filtered command set built during wiring, so a
  * disabled module's command literal never reaches the dispatcher.
@@ -34,7 +34,7 @@ public final class UxmEssentialsPlugin extends JavaPlugin {
 
     /**
      * Registers our WorldGuard custom flags before any plugin is enabled. WorldGuard locks its flag registry the moment
-     * it enables, so registration has to happen in the load phase — and a Paper
+     * it enables, so registration has to happen in the load phase, and a Paper
      * {@link io.papermc.paper.plugin.bootstrap.PluginBootstrap} runs even earlier, before WorldGuard has created that
      * registry, so {@code onLoad} is the correct hook. Each call is a silent no-op when WorldGuard is absent (it never
      * loads a WorldGuard class on a server without it), so both are safe to run unconditionally here, before the module
@@ -104,7 +104,7 @@ public final class UxmEssentialsPlugin extends JavaPlugin {
                             .log(
                                     Level.SEVERE,
                                     "failed to register command "
-                                            + command.getClass().getSimpleName() + " — skipped",
+                                            + command.getClass().getSimpleName() + ", skipped",
                                     failure);
                 }
             });
@@ -124,7 +124,7 @@ public final class UxmEssentialsPlugin extends JavaPlugin {
                         .log(
                                 Level.SEVERE,
                                 "failed to register listener "
-                                        + listener.getClass().getSimpleName() + " — skipped",
+                                        + listener.getClass().getSimpleName() + ", skipped",
                                 failure);
             }
         });

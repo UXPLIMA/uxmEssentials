@@ -40,7 +40,7 @@ public final class ReauthSessions {
         return pending.get(Objects.requireNonNull(playerId, "playerId"));
     }
 
-    /** Clear {@code playerId}'s pending re-auth — on a successful proof, an abandon, or a disconnect. */
+    /** Clear {@code playerId}'s pending re-auth, on a successful proof, an abandon, or a disconnect. */
     public void clear(UUID playerId) {
         pending.remove(Objects.requireNonNull(playerId, "playerId"));
     }

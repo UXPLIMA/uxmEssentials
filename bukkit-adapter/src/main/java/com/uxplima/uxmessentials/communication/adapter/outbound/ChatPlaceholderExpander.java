@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * authored survives verbatim rather than blanking out.
  *
  * <p>The expansion runs on the async chat thread where the renderer already reads the speaker's cached state, and
- * it only substitutes text into a string — it touches no unsafe Bukkit world state, so the async-listener contract
+ * it only substitutes text into a string. It touches no unsafe Bukkit world state, so the async-listener contract
  * holds. PlaceholderAPI is reached only through {@link PlaceholderApiSupport}, so this class carries no
  * {@code me.clip.placeholderapi} import and a server without the plugin never resolves those symbols.
  */
@@ -25,7 +25,7 @@ public interface ChatPlaceholderExpander {
     /** {@code text} with {@code who}'s {@code %token%} placeholders expanded, or {@code text} unchanged when none apply. */
     String expand(UUID who, String text);
 
-    /** An expander that returns the text unchanged — the fallback when PlaceholderAPI is not installed. */
+    /** An expander that returns the text unchanged: the fallback when PlaceholderAPI is not installed. */
     static ChatPlaceholderExpander identity() {
         return (who, text) -> text;
     }

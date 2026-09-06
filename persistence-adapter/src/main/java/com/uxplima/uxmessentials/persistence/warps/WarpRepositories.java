@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * Factory for the warps context's persistence adapter, so the consuming bukkit-adapter wires a
  * {@link WarpRepository} from the {@link Persistence} handle it already holds without ever naming a jOOQ
  * type (jOOQ is an {@code implementation} dependency of this module, kept off the consumer's compile
- * classpath). The returned repository is the cached jOOQ adapter — write-through at the database,
+ * classpath). The returned repository is the cached jOOQ adapter, write-through at the database,
  * invalidate in the Caffeine cache.
  */
 @NullMarked
@@ -27,7 +27,7 @@ public final class WarpRepositories {
 
     /**
      * The cached jOOQ {@link WarpRepository} as its concrete decorator type, so the wiring can hand the
-     * cross-server bus an invalidation hook on the same cache the commands read — a remote {@code /setwarp}
+     * cross-server bus an invalidation hook on the same cache the commands read, a remote {@code /setwarp}
      * drops the cached warp set. Same backing as {@link #cached}; this overload exposes the decorator only so
      * the invalidation seam can reach it.
      */

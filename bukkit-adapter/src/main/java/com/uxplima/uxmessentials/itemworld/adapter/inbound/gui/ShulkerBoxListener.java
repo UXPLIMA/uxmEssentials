@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * sub-feature must be enabled ({@link ItemworldConfig#shulkersEnabled()}), the interaction must be a main-hand
  * right-click with a shulker box in hand, the sneak trigger (if required) must be met, and the player must hold
  * {@code uxmessentials.itemworld.shulker}. When it opens, the interaction is cancelled so the box is not also placed
- * as a block. A player who lacks the permission or the sub-feature simply keeps vanilla behaviour — a silent no-op.
+ * as a block. A player who lacks the permission or the sub-feature simply keeps vanilla behaviour, a silent no-op.
  *
  * <p>While a view is open the click/drag policy ({@link ShulkerMenuPolicy}) locks the source box in its slot and
  * refuses to nest a shulker inside the view; on close the {@link ShulkerBoxView} writes the edits back into the box.

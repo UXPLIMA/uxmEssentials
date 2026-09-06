@@ -62,7 +62,7 @@ class RedisBusTransportAdapterTest {
 
         byte[] frame = {1, 2, 3};
         transport.send(frame);
-        frame[0] = 99; // mutate after send — the published copy must be unaffected
+        frame[0] = 99; // mutate after send. The published copy must be unaffected
 
         assertThat(channel.published().get(0).frame()).isEqualTo(new byte[] {1, 2, 3});
     }

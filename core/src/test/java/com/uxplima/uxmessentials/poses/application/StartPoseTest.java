@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  * feature switch is off, when the region gate refuses, or when the player already poses; and a success anchors the
  * player on a seat, renders the right pose, records a session of that type with the on-the-spot return location,
  * and publishes {@link PoseStarted}. Only {@code /lay} snores, and only when snoring is enabled. All ports are
- * fakes — no Bukkit.
+ * fakes, no Bukkit.
  */
 class StartPoseTest {
 

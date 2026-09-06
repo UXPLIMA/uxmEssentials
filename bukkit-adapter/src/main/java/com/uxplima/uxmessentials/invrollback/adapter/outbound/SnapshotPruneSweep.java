@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * The scheduled half of retention: a repeating tick that applies the {@link PruneSnapshots} sweep so
  * {@code inv_snapshots} stays bounded by age (and by count for any owner left over the cap after a reload). The
  * repeating tick fires on the global region thread through the injected {@link Scheduler}, and immediately hands the
- * DB work to the async lane — a snapshot prune is a write, which must never run on a tick thread (SQLite is
+ * DB work to the async lane. A snapshot prune is a write, which must never run on a tick thread (SQLite is
  * single-writer, and no region thread may block on the DB).
  *
  * <p>The sweep is skipped entirely when both retention limits are disabled ({@code max-per-player} and

@@ -20,7 +20,7 @@ public record NpcLimit(int cap, boolean unlimited) {
         return new NpcLimit(cap, false);
     }
 
-    /** The "no limit at all" quota — a player with the {@code -1} sentinel, unlimited meta, or unlimited default. */
+    /** The "no limit at all" quota: a player with the {@code -1} sentinel, unlimited meta, or unlimited default. */
     public static NpcLimit noLimit() {
         return new NpcLimit(Integer.MAX_VALUE, true);
     }

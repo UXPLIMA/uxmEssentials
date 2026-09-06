@@ -14,10 +14,10 @@ import java.util.Objects;
  *
  * <p>Period keys:
  * <ul>
- *   <li>{@code dayKey} — {@link LocalDate#toEpochDay()} for the vote date.
- *   <li>{@code weekKey} — {@code (ISO week-based year * 100) + ISO week-of-year}, giving a unique
+ *   <li>{@code dayKey}, {@link LocalDate#toEpochDay()} for the vote date.
+ *   <li>{@code weekKey}. {@code (ISO week-based year * 100) + ISO week-of-year}, giving a unique
  *       integer per ISO week that does not collide across years.
- *   <li>{@code monthKey} — {@code year * 12 + monthValue} (1-based), increasing monotonically.
+ *   <li>{@code monthKey}: {@code year * 12 + monthValue} (1-based), increasing monotonically.
  * </ul>
  *
  * <p>All fields are non-negative. The compact constructor enforces this so that no invalid tally
@@ -26,7 +26,7 @@ import java.util.Objects;
  * <p>The streak fields track consecutive-day voting independently of the calendar buckets.
  * {@code currentStreak} is the run of days the player has voted on, {@code bestStreak} the longest
  * run ever reached, and {@code streakDayKey} the epoch-day of the most recent vote that touched the
- * streak — so a second vote on the same day leaves the streak unchanged while the first vote of the
+ * streak, so a second vote on the same day leaves the streak unchanged while the first vote of the
  * next day extends it.
  *
  * @param alltime accumulated votes across all time
@@ -147,7 +147,7 @@ public record VoteTally(
 
     /**
      * Returns the accumulated vote count for the requested period. For periodic buckets this
-     * reflects the current window as stored — the caller is responsible for reading a fresh tally
+     * reflects the current window as stored. The caller is responsible for reading a fresh tally
      * from the repository before rendering.
      */
     public long countFor(VotePeriod period) {

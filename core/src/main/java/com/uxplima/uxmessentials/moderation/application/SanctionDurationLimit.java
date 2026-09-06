@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * within the cap passes through unchanged, a request over the cap (including a permanent ban, modelled as the
  * far-future {@link Ban#PERMANENT_SPAN}) comes back clamped to the cap. The use case compares the returned
  * span against what it requested to decide whether to tell the actor the duration was capped. A {@code kind}
- * is the lowercase family segment — {@code "ban"} or {@code "mute"}.
+ * is the lowercase family segment, {@code "ban"} or {@code "mute"}.
  */
 public final class SanctionDurationLimit {
 
@@ -30,7 +30,7 @@ public final class SanctionDurationLimit {
      * The "no node held" fallback handed to the reducer as its config default. It must be negative (so the
      * {@code capSeconds < 0} branch below reads it as unlimited) but <em>not</em> the {@code -1} unlimited
      * sentinel: the MAX reducer short-circuits to unlimited the instant it accepts {@code -1}, and the config
-     * default is seeded before any held node is folded in — seeding {@code -1} would latch unlimited and a real
+     * default is seeded before any held node is folded in. Seeding {@code -1} would latch unlimited and a real
      * {@code maxduration.<seconds>} node could never cap anything. {@code Long.MIN_VALUE} loses every {@code MAX}
      * fold to a real node, so a held cap wins, while a player with no node still resolves to this negative
      * fallback and is treated as unlimited.

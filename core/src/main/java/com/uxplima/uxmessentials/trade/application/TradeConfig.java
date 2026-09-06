@@ -6,11 +6,11 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 
 /**
- * The typed, immutable view of {@code modules/trade/config.conf}: the enable gate plus the trade tunables — which
+ * The typed, immutable view of {@code modules/trade/config.conf}: the enable gate plus the trade tunables, which
  * currencies may be staked, which materials are refused, how near two players must be to open a trade, the per-player
  * request cooldown, whether cross-server trading is on, and how many item slots each side gets in the window. It is
  * resolved once from the module's scoped {@link ConfigStore} when the module starts and, per the atomic-reload rule,
- * swapped whole on reload — so a trade opened mid-reload sees one coherent snapshot.
+ * swapped whole on reload, so a trade opened mid-reload sees one coherent snapshot.
  *
  * <p>The HOCON keys are kebab-case ({@code currencies-allowed}, {@code request-distance}); the record components are
  * the camelCase views the application reads. Every knob carries the default the bundled config ships, so an operator
@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * @param cooldownSeconds the per-player cooldown between trade requests, in seconds ({@code cooldown-seconds},
  *     default 5; 0 disables the cooldown)
  * @param crossServer whether players on different backend servers may trade over the bus ({@code cross-server},
- *     default {@code false} — it needs a proxy and the bus configured)
+ *     default {@code false}. It needs a proxy and the bus configured)
  * @param requestExpirySeconds how long a {@code /trade} request stays acceptable before it expires, in seconds
  *     ({@code request-expiry-seconds}, default 60)
  * @param audit whether a completed trade emits an audit line on the shared audit channel ({@code audit},
@@ -40,7 +40,7 @@ public record TradeConfig(
         int requestExpirySeconds,
         boolean audit) {
 
-    /** The default staked-currency set — the single shipped {@code coins} currency. */
+    /** The default staked-currency set: the single shipped {@code coins} currency. */
     private static final List<String> DEFAULT_CURRENCIES = List.of("coins");
 
     /** The default per-player request cooldown, in seconds. */
@@ -76,7 +76,7 @@ public record TradeConfig(
                 config.getBoolean("audit", true));
     }
 
-    /** Whether a request distance is enforced at all — a non-positive distance means unlimited range. */
+    /** Whether a request distance is enforced at all: a non-positive distance means unlimited range. */
     public boolean hasDistanceLimit() {
         return requestDistance > 0;
     }

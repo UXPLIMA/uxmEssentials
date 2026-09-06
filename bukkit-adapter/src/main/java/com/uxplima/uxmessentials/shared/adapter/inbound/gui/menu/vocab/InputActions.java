@@ -13,11 +13,11 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * {@code open} does. Registered once at startup into the shared {@link MenuBindings} alongside {@link MenuVocabulary}
  * and the other action packs.
  *
- * <p>The real behaviour of these two steps is <em>not</em> here — it lives in the click dispatcher, which reads the
+ * <p>The real behaviour of these two steps is <em>not</em> here. It lives in the click dispatcher, which reads the
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.Continuation Continuation} the loader attaches
  * to the ref and splits the action chain around it, because their outcome arrives on a later callback and cannot run
  * inline through a plain action handler. On the flat success path the dispatcher intercepts the step before it ever
- * reaches these handlers, so they only fire when the step was written somewhere the dispatcher does not intercept — an
+ * reaches these handlers, so they only fire when the step was written somewhere the dispatcher does not intercept, an
  * else-ladder, a deny list, or a per-requirement action list, where a continuation is unsupported. There the handler
  * logs a one-line operator warning and no-ops, so a mis-placed {@code input:}/{@code confirm:} degrades to a clear
  * diagnostic rather than a silent nothing. The warning is operator-facing only; no player text is produced, so no

@@ -26,12 +26,12 @@ import org.yaml.snakeyaml.Yaml;
  * the config line and an operator cannot discover the key to disable it; forget the dependency and the plugin
  * may load after us and sit silently inactive. This guard turns either omission into a build failure.
  *
- * <p>It reads only tracked sources — {@code /config.conf} and {@code /paper-plugin.yml} from the classpath, both
- * bundled from {@code src/main/resources} — and never touches {@code docs/}, which is gitignored and absent in a
+ * <p>It reads only tracked sources, {@code /config.conf} and {@code /paper-plugin.yml} from the classpath, both
+ * bundled from {@code src/main/resources}, and never touches {@code docs/}, which is gitignored and absent in a
  * clean CI checkout. The provider keys come from {@link ClaimProviders#candidateKeys()}, the single source of
  * truth the registry itself derives, so the guard cannot drift from the set it checks: the config lines are read
  * from raw text (the toggle entries ship commented, so a HOCON parse would not see them) and the dependency
- * names are parsed from the YAML. {@code uxmclaims} is the one documented exception to the dependency check — it
+ * names are parsed from the YAML. {@code uxmclaims} is the one documented exception to the dependency check: it
  * is discovered reflectively with no load-order need.
  *
  * <p>Each real-corpus assertion is paired with a teeth test that fires the same detector on a synthetic missing
@@ -41,7 +41,7 @@ class ClaimProviderCoverageDriftTest {
 
     /**
      * Each registered provider key mapped to the plugin name {@code paper-plugin.yml} must list, verified against
-     * that provider's {@code active()} {@code getPlugin("...")} string. {@code uxmclaims} is deliberately absent —
+     * that provider's {@code active()} {@code getPlugin("...")} string. {@code uxmclaims} is deliberately absent
      * it is the reflective, no-load-order exception, checked separately in {@link #theKeyToPluginMapCoversTheRegistryExactly}.
      */
     private static final Map<String, String> KEY_TO_PLUGIN = Map.ofEntries(

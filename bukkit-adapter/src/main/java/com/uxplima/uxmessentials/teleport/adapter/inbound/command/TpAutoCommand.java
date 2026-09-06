@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /tpauto}: flip the invoking player's auto-accept switch and confirm the new state. While on, an
  * incoming {@code /tpa} or {@code /tpahere} that clears the toggle/block/self gates is accepted immediately
- * rather than queued — the auto-accept branch lives in {@code RequestTeleport}. The flag itself is owned by the
+ * rather than queued: the auto-accept branch lives in {@code RequestTeleport}. The flag itself is owned by the
  * {@code TeleportFlags} port; this command flips it and renders the matching on/off confirmation, the same
  * shape as {@link TpToggleCommand}.
  */

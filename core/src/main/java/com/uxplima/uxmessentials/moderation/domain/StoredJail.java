@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  *
  * <p>The name is the jail's identity: jails are server-wide, so a name is unique across the whole store and is
  * normalised to its canonical lowercase form so {@code /setjail Spawn} and {@code /jail <player> spawn} address
- * the same jail — matching how the config seam ({@code ModerationSettings}) already case-folds jail names. The
+ * the same jail: matching how the config seam ({@code ModerationSettings}) already case-folds jail names. The
  * normalisation lives on the value object rather than a separate name type because jail names elsewhere are
  * plain lower-cased strings; blank or overlong input is rejected at construction so it can never reach the
  * store. The width mirrors the {@code moderation_jails.jail} column.

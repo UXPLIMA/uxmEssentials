@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Shared ACL helpers for resolving the two actors on a LiteBans row — the target and the issuer — into the
+ * Shared ACL helpers for resolving the two actors on a LiteBans row, the target and the issuer, into the
  * moderation domain's identity types. Pure: no JDBC, no Bukkit. The translation rules are LiteBans-specific
  * (the {@code #offline#}/{@code #undefined#} target sentinels and the {@code CONSOLE} issuer literal) and
  * are isolated here so the per-sanction mappers stay focused on shape, not identity parsing.
@@ -24,7 +24,7 @@ final class LiteBansActors {
 
     /**
      * Resolve the row's target as a {@link PlayerRef}, or empty when the UUID is a LiteBans sentinel
-     * ({@code #offline#}/{@code #undefined#}) or simply unparseable — such a row names no real account, so
+     * ({@code #offline#}/{@code #undefined#}) or simply unparseable. Such a row names no real account, so
      * the importer skips it rather than inventing a target.
      */
     static Optional<PlayerRef> target(LiteBansRow row) {

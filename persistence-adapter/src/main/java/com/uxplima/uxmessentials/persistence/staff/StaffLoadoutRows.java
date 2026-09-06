@@ -11,8 +11,8 @@ import org.jooq.Record;
 
 /**
  * The anti-corruption mapping between a {@code staff_loadout} row and the domain {@link SavedLoadout}. The
- * scalar facts of the captured state — the held hotbar slot, the experience level and progress, the game-mode
- * name and the flight flag — are first-class columns; the four item/effect regions are opaque payload, each
+ * scalar facts of the captured state, the held hotbar slot, the experience level and progress, the game-mode
+ * name and the flight flag. Are first-class columns; the four item/effect regions are opaque payload, each
  * stored as the base64 text of the adapter's already-serialized bytes (the architecture persistence invariant,
  * docs/01-architecture.md), exactly as the vaults context stores its {@code ItemStack[]}. This class is the
  * single place that translation lives, so the row shape stays identical on every backend.

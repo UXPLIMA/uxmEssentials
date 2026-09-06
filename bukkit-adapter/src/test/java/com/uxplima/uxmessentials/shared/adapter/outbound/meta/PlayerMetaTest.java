@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit coverage of {@link PlayerMeta} over a live player's {@link org.bukkit.persistence.PersistentDataContainer}.
  * It proves the set/get round-trip stores a {@link PersistentDataType#STRING}, that {@link PlayerMeta#add}
  * accumulates a numeric value, that {@link PlayerMeta#remove} and {@link PlayerMeta#has} behave, and that the
- * operator-arbitrary {@link NamespacedKey} is cached — the same instance is returned for repeated calls and the
- * value lands under the one {@code uxmessentials} namespace — so a hot click path never builds a key per call.
+ * operator-arbitrary {@link NamespacedKey} is cached. The same instance is returned for repeated calls and the
+ * value lands under the one {@code uxmessentials} namespace, so a hot click path never builds a key per call.
  */
 class PlayerMetaTest {
 

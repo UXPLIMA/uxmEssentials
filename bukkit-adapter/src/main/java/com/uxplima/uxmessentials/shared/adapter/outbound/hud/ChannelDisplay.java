@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The adapter-side display timing a {@link ChannelBroadcaster} applies to its non-chat surfaces: the title
  * fade-in / stay / fade-out in milliseconds, and the boss-bar colour, overlay, and visible-seconds before it is
- * hidden. It carries no sound — the sound is passed per broadcast to {@link ChannelBroadcaster#broadcast} so one
+ * hidden. It carries no sound. The sound is passed per broadcast to {@link ChannelBroadcaster#broadcast} so one
  * shared broadcaster can play a different sound per message (a per-announcement sound, a per-vote sound).
  *
  * <p>The colour and overlay are pre-resolved by the loader through the tolerant {@link #color}/{@link #overlay}

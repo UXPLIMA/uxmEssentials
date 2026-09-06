@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
  * Outbound port for permission checks and numbered/world quota resolution.
  *
  * <p>Works against vanilla op plus any permission plugin; numbered quota and tier nodes additionally
- * resolve through LuckPerms meta when present, but meta is never required — the numbered-node form is
+ * resolve through LuckPerms meta when present, but meta is never required. The numbered-node form is
  * the canonical contract. Every value-bearing node (home limits, every cooldown and warmup tier,
  * vault amount and size) resolves through the one {@link #resolveQuota} method so the max/min/sentinel
  * and optional {@code <world>} semantics are guaranteed identical across contexts.
@@ -24,10 +24,10 @@ public interface Permissions {
      * Resolve a value-bearing quota for {@code who} under {@code family}, optionally scoped to
      * {@code world}, applying the uniform numeric reducer.
      *
-     * <p>The reducer collects every matching node — the unscoped family
+     * <p>The reducer collects every matching node: the unscoped family
      * ({@code uxmessentials.<family>.<value>}), the world-scoped form
      * ({@code uxmessentials.<family>.<world>.<value>}) when {@code world} is present, any LuckPerms
-     * meta, and the config default — then reduces by the family's {@link QuotaFamily#direction()}:
+     * meta, and the config default, then reduces by the family's {@link QuotaFamily#direction()}:
      * the {@link QuotaReduction#MAX maximum} for quotas (more is better) or the
      * {@link QuotaReduction#MIN minimum} for cooldowns and warmups (less is better). Across multiple
      * permission groups the same more-generous-wins rule applies a level up, so stacking groups never

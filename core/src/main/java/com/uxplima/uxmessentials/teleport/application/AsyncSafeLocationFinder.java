@@ -16,10 +16,10 @@ import com.uxplima.uxmessentials.teleport.domain.SafeSearchPolicy;
 /**
  * The random-teleport safe-search primitive, rebuilt around an asynchronous {@link ChunkAccess} port. One
  * call to {@link #find} samples a random point in a world's {@link SafeSearchArea}, asks the port to probe
- * that column (the port loads the chunk off-thread, copies a snapshot, and releases it — no synchronous
+ * that column (the port loads the chunk off-thread, copies a snapshot, and releases it: no synchronous
  * chunk load ever happens on a tick thread), and runs the pure {@link SafeSearchPolicy} over whatever facts
- * the probe returns. A candidate that passes becomes an {@link RtpSafeLocation}; anything else — an unsafe
- * column, an excluded biome, or an absent probe — resolves to {@link Optional#empty()}.
+ * the probe returns. A candidate that passes becomes an {@link RtpSafeLocation}; anything else, an unsafe
+ * column, an excluded biome, or an absent probe, resolves to {@link Optional#empty()}.
  *
  * <p>This replaces the old {@code SafeSearchValidator}, whose probe read the candidate's chunk synchronously
  * inside a region-thread task and so generated a far chunk on the main thread on every attempt. Here the
@@ -39,7 +39,7 @@ public final class AsyncSafeLocationFinder {
     private final Clock clock;
     private final HotspotBiasedSampler sampler;
 
-    /** An untargeted finder with plain uniform sampling — no rare-biome hotspot bias. */
+    /** An untargeted finder with plain uniform sampling, no rare-biome hotspot bias. */
     public AsyncSafeLocationFinder(ChunkAccess chunkAccess, SafeSearchPolicy policy, Clock clock) {
         this(chunkAccess, policy, clock, new HotspotBiasedSampler(BiomeHotspots.NONE, 0.0, 1));
     }
@@ -54,7 +54,7 @@ public final class AsyncSafeLocationFinder {
 
     /**
      * Sample one random candidate in {@code area}, probe it asynchronously, and judge it with the pure
-     * policy. The future completes with the accepted {@link RtpSafeLocation} or empty — never blocking,
+     * policy. The future completes with the accepted {@link RtpSafeLocation} or empty: never blocking,
      * never orphaned.
      */
     public CompletableFuture<Optional<RtpSafeLocation>> find(SafeSearchArea area) {
@@ -69,8 +69,8 @@ public final class AsyncSafeLocationFinder {
      * Re-probe a <em>specific</em> column {@code (blockX, blockZ)} rather than a random sample, running the
      * exact same async probe and pure-policy verdict as {@link #find}. This is the startup pre-warm's primitive:
      * a persisted {@link RtpSafeLocation}'s column is trusted only as a horizontal coordinate, so it is re-probed
-     * here — a fresh landing Y is resolved and the full {@link SafeSearchPolicy} is re-run off the async chunk read
-     * — before it re-enters the servable queue. A known-good column almost always still passes (one cheap probe),
+     * here. A fresh landing Y is resolved and the full {@link SafeSearchPolicy} is re-run off the async chunk read
+     *: before it re-enters the servable queue. A known-good column almost always still passes (one cheap probe),
      * but a column the world changed under (a rollback, a regenerated chunk, a shrunk border) resolves to {@link
      * Optional#empty()} and is dropped, never served stale.
      */

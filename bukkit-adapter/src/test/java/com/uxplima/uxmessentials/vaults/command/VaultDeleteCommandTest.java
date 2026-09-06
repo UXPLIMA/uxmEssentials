@@ -184,7 +184,7 @@ class VaultDeleteCommandTest {
     @Test
     void openIsFreeWhenEconomyDisabled() {
         VaultChargeSettings settings = new VaultChargeSettings(new BigDecimal("7"), BigDecimal.ZERO, BigDecimal.ZERO);
-        // Economy NONE — the configured cost is recorded but never charged.
+        // Economy NONE: the configured cost is recorded but never charged.
         VaultServices services = services(VaultEconomy.NONE, settings, new AllowAllPermissions());
 
         services.openVault().open(ref(), 1);
@@ -405,7 +405,7 @@ class VaultDeleteCommandTest {
         }
     }
 
-    /** Grants exactly the given node and nothing else — for the bypass and unprivileged-branch tests. */
+    /** Grants exactly the given node and nothing else: for the bypass and unprivileged-branch tests. */
     private static final class NodePermissions implements Permissions {
         private final String granted;
 

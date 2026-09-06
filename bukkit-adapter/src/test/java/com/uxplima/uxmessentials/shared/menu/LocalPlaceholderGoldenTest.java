@@ -41,7 +41,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * inner {@code %player%} against the LOCAL override (not the built-in viewer name), so the name reads
  * {@code "Hi OVERRIDDEN"}; the {@code %doubled%} lore substitutes {@code %data_number_coins%} (coins=50) and the
  * renderer's outer math pass evaluates it to {@code "100"}; and a direct {@code %player%} lore line resolves to the
- * same {@code "OVERRIDDEN"} — the unambiguous demonstration that a local token overrides a built-in for this menu
+ * same {@code "OVERRIDDEN"}. The unambiguous demonstration that a local token overrides a built-in for this menu
  * alone. A second menu that declares no {@code placeholders {}} block still renders {@code %player%} as the real
  * built-in viewer name, proving no regression.
  */

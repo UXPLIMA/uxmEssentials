@@ -7,7 +7,7 @@ import java.util.Optional;
 
 /**
  * The cooldown state for one player on one vote site: the site name, the last time they voted
- * there (if ever), and the configured cooldown window. Pure value — no I/O.
+ * there (if ever), and the configured cooldown window. Pure value, no I/O.
  *
  * @param site        the site key this cooldown belongs to
  * @param lastVoteAt  when the player last voted on this site, or empty if they never have

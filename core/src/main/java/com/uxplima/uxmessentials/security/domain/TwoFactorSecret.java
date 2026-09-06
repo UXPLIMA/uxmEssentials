@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * A TOTP shared secret: the Base32 string a player scans into their authenticator app and the server keys the
- * one-time-password HMAC with. It is the one piece of two-factor material that is <b>not</b> a one-way hash — TOTP
+ * one-time-password HMAC with. It is the one piece of two-factor material that is <b>not</b> a one-way hash, TOTP
  * verification recomputes the expected code from the shared secret every 30 seconds, so both sides must hold the
  * same value. That is exactly why the secret is stored <b>encrypted</b> at rest (never a hash, never plaintext) and
  * why this value object {@linkplain #toString redacts itself} in every string form: a shared secret in a log line is
@@ -40,8 +40,8 @@ public record TwoFactorSecret(String value) {
      * Redacted deliberately: a {@code TwoFactorSecret} travels near log statements and exception messages during
      * enrolment and verification, and printing the raw Base32 would hand anyone reading the log a working second
      * factor. The canonical value is reachable only through {@link #value()}, which is called on the two intended
-     * paths — building the {@code otpauth://} URI shown to the enrolling player, and encrypting the secret for
-     * storage — never on a logging path.
+     * paths, building the {@code otpauth://} URI shown to the enrolling player, and encrypting the secret for
+     * storage: never on a logging path.
      */
     @Override
     public String toString() {

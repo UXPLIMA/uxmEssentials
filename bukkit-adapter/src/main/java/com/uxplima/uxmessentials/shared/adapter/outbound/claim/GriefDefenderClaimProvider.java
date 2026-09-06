@@ -15,11 +15,11 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by GriefDefender, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by GriefDefender, reached <b>entirely by reflection</b>. There is no compile
  * dependency on the GriefDefender API, so this class loads and runs whether or not GriefDefender is present.
  *
  * <p>The only Maven coordinate GriefDefender publishes is a JitPack build pinned to a mutable commit hash
- * (the project ships no version tags), which JitPack may garbage-collect — too fragile for a pinned
+ * (the project ships no version tags), which JitPack may garbage-collect. Too fragile for a pinned
  * {@code compileOnly} dependency. The public API surface ({@code com.griefdefender.api.GriefDefender}) is a
  * stable static entry point, so this provider reaches it reflectively instead.
  *
@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>{@link #active()} is {@code true} only when GriefDefender is enabled and the core resolves. Reflective
  * handles are resolved on first success and cached; any reflective failure logs once and degrades to
- * inactive/empty — it never propagates.
+ * inactive/empty: it never propagates.
  */
 @NullMarked
 public final class GriefDefenderClaimProvider implements ClaimProvider {
@@ -165,7 +165,7 @@ public final class GriefDefenderClaimProvider implements ClaimProvider {
 
         @Override
         public boolean isBanned(UUID player) {
-            // GriefDefender has no per-claim ban concept — access is expressed through trust and flags only.
+            // GriefDefender has no per-claim ban concept: access is expressed through trust and flags only.
             return false;
         }
 

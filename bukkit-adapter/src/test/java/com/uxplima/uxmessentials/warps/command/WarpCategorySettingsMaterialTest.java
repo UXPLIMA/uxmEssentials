@@ -101,7 +101,7 @@ class WarpCategorySettingsMaterialTest {
         return new WarpCategory("pvp", "PvP", material, List.of(), 0, Optional.empty());
     }
 
-    /** A category repository over a single fixed category — the panel's subject, no Bukkit read. */
+    /** A category repository over a single fixed category: the panel's subject, no Bukkit read. */
     private record FixedCategories(WarpCategory only) implements WarpCategoryRepository {
         @Override
         public Optional<WarpCategory> find(String id) {

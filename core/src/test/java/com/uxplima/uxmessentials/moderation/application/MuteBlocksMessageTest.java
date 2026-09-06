@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
  * The mute → messaging cross-context seam: the real {@link RepositoryMutePolicy} the moderation context
  * provides, bound into the real {@link SendMessage} use case, blocks a muted sender's {@code /msg} (the
  * placeholder {@code MutePolicy.NEVER} would let it through). An unmuted sender is delivered normally, and a
- * sender whose timed mute has expired is no longer blocked — the gate reads the live state against the clock.
+ * sender whose timed mute has expired is no longer blocked: the gate reads the live state against the clock.
  */
 class MuteBlocksMessageTest {
 

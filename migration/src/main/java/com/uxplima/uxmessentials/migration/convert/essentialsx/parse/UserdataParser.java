@@ -17,7 +17,7 @@ import org.spongepowered.configurate.ConfigurationNode;
  * Parses one EssentialsX {@code userdata/<uuid>.yml} into an {@link EssXUserdata}. The uuid comes from
  * the file name (EssentialsX keys each player's file by uuid); the node tree supplies the name, homes,
  * balance, and mail. Unknown keys are ignored and missing keys fall back to defaults, so a minor schema
- * variation never aborts a record (docs/12-migration §4). This class only reads value nodes — the YAML
+ * variation never aborts a record (docs/12-migration §4). This class only reads value nodes, the YAML
  * codec lives in {@link YamlSource}.
  */
 @NullMarked
@@ -31,7 +31,7 @@ public final class UserdataParser {
         return parse(uuid, YamlSource.load(file));
     }
 
-    /** Parse from a reader with an explicit uuid — the form the fixtures and golden-file tests drive. */
+    /** Parse from a reader with an explicit uuid: the form the fixtures and golden-file tests drive. */
     public EssXUserdata parse(UUID uuid, Reader reader) throws IOException {
         return parse(uuid, YamlSource.load(reader));
     }

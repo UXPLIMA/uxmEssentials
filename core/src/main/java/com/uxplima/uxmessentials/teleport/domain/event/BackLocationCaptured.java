@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import com.uxplima.uxmessentials.teleport.domain.BackCause;
 
 /**
- * A player's {@code /back} return point was (re)captured — before a teleport hop or on death. The most
+ * A player's {@code /back} return point was (re)captured, before a teleport hop or on death. The most
  * recent capture is what {@code /back} returns to.
  *
  * @param player the player whose return point was recorded

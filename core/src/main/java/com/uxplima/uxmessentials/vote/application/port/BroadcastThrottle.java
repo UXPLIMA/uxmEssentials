@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * Outbound port over the transient record of when each voter was last announced, backing the
  * {@link com.uxplima.uxmessentials.vote.domain.BroadcastType#COOLDOWN_PER_PLAYER} policy. It holds only
- * the per-voter timestamp — no message content — so it is the plugin's own transient state, not operator
+ * the per-voter timestamp, no message content, so it is the plugin's own transient state, not operator
  * data, and may live entirely in memory (a player who has never been announced simply has no entry).
  *
  * <p>The adapter backs this with a {@code ConcurrentHashMap<UUID, Instant>}; reads on the vote-handling

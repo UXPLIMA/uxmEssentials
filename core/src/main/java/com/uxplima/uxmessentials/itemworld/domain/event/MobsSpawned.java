@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.WorldRef;
 
 /**
- * A {@code /spawnmob} spawned mobs into a world — a real, observable effect worth bridging to other plugins.
+ * A {@code /spawnmob} spawned mobs into a world: a real, observable effect worth bridging to other plugins.
  * Published after the adapter has spawned the entities, carrying who spawned them, the validated request, the
  * world they landed in, the count actually spawned (which may be below {@link MobSpec#amount()} if the region
  * refused some), and when.

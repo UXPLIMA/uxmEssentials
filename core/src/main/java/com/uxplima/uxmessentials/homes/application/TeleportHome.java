@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /home <slot>}: teleport the player to the home in one of their slots. Execution is
- * <em>delegated</em> to the teleport context through {@link HomeTeleporter} — this use case never moves the
+ * <em>delegated</em> to the teleport context through {@link HomeTeleporter}. This use case never moves the
  * player itself, so the shared cooldown, the move-cancellable warmup, and the region-aware async hop are all
  * the teleport context's concern. An empty slot is rejected with {@link HomeError#NOT_FOUND}; an optional
  * economy charge is applied after the home is found but before the hop is handed to the teleport context.

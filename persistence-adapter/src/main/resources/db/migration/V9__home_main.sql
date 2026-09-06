@@ -1,4 +1,4 @@
--- The per-player main-home choice behind /setmainhome — which home plain /home (no
+-- The per-player main-home choice behind /setmainhome, which home plain /home (no
 -- name) teleports to. Until now plain /home always went to the first-created home;
 -- this lets a player pick any of theirs as the destination. A row here is one stored
 -- name keyed by the owner, queryable as a first-class column rather than a JSON blob,

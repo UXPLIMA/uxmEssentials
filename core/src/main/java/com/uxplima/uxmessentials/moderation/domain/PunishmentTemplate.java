@@ -8,7 +8,7 @@ import java.util.Optional;
  * A named punishment preset an operator configures under {@code templates} in {@code moderation.conf} and a
  * staff member applies with {@code /punish <player> <template>}: a fixed reason plus an optional duration. A
  * template that carries a duration issues a timed ban ({@code /tempban}); one without issues a permanent ban
- * ({@code /ban}). The duration is the parsed span — {@link Optional#empty()} is a permanent template — so the
+ * ({@code /ban}). The duration is the parsed span, {@link Optional#empty()} is a permanent template, so the
  * malformed-duration decision is made once, at load time, and never reaches the use case.
  *
  * @param name the template name as referenced on the command line (never blank)

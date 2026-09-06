@@ -14,8 +14,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A property whose click cycles through a small, fixed set of states — a boolean (two states) or a short enum
- * — and hands the chosen state to a setter. A left-click advances to the next state, a right-click steps back,
+ * A property whose click cycles through a small, fixed set of states. A boolean (two states) or a short enum
+ *, and hands the chosen state to a setter. A left-click advances to the next state, a right-click steps back,
  * so the viewer can move either way through the cycle without re-opening anything. The new state is written
  * through the caller's setter off the tick thread via the shared {@link Scheduler}, then the editor is
  * redrawn so the value lore shows the new state.

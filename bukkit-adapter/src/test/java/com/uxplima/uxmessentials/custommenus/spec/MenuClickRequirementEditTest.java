@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
  * Plain-JUnit coverage of the P4 click-action and view-requirement mutations {@link MenuEditSession} grew. Each proof
  * is a round-trip: clone a parsed spec, mutate a gesture's action list or the item's view requirement block, {@code
  * toSpec()} it, serialise with {@link MenuSpecWriter}, re-load through {@link MenuSpecLoader}, and assert the reloaded
- * click / view carries the change — so the edit model and the P0 writer compose without loss.
+ * click / view carries the change, so the edit model and the P0 writer compose without loss.
  */
 class MenuClickRequirementEditTest {
 

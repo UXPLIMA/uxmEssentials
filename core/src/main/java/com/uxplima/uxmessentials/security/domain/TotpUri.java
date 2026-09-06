@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Builds the {@code otpauth://totp/...} enrolment URI defined by the Key URI Format that authenticator apps read
  * from a QR code (or a pasted link). It carries the shared secret plus the parameters that must match the server's
- * verification — SHA1, 6 digits, a 30-second period — and the issuer/account label the app shows the user, so the
+ * verification (SHA1, 6 digits, a 30-second period) and the issuer/account label the app shows the user, so the
  * entry in their app reads e.g. "uxmEssentials (Steve)". Pure string assembly with URL-encoded label parts; no
  * platform types beyond {@code java.net.URLEncoder}.
  */

@@ -27,9 +27,9 @@ import org.junit.jupiter.api.Test;
  * The live reaction to a ban on another backend: {@link EnforceRemoteBan} re-reads the now-authoritative
  * tempban from the shared DB and kicks the target only if the ban is actually in effect. The use case runs off
  * the tick thread (the bus dispatches inbound frames asynchronously), so it must touch no Bukkit API: there is
- * no online lookup here — the kick is attempted unconditionally through the {@link Sanctions} adapter, which
+ * no online lookup here. The kick is attempted unconditionally through the {@link Sanctions} adapter, which
  * hops to the target's entity region thread and silently no-ops when the player is not connected. A frame for a
- * player whose ban is not (or no longer) active never kicks — the DB, not the frame, is the source of truth.
+ * player whose ban is not (or no longer) active never kicks: the DB, not the frame, is the source of truth.
  * Self-origin frames never reach here (the bus client drops them before dispatch), so this layer only ever sees
  * genuine peer bans.
  */
@@ -41,8 +41,8 @@ class EnforceRemoteBanTest {
     /**
      * A faithful {@link Sanctions} double mirroring the entity-hopping adapter: it records every UUID it was
      * asked to kick, and (modelling the adapter's resolve-on-entity-thread no-op) reports the kick as
-     * delivered only when the target is in the online set. The use case never sees this distinction — it just
-     * calls {@link #kick} — which is exactly the point: no online lookup happens inside the use case.
+     * delivered only when the target is in the online set. The use case never sees this distinction: it just
+     * calls {@link #kick}, which is exactly the point: no online lookup happens inside the use case.
      */
     private static final class EntityHoppingSanctions implements Sanctions {
         final List<UUID> attempted = new ArrayList<>();
@@ -112,7 +112,7 @@ class EnforceRemoteBanTest {
 
         enforce(repository, sanctions).onRemoteBan(TARGET.uuid());
 
-        // The use case keys the kick on the target UUID, leaving the entity-thread resolution to the adapter —
+        // The use case keys the kick on the target UUID, leaving the entity-thread resolution to the adapter
         // no PlayerLookup / Bukkit call ever happens here off the bus thread.
         assertThat(sanctions.attempted).containsExactly(TARGET.uuid());
     }

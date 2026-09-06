@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /sanction <player>}: an aggregated, read-only punishment summary for one target — their current mute,
+ * {@code /sanction <player>}: an aggregated, read-only punishment summary for one target, their current mute,
  * jail and tempban state plus the count of warnings still in effect. A staff convenience that gathers in one
  * read what {@code /mutelist}, {@code /jailedplayers}, the ban check and {@code /warns} expose separately, so a
  * staff member sees a player's standing at a glance. It rebuilds the live {@link ModerationProfile} from the

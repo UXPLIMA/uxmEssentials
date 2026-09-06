@@ -9,8 +9,8 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins the inventory/ender-chest staff verbs — {@code /enderclear} (alias {@code /clearec}), {@code /copyinv},
- * and {@code /endercopy} — into the itemworld command surface. {@code /enderclear} is the ender-chest sibling
+ * Pins the inventory/ender-chest staff verbs. {@code /enderclear} (alias {@code /clearec}), {@code /copyinv},
+ * and {@code /endercopy}. Into the itemworld command surface. {@code /enderclear} is the ender-chest sibling
  * of {@code /clearinventory}; {@code /copyinv} and {@code /endercopy} clone a target's inventory or ender
  * chest into the caller's. This guard fails if any drops out of the surface or wires under a node other than
  * its own {@code uxmessentials.<verb>.use}, which would drift the permissions reference and the permission catalogue.

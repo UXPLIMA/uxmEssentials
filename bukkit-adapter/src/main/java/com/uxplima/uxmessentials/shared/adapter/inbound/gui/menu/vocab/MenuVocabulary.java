@@ -29,7 +29,7 @@ import com.uxplima.uxmessentials.shared.application.port.Permissions;
  * The generic action vocabulary every menu can lean on without a feature wiring it. Registered once at startup
  * into the shared {@link MenuBindings}, so a spec loaded from disk resolves {@code close} / {@code open} /
  * {@code command} / {@code message} / {@code sound} the same way a code-registered feature menu does. Each handler
- * runs as the clicking player — nothing here touches the console; that is gated separately so an operator menu
+ * runs as the clicking player. Nothing here touches the console; that is gated separately so an operator menu
  * cannot dispatch privileged commands by default.
  */
 public final class MenuVocabulary {
@@ -44,7 +44,7 @@ public final class MenuVocabulary {
 
     /**
      * Register the generic actions into {@code bindings}. {@code menus} is needed only by the {@code open} action,
-     * which opens another registered spec for the same viewer with no subject — an operator-opened menu carries no
+     * which opens another registered spec for the same viewer with no subject. An operator-opened menu carries no
      * domain object. The {@code console} action is always registered so a spec referencing it still passes startup
      * validation, but it only dispatches when {@code allowConsole} is true; otherwise it no-ops and warns through
      * {@code log} so an operator who forgot the {@code custommenus.allow-console} flag sees why nothing happened.
@@ -55,7 +55,7 @@ public final class MenuVocabulary {
         Objects.requireNonNull(log, "log");
         bindings.action("close", ctx -> ctx.player().closeInventory());
         // `back` steps to the previous menu in the viewer's history (the engine holds the per-player stack); from the
-        // first/root menu — or on an engine wired without a history tracker — there is nothing beneath, so it closes.
+        // first/root menu, or on an engine wired without a history tracker, there is nothing beneath, so it closes.
         bindings.action("back", ctx -> menus.back(ctx.viewer()));
         bindings.action("open", ctx -> {
             OpenTarget target = OpenTarget.parse(ctx.arg());
@@ -69,7 +69,7 @@ public final class MenuVocabulary {
 
     /**
      * Register the generic conditions into {@code bindings}. A condition handler receives the per-open context plus
-     * the condition ref's parsed args — the same arg carrier an action reads — so a spec writes {@code perm:some.node}
+     * the condition ref's parsed args, the same arg carrier an action reads, so a spec writes {@code perm:some.node}
      * and the node arrives in {@code args.get("value")}. The {@code perm} condition gates an item's view or a click
      * on whether the viewer holds that node through the shared {@link Permissions} port. {@code papi-compare} reads
      * three named args ({@code left}, {@code op}, {@code right}) and compares the two operands after expanding any
@@ -96,7 +96,7 @@ public final class MenuVocabulary {
     /**
      * Build the {@code expr} condition: expand the {@code %token%}s in its raw expression against {@code placeholders}
      * (so a {@code %balance%} compares live), then evaluate the result through the sandboxed {@link Expressions}.
-     * A malformed expression fails closed — the condition is {@code false} so the item hides or the click is denied —
+     * A malformed expression fails closed (the condition is {@code false} so the item hides or the click is denied)
      * and the offending text is logged once (de-duplicated so a broken spec does not flood the log on every render).
      */
     private static BiPredicate<MenuContext, Map<String, String>> exprCondition(
@@ -163,7 +163,7 @@ public final class MenuVocabulary {
         return out.toString();
     }
 
-    /** The operand as a number, or empty when it is not numeric — the signal to fall back to string comparison. */
+    /** The operand as a number, or empty when it is not numeric: the signal to fall back to string comparison. */
     private static OptionalDouble parseNumber(String operand) {
         try {
             return OptionalDouble.of(Double.parseDouble(operand.strip()));
@@ -173,7 +173,7 @@ public final class MenuVocabulary {
     }
 
     /**
-     * Whether the one-based {@code page} falls inside {@code spec} — a comma-separated list of {@code N} single pages
+     * Whether the one-based {@code page} falls inside {@code spec}. A comma-separated list of {@code N} single pages
      * and {@code A-B} inclusive ranges, with whitespace around any number tolerated (so {@code " 1 - 3 "} and
      * {@code "1-3"} read alike). Pages are one-based to line up with the {@code %page%} placeholder an operator reads,
      * so {@code pages = "2"} shows only on the page {@code %page%} renders as {@code 2}. A blank or malformed spec
@@ -206,7 +206,7 @@ public final class MenuVocabulary {
     }
 
     /**
-     * Register the generic placeholders into {@code bindings}. {@code player} expands to the viewer's name — the
+     * Register the generic placeholders into {@code bindings}. {@code player} expands to the viewer's name, the
      * player the menu is rendered for, whom every player-scoped placeholder resolves against, so on a menu opened for
      * another player it is that target; {@code executor} expands to the name of whoever triggered the open, which is
      * the same player for an ordinary self-open (so {@code %executor%} then reads identically to {@code %player%}) and
@@ -225,7 +225,7 @@ public final class MenuVocabulary {
 
     /**
      * The {@code console} handler: dispatch {@code arg} from the console sender when {@code allowConsole}, else log
-     * a warning naming the ignored command and do nothing — privileged dispatch stays opt-in.
+     * a warning naming the ignored command and do nothing: privileged dispatch stays opt-in.
      */
     private static Consumer<MenuActionContext> consoleAction(boolean allowConsole, Logger log) {
         if (allowConsole) {
@@ -240,7 +240,7 @@ public final class MenuVocabulary {
      * registered spec to open for the same viewer, and an optional second token is a zero-based start page (a blank,
      * non-numeric, or negative page opens page zero). Parsing is Bukkit-free so a plain-JUnit grammar test can
      * exercise it. The fuller {@code open <menu> <args> <page>} grammar's typed {@code <args>} are Phase-4 typed menu
-     * arguments — not parsed here; only the leading menu id and a trailing page are read.
+     * arguments, not parsed here; only the leading menu id and a trailing page are read.
      */
     public record OpenTarget(String menu, int page) {
 

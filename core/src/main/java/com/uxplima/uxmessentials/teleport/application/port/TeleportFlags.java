@@ -4,7 +4,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Outbound port for the per-player teleport flags: the {@code /tptoggle} un-teleportable switch and the
- * {@code /tpblock} per-target block list. Both gate incoming {@code /tpa} requests — a request to a
+ * {@code /tpblock} per-target block list. Both gate incoming {@code /tpa} requests, a request to a
  * toggled-off player is auto-denied, and a request from a blocked requester is silently refused. The
  * flags are session/PDC state, not persisted economy-grade data.
  */

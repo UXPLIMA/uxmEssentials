@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code MessagingWiring} from the kernel ports, the jOOQ mail/ignore stores, the in-memory reply store, and
  * the soft-couple gates. Held so every command reads the same use cases. The {@link PlayerLookup} and
  * {@link VanishVisibility} are carried here so the {@code /msg} command can resolve a target with the same
- * vanish-aware {@code canSee} seam the teleport context applies — a vanished target the sender cannot see is
+ * vanish-aware {@code canSee} seam the teleport context applies. A vanished target the sender cannot see is
  * offered as unknown.
  *
  * @param sendMessage {@code /msg}

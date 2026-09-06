@@ -14,7 +14,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * Pure coverage of the GUIPlus → uxmEssentials converter mapping. Each test feeds a GUIPlus GUI YAML fragment, converts
- * it, and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle string — the
+ * it, and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle string, the
  * top-level title / rows / open-permission mapping, the scenes-first selection, the item fields, the click-event map
  * with its {@code clickType} → gesture grouping, the condition map with its {@code inverted} → {@code !} negation, and
  * the fail-soft skips (multi-scene, unsupported event/condition types, {@code money-set}, {@code %input%}).

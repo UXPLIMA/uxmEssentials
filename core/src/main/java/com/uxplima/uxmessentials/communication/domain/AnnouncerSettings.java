@@ -7,8 +7,8 @@ import java.util.OptionalInt;
 
 /**
  * The operator's in-game override of the two global announcer settings the file {@code announcer.conf} sets: the
- * default interval between announcements and the minimum-online-players gate. Each is optional — an absent override
- * means "defer to the file default" — so a fresh install (nothing set in the settings screen) behaves exactly as
+ * default interval between announcements and the minimum-online-players gate. Each is optional, an absent override
+ * means "defer to the file default", so a fresh install (nothing set in the settings screen) behaves exactly as
  * before, reading both globals from the file. When a value is present it wins over the file default.
  *
  * <p>This is the editable shape the {@code /announce} editor's settings screen reads and writes, persisted durably
@@ -36,7 +36,7 @@ public record AnnouncerSettings(Optional<Duration> interval, OptionalInt minOnli
         });
     }
 
-    /** No override set — both globals defer to the file. The shape a fresh, never-edited settings row reads as. */
+    /** No override set: both globals defer to the file. The shape a fresh, never-edited settings row reads as. */
     public static AnnouncerSettings unset() {
         return new AnnouncerSettings(Optional.empty(), OptionalInt.empty());
     }

@@ -27,51 +27,51 @@ import org.junit.jupiter.api.Test;
  * (docs/02-concurrency.md §2.6). Phase A of the 0.3.0 work moved every off-global enumeration onto the global
  * thread (or behind a per-entity / per-region hop, or confined it to an off-tick reader). This guard freezes that
  * result: it walks the production source under {@code bukkit-adapter/src/main/java} and fails if a new class
- * enumerates the online roster or a whole world's entities without being on the allowlist below — so a regression
+ * enumerates the online roster or a whole world's entities without being on the allowlist below, so a regression
  * that re-introduces an unmarshalled cross-region scan cannot land silently.
  *
  * <p><strong>How it works.</strong> The scan finds every source line that calls {@code getOnlinePlayers()} (any
- * receiver) <em>or</em> references it as a method handle ({@code ::getOnlinePlayers} — so the
+ * receiver) <em>or</em> references it as a method handle ({@code ::getOnlinePlayers}, so the
  * {@code Bukkit::getOnlinePlayers} / {@code getServer()::getOnlinePlayers} / {@code server::getOnlinePlayers} forms
  * that hand the roster to a {@code Supplier} are caught too) <em>or</em> calls {@code getEntities(} on any receiver
- * (the whole-world entity enumeration — {@code getNearbyEntities} is a bounded single-region read and is
- * deliberately not matched), ignoring comment lines (a leading {@code //}, {@code *}, or {@code /*} — so the many
+ * (the whole-world entity enumeration. {@code getNearbyEntities} is a bounded single-region read and is
+ * deliberately not matched), ignoring comment lines (a leading {@code //}, {@code *}, or {@code /*}, so the many
  * javadoc mentions of these methods do not count). Every such line's declaring class must appear in
  * {@link #ALLOWLIST}. The allowlist is the expected current set; it passes today and fails the moment an
  * enumeration appears in a class that is not listed. Each entry is grouped by <em>why</em> the read is safe.
  *
- * <p><strong>Known limitation — the roster can travel through a {@code Supplier} the scan cannot follow.</strong>
+ * <p><strong>Known limitation. The roster can travel through a {@code Supplier} the scan cannot follow.</strong>
  * A class can hand {@code Bukkit::getOnlinePlayers} to another object as a {@code Supplier<Collection<Player>>}; the
  * <em>creating</em> class is caught by the method-ref match above, but the <em>consuming</em> class enumerates by
  * calling {@code supplier.get()}, which carries no {@code getOnlinePlayers} text for the scan to see. The two known
  * consumers (the tablist {@code RealPlayerRowPainter} and {@code TablistSuppression}, fed from {@code TablistWiring}
  * / {@code TablistRenderer}) are listed in {@link #ALLOWLIST} and tracked in {@link #SUPPLIER_CONSUMERS}, but a
- * reviewer adding a foreign-live read inside one of them — or wiring a <em>new</em> supplier consumer — gets no
+ * reviewer adding a foreign-live read inside one of them, or wiring a <em>new</em> supplier consumer, gets no
  * automatic signal. When a new {@code Supplier} of the roster is injected, the reviewer must hand-check the
  * consuming class for the enumerate-then-hop shape and list it here.
  *
  * <p><strong>The four safe shapes (and the rule for adding an entry).</strong>
  *
  * <ul>
- *   <li><strong>GLOBAL</strong> — the read runs inside a {@code scheduler.onGlobal(...)} / {@code repeatGlobal(...)}
+ *   <li><strong>GLOBAL</strong>, the read runs inside a {@code scheduler.onGlobal(...)} / {@code repeatGlobal(...)}
  *       lambda, a globally-scheduled task, or a {@code FeatureModule.stop()} (Folia dispatches {@code /uxmess
  *       reload} and plugin disable on the global region thread). This is the bulk of the Phase A fixes.</li>
- *   <li><strong>COMMAND</strong> — the read runs directly in a Brigadier command handler, which Paper/Folia
+ *   <li><strong>COMMAND</strong>, the read runs directly in a Brigadier command handler, which Paper/Folia
  *       dispatch on the global region thread, so no extra hop is needed.</li>
- *   <li><strong>OFFTICK</strong> — a PlaceholderAPI placeholder resolver or a Brigadier suggestion provider. These
+ *   <li><strong>OFFTICK</strong>, a PlaceholderAPI placeholder resolver or a Brigadier suggestion provider. These
  *       run off any tick/region thread; an {@code onGlobal} hop would be wrong (it would block the resolver), and
  *       they only read the roster size or build a name list, never touching a foreign player's live state.</li>
- *   <li><strong>RENDER_SCAN</strong> — the documented self-rescheduling render/visibility pattern
+ *   <li><strong>RENDER_SCAN</strong>. The documented self-rescheduling render/visibility pattern
  *       (docs/02-concurrency.md §2.6 line "hop via entity.getScheduler() per player", §6.10): a loop enumerates the
  *       roster on its own (async loop or region) thread and then hops to each player's entity/region thread before
  *       touching that player, or it operates on a region-anchored shared display entity. No foreign {@code Player}
  *       is mutated inline, which is what §2.6 actually forbids. Adding one here means the new class must follow that
- *       same enumerate-then-hop shape — not mutate players on the scanning thread.</li>
+ *       same enumerate-then-hop shape, not mutate players on the scanning thread.</li>
  * </ul>
  *
  * <p>To add a site: confirm it matches one of the four shapes above, then list its class under the matching group
- * with a short note. If a new {@code getOnlinePlayers()} fits none of them — it mutates players on a non-global
- * region/async thread — it is a Folia bug, not an allowlist entry: marshal it through {@code scheduler.onGlobal}
+ * with a short note. If a new {@code getOnlinePlayers()} fits none of them. It mutates players on a non-global
+ * region/async thread. It is a Folia bug, not an allowlist entry: marshal it through {@code scheduler.onGlobal}
  * (or a per-entity hop) instead.
  */
 class FoliaThreadingDriftTest {
@@ -90,7 +90,7 @@ class FoliaThreadingDriftTest {
 
     /**
      * Allowlisted classes that receive the online roster through an injected {@code Supplier} rather than naming
-     * {@code getOnlinePlayers} themselves — they call {@code viewers.get()}, which carries no literal or method-ref
+     * {@code getOnlinePlayers} themselves. They call {@code viewers.get()}, which carries no literal or method-ref
      * text the scan can see. They are listed (their consumption is hand-verified, see the supplier note in the class
      * javadoc) but exempt from the staleness check, because the scan can never observe them enumerating.
      */
@@ -102,7 +102,7 @@ class FoliaThreadingDriftTest {
         Map<String, String> allow = new LinkedHashMap<>();
         String pkg = "com.uxplima.uxmessentials.";
 
-        // GLOBAL — resolved on the global region thread (inside scheduler.onGlobal/onRegion/repeatGlobal, a
+        // GLOBAL, resolved on the global region thread (inside scheduler.onGlobal/onRegion/repeatGlobal, a
         // globally-scheduled task, or a FeatureModule.stop() Folia dispatches on the global region thread).
         allow.put(
                 pkg + "communication.adapter.CommunicationWiring", "GLOBAL: advancement-vanish probe runs in onGlobal");
@@ -155,7 +155,7 @@ class FoliaThreadingDriftTest {
                 "GLOBAL: /near position read resolved via onGlobal before per-entity work");
         allow.put(
                 pkg + "playerstate.adapter.outbound.BukkitOnlineRoster",
-                "GLOBAL: playtime sampler roster snapshot — get() is only ever called inside the sampler's "
+                "GLOBAL: playtime sampler roster snapshot. Get() is only ever called inside the sampler's "
                         + "scheduler.onGlobal lambda, copies uuid/name only, then the writes hop off-tick");
         allow.put(
                 pkg + "presence.adapter.inbound.command.GcCommand",
@@ -236,7 +236,7 @@ class FoliaThreadingDriftTest {
                 "GLOBAL: restock sweep snapshots each world's villagers inside repeatGlobal, then hops each restock to "
                         + "onRegion");
 
-        // COMMAND — runs directly in a Brigadier handler, which Paper/Folia dispatch on the global region thread.
+        // COMMAND, runs directly in a Brigadier handler, which Paper/Folia dispatch on the global region thread.
         allow.put(
                 pkg + "economy.adapter.inbound.command.EcoTargets",
                 "COMMAND: /eco + /payall targets read on the Brigadier (global) thread");
@@ -259,7 +259,7 @@ class FoliaThreadingDriftTest {
                 pkg + "teleport.adapter.inbound.command.TpRandomPlayerCommand",
                 "COMMAND: /tpr candidate roster read on the Brigadier (global) thread");
 
-        // OFFTICK — PlaceholderAPI resolvers + Brigadier suggestion providers. These run off any tick/region thread;
+        // OFFTICK: PlaceholderAPI resolvers + Brigadier suggestion providers. These run off any tick/region thread;
         // an onGlobal hop would be wrong, and they only read the size or build a name list (no live foreign state).
         allow.put(
                 pkg + "playerstate.adapter.inbound.command.PlayerstateCommandSupport",
@@ -286,7 +286,7 @@ class FoliaThreadingDriftTest {
                 pkg + "shared.adapter.outbound.papi.StaffStaffPlaceholders",
                 "OFFTICK: PAPI staff-count placeholder reads roster for a permission count");
 
-        // RENDER_SCAN — the documented enumerate-then-hop render/visibility pattern (docs/02-concurrency.md §2.6,
+        // RENDER_SCAN. The documented enumerate-then-hop render/visibility pattern (docs/02-concurrency.md §2.6,
         // §6.10): the loop enumerates on its own (async-loop or region) thread, then hops per-entity before touching
         // a player, or operates on a region-anchored shared display entity. No foreign Player is mutated inline.
         allow.put(
@@ -298,7 +298,7 @@ class FoliaThreadingDriftTest {
         allow.put(
                 pkg + "tablist.adapter.outbound.TablistRenderer",
                 "RENDER_SCAN: passes Bukkit::getOnlinePlayers as the viewers supplier into the skin-row painter");
-        // Consumes the injected roster supplier (no literal/method-ref the scanner can see — it calls viewers.get()).
+        // Consumes the injected roster supplier (no literal/method-ref the scanner can see: it calls viewers.get()).
         // Verified enumerate-then-hop: reads uuid/name only, hops onEntity before touching a target.
         allow.put(
                 pkg + "tablist.adapter.outbound.RealPlayerRowPainter",
@@ -346,8 +346,8 @@ class FoliaThreadingDriftTest {
                 .as(
                         "a new whole-world enumeration (Bukkit.getOnlinePlayers() or world.getEntities()) appeared in a "
                                 + "class that is not on the Folia allowlist. Read it on the global region thread "
-                                + "(scheduler.onGlobal / a Brigadier handler) — and for a world-entity sweep hop each "
-                                + "mutation to the owning region (scheduler.onRegion) — or, if it is an off-tick "
+                                + "(scheduler.onGlobal / a Brigadier handler), and for a world-entity sweep hop each "
+                                + "mutation to the owning region (scheduler.onRegion), or, if it is an off-tick "
                                 + "PAPI/suggestion reader or the documented enumerate-then-hop render pattern, add it to "
                                 + "FoliaThreadingDriftTest.ALLOWLIST with a justifying note (see the class javadoc):\n%s",
                         String.join("\n", violations))

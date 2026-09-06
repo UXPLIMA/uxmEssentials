@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link NametagVanish} implementation, soft-coupled to the presence context through Bukkit's own
- * {@code Player#canSee} visibility graph — the same seam messaging's {@code CanSeeVanishVisibility} and teleport's
+ * {@code Player#canSee} visibility graph. The same seam messaging's {@code CanSeeVanishVisibility} and teleport's
  * {@code /tpa} listing use. When the presence module is active it hides a vanished player from those who lack the
  * vanish-see node by removing the entity from their view, which {@code canSee} reflects, so the wearer's nametag is
  * not shown to them; when presence is disabled nothing is hidden, {@code canSee} is always true, and the nametag is

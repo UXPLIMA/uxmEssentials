@@ -36,7 +36,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Drives the package-private convert apply seam of the engine-rendered exchange dashboard, the branch the anvil
  * prompt's submit callback runs. MockBukkit cannot drive a live anvil, so the golden test (in the menu's sibling
- * package) covers the render and the picker re-open while this test — in the menu's own package — proves a typed
+ * package) covers the render and the picker re-open while this test, in the menu's own package, proves a typed
  * amount runs the exchange use case for the source/target pair, and a malformed amount runs no exchange, exactly as
  * the old {@code ExchangeGuiView} did.
  */

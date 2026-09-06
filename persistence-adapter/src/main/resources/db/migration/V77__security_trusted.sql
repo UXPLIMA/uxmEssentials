@@ -5,7 +5,7 @@
 --
 -- Same portability contract as V1-V76: the DDL stays in the subset SQLite (the default), MySQL/MariaDB and
 -- PostgreSQL all accept. The player uuid is the canonical 36-character text; `ip_hash` is a one-way digest of the
--- connecting address (the raw IP is never stored — the adapter hashes it before it reaches the DB), so a player may
+-- connecting address (the raw IP is never stored. The adapter hashes it before it reaches the DB), so a player may
 -- carry several trusted devices, one row each. `until` is the epoch-millis the trust expires at, in a BIGINT so there
 -- is no dialect-specific datetime handling. jOOQ's DDLDatabase parses this file alongside V1-V76 at build time, so the
 -- generated classes always match the runtime schema.

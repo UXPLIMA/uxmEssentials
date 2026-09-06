@@ -13,7 +13,7 @@ import org.jooq.DSLContext;
 /**
  * The jOOQ-backed {@link TrustStore} over the generated {@code SECURITY_TRUSTED} table. One row per player-and-device
  * carries the epoch-millis instant the trust expires; a device is the one-way {@code ip_hash} the adapter computes
- * from the connecting address, so no raw IP ever reaches the DB. Every statement is typed jOOQ DSL — no SQL is
+ * from the connecting address, so no raw IP ever reaches the DB. Every statement is typed jOOQ DSL: no SQL is
  * string-concatenated.
  *
  * <p>{@link #isTrusted} answers true only for a row whose {@code until} is still in the future, so an expired trust is

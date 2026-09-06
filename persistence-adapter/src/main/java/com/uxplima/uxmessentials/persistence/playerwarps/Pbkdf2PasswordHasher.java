@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.playerwarps.domain.PasswordHash;
  * PBKDF2-HMAC-SHA256 implementation of {@link PasswordHasher}, using only the JDK crypto provider so no third
  * party dependency guards a warp password. It lives in the persistence adapter on purpose: the digest is
  * password-at-rest material, and the repository and the P3 data migration that read and write it sit right
- * here, so this is where the crypto naturally belongs — {@code :core} stays free of a concrete cipher.
+ * here, so this is where the crypto naturally belongs: {@code :core} stays free of a concrete cipher.
  *
  * <p>The work factor is deliberately high: {@value #ITERATIONS} iterations is an OWASP-aligned floor for
  * PBKDF2-HMAC-SHA256, which makes an offline dictionary attack against a stolen digest expensive while a single

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * A parsed semantic version — {@code major.minor.patch} — for comparing the running plugin version against the
+ * A parsed semantic version, {@code major.minor.patch}, for comparing the running plugin version against the
  * latest released one the update checker fetches.
  *
  * <p>Parsing is lenient by design: a leading {@code v}/{@code V} is stripped (GitHub release tags ship as

@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /visit <player> <slot>}: teleport an actor to another player's home. Access is by three gates that
- * any one of satisfies — the actor is the owner, the home is public, or the actor is on the home's invite
+ * any one of satisfies. The actor is the owner, the home is public, or the actor is on the home's invite
  * list. A slot the owner has no home in is rejected with {@link HomeError#NOT_FOUND}; a home that fails every
  * gate is refused with {@link HomeError#NOT_ACCESSIBLE}. Execution is then <em>delegated</em> to the teleport
  * context through {@link HomeTeleporter}; this use case never moves the player itself, so the shared

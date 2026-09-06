@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.vanish.domain.VanishLevel;
 /**
  * Re-resolves a vanished player's use level from their permissions and re-applies their visibility across every viewer.
  * Because levels are derived from permissions rather than stored, a promotion or demotion only takes effect once this
- * runs — the natural trigger is a (re)join, mirroring PremiumVanish's "players need to rejoin for layered permission
+ * runs. The natural trigger is a (re)join, mirroring PremiumVanish's "players need to rejoin for layered permission
  * changes to register". A player who is not currently vanished is left untouched.
  *
  * <p>Re-applying goes through the {@link VanishView#hide} reconciliation, which both hides the player from viewers who

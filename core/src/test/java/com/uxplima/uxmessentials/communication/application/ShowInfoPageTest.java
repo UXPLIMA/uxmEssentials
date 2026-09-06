@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pure pagination half of the data-driven info commands: {@link ShowInfoPage} slices an {@link InfoPage} into the
- * requested page and reports the page coordinates the adapter draws chrome from. It pins the headline rules — a body
+ * requested page and reports the page coordinates the adapter draws chrome from. It pins the headline rules, a body
  * that fits in one page is not paginated, a longer body splits at the configured size, and an out-of-range page is
  * clamped into {@code 1..pageCount} rather than yielding an empty or failing slice.
  */

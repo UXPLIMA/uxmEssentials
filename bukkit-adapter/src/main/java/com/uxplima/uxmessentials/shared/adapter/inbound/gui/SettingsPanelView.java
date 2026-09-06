@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A per-player settings panel: a config-driven grid of toggle/display/action buttons, each bound to a get/set of
  * one of the opening player's own preferences. Unlike an entity editor that edits an arbitrary entity, the panel
- * always edits the viewer themselves — so the "subject" is the viewer's own {@link PlayerRef}, and the properties
+ * always edits the viewer themselves, so the "subject" is the viewer's own {@link PlayerRef}, and the properties
  * close over it. There is no list around it and no delete button: a player opens their own panel and flips their own
  * switches, every flip routing through the module's existing per-player use case.
  *
@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * property list)} a module hands it into an {@link EditorSpec} and opens it through {@link Menus#openEditor}, so the
  * window is a holder-backed engine editor routed and torn down by the one menu listener and one {@code closeMenu}.
  * The geometry and materials still come from a {@code modules/<m>/gui/<name>.conf} loaded the same way every
- * management GUI loads its layout (the delete slot in that conf, if any, is ignored — a settings panel never
+ * management GUI loads its layout (the delete slot in that conf, if any, is ignored. A settings panel never
  * deletes), all text is a {@link MessageKey}, and every build/flip hops through the shared {@link Scheduler} on the
  * viewer's thread with the write off it. The back button closes the menu.
  */

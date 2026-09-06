@@ -42,14 +42,14 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The proof that the grid→form degradation is clean: a Bedrock viewer's SimpleForm shows only the actionable buttons,
- * each labelled with the item's name and lore, and a tap maps into that filtered list — while the Java chest keeps
+ * each labelled with the item's name and lore, and a tap maps into that filtered list, while the Java chest keeps
  * painting every item, decorative fillers included. A real {@link MenuSpecLoader} and {@link Menus} drive it; a fake
  * {@link BedrockDetector} / {@link BedrockScreen} stand in for the Cumulus/Floodgate SDK, a {@code compileOnly}
  * soft-depend absent from the test runtime.
  */
 class BedrockDegradationGoldenTest {
 
-    // Slot 0 and slot 2 carry click actions; slot 1 is a blank pane with no click — a decorative filler.
+    // Slot 0 and slot 2 carry click actions; slot 1 is a blank pane with no click, a decorative filler.
     private static final String SHOP = """
             title = "Shop"
             rows = 1
@@ -133,7 +133,7 @@ class BedrockDegradationGoldenTest {
 
         screen.tap(1);
         assertThat(captured.get())
-                .as("button 1 is Info — the filler at slot 1 was dropped, so Info moved up to index 1, not index 2")
+                .as("button 1 is Info. The filler at slot 1 was dropped, so Info moved up to index 1, not index 2")
                 .isEqualTo("info");
     }
 

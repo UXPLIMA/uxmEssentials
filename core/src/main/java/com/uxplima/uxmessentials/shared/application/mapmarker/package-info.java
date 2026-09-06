@@ -8,7 +8,7 @@
  * that keeps a web-map layer in step with the server's warps, spawns, and opt-in homes.
  *
  * <p>Everything here is map-API- and Bukkit-free so it lives in {@code :core}; the Dynmap and squaremap
- * adapters that satisfy the publisher port — and the spawn/warp/home sources — live in the bukkit-adapter.
+ * adapters that satisfy the publisher port, and the spawn/warp/home sources, live in the bukkit-adapter.
  * Homes are off by default: per-player home locations are private, so surfacing them on a public map is a
  * deliberate operator opt-in (see {@code MapMarkerSettings#homes}).
  */

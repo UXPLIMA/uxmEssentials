@@ -107,7 +107,7 @@ class ShulkerBoxViewTest {
 
         ItemStack[] contents = boxContents(player.getInventory().getItemInMainHand());
         assertThat(contents[0]).isNotNull();
-        assertThat(contents[0].getType()).isEqualTo(Material.DIAMOND); // original untouched — no loss
+        assertThat(contents[0].getType()).isEqualTo(Material.DIAMOND); // original untouched, no loss
         assertThat(contents[1]).isNotNull();
         assertThat(contents[1].getType()).isEqualTo(Material.EMERALD); // edit written back
         assertThat(contents[1].getAmount()).isEqualTo(2);
@@ -134,7 +134,7 @@ class ShulkerBoxViewTest {
     @Test
     void movingTheSourceBoxWhileOpenIsPrevented() {
         // The dupe guard: a click on the locked source hotbar slot is refused (MockBukkit cannot dispatch a real
-        // InventoryClickEvent — its simulateInventoryClick is a no-op — so the lock decision is asserted directly).
+        // InventoryClickEvent, its simulateInventoryClick is a no-op, so the lock decision is asserted directly).
         InventoryClickEvent grab = clickAt(RAW_SOURCE_SLOT, InventoryAction.PICKUP_ALL, null, -1);
 
         assertThat(ShulkerMenuPolicy.clickBlocked(grab, 0)).isTrue();
@@ -142,7 +142,7 @@ class ShulkerBoxViewTest {
 
     @Test
     void nestingAShulkerIntoTheViewIsPrevented() {
-        // Placing a shulker box onto a view slot from the cursor would nest a box inside a box — refused.
+        // Placing a shulker box onto a view slot from the cursor would nest a box inside a box, refused.
         InventoryClickEvent place = clickAt(3, InventoryAction.PLACE_ALL, new ItemStack(Material.LIME_SHULKER_BOX), -1);
 
         assertThat(ShulkerMenuPolicy.clickBlocked(place, 0)).isTrue();
@@ -201,7 +201,7 @@ class ShulkerBoxViewTest {
         player.getInventory().setItemInMainHand(box);
     }
 
-    /** Drive the interact handler directly — MockBukkit does not route {@code PlayerInteractEvent} through callEvent. */
+    /** Drive the interact handler directly: MockBukkit does not route {@code PlayerInteractEvent} through callEvent. */
     private void rightClickHeldItem() {
         ItemStack hand = player.getInventory().getItemInMainHand();
         listener.onInteract(new PlayerInteractEvent(
@@ -214,7 +214,7 @@ class ShulkerBoxViewTest {
     }
 
     /**
-     * A mocked click over a 27-slot top view — MockBukkit cannot construct or dispatch a real
+     * A mocked click over a 27-slot top view. MockBukkit cannot construct or dispatch a real
      * {@link InventoryClickEvent} in this version, so the click's raw slot, action, cursor and hotbar button are
      * stubbed directly to exercise the dupe-safe {@link ShulkerMenuPolicy} lock.
      */

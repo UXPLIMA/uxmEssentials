@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Applies the configured server links into Paper's global {@link ServerLinks} (the 1.21+ pause-menu links). On
  * apply it clears the existing links and sets the parsed list whole, so a reload is idempotent and never
- * accumulates stale entries. An empty configured list means the feature is off — the live links are left
+ * accumulates stale entries. An empty configured list means the feature is off. The live links are left
  * untouched so links pushed by other plugins or the vanilla server survive.
  *
  * <p>The {@code ServerLinks} object is global game state, so the mutation runs on the global region thread through

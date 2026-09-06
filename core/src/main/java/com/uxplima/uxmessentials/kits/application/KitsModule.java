@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  * is registered after economy but never hard depends on it.
  *
  * <p>The module needs no database. Kit definitions live one file per kit under {@code modules/kits/kits/}, and
- * per-player claim/cooldown state is transient PDC, so the module declares no migration location — a disabled
+ * per-player claim/cooldown state is transient PDC, so the module declares no migration location: a disabled
  * module wires nothing and
  * leaves no schema behind. The module declares its command surface and enable gate here; {@code start} arms
  * the lifecycle bookkeeping, and the bukkit-side adapters (the Brigadier handlers, the config-backed

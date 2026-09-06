@@ -17,7 +17,7 @@ public enum RespawnStepKind {
     /** The resolved (possibly mirrored) world spawn ({@code spawn}). */
     SPAWN,
 
-    /** The player's home — the default home for the world ({@code home}). */
+    /** The player's home, the default home for the world ({@code home}). */
     HOME,
 
     /** The player's last slept-in bed / respawn anchor as vanilla would ({@code bed}). */

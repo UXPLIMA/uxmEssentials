@@ -29,7 +29,7 @@ import com.uxplima.uxmessentials.vote.domain.VoteTally;
 import org.junit.jupiter.api.Test;
 
 /**
- * Covers {@link VoteWiring#wireDiscord} — the disabled-by-default contract and the enabled path. Disabled
+ * Covers {@link VoteWiring#wireDiscord}: the disabled-by-default contract and the enabled path. Disabled
  * (an empty URL) must subscribe nothing on the event bus and schedule no task; enabled with a valid URL must
  * subscribe the notifier and, when the top-voter feature is on, schedule exactly one repeating task.
  */

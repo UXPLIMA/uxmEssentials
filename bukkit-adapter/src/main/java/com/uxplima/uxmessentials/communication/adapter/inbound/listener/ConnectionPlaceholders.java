@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Builds the {@link PlaceholderBindings} a connection template is substituted against from a live Bukkit player
- * and event, on the player's region thread where the event fires. The tokens are runtime content — the player's
- * name and display name, the online count, the world — never plugin {@code MessageKey} strings, so nothing here
+ * and event, on the player's region thread where the event fires. The tokens are runtime content: the player's
+ * name and display name, the online count, the world. Never plugin {@code MessageKey} strings, so nothing here
  * is parity-checked.
  *
  * <p>The display name is flattened to plain text so a substituted {@code {displayname}} cannot smuggle a

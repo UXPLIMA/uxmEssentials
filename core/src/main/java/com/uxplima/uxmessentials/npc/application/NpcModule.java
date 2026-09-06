@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * the persistence layer), so the module declares no extra migration location of its own; a disabled module
  * leaves the baseline table in place but wires nothing over it. The use cases, the jOOQ repository over
  * {@code persistence.dsl()}, and the packet-backed renderer are constructed in the adapter wiring once the
- * module has started; the lifecycle bookkeeping here keeps {@code stop()} honest — on disable the spawned fake
+ * module has started; the lifecycle bookkeeping here keeps {@code stop()} honest. On disable the spawned fake
  * players are removed from every viewer. The module ships ENABLED but inert: with no NPCs created it renders
  * nothing and costs only the empty refresh iteration.
  */

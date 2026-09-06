@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
  * Covers the soft-dependency probe {@link RegionsWiring#regionService}: with no WorldGuard plugin present it binds
  * the inert no-op that reports {@code available() == false}; with a WorldGuard plugin present it binds the real
  * reflective implementation whose {@code available()} follows the plugin's enabled state. WorldGuard itself is not
- * on the test classpath, so the "present" case is a plugin-manager registration only — enough to prove the probe
+ * on the test classpath, so the "present" case is a plugin-manager registration only, enough to prove the probe
  * selects the real implementation.
  */
 class RegionsWiringTest {

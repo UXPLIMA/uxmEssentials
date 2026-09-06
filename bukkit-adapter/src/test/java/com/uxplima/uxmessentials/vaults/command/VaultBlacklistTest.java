@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the vault item-blacklist filter that runs when a vault window closes. A vault holding a
  * blacklisted item is closed; the blocked item is stripped from the saved contents and returned to the player
- * (with the {@code VAULT_ITEM_BLOCKED} notice), while a non-blocked item is left untouched — no item is lost or
+ * (with the {@code VAULT_ITEM_BLOCKED} notice), while a non-blocked item is left untouched. No item is lost or
  * duplicated. A player holding {@code uxmessentials.vault.bypass-blacklist} keeps every item and gets no notice.
  *
  * <p>The {@link VaultView} is opened directly (the same path {@code /vault} drives) and the close is dispatched
@@ -93,7 +93,7 @@ class VaultBlacklistTest {
         ItemStack[] saved = repository.lastSaved;
         assertThat(saved).isNotNull();
         assertThat(materialsIn(saved)).contains(Material.DIAMOND).doesNotContain(Material.BEDROCK);
-        // The bedrock came back to the player — nothing was lost or duplicated.
+        // The bedrock came back to the player: nothing was lost or duplicated.
         assertThat(countOf(player.getInventory().getContents(), Material.BEDROCK))
                 .isEqualTo(3);
         assertThat(sink.keys).contains(VaultsMessageKey.VAULT_ITEM_BLOCKED);
@@ -259,7 +259,7 @@ class VaultBlacklistTest {
         }
     }
 
-    /** Grants no node — the blacklist applies. */
+    /** Grants no node: the blacklist applies. */
     private static final class GrantNone implements Permissions {
         @Override
         public boolean has(PlayerRef who, String node) {
@@ -273,7 +273,7 @@ class VaultBlacklistTest {
         }
     }
 
-    /** Grants exactly one node — used to grant the bypass. */
+    /** Grants exactly one node: used to grant the bypass. */
     private static final class GrantNode implements Permissions {
         private final String granted;
 

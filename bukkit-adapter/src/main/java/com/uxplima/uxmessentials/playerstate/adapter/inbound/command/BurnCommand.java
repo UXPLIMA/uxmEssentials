@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /burn <seconds> [player]} ({@code uxmessentials.burn.use}): set a player on fire for a number of
- * seconds — the inverse of {@code /ext}. The seconds argument is bounded by Brigadier and clamped to a sane
+ * seconds, the inverse of {@code /ext}. The seconds argument is bounded by Brigadier and clamped to a sane
  * range in the domain ({@link BurnDuration}). The {@code .others} target is gated by the shared
  * {@code uxmessentials.burn.others} (or the cross-cutting {@code uxmessentials.playerstate.others}) node; the {@code Burn} use case owns the effect and feedback.
  */

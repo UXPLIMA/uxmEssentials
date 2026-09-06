@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  * keeps its current look and a pre-V36 row stays visible to everyone. The V37 type columns are likewise
  * nullable: a NULL type reads back as {@link HologramType#TEXT}, so a pre-V37 row keeps rendering its lines.
  * The click-action chain lives in the child {@code hologram_action} table (V60) and is passed in already ordered
- * — each row's {@code click_trigger}/{@code type} are the enum names and {@code value} the raw operator payload.
+ *: each row's {@code click_trigger}/{@code type} are the enum names and {@code value} the raw operator payload.
  * This class is the single place that translation lives.
  */
 final class HologramRows {
@@ -81,7 +81,7 @@ final class HologramRows {
                 rotationOf(row),
                 intOr(row.get(HOLOGRAMS.REFRESH_INTERVAL_TICKS), Hologram.STATIC),
                 Instant.ofEpochMilli(row.get(HOLOGRAMS.CREATED_AT)));
-        // A pre-V50 row (NULL linked_npc_name) — and any row that never linked — reads back unlinked, so an
+        // A pre-V50 row (NULL linked_npc_name), and any row that never linked, reads back unlinked, so an
         // existing hologram keeps anchoring to its own coordinates with no data migration. The V54 click command
         // is layered on the same way: a pre-V54 / never-clickable row (NULL) reads back without a click action.
         // The V57 extra pages and the V60 action chain are applied last: a row with no hologram_pages rows stays a
@@ -251,7 +251,7 @@ final class HologramRows {
     }
 
     private static TextAlignment alignmentOf(@Nullable String stored) {
-        // A pre-V48 row (NULL alignment) — and any unknown token — reads back as CENTER, so a row never resolves
+        // A pre-V48 row (NULL alignment), and any unknown token, reads back as CENTER, so a row never resolves
         // to an invalid alignment and an existing hologram keeps its centred lines.
         if (stored == null) {
             return TextAlignment.CENTER;
@@ -271,7 +271,7 @@ final class HologramRows {
         String mode = row.get(HOLOGRAMS.VISIBILITY_MODE);
         String permission = row.get(HOLOGRAMS.VISIBILITY_PERMISSION);
         int distance = intOr(row.get(HOLOGRAMS.VISIBILITY_DISTANCE), Visibility.UNLIMITED);
-        // A pre-V36 row (NULL mode) — and a PERMISSION mode that somehow lost its node — both read back as
+        // A pre-V36 row (NULL mode), and a PERMISSION mode that somehow lost its node, both read back as
         // "visible to everyone", so a row never resolves to an invalid Visibility.
         if ("PERMISSION".equalsIgnoreCase(mode) && permission != null && !permission.isBlank()) {
             return new Visibility(Visibility.Mode.PERMISSION, permission, distance);
@@ -289,7 +289,7 @@ final class HologramRows {
     }
 
     private static HologramType typeOf(@Nullable String stored) {
-        // A pre-V37 row (NULL type) — and any unknown token — reads back as TEXT, so a row never resolves to
+        // A pre-V37 row (NULL type), and any unknown token, reads back as TEXT, so a row never resolves to
         // an invalid type and an existing hologram keeps rendering its lines.
         return HologramType.parse(stored).orElse(HologramType.TEXT);
     }

@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.discordlink.application.DiscordlinkMessageKey;
 /**
  * The modelled failures a discord-link operation can produce. Each value carries the
  * {@link DiscordlinkMessageKey} the in-game adapter renders, so a use case returns a
- * {@code Result.err(DiscordLinkError.X)} and the caller never re-derives the message — the failure reason and
+ * {@code Result.err(DiscordLinkError.X)} and the caller never re-derives the message, the failure reason and
  * its localized text never drift apart.
  *
  * <p>The {@code /link} confirmation runs inside Discord, not on a Minecraft player, so its outcomes are mapped

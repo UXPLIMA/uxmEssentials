@@ -56,7 +56,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@code /depth}: report how many blocks the player stands above or below sea level
- * (block Y minus the world's sea level). A pure read in the adapter — none of the playerstate use cases run,
+ * (block Y minus the world's sea level). A pure read in the adapter. None of the playerstate use cases run,
  * so they are all mocked. The {@link Messages} fake echoes the resolved key and its placeholders so the
  * above/at/below branch and the {@code blocks} count are observable through the sender's message queue.
  */

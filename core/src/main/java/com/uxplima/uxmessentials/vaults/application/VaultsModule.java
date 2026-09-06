@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * leaves the baseline table in place but wires nothing over it. The use cases, the jOOQ {@code VaultRepository}
  * over {@code persistence.dsl()}, the GUI inventory-holder, the audit logger and the {@code InventoryClose}
  * save listener are constructed in the adapter wiring once the module has started; the lifecycle bookkeeping
- * here keeps {@code stop()} honest — on disable the open vault GUIs are closed and flushed.
+ * here keeps {@code stop()} honest: on disable the open vault GUIs are closed and flushed.
  */
 @NullMarked
 public final class VaultsModule implements FeatureModule {

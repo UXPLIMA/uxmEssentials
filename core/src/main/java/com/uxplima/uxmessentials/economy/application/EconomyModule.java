@@ -14,14 +14,14 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The economy bounded context as a first-class {@link FeatureModule} — the plugin's canonical worked DDD
+ * The economy bounded context as a first-class {@link FeatureModule}. The plugin's canonical worked DDD
  * example. It owns the {@code Wallet} aggregate, the multi-currency {@code Money}/{@code Currency} value
  * objects, and the {@code /balance} {@code /pay} {@code /baltop} {@code /paytoggle} {@code /eco} command
  * surface, all reached through the {@code EconomyProvider} port. The module is ON by default; at
  * {@code start} the bukkit-side adapter registers the native provider through the {@code ServicesManager}
  * <em>unless</em> a foreign economy already holds the registration, in which case it defers and logs
  * (register-or-defer, ADR-0004). When the module is disabled in {@code modules.conf}, nothing registers as
- * the provider and dependent features degrade gracefully — a {@code WarpCost} resolves to "free".
+ * the provider and dependent features degrade gracefully: a {@code WarpCost} resolves to "free".
  *
  * <p>The economy tables ({@code economy_owners}, {@code wallet_balances}, {@code transactions}) ship in the
  * persistence baseline ({@code db/migration} V2), which the persistence layer always applies, so the module

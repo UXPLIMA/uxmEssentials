@@ -49,7 +49,7 @@ public final class NpcSettings {
 
     /**
      * The optional MineSkin API key used to generate signed skins from an image URL ({@code /npc skin ... url:}).
-     * Empty by default — the unauthenticated public tier works for occasional skinning; a key raises the rate
+     * Empty by default. The unauthenticated public tier works for occasional skinning; a key raises the rate
      * limit and is sent as an {@code Authorization: Bearer} header. The returned value is stripped, so surrounding
      * whitespace in the config never reaches the header.
      */
@@ -69,7 +69,7 @@ public final class NpcSettings {
 
     /**
      * The command labels an NPC's bound command or click action may not run (case-insensitive, matched on the
-     * first word). Empty by default — nothing is blocked, so a server that configures no list behaves as before.
+     * first word). Empty by default: nothing is blocked, so a server that configures no list behaves as before.
      */
     public List<String> blockedCommands() {
         return config.getStringList("blocked-commands", List.of());

@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /ignore <player>}: add a player to the owner's persistent ignore list under
- * {@link IgnoreScope#ALL} — the verb form of the ignore behaviour. Ignoring yourself is rejected
+ * {@link IgnoreScope#ALL}, the verb form of the ignore behaviour. Ignoring yourself is rejected
  * ({@link MessagingError#IGNORE_SELF}); a repeat ignore of the same player is idempotent at the store, so
  * it simply re-confirms. After this, ignore-aware {@code /msg} and {@code /mail send} from the ignored
  * player are silently declined.

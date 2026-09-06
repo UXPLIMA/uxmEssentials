@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * The transient per-player presence map backing {@link PresenceStore}: a
  * {@code ConcurrentHashMap<UUID, PlayerPresence>} mutated only through {@code compute} / {@code computeIfAbsent}.
  * The map holds immutable aggregates, so a sync activity listener, the async AFK sweep, and a cross-context
- * vanish lookup all observe a coherent value, and a concurrent transition never loses an update —
+ * vanish lookup all observe a coherent value, and a concurrent transition never loses an update
  * {@code compute} re-applies the pure mutator under contention (docs/02-concurrency.md §6.9).
  *
  * <p>Nothing here is persisted. A presence is seeded on first read (or on join), re-stamped by the activity
@@ -29,8 +29,8 @@ import org.jspecify.annotations.NullMarked;
  * <p><b>Vanish is not owned here.</b> Presence stopped tracking its own vanish flag when vanish became its own
  * context and single authority. So the presence map never writes {@code vanished}; instead {@link #current} overlays
  * the vanished bit from the injected {@code vanishLookup} (the vanish authority's {@code isVanished}, or always-false
- * when the vanish module is disabled) so presence's own vanish-aware readers — the {@code %..._vanished%} placeholder,
- * the sleep exclusion, the settings panel — reflect the one vanish state without a second flag to keep in sync.
+ * when the vanish module is disabled) so presence's own vanish-aware readers. The {@code %..._vanished%} placeholder,
+ * the sleep exclusion, the settings panel, reflect the one vanish state without a second flag to keep in sync.
  */
 @NullMarked
 public final class InMemoryPresenceStore implements PresenceStore {

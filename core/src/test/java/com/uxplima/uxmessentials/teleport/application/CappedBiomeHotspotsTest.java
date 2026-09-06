@@ -46,7 +46,7 @@ class CappedBiomeHotspotsTest {
             registry.sample(WORLD, DESERT, random).ifPresent(sampled::add);
         }
 
-        // The two newest survive; the oldest was evicted so it can never be sampled — the window stays bounded.
+        // The two newest survive; the oldest was evicted so it can never be sampled: the window stays bounded.
         assertThat(sampled).containsExactlyInAnyOrder(new HotspotChunk(1, 1), new HotspotChunk(2, 2));
     }
 

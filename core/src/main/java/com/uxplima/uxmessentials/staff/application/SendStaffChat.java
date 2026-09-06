@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.staff.domain.event.StaffChatSent;
 
 /**
  * {@code /staffchat} (and {@code /sc}) {@code <message>}: send a line on the staff-only channel. The message
- * is fanned out to every online staff member through the soft-coupled {@link StaffChannel} — the same
- * staff-audience fan-out as {@code HelpOp.raise} — and the fact that it was sent is published as a domain
+ * is fanned out to every online staff member through the soft-coupled {@link StaffChannel}, the same
+ * staff-audience fan-out as {@code HelpOp.raise}, and the fact that it was sent is published as a domain
  * event for the audit trail. Staff chat is plain communication: it carries no sanction.
  *
  * <p>When the messaging module is disabled the channel binds {@link StaffChannel#NONE}, so the audience is

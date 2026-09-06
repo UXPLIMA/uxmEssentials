@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The damage/healing-indicator feature's configuration and text formatting — a small floating number that pops at
+ * The damage/healing-indicator feature's configuration and text formatting. A small floating number that pops at
  * an entity when it is hurt or healed and vanishes after a short duration. It is an adapter-only feature (a
  * reaction to Bukkit combat events rendered as an ephemeral {@code TextDisplay}); there is no persisted aggregate,
  * so the config and the pure {@link #format} live here beside the listener that consumes them, the same way
@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The feature ships <strong>disabled</strong>: {@link #fromConfig} reads {@code enabled} defaulting to false, so
  * a default server registers no listener and pays nothing. The format strings are MiniMessage sources carrying an
- * {@code {amount}} token (config data, not a user-message literal — like the scoreboard/tablist content lines), and
+ * {@code {amount}} token (config data, not a user-message literal. Like the scoreboard/tablist content lines), and
  * {@link #format} substitutes the rounded magnitude in, picking the crit format for a critical hit.
  *
  * @param enabled whether the feature shows any indicator at all
@@ -37,7 +37,7 @@ public record DamageIndicatorConfig(
         String critFormat,
         String healFormat) {
 
-    /** Which indicator a value renders as — picks the matching format string. */
+    /** Which indicator a value renders as: picks the matching format string. */
     public enum Kind {
         DAMAGE,
         CRIT,
@@ -55,7 +55,7 @@ public record DamageIndicatorConfig(
         }
     }
 
-    /** The off-by-default configuration — the shipped state, used as the test baseline. */
+    /** The off-by-default configuration: the shipped state, used as the test baseline. */
     public static DamageIndicatorConfig disabled() {
         return new DamageIndicatorConfig(
                 false, true, true, true, 20, "<red>-{amount}", "<gold><bold>-{amount} ✦", "<green>+{amount}");

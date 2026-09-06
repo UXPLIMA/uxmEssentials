@@ -13,8 +13,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The anti-corruption layer between a Bukkit {@link ItemStack} and the kits domain's opaque
  * {@link KitItem} payload. A kit's item is serialized with Paper's own item codec
- * ({@link ItemStack#serializeAsBytes()} / {@link ItemStack#deserializeBytes(byte[])}), so the full item —
- * components, enchantments, custom name — round-trips exactly, then Base64-encoded into the platform-neutral
+ * ({@link ItemStack#serializeAsBytes()} / {@link ItemStack#deserializeBytes(byte[])}), so the full item
+ * components, enchantments, custom name. Round-trips exactly, then Base64-encoded into the platform-neutral
  * string the domain carries. The codec is the only place the kits context touches an {@code ItemStack}; the
  * {@code :core} layer never sees one.
  *

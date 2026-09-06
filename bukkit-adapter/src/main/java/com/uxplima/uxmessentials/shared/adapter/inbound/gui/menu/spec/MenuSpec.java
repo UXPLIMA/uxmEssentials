@@ -11,15 +11,15 @@ import java.util.Optional;
  * shape, and the menu's own custom placeholder definitions. Validated up front so the renderer can trust the row
  * count and slot bounds without re-checking.
  *
- * <p>The {@code inventoryType} is carried as a plain operator token — {@code "hopper"}, {@code "dispenser"}, and so
- * on — never a Bukkit {@code InventoryType}, so this model stays pure and plain-JUnit testable. Absent, the menu is
+ * <p>The {@code inventoryType} is carried as a plain operator token, {@code "hopper"}, {@code "dispenser"}, and so
+ * on, never a Bukkit {@code InventoryType}, so this model stays pure and plain-JUnit testable. Absent, the menu is
  * the default {@code rows}-based chest. When present, the Bukkit-side façade maps the token to a real inventory
  * shape and falls back to a {@code rows}-based chest if that shape rejects a custom window, which is why {@code rows}
  * and its {@code 1..6} bound are still validated even for a non-chest menu: they size that fallback.
  *
  * <p>The {@code placeholders} map is the menu's own {@code placeholders {}} block: {@code name -> template} pairs
  * that define custom {@code %name%} tokens scoped to this one menu. It is carried verbatim for the Bukkit-side
- * renderer to expand, and is resolved local-first — a menu-scoped token overrides the shared registry (built-ins,
+ * renderer to expand, and is resolved local-first. A menu-scoped token overrides the shared registry (built-ins,
  * data readers, the global custom-placeholder file) for this menu alone. Empty for a menu that declares no block, so
  * such a menu renders byte-identically to before this field existed.
  *
@@ -32,14 +32,14 @@ import java.util.Optional;
  * items into the viewer's own 36 inventory slots, addressed as raw slots {@code rows*9 .. rows*9+35}. The Bukkit-side
  * runtime snapshots and restores the player inventory around such a menu; here it only widens the slot-fit bound, and
  * a bottom-inventory menu is chest-only by construction (the raw-slot geometry only holds for a chest). A menu that
- * leaves the flag {@code false} — the default — validates and renders exactly as before.
+ * leaves the flag {@code false}, the default, validates and renders exactly as before.
  *
  * <p>The {@code chestOnly} flag keeps the menu on the chest render path even for a Bedrock viewer the hybrid form
  * renderer would otherwise redirect. A form is a flat button list, so a menu that displays or edits real item stacks
  * (the inventory viewer, a storage-style grid) cannot be represented as one; setting this flag opts such a menu out
- * of the redirect so its Bedrock viewers still get the chest. It is purely a routing hint here — a plain boolean the
- * Bukkit-side façade reads — so this model stays pure and plain-JUnit testable. A menu that leaves it {@code false} —
- * the default — is redirected to a form for a Bedrock viewer and renders exactly as before for a Java one.
+ * of the redirect so its Bedrock viewers still get the chest. It is purely a routing hint here, a plain boolean the
+ * Bukkit-side façade reads, so this model stays pure and plain-JUnit testable. A menu that leaves it {@code false}
+ * the default: is redirected to a form for a Bedrock viewer and renders exactly as before for a Java one.
  *
  * <p>The {@code contents} map is the menu's {@code content {}} block: the slot regions the engine hands to a
  * feature's {@code ContentProvider} instead of drawing itself, keyed by the provider id each region names. Empty for
@@ -47,11 +47,11 @@ import java.util.Optional;
  * and routes clicks exactly as before this block existed.
  *
  * <p>The {@code bedrock} block is the menu's optional {@code bedrock {}} native CustomForm: when present, a Bedrock
- * viewer opening the menu (and not opted out by {@code chestOnly}) gets that explicit form — the form-native
- * dropdown/slider/toggle/multi-input widgets the automatic SimpleForm degradation cannot express — instead of the
+ * viewer opening the menu (and not opted out by {@code chestOnly}) gets that explicit form, the form-native
+ * dropdown/slider/toggle/multi-input widgets the automatic SimpleForm degradation cannot express, instead of the
  * degraded button list. It is {@link Optional#empty()} for a menu that declares no block, in which case the automatic
- * degradation is unchanged; a Java viewer never sees it either way. Purely spec here — a value the Bukkit-side façade
- * reads — so this model stays pure and plain-JUnit testable.
+ * degradation is unchanged; a Java viewer never sees it either way. Purely spec here, a value the Bukkit-side façade
+ * reads, so this model stays pure and plain-JUnit testable.
  */
 public record MenuSpec(
         String title,
@@ -173,7 +173,7 @@ public record MenuSpec(
 
     /**
      * The eleven-argument shape that carries a bottom-inventory flag but no chest-only routing hint, kept so every
-     * existing {@code new MenuSpec(...)} call site — the loader's older path and the record test fixtures — compiles
+     * existing {@code new MenuSpec(...)} call site, the loader's older path and the record test fixtures, compiles
      * unchanged. It delegates to the twelve-argument constructor with the chest-only flag off, so the menu is a form
      * candidate for a Bedrock viewer exactly as before this hint existed.
      */
@@ -207,7 +207,7 @@ public record MenuSpec(
     /**
      * The ten-argument shape that carries a click cooldown but paints only the chest top, kept so every existing
      * {@code new MenuSpec(...)} call site compiles unchanged. It delegates to the canonical constructor with the
-     * bottom-inventory flag off — an ordinary chest menu that never touches the player inventory.
+     * bottom-inventory flag off: an ordinary chest menu that never touches the player inventory.
      */
     public MenuSpec(
             String title,
@@ -236,7 +236,7 @@ public record MenuSpec(
 
     /**
      * The nine-argument shape that carries local placeholders but no click cooldown, kept so the loader and any other
-     * with-placeholders caller compiles unchanged. It delegates to the ten-argument constructor with a zero cooldown —
+     * with-placeholders caller compiles unchanged. It delegates to the ten-argument constructor with a zero cooldown
      * a menu that defers its anti-spam window to the server-wide default.
      */
     public MenuSpec(
@@ -255,7 +255,7 @@ public record MenuSpec(
     /**
      * The eight-argument shape that carries an inventory type but no local placeholders, kept so the loader's
      * inventory-type call and any other with-inventory-type caller compiles unchanged. It delegates to the canonical
-     * constructor with an empty local placeholder map — a menu without its own {@code placeholders {}} block.
+     * constructor with an empty local placeholder map: a menu without its own {@code placeholders {}} block.
      */
     public MenuSpec(
             String title,
@@ -270,8 +270,8 @@ public record MenuSpec(
     }
 
     /**
-     * The historic seven-argument shape, kept so every existing {@code new MenuSpec(...)} call-site — the loader's
-     * chest path and the engine's list/confirm/selector/editor holder specs — compiles unchanged. It delegates to the
+     * The historic seven-argument shape, kept so every existing {@code new MenuSpec(...)} call-site: the loader's
+     * chest path and the engine's list/confirm/selector/editor holder specs: compiles unchanged. It delegates to the
      * eight-argument constructor with no inventory type, i.e. the default {@code rows}-based chest, and so on to the
      * canonical constructor with an empty local placeholder map.
      */
@@ -287,7 +287,7 @@ public record MenuSpec(
     }
 
     /**
-     * The count of the viewer's own inventory slots a bottom-inventory menu may additionally paint into — the 27
+     * The count of the viewer's own inventory slots a bottom-inventory menu may additionally paint into, the 27
      * main slots plus the 9 hotbar slots shown below the chest top.
      */
     private static final int BOTTOM_SLOTS = 36;

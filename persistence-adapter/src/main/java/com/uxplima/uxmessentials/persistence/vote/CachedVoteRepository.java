@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.vote.application.port.VoteRepository;
  * A thin cache decorator over a delegate {@link VoteRepository} for the one hot read: the global vote-party
  * counter. The counter is read on every received vote and on every {@code /voteparty}, so it is held in an
  * {@link AtomicInteger} that loads through the delegate once (a sentinel of {@code -1} until first read) and
- * is updated write-through on {@link #setPartyCount}. The offline queue and vote totals are not cached —
+ * is updated write-through on {@link #setPartyCount}. The offline queue and vote totals are not cached
  * queue operations mutate rows (enqueue/drain) and totals are updated on every vote, so they forward straight
  * through {@link ForwardingVoteRepository} to the durable delegate which stays the source of truth. The
  * leaderboard query ({@link #topVoters}) is also uncached, as it is a bounded query that must reflect the

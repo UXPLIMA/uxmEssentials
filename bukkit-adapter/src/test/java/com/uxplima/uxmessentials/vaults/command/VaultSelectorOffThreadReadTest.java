@@ -67,12 +67,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * Pins that clicking an owned cell in the engine-rendered {@code /vault} selector resolves the vault's contents
  * <em>off</em> the click (region) thread. The engine dispatches the click handler on the viewer's entity thread;
  * the vault-contents read it triggers must not run there. It belongs in a {@link Scheduler#async} task whose
- * continuation bridges the window open back to the viewer's region thread — the same shape {@code /vault <n>} uses.
+ * continuation bridges the window open back to the viewer's region thread, the same shape {@code /vault <n>} uses.
  *
  * <p>The scheduler is a <em>deferring</em> double: {@code async} captures the task without running it, while
  * {@code onEntity} runs inline (the region bridge). The menu is opened first with the captured slot-source load
  * drained (so the picker is on screen), the read counter is then reset, and a click is fired. After the click the
- * repository has seen zero further reads — proving the contents read did not run on the click thread — and only
+ * repository has seen zero further reads (proving the contents read did not run on the click thread) and only
  * once the captured task is drained does the read happen and the vault window open.
  */
 class VaultSelectorOffThreadReadTest {
@@ -117,7 +117,7 @@ class VaultSelectorOffThreadReadTest {
 
         fireClick(1); // content slot 1 -> the second owned icon, vault 2
 
-        // The click handler returned without reading the vault's contents — that read was handed to async.
+        // The click handler returned without reading the vault's contents: that read was handed to async.
         assertThat(repository.reads).isZero();
         assertThat(scheduler.deferred).isNotEmpty();
         assertThat(player.getOpenInventory().getTopInventory().getHolder()).isInstanceOf(MenuHolder.class);

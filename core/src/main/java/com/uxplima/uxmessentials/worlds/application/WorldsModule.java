@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The worlds bounded context as a first-class {@link FeatureModule}: it owns the world aggregate and
  * the {@code /worlds} management surface, and delegates teleport execution (sub-project D) to the
- * teleport context — so it is registered after teleport in {@code DefaultModuleRegistry}. The world
+ * teleport context, so it is registered after teleport in {@code DefaultModuleRegistry}. The world
  * tables ship in the persistence baseline (V61), so the module declares no migration of its own; the
  * bukkit-side adapters (Brigadier handlers, the {@code BukkitWorldEngine}, the jOOQ repository) are
  * constructed in {@code WorldsWiring} once the module has started.

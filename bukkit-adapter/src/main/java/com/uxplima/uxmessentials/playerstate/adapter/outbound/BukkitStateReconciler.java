@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link com.uxplima.uxmessentials.playerstate.application.port.StateReconciler} implementation. It pushes
  * an immutable {@link PlayerStateSnapshot} onto the live Bukkit player, hopping to the player's owning
- * region/entity thread through the injected {@link Scheduler} port — the Bukkit mutators
+ * region/entity thread through the injected {@link Scheduler} port: the Bukkit mutators
  * ({@code setInvulnerable}, {@code setAllowFlight}, {@code setGameMode}, {@code setWalkSpeed},
  * {@code setFlySpeed}) are only valid there on Folia (docs/02-concurrency §playerstate reconciliation). An
  * offline player is a silent no-op (the entity scheduler refuses a despawned entity).

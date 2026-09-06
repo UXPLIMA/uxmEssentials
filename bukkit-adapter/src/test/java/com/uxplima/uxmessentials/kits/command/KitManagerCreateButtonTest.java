@@ -64,8 +64,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage that the engine-rendered kit manager's "create new kit" button starts kit creation directly —
- * the kit name prompt, then the new kit's settings window — instead of opening a redundant chooser. Clicking the
+ * MockBukkit coverage that the engine-rendered kit manager's "create new kit" button starts kit creation directly
+ * the kit name prompt, then the new kit's settings window: instead of opening a redundant chooser. Clicking the
  * create-button slot of the open {@link KitManagerMenu} through the engine's own {@link MenuListener} closes the
  * manager (the prompt path closes it) and arms a chat prompt for the kit name; the next chat line names the kit, which
  * is created in the repository and its settings window opens. The {@code kit.create-name} input point is configured as
@@ -168,7 +168,7 @@ class KitManagerCreateButtonTest {
 
         fireClick(49); // the create-new-kit button
 
-        // Going straight to kit creation means the create button closes the manager to ask for a kit name —
+        // Going straight to kit creation means the create button closes the manager to ask for a kit name
         // it must NOT open any further inventory (a chooser would have).
         assertThat(player.getOpenInventory().getType()).isEqualTo(InventoryType.CRAFTING);
     }
@@ -179,7 +179,7 @@ class KitManagerCreateButtonTest {
         fireClick(49);
 
         // The create button armed a chat prompt; the next chat line names the kit, which is created and its
-        // settings window opens — the same name-to-kit flow the shared chat backend drives in production.
+        // settings window opens: the same name-to-kit flow the shared chat backend drives in production.
         fireChat("freshkit");
 
         assertThat(repository.exists(KitId.of("freshkit"))).isTrue();

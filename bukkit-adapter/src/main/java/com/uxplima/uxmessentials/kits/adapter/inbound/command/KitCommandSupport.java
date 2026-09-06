@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Shared collaborators every kits Brigadier command holds: the constructed {@link KitServices} and the
  * {@link Messages} catalog (the latter only for the players-only and unknown-player rejections a console may
- * see — all player-facing claim feedback flows through the use cases' {@code MessageSink}). Concrete command
+ * see: all player-facing claim feedback flows through the use cases' {@code MessageSink}). Concrete command
  * classes extend this so each stays focused on building its node and mapping its arguments to one use-case
  * call.
  */

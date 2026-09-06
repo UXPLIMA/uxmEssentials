@@ -24,9 +24,9 @@ import com.uxplima.uxmessentials.shared.application.message.SharedMessageKey;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One virtual-workstation command — {@code /anvil}, {@code /workbench} ({@code /craft}), {@code /enderchest}
+ * One virtual-workstation command, {@code /anvil}, {@code /workbench} ({@code /craft}), {@code /enderchest}
  * ({@code /echest}), {@code /grindstone}, {@code /cartography}, {@code /loom}, {@code /smithingtable},
- * {@code /stonecutter}, {@code /furnace} — parameterised by its {@link Workstation}. Opening an inventory view
+ * {@code /stonecutter}, {@code /furnace}, parameterised by its {@link Workstation}. Opening an inventory view
  * is an entity-bound operation, so the open is scheduled on the opener's region thread through the kernel
  * {@code Scheduler} and reported through {@link ItemworldMessageKey#WORKSTATION_OPENED}. The whole group is
  * gated by the {@code workstations} sub-feature flag and each command by its own per-command disable.
@@ -133,7 +133,7 @@ public final class WorkstationCommand extends ItemworldCommandSupport implements
             List<Player> resolved = selector.resolve(ctx.getSource());
             return resolved.isEmpty() ? Optional.empty() : Optional.of(resolved.get(0));
         } catch (CommandSyntaxException unmatched) {
-            // A name with no online player, or a selector that matched nothing — surfaced as the unknown-player
+            // A name with no online player, or a selector that matched nothing, surfaced as the unknown-player
             // rejection by the caller, never as a raw Brigadier parse error.
             return Optional.empty();
         }

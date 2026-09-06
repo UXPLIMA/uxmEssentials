@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * each button does, and the block of slots the file hands over as a {@code content {}} region for the buy and sell
  * stacks themselves.
  *
- * <p>The region's slots come in threes — buy-A, buy-B, sell — one triple per editable trade, and the geometry is
+ * <p>The region's slots come in threes (buy-A, buy-B, sell) one triple per editable trade, and the geometry is
  * read back out of the parsed spec so nothing here assumes where they sit. A file whose region is not a whole
  * number of triples could not describe a trade set at all, so that is refused at wiring time.
  */

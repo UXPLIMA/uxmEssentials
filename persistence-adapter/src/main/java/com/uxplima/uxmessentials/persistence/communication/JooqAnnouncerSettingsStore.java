@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The jOOQ-backed {@link AnnouncerSettingsStore} over the single-row {@code COMMUNICATION_ANNOUNCER_SETTINGS} table.
  * The row is seeded by the V66 migration keyed by id {@code 0}, so {@link #load} is a single-row read on the primary
- * key and {@link #save} is an in-place update of that same row — there is exactly one global settings record. The
+ * key and {@link #save} is an in-place update of that same row: there is exactly one global settings record. The
  * two override columns carry a {@code -1} sentinel for "unset, defer to the file default"; the mapping folds a
  * non-negative value into an {@link AnnouncerSettings} override and a sentinel back to empty. Every statement is
  * typed jOOQ DSL; no SQL is string-concatenated.

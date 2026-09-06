@@ -7,7 +7,7 @@ import java.util.UUID;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Who issued a sanction — the {@code *_by}/{@code *_by_name} columns every sanction row carries. A staff
+ * Who issued a sanction: the {@code *_by}/{@code *_by_name} columns every sanction row carries. A staff
  * member's UUID is present; a console or system actor has no UUID but always a name, so an audit line and an
  * {@code /unmute}/{@code /unjail} failure message still render an issuer even after a rename.
  *

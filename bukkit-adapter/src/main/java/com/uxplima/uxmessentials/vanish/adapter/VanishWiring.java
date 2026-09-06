@@ -52,7 +52,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * Constructs the vanish context's adapters and use cases over the injected kernel ports, and produces the {@code
  * /vanish} command plus the join/quit listener the plugin registers. This is the one place the vanish context is
- * wired — nothing else news up its classes.
+ * wired: nothing else news up its classes.
  *
  * <p>The context persists nothing: the vanish state is the transient in-memory {@link InMemoryVanishStore}, the single
  * authority every consumer (messaging, nametags, staff) reads. Its outbound adapters are the store, the level-aware
@@ -140,7 +140,7 @@ public final class VanishWiring {
     /**
      * The authority the consumers read: our own store, or that store with SuperVanish's or PremiumVanish's hidden
      * players folded in when one of them is running and the operator has left the fold on. Only the read side is
-     * overlaid — our own use cases, listeners and the action-bar indicator keep the plain store, so we never announce
+     * overlaid. Our own use cases, listeners and the action-bar indicator keep the plain store, so we never announce
      * or act on a vanish that belongs to the other plugin.
      *
      * <p>The other plugin's state is re-read by a repeating global-region task rather than on every question, both
@@ -165,7 +165,7 @@ public final class VanishWiring {
     /**
      * Wire the cross-server vanish sync, or the inert shape when it is off. With {@code cross-server=true} it builds
      * the network-wide view, the bus bridge that publishes/receives vanish frames, and the applier that reconciles an
-     * inbound frame onto the target's region — registering the applier as a {@code RemoteSyncListener}. With it off (or
+     * inbound frame onto the target's region, registering the applier as a {@code RemoteSyncListener}. With it off (or
      * the network bus absent, in which case the publisher is a no-op) it returns the disabled bus and empty view, so
      * every cross-server seam is a harmless no-op and same-server vanish is unchanged.
      */

@@ -22,19 +22,19 @@ import org.junit.jupiter.api.Test;
 /**
  * The RTP async-chunk invariant guard (CLAUDE.md §1 Folia-ready / §3 no BukkitScheduler kin,
  * docs/02-concurrency.md, the RTP redesign spec §1/§6 and ledger rule "no synchronous chunk load on a tick
- * thread — EVER").
+ * thread, EVER").
  *
  * <p><strong>The bug this freezes out.</strong> Before the P0 rewrite the RTP safe-search read each candidate's
- * chunk synchronously — {@code world.getHighestBlockYAt(...)} / {@code world.getBlockAt(...)} /
- * {@code world.getBiome(...)} — from inside a {@code scheduler.onRegion(...)} lambda, i.e. on a tick/region
+ * chunk synchronously, {@code world.getHighestBlockYAt(...)} / {@code world.getBlockAt(...)} /
+ * {@code world.getBiome(...)}, from inside a {@code scheduler.onRegion(...)} lambda, i.e. on a tick/region
  * thread. Those {@link World} methods force-<em>generate</em> the chunk on the calling thread if it is not
  * already resident, so a refill that probed up to thirty-two far candidates generated thirty-two chunks inline
  * and dropped the server to about five TPS; the probed chunks were never unloaded, leaking heap and region-file
  * bloat. The rewrite moved every probe onto {@code World#getChunkAtAsync} plus off-thread
  * {@link ChunkSnapshot} reads. This guard makes sure the fast path can never be reintroduced silently.
  *
- * <p><strong>What it scans.</strong> An ArchUnit (bytecode) fence — the robust house pattern, matching
- * {@code ArchitectureTest}'s inventory fence rather than a brittle line regex — over the RTP safe-search
+ * <p><strong>What it scans.</strong> An ArchUnit (bytecode) fence. The robust house pattern, matching
+ * {@code ArchitectureTest}'s inventory fence rather than a brittle line regex, over the RTP safe-search
  * outbound adapters ({@code ..teleport.adapter.outbound..}, where the {@code ChunkAccess} probe impl
  * {@link BukkitChunkAccess} and the pre-warm / queue / pool search helpers live). It fails if any of those
  * classes <em>calls</em> a synchronous, chunk-loading method on {@code org.bukkit.World} /
@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
  *
  * <p><strong>What stays allowed.</strong> {@code World#getChunkAtAsync} (the off-main generate),
  * {@code World#isChunkLoaded} and {@code World#unloadChunkRequest} (cheap, non-loading lifecycle calls), and
- * every read off a {@link ChunkSnapshot} copy — {@code getBiome} / {@code getBlockType} on the <em>snapshot</em>
+ * every read off a {@link ChunkSnapshot} copy, {@code getBiome} / {@code getBlockType} on the <em>snapshot</em>
  * are off-thread-safe because they read a detached copy, and their declaring type is {@code ChunkSnapshot},
  * not {@code World}, so they are structurally outside the forbidden-owner set.
  *
@@ -55,7 +55,7 @@ import org.junit.jupiter.api.Test;
  *
  * <ul>
  *   <li>{@code teleport.adapter.inbound.listener.BiomeHotspotListener} samples biomes on a
- *       {@code ChunkLoadEvent} — the chunk is already resident and the reads stay within its bounds, on the
+ *       {@code ChunkLoadEvent}. The chunk is already resident and the reads stay within its bounds, on the
  *       chunk's own owning region thread.</li>
  *   <li>{@code teleport.adapter.inbound.command.VerticalCommand} ({@code /top}, {@code /vertical}) reads the
  *       player's own column, already loaded around the player, on the command (global) thread.</li>
@@ -73,7 +73,7 @@ import org.junit.jupiter.api.Test;
  */
 class RtpSyncChunkLoadDriftTest {
 
-    /** The RTP safe-search probe / search adapters — the one place a stray synchronous chunk load would crater TPS. */
+    /** The RTP safe-search probe / search adapters: the one place a stray synchronous chunk load would crater TPS. */
     private static final String RTP_SAFE_SEARCH_PACKAGE = "..teleport.adapter.outbound..";
 
     /**
@@ -92,7 +92,7 @@ class RtpSyncChunkLoadDriftTest {
 
     private static final String INVARIANT = "the RTP safe-search adapters read chunk data only off the main thread "
             + "(World#getChunkAtAsync + ChunkSnapshot copies). A synchronous World#getHighestBlockYAt / getBlockAt / "
-            + "getBiome / getChunkAt / loadChunk force-generates a far chunk on the calling tick/region thread — the "
+            + "getBiome / getChunkAt / loadChunk force-generates a far chunk on the calling tick/region thread, the "
             + "exact bug that dropped RTP to ~5 TPS and leaked chunks. Load the chunk with getChunkAtAsync and read "
             + "from the snapshot instead.";
 
@@ -119,7 +119,7 @@ class RtpSyncChunkLoadDriftTest {
 
     @Test
     void guardAllowsTheAsyncProbeShape() {
-        // The current correct shape — getChunkAtAsync + ChunkSnapshot reads + isChunkLoaded/unloadChunkRequest —
+        // The current correct shape, getChunkAtAsync + ChunkSnapshot reads + isChunkLoaded/unloadChunkRequest,
         // must never be flagged, or the guard would false-positive the async path it is meant to protect.
         JavaClasses fixture = new ClassFileImporter().importClasses(AsyncProbeFixture.class);
         assertThat(rule().evaluate(fixture).hasViolation())
@@ -153,7 +153,7 @@ class RtpSyncChunkLoadDriftTest {
     /**
      * The pre-P0 synchronous-probe pattern, reproduced in the guarded package so the negative test can prove the
      * fence catches it. Reads chunk data through the {@link World} methods that force-generate a far chunk on the
-     * calling thread — exactly what crashed the tick rate. Never executed; ArchUnit inspects the bytecode.
+     * calling thread: exactly what crashed the tick rate. Never executed; ArchUnit inspects the bytecode.
      */
     static final class LegacySyncProbeFixture {
 

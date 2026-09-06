@@ -34,8 +34,8 @@ import org.jspecify.annotations.Nullable;
  * BOSS_BAR) and the Folia-safe global-enumerate / per-entity-deliver / scheduled boss-bar-hide dance; this class
  * supplies the per-viewer render and the visibility gate.
  *
- * <p>The render function checks {@link BroadcastVisibility} for the hidden flag — returning {@code null} to skip a
- * player who hid broadcasts — and otherwise resolves the catalog {@code key} in that viewer's locale, folding the
+ * <p>The render function checks {@link BroadcastVisibility} for the hidden flag, returning {@code null} to skip a
+ * player who hid broadcasts, and otherwise resolves the catalog {@code key} in that viewer's locale, folding the
  * shared {@code <prefix>} tag in exactly as {@code CommandFeedback} does. The configured broadcast sound is passed
  * straight through to the broadcaster.
  */

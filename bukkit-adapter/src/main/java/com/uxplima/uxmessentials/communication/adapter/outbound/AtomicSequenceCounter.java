@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>concurrent-collection</b>. The per-channel counters are transient state, created on demand and
- * dropped with the wiring on module stop — never persisted.
+ * dropped with the wiring on module stop: never persisted.
  */
 @NullMarked
 public final class AtomicSequenceCounter implements SequenceCounter {

@@ -315,7 +315,7 @@ class VanishCommandTest {
         }
     }
 
-    /** A buffs port that does nothing — the command routing under test does not assert on buffs. */
+    /** A buffs port that does nothing: the command routing under test does not assert on buffs. */
     private static final class NoopBuffs implements VanishBuffs {
         @Override
         public void apply(PlayerRef who) {}

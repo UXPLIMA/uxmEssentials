@@ -30,7 +30,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@link OnlinePlayerListView}: the read-only online-roster head grid. Given a
  * pre-snapshotted roster it draws one player head per entry into the paginated content slots through the engine
- * list runtime ({@link MenuHolder}); an empty roster opens the same engine list under its empty-state title — a
+ * list runtime ({@link MenuHolder}); an empty roster opens the same engine list under its empty-state title, a
  * filler-and-nav panel, still a {@link MenuHolder}, never a bespoke uxmLib window. The scheduler is a synchronous
  * double so the entity-bound build runs inline, and the engine's menu listener is installed against a mock plugin.
  */
@@ -85,7 +85,7 @@ class OnlinePlayerListViewTest {
         Inventory inv = player.getOpenInventory().getTopInventory();
         // The empty roster opens the engine list (a MenuHolder), not a bespoke uxmLib window.
         assertThat(inv.getHolder()).isInstanceOf(MenuHolder.class);
-        // No roster entry, so every content slot is filler — there is no player head anywhere.
+        // No roster entry, so every content slot is filler: there is no player head anywhere.
         for (int slot = 0; slot < inv.getSize(); slot++) {
             assertThat(inv.getItem(slot).getType()).isNotEqualTo(Material.PLAYER_HEAD);
         }

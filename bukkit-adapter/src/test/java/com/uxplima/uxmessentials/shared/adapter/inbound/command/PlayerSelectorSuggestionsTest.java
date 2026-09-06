@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * ({@code /nuke @e} was suggested but never resolved): a suggested selector must be one the argument can actually
  * resolve to players. {@code @e}/{@code @n} pull in non-player entities, so neither arity ever offers them; the
  * single-target form additionally drops {@code @a}, which matches more than one player and so fails its parser.
- * {@link CommandSuggestions#playerSelectorTokens} reads only the typed prefix, so it runs without a live server —
+ * {@link CommandSuggestions#playerSelectorTokens} reads only the typed prefix, so it runs without a live server
  * online names are appended separately by the providers, which is why a plain text prefix yields no tokens here.
  */
 class PlayerSelectorSuggestionsTest {

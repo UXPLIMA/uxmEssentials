@@ -66,7 +66,7 @@ class BukkitAnnouncerBroadcasterTest {
         broadcaster.broadcast(chat(DisplayCondition.always(), "<gold>hello %player_name%"));
 
         // MiniMessage parsed the colour tag; PlaceholderAPI is absent so the %papi% token is left as-is by the
-        // identity bridge — what matters is the HudText render path ran end to end.
+        // identity bridge: what matters is the HudText render path ran end to end.
         assertThat(PLAIN.serialize(alice.nextComponentMessage())).isEqualTo("hello %player_name%");
     }
 
@@ -84,7 +84,7 @@ class BukkitAnnouncerBroadcasterTest {
     void aRecipientWhoseConditionDoesNotMatchIsSkipped() {
         BukkitAnnouncerBroadcaster broadcaster = broadcaster(player -> alwaysContext(player));
 
-        // permission:uxmessentials.vip — Alice is not op and holds no node, so the condition fails.
+        // permission:uxmessentials.vip: Alice is not op and holds no node, so the condition fails.
         broadcaster.broadcast(chat(new DisplayCondition.Permission("uxmessentials.vip"), "vip only"));
 
         assertThat(alice.nextComponentMessage()).isNull();

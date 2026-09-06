@@ -2,7 +2,7 @@
  * The worlds context's use cases and outbound ports. The use cases orchestrate world creation, import,
  * load/unload, and deletion through the context's ports, gate the operator commands through the shared
  * permission seam, and render every outcome through the {@link
- * com.uxplima.uxmessentials.worlds.application.WorldsMessageKey} catalog — no inline player-facing
+ * com.uxplima.uxmessentials.worlds.application.WorldsMessageKey} catalog: no inline player-facing
  * literal appears anywhere in the context. No Bukkit, Paper, Kyori, or logging type appears here.
  *
  * <p>This context gates its two halves in two different places, and only one of them holds for every adapter.

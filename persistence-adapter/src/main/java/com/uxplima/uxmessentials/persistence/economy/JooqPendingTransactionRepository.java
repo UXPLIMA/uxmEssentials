@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * jOOQ-backed {@link PendingTransactionRepository} over the generated
- * {@code ECONOMY_PENDING_PHYSICAL_TRANSACTIONS} table. Every statement is typed jOOQ DSL — no
+ * {@code ECONOMY_PENDING_PHYSICAL_TRANSACTIONS} table. Every statement is typed jOOQ DSL, no
  * string-concatenated SQL. The take-and-clear runs as one transaction so a credit replayed on join is read
  * and deleted atomically and cannot be applied twice.
  */

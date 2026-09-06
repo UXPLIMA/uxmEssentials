@@ -42,7 +42,7 @@ import org.junit.jupiter.api.Test;
  * The arrival half of a cross-server teleport, {@link CrossServerArrival}, against fakes for every port and a
  * synchronous scheduler so the whole off-tick → delayed → region-hop chain runs inline. Each case asserts the
  * observable outcome: whether the pending row was cleared, whether the local hop fired, whether the origin's
- * charge was refunded, and which message key was delivered — the handler's whole job is deciding, per row, which
+ * charge was refunded, and which message key was delivered. The handler's whole job is deciding, per row, which
  * of those happen. The scheduler records the delay it was handed so the settling window is proven Folia-safe
  * (the hop is deferred, not run on the join thread).
  */
@@ -97,7 +97,7 @@ class CrossServerArrivalTest {
 
     @Test
     void aVanishedWarpClearsRefundsTheChargeAndNotifiesFailure() {
-        // No warp is put, so findById misses — the warp was deleted between send and arrival.
+        // No warp is put, so findById misses: the warp was deleted between send and arrival.
         store.record(pending(1L, LOCAL, Optional.of(WarpCost.of(new BigDecimal("100"), "coins")), NOW));
 
         arrival().onArrival(PLAYER);

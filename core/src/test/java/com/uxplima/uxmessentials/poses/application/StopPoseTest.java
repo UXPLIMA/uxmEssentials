@@ -72,7 +72,7 @@ class StopPoseTest {
 
     @Test
     void dismountsTheRiderRatherThanRemovingASeatForAPlayerSit() {
-        // A player-sit rides a carrier, not a seat entity, so stopping it dismounts the rider — no seat is removed.
+        // A player-sit rides a carrier, not a seat entity, so stopping it dismounts the rider: no seat is removed.
         sessions.start(new PoseSession(
                 WHO, PoseType.PLAYER_SIT, RETURN, "player-sit", CARRIER, Instant.parse("2026-07-02T00:00:00Z")));
         StopPose stopPose = new StopPose(sessions, seats, poses, snores, crawlView, poseReturn, events, true);
@@ -121,7 +121,7 @@ class StopPoseTest {
 
         stopPose.stop(WHO, false);
 
-        // The seat is still removed (no ghost), but the player is not teleported — this is the quit/teleport exit.
+        // The seat is still removed (no ghost), but the player is not teleported: this is the quit/teleport exit.
         assertThat(seats.removed).containsExactly("h1");
         assertThat(poseReturn.returns).isEmpty();
     }

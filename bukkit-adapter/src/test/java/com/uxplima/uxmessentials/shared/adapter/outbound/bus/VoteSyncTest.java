@@ -32,10 +32,10 @@ import com.uxplima.uxmessentials.vote.domain.event.VotePartyTriggered;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit coverage of the vote context's cross-server sync seam. The three seams are exercised in isolation —
+ * Unit coverage of the vote context's cross-server sync seam. The three seams are exercised in isolation
  * the inbound listener (invalidate + echo-broadcast, never reward), the outbound counter decorator (announce
  * each counter mutation, pass return values through, stay silent on non-counter reads), and the outbound
- * party publisher (a local party fire becomes a {@link VotePartyFired}) — all against fakes, no Bukkit.
+ * party publisher (a local party fire becomes a {@link VotePartyFired}): all against fakes, no Bukkit.
  */
 final class VoteSyncTest {
 
@@ -76,7 +76,7 @@ final class VoteSyncTest {
         assertThat(sent.key()).isEqualTo(VoteMessageKey.VOTEPARTY_REACHED);
         assertThat(sent.placeholders()).containsExactlyEntriesOf(Map.of("threshold", "25"));
         assertThat(sent.channels()).isEqualTo(channels);
-        // The listener must never pay out — a peer only echoes the announcement; the origin already rewarded.
+        // The listener must never pay out: a peer only echoes the announcement; the origin already rewarded.
         assertThat(delegate.rewardApplied).isFalse();
     }
 

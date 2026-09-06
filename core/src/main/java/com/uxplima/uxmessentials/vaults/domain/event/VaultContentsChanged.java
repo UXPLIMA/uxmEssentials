@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A vault's stored contents were written through to the database — the save that fires on {@code
+ * A vault's stored contents were written through to the database. The save that fires on {@code
  * InventoryCloseEvent} when a viewer closes an open vault GUI. The {@code owner} is whose vault changed and
  * {@code index} the one-based vault number; {@code at} is the save instant, which becomes the vault's
  * {@code lastTouched}.

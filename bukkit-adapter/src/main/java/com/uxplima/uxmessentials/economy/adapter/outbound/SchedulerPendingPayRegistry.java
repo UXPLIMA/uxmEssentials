@@ -18,8 +18,8 @@ import org.jspecify.annotations.NullMarked;
  * The one-outstanding-confirmation-per-payer registry behind the {@code /payconfirm} flow
  * ({@code docs/11-economy-integration.md} §9.2): a per-payer slot holding the staged {@link PendingPay}, with
  * a self-cancelling {@link Scheduler#asyncAfter} expiry that discards a stale prompt and logs
- * {@code event=economy_pay_confirm_expired}. Staging never debits — no money has moved while a pending pay is
- * held — so a dropped or expired entry loses nothing.
+ * {@code event=economy_pay_confirm_expired}. Staging never debits. No money has moved while a pending pay is
+ * held, so a dropped or expired entry loses nothing.
  *
  * <p>A second large {@code /pay} replaces the first and re-prompts (the slot is overwritten), and the expiry
  * timer only clears the slot if it still holds the <em>same</em> staged pay it was armed for, so a replaced
@@ -69,7 +69,7 @@ public final class SchedulerPendingPayRegistry implements PendingPayRegistry {
     }
 
     private void expire(UUID payer, PendingPay staged) {
-        // Only drop the slot when it still holds the exact pay this timer was armed for — a replaced prompt
+        // Only drop the slot when it still holds the exact pay this timer was armed for: a replaced prompt
         // installed a fresh slot and its own timer, which this stale one must not clobber.
         if (slots.remove(payer, staged)) {
             log.info(

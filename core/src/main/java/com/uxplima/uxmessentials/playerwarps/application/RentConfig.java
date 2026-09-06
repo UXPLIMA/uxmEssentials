@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.playerwarps.domain.PlayerWarp;
  *
  * <p>Exemption is by owner, category, or world (matched case-insensitively): an exempt warp is skipped by the
  * sweep entirely, never charged and never suspended. Owners may be listed by name or by uuid string; whichever an
- * operator has to hand matches. A {@link #disabled()} config is the shipped default — the sub-group off, nothing
+ * operator has to hand matches. A {@link #disabled()} config is the shipped default. The sub-group off, nothing
  * charged.
  *
  * @param enabled whether the rent lifecycle runs at all
@@ -75,7 +75,7 @@ public record RentConfig(
                 Set.of());
     }
 
-    /** The number of reminder windows — the highest reminder stage a warp can reach before its term lapses. */
+    /** The number of reminder windows: the highest reminder stage a warp can reach before its term lapses. */
     public int maxReminderStage() {
         return reminderWindows.size();
     }
@@ -86,7 +86,7 @@ public record RentConfig(
     }
 
     /**
-     * True when {@code warp} is exempt from rent by its owner (name or uuid), its category, or its world — an
+     * True when {@code warp} is exempt from rent by its owner (name or uuid), its category, or its world, an
      * exempt warp is left entirely untouched by the sweep. Matching is case-insensitive on every axis.
      */
     public boolean isExempt(PlayerWarp warp) {

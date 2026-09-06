@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The viewer's own half of a trade window: the block of slots they place items into and take them back out of. It is
- * the only place in the window an item may move, and the rules that keep a trade honest live here — a movement is
+ * the only place in the window an item may move, and the rules that keep a trade honest live here: a movement is
  * refused once the trade has settled (so nothing can be pulled out from under a swap in flight) and refused for a
  * blacklisted material, and every accepted movement schedules the re-read that puts the new offer in front of the
  * other player and clears both confirmations.

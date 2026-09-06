@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The staff bounded context as a first-class {@link FeatureModule}: a STAFF-MODE-ONLY toolkit that lets a
- * staff member flip into a working "staff mode" — their real loadout is captured to the database and swapped
+ * staff member flip into a working "staff mode". Their real loadout is captured to the database and swapped
  * for a configurable gadget hotbar (the VANISH and EXAMINE gadgets), and a staff-only chat channel
  * ({@code /staffchat}, {@code /sc}). It owns no sanctions: it never mutes, bans, kicks, or warns. The
  * gadgets orchestrate the existing presence and playerstate modules through soft-coupled ports that degrade
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link #enabled(ConfigStore)} gate therefore defaults to {@code true} (like the steady-state contexts; unlike
  * {@code nametags}, which ships off until name-hiding lands).
  *
- * <p>It persists the captured loadout — but that {@code staff_loadout} table ships in a persistence Flyway
+ * <p>It persists the captured loadout, but that {@code staff_loadout} table ships in a persistence Flyway
  * migration the persistence layer always applies, so the module declares no extra migration location of its
  * own. The toggle command, the gadget hotbar swap, the right-click gadget listener, and the soft-couple port
  * bindings are Bukkit-facing and land with the adapter wiring once the module has started; the lifecycle

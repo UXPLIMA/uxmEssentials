@@ -77,7 +77,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * manage panel opens. Proves the shipped specs load and render one snapshot row per person over a real engine, that a
  * row's left click reaches the matching removal use case ({@link ManageMembers#removeMember} /
  * {@link ManageWhitelist#unwhitelist} / {@link ManageBans#unban}), and that each add button threads a typed name through
- * the engine's {@code input:} step into the matching grant — the two members buttons fixing the CO_OWNER and MANAGER
+ * the engine's {@code input:} step into the matching grant. The two members buttons fixing the CO_OWNER and MANAGER
  * roles, the whitelist button whitelisting, and the bans button imposing a permanent, reasonless ban. Drives the façade
  * through a synchronous scheduler so the async snapshot and the entity render run inline, and stands a recording prompt
  * in for the text-input seam so an add submit is driven by hand.
@@ -241,7 +241,7 @@ class PwarpPeopleMenuTest {
         fireClick(BANS_ADD_SLOT, ClickType.LEFT);
         prompt.submit("Bob");
 
-        // A GUI ban is permanent and reasonless — empty duration, empty reason; the command owns timed/reasoned bans.
+        // A GUI ban is permanent and reasonless: empty duration, empty reason; the command owns timed/reasoned bans.
         verify(manageBans)
                 .ban(
                         eq(viewer),

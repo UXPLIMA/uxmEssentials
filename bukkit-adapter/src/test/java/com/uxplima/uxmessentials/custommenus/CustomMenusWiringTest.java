@@ -40,7 +40,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
  * Wiring-level smoke for the custommenus context: building the wiring over the real generic menu vocabulary loads the
- * operator's {@code menus/*.conf}, registers the {@code /menu} command, and surfaces the loaded names — and the
+ * operator's {@code menus/*.conf}, registers the {@code /menu} command, and surfaces the loaded names, and the
  * shipped {@code example.conf} is itself a valid spec against that vocabulary, so a fresh install lands a working
  * sample. The bindings here register exactly the generic vocabulary {@code PluginModule} installs at startup.
  */
@@ -232,7 +232,7 @@ class CustomMenusWiringTest {
         }
     }
 
-    /** A permissions double that grants everything — the wiring smoke never gates on a real node. */
+    /** A permissions double that grants everything: the wiring smoke never gates on a real node. */
     private static final class AllowAllPermissions implements Permissions {
         @Override
         public boolean has(PlayerRef who, String node) {

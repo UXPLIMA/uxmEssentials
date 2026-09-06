@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /pwarp rate <name> <1-5>}: any viewer who can see a warp awards it a star rating, driving the Bayesian
  * {@code rating_score} the "top rated" browse sorts on. A star outside 1..5 is rejected
  * ({@link PlayerWarpError#RATING_INVALID}); a missing warp is {@link PlayerWarpError#NOT_FOUND}; the owner may not
- * rate their own warp ({@link PlayerWarpError#CANNOT_RATE_OWN}) — self-rating from your own account is the cheapest
+ * rate their own warp ({@link PlayerWarpError#CANNOT_RATE_OWN}). Self-rating from your own account is the cheapest
  * score-boost, so blocking the owner closes the obvious hole and the Bayesian smoothing blunts the rest.
  *
  * <p>A valid vote upserts the rater's star, then recomputes the denormalised rollup from the store's tally and global
@@ -32,8 +32,8 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * the vote rows.
  *
  * <p>When the {@code ratings.rewards} sub-group is enabled the vote also grants a configured reward, deduped so it
- * cannot be farmed: the rater is rewarded once per warp (dedup id {@value #RATER_REWARD_ID} — re-rating the same
- * warp grants nothing) and the owner is rewarded once per <em>unique</em> rater (dedup id {@code "rater:<uuid>"} — a
+ * cannot be farmed: the rater is rewarded once per warp (dedup id {@value #RATER_REWARD_ID}, re-rating the same
+ * warp grants nothing) and the owner is rewarded once per <em>unique</em> rater (dedup id {@code "rater:<uuid>"}, a
  * different rater triggers a fresh owner grant). With the sub-group disabled the reward collaborators are absent
  * ({@code Optional.empty()}), so nothing is granted and no reward row is written.
  */
@@ -106,7 +106,7 @@ public final class RatePlayerWarp {
     /**
      * Reward the rater once per warp: skipped entirely when no rater reward is configured, otherwise the
      * {@value #RATER_REWARD_ID} dedup row is written on the first rating and blocks every later one, so re-rating the
-     * same warp grants nothing — the anti-farming invariant. With no reward configured there is nothing to farm, so
+     * same warp grants nothing: the anti-farming invariant. With no reward configured there is nothing to farm, so
      * no dedup row and no message are written either.
      */
     private void rewardRater(RatingRewards active, PlayerRef actor, PlayerWarpName name, PlayerWarpId id, Instant now) {

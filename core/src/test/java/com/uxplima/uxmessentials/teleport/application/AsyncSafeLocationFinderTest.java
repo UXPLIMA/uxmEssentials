@@ -24,9 +24,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the async safe-search primitive over a fake {@link ChunkAccess}: the finder samples a point, asks the
- * port to probe it (never a synchronous chunk read here — the port is a plain future), and runs the pure
+ * port to probe it (never a synchronous chunk read here. The port is a plain future), and runs the pure
  * {@link SafeSearchPolicy} over whatever the probe returns. A safe candidate becomes an {@link
- * RtpSafeLocation}; an unsafe one, an excluded-biome one, and an absent probe all resolve to empty — and the
+ * RtpSafeLocation}; an unsafe one, an excluded-biome one, and an absent probe all resolve to empty, and the
  * absent-probe case must complete without blocking, proving the finder never orphans a queue slot.
  */
 class AsyncSafeLocationFinderTest {
@@ -37,7 +37,7 @@ class AsyncSafeLocationFinderTest {
     // border is effectively unbounded, so only the biome / ground checks decide the verdict.
     private final SafeSearchArea area = new SafeSearchArea(WORLD, 0.0, 0.0, 0.0, 10_000.0, 1_000_000.0);
 
-    // The real, pure policy — reused so the test proves the finder actually consults it, not a stub.
+    // The real, pure policy: reused so the test proves the finder actually consults it, not a stub.
     private final SafeSearchPolicy policy = new SafeSearchPolicy(
             Set.of(BiomeName.of("ocean")), Set.of(BlockTypeName.of("lava")), YBand.unbounded(), false);
 
@@ -77,7 +77,7 @@ class AsyncSafeLocationFinderTest {
 
     @Test
     void anExcludedBiomeCandidateIsRejectedProvingThePolicyIsConsulted() {
-        // Standing-safe is true, so only the excluded-biome rule can reject it — that it does proves the
+        // Standing-safe is true, so only the excluded-biome rule can reject it. That it does proves the
         // finder runs the candidate through the SafeSearchPolicy rather than accepting any probed column.
         SafeCandidate ocean = new SafeCandidate(
                 Position.of(WORLD, 200.5, 80.0, 200.5), BiomeName.of("ocean"), true, false, BlockTypeName.of("sand"));

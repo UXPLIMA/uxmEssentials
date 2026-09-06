@@ -42,13 +42,13 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The proof that a list-backed menu degrades to a paged Bedrock form: the current page's entries become buttons after
  * the static ones, form-native Previous/Next buttons appear only when a further page exists, and tapping one re-sends
- * the form one page over — while a static-only menu adds no page controls at all. A real {@link MenuSpecLoader} and
+ * the form one page over, while a static-only menu adds no page controls at all. A real {@link MenuSpecLoader} and
  * {@link Menus} drive it; a fake {@link BedrockDetector} / {@link BedrockScreen} stand in for the Cumulus/Floodgate
  * SDK, a {@code compileOnly} soft-depend absent from the test runtime.
  */
 class BedrockPaginationGoldenTest {
 
-    // A static actionable "Home" button plus a list of five warps over three content slots — page 0 shows three,
+    // A static actionable "Home" button plus a list of five warps over three content slots: page 0 shows three,
     // page 1 shows two. The template name is the entry itself, so every warp button is distinguishable.
     private static final String WARPS = """
             title = "Warps"
@@ -124,7 +124,7 @@ class BedrockPaginationGoldenTest {
         assertThat(screen.title).as("the form carries the menu's own title").isEqualTo("Warps");
         assertThat(screen.buttons)
                 .extracting(BedrockButton::text)
-                .as("static Home, then page 0's three warp entries, then Next — no Previous on the first page")
+                .as("static Home, then page 0's three warp entries, then Next. No Previous on the first page")
                 .containsExactly("Home", "w1", "w2", "w3", "gui.page.next");
         assertThat(screen.buttons)
                 .extracting(BedrockButton::image)
@@ -168,12 +168,12 @@ class BedrockPaginationGoldenTest {
         assertThat(screen.buttons)
                 .extracting(BedrockButton::text)
                 .as(
-                        "the form is re-sent for page 1: static Home, the last two entries, then Previous — no Next on the last page")
+                        "the form is re-sent for page 1: static Home, the last two entries, then Previous, no Next on the last page")
                 .containsExactly("Home", "w4", "w5", "gui.page.previous");
 
         screen.tap(1);
         assertThat(picked.get())
-                .as("button 1 on page 1 is entry w4 — the re-sent form routes into page 1's entries")
+                .as("button 1 on page 1 is entry w4. The re-sent form routes into page 1's entries")
                 .isEqualTo("w4");
 
         screen.tap(3);
@@ -193,7 +193,7 @@ class BedrockPaginationGoldenTest {
 
         assertThat(screen.buttons)
                 .extracting(BedrockButton::text)
-                .as("no list item, so the form is just the static buttons — byte-identical to before this slice")
+                .as("no list item, so the form is just the static buttons, byte-identical to before this slice")
                 .containsExactly("Alpha", "Beta");
     }
 

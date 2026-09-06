@@ -66,10 +66,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The {@code /loan} dashboard golden test: the engine-rendered panel must draw the exact window the original
  * {@code LoanGuiView} drew, and its loan strip and request button must keep their behaviour. The panel draws the
  * SUNFLOWER@4 credit profile, one BOOK per active loan across slots 10..16, the EMERALD_BLOCK@20 request button and
- * the BARRIER@22 close over a grey-glass backdrop — snapshotted as {@code (slot -> material, plain name)} and
+ * the BARRIER@22 close over a grey-glass backdrop, snapshotted as {@code (slot -> material, plain name)} and
  * asserted equal slot for slot to the baseline the old view produced (frozen here so the old class could be
  * deleted), with the loan entry's lore asserted line for line. A left click on a loan pays an installment, a right
- * click pays it off, and a shift-click prompts a custom amount — all running the {@code LoanService} repayment; the
+ * click pays it off, and a shift-click prompts a custom amount. All running the {@code LoanService} repayment; the
  * custom-amount and the request flows ride the anvil seam, which MockBukkit leaves unimplemented, so they are driven
  * through the package-private apply seam, and the request button is shown to open the engine currency picker.
  */
@@ -181,7 +181,7 @@ class EconomyLoanGoldenTest {
 
     // The shift-click custom-amount prompt and the request flow's amount/installment prompts ride the anvil seam,
     // which MockBukkit leaves unimplemented (no player.openAnvil), so the click that opens them cannot be exercised
-    // here. Their apply branches — the seam the prompt's submit callback drives — are verified in
+    // here. Their apply branches, the seam the prompt's submit callback drives, are verified in
     // LoanDashboardApplyTest, which lives in the menu's own package and so can drive the package-private
     // applyCustomRepayment / applyAmount / applyInstallments. This golden test covers the click-driven flows the
     // engine routes: the render, the left/right repayment clicks, the request-button picker open, and close.
@@ -213,7 +213,7 @@ class EconomyLoanGoldenTest {
      * The slot -> (material, plain name) map the dashboard produces for a one-loan fixture: the SUNFLOWER@4 profile,
      * the BOOK@10 loan, the EMERALD_BLOCK@20 request and the BARRIER@22 close, each carrying its catalog key (the
      * test's {@code KeyMessages} returns the key verbatim, so a wrong key or material still mismatches). The
-     * grey-glass backdrop fills every other slot — except the unfilled loan-strip cells (11..16), which the engine
+     * grey-glass backdrop fills every other slot. Except the unfilled loan-strip cells (11..16), which the engine
      * list runtime leaves empty rather than backed with filler, the same convention every engine list menu follows.
      */
     private static Map<Integer, Snapshot> baseline() {

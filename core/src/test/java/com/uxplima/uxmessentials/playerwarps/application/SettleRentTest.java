@@ -92,7 +92,7 @@ class SettleRentTest {
 
         assertThat(outcome).isEqualTo(RentOutcome.ARCHIVED);
         assertThat(repo.stored("keep").status()).isEqualTo(WarpStatus.ARCHIVED);
-        // Archiving never charges — the grace window is a payment window, not the archive step.
+        // Archiving never charges: the grace window is a payment window, not the archive step.
         assertThat(economy.lastCollectWarp).isNull();
     }
 
@@ -192,7 +192,7 @@ class SettleRentTest {
         assertThat(outcome).isEqualTo(RentOutcome.UNCHANGED);
         PlayerWarp stored = repo.stored("roost");
         assertThat(stored.status()).isEqualTo(WarpStatus.SUSPENDED);
-        // The archive deadline is untouched, so the warp is archived only once that lapses — never hard-deleted here.
+        // The archive deadline is untouched, so the warp is archived only once that lapses: never hard-deleted here.
         assertThat(stored.rent().orElseThrow().archiveAfter()).contains(archiveAfter);
     }
 

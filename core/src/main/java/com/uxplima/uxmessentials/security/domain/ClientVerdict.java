@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.security.domain;
 
 /**
  * The outcome of judging one client brand against a {@link ClientPolicy}: whether the player is allowed to stay on
- * this join, and whether the brand is flagged for staff attention. The two flags are independent — a brand can be
+ * this join, and whether the brand is flagged for staff attention. The two flags are independent. A brand can be
  * allowed yet flagged (the {@link ClientIdMode#FLAG} observe mode), allowed and unremarkable, or denied.
  *
  * @param allowed whether the player may join with this brand (a denied brand is kicked on join)

@@ -86,7 +86,7 @@ class NetworkMessageCodecTest {
         // A frame from a newer build carrying a MessageType this version does not know: the whole decode path
         // must reject it (so the bus drops it) rather than mis-decode or crash a peer mid rolling-upgrade.
         byte[] frame = NetworkMessageCodec.encode(new HomeChanged("survival-1", OWNER));
-        frame[1] = 120; // the wire-tag byte — frame[0] is the protocol version
+        frame[1] = 120; // the wire-tag byte. Frame[0] is the protocol version
 
         assertThatThrownBy(() -> NetworkMessageCodec.decode(frame)).isInstanceOf(IllegalArgumentException.class);
     }

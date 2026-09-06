@@ -39,7 +39,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * Pins the self-service {@code /pwarp} subcommand wiring: each verb parses its arguments and drives the right use
- * case with them, and each is gated by its own permission node. The critical case is the password threading — a
+ * case with them, and each is gated by its own permission node. The critical case is the password threading, a
  * bare {@code /pwarp <name>} teleports with {@link Optional#empty()} while {@code /pwarp <name> <password>} threads
  * the entered password to {@link UsePlayerWarp}'s {@code Optional<String>} overload (the fix that makes PASSWORD
  * warps usable again). The inline scheduler runs the off-tick task within the dispatch so the use-case call is
@@ -117,7 +117,7 @@ class PlayerWarpSubcommandWiringTest {
 
     @Test
     void rateIsRefusedWithoutItsNode() {
-        PlayerMock player = server.addPlayer("Bob"); // not op — holds only the base use node granted below
+        PlayerMock player = server.addPlayer("Bob"); // not op. Holds only the base use node granted below
         player.addAttachment(MockBukkit.createMockPlugin(), "uxmessentials.pwarp.use", true);
 
         // Without uxmessentials.pwarp.rate the rate literal is filtered out by its .requires, so the input no longer

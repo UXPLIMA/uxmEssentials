@@ -47,7 +47,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The player-warps command paths through the real use cases against an in-memory repository and a recording
- * teleporter — the same wiring the Brigadier handlers drive, minus Bukkit. It proves that {@code /setpwarp}
+ * teleporter: the same wiring the Brigadier handlers drive, minus Bukkit. It proves that {@code /setpwarp}
  * persists a warp under its globally-unique name and re-anchors in place, that a name already held by another
  * player is refused, that a set past the resolved per-owner limit is refused, that {@code /pwarp} delegates
  * execution to the teleport context, that the fail-closed access gate lets an owner reach their own private warp
@@ -162,7 +162,7 @@ class PlayerWarpCommandPathTest {
     @Test
     void setPwarpOnAReservedVerbNameIsRefused() {
         // "set" is a /pwarp verb literal; a warp named after it would be shadowed and unreachable, so creation is
-        // refused before any row is written — the whole point of reserving the command-verb tokens.
+        // refused before any row is written: the whole point of reserving the command-verb tokens.
         Result<Unit, PlayerWarpError> result = setWarp(10).set(alice, "Alice", PlayerWarpName.of("set"), at(0, 0, 0));
 
         assertThat(result.errorOrThrow()).isEqualTo(PlayerWarpError.RESERVED_NAME);
@@ -318,7 +318,7 @@ class PlayerWarpCommandPathTest {
     private UsePlayerWarp usePwarp() {
         // The command paths under test exercise only the owner-reaches-own and public-admits-non-member rules, so
         // the ban/member/whitelist/password stores are empty no-ops and the cooldown gate is open; the economy seam
-        // stays absent (a priced warp would teleport for free) — none of these paths set a price.
+        // stays absent (a priced warp would teleport for free): none of these paths set a price.
         return new UsePlayerWarp(
                 repository,
                 teleporter,

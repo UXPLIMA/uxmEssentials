@@ -33,16 +33,16 @@ import org.jspecify.annotations.Nullable;
  * {@code {player}} placeholder substituted, each message line is sent to the voter as a parsed MiniMessage
  * component, each broadcast line is sent to every online player (with {@code {player}} expanded to the voter's
  * name), and each {@link ItemReward} is built into an {@link ItemStack} and added to the voter's inventory,
- * with any overflow dropped at their feet — the same give-or-drop policy the kits context uses. A reward whose
+ * with any overflow dropped at their feet, the same give-or-drop policy the kits context uses. A reward whose
  * material name does not resolve is skipped with one warn line, never throwing, so one typo cannot abort the
  * rest of the grant.
  *
  * <p>For an <b>offline</b> voter only the grant's commands are durable, so they are queued through
  * {@link VoteRepository#enqueue(QueuedReward)} (the existing offline batch the join handler drains) with the
- * {@code {player}} placeholder left raw — the drain substitutes it when the voter next joins. The enqueue is a
+ * {@code {player}} placeholder left raw: the drain substitutes it when the voter next joins. The enqueue is a
  * database write, so it hops off the tick thread via the {@link Scheduler}. Messages, broadcasts, and items are
  * skipped offline: there is no inventory to fill and no viewer to message. An offline queue cap bounds how many
- * queued reward commands one voter may stack up while away ({@code 0} disables it) — the cap is checked against
+ * queued reward commands one voter may stack up while away ({@code 0} disables it). The cap is checked against
  * {@link VoteRepository#queuedCount(PlayerRef)}, which counts command rows, not batches; a vote past the cap
  * still counts toward totals and the party, only its durable offline reward is dropped.
  *
@@ -66,7 +66,7 @@ public final class BukkitRewardApplier implements RewardApplier {
      * @param offlineLimit the most queued reward commands an offline voter may have stored at once; {@code 0}
      *                     (or any non-positive value) means no cap. The limit is compared against
      *                     {@link VoteRepository#queuedCount(PlayerRef)}, which counts command rows. A vote that
-     *                     would exceed the cap still counts toward totals and the party — only its durable
+     *                     would exceed the cap still counts toward totals and the party, only its durable
      *                     offline reward is dropped
      */
     public BukkitRewardApplier(
@@ -96,7 +96,7 @@ public final class BukkitRewardApplier implements RewardApplier {
 
     private void queueOffline(PlayerRef voter, RewardGrant grant) {
         // Only the commands are durable for an offline voter; the {player} token stays raw so the join-time
-        // drain substitutes it then. Skip messages/broadcasts/items — there is no viewer and no inventory.
+        // drain substitutes it then. Skip messages/broadcasts/items: there is no viewer and no inventory.
         if (grant.commands().isEmpty()) {
             return;
         }

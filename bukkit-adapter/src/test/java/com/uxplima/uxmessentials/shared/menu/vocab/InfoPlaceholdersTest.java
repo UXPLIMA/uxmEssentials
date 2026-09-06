@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The Bukkit-free part of the info-placeholder pack. {@link InfoPlaceholders#worldClock(long)} is a pure Minecraft
  * tick-to-clock conversion exercised across the day, and the {@code stat_} fallback's fail-soft is checked for an
- * unparseable statistic name — that path short-circuits on the bad name before it ever looks up an online player, so
+ * unparseable statistic name. That path short-circuits on the bad name before it ever looks up an online player, so
  * it resolves to empty with no server. The live inventory / world / statistic reads need a real player and are
  * covered by {@link com.uxplima.uxmessentials.shared.menu.InfoPlaceholderGoldenTest}.
  */

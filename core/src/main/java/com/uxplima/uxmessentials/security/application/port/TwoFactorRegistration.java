@@ -10,11 +10,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A player's stored two-factor registration as the application reads it back: which factors they hold and when they
- * first enrolled. A player may hold a TOTP secret, a PIN, or both — either is a valid second factor — so both are
+ * first enrolled. A player may hold a TOTP secret, a PIN, or both, either is a valid second factor, so both are
  * optional here and {@link #hasAnyFactor()} tells the application whether the player is enrolled at all.
  *
  * <p>The TOTP secret is present in its decrypted {@link TwoFactorSecret} form because verification recomputes the
- * expected code from the shared secret; the PIN is deliberately <b>absent</b> — it is a one-way hash the store
+ * expected code from the shared secret; the PIN is deliberately <b>absent</b>. It is a one-way hash the store
  * verifies against internally through {@link TwoFactorRepository#verifyPin}, and is never reconstructed here, so a
  * PIN plaintext never reaches the application. {@code pinSet} records only that a hash exists.
  *
@@ -48,7 +48,7 @@ public record TwoFactorRegistration(
         return secret != null;
     }
 
-    /** Whether the player holds at least one factor — the signal that they are enrolled and must verify. */
+    /** Whether the player holds at least one factor: the signal that they are enrolled and must verify. */
     public boolean hasAnyFactor() {
         return secret != null || pinSet;
     }

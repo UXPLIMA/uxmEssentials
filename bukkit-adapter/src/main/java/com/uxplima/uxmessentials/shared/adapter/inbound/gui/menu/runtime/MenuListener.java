@@ -92,17 +92,17 @@ import org.jspecify.annotations.Nullable;
  * mid-menu. A click is always cancelled (menus never let an item be taken), then routed: a pagination button
  * re-renders the same holder on a new page, while any other slot fires the actions its spec bound to the gesture.
  * Actions run through the {@link Scheduler} entity hop so feature use-cases land on the viewer's region thread, and
- * the live {@link Player} is resolved from the viewer's UUID at that point — a viewer who logged off in the gap is
+ * the live {@link Player} is resolved from the viewer's UUID at that point. A viewer who logged off in the gap is
  * simply skipped.
  *
- * <p>Closing the window — whether the player closed it or quit with it open — funnels through one
+ * <p>Closing the window (whether the player closed it or quit with it open) funnels through one
  * {@link #closeMenu} choke-point that stops the refresh task. Both close paths are idempotent, so a double close is
  * a harmless no-op.
  */
 @NullMarked
 public final class MenuListener implements Listener {
 
-    /** Operator diagnostics for a paged list flip: an overflowing source, or a query that threw — logged, page kept. */
+    /** Operator diagnostics for a paged list flip: an overflowing source, or a query that threw, logged, page kept. */
     private static final Logger LOG = Logger.getLogger(MenuListener.class.getName());
 
     private final MenuRenderer renderer;
@@ -112,8 +112,8 @@ public final class MenuListener implements Listener {
     private final Plugin plugin;
 
     /**
-     * The streaming list sources a page flip re-queries. A paged list holds no cached corpus to re-slice — only the
-     * page on screen — so flipping it must ask the source for the next page, which this registry resolves by id.
+     * The streaming list sources a page flip re-queries. A paged list holds no cached corpus to re-slice, only the
+     * page on screen, so flipping it must ask the source for the next page, which this registry resolves by id.
      * Empty on every engine wired without one (a plain/spec-only test fixture and any production menu set with no
      * paged source): no menu on such an engine carries a paged view, so the flip path never reaches this registry and
      * a flip stays the synchronous cache re-slice it always was.
@@ -130,7 +130,7 @@ public final class MenuListener implements Listener {
     /**
      * The opener a property's click hook uses to show its picker as an engine child window, threaded into the
      * {@link ClickContext} on the editor path. Null on a spec-only engine and on an editor engine wired without it,
-     * in which case a property that opens a picker falls back to its uxmLib selector — both runtimes coexist.
+     * in which case a property that opens a picker falls back to its uxmLib selector: both runtimes coexist.
      */
     @Nullable private final SelectorOpener selectorOpener;
 
@@ -150,8 +150,8 @@ public final class MenuListener implements Listener {
     @Nullable private final MenuTextPrompt textPrompt;
 
     /**
-     * The providers behind a menu's {@code content {}} regions. Null on an engine wired without any — every
-     * spec-only test fixture — in which case a region refuses every click and hands nothing back on close, exactly
+     * The providers behind a menu's {@code content {}} regions. Null on an engine wired without any, every
+     * spec-only test fixture. In which case a region refuses every click and hands nothing back on close, exactly
      * what an unregistered provider gets. Only production wiring, which holds the feature-populated registry,
      * passes it.
      */
@@ -228,8 +228,8 @@ public final class MenuListener implements Listener {
     /**
      * The anti-spam-aware form carrying the cooldown floor and its clock, kept so every existing construction and test
      * (all of which predate paged sources) compiles unchanged. Delegates to the canonical constructor with an empty
-     * {@link PagedListSourceRegistry}, so a listener built here can never flip a paged list — no menu it routes carries
-     * a paged view — and a flip stays the synchronous cache re-slice it always was.
+     * {@link PagedListSourceRegistry}, so a listener built here can never flip a paged list. No menu it routes carries
+     * a paged view, and a flip stays the synchronous cache re-slice it always was.
      */
     public MenuListener(
             MenuRenderer renderer,
@@ -260,7 +260,7 @@ public final class MenuListener implements Listener {
     /**
      * The paged-source-aware form, kept so every construction and test that predates the text-input seam compiles
      * unchanged. Delegates to the canonical constructor with no text prompt, so a listener built here cannot drive an
-     * {@code input:} step (it runs that step's cancel refs instead) — no menu such a listener routes carries one.
+     * {@code input:} step (it runs that step's cancel refs instead): no menu such a listener routes carries one.
      */
     public MenuListener(
             MenuRenderer renderer,
@@ -328,7 +328,7 @@ public final class MenuListener implements Listener {
     /**
      * The canonical constructor, carrying on top of everything above the content-region providers a menu's live-item
      * slots are filled and policed by. Every shorter form delegates here with none, so a menu with no
-     * {@code content {}} block — every menu before this seam existed — routes exactly as before.
+     * {@code content {}} block, every menu before this seam existed, routes exactly as before.
      */
     public MenuListener(
             MenuRenderer renderer,
@@ -378,7 +378,7 @@ public final class MenuListener implements Listener {
             return;
         }
         // A capture-enabled grid decides cancellation per action, so the operator can pull items off their own
-        // inventory onto the canvas; every other menu — and a plain grid — blanket-cancels, so no item ever moves.
+        // inventory onto the canvas; every other menu, and a plain grid, blanket-cancels, so no item ever moves.
         GridViewState captureGrid = holder.gridView().orElse(null);
         if (captureGrid != null && captureEnabled(captureGrid) && event.getWhoClicked() instanceof Player) {
             handleCaptureGridClick(holder, captureGrid, event);
@@ -429,8 +429,8 @@ public final class MenuListener implements Listener {
     /**
      * Route a drag gesture over a menu window. A drag that touches any slot of a capture-enabled grid's top canvas is
      * cancelled and each dragged content cell captures a copy of the held item, so the operator can paint a row by
-     * dragging across it; a drag that stays entirely in their own inventory is left alone. Every other menu — and a
-     * plain grid — cancels a drag outright: a drag is not part of a menu's interaction model, and cancelling closes the
+     * dragging across it; a drag that stays entirely in their own inventory is left alone. Every other menu, and a
+     * plain grid. Cancels a drag outright: a drag is not part of a menu's interaction model, and cancelling closes the
      * one gap the blanket click-cancel does not (an item cannot reach a menu's cursor anyway, so this changes nothing a
      * player could observe, it only fails safe).
      */
@@ -457,7 +457,7 @@ public final class MenuListener implements Listener {
      * the cancel lifted, which is the single place an item may move inside a menu window.
      *
      * <p>A shift-click from the viewer's own inventory is handled rather than delegated, because vanilla would
-     * scatter the stack across whatever top slots happen to be free — chrome gaps included — instead of into the
+     * scatter the stack across whatever top slots happen to be free, chrome gaps included, instead of into the
      * region. The engine therefore performs that insert itself, into the first free slot of a region that accepts it.
      *
      * <p>Two gestures are refused outright even in an editable region: a double-click, which vanilla resolves by
@@ -620,10 +620,10 @@ public final class MenuListener implements Listener {
 
     /**
      * Fire the public, cancellable {@link MenuClickEvent} for a spec-slot click and report whether a listener vetoed
-     * it. A veto stops the whole click-handling — the item-drag flow, conditions, requirements and actions alike —
+     * it. A veto stops the whole click-handling (the item-drag flow, conditions, requirements and actions alike)
      * before any of it runs; the engine's own hook, fired at the click choke-point right before {@link #routeSpecClick}.
      * It is independent of the vanilla {@link InventoryClickEvent}, which is already cancelled either way so the item
-     * never moves — cancelling this one does not un-cancel that one. The nav (next/previous/jump) branch lives inside
+     * never moves: cancelling this one does not un-cancel that one. The nav (next/previous/jump) branch lives inside
      * {@link #handleClick}, downstream of here, so this fires for a pagination-button click too; a listener that only
      * cares about real button clicks can read {@link MenuClickEvent#getItemId()}. Fires on the viewer's own region
      * thread the click already runs on.
@@ -637,7 +637,7 @@ public final class MenuListener implements Listener {
     /**
      * Best-effort stable id of the item spec that produced the clicked slot: the operator's own key for it in the
      * menu's {@code items {}} block, found by identity. A list cell renders the list's nested template, which is not a
-     * top-level entry and so carries no such key — such a click resolves to {@code null}, and the event still fires,
+     * top-level entry and so carries no such key. Such a click resolves to {@code null}, and the event still fires,
      * just without an id.
      */
     @Nullable private static String itemIdOf(MenuHolder holder, RenderedSlot rs) {
@@ -651,7 +651,7 @@ public final class MenuListener implements Listener {
 
     /**
      * Route a click on a rendered spec slot. When the slot's item carries an item-drag binding and the viewer is
-     * holding an item on their cursor, the click runs the drag flow — the cursor is captured, validated, and (on a
+     * holding an item on their cursor, the click runs the drag flow. The cursor is captured, validated, and (on a
      * pass) fed to the item-drag actions rather than the ordinary click. An empty cursor, or a slot with no drag
      * binding, takes the normal click exactly as before, so a plain item behaves identically. The click is already
      * cancelled by the caller either way, so nothing the viewer holds is ever moved by vanilla.
@@ -668,10 +668,10 @@ public final class MenuListener implements Listener {
 
     /**
      * Handle a click on an item-drag slot made while holding an item on the cursor. The click is already cancelled, so
-     * vanilla never moves the item — no dupe. The cursor is validated against the item's rules; on a pass the drag
+     * vanilla never moves the item, no dupe. The cursor is validated against the item's rules; on a pass the drag
      * actions fire with the dropped item exposed as {@code %drag_material%}/{@code %drag_amount%}/{@code %drag_name%}
      * placeholders, and when the item consumes, the matched amount is removed from the cursor here on the viewer's own
-     * entity thread (the thread this click runs on) — a controlled, single-threaded mutation, never a vanilla move, so
+     * entity thread (the thread this click runs on). A controlled, single-threaded mutation, never a vanilla move, so
      * it cannot dupe. A failed match leaves the cursor untouched: a silent deny, since a "wrong item" line would spam
      * a mis-drop. It dispatches actions, so it is throttled by the same anti-spam window a normal action click is.
      */
@@ -697,7 +697,7 @@ public final class MenuListener implements Listener {
      * The context the drag actions run against: the open context (bound to the slot's list entry when it has one) with
      * the dropped item's {@code %drag_material%}/{@code %drag_amount%}/{@code %drag_name%} exposed as menu-local
      * placeholders, merged over the menu's own local block, so a drag action (and any message it emits) can reference
-     * the item — the same local-placeholder channel the renderer resolves in text.
+     * the item: the same local-placeholder channel the renderer resolves in text.
      */
     private MenuContext dragContext(MenuHolder holder, RenderedSlot rs, ItemStack cursor) {
         Map<String, String> locals = new LinkedHashMap<>(holder.ctx().localPlaceholders());
@@ -710,8 +710,8 @@ public final class MenuListener implements Listener {
 
     /**
      * Whether the held cursor satisfies the item-drag rules: its material is on the whitelist (an empty whitelist
-     * accepts any material), its stack size is at least the minimum (a minimum below one is read as one), and — when a
-     * name filter is set — its display name contains the filter case-insensitively. The name is read best-effort from
+     * accepts any material), its stack size is at least the minimum (a minimum below one is read as one), and, when a
+     * name filter is set: its display name contains the filter case-insensitively. The name is read best-effort from
      * the item's Adventure display name, falling back to the material name when the item is unnamed.
      */
     private boolean matches(ItemRuleSpec rules, ItemStack cursor) {
@@ -730,7 +730,7 @@ public final class MenuListener implements Listener {
                 .contains(rules.nameContains().toLowerCase(Locale.ROOT));
     }
 
-    /** The cursor's plain-text display name when it has one, else its material name — the {@code %drag_name%} value. */
+    /** The cursor's plain-text display name when it has one, else its material name, the {@code %drag_name%} value. */
     private static String plainName(ItemStack cursor) {
         ItemMeta meta = cursor.getItemMeta();
         if (meta != null && meta.hasDisplayName()) {
@@ -745,7 +745,7 @@ public final class MenuListener implements Listener {
     /**
      * Remove {@code amount} from the held cursor after a matched drag, clearing it to nothing when the stack empties.
      * A controlled write on the viewer's own entity thread through the click view, never a vanilla item move, so it
-     * cannot dupe — the click itself stays cancelled.
+     * cannot dupe: the click itself stays cancelled.
      */
     private void consumeCursor(InventoryClickEvent event, ItemStack cursor, int amount) {
         int remaining = cursor.getAmount() - amount;
@@ -761,7 +761,7 @@ public final class MenuListener implements Listener {
     /**
      * Route a click in a confirm window: the yes/no slot runs its decision exactly once. The single-fire guard on
      * the {@link ConfirmState} makes a stray second click in the same tick a no-op, and the window is closed before
-     * the decision runs — mirroring uxmLib's {@code ConfirmMenu} — so a decision that opens another menu is not
+     * the decision runs, mirroring uxmLib's {@code ConfirmMenu}, so a decision that opens another menu is not
      * clobbered by the close. The close funnels through the one {@code closeMenu}, so no second listener or teardown
      * path is introduced. A click on a non-button slot does nothing; the click is already cancelled.
      */
@@ -782,7 +782,7 @@ public final class MenuListener implements Listener {
      * Route a click in a selector window: the clicked button runs its handler exactly once, given the click gesture
      * so a list-entry button can branch (an option/add/back button ignores it). The single-fire guard on the
      * {@link SelectorState} makes a stray second click in the same tick a no-op, and the window is closed before the
-     * handler runs — mirroring the confirm flow — so a handler that reopens the parent editor (or the list child after
+     * handler runs, mirroring the confirm flow, so a handler that reopens the parent editor (or the list child after
      * a mutation) is not clobbered by the close. The close funnels through the one {@code closeMenu}, so no second
      * listener or teardown path is introduced. A click on a non-button slot does nothing; the click is already
      * cancelled. The handler itself (the property's async-setter-then-reopen loop) is enqueued on the viewer's entity
@@ -810,7 +810,7 @@ public final class MenuListener implements Listener {
     /**
      * Route a click in an editor window: a property slot runs that property's {@link EditableProperty#onClick} with a
      * freshly built {@link ClickContext}, a plain button (back, delete) runs its recorded action. Both hop to the
-     * viewer's entity thread first — the same hop a spec action takes — and re-resolve the live player there, so a
+     * viewer's entity thread first, the same hop a spec action takes, and re-resolve the live player there, so a
      * viewer who logged off in the gap is simply skipped and Bukkit is only ever touched on the owning thread. The
      * context's reopen hook repaints this editor in place, so the property's own setter-then-reopen loop redraws the
      * window the viewer is already looking at.
@@ -859,7 +859,7 @@ public final class MenuListener implements Listener {
      * Route a click in an entity-list window: an entity icon runs the spec's {@code onSelect} for the entity drawn at
      * that slot on the current page, a previous/next nav button re-paginates the same holder in place, and a
      * create/action button runs its recorded handler. Each branch hops to the viewer's entity thread and re-resolves
-     * the live player there — the same hop the editor and spec paths take — so a viewer who logged off in the gap is
+     * the live player there, the same hop the editor and spec paths take, so a viewer who logged off in the gap is
      * simply skipped and Bukkit is only ever touched on the owning thread. A nav flip re-renders the live inventory
      * (no new window), so the one listener and one teardown keep owning it.
      */
@@ -913,7 +913,7 @@ public final class MenuListener implements Listener {
      * Route a click in a slot-grid canvas: a previous/next nav button re-paginates the same holder in place, a
      * control-bar button runs its recorded handler, and a content cell invokes the caller's {@link GridHandlers}
      * content handler with the menu slot it maps to and whether it held an item. Each branch hops to the viewer's
-     * entity thread and re-resolves the live player there — the same hop the editor, list and spec paths take — so a
+     * entity thread and re-resolves the live player there (the same hop the editor, list and spec paths take) so a
      * viewer who logged off in the gap is simply skipped and Bukkit is only ever touched on the owning thread. The
      * content handler is handed a {@link GridView} bound to this holder, so a place / move / clear that mutates the
      * caller's edit model can repaint the same window in place.
@@ -1004,8 +1004,8 @@ public final class MenuListener implements Listener {
     }
 
     /**
-     * Core invariant of the capture grid: the top canvas never accepts or yields a real item — every transfer touching
-     * it is cancelled here — so "placing" only copies the held item's definition into the caller's edit model and
+     * Core invariant of the capture grid: the top canvas never accepts or yields a real item: every transfer touching
+     * it is cancelled here, so "placing" only copies the held item's definition into the caller's edit model and
      * re-renders. The player's real items never move, so no dupe is possible. A click on the top canvas is always
      * cancelled and then either captures (a held item placed onto a content cell) or runs the ordinary editor gesture
      * ({@link #handleGridClick}); a click in the player's own bottom inventory stays free, except a shift-click appends
@@ -1015,7 +1015,7 @@ public final class MenuListener implements Listener {
         int topSize = event.getView().getTopInventory().getSize();
         int raw = event.getRawSlot();
         if (raw < 0) {
-            // A click outside the whole window (dropping their own item) — never the canvas's concern.
+            // A click outside the whole window (dropping their own item): never the canvas's concern.
             return;
         }
         if (raw < topSize) {
@@ -1043,7 +1043,7 @@ public final class MenuListener implements Listener {
 
     /**
      * A click in the viewer's own bottom inventory. A shift-click ({@code MOVE_TO_OTHER_INVENTORY}) is cancelled and the
-     * clicked item is appended to the first empty menu slot — the quick "send this to the canvas" gesture — and a
+     * clicked item is appended to the first empty menu slot, the quick "send this to the canvas" gesture, and a
      * double-click ({@code COLLECT_TO_CURSOR}) is cancelled so it cannot rake the top's display icons onto the cursor.
      * Every other bottom click is left alone, so the operator freely picks up and rearranges their own items.
      */
@@ -1099,7 +1099,7 @@ public final class MenuListener implements Listener {
         runOnGrid(holder, live -> onCapture.capture(new HolderGridView(holder, grid), live, menuSlot, copy));
     }
 
-    /** Whether {@code action} drops the cursor onto a slot — the gestures that mean "put this item here". */
+    /** Whether {@code action} drops the cursor onto a slot: the gestures that mean "put this item here". */
     private static boolean isPlaceOrSwap(InventoryAction action) {
         return action == InventoryAction.PLACE_ONE
                 || action == InventoryAction.PLACE_SOME
@@ -1219,7 +1219,7 @@ public final class MenuListener implements Listener {
 
     /**
      * Run a {@code confirm:} step: resolve its title against the open context, then open a yes/no window whose accept
-     * runs the {@code yes} refs and whose decline runs the {@code no} refs — each through the same continuation-aware
+     * runs the {@code yes} refs and whose decline runs the {@code no} refs, each through the same continuation-aware
      * walk, on the viewer's entity thread the confirm opener runs its decision on. Unlike {@code input:} it splits no
      * remaining chain: its two branches carry everything that follows either decision. An engine wired without a
      * confirm opener runs the {@code no} refs rather than dead-ending.
@@ -1242,7 +1242,7 @@ public final class MenuListener implements Listener {
      * Whether this click lands inside the anti-spam window and should be swallowed. The effective cooldown is the
      * menu's own {@code click-cooldown} when it sets a positive one, otherwise the server-wide default; when both are
      * zero there is no throttle and every click passes. A click closer to the last passed click than the cooldown is
-     * dropped silently — a "slow down" message would itself spam the chat, so nothing is sent — and only a passing
+     * dropped silently (a "slow down" message would itself spam the chat, so nothing is sent) and only a passing
      * click advances the per-holder stamp, so the window is always measured from the last click that actually fired.
      * Runs on the viewer's own entity thread, so the read-then-stamp is single-threaded per holder and needs no lock.
      */
@@ -1263,7 +1263,7 @@ public final class MenuListener implements Listener {
     /**
      * Walk one node of a gesture's else-chain: the fallback ladder tried once its main requirement block has already
      * failed. The rule mirrors an if / else-if / else ladder. If this branch's own requirement passes, its actions run
-     * and the walk stops — the first satisfied branch wins. Otherwise the walk continues to the next {@code orElse}
+     * and the walk stops: the first satisfied branch wins. Otherwise the walk continues to the next {@code orElse}
      * branch; when there is none, this branch's own block {@code deny} runs, so the tail of a ladder still has a deny
      * arm. A terminal else parses with {@link RequirementSpec#NONE}, which always passes, so its actions run
      * unconditionally as the "otherwise" arm. Each branch's own per-requirement success/deny actions fire inside
@@ -1286,9 +1286,9 @@ public final class MenuListener implements Listener {
      * reporting whether the block as a whole passes. The pass/fail rule is driven by {@code minimum}:
      *
      * <ul>
-     *   <li>{@code minimum <= 0} (the default) — every <em>mandatory</em> (non-optional) requirement must pass. An
+     *   <li>{@code minimum <= 0} (the default): every <em>mandatory</em> (non-optional) requirement must pass. An
      *       optional requirement failing does not fail the block, yet its per-requirement {@code deny} still runs.</li>
-     *   <li>{@code minimum > 0} — at least N of <em>all</em> requirements (optional included) must pass.</li>
+     *   <li>{@code minimum > 0}. At least N of <em>all</em> requirements (optional included) must pass.</li>
      * </ul>
      *
      * <p>With {@link RequirementSpec#stopAtSuccess()} and a positive {@code minimum}, the loop breaks the moment the
@@ -1323,8 +1323,8 @@ public final class MenuListener implements Listener {
      * Evaluate one requirement, run its per-requirement success or deny actions as a side effect, and report whether it
      * passed. The condition is resolved against the condition registry (so a valued token like {@code has-money:100}
      * reaches its handler with {@code value=100}, the same registry-aware split the action path takes) and then negated
-     * when the requirement was written with a leading {@code !}. An unregistered condition evaluates {@code false} —
-     * fail-closed — so a wiring gap denies rather than silently granting. The condition's args have their
+     * when the requirement was written with a leading {@code !}. An unregistered condition evaluates {@code false}
+     * fail-closed, so a wiring gap denies rather than silently granting. The condition's args have their
      * {@code %argument_<name>%} tokens expanded from the arguments the menu was opened with first, so a click
      * requirement can gate on a typed open-command's argument; an argument-less open takes the identity fast-path.
      * Both branches route their refs through {@link #runRef}, so per-requirement actions honour the same modifiers and
@@ -1353,7 +1353,7 @@ public final class MenuListener implements Listener {
      * shared {@link ClickKind#ANY} list must hold; an unregistered condition fails closed so a wiring gap blocks
      * the click rather than silently running it. An empty condition list always passes. Each ref is first resolved
      * against the condition registry, so a valued condition written {@code has-money:100} splits its head off and the
-     * handler sees {@code value=100} in its args — the same registry-aware split the action path takes. Each ref's args
+     * handler sees {@code value=100} in its args: the same registry-aware split the action path takes. Each ref's args
      * then have their {@code %argument_<name>%} tokens expanded from the arguments the menu was opened with, so a
      * per-gesture condition can read a typed open-command's argument; an argument-less open takes the identity fast-path.
      */
@@ -1384,7 +1384,7 @@ public final class MenuListener implements Listener {
     /**
      * Run one bound action ref, applying its per-action modifiers. A failed chance roll denies the action: its
      * {@code deny} fallback (if any) runs through this same path and the main action is skipped. An action that
-     * survives the roll is dispatched now, or after its delay — waited off-tick, then hopped back to the viewer's
+     * survives the roll is dispatched now, or after its delay. Waited off-tick, then hopped back to the viewer's
      * entity thread. A ref with no modifiers (fires immediately, always, no fallback) takes the direct dispatch and
      * behaves exactly as the action loop did before modifiers existed.
      */
@@ -1434,8 +1434,8 @@ public final class MenuListener implements Listener {
     /**
      * Hop to the viewer's entity thread, re-resolve the live player, and run one bound action there. Before the
      * action context is built, each of the ref's argument values has its {@code %argument_<name>%} tokens expanded
-     * from the arguments the menu was opened with — the same first-class substitution rendered menu TEXT already
-     * gets — so an action written {@code give-money:%argument_amount%} actually acts on the opened amount. A menu
+     * from the arguments the menu was opened with. The same first-class substitution rendered menu TEXT already
+     * gets, so an action written {@code give-money:%argument_amount%} actually acts on the opened amount. A menu
      * opened without command arguments takes the identity fast-path and passes the ref's args through unchanged.
      */
     private void dispatch(
@@ -1446,8 +1446,8 @@ public final class MenuListener implements Listener {
                 return;
             }
             Map<String, String> args = ActionArguments.resolve(ref.args(), base.arguments());
-            // Expand the menu-local placeholders too — the open spec's own placeholders{} block, and the item-drag
-            // flow's %drag_*% tokens — so an action reads the dropped item the same way the renderer reads it in text.
+            // Expand the menu-local placeholders too. The open spec's own placeholders{} block, and the item-drag
+            // flow's %drag_*% tokens, so an action reads the dropped item the same way the renderer reads it in text.
             args = ActionArguments.resolveLocals(args, base.localPlaceholders());
             handler.accept(new MenuActionContext(base, live, kind, args, new HolderControl(holder)));
         });
@@ -1522,8 +1522,8 @@ public final class MenuListener implements Listener {
      * The one entry a {@code list-sort}/{@code list-filter}/{@code list-search} change takes into the paged re-query,
      * so the three controls and a page flip share the query, the in-flight flag, the thread hops and the render. Runs on
      * the viewer's entity thread. It finds the paged list the control names (an unknown id is a logged no-op, never a
-     * crash), drops out for a plain list or one not shown as paged (neither can sort or filter at the source), then —
-     * unless a query is already in flight — mutates the list's query state (which zeroes its page) and issues the same
+     * crash), drops out for a plain list or one not shown as paged (neither can sort or filter at the source), then
+     * unless a query is already in flight. Mutates the list's query state (which zeroes its page) and issues the same
      * off-thread query {@link #startPagedQuery} runs for a flip, targeting page zero because the changed sort or filter
      * makes any later page meaningless.
      */
@@ -1554,7 +1554,7 @@ public final class MenuListener implements Listener {
      * drives, and on submit store the typed line as the list's {@code key} filter through the shared
      * {@link #applyListControl} re-query; a cancel changes nothing. Runs on the viewer's entity thread, where the seam
      * delivers both callbacks. An engine wired without a prompt, or a list this menu does not carry, is a logged no-op.
-     * The prompt carries no label of its own — the operator's per-key input mode supplies the surface — so no
+     * The prompt carries no label of its own, the operator's per-key input mode supplies the surface, so no
      * player-facing text is produced here.
      */
     private void beginListSearch(MenuHolder holder, String listId, String key) {
@@ -1590,8 +1590,8 @@ public final class MenuListener implements Listener {
     }
 
     /**
-     * Re-render a single slot of the holder's window. The engine's {@code populate} path is whole-inventory — it has
-     * no per-slot renderer yet — so a correct partial redraw is a full {@link #repaint}: broader than the caller
+     * Re-render a single slot of the holder's window. The engine's {@code populate} path is whole-inventory: it has
+     * no per-slot renderer yet, so a correct partial redraw is a full {@link #repaint}: broader than the caller
      * asked, but idempotent (the same spec and cached lists are redrawn) and never wrong. An out-of-range slot is a
      * no-op, so a spec typo cannot repaint on every click. When per-slot rendering lands this narrows to the one slot.
      */
@@ -1625,12 +1625,12 @@ public final class MenuListener implements Listener {
     /**
      * Flip a paged list one page over by re-querying its source, rather than re-slicing a cache it does not hold.
      * Runs on the viewer's entity thread. Returns {@code false} when the menu's list is a plain in-memory source (or
-     * it has no list at all), so the caller takes the historic synchronous re-slice, byte for byte — the paged
+     * it has no list at all), so the caller takes the historic synchronous re-slice, byte for byte: the paged
      * registry is never consulted for such a menu, because a plain list is never given a {@link PagedListView}. For a
      * paged source it clamps to the reachable target page, builds the immutable {@link PageRequest} here, and hops to
      * {@link Scheduler#async} to fetch that page; the page on screen stays put until the new one lands. A second flip
      * while a query is in flight is dropped, not queued, so a mashed arrow issues one query at a time and a later page
-     * can never be overwritten by an earlier one. A flip that cannot move — already at the first or last page — leaves
+     * can never be overwritten by an earlier one. A flip that cannot move, already at the first or last page, leaves
      * the current page up and issues no query, matching what {@link com.uxplima.uxmessentials.shared.adapter.inbound
      * .gui.menu.eval.Pagination} does for a plain list: it clamps, it never wraps.
      */
@@ -1662,8 +1662,8 @@ public final class MenuListener implements Listener {
 
     /**
      * Set the in-flight flag and hop off the entity thread to fetch {@code target}. Every value the async body reads is
-     * built here, on the entity thread, and handed across immutable — the {@link PageRequest} from the list's live
-     * query state, the query context, and the viewer — so the async lambda touches no holder field and the holder's
+     * built here, on the entity thread, and handed across immutable. The {@link PageRequest} from the list's live
+     * query state, the query context, and the viewer, so the async lambda touches no holder field and the holder's
      * single-threaded contract holds.
      */
     private void startPagedQuery(
@@ -1683,7 +1683,7 @@ public final class MenuListener implements Listener {
 
     /**
      * Off the viewer's entity thread: fetch the requested page, then hop back to render it. Reads and writes no holder
-     * field here — every argument is an immutable value captured on the entity thread — so the holder's single-threaded
+     * field here (every argument is an immutable value captured on the entity thread) so the holder's single-threaded
      * contract holds. A query that throws is logged with context and hops back only to clear the in-flight flag, so the
      * page already on screen stays put and the arrows are freed for the next click rather than wedged.
      */
@@ -1720,7 +1720,7 @@ public final class MenuListener implements Listener {
     /**
      * On the viewer's entity thread: settle the flip. The in-flight flag is cleared first, so a viewer who closed the
      * window while the query ran frees the arrows for their next session rather than wedging them, and a closed window
-     * is then a clean early return — the render never runs against a dead holder and never throws. When the window is
+     * is then a clean early return, the render never runs against a dead holder and never throws. When the window is
      * still this holder's, the fetched page is committed: the list's query state records the new page and corpus total,
      * only this list's rows and paged view are swapped in (a plain list sharing the menu keeps its cached corpus), and
      * the window is repainted in place.
@@ -1751,7 +1751,7 @@ public final class MenuListener implements Listener {
         repaint(holder);
     }
 
-    /** The first list-backed item of {@code spec} in declaration order — the list the nav buttons page — or null. */
+    /** The first list-backed item of {@code spec} in declaration order, the list the nav buttons page, or null. */
     @Nullable private static MenuItemSpec firstListItem(MenuSpec spec) {
         for (MenuItemSpec item : spec.items().values()) {
             if (item.list().isPresent()) {
@@ -1810,7 +1810,7 @@ public final class MenuListener implements Listener {
      * place, so dying with such a menu open behaves exactly like an ordinary death. This handler lives on the menu
      * lifecycle listener (which already reads the open holder cleanly, as {@link #onQuit} does) rather than on a
      * separate router. When the dying player still has a bottom-inventory menu open, the marked tiles sit in their
-     * real inventory and would otherwise drop — and could be picked up as a dupe — so it strips every marked tile from
+     * real inventory and would otherwise drop, and could be picked up as a dupe, so it strips every marked tile from
      * the drops, adds the snapshot's real items so those drop as normal, and clears the snapshot so the paired
      * close-restore into the respawning player becomes a no-op. The drop is then the single disposition of the real
      * items. An ordinary menu (or none) carries no snapshot and is left untouched. Runs on the death event thread, the
@@ -1837,7 +1837,7 @@ public final class MenuListener implements Listener {
     }
 
     /**
-     * The single teardown choke-point both close paths — the player closing the window and a quit with it open —
+     * The single teardown choke-point both close paths (the player closing the window and a quit with it open)
      * funnel through: it stops the refresh task so a timer can never re-render a closed window. Idempotent, so a
      * close that is immediately followed by a quit close is a harmless no-op.
      *
@@ -1852,11 +1852,11 @@ public final class MenuListener implements Listener {
     /**
      * Put the viewer's real bottom inventory back after a bottom-inventory menu closes. Mutating a player inventory
      * inside {@link InventoryCloseEvent} is a Paper gotcha, so the restore is deferred to the player's next tick on
-     * their own region thread via the {@link Scheduler} port. The snapshot is nulled inside the deferred task — not at
-     * schedule time — so a quit that restores synchronously ({@link #restoreBottomNow}) first wins the race and this
+     * their own region thread via the {@link Scheduler} port. The snapshot is nulled inside the deferred task, not at
+     * schedule time, so a quit that restores synchronously ({@link #restoreBottomNow}) first wins the race and this
      * pass then no-ops, and a double close (a close immediately followed by a quit close) restores exactly once. The
      * deferred {@code setStorageContents} overwrites the whole 36-slot canvas with the real items, so it composes with
-     * the anti-dupe close sweep regardless of order — the sweep may strip an escaped tile first, the restore then
+     * the anti-dupe close sweep regardless of order. The sweep may strip an escaped tile first, the restore then
      * overwrites the canvas either way. An ordinary menu carries no snapshot and returns immediately.
      */
     private void restoreBottom(MenuHolder holder, HumanEntity human) {

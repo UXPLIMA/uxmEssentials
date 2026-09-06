@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * metadata. The body model lives inside the base64 {@code textures} value, under {@code textures.SKIN.metadata.model};
  * a fetched skin's value already states its model, so this is only needed when an operator overrides a classic
  * texture to slim. Re-encoding the value invalidates the Yggdrasil signature, so the caller sends the result
- * unsigned — a synthetic NPC renders an unsigned skin fine. Every step is fail-soft: a value that is not base64,
+ * unsigned: a synthetic NPC renders an unsigned skin fine. Every step is fail-soft: a value that is not base64,
  * not JSON, carries no SKIN texture, or already declares slim yields {@link Optional#empty()}, and the caller then
  * keeps the original signed value unchanged.
  *

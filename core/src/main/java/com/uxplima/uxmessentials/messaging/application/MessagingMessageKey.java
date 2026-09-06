@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The messaging context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code MSG_SENT} ↔ {@code msg.sent}); the constant is the compile-time
- * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context —
+ * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context
  * every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  */
 public enum MessagingMessageKey implements MessageKey {
 
-    // private messages — /msg, /reply
+    // private messages, /msg, /reply
     MSG_SENT("msg.sent"),
     MSG_RECEIVED("msg.received"),
     MSG_SPY("msg.spy"),
@@ -63,7 +63,7 @@ public enum MessagingMessageKey implements MessageKey {
     HELPOP_RECEIVED("helpop.received"),
     HELPOP_NO_STAFF("helpop.no-staff"),
 
-    // management GUIs — /msgsettings settings panel
+    // management GUIs: /msgsettings settings panel
     GUI_SETTINGS_TITLE("messaging.gui.settings.title"),
     GUI_SETTINGS_VALUE_LORE("messaging.gui.settings.value-lore"),
     GUI_SETTINGS_BACK("messaging.gui.settings.back"),
@@ -72,7 +72,7 @@ public enum MessagingMessageKey implements MessageKey {
     GUI_SETTINGS_VALUE_ON("messaging.gui.settings.value-on"),
     GUI_SETTINGS_VALUE_OFF("messaging.gui.settings.value-off"),
 
-    // management GUIs — /ignore ignore-list manager
+    // management GUIs, /ignore ignore-list manager
     GUI_IGNORE_TITLE("messaging.gui.ignore.title"),
     GUI_IGNORE_PREV("messaging.gui.ignore.prev"),
     GUI_IGNORE_NEXT("messaging.gui.ignore.next"),
@@ -81,7 +81,7 @@ public enum MessagingMessageKey implements MessageKey {
     GUI_IGNORE_ADD("messaging.gui.ignore.add"),
     GUI_IGNORE_ADD_PROMPT("messaging.gui.ignore.add-prompt"),
 
-    // management GUIs — /mail mailbox
+    // management GUIs, /mail mailbox
     GUI_MAIL_TITLE("messaging.gui.mail.title"),
     GUI_MAIL_PREV("messaging.gui.mail.prev"),
     GUI_MAIL_NEXT("messaging.gui.mail.next"),

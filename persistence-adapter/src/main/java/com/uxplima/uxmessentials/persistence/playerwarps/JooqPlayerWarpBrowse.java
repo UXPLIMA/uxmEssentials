@@ -33,22 +33,22 @@ import org.jooq.impl.DSL;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The jOOQ-backed {@link PlayerWarpBrowse} — the read side that answers the old browse's "verimsiz" (inefficient)
+ * The jOOQ-backed {@link PlayerWarpBrowse}. The read side that answers the old browse's "verimsiz" (inefficient)
  * complaint. The previous browse GUI ran {@code SELECT *} over {@code player_warps}, rebuilt one {@code PlayerWarp}
  * aggregate per row, and paginated in Java; opening the browse got linearly slower as the server grew. This impl
  * instead issues one bounded query pair per page: a projection of only the card columns filtered, sorted, and
  * {@code LIMIT}/{@code OFFSET}-windowed, plus a {@code COUNT} over the same predicate for the total. It never loads
  * an aggregate and never reads the whole table, so a page over a hundred thousand warps costs the same as one over
- * eight — the guard {@code PlayerWarpBrowseIsPagedDriftTest} freezes that in.
+ * eight: the guard {@code PlayerWarpBrowseIsPagedDriftTest} freezes that in.
  *
  * <p>Correctness notes. Every sort appends a stable {@code id ASC} tiebreaker so paging is deterministic across
  * reads. {@code viewerFavourited} comes from a {@code LEFT JOIN} on {@code player_warp_favourites} scoped to the
  * viewer, so it is one join rather than a per-card follow-up query. {@code sponsored} is computed against a supplied
  * {@link Clock} ({@code sponsored_until > now}). {@link WarpSort#RATING} orders by the stored Bayesian
- * {@code rating_score} column — the rating use case computes that value; here it is only read. {@link WarpSort#DISTANCE}
+ * {@code rating_score} column. The rating use case computes that value; here it is only read. {@link WarpSort#DISTANCE}
  * orders by squared planar distance within the viewer's world and falls back to {@link WarpSort#ALPHABETICAL} when
  * the query carries no viewer position. This port applies exactly the filters it is given and adds no hidden access
- * check — a card in a browse never grants access; the teleport gate is the real guard. Every statement is typed jOOQ
+ * check: a card in a browse never grants access; the teleport gate is the real guard. Every statement is typed jOOQ
  * DSL; no SQL is ever string-concatenated.
  */
 @NullMarked
@@ -58,7 +58,7 @@ public final class JooqPlayerWarpBrowse extends JooqRepository implements Player
 
     /**
      * The projection: only the columns a {@link WarpCard} renders, plus the joined favourite marker. Deliberately
-     * not {@code player_warps.*} — a card is a flat listing row, never a rehydrated aggregate.
+     * not {@code player_warps.*}: a card is a flat listing row, never a rehydrated aggregate.
      */
     private static final List<SelectFieldOrAsterisk> CARD_FIELDS = List.of(
             PLAYER_WARPS.ID,
@@ -106,7 +106,7 @@ public final class JooqPlayerWarpBrowse extends JooqRepository implements Player
             return List.of();
         }
         long now = clock.millis();
-        // A small bounded read ordered by sponsor_slot for the pinned browse tiles — the sponsors live at
+        // A small bounded read ordered by sponsor_slot for the pinned browse tiles. The sponsors live at
         // sponsored_until > now with a slot, indexed on idx_player_warps_sponsored, capped at limit. No viewer join is
         // needed (the pinned tiles carry no per-viewer favourite marker), so the favourite column reads as absent.
         return read(dsl -> dsl.select(CARD_FIELDS)

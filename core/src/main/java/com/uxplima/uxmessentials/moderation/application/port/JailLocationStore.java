@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.moderation.domain.StoredJail;
  * survives a world rollback (it is relational, never PDC). The two are merged behind a combined directory so
  * {@code /jail} validates against both and the sanction adapter resolves a stored jail's location.
  *
- * <p>A jail is keyed by its canonical lowercase name (see {@link StoredJail}), so {@link #save} is an upsert —
+ * <p>A jail is keyed by its canonical lowercase name (see {@link StoredJail}), so {@link #save} is an upsert
  * a {@code /setjail} onto an existing name overwrites that jail's location in place. The implementation lands
  * in the persistence adapter; the use cases depend only on this contract.
  */

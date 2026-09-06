@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * the stacks to the recipient on their own region thread (Folia-safe), adding them to the inventory and dropping any
  * overflow at their feet so no stack is ever lost. The coordinator only asks to deliver items to a recipient it has
  * checked is online, and defers an offline recipient to their next join, so this never has to hold items for an absent
- * player — but if the player logs off in the sub-tick between the check and the region hop, the overflow-to-ground path
+ * player, but if the player logs off in the sub-tick between the check and the region hop, the overflow-to-ground path
  * still keeps the items in the world.
  */
 @NullMarked

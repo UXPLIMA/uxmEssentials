@@ -30,13 +30,13 @@ public final class ModerationStores {
         return new JooqModerationRepository(persistence.dsl());
     }
 
-    /** A jOOQ {@link JailLocationStore} over the shared persistence DSL — the writable jail-location seam. */
+    /** A jOOQ {@link JailLocationStore} over the shared persistence DSL, the writable jail-location seam. */
     public static JailLocationStore jailLocationStore(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqJailLocationStore(persistence.dsl());
     }
 
-    /** A jOOQ {@link SanctionHistory} over the shared persistence DSL — the append-only history seam. */
+    /** A jOOQ {@link SanctionHistory} over the shared persistence DSL, the append-only history seam. */
     public static SanctionHistory sanctionHistory(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqSanctionHistory(persistence.dsl());

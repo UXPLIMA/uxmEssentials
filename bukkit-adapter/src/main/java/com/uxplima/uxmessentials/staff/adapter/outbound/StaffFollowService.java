@@ -22,8 +22,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The FOLLOW gadget's runtime: a single repeating task on the {@code Scheduler} port that, each tick, teleports
- * every following staff member onto the player they follow. This lives entirely in the adapter — there is no
- * core port, no DB row — because following is transient session work that vanishes with a restart, a quit, or a
+ * every following staff member onto the player they follow. This lives entirely in the adapter: there is no
+ * core port, no DB row, because following is transient session work that vanishes with a restart, a quit, or a
  * mode exit.
  *
  * <p>The staff→target sessions ride a {@link ConcurrentHashMap} mutated only through {@code put}/{@code remove}.
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>Following is continuous, so it must not route through the cooldown-gated teleport engine; instead each tick
  * does its own two region hops, mirroring {@code AsyncTeleportExecutor}'s region discipline (docs/02-concurrency
  * §6.5). The repeating task itself runs on the global region thread and does nothing but iterate the session map
- * and dispatch the hops — it never reads or moves an entity, since on Folia each player is owned by its own
+ * and dispatch the hops. It never reads or moves an entity, since on Folia each player is owned by its own
  * region thread. For each session it first hops to the <em>target</em>'s entity thread to snapshot the target's
  * location, then hops to the <em>staff</em> member's entity thread to {@code teleportAsync} them onto that
  * snapshot. Each hop re-resolves the live {@code Player} (no stale handle crosses a thread) and treats an offline

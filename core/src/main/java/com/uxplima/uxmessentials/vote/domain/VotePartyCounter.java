@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.vote.domain;
 
 /**
  * The vote-party progress counter: how many votes have accumulated towards the next party, and the
- * threshold that triggers one. A pure value object — increments produce a new counter, the threshold
+ * threshold that triggers one. A pure value object, increments produce a new counter, the threshold
  * check is a comparison, and a reset returns the count to zero. The durable count lives in the
  * repository; this record is the in-memory arithmetic the {@code HandleVote} use case runs on each
  * received vote.
@@ -26,7 +26,7 @@ public record VotePartyCounter(int count, int threshold) {
         return new VotePartyCounter(count + 1, threshold);
     }
 
-    /** True once the accumulated count has reached (or passed) the threshold — a party is due. */
+    /** True once the accumulated count has reached (or passed) the threshold: a party is due. */
     public boolean isReached() {
         return count >= threshold;
     }

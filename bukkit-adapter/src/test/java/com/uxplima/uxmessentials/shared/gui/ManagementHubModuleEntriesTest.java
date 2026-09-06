@@ -60,7 +60,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link ManagementHubView} routes a click on each entry to that entry's opener.
  *
  * <p>The view-open behaviour itself is unchanged and already covered by each module's command tests; this
- * guards only the integration seam SP5 adds — that every entry is present, permitted, and its opener fires.
+ * guards only the integration seam SP5 adds: that every entry is present, permitted, and its opener fires.
  */
 class ManagementHubModuleEntriesTest {
 

@@ -13,7 +13,7 @@ import org.spongepowered.configurate.ConfigurationNode;
  * Parses an EssentialsX {@code kits.yml} into a list of {@link EssXKit}. The file holds a {@code kits:}
  * map of {@code <name> -> { delay, items: [...] }}; each entry's item lines are kept raw (the writer
  * turns a descriptor into a stack). EssentialsX also supports a {@code kits/<name>.yml} split layout on
- * newer versions — {@link #parseSingle} handles one such file — so both layouts feed the same list
+ * newer versions, {@link #parseSingle} handles one such file, so both layouts feed the same list
  * (docs/12-migration §4).
  */
 @NullMarked
@@ -24,7 +24,7 @@ public final class KitsParser {
         return parse(YamlSource.load(file));
     }
 
-    /** Parse a combined {@code kits.yml} from a reader — the form the golden-file tests drive. */
+    /** Parse a combined {@code kits.yml} from a reader: the form the golden-file tests drive. */
     public List<EssXKit> parse(Reader reader) throws IOException {
         return parse(YamlSource.load(reader));
     }

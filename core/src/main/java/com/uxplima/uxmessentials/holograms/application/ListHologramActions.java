@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
 
 /**
  * {@code /hologram action <name> list}: show a hologram's action chain in run order, 1-based, with each action's
- * trigger, type and value. No new query is needed — the hologram is loaded and its {@code actions()} read. A name
+ * trigger, type and value. No new query is needed: the hologram is loaded and its {@code actions()} read. A name
  * no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; a hologram with no actions gets the empty
  * notice. The header / per-entry / empty feedback is pushed through the notifier so all text resolves from
  * {@link HologramsMessageKey}.

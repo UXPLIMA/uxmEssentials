@@ -19,13 +19,13 @@ import org.jspecify.annotations.NullMarked;
  * The built-in {@code uxmEssentials:flat} chunk generator: paints a world as an ordered stack of block
  * bands over a single fixed biome. The domain {@link FlatLayerPlan} is translated <em>once</em> at wire
  * time (via {@link #from}) into an immutable list of {@link ResolvedLayer}s, each carrying a pre-composed
- * {@link BlockData} that is reused for every chunk — worldgen never resolves a material or allocates a
+ * {@link BlockData} that is reused for every chunk. Worldgen never resolves a material or allocates a
  * block per call.
  *
  * <p>All vanilla generation stages are suppressed ({@code shouldGenerate* → false}), so Paper writes
  * nothing before our hook runs. The bands are written in {@link #generateNoise}: the Paper contract is
  * that each {@code shouldGenerate*()} flag only gates the <em>vanilla</em> pass that runs <em>before</em>
- * the matching {@code generate*()} method — the overridden {@code generate*()} is always invoked. So with
+ * the matching {@code generate*()} method: the overridden {@code generate*()} is always invoked. So with
  * noise suppressed our {@code generateNoise} receives empty {@link ChunkData} and fills the flat layers.
  *
  * <p>The generator holds only the immutable plan and the injected {@link BiomeProvider}, so it is safe
@@ -76,7 +76,7 @@ public final class FlatChunkGenerator extends ChunkGenerator {
         return material.createBlockData();
     }
 
-    /** The resolved, pre-composed bands — exposed package-private for the adapter test. */
+    /** The resolved, pre-composed bands, exposed package-private for the adapter test. */
     List<ResolvedLayer> resolvedPlan() {
         return plan;
     }

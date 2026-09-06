@@ -16,13 +16,13 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * Reads the {@code server-links} list from the root {@code config.conf}. The block is a list of maps, each with
- * either a built-in {@code type} or a custom {@code label} plus a {@code url} — a shape the dotted-path
+ * either a built-in {@code type} or a custom {@code label} plus a {@code url}, a shape the dotted-path
  * {@code ConfigStore} cannot express, so this reads the root file directly with Configurate, exactly as the
  * communication context reads its content siblings.
  *
  * <p>Reading is total: an absent file, an absent {@code server-links} key, a non-list value, or any individual
  * malformed entry yields the entries that did parse (an empty list when none did). A malformed entry is dropped
- * with one warning by the applier, never fatal. An empty result means the feature is off — the applier then leaves
+ * with one warning by the applier, never fatal. An empty result means the feature is off. The applier then leaves
  * the live {@link org.bukkit.ServerLinks} untouched.
  */
 @NullMarked

@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link VanishBuffs} implementation: grants a vanished player permanent night vision and a flight allowance, both
  * behind their config toggles, and undoes them on reappear. Every mutation hops to the player's own entity thread
- * through the injected {@link Scheduler} port — a potion effect and the flight flag are per-entity operations valid
- * only on the owning thread under Folia — and an offline player is a silent no-op.
+ * through the injected {@link Scheduler} port. A potion effect and the flight flag are per-entity operations valid
+ * only on the owning thread under Folia, and an offline player is a silent no-op.
  *
  * <p>Flight is restored to the game-mode default rather than a captured value: creative and spectator fly inherently,
  * so those are left untouched, while survival and adventure lose the granted allowance (and any active flight) on
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class BukkitVanishBuffs implements VanishBuffs {
 
-    /** A negative duration is Paper's "infinite" potion length — the effect persists until removed on reappear. */
+    /** A negative duration is Paper's "infinite" potion length: the effect persists until removed on reappear. */
     private static final int INFINITE_TICKS = -1;
 
     private final Server server;

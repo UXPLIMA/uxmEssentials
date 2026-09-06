@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the holograms cross-server sync seam. The broadcasting decorator publishes a {@link HologramChanged}
- * naming the affected hologram after every local write that changes one — a {@code save} (create, move, line
+ * naming the affected hologram after every local write that changes one, a {@code save} (create, move, line
  * edit, appearance/visibility/model/page/leaderboard/action change all upsert the same row), a {@code delete},
  * a manual {@code showTo}/{@code hideFrom}, and a blacklist add/remove. On a remote frame the listener reloads
  * exactly that hologram from the shared DB into the same cache the commands and renderer read, then re-renders

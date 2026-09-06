@@ -15,13 +15,13 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * Redeems a link code presented in Discord, binding the presenting Discord account to the player who issued the
- * code. This is the use case the {@code /link} slash handler calls — on JDA's own thread, off any server tick —
+ * code. This is the use case the {@code /link} slash handler calls (on JDA's own thread, off any server tick)
  * through the {@code ServicesManager} seam.
  *
  * <p>The redemption is rejected when no pending row matches the code ({@code NO_PENDING_CODE}), when the code's
  * window has closed (the stale row is cleared and {@code CODE_EXPIRED} returned), or when the Discord account is
  * already bound to a <em>different</em> player ({@code DISCORD_ALREADY_LINKED}). Re-confirming the same code for
- * the same Discord account that is already bound to that same player is idempotent — it re-stamps the binding.
+ * the same Discord account that is already bound to that same player is idempotent: it re-stamps the binding.
  * On success the binding is written and the pending row cleared in one store write.
  */
 public final class ConfirmLink {

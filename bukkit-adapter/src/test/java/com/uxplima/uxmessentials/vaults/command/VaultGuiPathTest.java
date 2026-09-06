@@ -74,12 +74,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code /vault} node and uxmLib's {@code StorageGui}, backed by the real cached jOOQ {@code VaultRepository}
  * (from {@link VaultRepositories}) over an embedded SQLite database. {@code /vault} opens a {@code StorageGui}
  * sized to the resolved quota; an item placed in it and the window closed is serialized and written through to
- * the DB; re-opening the same vault re-reads the stored item — proving vaults are DB-persisted and survive past
+ * the DB; re-opening the same vault re-reads the stored item. Proving vaults are DB-persisted and survive past
  * the live GUI, never PDC.
  *
  * <p>The scheduler is a synchronous double so the entity-bound open and the async save run inline. uxmLib's
  * menu listener is installed via {@link Guis#install} against a mock plugin, and the close is dispatched as a
- * real {@link InventoryCloseEvent} through the plugin manager — exactly the path a live close takes — so the
+ * real {@link InventoryCloseEvent} through the plugin manager, exactly the path a live close takes, so the
  * GUI's own close handler writes the vault through.
  */
 class VaultGuiPathTest {

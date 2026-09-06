@@ -6,13 +6,13 @@ import java.util.Objects;
 
 /**
  * The Bukkit-free policy for which block a player may sit on and where the seat sits on it. The material is named
- * by its {@code Material} name only (e.g. {@code OAK_STAIRS}) — the adapter reads the live {@code Block}/{@code
+ * by its {@code Material} name only (e.g. {@code OAK_STAIRS}). The adapter reads the live {@code Block}/{@code
  * BlockData} and passes the name in, so the sit rules stay in the domain rather than smeared across the listener.
  *
  * <p>Sittability is a configured wildcard set ({@code *_STAIRS}, {@code *_SLAB}, {@code *_CARPET}, or an exact
  * name), matched case-insensitively; a leading or trailing {@code *} is the one supported wildcard, which is all
  * the bundled palette needs. The seat offset is the nominal height above the block's base where a player's seat
- * rests — half a block on a stair or slab, a carpet's thin lip, a full block's top otherwise — so the adapter
+ * rests (half a block on a stair or slab, a carpet's thin lip, a full block's top otherwise) so the adapter
  * places the invisible seat entity at {@code blockY + }{@link #seatOffset(String)}. {@link #facingApplies(String)}
  * reports whether the block carries a direction the seat should face (a stair does; a slab or carpet does not),
  * so the adapter only reads {@code BlockData} facing when it matters.
@@ -25,7 +25,7 @@ public final class SittableBlocks {
     /** A carpet's thin lip above the block below it (1/16). */
     private static final double CARPET_LIP = 0.0625;
 
-    /** A full block's top — the fallback when a sittable material is neither a stair, slab, nor carpet. */
+    /** A full block's top: the fallback when a sittable material is neither a stair, slab, nor carpet. */
     private static final double FULL_BLOCK = 1.0;
 
     private final List<String> patterns;

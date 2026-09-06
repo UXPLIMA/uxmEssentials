@@ -92,7 +92,7 @@ public final class StaffModeCommand extends StaffCommandSupport implements Comma
 
     /**
      * Flip {@code who} between staff mode and not, on their entity region thread. The use cases are idempotent
-     * on the live state: {@code enter} no-ops when already active, {@code exit} no-ops when not — so a double
+     * on the live state: {@code enter} no-ops when already active, {@code exit} no-ops when not, so a double
      * toggle never double-captures or double-restores.
      */
     private void toggle(PlayerRef who) {

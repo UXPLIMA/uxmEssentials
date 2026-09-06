@@ -34,8 +34,8 @@ import org.jspecify.annotations.Nullable;
  * reopens the warp editor. Each mutation saves the edited warp through the shared {@link EditableWarp} loader and
  * re-opens this list with the new subject so the operator sees the result.
  *
- * <p>The edited warp is handed in as the menu subject — its name, owner, and a welcome-message snapshot read off the
- * viewer's entity thread at open — so the entry list (the {@code warps:welcome} list source) and every entry line
+ * <p>The edited warp is handed in as the menu subject, its name, owner, and a welcome-message snapshot read off the
+ * viewer's entity thread at open, so the entry list (the {@code warps:welcome} list source) and every entry line
  * fill from the {@code warp_welcome_*} placeholders without the renderer touching a port. The panel holds no new
  * domain logic: it replays the old bespoke window's handlers verbatim through the engine, on the warp-browse list
  * pattern. The editor is injected after this view to break their re-open cycle. Every visible string resolves from

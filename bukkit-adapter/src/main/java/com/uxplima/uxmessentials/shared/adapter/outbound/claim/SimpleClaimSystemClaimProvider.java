@@ -22,14 +22,14 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>SimpleClaimSystem is a {@code compileOnly} soft-depend, so {@code fr.xyness.SCS.*} is absent from the
  * runtime and test classpaths. Every typed SCS reference lives inside a method behind {@link #active()},
- * which only consults the plugin manager — constructing this provider and asking whether it is active never
+ * which only consults the plugin manager. Constructing this provider and asking whether it is active never
  * loads an SCS class. The {@link ClaimMain} handle is resolved lazily on the first {@link #claimAt} call
  * (again past the present guard) and cached, so a server without SCS stays on the no-throw path.
  *
  * <p>The advertised {@code SimpleClaimSystemAPI} is never initialised in 1.13.1, so this binds to the main
  * class's {@link SimpleClaimSystem#getMain()} instead. SCS is chunk-based; a claim is resolved by chunk
  * coordinate with {@link ClaimMain#getClaim(String, int, int)}, a pure in-memory map lookup that never loads
- * a chunk — Folia-safe. Trust is owner-or-member; SCS exposes a real per-claim ban list.
+ * a chunk, Folia-safe. Trust is owner-or-member; SCS exposes a real per-claim ban list.
  */
 @NullMarked
 public final class SimpleClaimSystemClaimProvider implements ClaimProvider {
@@ -77,7 +77,7 @@ public final class SimpleClaimSystemClaimProvider implements ClaimProvider {
             return Optional.empty();
         }
         // SCS keys claims by chunk; the block-to-chunk conversion is a pure shift (>> 4) with no chunk read,
-        // and getClaim(world, chunkX, chunkZ) is an in-memory map lookup — safe on the region thread / Folia.
+        // and getClaim(world, chunkX, chunkZ) is an in-memory map lookup, safe on the region thread / Folia.
         Claim claim = main.getClaim(world.name(), blockX >> 4, blockZ >> 4);
         if (claim == null) {
             return Optional.empty();

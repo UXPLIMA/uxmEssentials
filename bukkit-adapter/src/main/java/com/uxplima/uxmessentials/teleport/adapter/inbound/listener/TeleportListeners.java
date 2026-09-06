@@ -24,7 +24,7 @@ import com.uxplima.uxmessentials.teleport.domain.WarmupCancelReason;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The teleport context's Bukkit listeners — thin adapters that translate an event to a domain call and
+ * The teleport context's Bukkit listeners. Thin adapters that translate an event to a domain call and
  * return. They own the <b>move-cancels-warmup</b> invariant ({@link PlayerMoveEvent} compares block
  * coordinates and flips the pending warmup), the optional damage- and interact-cancel axes, the
  * {@code /back} capture for both deaths and vanilla teleports (gated by the {@link BackCapturePolicy} so
@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * cheap-rejection-first: a move within the same block never touches the tracker.
  *
  * <p>Events fire on the player's region thread, so the warmup tracker's {@code computeIfPresent} and the
- * {@code /back} capture run where the live position is valid — no scheduler hop is needed here.
+ * {@code /back} capture run where the live position is valid: no scheduler hop is needed here.
  */
 @NullMarked
 public final class TeleportListeners implements Listener {

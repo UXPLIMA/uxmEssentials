@@ -211,7 +211,7 @@ class SoundActionsTest {
 
     @Test
     void rawSoundWithTheLiteralInvalidExampleDoesNotThrow() {
-        // The prompt's example arg splits on whitespace, so its first token ("not") is a legal key — the point of
+        // The prompt's example arg splits on whitespace, so its first token ("not") is a legal key, the point of
         // this case is that a malformed-looking arg never propagates an exception into the click dispatch.
         assertThatCode(() -> invoke("rawsound", "not a key!!", viewer)).doesNotThrowAnyException();
     }

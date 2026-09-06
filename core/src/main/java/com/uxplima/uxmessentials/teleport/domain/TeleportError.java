@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.SharedMessageKey;
 import com.uxplima.uxmessentials.teleport.application.TeleportMessageKey;
 
 /**
- * The modelled, expected failures of a teleport flow — the {@code E} arm of a {@code Result} a use case
+ * The modelled, expected failures of a teleport flow, the {@code E} arm of a {@code Result} a use case
  * returns instead of throwing. Each value carries the {@link TeleportMessageKey} the adapter renders to
  * the player, so the failure reason and its localized text never drift apart.
  *
@@ -42,7 +42,7 @@ public enum TeleportError {
     /** The captured {@code /back} location is a death point and death-back is not permitted. */
     BACK_ON_DEATH_DENIED(TeleportMessageKey.BACK_DEATH_DENIED),
 
-    /** The captured death point is too recent — the post-death {@code /back} delay has not elapsed. */
+    /** The captured death point is too recent: the post-death {@code /back} delay has not elapsed. */
     BACK_ON_DEATH_DELAY(TeleportMessageKey.BACK_DEATH_DELAY),
 
     /** The world has no random-teleport queue and no fallback world is configured. */
@@ -51,7 +51,7 @@ public enum TeleportError {
     /** The safe-location queue is momentarily empty and no urgent fallback produced a location. */
     RTP_NO_SAFE_LOCATION(TeleportMessageKey.RTP_NO_LOCATION),
 
-    /** The player cannot afford the configured random-teleport cost — rejected before any search runs. */
+    /** The player cannot afford the configured random-teleport cost, rejected before any search runs. */
     RTP_CANT_AFFORD(TeleportMessageKey.RTP_CANT_AFFORD),
 
     /** {@code /rtp biome <biome>} named a biome the server's registry does not know. */

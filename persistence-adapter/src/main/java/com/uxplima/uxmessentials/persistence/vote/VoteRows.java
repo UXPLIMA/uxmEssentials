@@ -14,7 +14,7 @@ import org.jooq.Record;
  * every backend. This class is the single place that translation lives.
  *
  * <p>The voter name is not persisted (only the uuid is), so a {@link QueuedReward} rebuilt from rows
- * carries the player uuid with the uuid string as a placeholder name — the join handler passes the live
+ * carries the player uuid with the uuid string as a placeholder name. The join handler passes the live
  * name through when it dispatches the drained commands.
  */
 final class VoteRows {

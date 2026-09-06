@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link Snores} loop: one repeating {@code repeatGlobal} pass that, at an interval, plays a soft snore sound at
- * each laying player — no resource pack, just a vanilla sound key. It follows the {@code StaffFollowService} idiom:
+ * each laying player, no resource pack, just a vanilla sound key. It follows the {@code StaffFollowService} idiom:
  * the pass iterates the snoring set and hops each player onto their own entity thread, where the sound is played, so
  * nothing touches an entity off its owning region under Folia.
  *

@@ -356,7 +356,7 @@ class CommandActionsTest {
         public void onCommand(PlayerCommandPreprocessEvent event) {
             if (message != null) {
                 // MockBukkit's dispatchCommand (reached via performCommand) fires a second preprocess event that
-                // real Paper does not; keep only the first — the one our action itself raised.
+                // real Paper does not; keep only the first: the one our action itself raised.
                 return;
             }
             message = event.getMessage();

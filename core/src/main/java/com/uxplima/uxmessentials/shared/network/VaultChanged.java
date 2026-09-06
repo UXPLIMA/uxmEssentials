@@ -7,7 +7,7 @@ import java.util.UUID;
  * One player vault's contents changed on the origin backend (a vault window closed and saved), so peers must
  * drop their cached copy of that vault and re-read the authoritative contents on the next open. A vault is
  * keyed by its owner and index, so the frame carries both; the durable contents live in the shared database
- * (vault contents are DB-backed, never PDC, so they survive a world rollback — the same hard invariant as
+ * (vault contents are DB-backed, never PDC, so they survive a world rollback, the same hard invariant as
  * economy balances).
  *
  * @param originServer the backend that made the change

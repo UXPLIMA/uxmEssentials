@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * One captured {@code /back} return point: where the player was, what caused the capture, and when.
  *
- * <p>A player has at most one current {@code BackLocation} — each capture supersedes the last, so
+ * <p>A player has at most one current {@code BackLocation}. Each capture supersedes the last, so
  * {@code /back} always returns to the most recent of (the pre-teleport snapshot, the death point). The
  * capture is in-flight per-player state the teleport module re-arms on relog; it is never PDC-stamped
  * by the domain.

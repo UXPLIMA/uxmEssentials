@@ -10,7 +10,7 @@ package com.uxplima.uxmessentials.shared.domain;
  * the closed-event-set guarantee is per context while the cross-cutting publisher still accepts any
  * event through this single type.
  *
- * <p>Every concrete implementation is a {@code record} — value equality backs bus de-duplication,
+ * <p>Every concrete implementation is a {@code record}. Value equality backs bus de-duplication,
  * codec round-trips, and equality-based test consumers. The ArchUnit rule
  * {@code domainEventConcreteImplementationsAreRecords} enforces this.
  */

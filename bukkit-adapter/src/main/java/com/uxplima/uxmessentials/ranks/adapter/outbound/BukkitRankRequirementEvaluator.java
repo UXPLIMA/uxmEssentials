@@ -33,8 +33,8 @@ import org.jspecify.annotations.NullMarked;
  * DB-backed {@link PlaytimeRepository}, and <b>previous-rank</b> against the player's stored rank resolved by
  * {@link CurrentRank}.
  *
- * <p>Every unresolvable condition fails closed — an offline player for an inventory or placeholder check, a
- * malformed amount, an unknown material, or a money requirement on a server with no economy — so a rankup never
+ * <p>Every unresolvable condition fails closed, an offline player for an inventory or placeholder check, a
+ * malformed amount, an unknown material, or a money requirement on a server with no economy, so a rankup never
  * slips through on a condition that could not be verified.
  */
 @NullMarked

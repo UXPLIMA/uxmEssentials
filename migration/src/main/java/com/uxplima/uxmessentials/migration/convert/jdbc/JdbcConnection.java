@@ -6,8 +6,8 @@ import java.util.Optional;
 /**
  * The settled coordinates a {@link JdbcSource} opens a connection from: the JDBC URL and an optional
  * credential pair. A file-backed source (H2/SQLite) carries a URL and no credentials; a networked source
- * (MySQL/MariaDB/PostgreSQL) carries both. The username and password travel together — a present username
- * implies a present password — so the source either authenticates with both or connects with neither.
+ * (MySQL/MariaDB/PostgreSQL) carries both. The username and password travel together, a present username
+ * implies a present password, so the source either authenticates with both or connects with neither.
  *
  * @param url the JDBC URL ({@code jdbc:h2:file:…}, {@code jdbc:mariadb://…})
  * @param username the database user, or empty for a credential-less file source
@@ -30,7 +30,7 @@ public record JdbcConnection(String url, Optional<String> username, Optional<Str
     }
 
     /**
-     * A connection with credentials when the username is non-blank, else a credential-less one — so an
+     * A connection with credentials when the username is non-blank, else a credential-less one, so an
      * empty config username (LiteBans' file default) maps to an embedded connection rather than an empty
      * login that some drivers reject.
      */

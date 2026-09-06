@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
  * feet or head (would suffocate), lava or fire directly below feet, or no solid ground within
  * {@code midairGroundDepth} blocks below (floating/mid-air, when the mid-air check is enabled).
  *
- * <p>An unloaded world is not blocked — the check cannot be authoritative when no blocks are loaded,
+ * <p>An unloaded world is not blocked. The check cannot be authoritative when no blocks are loaded,
  * so it conservatively allows the placement. Any unexpected state is treated the same way.
  *
  * <p>It implements {@link SethomeGuard} so it can still be unit-tested through {@code check}, but it is
@@ -68,10 +68,10 @@ public final class SafeLocationGuard implements SethomeGuard {
 
     /**
      * Returns {@code true} when the destination is demonstrably unsafe. An unloaded world is
-     * treated as safe — the check cannot be authoritative without loaded blocks. Bypasses the
+     * treated as safe: the check cannot be authoritative without loaded blocks. Bypasses the
      * {@link #blockUnsafe} toggle so callers that have their own toggle (e.g. the GUI confirm
      * flow) can invoke the detection logic independently. Must be called on the region thread that
-     * owns {@code at} — it reads {@code World.getBlockAt(...)}.
+     * owns {@code at}: it reads {@code World.getBlockAt(...)}.
      */
     public boolean isUnsafe(Position at) {
         Objects.requireNonNull(at, "at");

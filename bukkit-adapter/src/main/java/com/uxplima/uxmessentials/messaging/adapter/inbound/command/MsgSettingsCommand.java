@@ -18,10 +18,10 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /msgsettings}: open the per-player messaging settings panel — the accept-messages ({@code /msgtoggle})
+ * {@code /msgsettings}: open the per-player messaging settings panel. The accept-messages ({@code /msgtoggle})
  * toggle every player flips for themselves, plus the social-spy ({@code /socialspy}) toggle a staff member sees.
  * A players-only, self-service command gated by {@code uxmessentials.msgsettings.use}; it opens the same
- * {@link MessagingGuiViews} settings panel the {@code /uxmess gui} hub does. It mutates nothing itself — every
+ * {@link MessagingGuiViews} settings panel the {@code /uxmess gui} hub does. It mutates nothing itself, every
  * flip in the panel routes through the existing message-toggle / social-spy stores the toggle commands use.
  */
 @NullMarked

@@ -41,7 +41,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * pattern into an ordinary item at load, filling its declared {@code %var%}s, and a real {@link Menus} renders it,
  * so the assertions land on the live top inventory's icon rather than the parsed model alone. The point a golden
  * makes that a loader test cannot: an undeclared {@code %placeholder%} the pattern left verbatim still resolves at
- * render time, proving the two token kinds coexist — {@code %var%} filled at load, {@code %placeholder%} at draw.
+ * render time, proving the two token kinds coexist: {@code %var%} filled at load, {@code %placeholder%} at draw.
  */
 class MenuPatternGoldenTest {
 

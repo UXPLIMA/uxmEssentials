@@ -17,9 +17,9 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * {@code /npc info <name>}: print an NPC's stored properties to the operator — its location, appearance (type,
+ * {@code /npc info <name>}: print an NPC's stored properties to the operator, its location, appearance (type,
  * skin + slim, glow, pose, scale), the boolean state flags, the per-NPC ranges + cooldown, and its behaviour
- * (display name, click command, look, action count) — as one header followed by structured {@link NpcMessageKey}
+ * (display name, click command, look, action count). As one header followed by structured {@link NpcMessageKey}
  * entries whose values interpolate the data. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}.
  * The operator-only permission is enforced at the command gate.
  */

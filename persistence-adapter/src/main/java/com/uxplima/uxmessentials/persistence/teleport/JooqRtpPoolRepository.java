@@ -27,8 +27,8 @@ import org.jspecify.annotations.NullMarked;
  * single keyed aggregate. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  *
  * <p>Every method runs a synchronous query and so must be called off the tick thread (the callers dispatch through
- * the {@code Scheduler} port). The eviction keeps two cheap statements — a count, then a bounded id-select and
- * delete — rather than a correlated sub-query, so it stays portable across the SQLite default and the network
+ * the {@code Scheduler} port). The eviction keeps two cheap statements. A count, then a bounded id-select and
+ * delete. Rather than a correlated sub-query, so it stays portable across the SQLite default and the network
  * backends.
  */
 @NullMarked

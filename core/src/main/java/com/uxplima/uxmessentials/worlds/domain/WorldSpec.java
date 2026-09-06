@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Immutable description of how a world is created — its environment, generation preset, optional
+ * Immutable description of how a world is created, its environment, generation preset, optional
  * seed, optional external generator, structure toggle, and optional datapack dimension. Separated
  * from live mutable state (added by sub-project B) so clone/regenerate can copy the spec verbatim.
  */

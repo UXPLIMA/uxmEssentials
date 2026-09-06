@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
  * (docs/12-migration §3). {@code <source>} suggests only built source ids from the registry; an unknown
  * value is rejected with the built-source list, never a silent no-op. {@code --dry-run} and the bare
  * {@code dry-run} literal are equivalent. The handler returns control to the tick thread immediately and
- * hands the import to the bounded executor off-tick — it never blocks the caller.
+ * hands the import to the bounded executor off-tick: it never blocks the caller.
  *
  * <p>This node lives in the bootstrap command surface (operator-facing, like the {@code /uxmess} root), so
  * its acknowledgements are plain operator text rather than catalogue keys: an import is run from the console
@@ -43,8 +43,7 @@ public final class MigrationImportNode {
     private static final String UNKNOWN_SOURCE = "Unknown import source: ";
     private static final String STARTED = "Import dispatched off-tick for source ";
     private static final String DRY_PREFIX = " (dry-run)";
-    private static final String DISABLED =
-            "The migration module is disabled — enable it in modules.conf for a cutover.";
+    private static final String DISABLED = "The migration module is disabled. Enable it in modules.conf for a cutover.";
 
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
     private static final String HEADER = "<gradient:#4aa3ff:#9b6bff>";
@@ -117,7 +116,7 @@ public final class MigrationImportNode {
     }
 
     private static String describe(SourceDescriptor descriptor) {
-        return descriptor.sourceId().value() + " — " + descriptor.displayName() + " ["
+        return descriptor.sourceId().value() + ", " + descriptor.displayName() + " ["
                 + String.join(", ", descriptor.surfaces()) + "]";
     }
 

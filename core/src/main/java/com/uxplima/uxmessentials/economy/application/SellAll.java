@@ -17,10 +17,10 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /sellall}: sell every sellable item in the seller's inventory at its configured {@link WorthSource}
  * worth, the bulk counterpart to {@code /sell}. It reuses the same pricing table and the same DB-backed
- * {@link EconomyProvider} credit (never a PDC stamp — the economy hard invariant). Priced stacks are grouped by
+ * {@link EconomyProvider} credit (never a PDC stamp, the economy hard invariant). Priced stacks are grouped by
  * the currency they price in, each currency is credited in one move, and a material is reported as sold only
- * after the credit for its currency actually applied — so the inventory the adapter removes and the balance the
- * seller received never diverge. Unpriced materials are silently left in place — no "cannot be sold" spam.
+ * after the credit for its currency actually applied, so the inventory the adapter removes and the balance the
+ * seller received never diverge. Unpriced materials are silently left in place: no "cannot be sold" spam.
  *
  * <p>An inventory with nothing priced (or empty) is refused with {@link EconomyMessageKey#SELL_NOTHING_TO_SELL}
  * and leaves the inventory untouched; a currency whose credit the clamp rejects leaves that currency's stacks in

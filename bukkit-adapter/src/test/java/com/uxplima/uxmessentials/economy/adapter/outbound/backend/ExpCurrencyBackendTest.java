@@ -35,7 +35,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The experience backend. Against MockBukkit online players it is the one shipped backend that cannot be written
  * offline, its debit is guarded against overdraw, and a credit followed by a balance read agrees with the vanilla
- * experience curve — the round trip {@code applyTotal}/{@code readTotal} promises. Behind {@code EconomyProvider}
+ * experience curve: the round trip {@code applyTotal}/{@code readTotal} promises. Behind {@code EconomyProvider}
  * every call is off-tick, so the backend must hop onto the owner's entity thread before touching the live player;
  * the off-tick tests drive that hop through a fake {@link Scheduler} and prove the player is reached only inside it.
  */

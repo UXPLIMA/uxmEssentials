@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
  * The one codec between the real item stacks a cross-server trade escrows and the opaque {@code itemData} string the
  * escrow row holds. It encodes a list of stacks (with every component and NBT) to base64 of Paper's
  * {@link ItemStack#serializeItemsAsBytes(ItemStack[])} and decodes it back with
- * {@link ItemStack#deserializeItemsFromBytes(byte[])}, so both backends — running the same Paper build — round-trip the
+ * {@link ItemStack#deserializeItemsFromBytes(byte[])}, so both backends, running the same Paper build, round-trip the
  * exact items. Blank data means an empty stake, and a decode of corrupt data fails soft to an empty list rather than
  * aborting a delivery (the money leg still settles).
  */
@@ -50,7 +50,7 @@ public final class TradeItemBytes {
         return stacks;
     }
 
-    /** The total quantity across {@code items} — the count the escrow row records for the audit receipt. */
+    /** The total quantity across {@code items}: the count the escrow row records for the audit receipt. */
     public static int totalCount(List<ItemStack> items) {
         int total = 0;
         for (ItemStack stack : items) {

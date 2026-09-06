@@ -12,7 +12,7 @@
  * {@link com.uxplima.uxmessentials.custommenus.adapter.convert.OguiConvertService} behind
  * {@code /menu convert ogui <path>}. The services share their path resolution and directory walk through the
  * package-private {@link com.uxplima.uxmessentials.custommenus.adapter.convert.MenuConvertFiles}. Everything here is
- * Configurate-only and touches no engine internals — a converted spec re-enters the engine through the ordinary
+ * Configurate-only and touches no engine internals. A converted spec re-enters the engine through the ordinary
  * {@code menus/} loader on the next reload.
  */
 @org.jspecify.annotations.NullMarked

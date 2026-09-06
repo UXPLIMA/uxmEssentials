@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The custommenus context's user-visible message keys for the {@code /menu} command. Each constant maps 1:1 to a
  * kebab-case catalog key in {@code messages_<lang>.conf} ({@code MENU_NOT_FOUND} ↔ {@code menu.not-found}); the
  * constant is the compile-time handle, the catalog holds the text. There are no inline player-facing literals in
- * the context — every line the command shows resolves through one of these (the players-only rejection a console
+ * the context. Every line the command shows resolves through one of these (the players-only rejection a console
  * meets reuses the shared {@code command.players-only} key).
  *
  * <p>Per the i18n contract a disabled module still ships its keys, so the catalog stays whole and the
@@ -131,7 +131,7 @@ public enum CustomMenusMessageKey implements MessageKey {
     /** Name of an empty cell's placeholder on the grid canvas. */
     MENU_GRID_EMPTY("menu.editor.grid.empty"),
 
-    /** Lore of an empty cell's placeholder — the "click to add an item" hint, kept off the display name. */
+    /** Lore of an empty cell's placeholder, the "click to add an item" hint, kept off the display name. */
     MENU_GRID_EMPTY_LORE("menu.editor.grid.empty-lore"),
 
     /** Name of the grid canvas's back-to-overview control button. */
@@ -525,7 +525,7 @@ public enum CustomMenusMessageKey implements MessageKey {
     /** Reply when a viewer opens a menu another operator already has open in the editor ({@code {player}}). */
     MENU_EDITOR_LOCKED("menu.editor.locked"),
 
-    /** Confirmation that the held item was captured into {@code {slot}} — the {@code /menu captureitem} command. */
+    /** Confirmation that the held item was captured into {@code {slot}}, the {@code /menu captureitem} command. */
     MENU_CAPTURE_CAPTURED("menu.capture.captured"),
 
     /** Reply for {@code /menu captureitem} when the sender is not holding an item. */

@@ -48,7 +48,7 @@ import org.jspecify.annotations.Nullable;
  * delivered through {@code Scheduler#onEntity}, on the initiator's own region thread, where the live
  * {@code Player} is re-resolved from its uuid. The per-chunk completion callback registered on the seam's
  * future runs off any of those threads, so it touches <em>only</em> the job's two atomics and never the
- * boss bar, Bukkit, or the notifier — all of which are confined to tick/finish/cancel.
+ * boss bar, Bukkit, or the notifier: all of which are confined to tick/finish/cancel.
  */
 @NullMarked
 public final class BukkitWorldPregen implements WorldPregen {
@@ -91,7 +91,7 @@ public final class BukkitWorldPregen implements WorldPregen {
         BossBar bar =
                 BossBar.bossBar(barTitle(initiator, world, 0, "-"), 0f, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS);
         PregenJob job = new PregenJob(initiator, world, region, region.spiral(), bar, Instant.now());
-        // Register before scheduling so the first tick — which looks the job up by world — finds it.
+        // Register before scheduling so the first tick, which looks the job up by world, finds it.
         jobs.put(world, job);
         scheduler.onEntity(initiator, () -> showBar(initiator, bar));
         job.handle(scheduler.repeatGlobal(() -> tick(world), Duration.ZERO, settings.pregenTickPeriod()));
@@ -156,9 +156,9 @@ public final class BukkitWorldPregen implements WorldPregen {
     /**
      * Request one chunk and arm the completion callback that closes its in-flight slot. The increment is
      * paired with the future's completion; a synchronous throw from {@link ChunkGenSource#generate} is
-     * caught here so the slot is still released and the chunk counted as done — otherwise the job would
+     * caught here so the slot is still released and the chunk counted as done. Otherwise the job would
      * never drain to {@code inFlight == 0} and the loop would wedge. The callback may run off the region
-     * thread, so it touches ONLY these two atomics — never Bukkit, the boss bar, or the notifier (those
+     * thread, so it touches ONLY these two atomics, never Bukkit, the boss bar, or the notifier (those
      * are confined to tick/finish/cancel).
      */
     private void request(PregenJob job, WorldName world, ChunkPos p) {

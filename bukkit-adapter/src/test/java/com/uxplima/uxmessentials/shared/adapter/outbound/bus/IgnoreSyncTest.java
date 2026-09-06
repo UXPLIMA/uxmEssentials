@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the messaging ignore-list cross-server sync seam: the broadcasting decorator publishes an
- * {@link IgnoreChanged} carrying the affected owner after every local write that changes that owner's set — an
- * {@code /ignore} and an {@code /unignore} — and the listener drops exactly that owner from the
+ * {@link IgnoreChanged} carrying the affected owner after every local write that changes that owner's set, an
+ * {@code /ignore} and an {@code /unignore}, and the listener drops exactly that owner from the
  * {@link CachedIgnoreStore} on a remote frame so the next ignore-aware delivery reloads the authoritative
  * rows. A frame of another type leaves the cache untouched. This mirrors {@code PlayerWarpSyncTest}.
  */
@@ -83,7 +83,7 @@ class IgnoreSyncTest {
 
         IgnoreSync.listener(cached).onRemoteChange(new HomeChanged("peer-2", OWNER.uuid()));
 
-        cached.load(OWNER); // still cached — a non-ignore frame does not invalidate
+        cached.load(OWNER); // still cached. A non-ignore frame does not invalidate
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 /**
  * A validated {@code /spawnmob <type> [amount]} request: a normalised entity-type id and a count clamped to a
- * spawn cap. {@code /spawnmob} is an abusable verb — a careless {@code /spawnmob zombie 10000} can wedge a
- * region — so the count cap is a domain rule and the use case audit-logs the spawn.
+ * spawn cap. {@code /spawnmob} is an abusable verb. A careless {@code /spawnmob zombie 10000} can wedge a
+ * region, so the count cap is a domain rule and the use case audit-logs the spawn.
  *
  * <p>The domain does not know Bukkit {@code EntityType}; it normalises the id to lowercase and the adapter
  * resolves it, mapping an unresolved id to {@link ItemWorldError#UNKNOWN_MOB}. The mount/ridden chaining and

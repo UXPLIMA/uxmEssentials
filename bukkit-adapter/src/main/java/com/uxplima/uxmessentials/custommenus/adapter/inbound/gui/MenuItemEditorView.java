@@ -53,15 +53,15 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The per-item property editor of the {@code /menu editor}: clicking a filled cell on the {@link MenuGridView} grid
  * opens this window to change that item's material, name, lore, decor and slots. It is a thin consumer of the shared
- * {@link EntityEditorView} — every field is one {@link EditableProperty} button wired to a {@link MenuEditSession}
+ * {@link EntityEditorView}. Every field is one {@link EditableProperty} button wired to a {@link MenuEditSession}
  * setter, the anvil prompts ride {@link TextInput}, the lore-line list is a {@link ListProperty}, and the two
- * selectors are {@link EnumProperty} children — so no raw Bukkit inventory is ever built here and the editor stays on
+ * selectors are {@link EnumProperty} children, so no raw Bukkit inventory is ever built here and the editor stays on
  * the menu engine like every other editor surface.
  *
  * <p>The editor mutates the grid's per-viewer working copy in place: each property reads the item fresh from the
  * session on every draw (so a change shows on re-render) and writes back through the session's field setters, never
  * the live menu. The live menu changes only when the operator saves on the grid or overview (the P0 validate → write →
- * hot-reload path). Back returns to the grid, which re-renders with the edit. There is no delete button — clearing a
+ * hot-reload path). Back returns to the grid, which re-renders with the edit. There is no delete button, clearing a
  * cell is a grid gesture, not an item-editor field.
  */
 @NullMarked
@@ -125,8 +125,8 @@ public final class MenuItemEditorView {
     private final EntityEditorView<ItemTarget> view;
 
     /**
-     * The item each viewer is currently editing, so the click-action and requirement sub-editors — which open their own
-     * engine windows and cannot carry the subject back through the framework's {@code onBack} — can reopen this editor
+     * The item each viewer is currently editing, so the click-action and requirement sub-editors, which open their own
+     * engine windows and cannot carry the subject back through the framework's {@code onBack}, can reopen this editor
      * for the right item via {@link #reopen}. Mirrors the grid's per-viewer session map.
      */
     private final Map<UUID, ItemTarget> openTargets = new ConcurrentHashMap<>();
@@ -177,7 +177,7 @@ public final class MenuItemEditorView {
     }
 
     /**
-     * Reopen the item editor for whatever item {@code viewer} was last editing — the target the click-action and
+     * Reopen the item editor for whatever item {@code viewer} was last editing, the target the click-action and
      * requirement sub-editors return to, since they open their own windows and lose the framework's subject on back. A
      * no-op when the viewer has no tracked item (they never opened one, or it closed).
      */
@@ -490,7 +490,7 @@ public final class MenuItemEditorView {
         return viewer -> messages.resolve(viewer, key, Map.of());
     }
 
-    /** Whether a typed line means "clear back to the base icon's own name" — a dash, {@code none}, {@code clear}, or blank. */
+    /** Whether a typed line means "clear back to the base icon's own name", a dash, {@code none}, {@code clear}, or blank. */
     private static boolean clearToken(String raw) {
         String value = raw.strip();
         return value.isEmpty()

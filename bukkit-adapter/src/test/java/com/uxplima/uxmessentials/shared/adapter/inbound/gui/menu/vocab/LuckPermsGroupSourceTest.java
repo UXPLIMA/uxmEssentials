@@ -23,7 +23,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 /**
  * Coverage of the {@code luckperms-groups} source's testable surface. Real LuckPerms is not on the test classpath
  * (it is a soft-depend), so the reflective happy path cannot be unit-tested; instead this pins the contract a
- * LuckPerms-less server can reach — the present-guard degrade to an empty list — plus the pure pieces around it: the
+ * LuckPerms-less server can reach, the present-guard degrade to an empty list, plus the pure pieces around it: the
  * {@link GroupEntry} record, the five per-entry placeholders, the off-list resilience, the weight-descending sort,
  * and the structural guarantee that no field or method signature names the LuckPerms SDK package (so loading the
  * class on a plugin-less server pulls in zero SDK class). This mirrors how the Jobs/WorldGuard integration gates are
@@ -98,7 +98,7 @@ class LuckPermsGroupSourceTest {
 
     @Test
     void sourceDeclaresNoLuckPermsSdkTypeAnywhere() {
-        // Loading the source (and its reflective nested helper) on a plugin-less server must pull in zero SDK class —
+        // Loading the source (and its reflective nested helper) on a plugin-less server must pull in zero SDK class
         // every LuckPerms reference is a string class-name, so no field or method signature names the net.luckperms
         // package, and the present-guard, not a classload, is what gates the reflection.
         assertThat(declaresPackage(LuckPermsGroupSource.class, "net.luckperms"))

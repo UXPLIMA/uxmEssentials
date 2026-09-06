@@ -87,7 +87,7 @@ public final class VoteSiteCatalogLoader {
             }
         }
 
-        // No sites configured — fall back to legacy vote-links.
+        // No sites configured: fall back to legacy vote-links.
         ConfigurationNode linksNode = root.node("vote-links");
         if (!linksNode.virtual() && linksNode.isList()) {
             List<VoteSiteSpec> specs = parseFromLegacyLinks(linksNode, defaultCooldown);

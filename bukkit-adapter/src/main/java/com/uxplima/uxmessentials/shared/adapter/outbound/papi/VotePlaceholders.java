@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.vote.domain.VotePeriod;
  *
  * <p>The tally reads hit the cached repository so a PAPI request for an online player should see
  * a warm cache (populated by the vote handler). For a cold read the repository falls back to a DB
- * query — acceptable for a placeholder; the value is still correct.
+ * query: acceptable for a placeholder; the value is still correct.
  */
 public interface VotePlaceholders {
 

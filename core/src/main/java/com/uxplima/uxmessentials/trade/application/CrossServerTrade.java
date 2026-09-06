@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.trade.domain.TradeId;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The cross-server trade coordinator — the pure two-phase-commit engine that moves two players' escrowed goods between
+ * The cross-server trade coordinator. The pure two-phase-commit engine that moves two players' escrowed goods between
  * two backend servers with no loss or duplication on any path (commit, refund, decline, timeout, or a crash mid-flight
  * reconciled on rejoin). It owns no state of its own; the durable state is the shared {@link TradeEscrowStore}, and
  * every decision is a single guarded transition on an escrow row, so a duplicate bus signal, a double region hop, or a
@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The protocol per side: {@link #escrow} debits the owner's money and stores their items as a {@code HELD} row, then
  * signals {@code READY}. When both sides are {@code HELD}, {@link TradeEscrowStore#commitBoth} atomically flips both to
- * {@code COMMITTED} (the point of no return — neither can refund after), and each backend {@code claim}s the
+ * {@code COMMITTED} (the point of no return. Neither can refund after), and each backend {@code claim}s the
  * counterpart's committed row to deliver its goods to its own local player. A back-out before commit refunds the
  * still-{@code HELD} side and signals {@code ABORT} so the peer refunds too. Item delivery hops to the recipient's
  * region in the adapter; a claim whose recipient is offline is deferred to {@link #reconcile} on their next join.
@@ -57,7 +57,7 @@ public final class CrossServerTrade {
 
     /**
      * Escrow {@code owner}'s side: guardedly debit their staked money (double-spend-safe), then hold their items and
-     * money in a {@code HELD} row and signal {@code READY}. Returns {@code false} — escrowing nothing — when the money
+     * money in a {@code HELD} row and signal {@code READY}. Returns {@code false}, escrowing nothing, when the money
      * could not be debited, so the caller keeps the player's items and aborts the open; the items are removed from the
      * player by the caller only after a {@code true} return.
      */

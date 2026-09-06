@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.poses.domain.PoseSession;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The single source of truth for who is currently posing — a per-player registry of active {@link PoseSession}s.
+ * The single source of truth for who is currently posing, a per-player registry of active {@link PoseSession}s.
  * The placeholder surface, the ghost-entity cleanup, and the one-session-per-player invariant all read and mutate
  * through this one object, so a pose is started, replaced, or ended in exactly one place.
  *
@@ -55,7 +55,7 @@ public final class PoseSessions {
     }
 
     /**
-     * The players currently sitting <em>on</em> {@code target} — the subjects of the {@link
+     * The players currently sitting <em>on</em> {@code target}. The subjects of the {@link
      * com.uxplima.uxmessentials.poses.domain.PoseType#PLAYER_SIT} sessions whose target is {@code target}. Used to
      * end each rider's pose when their carrier logs out or is removed, so no rider is left with a stuck session once
      * the carrier is gone. The returned list is a snapshot, safe to iterate while stopping each rider.
@@ -73,7 +73,7 @@ public final class PoseSessions {
         return sessions.size();
     }
 
-    /** Drop every active session — called on module stop so a disable/reload leaves no residual state. */
+    /** Drop every active session, called on module stop so a disable/reload leaves no residual state. */
     public void clear() {
         sessions.clear();
     }

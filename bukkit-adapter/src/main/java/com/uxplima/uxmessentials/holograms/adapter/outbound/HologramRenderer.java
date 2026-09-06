@@ -62,15 +62,15 @@ import org.jspecify.annotations.NullMarked;
  * <p>On top of that shared base, a text hologram whose lines embed a {@code %...%} token additionally renders
  * <em>per viewer</em>: after the native spawn, each eligible viewer is sent a text-override metadata packet (via
  * the {@link HologramTextOverrides} collaborator over the lib {@code DisplayTextPackets} port) carrying their own
- * resolved placeholder values, so each viewer sees their own text over the one shared {@code TextDisplay} — no
+ * resolved placeholder values, so each viewer sees their own text over the one shared {@code TextDisplay}, no
  * per-viewer entity. Overrides are sent on spawn, on join (so a joiner sees their values at once), and on each
  * refresh re-render (a remove-then-spawn re-sends them, keeping a refreshing hologram's per-viewer values
  * fresh). When PlaceholderAPI is absent the per-viewer bridge is the identity, so per-viewer text equals the
- * global text — the path is harmless. A static, no-placeholder, or item/block hologram is never per-viewer and
+ * global text: the path is harmless. A static, no-placeholder, or item/block hologram is never per-viewer and
  * pays nothing.
  *
  * <p>A hologram's {@link Visibility} is applied at the spawn boundary. {@link Visibility.Mode#ALL} is the cheap
- * default — the shared entity is visible by default to everyone. {@link Visibility.Mode#PERMISSION} restricts
+ * default. The shared entity is visible by default to everyone. {@link Visibility.Mode#PERMISSION} restricts
  * the entity to an allowed-viewer set (Paper's native {@code show/hideEntity}) recomputed from the online
  * permission-holders on every render and refresh. {@link Visibility.Mode#MANUAL} hides the entity from everyone
  * and restricts it to its persisted shown-viewer set, queried per hologram through the injected
@@ -78,8 +78,8 @@ import org.jspecify.annotations.NullMarked;
  * one online viewer the instant {@code /hologram show|hide} runs. {@link #recomputeVisibilityFor(Player)}
  * re-evaluates a single joiner so they pick up the permission-gated and manual holograms they qualify for
  * without waiting for a refresh tick. A finite {@link Visibility#distance()} maps onto the native display view
- * range — blocks divided by the vanilla {@value HologramSpawns#VANILLA_VIEW_BLOCKS}-block tracking range, since the lib view
- * range is a multiplier — so the hologram culls beyond that radius; distance 0 leaves the appearance's own
+ * range. Blocks divided by the vanilla {@value HologramSpawns#VANILLA_VIEW_BLOCKS}-block tracking range, since the lib view
+ * range is a multiplier, so the hologram culls beyond that radius; distance 0 leaves the appearance's own
  * view-range multiplier untouched.
  */
 @NullMarked
@@ -87,12 +87,12 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
 
     /**
      * How far above the linked NPC's feet a linked hologram floats, so it sits over the NPC's head rather than
-     * inside it — roughly a player's standing height plus a little clearance, the conventional default
+     * inside it. Roughly a player's standing height plus a little clearance, the conventional default
      * NPC-link offset.
      */
     static final double LINKED_NPC_Y_OFFSET = 2.2;
 
-    /** The per-line height a grow-up hologram is raised by so its bottom sits at the anchor — the same per-line
+    /** The per-line height a grow-up hologram is raised by so its bottom sits at the anchor, the same per-line
      * factor the click-box span uses, an estimate the operator can fine-tune with the translation setting. */
     static final double LINE_HEIGHT = 0.28;
 
@@ -148,7 +148,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
         World world = Bukkit.getWorld(anchor.world().uid());
         if (world == null) {
             log.warn(
-                    "skipping hologram {} — world {} is not loaded",
+                    "skipping hologram {}. World {} is not loaded",
                     hologram.name().value(),
                     anchor.world().name());
             return;
@@ -197,7 +197,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
      * Where the hologram should render: when it is linked to an NPC that the locator can find, the NPC's current
      * position raised by {@link #LINKED_NPC_Y_OFFSET} so it floats above the NPC's head; otherwise (not linked, or
      * the linked NPC no longer exists) its own stored location. Failing soft on a missing NPC means a stale link
-     * never crashes or hides the hologram — it simply renders where it was placed. Pure of any Bukkit call, so the
+     * never crashes or hides the hologram: it simply renders where it was placed. Pure of any Bukkit call, so the
      * position math and the fail-soft fallback are unit-testable with a fake locator.
      */
     static Position anchorFor(Hologram hologram, LinkedNpcLocator linkedNpcs) {
@@ -226,7 +226,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
         }
     }
 
-    /** Despawn every tracked hologram now — call on module stop so no display entity is orphaned. */
+    /** Despawn every tracked hologram now, call on module stop so no display entity is orphaned. */
     public void despawnAll() {
         for (Tracked tracked : live.values()) {
             // Each entity is removed on its own region thread, derived from the position it was spawned at.
@@ -266,7 +266,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
      * or manual hologram is shown to the joiner when they qualify and hidden otherwise ({@code ALL} holograms are
      * visible by default and need no visibility call); a hologram whose lines embed a placeholder also sends the
      * joiner their own text override (for an {@code ALL} hologram too) when they may see it. Called from the join
-     * listener so a joiner sees the holograms — and their own placeholder values — at once, not after a refresh.
+     * listener so a joiner sees the holograms, and their own placeholder values, at once, not after a refresh.
      */
     public void recomputeVisibilityFor(Player joiner) {
         Objects.requireNonNull(joiner, "joiner");
@@ -313,7 +313,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
 
     /**
      * Apply a single MANUAL viewer change to the live entity at once: show the hologram under {@code name} to
-     * the online {@code viewer} when {@code visible}, hide it otherwise — so {@code /hologram show|hide} takes
+     * the online {@code viewer} when {@code visible}, hide it otherwise, so {@code /hologram show|hide} takes
      * effect without a refresh tick. A no-op when the hologram is not tracked or the viewer is offline; the
      * change is routed onto the entity's region thread.
      */
@@ -335,7 +335,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
         });
     }
 
-    /** The height a grow-up hologram's spawn is raised by — its text block, roughly one line height per line. */
+    /** The height a grow-up hologram's spawn is raised by, its text block, roughly one line height per line. */
     private static double growUpHeight(Hologram hologram) {
         return hologram.lineCount() * LINE_HEIGHT;
     }
@@ -357,7 +357,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
         RenderedHologram spawned =
                 HologramSpawns.spawnFor(manager, log, hologram, spawnAt, animated, miniMessage, globalTags.get());
         if (spawned == null) {
-            // Invalid item material or block data — already logged; leave nothing tracked rather than crash.
+            // Invalid item material or block data: already logged; leave nothing tracked rather than crash.
             return;
         }
         if (hologram.clickCommand() != null || hologram.isMultiPage()) {
@@ -367,7 +367,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
         }
         viewers.applyOnSpawn(spawned, hologram);
         // Track the anchor the entity actually spawned at (the NPC's position for a linked hologram), so a later
-        // despawn or replace is routed onto the entity's real region — not the hologram's stored location.
+        // despawn or replace is routed onto the entity's real region, not the hologram's stored location.
         live.put(hologram.name().value(), new Tracked(spawned, hologram, anchor));
         sendPerViewerText(spawned, hologram);
     }
@@ -375,7 +375,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
     /**
      * Spawn the invisible {@code Interaction} hitbox beside a clickable hologram and bundle it with {@code spawned}
      * so it shares the lifecycle (despawned together, never orphaned). The box is stamped with the hologram's name
-     * so the click listener can resolve it, and is non-persistent — a restart drops it and {@code spawnStored}
+     * so the click listener can resolve it, and is non-persistent. A restart drops it and {@code spawnStored}
      * re-creates it, so a crash never leaves a stray hitbox. A text hologram's lines hang downward from the anchor,
      * so the box brackets that span; an item/block/head model sits at the anchor, so the box centres on it.
      */
@@ -416,8 +416,8 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
      * Advance {@code viewer} to the next page of the multi-page hologram {@code name} and re-send only their text
      * override, so the click flips just that viewer's page over the one shared display. A no-op when the hologram
      * is not tracked, is not multi-page, or has no text entity. The page is advanced first (atomically in
-     * {@link HologramPageState}), then the viewer's resolve is hopped onto their own entity thread — where the
-     * override reads back the new page — exactly as the spawn/join paths dispatch per-viewer text.
+     * {@link HologramPageState}), then the viewer's resolve is hopped onto their own entity thread, where the
+     * override reads back the new page: exactly as the spawn/join paths dispatch per-viewer text.
      */
     @Override
     public void cyclePage(Player viewer, HologramName name) {
@@ -439,7 +439,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
     /**
      * Hop each viewer's per-viewer text resolve onto <em>that viewer's</em> entity thread before resolving and
      * sending the override. Resolving a player-relative {@code %papi%} token reads the viewer's live entity
-     * state, which under Folia is only safe to touch from the entity's owning thread — never the hologram's
+     * state, which under Folia is only safe to touch from the entity's owning thread: never the hologram's
      * region thread the spawn/refresh runs on, where a viewer may sit in a different region or world (the same
      * rule the scoreboard and tablist render loops follow). Pure of any spawn or live-entity read, so it is
      * unit-testable with a recording scheduler and fake viewers.
@@ -475,7 +475,7 @@ public final class HologramRenderer implements HologramView, HologramPageCycler 
 
     /**
      * The pure model-to-builder mapping, kept reachable here so the builder mapping stays unit-testable. Uses an
-     * empty MiniPlaceholders resolver — the global-tag resolution is exercised directly against {@link HologramSpawns}.
+     * empty MiniPlaceholders resolver: the global-tag resolution is exercised directly against {@link HologramSpawns}.
      */
     static Holograms.Builder builderFor(
             Hologram hologram, UnaryOperator<String> placeholders, MiniMessage miniMessage) {

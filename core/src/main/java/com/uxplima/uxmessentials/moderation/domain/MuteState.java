@@ -6,13 +6,13 @@ import java.util.Optional;
 
 /**
  * A target's mute, as a closed set of three shapes: {@link None} (not muted), {@link Permanent} (a
- * {@code /mute} with no duration — never expires), and {@link Timed} (a {@code /tempmute} that expires at a
+ * {@code /mute} with no duration. Never expires), and {@link Timed} (a {@code /tempmute} that expires at a
  * wall-clock instant). The presence of a {@code moderation_mutes} row is the mute; a null {@code until}
  * column rebuilds to {@link Permanent}, a non-null one to {@link Timed}.
  *
  * <p>The mute gate the messaging context consumes is {@link #isActiveAt(Instant)}: a permanent mute is
  * always active, a timed mute is active only until its expiry, and {@link None} is never active. The domain
- * never reads the wall clock — the caller passes the instant — so the gate is deterministic.
+ * never reads the wall clock, the caller passes the instant, so the gate is deterministic.
  */
 public sealed interface MuteState permits MuteState.None, MuteState.Permanent, MuteState.Timed {
 
@@ -31,7 +31,7 @@ public sealed interface MuteState permits MuteState.None, MuteState.Permanent, M
         return new Timed(until, issuer, reason, issuedAt);
     }
 
-    /** True when this mute gags the target at {@code now} — a permanent mute always, a timed mute until expiry. */
+    /** True when this mute gags the target at {@code now}: a permanent mute always, a timed mute until expiry. */
     boolean isActiveAt(Instant now);
 
     /** The expiry instant for a timed mute, else empty (permanent or none). */

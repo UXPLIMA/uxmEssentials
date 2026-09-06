@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /itemdamage <damage>} (alias {@code /durability}): set the held item's durability damage (the
  * inverse of remaining durability). The damage is validated as a non-negative integer by the Brigadier
- * argument and then bounded by the item's max durability — a value above it replies
+ * argument and then bounded by the item's max durability. A value above it replies
  * {@link ItemworldMessageKey#ITEMDAMAGE_OUT_OF_RANGE}. An item that cannot take damage (no durability, or a
  * non-{@link Damageable} meta) replies {@link ItemworldMessageKey#ITEMDAMAGE_NOT_DAMAGEABLE}; an empty hand
  * replies {@link ItemworldMessageKey#NO_ITEM_IN_HAND}. The damage write rides the same {@link ItemBuilder}

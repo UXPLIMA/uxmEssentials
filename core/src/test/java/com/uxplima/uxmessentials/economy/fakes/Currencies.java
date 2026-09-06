@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.economy.domain.Currency;
 import com.uxplima.uxmessentials.economy.domain.CurrencyId;
 
 /**
- * The fixed test currencies the economy tests use — {@code coins} (the default) and {@code gems} (a second
+ * The fixed test currencies the economy tests use. {@code coins} (the default) and {@code gems} (a second
  * currency proving the multi-currency path). The worked example exercises the single-currency-default path
  * with {@code coins}; {@code gems} is here so a test can assert crediting one currency leaves the other
  * untouched and that arithmetic across the two throws.

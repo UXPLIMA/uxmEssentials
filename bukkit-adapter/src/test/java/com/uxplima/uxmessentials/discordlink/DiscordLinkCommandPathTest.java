@@ -32,11 +32,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The discordlink command and seam paths through the real use cases against an in-memory store — the same
+ * The discordlink command and seam paths through the real use cases against an in-memory store, the same
  * wiring the Brigadier handlers and the {@code ServicesManager}-exposed confirmation drive, minus Bukkit. It
  * proves {@code /discordlink} issues and persists a code, {@code /discordlink status} reflects the binding,
  * {@code /discordunlink} clears it, and the bridge-facing {@link ConfirmLinkService} redeems a code end to end
- * — mapping a malformed input, an unknown code, and an already-linked Discord account to the right outcomes
+ *. Mapping a malformed input, an unknown code, and an already-linked Discord account to the right outcomes
  * without ever throwing across the seam.
  */
 class DiscordLinkCommandPathTest {

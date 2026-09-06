@@ -7,7 +7,7 @@ import java.util.OptionalInt;
 
 /**
  * The visual settings of an above-head nametag, held as raw primitives and strings so the model stays in
- * {@code :core}. None of these values are interpreted here — the bukkit adapter maps them onto uxmLib's packet
+ * {@code :core}. None of these values are interpreted here. The bukkit adapter maps them onto uxmLib's packet
  * {@code Appearance} for the text-display stack (billboard parsed to the lib billboard enum, colours folded into a
  * packed ARGB int, view range to a float, …). The domain only validates the operator-authored values it can check
  * without a rendering library: the structural and range invariants.

@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Removes a player's confirmed Discord binding ({@code /discordunlink}). Returns success when a binding existed
- * and was removed, or {@code NOT_LINKED} when the player had none — so the command can tell the player whether
+ * and was removed, or {@code NOT_LINKED} when the player had none, so the command can tell the player whether
  * anything was actually unbound.
  *
  * <p>The binding is read before it is removed, because the fact published afterwards carries the Discord account

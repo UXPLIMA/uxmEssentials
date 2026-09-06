@@ -30,7 +30,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * becomes a spec registered under its file name (sans extension): the file is parsed by the Phase-1
  * {@link MenuSpecLoader} and its refs validated against the registered {@link MenuBindings} before it reaches
  * {@link Menus}. A file that fails to parse, or that names an action/condition/placeholder no binding provides,
- * is skipped with a logged warning rather than aborting the whole load — one operator typo never hides every
+ * is skipped with a logged warning rather than aborting the whole load. One operator typo never hides every
  * other menu. An absent {@code menus/} directory is normal on a fresh install and yields an empty result.
  */
 public final class CustomMenuLoader {
@@ -130,7 +130,7 @@ public final class CustomMenuLoader {
     }
 
     /**
-     * The outcome of a single-file reload — {@code /menu reload <menu>}. {@code found} is whether a
+     * The outcome of a single-file reload. {@code /menu reload <menu>}. {@code found} is whether a
      * {@code menus/<name>.conf} menu spec file existed at all (a missing one is the not-found reply); {@code loaded}
      * and {@code skipped} count that one file's outcome, so a re-registered menu reports {@code loaded=1, skipped=0}
      * and one that failed to parse or named an unknown id reports {@code loaded=0, skipped=1}.
@@ -142,7 +142,7 @@ public final class CustomMenuLoader {
     }
 
     /**
-     * Re-parse, validate and re-register the single {@code menus/<name>.conf} spec — the per-menu {@code /menu reload
+     * Re-parse, validate and re-register the single {@code menus/<name>.conf} spec, the per-menu {@code /menu reload
      * <menu>} target. A missing menus directory, a reserved file name ({@code openers}/{@code patterns}/{@code
      * placeholders}), or an absent {@code <name>.conf} yields a not-found result; otherwise the one file is loaded
      * exactly as {@link #loadFrom} loads each, through the shared {@link #loadOne}. The global patterns and custom
@@ -170,7 +170,7 @@ public final class CustomMenuLoader {
      * are reserved and live alongside the menus without being specs: {@code openers.conf} (opener-item config,
      * {@code OpenerLoader}), {@code patterns.conf} (shared item templates, loaded once via {@link #loadGlobalPatterns})
      * and {@code placeholders.conf} (custom {@code %name%} definitions, loaded once via {@link #loadGlobalPlaceholders}).
-     * All three are excluded here — parsing any of them as a menu spec would only skip it with a spurious warning.
+     * All three are excluded here, parsing any of them as a menu spec would only skip it with a spurious warning.
      */
     private static List<Path> confFiles(Stream<Path> entries) {
         return entries.filter(Files::isRegularFile)
@@ -191,7 +191,7 @@ public final class CustomMenuLoader {
     }
 
     /**
-     * Read the optional shared {@code patterns.conf} once per load pass into its {@code patterns} block — a node of
+     * Read the optional shared {@code patterns.conf} once per load pass into its {@code patterns} block, a node of
      * reusable item templates every menu in the pass may name. Shared patterns are opt-in, so a missing or unreadable
      * file yields an empty node rather than an error. This runs once here, never on a hot path; a {@code /menu reload}
      * re-reads it as part of the same {@link #loadFrom} re-run.
@@ -210,7 +210,7 @@ public final class CustomMenuLoader {
     }
 
     /**
-     * Read the optional global {@code placeholders.conf} once per load pass into a {@code name -> template} map — the
+     * Read the optional global {@code placeholders.conf} once per load pass into a {@code name -> template} map, the
      * custom {@code %name%} placeholders every menu in the pass may reference. Each child of the {@code placeholders}
      * block maps its key to its string value. Custom placeholders are opt-in, so a missing or unreadable file yields
      * an empty map rather than an error. This runs once here, never on a hot path; a {@code /menu reload} re-reads it
@@ -267,7 +267,7 @@ public final class CustomMenuLoader {
 
     /**
      * Read the optional top-level {@code command {}} block of a menu file into an {@link OpenCommandSpec}. A file
-     * with no such block contributes no open command. A malformed block — a name with spaces, an unreadable file —
+     * with no such block contributes no open command. A malformed block (a name with spaces, an unreadable file)
      * is logged and skipped without touching the already-registered menu, which still opens through
      * {@code /menu open <id>}; one bad command block never hides its menu. The file is read a second time here rather
      * than threading the node out of {@link MenuSpecLoader}: this runs once on enable / reload, never on a hot path.
@@ -297,7 +297,7 @@ public final class CustomMenuLoader {
      * Parse the ordered {@code arguments = [{ name=..., type=... }, ...]} list of a command block. Each entry needs
      * a non-blank {@code name}; an entry without one is logged and skipped rather than aborting the command. An
      * unrecognised {@code type} degrades to a plain {@link ArgType#STRING} word argument with a warning, so a config
-     * typo never drops the command — it just loses the stricter parsing and autocomplete for that one argument.
+     * typo never drops the command: it just loses the stricter parsing and autocomplete for that one argument.
      */
     private List<ArgumentSpec> parseArguments(ConfigurationNode node, String menuId) {
         if (node.virtual() || node.isNull()) {
@@ -321,7 +321,7 @@ public final class CustomMenuLoader {
     /**
      * Warn when a {@code greedy} flag sits on any argument other than the last. Brigadier can only capture the
      * remainder of the input on a terminal node, so a greedy flag before a further argument is silently ignored at
-     * build time — surfacing it here lets an operator reorder the arguments rather than wonder why only one word was
+     * build time, surfacing it here lets an operator reorder the arguments rather than wonder why only one word was
      * read. The spec itself is left as declared; the command builder is what honours greedy only on the final node.
      */
     private void warnOnNonTerminalGreedy(List<ArgumentSpec> arguments, String menuId) {

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.vote.application.port.VoteRepository;
 
 /**
  * Admin use case: set the global vote-party counter to a specific value. Does not fire a party even
- * if the new count exceeds the threshold — use {@link AddPartyCount} when you want threshold-checking.
+ * if the new count exceeds the threshold: use {@link AddPartyCount} when you want threshold-checking.
  */
 public final class SetPartyCount {
 
@@ -23,7 +23,7 @@ public final class SetPartyCount {
 
     /**
      * Set the party counter to {@code count} and notify {@code actor}. Also clears any stored
-     * threshold override so the effective threshold reverts to the configured base — matching the
+     * threshold override so the effective threshold reverts to the configured base, matching the
      * documented behaviour of {@code /voteparty set <n>} and making "reset escalation" an explicit
      * admin action rather than an implicit side effect.
      *

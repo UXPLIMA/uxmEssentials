@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the itemworld utilities hub ({@code /itemworld gui}, and the itemworld entry on the {@code /uxmess gui}
  * hub) with the menu engine and opens it. The hub is a launcher panel: eight buttons open a virtual workstation,
- * two set the world time, two set the weather, and two run a cleanup sweep — each running the same surface its
+ * two set the world time, two set the weather, and two run a cleanup sweep. Each running the same surface its
  * command does, and each drawn only when the viewer holds that command's permission. The menu carries no new
  * domain logic; it registers the per-button feature actions and the visibility conditions, then loads the
  * {@code itemworld-hub} spec and hands it to {@link Menus}.
@@ -46,7 +46,7 @@ import org.jspecify.annotations.NullMarked;
  * The click actions replicate the original handlers: opening a station opens its {@link Workstation} view and
  * replies, the time/weather buttons hop to the global region and apply through the same code the {@code /day} /
  * {@code /weather} commands use, and the two sweeps thread under Folia exactly as {@code /killall item} and
- * {@code /butcher} do — a radius purge on the actor's region, a world purge across every region — then report,
+ * {@code /butcher} do (a radius purge on the actor's region, a world purge across every region) then report,
  * audit, and publish the same {@link EntitiesPurged} event. The menu opens with no subject (it is viewer-scoped).
  */
 @NullMarked
@@ -99,7 +99,7 @@ public final class ItemworldHubMenu {
         menus.open(viewer, SPEC_ID, null);
     }
 
-    /** The fully-resolved button label for {@code station} — the workstation name filled into the hub catalog key. */
+    /** The fully-resolved button label for {@code station}: the workstation name filled into the hub catalog key. */
     private String stationLabel(MenuContext ctx, Workstation station) {
         return messages.resolve(
                 ctx.viewer(), ItemworldMessageKey.GUI_HUB_WORKSTATION, Map.of("station", station.displayName()));

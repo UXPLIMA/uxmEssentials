@@ -3,9 +3,9 @@ package com.uxplima.uxmessentials.security.domain;
 /**
  * The pure decision behind the same-IP account cap: given how many distinct accounts have connected from one IP
  * token, decide whether one more (the account currently joining, already counted) may stay. A {@code
- * maxAccountsPerIp} of {@code 0} (or below) means no cap — every join is allowed and the guard only observes.
+ * maxAccountsPerIp} of {@code 0} (or below) means no cap: every join is allowed and the guard only observes.
  *
- * <p>It is a value object so the rule is unit-testable without a player or a database — the join listener feeds it
+ * <p>It is a value object so the rule is unit-testable without a player or a database. The join listener feeds it
  * the account count the store reports for the joining IP and kicks the player on {@link Decision#DENY}.
  *
  * @param maxAccountsPerIp the greatest number of distinct accounts allowed on one IP token, or {@code 0}/below for
@@ -32,10 +32,10 @@ public record AltLimitPolicy(int maxAccountsPerIp) {
     /** The verdict {@link AltLimitPolicy#evaluate} returns: admit the join, or refuse it as one alt too many. */
     public enum Decision {
 
-        /** The IP is within the cap (or the cap is off) — let the player stay. */
+        /** The IP is within the cap (or the cap is off), let the player stay. */
         ALLOW,
 
-        /** The IP already carries the maximum distinct accounts — refuse this one. */
+        /** The IP already carries the maximum distinct accounts, refuse this one. */
         DENY
     }
 }

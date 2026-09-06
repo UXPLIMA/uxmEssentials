@@ -25,11 +25,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * Pins how {@link BukkitEntityPurger#purgeWorld} threads a world-wide sweep under Folia. A world's entities span
  * every region, so the purger must snapshot the roster on the <strong>global</strong> region thread (the one
  * thread that can read every region coherently) and then hop <em>each</em> removal onto the region that owns that
- * entity's location — never enumerating or removing across regions from one actor's thread. A recording
+ * entity's location: never enumerating or removing across regions from one actor's thread. A recording
  * {@link Scheduler} freezes that shape: exactly one {@code onGlobal} snapshot, then one {@code onRegion} hop per
  * matching entity, the count aggregated across the hops, and the completion callback fired once with the total.
  *
- * <p>The sweep's invariants are checked here too — players and tamed pets are never removed — so a regression that
+ * <p>The sweep's invariants are checked here too, players and tamed pets are never removed, so a regression that
  * widened the match or dropped the per-region hop fails a concrete assertion rather than only surfacing on a live
  * Folia server.
  */

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Pins {@link ClaimAwareRegionGate}: the two seams gate independently, each honours its {@code respect-*} toggle, and
  * the WorldGuard seam is consulted with the pose type the caller passed (so the adapter can map SIT / PLAYER_SIT /
- * LAY|BELLYFLOP|SPIN / CRAWL to its own flags). All backends are fakes — no Bukkit, no claim plugin.
+ * LAY|BELLYFLOP|SPIN / CRAWL to its own flags). All backends are fakes, no Bukkit, no claim plugin.
  */
 class ClaimAwareRegionGateTest {
 

@@ -40,7 +40,7 @@ import org.jspecify.annotations.NullMarked;
  * category tiles (sorted by their slot) with the kits at the current tree level, exactly as the old view did;
  * clicking a category drills in, the back button steps up to the parent, a left click on a kit claims it through
  * the same {@link ClaimKit} use case the {@code /kit} command drives, and a right click opens the kit's bespoke
- * {@link KitPreviewView}. With no categories the legacy flat grid is the root level with no sub-categories — one
+ * {@link KitPreviewView}. With no categories the legacy flat grid is the root level with no sub-categories, one
  * spec serves both modes.
  *
  * <p>The level's tiles, their full lore strings, and each category's pinned slot are resolved up front on the
@@ -53,7 +53,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>A category configured to a content slot pins to it on every page: the uniform browse row implements
  * {@link PinnedEntry}, returning the category's slot for a pinned category and an out-of-range {@code -1} (so it
- * flows) for kits and unpinned categories — exactly reproducing the old {@code openCategory} rule that fixed a
+ * flows) for kits and unpinned categories. Exactly reproducing the old {@code openCategory} rule that fixed a
  * category to {@code cat.slot()} only when that slot fell inside the content grid.
  */
 @NullMarked
@@ -246,7 +246,7 @@ public final class KitBrowseMenu {
     /**
      * Claim the clicked kit on the viewer's entity thread (the grant moves items into the live inventory).
      * {@link ClaimKit} gates the claim and sends the result message itself; the window closes only when the kit
-     * opts into close-on-claim, otherwise it stays open so the player can claim again — the old view's behaviour.
+     * opts into close-on-claim, otherwise it stays open so the player can claim again: the old view's behaviour.
      */
     private void claim(Player player, PlayerRef viewer, KitDefinition kit) {
         scheduler.onEntity(viewer, () -> {
@@ -299,10 +299,10 @@ public final class KitBrowseMenu {
      *
      * <p>{@link #pinnedSlot()} returns that slot for a pinned category and {@code -1} for a kit or an unpinned
      * category; the engine pins a row only when the slot is one of the list's content slots, so a category whose
-     * configured slot falls outside the content grid flows like a kit — reproducing the old view's pin rule.
+     * configured slot falls outside the content grid flows like a kit: reproducing the old view's pin rule.
      *
      * @param kind whether this tile drills into a category or claims/previews a kit
-     * @param id the clicked identity — the category id to drill into, or the kit id to claim
+     * @param id the clicked identity, the category id to drill into, or the kit id to claim
      * @param icon the icon material name
      * @param name the rendered display name source in the viewer's locale
      * @param lore the full lore, the catalog/override lines joined by {@code \n} for the engine to expand

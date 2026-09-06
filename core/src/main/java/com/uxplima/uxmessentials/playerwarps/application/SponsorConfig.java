@@ -10,7 +10,7 @@ import java.util.Objects;
  * how many sponsors can be live at once, {@link #durationDays} is the longest term a purchase may run,
  * {@link #price} of {@link #currencyId} is charged per purchase, {@link #maxConcurrentPerPlayer} caps how many
  * sponsorships one owner may hold at once, and {@link #cooldown} is the post-expiry cooldown a warp must wait out
- * before it can be sponsored again. A {@link #disabled()} config is the shipped default — the sub-group off, so no
+ * before it can be sponsored again. A {@link #disabled()} config is the shipped default, the sub-group off, so no
  * slot is sold, no sweep runs, and no pinned tile renders.
  *
  * @param enabled whether the sponsorship sub-group runs at all

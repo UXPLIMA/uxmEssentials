@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /ignorelist}: open the ignore-list manager GUI — the same view {@code /ignore} with no argument opens,
+ * {@code /ignorelist}: open the ignore-list manager GUI, the same view {@code /ignore} with no argument opens,
  * so the list lives in one place and the standalone command stays a familiar entry point into it. It takes no
  * argument and reuses the {@code uxmessentials.msg.ignore} node, since seeing your own list is part of managing
  * it; the rendered list (the heads to review and un-ignore, the add control) is the GUI's job.

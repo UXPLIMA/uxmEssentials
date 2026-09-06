@@ -48,7 +48,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit + Mockito coverage of {@link AdvancementMessageListener}. The {@code Advancement}/{@code
  * AdvancementDisplay} pair are Bukkit/Paper interfaces MockBukkit does not implement, so they are mocked; the earner
  * and the broadcast recipients are real {@link PlayerMock}s and the {@link PlayerAdvancementDoneEvent} is a real
- * event built from the public {@code (Player, Advancement, Component)} constructor, so the listener runs end to end —
+ * event built from the public {@code (Player, Advancement, Component)} constructor, so the listener runs end to end
  * the vanilla-message edit ({@code event.message(null)}) and the actual fan-out through the {@link ChannelBroadcaster}
  * are both observable. The {@link AdvancementFilter} gate logic itself is unit-tested in core; here it is exercised
  * through the live event to confirm the listener wires the facts (key, recipe-ness, announceable) into it correctly.
@@ -223,7 +223,7 @@ class AdvancementMessageListenerTest {
     @Test
     void vanishCheckAndBroadcastResolveOnTheGlobalRegionThreadWithoutAMarshal() {
         // The event fires on the earner's region thread; the vanish read (a cross-region canSee scan) and the
-        // broadcast decision must hop once onto the global thread, where the predicate then runs inline — no nested
+        // broadcast decision must hop once onto the global thread, where the predicate then runs inline: no nested
         // CompletableFuture.get marshal of its own. The predicate records the thread-ownership it observed.
         RecordingScheduler scheduler = new RecordingScheduler();
         boolean[] testedOnGlobal = {false};
@@ -253,7 +253,7 @@ class AdvancementMessageListenerTest {
                 advancement("minecraft:end/kill_dragon", true, "The End?", ""));
 
         assertThat(viewer.nextComponentMessage()).isNull();
-        // The opted-in earner still receives it, so the broadcast did fire — only the opted-out viewer was skipped.
+        // The opted-in earner still receives it, so the broadcast did fire: only the opted-out viewer was skipped.
         assertThat(PLAIN.serialize(received(earner))).isEqualTo("Earner The End?");
     }
 
@@ -284,14 +284,14 @@ class AdvancementMessageListenerTest {
         lenient().when(display.description()).thenReturn(Component.text("Discover every biome"));
 
         String result = AdvancementMessageListener.substitute(
-                "{player}: {title} — {description} ({advancement})",
+                "{player}: {title}, {description} ({advancement})",
                 "Steve",
                 "minecraft:adventure/adventuring_time",
                 display,
                 Locale.ENGLISH);
 
         assertThat(result)
-                .isEqualTo("Steve: Adventuring Time — Discover every biome (minecraft:adventure/adventuring_time)");
+                .isEqualTo("Steve: Adventuring Time, Discover every biome (minecraft:adventure/adventuring_time)");
     }
 
     @Test
@@ -342,7 +342,7 @@ class AdvancementMessageListenerTest {
 
     /**
      * An announceable advancement whose title is a {@link Component#translatable} keyed by {@code titleKey}, as a real
-     * vanilla advancement title is — unlike the literal-title {@link #advancement} helper, this exercises the
+     * vanilla advancement title is. Unlike the literal-title {@link #advancement} helper, this exercises the
      * translator-render path.
      */
     private static Advancement translatableAdvancement(String key, String titleKey) {

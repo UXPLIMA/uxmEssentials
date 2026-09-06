@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Typed view over the {@code modules/staff/config.conf} subtree, read once at wire time from the module's
  * scoped {@link ConfigStore}. It carries the {@code vanish-on-enter} flag, the gadget hotbar layout (one
- * {@link GadgetSpec} per gadget — its slot, material, and operator-authored MiniMessage display name), and the
+ * {@link GadgetSpec} per gadget. Its slot, material, and operator-authored MiniMessage display name), and the
  * staff-chat receive permission node. An unknown gadget material or an out-of-range slot is dropped with a
  * single warning rather than failing the wire, so a misconfigured gadget never strands the module.
  *

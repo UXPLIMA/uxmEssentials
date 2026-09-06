@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * offered sorts, and the filters they typed. A paged list source is asked for exactly the page this describes, so
  * this is where the engine remembers what a viewer has done to a list between draws without holding the corpus.
  *
- * <p>Changing what the query returns — a new filter, a different sort — sends the viewer back to page zero. On page
+ * <p>Changing what the query returns (a new filter, a different sort) sends the viewer back to page zero. On page
  * seven of the whole corpus, filtering to "shop" would otherwise land on a page past the end of the far shorter
  * filtered result and read as "no shops", so every filter and sort mutation zeroes the page.
  *

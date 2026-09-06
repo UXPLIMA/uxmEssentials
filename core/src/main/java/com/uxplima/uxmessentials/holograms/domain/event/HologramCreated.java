@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * A hologram was created — {@code /hologram create} under a name no hologram existed at.
+ * A hologram was created, {@code /hologram create} under a name no hologram existed at.
  *
  * @param name the name the hologram was created under
  * @param creator the player who created the hologram

@@ -28,21 +28,21 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Registers the active-punishments management list (the management GUI's entry point — {@code /mod} with no args and
+ * Registers the active-punishments management list (the management GUI's entry point, {@code /mod} with no args and
  * the {@code /uxmess gui} hub entry) with the menu engine and opens it. A paginated grid of one icon per currently
  * active ban, mute, and jail, each showing the target, the kind, the issuer, the reason and the remaining time. A
  * left click opens that entry's still-bespoke {@link PunishmentDetailView}, the confirm-gated detail/revoke screen.
  *
  * <p>The three active reads ({@code activeBans} / {@code activeMutes} / {@code activeJails}) are DB queries, each
  * target's display name resolves through the {@link PlayerLookup}, and the kind label and {@code permanent} marker
- * resolve through the {@link Messages} catalog — none of which belongs in an off-thread list source. So {@link #open}
+ * resolve through the {@link Messages} catalog: none of which belongs in an off-thread list source. So {@link #open}
  * runs the reads off the tick thread, resolves every name, kind label and remaining string there in the viewer's
  * locale, and hands the fully-resolved rows in as the menu subject; the {@code moderation:active} list source only
  * reads that subject. The {@code mod_active_icon} / {@code mod_active_player} / {@code mod_active_type} /
  * {@code mod_active_issuer} / {@code mod_active_reason} / {@code mod_active_remaining} placeholders fill each icon
  * from the bound row, prefixed so they never collide with the history- and jailed-list tokens that carry the same
  * field names. A {@code moderation:open-detail} left action hands the clicked {@link ActivePunishment} to the detail
- * view. There is no create button — punishments are issued by the {@code /ban} / {@code /mute} / {@code /jail}
+ * view. There is no create button. Punishments are issued by the {@code /ban} / {@code /mute} / {@code /jail}
  * commands, not the list. Every label resolves from the moderation catalog, so no user-facing text lives here. The
  * geometry mirrors the original paginated list: a grid across the top five rows and the two nav arrows on the bottom.
  */

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.moderation.domain.SanctionHistoryEntry;
 /**
  * The DB-backed append-only sanction-history store (the same hard moderation invariant as the sanction state:
  * it survives restart, never PDC). Kept a separate port from {@link ModerationRepository} so the history
- * concern stays isolated — recording one row never touches the active-state tables, and a read never widens
+ * concern stays isolated. Recording one row never touches the active-state tables, and a read never widens
  * the repository's surface.
  *
  * <p>Each row records a single ban/unban/mute/unmute/warn/kick applied to a target; nothing is ever updated.

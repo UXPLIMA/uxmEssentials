@@ -16,14 +16,14 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The {@link NickStore} implementation. A nick is transient per-holder preference that survives relog — the
- * same class as a cooldown stamp — so it is stored in PDC under a single pre-created key, never the
+ * The {@link NickStore} implementation. A nick is transient per-holder preference that survives relog, the
+ * same class as a cooldown stamp, so it is stored in PDC under a single pre-created key, never the
  * economy-grade DB. Setting both stamps the nick and applies the display name; clearing both removes the stamp
  * and restores the account name.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>per-holder PDC</b>. Every PDC read/write and every {@code displayName} application hops to the
- * affected player's owning entity/region thread through the injected {@link Scheduler} port — a {@code Player}
+ * affected player's owning entity/region thread through the injected {@link Scheduler} port, a {@code Player}
  * mutation is valid only on its owning thread on Folia. An offline player is a silent no-op. The
  * {@link NamespacedKey} is built once in the constructor, never on a hot path.
  */

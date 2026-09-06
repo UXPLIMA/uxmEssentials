@@ -18,14 +18,14 @@ import com.uxplima.uxmessentials.worlds.domain.WorldName;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The thin, pure front for {@code /worlds pregen}. It resolves and validates the request — the world must
- * exist, be loaded, and carry a positive radius, and no pre-generation may already be running for it — then
+ * The thin, pure front for {@code /worlds pregen}. It resolves and validates the request: the world must
+ * exist, be loaded, and carry a positive radius, and no pre-generation may already be running for it, then
  * clamps the radius to {@link WorldsSettings#pregenMaxRadius()} and delegates to the {@link WorldPregen} port.
  *
  * <p>The use case notifies only the immediate command outcome (started, already-running, not-loaded,
  * not-found, cancelled, not-running). The asynchronous generation loop, its progress bar, and the
  * completion ("done") notification all belong to the engine behind the port, so this class never notifies
- * completion — doing so would double-notify the operator.
+ * completion: doing so would double-notify the operator.
  */
 @NullMarked
 public final class PregenWorld {

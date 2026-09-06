@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * A capturing {@link SanctionSync}: every {@link #banChanged}/{@link #muteChanged} call is recorded so a test
- * can assert that a successful ban or mute announced the live cross-server effect — and that a refused one did
+ * can assert that a successful ban or mute announced the live cross-server effect, and that a refused one did
  * not.
  */
 public final class RecordingSanctionSync implements SanctionSync {

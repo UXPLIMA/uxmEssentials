@@ -126,7 +126,7 @@ class MergeAnnouncementsTest {
         assertThat(merged.minOnlinePlayers()).isEqualTo(7);
     }
 
-    /** An always-unset settings store — both globals defer to the file, the pre-feature behaviour. */
+    /** An always-unset settings store: both globals defer to the file, the pre-feature behaviour. */
     private static AnnouncerSettingsStore unsetSettings() {
         return new InMemorySettingsStore();
     }

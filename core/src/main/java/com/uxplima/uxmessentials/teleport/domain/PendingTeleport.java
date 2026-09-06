@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 /**
  * One in-flight teleport warmup, modelling the <b>move-cancels-warmup invariant</b> the teleport context
  * owns. It pins the {@link #origin} block the player must not leave, the {@link Destination} the warmup
- * precedes, the cancel toggles, and a {@code cancelled} flag — exactly the snapshot the adapter keeps in
+ * precedes, the cancel toggles, and a {@code cancelled} flag. Exactly the snapshot the adapter keeps in
  * its {@code ConcurrentHashMap<UUID, PendingTeleport>} and re-checks each tick before issuing the hop.
  *
  * <p>The decision logic is here and pure: {@link #onMovement(Position)} compares the new position's
@@ -111,7 +111,7 @@ public final class PendingTeleport {
 
     /**
      * The result of reconciling an event against a pending warmup: the (possibly cancelled) state and,
-     * when a cancel fired, the reason — so the caller raises {@code WarmupCancelled} exactly once.
+     * when a cancel fired, the reason, so the caller raises {@code WarmupCancelled} exactly once.
      *
      * @param state the warmup after reconciliation
      * @param cancelReason the reason a cancel fired, or {@code null} when nothing changed

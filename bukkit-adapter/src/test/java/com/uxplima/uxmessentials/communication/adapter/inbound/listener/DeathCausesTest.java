@@ -17,10 +17,10 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The Bukkit-to-domain death mapping in {@link DeathCauses}, driven through Mockito doubles so the classification
- * runs without a live server. It pins the "who before how" rule the death policy relies on — a player killer is
+ * runs without a live server. It pins the "who before how" rule the death policy relies on. A player killer is
  * {@link DeathCause#PVP}, a creature blow is {@link DeathCause#MOB}, a fired projectile is {@link
  * DeathCause#PROJECTILE}, an environmental cause maps from its {@code DamageCause}, and a missing damage event is
- * {@link DeathCause#OTHER} — plus the readable-material fallback the {@code {killer_weapon}} token uses for a
+ * {@link DeathCause#OTHER}, plus the readable-material fallback the {@code {killer_weapon}} token uses for a
  * plain (un-renamed) item.
  */
 class DeathCausesTest {

@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  * returned hidden flag, so the player sees the change at once rather than after a refresh tick. The {@code gui}
  * subcommand opens the settings panel that carries the same toggle, gated on {@code uxmessentials.scoreboard.gui}.
  *
- * <p>A console source gets the players-only rejection — a board belongs to a live player. The render/clear hop runs
+ * <p>A console source gets the players-only rejection: a board belongs to a live player. The render/clear hop runs
  * on the player's entity thread because it touches the live scoreboard.
  */
 @NullMarked

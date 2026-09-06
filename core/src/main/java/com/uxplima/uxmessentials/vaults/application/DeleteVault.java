@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultId;
 
 /**
  * {@code /vault delete <n>} (own) and {@code /vault delete <player> <n>} (admin): remove a vault row, freeing
- * the owner's amount-quota slot, and — for an owner deleting their own vault — pay back the configured refund.
+ * the owner's amount-quota slot, and, for an owner deleting their own vault, pay back the configured refund.
  * Mirrors the create path's order in reverse: the vault must exist before it can be removed, so an index with
  * no row returns {@link VaultError#DELETE_UNKNOWN} and writes nothing.
  *
@@ -57,7 +57,7 @@ public final class DeleteVault {
 
     /**
      * Delete {@code owner}'s vault at one-based {@code index} on behalf of staff {@code actor}, audit-logging
-     * the override and notifying the actor. No refund is paid — the actor is not the owner (see the class doc).
+     * the override and notifying the actor. No refund is paid: the actor is not the owner (see the class doc).
      */
     public Result<Unit, VaultError> deleteOther(PlayerRef actor, PlayerRef owner, int index) {
         Objects.requireNonNull(actor, "actor");

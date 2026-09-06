@@ -45,13 +45,13 @@ import org.jspecify.annotations.NullMarked;
  * player-warp property as one button wired to the same write path the {@code /pwarp} subcommands use. A warp is
  * keyed {@code (owner, name)}, so the editor is generic over an {@link OwnedWarp} and every property reads the
  * live row fresh from the {@link PlayerWarpRepository} on each open (the list-click snapshot would otherwise go
- * stale after an edit) and writes back against that same owner — an operator never edits anyone else's warp by
+ * stale after an edit) and writes back against that same owner. An operator never edits anyone else's warp by
  * accident, and a player only ever reaches their own through the list's owner filter.
  *
  * <p>Most fields are immutable {@code with*} transitions on the {@link PlayerWarp} aggregate persisted through
  * {@code repository.save}; visibility flows through {@link SetPlayerWarpVisibility} (the same use case the
  * {@code /pwarp public|private} subcommands call), move-here re-anchors at the operator's feet, and delete
- * archives the warp through {@link ArchivePlayerWarp} behind the framework's confirm gate (recoverable — the row
+ * archives the warp through {@link ArchivePlayerWarp} behind the framework's confirm gate (recoverable, the row
  * is retired, not dropped).
  */
 @NullMarked
@@ -117,7 +117,7 @@ public final class PlayerWarpEditorView {
         view.open(player, viewer, owned);
     }
 
-    /** The underlying property grid — exposed for tests to resolve a slot to its property without a live click. */
+    /** The underlying property grid: exposed for tests to resolve a slot to its property without a live click. */
     EntityEditorView<OwnedWarp> grid() {
         return view;
     }
@@ -235,7 +235,7 @@ public final class PlayerWarpEditorView {
 
     /**
      * Rename a warp by re-saving the live row under the new name. The warp now carries a durable surrogate id, so a
-     * save with the same id and a different name updates that one row in place — no copy-then-delete is needed the
+     * save with the same id and a different name updates that one row in place. No copy-then-delete is needed the
      * way it was when identity was {@code (owner, name)}. A no-op when the new name equals the old or no such warp
      * exists; a name another warp already holds is rejected by the repository's global-unique constraint just as
      * {@code /setpwarp} onto a taken name is.

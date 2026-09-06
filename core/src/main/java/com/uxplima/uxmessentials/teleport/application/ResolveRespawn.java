@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.teleport.domain.RespawnStep;
  * return the first step that resolves to a valid {@link Position}. The chain is read from
  * {@link TeleportSettings#respawnChain(WorldRef)}; resolving each step (the world spawn, the urgent RTP
  * queue, the player's home, a named warp, the bed/anchor) is delegated to the {@link StepResolver} the
- * adapter supplies, since those targets live behind ports — the urgent RTP path is used for the
+ * adapter supplies, since those targets live behind ports. The urgent RTP path is used for the
  * {@code tpr} step so a respawn never blocks on a queue refill.
  *
  * <p>An empty result means no step resolved and the caller defers to vanilla respawn. The settings view supplies

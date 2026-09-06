@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
  * {@code "wool 1"}) into a Bukkit {@link ItemStack}, the bukkit-side conversion the kit import defers here
  * (docs/12-migration §5.1). The descriptor grammar handled is the realistic subset for a modern server: the
  * material (a name, optionally a {@code name:data} pair), the amount, an optional durability/damage value, and
- * enchantment {@code name:level} tokens — including the legacy Bukkit enchant names EssentialsX historically
+ * enchantment {@code name:level} tokens. Including the legacy Bukkit enchant names EssentialsX historically
  * wrote ({@code damage_all}, {@code durability}, {@code dig_speed}, …). Item display name, lore, and
  * potion/firework meta are out of scope and ignored, as are pre-1.13 numeric item ids (removed game-side in
  * 1.13 and unresolvable through the 1.21 API). An unresolvable material yields {@link Optional#empty()} so the

@@ -42,9 +42,9 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@code /menu editor} menu picker: a paginated {@link EntityListView} of every loaded custom menu with a create
  * button, and a per-menu {@link EntityEditorView} overview carrying save / duplicate / rename / delete. It is a thin
- * consumer of the shared menu engine — the list opens through the façade, each button is an {@link ActionProperty} or
+ * consumer of the shared menu engine. The list opens through the façade, each button is an {@link ActionProperty} or
  * the editor's own back/delete, names are captured through {@link TextInput}, and the destructive delete gates behind
- * the engine's confirm — so no raw Bukkit inventory is ever built and the editor stays on the engine like every other
+ * the engine's confirm, so no raw Bukkit inventory is ever built and the editor stays on the engine like every other
  * spec-driven menu.
  *
  * <p>All file work runs through the {@link MenuEditorService}, off the tick thread: a create / duplicate / rename /
@@ -67,7 +67,7 @@ public final class MenuEditorView {
     /** The create button's slot on the six-row picker. */
     private static final int CREATE_SLOT = 49;
 
-    /** The overview's five action-button slots, then its back and delete slots — a single three-row chest. */
+    /** The overview's five action-button slots, then its back and delete slots, a single three-row chest. */
     private static final List<Integer> OVERVIEW_PROPERTY_SLOTS = List.of(10, 12, 14, 16, 18);
 
     private static final int OVERVIEW_BACK_SLOT = 22;
@@ -154,7 +154,7 @@ public final class MenuEditorView {
 
     /**
      * Open the menu picker for {@code player}; the framework schedules it on the viewer's entity thread. Arriving at
-     * the browser means the viewer is no longer editing a specific menu, so their edit lock (if any) is released here —
+     * the browser means the viewer is no longer editing a specific menu, so their edit lock (if any) is released here
      * this is the "done with this menu" signal, alongside the quit hook.
      */
     public void open(Player player, PlayerRef viewer) {
@@ -162,7 +162,7 @@ public final class MenuEditorView {
         list.open(player, viewer);
     }
 
-    /** Reopen the picker — the overview's back target, releasing the viewer's edit lock as the browser is the root. */
+    /** Reopen the picker: the overview's back target, releasing the viewer's edit lock as the browser is the root. */
     private void openList(Player player, PlayerRef viewer) {
         locks.release(viewer.uuid());
         list.open(player, viewer);
@@ -275,7 +275,7 @@ public final class MenuEditorView {
                 (player, reopen) -> promptRename(player, id, reopen));
     }
 
-    /** The overview button that opens the slot-grid canvas for this menu — the P2 editor's entry point. */
+    /** The overview button that opens the slot-grid canvas for this menu: the P2 editor's entry point. */
     private EditableProperty gridButton(String id) {
         return new ActionProperty(
                 CustomMenusMessageKey.MENU_EDITOR_GRID,
@@ -284,7 +284,7 @@ public final class MenuEditorView {
                 (player, reopen) -> openGrid.accept(player, id));
     }
 
-    /** The overview button that opens the menu-level property editor for this menu — the P5 editor's entry point. */
+    /** The overview button that opens the menu-level property editor for this menu: the P5 editor's entry point. */
     private EditableProperty propertiesButton(String id) {
         return new ActionProperty(
                 CustomMenusMessageKey.MENU_EDITOR_PROPERTIES,
@@ -395,7 +395,7 @@ public final class MenuEditorView {
         };
     }
 
-    /** A fixed value-hint resolved in the viewer's locale — an action button's lore is not an editable value. */
+    /** A fixed value-hint resolved in the viewer's locale: an action button's lore is not an editable value. */
     private Function<PlayerRef, String> hint(MessageKey key) {
         return viewer -> messages.resolve(viewer, key, Map.of());
     }

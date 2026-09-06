@@ -94,7 +94,7 @@ class JooqNpcRepositoryTest {
     @Test
     void roundTripsALongSerializedEquipmentTokenWithoutTruncation() {
         // A serialized + base64 ItemStack token is far longer than the legacy VARCHAR(64) cap. The V45 TEXT
-        // column must store it whole — this asserts the full token comes back byte-for-byte, not truncated.
+        // column must store it whole: this asserts the full token comes back byte-for-byte, not truncated.
         String longToken = "b64:" + "QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVowMTIzNDU2Nzg5".repeat(40);
         assertThat(longToken.length()).isGreaterThan(1_000);
         repository.save(
@@ -183,7 +183,7 @@ class JooqNpcRepositoryTest {
     @Test
     void clearingASlotWipesBothColumnsSoNoStaleGearResurfaces() {
         // Clearing a slot must null both the legacy VARCHAR and the new TEXT column. Seed a row carrying a legacy
-        // head value, clear that slot, and confirm it stays empty on reload — a stale value in either column would
+        // head value, clear that slot, and confirm it stays empty on reload. A stale value in either column would
         // resurface through the new-then-legacy read.
         com.uxplima.uxmessentials.persistence.jooq.tables.Npc npc =
                 com.uxplima.uxmessentials.persistence.jooq.tables.Npc.NPC;
@@ -417,7 +417,7 @@ class JooqNpcRepositoryTest {
         // The upsert's doUpdate() set list must overwrite every column the insert writes; a column present on
         // insert but missing from doUpdate would be dropped on the second save (the pose/scale bug caught during
         // implementation). This seeds an NPC carrying a value in every optional column, re-saves it editing only a
-        // single unrelated field (the position), and asserts every other field still round-trips — so any column
+        // single unrelated field (the position), and asserts every other field still round-trips, so any column
         // omitted from the update set surfaces here as a lost value rather than in production.
         repository.save(Npc.create(
                         NpcName.of("decked"),
@@ -709,7 +709,7 @@ class JooqNpcRepositoryTest {
         return Npc.create(NpcName.of(name), Position.of(WORLD, 0, 64, 0), null, createdAt);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

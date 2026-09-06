@@ -23,12 +23,12 @@ import org.jspecify.annotations.NullMarked;
  * {@code docs/11-economy-integration.md} §9.6. {@code /balance <offline>} and {@code /baltop} are served from
  * a bounded, TTL'd cache so a tick-thread read of an offline player's balance does not hit the database; a
  * miss loads the whole wallet through once and a write invalidates the affected owner so a stale balance is
- * never shown after a mutation — write-through at the delegate, invalidate here, never a write-back cache.
+ * never shown after a mutation, write-through at the delegate, invalidate here, never a write-back cache.
  *
  * <p>The cache is a <strong>read accelerator only</strong>. It is never an authority and never written
  * through as a source of truth: the guarded debit/credit/transfer path always runs against the delegate
- * (the live DB row inside its transaction) and invalidates the cached owner afterwards, so invariant (d) —
- * the database is the only authority — stays intact. {@code top} is not cached here; the provider's per-
+ * (the live DB row inside its transaction) and invalidates the cached owner afterwards, so invariant (d)
+ * the database is the only authority. Stays intact. {@code top} is not cached here; the provider's per-
  * currency baltop snapshot owns that caching above the port.
  */
 @NullMarked
@@ -111,7 +111,7 @@ public final class CachedWalletRepository implements WalletRepository {
 
     /**
      * Drop one cached owner so the next read reloads it from the database. Called by the cross-server bus
-     * client when a peer reports this owner's balance changed on another backend — the shared DB already
+     * client when a peer reports this owner's balance changed on another backend. The shared DB already
      * holds the authoritative figure, so dropping the cached snapshot is all that is needed for the next
      * {@code /balance} on this backend to reflect it.
      */

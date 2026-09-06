@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.holograms.domain;
 
 /**
  * A hologram's spatial display transform, separate from the rest of the {@link Appearance} styling: a
- * display-space translation offset (x, y, z) and a per-axis scale. Pure value object (no Bukkit) — the adapter
+ * display-space translation offset (x, y, z) and a per-axis scale. Pure value object (no Bukkit), the adapter
  * maps it onto the native display transformation at the rendering boundary. A uniform scale is the common case,
  * so {@link #ofUniformScale(float)} keeps the single-value form an operator and the stored {@code SCALE} column
  * both use, while {@link #withScale(float, float, float)} sets each axis independently.
@@ -23,7 +23,7 @@ public record Transform(
     private static final float UNIT_SCALE = 1.0f;
     private static final float MAX_TRANSLATION = 256.0f;
 
-    /** No offset, unit scale on every axis — what a default and an un-transformed stored row both resolve to. */
+    /** No offset, unit scale on every axis: what a default and an un-transformed stored row both resolve to. */
     public static final Transform DEFAULT = new Transform(0f, 0f, 0f, UNIT_SCALE, UNIT_SCALE, UNIT_SCALE);
 
     public Transform {

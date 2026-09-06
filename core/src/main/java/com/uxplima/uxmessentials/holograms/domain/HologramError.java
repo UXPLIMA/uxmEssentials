@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.holograms.application.HologramsMessageKey;
 /**
  * The modelled failures a hologram operation can produce. Each value carries the
  * {@link HologramsMessageKey} the command adapter renders, so a use case returns a
- * {@code Result.err(HologramError.X)} and the caller never re-derives the message — the error carries it,
+ * {@code Result.err(HologramError.X)} and the caller never re-derives the message. The error carries it,
  * and the failure reason and its localized text never drift apart.
  */
 public enum HologramError {
@@ -19,10 +19,10 @@ public enum HologramError {
     /** A line index outside the hologram's current line range ({@code setline}, {@code removeline}). */
     LINE_INDEX_OUT_OF_RANGE(HologramsMessageKey.HOLOGRAM_LINE_INDEX_INVALID),
 
-    /** Removing the line would leave the hologram empty — a hologram must keep at least one line. */
+    /** Removing the line would leave the hologram empty: a hologram must keep at least one line. */
     WOULD_BE_EMPTY(HologramsMessageKey.HOLOGRAM_MIN_ONE_LINE),
 
-    /** {@code /hologram page add} on a non-text hologram — only text holograms render paged lines. */
+    /** {@code /hologram page add} on a non-text hologram: only text holograms render paged lines. */
     NOT_TEXT_HOLOGRAM(HologramsMessageKey.HOLOGRAM_PAGE_NOT_TEXT),
 
     /** {@code /hologram page remove} on a hologram that has no page set (it is an ordinary single-page hologram). */

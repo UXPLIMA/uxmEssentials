@@ -28,8 +28,8 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * End-to-end dispatch coverage of the bus stack — the real {@link PluginMessagingTransport} over the mock
- * Bukkit messenger, wrapped by the live {@link BusCore} — so the loop sentinel and listener dispatch are
+ * End-to-end dispatch coverage of the bus stack, the real {@link PluginMessagingTransport} over the mock
+ * Bukkit messenger, wrapped by the live {@link BusCore}, so the loop sentinel and listener dispatch are
  * exercised through exactly the path a frame travels in production: inbound plugin message → transport →
  * {@code onFrame} → core decode → registry. {@link BusCoreTest} asserts the same decisions against a fake
  * transport (no Bukkit); this keeps the integrated round-trip covered after the transport was split out of the
@@ -37,8 +37,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
  * inbound listener.
  *
  * <ul>
- *   <li>a frame whose origin equals this backend's own {@code server-id} is dropped — never delivered to a
- *       listener — so a backend never re-applies its own mutation echoed back through the proxy;
+ *   <li>a frame whose origin equals this backend's own {@code server-id} is dropped. Never delivered to a
+ *       listener, so a backend never re-applies its own mutation echoed back through the proxy;
  *   <li>a frame from a peer is delivered to every registered {@link RemoteSyncListener}, which is what
  *       invalidates the Caffeine cache so the next read sees the peer's change.
  * </ul>

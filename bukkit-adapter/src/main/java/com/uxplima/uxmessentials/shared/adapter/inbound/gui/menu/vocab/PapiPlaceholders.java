@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * Bridges PlaceholderAPI tokens into the menu engine's {@code %token%} syntax. Registered once at startup, it sets
  * the {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.binding.PlaceholderRegistry} fallback so any
  * token written {@code %papi_<name>%} resolves through PlaceholderAPI's {@code %<name>%} expansion against the
- * viewer — letting an operator reuse the thousands of placeholders other plugins expose without a per-token binding.
+ * viewer: letting an operator reuse the thousands of placeholders other plugins expose without a per-token binding.
  *
  * <p>PlaceholderAPI is a soft dependency, reached only past {@link PlaceholderApiSupport#isPresent()} so a server
  * without it never resolves the {@code me.clip.placeholderapi} classes and the bridge is an inert empty-string

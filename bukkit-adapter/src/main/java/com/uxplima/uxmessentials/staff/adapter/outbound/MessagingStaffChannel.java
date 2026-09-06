@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * The messaging-backed {@link StaffChannel}: it resolves the staff-chat audience through the messaging
  * context's {@link StaffAudience} (every online holder of the staff-chat node) and fans each line out through
  * the shared {@link Messages}/{@link MessageSink} pair, formatting it with {@code STAFF_CHAT_FORMAT} in each
- * recipient's locale — the same staff-audience fan-out shape as {@code HelpOp}.
+ * recipient's locale, the same staff-audience fan-out shape as {@code HelpOp}.
  *
  * <p>This impl is bound only when the messaging module is enabled; with messaging off the wiring binds
  * {@link StaffChannel#NONE}, so the audience is empty and a send degrades to silence rather than failing.

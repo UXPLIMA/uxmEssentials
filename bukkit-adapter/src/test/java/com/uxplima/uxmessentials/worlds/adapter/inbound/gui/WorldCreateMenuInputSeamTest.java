@@ -55,8 +55,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * Unit coverage of the create screen's package-private name/seed apply seams — the path a live anvil/chat submission
- * runs, which MockBukkit cannot drive — so the validation and the re-open with the captured value are exercised
+ * Unit coverage of the create screen's package-private name/seed apply seams, the path a live anvil/chat submission
+ * runs, which MockBukkit cannot drive, so the validation and the re-open with the captured value are exercised
  * without a live prompt, mirroring the economy amount-seam test. A valid name/seed re-opens the screen carrying it
  * (surfaced through the create-name / create-seed token), and an invalid one sends the existing rejection through the
  * notifier and re-opens unchanged. The test drives the seam directly because it lives in the menu's own package.

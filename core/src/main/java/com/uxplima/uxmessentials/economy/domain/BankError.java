@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
 /**
  * The modelled failures a shared-bank operation ({@code /bank create|deposit|withdraw|addmember|removemember})
  * can produce. Each value is a distinct outcome the command adapter renders through its own
- * {@link EconomyMessageKey} — never collapsed to a single "insufficient funds" notice, so a missing bank, a
+ * {@link EconomyMessageKey}. Never collapsed to a single "insufficient funds" notice, so a missing bank, a
  * permission denial, and an empty wallet are all told apart.
  *
  * <p>A shared bank is a native-ledger feature: a deposit/withdraw moves money through the wallet repository the
@@ -24,10 +24,10 @@ public enum BankError {
     /** The actor lacks the role permission for the requested action. */
     NO_PERMISSION(EconomyMessageKey.BANK_NO_PERMISSION),
 
-    /** The depositor cannot cover the amount — the guarded wallet debit changed no rows. */
+    /** The depositor cannot cover the amount: the guarded wallet debit changed no rows. */
     INSUFFICIENT_FUNDS(EconomyMessageKey.BANK_INSUFFICIENT_FUNDS),
 
-    /** The bank cannot cover the withdrawal — the guarded balance update changed no rows. */
+    /** The bank cannot cover the withdrawal: the guarded balance update changed no rows. */
     INSUFFICIENT_BANK_FUNDS(EconomyMessageKey.BANK_INSUFFICIENT_BANK_FUNDS),
 
     /** The credit of a withdrawal would push the player past the currency's max balance. */

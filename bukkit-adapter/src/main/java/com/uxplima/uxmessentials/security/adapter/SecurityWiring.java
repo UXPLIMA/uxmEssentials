@@ -129,7 +129,7 @@ public final class SecurityWiring {
                 new ClientGuard(brands, config.clientId(), staffNotifier, kernel.scheduler(), kernel.messages());
         FindAlts findAlts = new FindAlts(ipHistory);
 
-        // Phase 2 — join verification: the DB-backed device-trust store, the transient freeze/lockout registry, the
+        // Phase 2. Join verification: the DB-backed device-trust store, the transient freeze/lockout registry, the
         // keypad GUI, and the controller that decides on join and drives every submitted PIN/code to an unfreeze,
         // re-prompt, or lockout kick. A submitted code is verified through VerifyTwoFactor (TOTP or PIN), off-thread.
         // Built ahead of the commands so /2fa force can drive an online target straight back into the freeze.
@@ -240,7 +240,7 @@ public final class SecurityWiring {
                 new ClientInfoCommand(
                         brands, kernel.playerLookup(), kernel.scheduler(), kernel.messages(), kernel.messageSink()));
 
-        // Phase 3 — op-command protection: a re-auth controller sharing the same keypad, a router that sends each
+        // Phase 3. Op-command protection: a re-auth controller sharing the same keypad, a router that sends each
         // keypad submission to whichever flow the player is in, and the command listener that blocks a protected
         // command until the player's re-auth window is fresh. The recent-verify check is in-memory; the verify is
         // off-thread. The op-protection sub-feature is gated by its own enabled flag, so a no-op costs nothing.
@@ -307,7 +307,7 @@ public final class SecurityWiring {
     /**
      * Everything the security module contributes once wired: the {@code /2fa}, {@code /pin} and {@code /security}
      * command registrations and the join-verification listeners to publish, plus the transient registries cleared on stop (the pending
-     * un-confirmed enrolments, the freeze/lockout sessions) and the keypad view whose open windows close on stop — so
+     * un-confirmed enrolments, the freeze/lockout sessions) and the keypad view whose open windows close on stop, so
      * a disable or reload leaves no residual secret and no locked player.
      *
      * @param commands the Brigadier command registrations to publish

@@ -8,10 +8,10 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
 
 /**
  * The typed, immutable view of {@code modules/ranks/config.conf}: the module enable gate plus the two
- * feature switches — prestige and autorank — later phases (P3, P4) gate their behaviour on. The ladder itself
+ * feature switches, prestige and autorank, later phases (P3, P4) gate their behaviour on. The ladder itself
  * lives in a sibling {@code ranks.conf} and is read by {@link RankLadders}, not here, so this record holds only
  * the module-level tunables. It is resolved once from the module's scoped {@link ConfigStore} on start and, per
- * the atomic-reload rule, swapped whole on reload — so a reader always sees one coherent snapshot.
+ * the atomic-reload rule, swapped whole on reload, so a reader always sees one coherent snapshot.
  *
  * <p>Prestige ships {@code true} so the {@code /prestige} verb is published out of the box; it no-ops sensibly
  * until a ladder and prestige rewards are authored. Autorank ships {@code false}: it is an opt-in an operator
@@ -42,7 +42,7 @@ public record RanksConfig(boolean enabled, PrestigeSettings prestige, AutorankSe
 
     /**
      * The {@code /ranks} panel's one tunable ({@code gui.*}): whether the ladder GUI is on. Unlike prestige and
-     * autorank this ships {@code true} — the panel is a self-service window every player opens to see their standing
+     * autorank this ships {@code true}. The panel is a self-service window every player opens to see their standing
      * and rank up, so a fresh install has it available; an operator flips {@code gui.enabled = false} to drop the
      * GUI (and its {@code /ranks} no-argument open) entirely, leaving only the admin {@code /ranks setrank}.
      *

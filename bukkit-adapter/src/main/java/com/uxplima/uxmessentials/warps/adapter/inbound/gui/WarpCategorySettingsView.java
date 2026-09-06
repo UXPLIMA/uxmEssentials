@@ -40,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  * re-opens this panel with the new subject so the operator sees the result.
  *
  * <p>The edited category is handed in as the menu subject, so the title and every current-value line fill from the
- * {@code warp_cat_set_*} placeholders without the renderer touching a port. The panel holds no new domain logic — it
+ * {@code warp_cat_set_*} placeholders without the renderer touching a port. The panel holds no new domain logic: it
  * replays the old bespoke window's handlers verbatim through the engine. This is the kit target-panel pattern
  * (subject-carried state, the input seam, and re-open after a mutation). Every visible string resolves from the warps
  * catalog.
@@ -207,7 +207,7 @@ public final class WarpCategorySettingsView {
         }
     }
 
-    /** Delete the category through the repository, then return to the manager — the old delete button's effect. */
+    /** Delete the category through the repository, then return to the manager: the old delete button's effect. */
     private void delete(MenuActionContext ctx) {
         Player player = ctx.player();
         PlayerRef viewer = ctx.viewer();

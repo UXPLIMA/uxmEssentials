@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 
 /**
  * A {@link Logger} for the economy tests that keeps the ERROR lines it is handed. The economy's one
- * logging path — a compensating credit that itself failed, leaving the payer short — is worth asserting
+ * logging path (a compensating credit that itself failed, leaving the payer short) is worth asserting
  * on: a test checks it fired exactly once and carried the context an operator needs. INFO/WARN/DEBUG are
  * dropped; only the error path is under test.
  */

@@ -42,7 +42,7 @@ import org.jspecify.annotations.NullMarked;
  * The jOOQ-backed {@link PlayerWarpRepository} over the V70 {@code player_warps} table. A warp is now keyed by a
  * durable surrogate {@link PlayerWarpId} and its name is globally unique, so {@link #findByName} and
  * {@link #existsByName} are single-column lookups, {@link #findById} keys on the surrogate, and the owner-scoped
- * lists read the owner's rows in stored creation order. A {@link #save} upserts on the surrogate — allocating a
+ * lists read the owner's rows in stored creation order. A {@link #save} upserts on the surrogate, allocating a
  * fresh {@code max(id)+1} key on insert (the V5/V11/V69 idiom, so the schema needs no auto-increment) and updating
  * in place on an existing id, without ever touching the {@code password_*} columns. A {@link #deleteById} removes
  * the warp's side-table rows and the parent row in one transaction, since the schema carries no {@code ON DELETE
@@ -180,7 +180,7 @@ public final class JooqPlayerWarpRepository extends JooqRepository implements Pl
     public void refreshFavouriteCount(PlayerWarpId id) {
         Objects.requireNonNull(id, "id");
         // Recompute from the source rows, not a +/-1 bump, so a double-click race can never drift the stored count.
-        // The correlated COUNT reads a different table (player_warp_favourites), so it stays portable — unlike the
+        // The correlated COUNT reads a different table (player_warp_favourites), so it stays portable, unlike the
         // self-referential UPDATE ... SET x = (SELECT ... FROM the-same-table) that MySQL forbids.
         write(dsl -> dsl.update(PLAYER_WARPS)
                 .set(
@@ -224,7 +224,7 @@ public final class JooqPlayerWarpRepository extends JooqRepository implements Pl
         Objects.requireNonNull(now, "now");
         Objects.requireNonNull(horizon, "horizon");
         // Active warps whose term falls inside the reminder horizon and that have not yet been reminded for every
-        // window — a light projection, never the full aggregate, so the reminder pass reads only what it mails on.
+        // window, a light projection, never the full aggregate, so the reminder pass reads only what it mails on.
         return read(dsl -> dsl.select(
                         PLAYER_WARPS.ID,
                         PLAYER_WARPS.OWNER,
@@ -366,7 +366,7 @@ public final class JooqPlayerWarpRepository extends JooqRepository implements Pl
         PlayerWarpsRecord record = dsl.newRecord(PLAYER_WARPS);
         PlayerWarpRows.apply(record, warp);
         // apply() sets neither the id nor the password_* columns, so the UPDATE touches every other column but
-        // leaves a set password intact — a visibility flip must never wipe it.
+        // leaves a set password intact: a visibility flip must never wipe it.
         dsl.update(PLAYER_WARPS)
                 .set(record)
                 .where(PLAYER_WARPS.ID.eq(id.value()))

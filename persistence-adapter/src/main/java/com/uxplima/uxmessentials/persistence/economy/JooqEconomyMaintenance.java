@@ -27,8 +27,8 @@ import org.jspecify.annotations.NullMarked;
  * The jOOQ-backed {@link EconomyMaintenance} over the generated economy tables. Telemetry trimming is one
  * {@code DELETE … WHERE ts < ?}; the wallet purge runs in a transaction that removes an owner's pay preferences
  * and wallet rows (the {@code wallet_balances} FK child) before the {@code economy_owners} identity row, so the
- * foreign keys are honoured in delete order. {@link #protectedOwners()} reads the live FK graph — loans, credit
- * scores, bank memberships, and bank creators — so the task can never hand those owners to {@link #purgeOwners}.
+ * foreign keys are honoured in delete order. {@link #protectedOwners()} reads the live FK graph, loans, credit
+ * scores, bank memberships, and bank creators, so the task can never hand those owners to {@link #purgeOwners}.
  * Deletes are chunked under the parameter limit the embedded SQLite backend enforces.
  */
 @NullMarked

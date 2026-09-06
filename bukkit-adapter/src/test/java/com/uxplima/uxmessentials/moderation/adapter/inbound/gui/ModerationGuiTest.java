@@ -62,7 +62,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * confirm-gated and, only on confirm, calls the matching revoke seam (which the production wiring binds to
  * unban/unmute/unjail); the "view history" button hands the clicked target to the engine-rendered history menu (its
  * rendering is covered by {@code ModerationHistoryListGoldenTest}); and the entry point is permission-gated. The
- * active-punishments list itself now renders through the menu engine — its grid and its click-opens-detail gesture
+ * active-punishments list itself now renders through the menu engine, its grid and its click-opens-detail gesture
  * are covered slot-for-slot by {@code ModerationActiveListGoldenTest}. The detail view is laid out from a temp conf
  * (no hardcoded slots); the scheduler runs every hop inline so the off-thread reads and writes land synchronously.
  */
@@ -291,7 +291,7 @@ class ModerationGuiTest {
             bans.add(new BanEntry(target, Issuer.console("console"), Optional.of("test"), until));
         }
 
-        /** The first active punishment as the list projects it — for driving the detail view directly. */
+        /** The first active punishment as the list projects it: for driving the detail view directly. */
         ActivePunishment firstActive() {
             if (!bans.isEmpty()) {
                 return ActivePunishment.ofBan(bans.get(0), "Mallory");

@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A player left the AFK state — either by running {@code /afk} again or by the first sign of activity (a move,
+ * A player left the AFK state. Either by running {@code /afk} again or by the first sign of activity (a move,
  * a chat line, a command) clearing the flag. Carries no reason, since the player is now active. The
  * status-placeholder path and other plugins observe this to clear the AFK indicator.
  *

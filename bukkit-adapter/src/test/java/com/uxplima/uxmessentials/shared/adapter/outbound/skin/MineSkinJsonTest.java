@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@link MineSkinJson}'s defensive extraction of the signed texture value/signature from a MineSkin
- * generate response, across the response shapes the public API has used — the v1 {@code data.texture.*}, a bare
+ * generate response, across the response shapes the public API has used, the v1 {@code data.texture.*}, a bare
  * {@code texture.*}, a nested {@code texture.data.*}, and the v2 {@code skin.texture.data.*} /
- * {@code skin.data.texture.*} — plus the v2 queue job id, and its fail-soft empties for a malformed or partial
+ * {@code skin.data.texture.*}, plus the v2 queue job id, and its fail-soft empties for a malformed or partial
  * body.
  */
 class MineSkinJsonTest {
@@ -62,7 +62,7 @@ class MineSkinJsonTest {
 
     @Test
     void extractsFromV2SkinDataTextureShape() {
-        // A v1-style data.texture nesting wrapped under a v2 skin object — tolerated defensively.
+        // A v1-style data.texture nesting wrapped under a v2 skin object, tolerated defensively.
         String body = "{\"skin\":{\"data\":{\"texture\":{\"value\":\"dGV4dA==\",\"signature\":\"sig=\"}}}}";
 
         assertThat(MineSkinJson.skin(body)).contains(new SignedSkin(new SkinTexture("dGV4dA==", "sig="), false));

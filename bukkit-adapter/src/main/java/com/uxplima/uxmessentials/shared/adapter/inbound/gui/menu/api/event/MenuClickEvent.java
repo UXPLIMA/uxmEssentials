@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Fired just before a menu button's click handling runs — its conditions, requirements and actions. Another plugin
+ * Fired just before a menu button's click handling runs: its conditions, requirements and actions. Another plugin
  * can cancel it to veto the click: a cancelled event skips the whole click-handling, so none of the button's actions
  * fire. This is the engine's own cancellable hook and is independent of the vanilla {@link
  * org.bukkit.event.inventory.InventoryClickEvent}, which the engine always cancels so a menu item never moves;
@@ -57,7 +57,7 @@ public final class MenuClickEvent extends Event implements Cancellable {
     }
 
     /**
-     * The clicked item spec's own id — the operator's key for it in the menu's {@code items {}} block — when it can be
+     * The clicked item spec's own id (the operator's key for it in the menu's {@code items {}} block) when it can be
      * resolved, else {@code null}. It is a best-effort lookup: a list-cell click renders the list's nested template,
      * which carries no top-level key, so such a click reports {@code null}.
      */

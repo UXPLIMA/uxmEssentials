@@ -8,8 +8,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Parses a custom-colour line typed into the picker's anvil into a packed ARGB int. Accepts a hex value with an
  * optional leading {@code #}, either six digits ({@code RRGGBB}, an opaque {@code 0xFF} alpha is supplied) or
- * eight digits ({@code AARRGGBB}, the alpha is taken as typed). Anything else — a wrong length, a non-hex
- * character, blank input — returns empty so the property can reject it with a catalog message and re-open the
+ * eight digits ({@code AARRGGBB}, the alpha is taken as typed). Anything else, a wrong length, a non-hex
+ * character, blank input. Returns empty so the property can reject it with a catalog message and re-open the
  * picker rather than writing a garbage colour.
  *
  * <p>Kept free of any module dependency so the shared colour picker has no edge into a feature context; the

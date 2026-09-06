@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * A piece of mail was delivered into {@code recipient}'s mailbox. Raised on a successful {@code /mail send}
  * after the row is written; offline delivery still raises it, and the inbound adapter uses it (together with
- * a notify cooldown) to ping an online recipient about new mail. Mail is text-only — there are no item
- * attachments — so the body is the whole payload.
+ * a notify cooldown) to ping an online recipient about new mail. Mail is text-only. There are no item
+ * attachments, so the body is the whole payload.
  *
  * @param recipient who the mail is for
  * @param sender who the mail is from

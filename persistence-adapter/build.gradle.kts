@@ -6,7 +6,7 @@ plugins {
 }
 
 // jOOQ generates its classes by parsing the Flyway migrations through the
-// DDLDatabase — no live database is contacted at build time. It reads every
+// DDLDatabase: no live database is contacted at build time. It reads every
 // V*.sql under db/migration in version order, so the generated sources describe
 // the same tables the migrations create at runtime and the typed DSL can never
 // drift from the actual schema. SQLite is the default backend; the DDLDatabase
@@ -17,8 +17,8 @@ dependencies {
     api(project(":api"))
 
     compileOnly(libs.bundles.db) // Hikari + SQLite + Flyway + jOOQ (default backend)
-    compileOnly(libs.bundles.db.mysql) // MySQL/MariaDB driver — activated via modules.conf
-    compileOnly(libs.bundles.db.pg) // PostgreSQL driver — activated via modules.conf
+    compileOnly(libs.bundles.db.mysql) // MySQL/MariaDB driver. Activated via modules.conf
+    compileOnly(libs.bundles.db.pg) // PostgreSQL driver. Activated via modules.conf
     compileOnly(libs.caffeine)
     compileOnly(libs.gson)
     compileOnly(libs.slf4j.api)
@@ -36,7 +36,7 @@ dependencies {
     testImplementation(libs.tc.junit)
     testImplementation(libs.tc.postgres) // network-backend integration tests
     testImplementation(libs.tc.mysql) // network-backend integration tests
-    // SQLite needs no Testcontainer — the embedded file db runs in-process.
+    // SQLite needs no Testcontainer: the embedded file db runs in-process.
 }
 
 jooq {
@@ -59,7 +59,7 @@ jooq {
                         value = "flyway"
                     }
                     // Force lowercase generated identifiers. The migrations declare tables/columns
-                    // unquoted in lowercase, but the jOOQ DDL parser folds unquoted names to UPPER —
+                    // unquoted in lowercase, but the jOOQ DDL parser folds unquoted names to UPPER
                     // which `as_is` then preserves. SQLite (default) and case-insensitive MySQL images
                     // tolerate the mismatch, but a real case-sensitive MySQL/Linux (lower_case_table_names=0)
                     // has lowercase tables and rejects the uppercased names ("table doesn't exist").

@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The playerstate {@link AfkStatus} implementation, soft-coupled to the presence context through its in-memory
- * {@link PresenceStore} — the same store the AFK sweep, the vanish listeners, and the {@code afk} placeholder
+ * {@link PresenceStore}, the same store the AFK sweep, the vanish listeners, and the {@code afk} placeholder
  * already read. The playtime sampler asks this whether each online player is AFK so it credits the sample interval
  * to the active or the AFK column; the read is via {@link PresenceStore#current}, which never mutates the map.
  *

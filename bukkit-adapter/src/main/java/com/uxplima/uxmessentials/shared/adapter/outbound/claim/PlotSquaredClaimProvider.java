@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by PlotSquared plots, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by PlotSquared plots, reached <b>entirely by reflection</b>. There is no compile
  * dependency on PlotSquared, so this class loads and runs whether or not PlotSquared is present. Here a "claim"
  * is an owned plot: the block belongs to a claim exactly when PlotSquared reports an owned plot covering it, so a
  * warp can be gated to a plot you own or are added to.
@@ -31,18 +31,18 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>PlotSquared is UUID-keyed, so ownership maps directly onto the port. Ownership is {@code Plot.isOwner(UUID)},
  * which spans a merged plot's several co-owners, not just the single stored owner. Trust widens ownership to
- * {@code Plot.isAdded(UUID)}, which PlotSquared already defines as owner-or-trusted-or-member — the owner-or-member
+ * {@code Plot.isAdded(UUID)}, which PlotSquared already defines as owner-or-trusted-or-member, the owner-or-member
  * reading the other providers give trust. Unlike Residence and WorldGuard, PlotSquared exposes a single owner
  * UUID, so {@link ClaimLookup#owner()} returns {@code Plot.getOwner()} rather than staying empty. A ban is the
  * plot's deny list: {@link ClaimLookup#isBanned} defers to {@code Plot.getDenied().contains(UUID)}.
  *
  * <p>The port supplies only a block column with no Y, and a PlotSquared plot spans the whole column, so the
- * lookup builds its Bukkit location at a constant {@code Y} — any height in the column resolves to the same plot,
+ * lookup builds its Bukkit location at a constant {@code Y}. Any height in the column resolves to the same plot,
  * and the constant keeps the lookup off {@code getHighestBlockYAt}, matching every other provider's 2D-column
  * lookup.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code com.plotsquared} type — a server without PlotSquared loads none of its classes. The
+ * active names no {@code com.plotsquared} type: a server without PlotSquared loads none of its classes. The
  * PlotSquared API chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs once
  * and degrades to empty rather than propagating.
  */
@@ -52,7 +52,7 @@ public final class PlotSquaredClaimProvider implements ClaimProvider {
     private static final String PLOT_SQUARED = "PlotSquared";
     private static final String BUKKIT_UTIL_CLASS = "com.plotsquared.bukkit.util.BukkitUtil";
 
-    // PlotSquared plots span the full world height — a warp is on the plot regardless of height — so a constant Y
+    // PlotSquared plots span the full world height, a warp is on the plot regardless of height, so a constant Y
     // keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on Folia, matching the other
     // providers.
     private static final int CLAIM_LOOKUP_Y = 64;
@@ -96,7 +96,7 @@ public final class PlotSquaredClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code BukkitUtil.adapt(Location).getOwnedPlot()} — the owned plot at the block, or {@code null}. */
+    /** {@code BukkitUtil.adapt(Location).getOwnedPlot()}: the owned plot at the block, or {@code null}. */
     private static @Nullable Object ownedPlotAt(Location location) throws ReflectiveOperationException {
         Object psLocation = Class.forName(BUKKIT_UTIL_CLASS)
                 .getMethod("adapt", Location.class)
@@ -127,10 +127,10 @@ public final class PlotSquaredClaimProvider implements ClaimProvider {
         /** The plot's owner, or empty when the plot is unowned. */
         Optional<UUID> owner();
 
-        /** Whether {@code player} owns the plot — spanning a merged plot's several co-owners. */
+        /** Whether {@code player} owns the plot: spanning a merged plot's several co-owners. */
         boolean isOwner(UUID player);
 
-        /** Whether {@code player} is the owner or on the trusted/member list — PlotSquared's owner-or-added check. */
+        /** Whether {@code player} is the owner or on the trusted/member list: PlotSquared's owner-or-added check. */
         boolean isAdded(UUID player);
 
         /** Whether {@code player} is on the plot's deny list. */

@@ -89,7 +89,7 @@ class MapMarkerServiceTest {
 
         service.onEvent(new HomeCreated(ALICE, HomeSlot.of(0), Position.of(WORLD, 5, 64, 6)));
 
-        assertThat(publisher.published).as("homes off — no private home marker").isEmpty();
+        assertThat(publisher.published).as("homes off, no private home marker").isEmpty();
     }
 
     @Test
@@ -154,7 +154,7 @@ class MapMarkerServiceTest {
         };
     }
 
-    /** A source whose {@link #currentMarkers()} fails if read — proves a disabled kind is never queried. */
+    /** A source whose {@link #currentMarkers()} fails if read: proves a disabled kind is never queried. */
     private static final class ThrowingSource implements MapMarkerSource {
         private boolean read;
 

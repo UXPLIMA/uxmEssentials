@@ -14,7 +14,7 @@ import org.jooq.DSLContext;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jOOQ-backed {@link WarpWhitelistStore} over the generated {@code PLAYER_WARP_WHITELIST} table — one row per
+ * jOOQ-backed {@link WarpWhitelistStore} over the generated {@code PLAYER_WARP_WHITELIST} table, one row per
  * {@code (warp_id, player_uuid)}. {@link #add} inserts with {@code added_at} read from the injected {@link Clock}
  * and an {@code ON CONFLICT DO NOTHING} on the composite key, so re-whitelisting a player is a silent no-op
  * rather than a duplicate row or a moved timestamp. The warp id is the surrogate {@code long}; the player uuid is

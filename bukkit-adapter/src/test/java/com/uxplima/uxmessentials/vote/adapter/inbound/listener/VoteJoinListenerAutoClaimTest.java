@@ -32,7 +32,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Covers the auto-claim toggle on {@link VoteJoinListener}: with auto-claim on, the join drains the offline
  * reward queue (proven by the {@link ApplyQueuedRewards#applyFor} probe hitting the repository); with it off,
- * the join never drains — the queue is left for the player to pay out with {@code /vote claim}. The
+ * the join never drains: the queue is left for the player to pay out with {@code /vote claim}. The
  * cache-warm read fires in both cases. {@code applyFor} short-circuits on {@code hasPending}, so a repository
  * that records its {@code hasPending} probe is the observable signal for whether the drain ran.
  */
@@ -85,7 +85,7 @@ class VoteJoinListenerAutoClaimTest {
                 applyQueued, repository, new SyncScheduler(), autoClaim, false, Duration.ZERO, null, null, null);
     }
 
-    /** Inline scheduler — runs every task on the calling thread. */
+    /** Inline scheduler: runs every task on the calling thread. */
     private static final class SyncScheduler implements Scheduler {
         @Override
         public void onGlobal(Runnable task) {

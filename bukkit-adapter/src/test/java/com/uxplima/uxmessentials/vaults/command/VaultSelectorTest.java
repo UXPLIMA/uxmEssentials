@@ -78,7 +78,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  *
  * <p>The slot source loads owned indices off-thread and the menu builds on the entity thread; both run inline
  * through a synchronous scheduler double. The engine's own {@link MenuListener} is installed against a mock plugin,
- * and a click is dispatched as a real {@link InventoryClickEvent} through the plugin manager — the production click
+ * and a click is dispatched as a real {@link InventoryClickEvent} through the plugin manager, the production click
  * path.
  */
 class VaultSelectorTest {
@@ -139,7 +139,7 @@ class VaultSelectorTest {
 
         fireClick(2); // content slot 2 -> the first locked index (vault 3)
 
-        // Still on the selector — no storage vault opened — and only the locked nudge was sent.
+        // Still on the selector, no storage vault opened, and only the locked nudge was sent.
         assertThat(player.getOpenInventory().getTopInventory().getHolder()).isNotInstanceOf(StorageGui.class);
         assertThat(sink.keys).contains(VaultsMessageKey.VAULT_SELECTOR_LOCKED_CLICK);
         assertThat(sink.keys).doesNotContain(VaultsMessageKey.VAULT_OPENED);

@@ -19,11 +19,11 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * jOOQ-backed {@link PendingTeleportStore} over the generated {@code PLAYER_WARP_PENDING_TELEPORTS} table — one
+ * jOOQ-backed {@link PendingTeleportStore} over the generated {@code PLAYER_WARP_PENDING_TELEPORTS} table, one
  * row per player, keyed by the {@code player_uuid} primary key so a player can only ever have one teleport in
  * flight. {@link #record} upserts on that key, so a fresh cross-server request overwrites a stale one in place
  * rather than leaving orphaned rows. The uuid is canonical 36-char text, the warp the surrogate {@code long}, the
- * request time epoch-millis, and the charged amount a {@code DECIMAL(20,4)} paired with its currency id — both
+ * request time epoch-millis, and the charged amount a {@code DECIMAL(20,4)} paired with its currency id, both
  * NULL when nothing was charged. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */
 @NullMarked

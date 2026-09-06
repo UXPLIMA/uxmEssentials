@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The moderation-backed {@link StaffFreeze}: the FREEZE gadget routes through the existing moderation
- * {@link Freeze} use case so the freeze is audited and respects the exempt node — staff mode never owns a
+ * {@link Freeze} use case so the freeze is audited and respects the exempt node, staff mode never owns a
  * second frozen state. The current state read goes straight to {@link Sanctions#isFrozen} (the same runtime
  * set moderation owns), so a toggle that finds the target frozen unfreezes and one that finds it free freezes.
  *

@@ -48,7 +48,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The COMPASS navigator golden test: the engine-rendered picker must draw the exact window the deleted
  * {@code StaffNavigatorView} drew. The fixture is three candidate players, so the window draws a PLAYER_HEAD named
  * with each player's name at content slots 0, 1, 2 (the order the open site hands them in), with the rest of the
- * grid and the whole bottom row empty — the old picker placed no filler and no navigation buttons. The engine's
+ * grid and the whole bottom row empty: the old picker placed no filler and no navigation buttons. The engine's
  * window is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline
  * the old view produced, captured once while both rendered the same fixture and frozen here as the contract so the
  * old class could be deleted. A second case clicks a head through the engine's own {@link MenuListener} and proves
@@ -118,7 +118,7 @@ class StaffNavigatorGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code StaffNavigatorView} produced for this fixture (three
      * candidates), captured once while both paths rendered it identically and frozen here as the contract: a
-     * PLAYER_HEAD named with each player's name at content slots 0, 1, 2, and nothing else — the old picker placed no
+     * PLAYER_HEAD named with each player's name at content slots 0, 1, 2, and nothing else. The old picker placed no
      * filler and no navigation buttons, so the rest of the grid and the whole bottom row are empty.
      */
     private static Map<Integer, Snapshot> baseline() {

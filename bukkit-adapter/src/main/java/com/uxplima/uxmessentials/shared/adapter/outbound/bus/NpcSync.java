@@ -16,26 +16,26 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The npc context's cross-server sync seam. It is the same write-decorator-plus-listener shape as
  * {@link HologramSync}: an NPC is its own per-server fake-player entity on every backend, so a peer must do
- * more than drop a cache entry on a remote change — it must reload the named NPC from the shared DB and
+ * more than drop a cache entry on a remote change. It must reload the named NPC from the shared DB and
  * re-render the live fake player so the world matches.
  *
  * <ul>
  *   <li><b>Outbound</b>: {@link #repository(CachedNpcRepository, BusPublisher)} wraps the cached repository so
- *       every local mutating write announces it to peers. NPCs are keyed by name and every edit — a create, a
- *       move, a re-skin, an equipment/glow/pose/scale/look/type/action change, an owner rebind — upserts the
+ *       every local mutating write announces it to peers. NPCs are keyed by name and every edit, a create, a
+ *       move, a re-skin, an equipment/glow/pose/scale/look/type/action change, an owner rebind, upserts the
  *       same row through {@code save}, so that one case (plus {@code delete}) covers every mutation; the frame
  *       names the affected NPC and is published after the durable write commits.
  *   <li><b>Inbound</b>: {@link #listener(CachedNpcRepository, NpcView, Scheduler)} returns a
  *       {@link RemoteSyncListener} that, on a remote {@link NpcChanged}, reloads exactly that NPC from the
  *       shared DB into the in-memory set and re-renders it: an NPC that now exists (created or edited on the
- *       peer) is rendered through {@link NpcView#render} — the same force-render the local edit path runs — and
+ *       peer) is rendered through {@link NpcView#render}, the same force-render the local edit path runs, and
  *       one that no longer exists (deleted on the peer) is despawned through {@link NpcView#despawn}, exactly as
  *       the local delete path does.
  * </ul>
  *
  * <p>The reload is a synchronous SQLite read, so the listener hops onto the injected {@link Scheduler}'s async
  * thread first. It then calls {@code render}/{@code despawn}, which the renderer routes onto the global region
- * thread internally (Folia) — the same scheduling the local {@code /npc} edit path relies on, so the remote
+ * thread internally (Folia). The same scheduling the local {@code /npc} edit path relies on, so the remote
  * re-render and the local one converge to one in-world result. The decorator wraps the <em>same</em> cache the
  * {@code /npc} commands and the renderer read, so the loop closes: a write here emits a frame, the peer reloads
  * and re-renders that NPC there.
@@ -65,7 +65,7 @@ public final class NpcSync {
                 return;
             }
             NpcName name = NpcName.of(changed.name());
-            // Reload off the tick thread — the cache reload is a synchronous SQLite read — then re-render through
+            // Reload off the tick thread, the cache reload is a synchronous SQLite read, then re-render through
             // the renderer, which hops onto the global region thread itself (the local edit path's route).
             scheduler.async(() -> reRender(cache, renderer, name));
         };

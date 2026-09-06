@@ -20,8 +20,8 @@ import org.jspecify.annotations.Nullable;
  * binding; this implementation is the embedded fallback the wiring would use if persistence were unavailable
  * and the seam the command-path test drives so the resolution chain can be exercised without a database.
  *
- * <p>This implementation carries no vanilla-world fallback — {@link #defaultSpawn} returns only the operator
- * set per-world spawn, the same as {@link #operatorSpawn} — so it satisfies the no-vanilla contract the
+ * <p>This implementation carries no vanilla-world fallback. {@link #defaultSpawn} returns only the operator
+ * set per-world spawn, the same as {@link #operatorSpawn}, so it satisfies the no-vanilla contract the
  * resolution chain relies on; the vanilla last-resort is the {@link VanillaFallbackSpawnDirectory} decorator's.
  *
  * <h2>Concurrency</h2>

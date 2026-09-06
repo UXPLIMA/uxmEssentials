@@ -5,7 +5,7 @@
 --
 -- Same portability contract as V29/V30: a SMALLINT (0/1) rather than a BOOLEAN so there is no
 -- dialect-specific boolean handling (matching the flying and vanished_before flags). NOT NULL
--- with a DEFAULT 0 so the column adds cleanly to any rows left behind by a pre-V31 staff mode —
+-- with a DEFAULT 0 so the column adds cleanly to any rows left behind by a pre-V31 staff mode
 -- an orphaned row from before this migration recovers as flight-not-allowed, the safe default.
 -- jOOQ's DDLDatabase parses this file alongside V1-V30 at build time, so the generated
 -- STAFF_LOADOUT class always matches the runtime schema.

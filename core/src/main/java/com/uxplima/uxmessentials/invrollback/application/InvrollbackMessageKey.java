@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in the
  * context.
  *
- * <p>Phase 1's capture path is silent — a snapshot is taken in the background with no player-facing feedback — so
+ * <p>Phase 1's capture path is silent (a snapshot is taken in the background with no player-facing feedback) so
  * these are the seed for the Phase 2 {@code /invrestore} staff surface (the snapshot listing, the restore
  * confirmation, and the not-found refusals). Per the i18n contract the keys ship now even though the command that
  * resolves them lands later, so the catalog stays whole and the locale-parity guard sees the full {@code en} key

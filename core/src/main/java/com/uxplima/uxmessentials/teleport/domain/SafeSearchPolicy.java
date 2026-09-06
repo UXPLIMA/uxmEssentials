@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
  * The pure decision logic of the random-teleport safe-location search: given a world's {@link
  * SafeSearchArea}, its excluded biomes, avoided landing blocks, the permitted Y band, and the
  * avoid-protected-land flag, decide whether one {@link SafeCandidate} the adapter validated off-thread is
- * acceptable. This is the queue's <em>refill primitive</em>'s verdict step — the random-point generation,
+ * acceptable. This is the queue's <em>refill primitive</em>'s verdict step, the random-point generation,
  * async chunk load, biome read, material read, safe-Y resolution, and the claim/region protection read all
  * happen in the adapter; the policy only judges the resulting facts.
  *
@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
  * @param excludedBiomes biomes a candidate may not land in (lower-cased {@link BiomeName})
  * @param avoidBlocks materials a candidate may not land on (lower-cased {@link BlockTypeName})
  * @param yBand the vertical band a candidate's landing Y must fall within
- * @param avoidProtected whether candidates on protected land — inside a claim or a WorldGuard region — are
+ * @param avoidProtected whether candidates on protected land, inside a claim or a WorldGuard region, are
  *     rejected; the adapter folds the {@code respect-claims} / {@code respect-worldguard} toggles into the
  *     candidate's {@link SafeCandidate#insideClaim} flag, and this gate decides whether that flag vetoes
  */
@@ -38,7 +38,7 @@ public record SafeSearchPolicy(
         avoidBlocks = Set.copyOf(avoidBlocks);
     }
 
-    /** A policy with only excluded biomes and protected-land avoidance — no avoid-blocks, no Y clamp. */
+    /** A policy with only excluded biomes and protected-land avoidance: no avoid-blocks, no Y clamp. */
     public SafeSearchPolicy(Set<BiomeName> excludedBiomes, boolean avoidProtected) {
         this(excludedBiomes, Set.of(), YBand.unbounded(), avoidProtected);
     }
@@ -95,14 +95,14 @@ public record SafeSearchPolicy(
         return candidate.landing().map(avoidBlocks::contains).orElse(false);
     }
 
-    /** True when the area targets a biome the candidate did not validate in — the {@code /rtp biome} gate. */
+    /** True when the area targets a biome the candidate did not validate in, the {@code /rtp biome} gate. */
     private static boolean biomeMismatch(SafeSearchArea area, SafeCandidate candidate) {
         return area.targetBiomeName()
                 .map(target -> !target.equals(candidate.biome()))
                 .orElse(false);
     }
 
-    /** True when {@code biome} is excluded — exposed for the cheap on-serve revalidation. */
+    /** True when {@code biome} is excluded, exposed for the cheap on-serve revalidation. */
     public boolean excludes(BiomeName biome) {
         return excludedBiomes.contains(Objects.requireNonNull(biome, "biome"));
     }

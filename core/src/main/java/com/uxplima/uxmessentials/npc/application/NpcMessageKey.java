@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The npc context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code NPC_CREATED} ↔ {@code npc.created}); the constant is the compile-time
- * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context —
+ * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context
  * every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
@@ -137,7 +137,7 @@ public enum NpcMessageKey implements MessageKey {
     // runtime action feedback
     NPC_ACTION_COST_DENIED("npc.action.cost-denied"),
 
-    // management GUI — list
+    // management GUI, list
     NPC_GUI_LIST_TITLE("npc.gui.list.title"),
     NPC_GUI_LIST_ENTRY_NAME("npc.gui.list.entry-name"),
     NPC_GUI_LIST_ENTRY_LORE("npc.gui.list.entry-lore"),
@@ -146,14 +146,14 @@ public enum NpcMessageKey implements MessageKey {
     NPC_GUI_LIST_CREATE("npc.gui.list.create"),
     NPC_GUI_LIST_CREATE_PROMPT("npc.gui.list.create-prompt"),
 
-    // management GUI — editor shell
+    // management GUI, editor shell
     NPC_GUI_EDITOR_TITLE("npc.gui.editor.title"),
     NPC_GUI_EDITOR_VALUE_LORE("npc.gui.editor.value-lore"),
     NPC_GUI_EDITOR_BACK("npc.gui.editor.back"),
     NPC_GUI_EDITOR_DELETE("npc.gui.editor.delete"),
     NPC_GUI_EDITOR_DELETE_CONFIRM("npc.gui.editor.delete-confirm"),
 
-    // management GUI — property labels
+    // management GUI: property labels
     NPC_GUI_PROP_NAME("npc.gui.prop.name"),
     NPC_GUI_PROP_NAME_PROMPT("npc.gui.prop.name-prompt"),
     NPC_GUI_PROP_SKIN("npc.gui.prop.skin"),
@@ -177,25 +177,25 @@ public enum NpcMessageKey implements MessageKey {
     NPC_GUI_PROP_MOVE("npc.gui.prop.move"),
     NPC_GUI_PROP_TELEPORT("npc.gui.prop.teleport"),
 
-    // management GUI — value words
+    // management GUI: value words
     NPC_GUI_VALUE_ON("npc.gui.value.on"),
     NPC_GUI_VALUE_OFF("npc.gui.value.off"),
     NPC_GUI_VALUE_NONE("npc.gui.value.none"),
     NPC_GUI_VALUE_DEFAULT("npc.gui.value.default"),
 
-    // management GUI — selector titles
+    // management GUI: selector titles
     NPC_GUI_SELECT_TYPE("npc.gui.select.type"),
     NPC_GUI_SELECT_POSE("npc.gui.select.pose"),
     NPC_GUI_SELECT_GLOW_COLOR("npc.gui.select.glow-color"),
 
-    // management GUI — equipment sub-menu
+    // management GUI, equipment sub-menu
     NPC_GUI_EQUIP_TITLE("npc.gui.equip.title"),
     NPC_GUI_EQUIP_SLOT_NAME("npc.gui.equip.slot-name"),
     NPC_GUI_EQUIP_SLOT_HINTS("npc.gui.equip.slot-hints"),
     NPC_GUI_EQUIP_EMPTY("npc.gui.equip.empty"),
     NPC_GUI_EQUIP_BACK("npc.gui.equip.back"),
 
-    // management GUI — actions sub-menu
+    // management GUI, actions sub-menu
     NPC_GUI_ACTIONS_TITLE("npc.gui.actions.title"),
     NPC_GUI_ACTIONS_ENTRY_NAME("npc.gui.actions.entry-name"),
     NPC_GUI_ACTIONS_ENTRY_HINTS("npc.gui.actions.entry-hints"),

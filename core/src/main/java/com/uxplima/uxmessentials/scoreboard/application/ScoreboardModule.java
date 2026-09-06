@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * shown/hidden confirmations are {@code ScoreboardMessageKey}s in both locale catalogs (parity-checked); the sidebar
  * title/lines are config-authored content rendered through MiniMessage and never parity-checked. The use case, the
  * render timer, the connection listener, the renderer, and the PDC visibility store are constructed in the adapter
- * wiring once the module has started; the lifecycle bookkeeping here keeps {@code stop()} honest — the render timer
+ * wiring once the module has started; the lifecycle bookkeeping here keeps {@code stop()} honest, the render timer
  * observes the running flag and exits cleanly on disable.
  */
 @NullMarked

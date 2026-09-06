@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
  * flips. Built during communication wiring from the same instances those commands hold, so a placeholder matches
  * the live chat lock and the player's announcer subscription.
  *
- * <p>{@link #chatEnabled()} reports the inverse of the lock — chat is open while it is not held. {@link
+ * <p>{@link #chatEnabled()} reports the inverse of the lock. Chat is open while it is not held. {@link
  * #receivesBroadcasts(PlayerRef)} reads the store's per-player bit; the store resolves the connected player, so
  * the read is meaningful for an online player.
  */

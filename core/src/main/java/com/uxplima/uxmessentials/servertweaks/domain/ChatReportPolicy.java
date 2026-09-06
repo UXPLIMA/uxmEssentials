@@ -8,7 +8,7 @@ package com.uxplima.uxmessentials.servertweaks.domain;
  * reported.
  *
  * <p>The policy is deliberately narrow. It asks for re-delivery only when the tweak is enabled <em>and</em> the message
- * was actually signed — an already-unsigned message (secure chat off, or a system-sourced message) needs no rework and
+ * was actually signed. An already-unsigned message (secure chat off, or a system-sourced message) needs no rework and
  * is left to flow normally. What it cannot decide, because the server cannot, is the client's own behaviour: a vanilla
  * client still computes a signature for every message it sends; the server can only choose not to propagate it. Pure
  * Java (no Bukkit, Paper, Kyori, or SLF4J) so the adapter's chat listener reuses this verbatim while the Bukkit calls

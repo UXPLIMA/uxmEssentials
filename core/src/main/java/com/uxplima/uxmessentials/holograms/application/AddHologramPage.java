@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /hologram page <name> add <text…>}: append a new page (one or more lines) to a text hologram, save the
- * new snapshot, and re-render. The first {@code add} promotes an ordinary hologram to multi-page — its current
+ * new snapshot, and re-render. The first {@code add} promotes an ordinary hologram to multi-page, its current
  * lines become page 0 and the new lines become page 1. A name no hologram exists at is rejected with
  * {@link HologramError#NOT_FOUND}; a non-text hologram (item/block/head/entity) with
  * {@link HologramError#NOT_TEXT_HOLOGRAM}, since only text holograms render paged lines. The operator-only

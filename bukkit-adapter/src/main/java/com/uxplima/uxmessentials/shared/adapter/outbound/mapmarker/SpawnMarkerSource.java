@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The spawn {@link MapMarkerSource}: the operator-set spawn of each loaded world ({@code /setspawn}) plus the
- * single global main spawn ({@code /setmainspawn}). Only operator-set spawns render — the bottom-of-chain
+ * single global main spawn ({@code /setmainspawn}). Only operator-set spawns render, the bottom-of-chain
  * vanilla world spawn is not a configured point and is left off the map. The per-world spawn marker is named
  * {@code main} for the global spawn and the world name otherwise, so each renders under a stable id.
  *

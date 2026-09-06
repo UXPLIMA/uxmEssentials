@@ -9,7 +9,7 @@ import java.util.Objects;
  * represented by {@link #free()} rather than a {@code null} amount, so the "no charge" case is a
  * first-class value the application layer can branch on without a null check.
  *
- * <p>The cost is a pure domain value — it carries a currency ID but no economy provider. Whether a cost
+ * <p>The cost is a pure domain value: it carries a currency ID but no economy provider. Whether a cost
  * is actually charged is decided in the application layer, which soft-couples to the economy context only
  * when a provider is present; with no provider the cost is recorded in config but ignored at use time.
  * This keeps homes free of any hard dependency on the economy context.
@@ -39,7 +39,7 @@ public record HomeCost(BigDecimal amount, String currencyId) {
         return new HomeCost(amount, currencyId);
     }
 
-    /** The "no charge" cost — an action anyone may perform without paying. */
+    /** The "no charge" cost: an action anyone may perform without paying. */
     public static HomeCost free() {
         return FREE;
     }

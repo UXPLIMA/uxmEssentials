@@ -35,7 +35,7 @@ import org.jspecify.annotations.NullMarked;
  * surface rather than registered as a {@code FeatureModule}.
  *
  * <p>Server links apply immediately (clear-and-set the global links from {@code server-links}); an empty list
- * leaves the live links untouched. The update checker is off by default and built on the uxmLib update toolkit —
+ * leaves the live links untouched. The update checker is off by default and built on the uxmLib update toolkit
  * when enabled it reads the operator's {@code source-url} as a generic release-JSON endpoint, runs its checks
  * off-thread through uxmLib's Folia-aware scheduler, and announces a newer release to the console once per
  * distinct version. When {@code notify-ops-on-join} is on it also surfaces uxmLib's permission-gated,
@@ -118,7 +118,7 @@ final class IntegrationsWiring {
 
     // notify-ops-on-join = true: the library notifier owns the console announce and registers its own
     // permission-gated, click-to-open join notice. It couples the recurring poll with that listener, so a zero
-    // interval (check-once) falls back to the shipped default cadence here — the join listener self-warms its
+    // interval (check-once) falls back to the shipped default cadence here. The join listener self-warms its
     // cache anyway, so a player who joins before the first poll still triggers a check.
     private static Runnable startWithJoinNotice(
             JavaPlugin plugin, Scheduler scheduler, UpdateChecker checker, UpdateCheckSettings settings) {
@@ -143,7 +143,7 @@ final class IntegrationsWiring {
 
     // One console-announcing check. The library's checkAndAnnounce future funnels every outcome (including
     // failure) into the dedupe and the announce callback, so the returned future carries nothing the caller
-    // needs — dropped here exactly as the library's own notifier drops it.
+    // needs: dropped here exactly as the library's own notifier drops it.
     private static void poll(UpdateChecker checker, Logger log) {
         var ignored = checker.checkAndAnnounce(outcome -> announce(log, checker, outcome));
     }

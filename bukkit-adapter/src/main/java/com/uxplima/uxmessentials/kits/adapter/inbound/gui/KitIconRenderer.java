@@ -30,7 +30,7 @@ import com.uxplima.uxmlib.item.ItemBuilder;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Builds the display icons the {@code /kit list} browse menu shows — one per kit and one per category — resolving
+ * Builds the display icons the {@code /kit list} browse menu shows, one per kit and one per category, resolving
  * each icon's player-relative name, material, and lore against the viewer's permission, cooldown, one-time, and
  * affordability state. The renderer holds no menu or scheduler state: it reads the kit/category and the viewer
  * and returns an {@link ItemStack}, so it is a pure presentation collaborator the menu view delegates to. Every
@@ -84,8 +84,8 @@ final class KitIconRenderer {
      * The engine-rendered kit browse menu draws a kit's tile from these three source strings rather than from a
      * pre-built {@link ItemStack}: the icon's material name, its name as a MiniMessage source, and its full lore
      * as the rendered lines joined by {@code \n} for the engine's multi-line placeholder to expand back. They are
-     * the exact name/material/lore the {@link #icon} path builds — the same resolveMaterial/resolveName/resolveLore
-     * passes feed both — so a tile drawn through the engine matches the tile the old view drew icon for icon. The
+     * the exact name/material/lore the {@link #icon} path builds, the same resolveMaterial/resolveName/resolveLore
+     * passes feed both, so a tile drawn through the engine matches the tile the old view drew icon for icon. The
      * variant is resolved once here so the browse menu hands the same already-resolved kit to a later claim.
      */
     String kitMaterialName(PlayerRef viewer, KitDefinition variant) {
@@ -305,7 +305,7 @@ final class KitIconRenderer {
      * engine-rendered browse tile (which joins these with {@code \n} and re-splits per line through its multi-line
      * placeholder) and the old ItemStack path resolve the identical lore. The order is the old view's: the
      * per-state or display lore, then a status line per requirement, then the conditional cooldown/one-time/cost
-     * lines and the claim hint, and finally the preview hint — unless the kit is locked, which shows its own lore.
+     * lines and the claim hint, and finally the preview hint, unless the kit is locked, which shows its own lore.
      */
     private List<String> loreSource(PlayerRef viewer, KitDefinition kit) {
         DisplayState state = stateOf(viewer, kit);
@@ -363,7 +363,7 @@ final class KitIconRenderer {
     /**
      * The lore source for a kit the viewer cannot claim because its rotation window is closed or its global stock
      * is spent: the kit's own display lore for context, then the single locked-reason line, then the preview hint
-     * when the kit allows a preview. No cooldown/cost/claimable lines — none of them apply to a locked kit.
+     * when the kit allows a preview. No cooldown/cost/claimable lines: none of them apply to a locked kit.
      */
     private List<String> lockedLoreSource(PlayerRef viewer, KitDefinition kit, DisplayState state) {
         List<String> lines = new ArrayList<>();

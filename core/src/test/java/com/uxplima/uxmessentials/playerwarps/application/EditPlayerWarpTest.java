@@ -130,7 +130,7 @@ class EditPlayerWarpTest {
 
     @Test
     void renamingOntoAReservedVerbNameIsRefused() {
-        // "admin" is a /pwarp verb literal, so a warp under it would be unreachable — the rename is refused before
+        // "admin" is a /pwarp verb literal, so a warp under it would be unreachable. The rename is refused before
         // the row is touched, and the collision check runs even though no other warp holds the name.
         Result<Unit, PlayerWarpError> result = edit.rename(owner, HUB, PlayerWarpName.of("admin"));
 

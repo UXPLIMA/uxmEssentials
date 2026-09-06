@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.economy.domain.Money;
  * Periodic interest paid into a shared bank, loaded once on enable and swapped atomically on reload (the
  * {@code LoanPolicy} pattern). Interest is balance-tiered: each {@link Tier} names a minimum balance and the rate
  * that applies at or above it, so a bigger bank earns a better rate. {@link #interestOn} resolves the highest tier
- * a balance qualifies for and returns the cut to mint into the bank — never exceeding the balance's currency, and
+ * a balance qualifies for and returns the cut to mint into the bank. Never exceeding the balance's currency, and
  * zero when disabled, when no tier applies, or when the rate rounds to nothing.
  *
  * @param enabled whether interest accrues at all
@@ -41,7 +41,7 @@ public record BankInterestPolicy(boolean enabled, Duration interval, List<Tier> 
         tiers = List.copyOf(sorted);
     }
 
-    /** A disabled policy — the shipped default, accruing no interest. */
+    /** A disabled policy: the shipped default, accruing no interest. */
     public static BankInterestPolicy disabled() {
         return new BankInterestPolicy(false, Duration.ofHours(24), List.of());
     }

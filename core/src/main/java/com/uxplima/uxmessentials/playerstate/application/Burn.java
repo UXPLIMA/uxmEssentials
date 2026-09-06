@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /burn <seconds> [player]}: set a player on fire for a number of seconds (the inverse of {@code /ext}).
- * A live-only effect through the {@link PlayerEffects} port — the duration is clamped to a sane range in the
+ * A live-only effect through the {@link PlayerEffects} port. The duration is clamped to a sane range in the
  * domain ({@link BurnDuration}) so a typo cannot set someone alight indefinitely. The actor is confirmed and,
  * for a staff target, the subject is told too.
  */

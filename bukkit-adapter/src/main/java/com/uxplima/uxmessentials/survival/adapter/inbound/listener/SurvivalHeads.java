@@ -14,8 +14,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The Bukkit-side head items head-drop produces: a player's own head (a {@code PLAYER_HEAD} carrying the victim's
- * profile) and the vanilla mob heads. Only the mobs that ship a real head item in vanilla are mapped — the zombie,
- * skeleton, wither skeleton, creeper, piglin, and ender dragon — so head-drop drops an authentic Minecraft head rather
+ * profile) and the vanilla mob heads. Only the mobs that ship a real head item in vanilla are mapped, the zombie,
+ * skeleton, wither skeleton, creeper, piglin, and ender dragon, so head-drop drops an authentic Minecraft head rather
  * than shipping a table of custom textures. A mob without a vanilla head simply drops nothing.
  */
 @NullMarked

@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Builds the communication context's Brigadier command surface. The static half is the plugin's own
  * {@code /broadcast} (an operator one-off announcement), {@code /broadcasttoggle} (a per-player opt-out), and
- * {@code /announce} (the rotating-announcer admin surface — reload / list / preview / toggle); the dynamic half is
+ * {@code /announce} (the rotating-announcer admin surface. Reload / list / preview / toggle); the dynamic half is
  * one {@link InfoPageCommand} per {@link InfoPage} in the config-derived {@link InfoRegistry} ({@code /rules},
  * {@code /motd}, {@code /info}, any custom page). The static literals are greppable so the permissions reference can
  * check them; the dynamic literals are operator data, each guarded by the fixed

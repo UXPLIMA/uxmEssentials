@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>{@link #spawn} runs the full pipeline: resolve the world (else {@link WorldError#NOT_FOUND}), load it on
  * demand, evaluate the {@link WorldAccessPolicy} gate (publishing {@link WorldEntryDenied} and refusing on a
  * denial), charge the {@link WorldProperties#ENTRY_FEE} unless the player holds {@link WorldAccessPolicy#BYPASS_NODE},
- * then hand the player off to the live spawn. The live spawn is authoritative — the stored custom spawn is pushed
+ * then hand the player off to the live spawn. The live spawn is authoritative. The stored custom spawn is pushed
  * onto the world when it loads, so the destination is always {@link WorldEngine#spawnPoint}. The fee is debited
  * only after the teleport is accepted, so a rejected hand-off never costs the player money.
  */

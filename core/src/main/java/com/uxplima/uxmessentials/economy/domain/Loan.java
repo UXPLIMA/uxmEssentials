@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * A player loan: the principal disbursed, the remaining repayable balance (principal plus interest), the fixed
  * interest rate, the count of installments still owed, the per-installment figure, and the debtor. The
- * aggregate is immutable — a repayment produces a new {@code Loan} through {@link #afterPayment(Money)} rather
+ * aggregate is immutable. A repayment produces a new {@code Loan} through {@link #afterPayment(Money)} rather
  * than mutating in place, so a persistence failure can never leave a half-applied loan in memory. Inputs are
  * validated at construction: the principal, remaining amount, and installment all share one currency, the
  * interest rate is non-negative, and the installment count is positive while installments remain.
@@ -78,7 +78,7 @@ public final class Loan {
     }
 
     /**
-     * A loan id that cannot collide with another taken in the same millisecond — a full random UUID, where the
+     * A loan id that cannot collide with another taken in the same millisecond, a full random UUID, where the
      * old {@code uuid.substring(0,8) + millis} scheme could collide for two loans a player took in one tick. A
      * bare 36-character UUID also fits the {@code economy_loans.id VARCHAR(36)} column on every backend.
      */
@@ -125,7 +125,7 @@ public final class Loan {
     /**
      * The figure that actually settles {@code requested}: never more than the remaining balance. When the
      * caller offers at least the residual on the final installment (or any payment that would clear the loan),
-     * the loan is paid in full and the settled amount is exactly the residual — overpayment is refused here so
+     * the loan is paid in full and the settled amount is exactly the residual. Overpayment is refused here so
      * the caller never debits the debtor more than they owe.
      */
     public Money settlementFor(Money requested) {
@@ -139,7 +139,7 @@ public final class Loan {
     /**
      * The loan after {@code paid} is applied: the remaining balance drops by the settled amount and one
      * installment is consumed (the last payment that clears the balance also zeroes the installment count).
-     * {@code paid} must be the {@link #settlementFor(Money)} figure — never larger than the residual.
+     * {@code paid} must be the {@link #settlementFor(Money)} figure, never larger than the residual.
      */
     public Loan afterPayment(Money paid) {
         Objects.requireNonNull(paid, "paid");
@@ -175,7 +175,7 @@ public final class Loan {
                 nextPaymentAt);
     }
 
-    /** True once the remaining balance is fully repaid — the loan can be closed. */
+    /** True once the remaining balance is fully repaid: the loan can be closed. */
     public boolean isFullyPaid() {
         return remainingAmount.isZero();
     }

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Where a tablist format's custom skin comes from. A skin is the one tab-list thing native Paper cannot do — to give a
+ * Where a tablist format's custom skin comes from. A skin is the one tab-list thing native Paper cannot do, to give a
  * viewer's tab row a different texture the adapter re-adds the entry through a player-info packet carrying the texture,
  * so a format may name where that texture is sourced from. This is pure operator intent: the domain only models the two
  * shapes, the adapter resolves them to a real texture (reading an online player's profile, or fetching an offline name)
@@ -13,9 +13,9 @@ import java.util.Optional;
  * <p>Two shapes, a sealed pair so the adapter switch is exhaustive:
  *
  * <ul>
- *   <li>{@link Texture} — a base64-encoded texture value (and an optional signature) authored directly in config. No
+ *   <li>{@link Texture}: a base64-encoded texture value (and an optional signature) authored directly in config. No
  *       lookup is needed; the value is used as-is.</li>
- *   <li>{@link PlayerName} — the name of a player whose skin to copy. The adapter reads the named player's texture from
+ *   <li>{@link PlayerName}, the name of a player whose skin to copy. The adapter reads the named player's texture from
  *       their live profile when they are online, else fetches it for an offline name.</li>
  * </ul>
  */

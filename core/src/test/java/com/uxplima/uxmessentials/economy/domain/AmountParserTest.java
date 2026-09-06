@@ -13,7 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 /**
- * Coverage of {@link AmountParser} — the human-amount parser behind {@code /pay} and {@code /eco}. The
+ * Coverage of {@link AmountParser}, the human-amount parser behind {@code /pay} and {@code /eco}. The
  * load-bearing properties: each magnitude suffix scales by an exact {@link BigDecimal} power of ten (never a
  * {@code double}), thousands separators are stripped locale-agnostically, an unparseable or non-positive token
  * returns a modelled {@link AmountParseError} rather than throwing, and an overflowing figure clamps to the

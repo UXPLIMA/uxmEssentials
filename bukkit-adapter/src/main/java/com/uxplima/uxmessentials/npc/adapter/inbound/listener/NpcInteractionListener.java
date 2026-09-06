@@ -27,22 +27,22 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Runs an NPC's bound click command when a player interacts with it. A packet NPC has no real entity, so the
- * server never knows it was clicked through the normal interact event — instead Paper fires
+ * server never knows it was clicked through the normal interact event: instead Paper fires
  * {@link PlayerUseUnknownEntityEvent} carrying the fake entity id. The renderer resolves that id back to the NPC
  * name (the id is allocated once per NPC and shared by every viewer), the repository supplies the stored command,
  * and it runs on the clicking player's region thread (where {@code performCommand} / {@code dispatchCommand} are
  * safe).
  *
  * <p>On a click the single bound click command runs first (kept for backward-compat), then the ordered action
- * chain — every {@link com.uxplima.uxmessentials.shared.domain.action.ClickAction} whose trigger matches the click — runs
+ * chain (every {@link com.uxplima.uxmessentials.shared.domain.action.ClickAction} whose trigger matches the click) runs
  * through the {@link ClickActionRunner}. The command may carry a routing prefix: {@code [console]} runs it as the
  * server console, {@code [player]} (or no prefix) as the clicking player; a {@code {player}} token is replaced
  * with the clicker's name. The click command alone is right-click-only; the action chain carries its own
- * per-action trigger (left/right/any), so both an attack and an interact are now acted on — only the off-hand
+ * per-action trigger (left/right/any), so both an attack and an interact are now acted on, only the off-hand
  * duplicate is ignored. A held button repeats and the client double-fires, so a short per-player-per-NPC cooldown
  * gates the whole interaction. The cooldown is a self-evicting Caffeine cache keyed {@code uuid:npcName} with a
- * per-entry variable {@code expireAfter}: each stamp expires after that click's effective cooldown — the NPC's own
- * {@code interactionCooldownMillis} override when set, else the module-wide default — so a present (un-expired)
+ * per-entry variable {@code expireAfter}: each stamp expires after that click's effective cooldown: the NPC's own
+ * {@code interactionCooldownMillis} override when set, else the module-wide default, so a present (un-expired)
  * stamp means the cooldown is still running, and an expired entry (the cooldown has elapsed) drops out on its own,
  * so the map cannot grow for offline players or deleted NPCs over the JVM lifetime. The interaction runs for
  * everyone (an NPC is a server fixture); the reserved {@code uxmessentials.npc.use} node is left for a future
@@ -157,10 +157,10 @@ public final class NpcInteractionListener implements Listener {
         return false;
     }
 
-    /** The count of still-running cooldown stamps after sweeping elapsed ones — exposed so a test can assert eviction. */
+    /** The count of still-running cooldown stamps after sweeping elapsed ones: exposed so a test can assert eviction. */
     long trackedClicks() {
         long now = clock.getAsLong();
-        // Drop every entry whose deadline has passed, so an elapsed cooldown leaves no residue — the same self-bound
+        // Drop every entry whose deadline has passed, so an elapsed cooldown leaves no residue, the same self-bound
         // the old time-expiry gave, made precise (Caffeine's variable timer wheel is too coarse for sub-second tests).
         lastClick.asMap().values().removeIf(deadline -> deadline <= now);
         lastClick.cleanUp();

@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpError;
 
 /**
  * The access gate a {@code /warp} passes before the hop is delegated: the per-warp permission node, the
- * warp's optional extra permission, and — only when an economy provider is present — the per-warp cost.
+ * warp's optional extra permission, and, only when an economy provider is present, the per-warp cost.
  * Extracted from {@code UseWarp} so the use case stays a thin orchestrator and the gate ordering
  * (permission first, then charge) lives in one place.
  *
@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpError;
  * {@link Optional} injected at wiring time: when it is absent, a warp's recorded cost is ignored and the
  * warp is usable for free; when it is present, the cost is charged through the narrow {@link WarpEconomy}
  * seam after the permission gates pass. The warps context therefore never hard-depends on the economy
- * context — economy landing in P3 only flips this {@code Optional} from empty to present.
+ * context: economy landing in P3 only flips this {@code Optional} from empty to present.
  */
 public final class WarpAccess {
 
@@ -57,7 +57,7 @@ public final class WarpAccess {
 
     private Result<Unit, WarpError> charge(PlayerRef who, Warp warp) {
         if (!warp.hasCost() || economy.isEmpty()) {
-            // No charge to make, or no economy provider wired — the cost is recorded but ignored at use
+            // No charge to make, or no economy provider wired. The cost is recorded but ignored at use
             // time so warps never hard-depends on the economy context.
             return Result.ok();
         }

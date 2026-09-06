@@ -22,8 +22,8 @@ import org.jooq.DSLContext;
  * treated as {@link IgnoreScope#ALL} so an ignore is never silently dropped. Every statement is typed jOOQ
  * DSL; no SQL is ever string-concatenated.
  *
- * <p>The ignored player's name is not persisted (only the uuid is) — the column shape stays identical on
- * every backend — so an {@link IgnoreEntry} rebuilt from a row carries the ignored uuid with the uuid text
+ * <p>The ignored player's name is not persisted (only the uuid is). The column shape stays identical on
+ * every backend, so an {@link IgnoreEntry} rebuilt from a row carries the ignored uuid with the uuid text
  * as a placeholder name; the command adapter resolves the live name for display.
  */
 public final class JooqIgnoreStore extends JooqRepository implements IgnoreStore {

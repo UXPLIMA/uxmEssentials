@@ -20,13 +20,13 @@ import org.junit.jupiter.api.Test;
  *
  * <p>Scans production source under {@code domain/} / {@code application/} / {@code adapter/} in both
  * {@code :core} and {@code :bukkit-adapter} and bans inline user-facing string literals passed to a
- * player-facing primitive — {@code sendMessage("…")}, {@code sendRichMessage("…")},
+ * player-facing primitive, {@code sendMessage("…")}, {@code sendRichMessage("…")},
  * {@code Component.text("…")}, or {@code String.format("…")}. Every user-visible string must resolve
  * through a {@link com.uxplima.uxmessentials.shared.application.message.MessageKey} so the per-player
  * locale and the {@code en} fallback chain both apply.
  *
- * <p>Operator-facing SLF4J logger lines stay literal (docs/13-i18n §1) — the boundary is the
- * {@code MessageSink} / {@code messages.resolve} call, not the logger — so a {@code log.info("…")} is
+ * <p>Operator-facing SLF4J logger lines stay literal (docs/13-i18n §1). The boundary is the
+ * {@code MessageSink} / {@code messages.resolve} call, not the logger, so a {@code log.info("…")} is
  * never matched. The guard ships its own {@code regexPatternsSelfTest} so its detection patterns are
  * covered by an example that must match and an example that must not.
  */

@@ -23,13 +23,13 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /jailedplayers}: list the players currently jailed — the companion of {@code /banlist} and
+ * {@code /jailedplayers}: list the players currently jailed, the companion of {@code /banlist} and
  * {@code /mutelist}. The {@code ListJailed} use case runs the bounded DB query and renders the page, hopped
  * off the tick thread through the {@link Scheduler} port so a large jail table never blocks the command. It
  * shares the {@code uxmessentials.moderation.jail} node with {@code /jail} and {@code /jails}.
  *
  * <p>Bare {@code /jailedplayers} opens the jailed-players view (capability D) when the command's catalog
- * {@code gui} flag is on — a paginated list of the currently-jailed players where a click releases one — the
+ * {@code gui} flag is on (a paginated list of the currently-jailed players where a click releases one) the
  * same view the hub's [Jailed players] footer reaches. With gui off the bare form keeps its chat list.
  */
 @NullMarked

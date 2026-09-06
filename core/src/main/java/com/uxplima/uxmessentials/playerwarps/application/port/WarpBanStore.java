@@ -29,7 +29,7 @@ public interface WarpBanStore {
     List<BanRecord> list(PlayerWarpId warp);
 
     /**
-     * True when {@code player} is under a ban on {@code warp} that is still in force at {@code now} — an expired
+     * True when {@code player} is under a ban on {@code warp} that is still in force at {@code now}: an expired
      * timed ban reads as not banned. Composes {@link #find} with {@link BanRecord#isActiveAt} so callers never
      * re-implement the expiry rule.
      */

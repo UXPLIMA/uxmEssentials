@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /vault icon <n> [material]}: set or clear the player-chosen icon of a vault they already own. Mirrors
- * {@link RenameVault} — the vault must exist before its presentation can change, so an index with no row returns
+ * {@link RenameVault}. The vault must exist before its presentation can change, so an index with no row returns
  * {@link VaultError#VAULT_UNKNOWN} and writes nothing. The icon is a material <em>name</em> the adapter has
  * already validated against the real {@code Material} registry before calling in; the domain stays Bukkit-free.
  * A {@code null} material clears the icon; a non-null one applies it through {@link Vault#iconSet}. The size,

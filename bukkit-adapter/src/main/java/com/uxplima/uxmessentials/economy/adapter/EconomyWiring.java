@@ -87,12 +87,12 @@ import com.uxplima.uxmessentials.warps.application.port.WarpEconomy;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Constructs the economy context — the plugin's canonical worked DDD example — over the injected kernel ports,
+ * Constructs the economy context, the plugin's canonical worked DDD example, over the injected kernel ports,
  * the persistence DSL, and the Bukkit {@code ServicesManager}. This is the one place the economy context is
  * wired: it builds the native ledger (the cached jOOQ repository plus the debounced settle writer and the
  * batched transaction telemetry), wraps it in the native {@code EconomyProvider}, then runs register-or-defer
- * — registering the native provider unless a foreign economy is already present, in which case it consumes the
- * incumbent (Treasury before Vault — {@code docs/11-economy-integration.md} §2, §4).
+ *. Registering the native provider unless a foreign economy is already present, in which case it consumes the
+ * incumbent (Treasury before Vault, {@code docs/11-economy-integration.md} §2, §4).
  *
  * <p>Every command reads the resolved provider through the per-currency baltop snapshot decorator, so the same
  * code serves the native ledger, a Treasury economy, or a legacy Vault economy without knowing which. The
@@ -107,7 +107,7 @@ public final class EconomyWiring {
 
     /**
      * Build the economy context, threading the shared {@code textInput} seam into every menu that captures a typed
-     * line — the bare-{@code /eco} admin GUI's Give / Take / Set / bulk amount entry and the bank, loan, and
+     * line. The bare-{@code /eco} admin GUI's Give / Take / Set / bulk amount entry and the bank, loan, and
      * exchange dashboards. A {@code null} {@code textInput} disables the admin GUI (bare {@code /eco} then falls
      * through to usage); the bank/loan/exchange views always receive the seam, and the raw subcommands are
      * unaffected either way.
@@ -149,7 +149,7 @@ public final class EconomyWiring {
 
         // Decorator chain: JooqWalletRepository -> CachedWalletRepository -> general-bus WalletSync broadcaster.
         // Cross-server invalidation rides the general bus's WalletSync frame (network.transport selects the
-        // carrier). Money safety is the jOOQ guarded UPDATE alone — a single `UPDATE … WHERE amount >= ?` the
+        // carrier). Money safety is the jOOQ guarded UPDATE alone, a single `UPDATE … WHERE amount >= ?` the
         // database serialises, where an over-draw updates zero rows; correct even across servers sharing one DB,
         // which a per-JVM lock could never be.
         WalletRepository repository = WalletSync.repository(cached, bus.publisher());
@@ -446,7 +446,7 @@ public final class EconomyWiring {
      * Whether this plugin's own wallet ledger is the authoritative store for every configured currency. Exchange,
      * banks and loans read and write {@code wallet_balances} directly instead of going through
      * {@link EconomyProvider}, so they are only correct while that holds. Two things break it: a foreign economy
-     * plugin consuming us outright, or a single currency naming a foreign {@code backend} — its real balance then
+     * plugin consuming us outright, or a single currency naming a foreign {@code backend}, its real balance then
      * lives in PlayerPoints or CoinsEngine, and a row in our table would invent money that does not exist.
      *
      * <p>One foreign currency therefore disables the three features for all currencies. A per-currency gate is the

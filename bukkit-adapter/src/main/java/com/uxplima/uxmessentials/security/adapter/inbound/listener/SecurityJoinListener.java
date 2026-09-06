@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * The connection edges of the join-verification freeze: on join it hands the player to the {@link
  * VerificationController}, which decides off the tick thread whether they must prove a second factor and freezes them
  * if so; on quit it drops any pending freeze so a disconnect mid-verification leaves no lingering state. Both fire at
- * {@code MONITOR} — the decision only reads state and schedules its own work, so it runs after every other join
+ * {@code MONITOR}. The decision only reads state and schedules its own work, so it runs after every other join
  * handler has settled the player in.
  */
 @NullMarked

@@ -6,8 +6,8 @@ import java.util.Optional;
 
 /**
  * The rent lifecycle of a warp that occupies a paid slot. A warp is rented through {@link #paidUntil}; once that
- * instant passes with no renewal the warp is suspended — {@link #suspendedAt}, when present, marks the moment it
- * was pulled from listings — and is slated to be archived at {@link #archiveAfter}, giving the owner a grace
+ * instant passes with no renewal the warp is suspended. {@link #suspendedAt}, when present, marks the moment it
+ * was pulled from listings, and is slated to be archived at {@link #archiveAfter}, giving the owner a grace
  * window to renew before the warp is retired for good.
  *
  * <p>The two later stages are {@link Optional} because a healthy, paid-up warp has reached neither: an empty

@@ -8,7 +8,7 @@ import java.util.Optional;
  * The kinds of condition a rank may gate its rankup on. Each constant carries the keyword an operator writes as
  * the first token of a {@code requirements} entry in {@code ranks.conf} ({@code money 1000},
  * {@code playtime 3600}); {@link #parse(String)} maps a raw keyword back to the constant so the codec never
- * branches on the literal itself. The domain only names the kinds and the keyword grammar — how each one is
+ * branches on the literal itself. The domain only names the kinds and the keyword grammar. How each one is
  * resolved for a player (a balance read, a playtime lookup, a permission check, the stored rank, a placeholder
  * comparison, an inventory count) is the evaluator adapter's job, keeping the kernel free of any Bukkit,
  * economy or placeholder dependency.

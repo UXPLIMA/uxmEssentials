@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
  * The production {@link BiomeCatalog}: it resolves an operator-typed biome key against the server's biome registry
  * and normalises the result to the same lower-cased path form a validated candidate carries ({@code plains},
  * {@code desert}), so the {@code /rtp biome} biome gate compares like for like. An input with no matching registry
- * entry — a typo, or a biome the running version does not have — resolves to empty, and the use case reports it.
+ * entry (a typo, or a biome the running version does not have) resolves to empty, and the use case reports it.
  *
  * <p>The key list is built once per call for tab completion; it is a cheap registry walk, not a hot path (Brigadier
  * only asks while the player is typing the argument).

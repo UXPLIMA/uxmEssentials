@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@link HologramRenderer#maySee} — the per-player decision the renderer's allowed-viewer set is built
+ * Pins {@link HologramRenderer#maySee}. The per-player decision the renderer's allowed-viewer set is built
  * from. An {@code ALL} hologram is visible to everyone; a {@code PERMISSION} hologram is visible only to the
  * players the {@link Permissions} port says hold its node, so the restricted viewer set is exactly the
  * node-holders among the candidates; a {@code MANUAL} hologram is visible only to the players in its explicit
@@ -84,7 +84,7 @@ class HologramVisibilityViewerTest {
         // ALL: everyone sees it regardless of the manual set.
         assertThat(HologramRenderer.maySee(onlyVip, Visibility.everyone(), PLAIN, shownPlain))
                 .isTrue();
-        // PERMISSION: the node decides, not the manual set — Plain is in the set but lacks the node.
+        // PERMISSION: the node decides, not the manual set: Plain is in the set but lacks the node.
         assertThat(HologramRenderer.maySee(onlyVip, Visibility.restrictedTo(NODE), PLAIN, shownPlain))
                 .isFalse();
     }

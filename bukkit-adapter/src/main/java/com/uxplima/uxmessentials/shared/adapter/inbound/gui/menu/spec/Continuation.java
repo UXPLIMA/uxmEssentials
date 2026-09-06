@@ -10,19 +10,19 @@ import java.util.Objects;
  * and dispatches inline as before.
  *
  * <ul>
- *   <li>{@link Input} — an {@code input:<key>} step: prompt the viewer for a line of text, then run the gesture's
+ *   <li>{@link Input}, an {@code input:<key>} step: prompt the viewer for a line of text, then run the gesture's
  *       remaining refs as a continuation with the typed line exposed as {@code %input%}. On a cancel the
  *       {@code onCancel} refs run and the remaining refs are abandoned. It is only meaningful as a step in a flat
  *       action list (the case player-warps needs, {@code [input:…, action-reading-%input%]}); inside an else-ladder
  *       or a deny list it is unsupported.</li>
- *   <li>{@link Confirm} — a {@code confirm:<key>} step: open a yes/no confirmation, run {@code onYes} on accept and
- *       {@code onNo} on decline. It has no continuation of the remaining chain — its two branches carry everything
+ *   <li>{@link Confirm}, a {@code confirm:<key>} step: open a yes/no confirmation, run {@code onYes} on accept and
+ *       {@code onNo} on decline. It has no continuation of the remaining chain. Its two branches carry everything
  *       that should follow either decision.</li>
  * </ul>
  *
  * <p>The {@code prompt}/{@code defaultText}/{@code title} strings are carried verbatim (a {@code @key} or an inline
  * MiniMessage token), resolved to a component against the open context by the engine at dispatch time exactly as an
- * item name is — never resolved here.
+ * item name is: never resolved here.
  */
 public sealed interface Continuation permits Continuation.Input, Continuation.Confirm {
 

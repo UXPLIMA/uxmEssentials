@@ -35,8 +35,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>An offline player cannot be snapshotted or swapped, so {@link #capture} of an absent player yields an
  * empty-but-valid loadout and {@link #applyGadgetHotbar} is a silent no-op. {@link #restore} of an absent
- * player returns {@code false} (nothing written back) so the exit use case keeps the durable DB row — the
- * item-loss-safe net — for the join-recovery path rather than deleting it over a non-restore.
+ * player returns {@code false} (nothing written back) so the exit use case keeps the durable DB row, the
+ * item-loss-safe net: for the join-recovery path rather than deleting it over a non-restore.
  */
 @NullMarked
 public final class BukkitStaffLoadoutCapture implements StaffLoadoutCapture {
@@ -86,7 +86,7 @@ public final class BukkitStaffLoadoutCapture implements StaffLoadoutCapture {
         Objects.requireNonNull(loadout, "loadout");
         Player player = Bukkit.getPlayer(who.uuid());
         if (player == null) {
-            // Offline at restore (a disconnect race): nothing was written back, so report failure — the use case
+            // Offline at restore (a disconnect race): nothing was written back, so report failure, the use case
             // keeps the durable row for the join-recovery path rather than deleting it over a non-restore.
             return false;
         }
@@ -125,7 +125,7 @@ public final class BukkitStaffLoadoutCapture implements StaffLoadoutCapture {
     /**
      * Grant the configured in-mode perks after the gadget hotbar is laid out. This runs after {@code capture}
      * (the enter sequence captures the real loadout first), so the granted night vision is never part of the
-     * saved set and the captured flight allowance still reflects the player's real pre-mode value — both revert
+     * saved set and the captured flight allowance still reflects the player's real pre-mode value, both revert
      * cleanly on exit (the captured {@code allowFlight} on restore, the granted effect cleared by
      * {@link #restoreEffects}).
      */

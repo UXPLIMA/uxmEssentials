@@ -6,7 +6,7 @@
 -- the config table behind the combined worth source (store first, config fallback)
 -- so a freshly set price is what /worth reports and /sell credits against.
 --
--- price is DECIMAL(20,4) — identical to wallet_balances.amount and
+-- price is DECIMAL(20,4). Identical to wallet_balances.amount and
 -- transactions.amount (V2): worth is money, never a float, so /sell can compute a
 -- stack value the same width a balance is stored at. defined_by is the actor uuid
 -- (NULL for a console actor); updated_at is epoch milliseconds in a BIGINT,

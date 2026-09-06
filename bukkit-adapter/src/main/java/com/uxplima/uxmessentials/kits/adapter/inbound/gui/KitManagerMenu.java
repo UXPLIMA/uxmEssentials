@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The grid is the {@code kits:manager} list source. The repository read happens on the viewer's entity thread at
  * open and the rows are handed to the engine as the menu subject, so the engine renders off that snapshot without a
- * repository read of its own — mirroring {@code WorldListMenu}. The {@code kit_manager_icon} / {@code kit_manager_name}
+ * repository read of its own, mirroring {@code WorldListMenu}. The {@code kit_manager_icon} / {@code kit_manager_name}
  * placeholders and the fixed catalog-key lore (cooldown, cost, permission, one-time, first-join, auto-equip, a spacer,
  * the edit hint) read the bound row, reproducing the old {@code KitManagerView}'s icon slot for slot.
  *

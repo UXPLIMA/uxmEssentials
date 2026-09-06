@@ -15,12 +15,12 @@ import org.jspecify.annotations.NullMarked;
  * The Redis arm of the bus, resolved lazily on {@link #start}. The Redis transport lives in the optional
  * {@code uxmEssentials-redis} companion plugin, which registers a {@link RedisTransportFactory} with the
  * {@code ServicesManager} on <em>its</em> enable. Because the companion is declared to load after the host, the
- * host cannot resolve the factory during its own enable — so the host defers starting the bus to its first
+ * host cannot resolve the factory during its own enable, so the host defers starting the bus to its first
  * global tick and this transport resolves the factory at that point, by which time every plugin has enabled.
  *
  * <p>On {@link #start} it looks the factory up: present (companion deployed) → build the real Redis transport
  * and delegate to it; absent → degrade to a {@link LocalOnlyBusTransport} and log one WARN telling the operator
- * to drop the companion jar in {@code plugins/}. There is no class-reference {@code LinkageError} to guard — the
+ * to drop the companion jar in {@code plugins/}. There is no class-reference {@code LinkageError} to guard, the
  * host never names a Lettuce or companion type directly; the lookup is a plain null check across the
  * {@code ServicesManager} seam, and the factory returns the host's own {@link BusTransport} class (the companion
  * joins the host classpath), so no loader-constraint violation can arise.
@@ -60,7 +60,7 @@ final class DeferredRedisTransport implements BusTransport {
         RedisTransportFactory factory = plugin.getServer().getServicesManager().load(RedisTransportFactory.class);
         if (factory == null) {
             log.warn("network.transport=redis but the uxmEssentials-redis companion plugin is not deployed; "
-                    + "redis bus disabled — drop uxmEssentials-redis.jar in plugins/ to enable the redis transport");
+                    + "redis bus disabled. Drop uxmEssentials-redis.jar in plugins/ to enable the redis transport");
             return new LocalOnlyBusTransport();
         }
         return factory.redis(redis.host(), redis.port(), redis.password(), redis.db(), redis.channel(), scheduler, log);

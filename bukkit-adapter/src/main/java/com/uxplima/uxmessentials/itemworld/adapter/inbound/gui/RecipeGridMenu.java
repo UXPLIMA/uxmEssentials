@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  * an empty slot) and a result material, then opens this menu over a {@link RecipeDisplay}; an item with no
  * crafting form opens {@link #openEmpty} instead, the one-row empty-state title. Each of the nine grid cells is a
  * fixed slot whose material, name, and lore come from {@code recipe_slot<i>_material} / {@code _name} /
- * {@code _lore} placeholders that branch on whether that cell is empty — an empty cell shows the glass filler with
+ * {@code _lore} placeholders that branch on whether that cell is empty. An empty cell shows the glass filler with
  * the empty-slot label, a filled cell shows its ingredient with the ingredient lore.
  */
 @NullMarked
@@ -90,7 +90,7 @@ public final class RecipeGridMenu {
         menus.open(viewer, GRID_SPEC_ID, new RecipeDisplay(grid, result));
     }
 
-    /** Open the empty-state title for {@code viewer} — shown for an item with no crafting recipe. */
+    /** Open the empty-state title for {@code viewer}: shown for an item with no crafting recipe. */
     public void openEmpty(PlayerRef viewer) {
         Objects.requireNonNull(viewer, "viewer");
         menus.open(viewer, EMPTY_SPEC_ID, null);

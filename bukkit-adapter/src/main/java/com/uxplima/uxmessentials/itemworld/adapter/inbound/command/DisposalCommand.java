@@ -25,7 +25,7 @@ import com.uxplima.uxmlib.gui.StorageGui;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /disposal} (alias {@code /trash}): open a throwaway window — anything left inside when it closes is
+ * {@code /disposal} (alias {@code /trash}): open a throwaway window. Anything left inside when it closes is
  * discarded. The window is a fresh uxmLib {@link StorageGui} backed by nothing: items dropped into it are
  * never written to a real container and the menu has no close handler, so closing the view silently drops
  * them. Opening is entity-bound, so it is scheduled on the player's region thread through the kernel

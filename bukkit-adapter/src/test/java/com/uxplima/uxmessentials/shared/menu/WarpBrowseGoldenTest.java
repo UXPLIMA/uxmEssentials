@@ -60,12 +60,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * icon, so page 0 holds two ENDER_PEARL tiles (content slots 0 and 1, the names surfacing through the warp-name
  * token) and the two ARROW nav buttons (slots 48 and 50), with no back button at the root. The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — captured once while both rendered the same fixture, then frozen here as the contract so the old
+ * view produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old
  * class could be deleted. A priced, permission-gated warp is also rendered to prove its lore expands to the full
  * four lines through the single multi-line placeholder, where a free warp expands to two.
  *
  * <p>Category mode: a "places" category (a BOOK tile) sits alongside an uncategorised warp "beta" at the root. A
- * left click on the category drills in — the engine re-opens at that level, where the warp filed under it appears;
+ * left click on the category drills in. The engine re-opens at that level, where the warp filed under it appears;
  * a left click on the back button steps back to the root. And, through the engine's own {@link MenuListener}, a
  * left click on a warp tile proves the migrated path warps the viewer through the same {@link UseWarp} use case the
  * {@code /warp} command drives, recorded by the teleporter the use case delegates the hop to.
@@ -213,7 +213,7 @@ class WarpBrowseGoldenTest {
         return top();
     }
 
-    /** Open the category-mode root (categories present), returning nothing — the window is read off the player. */
+    /** Open the category-mode root (categories present), returning nothing: the window is read off the player. */
     private void openCategoryRoot() {
         browseMenu().open(player, viewer, repository.all());
     }

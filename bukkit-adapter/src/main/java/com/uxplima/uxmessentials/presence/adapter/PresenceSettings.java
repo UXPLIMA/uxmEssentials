@@ -14,12 +14,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The presence context's typed config, read once from the module's scoped {@code modules.presence} subtree at
  * wiring time. It bounds the idle threshold (how long a player must be still before the sweep flips them to
- * AFK) and the sweep interval (how often the auto-AFK scan runs), and carries the round-3 anti-AFK matrix —
- * the anti-machine activity filter, the disable-pickup-while-AFK toggle, and the sleep-ignores-AFK toggle —
+ * AFK) and the sweep interval (how often the auto-AFK scan runs), and carries the round-3 anti-AFK matrix
+ * the anti-machine activity filter, the disable-pickup-while-AFK toggle, and the sleep-ignores-AFK toggle
  * all additive and config-gated so an operator who declares nothing keeps the current behaviour.
  *
  * <p>A non-positive idle threshold is honoured by the domain as "never idle", so an operator switches auto-AFK
- * off by setting it to zero — manual {@code /afk} still works. The anti-machine toggles all default to the
+ * off by setting it to zero: manual {@code /afk} still works. The anti-machine toggles all default to the
  * inert value (empty ignore set, pickup-block off, sleep-ignore off), so enabling presence alone changes
  * nothing on the AFK-farm or sleep paths until an operator opts in.
  */

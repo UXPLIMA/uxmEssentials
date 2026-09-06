@@ -11,11 +11,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A {@link PlayerGroupSource} backed by LuckPerms. Bound only when LuckPerms is installed (the wiring probes the
- * plugin before constructing it), so the {@code net.luckperms} symbols are never loaded on a server without it —
+ * plugin before constructing it), so the {@code net.luckperms} symbols are never loaded on a server without it
  * mirroring {@code LuckPermsChatMetaSource} in the chat renderer.
  *
- * <p>The primary group is read from the loaded user's cached data — the same snapshot the platform resolves
- * permission checks against — so the read is non-blocking and safe on the tick thread inside the preprocess gate. A
+ * <p>The primary group is read from the loaded user's cached data. The same snapshot the platform resolves
+ * permission checks against, so the read is non-blocking and safe on the tick thread inside the preprocess gate. A
  * group is reported only for a currently-loaded user; an unloaded user (an edge case for an online player) falls back
  * to empty, so the gate uses the {@code default} command list rather than blocking to load.
  */

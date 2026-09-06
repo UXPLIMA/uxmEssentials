@@ -32,8 +32,8 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  * skipped or replaced with its default, and an unresolvable sound name yields no sound.
  *
  * <p><b>Back-compat:</b> the pre-V5b config carried a scalar boolean {@code broadcast = true|false}. When
- * the node is a scalar rather than a section it is mapped to a type — {@code true} to
- * {@link BroadcastType#EVERY_VOTE}, {@code false} to {@link BroadcastType#NONE} — with the default channel
+ * the node is a scalar rather than a section it is mapped to a type, {@code true} to
+ * {@link BroadcastType#EVERY_VOTE}, {@code false} to {@link BroadcastType#NONE}, with the default channel
  * set and display, so an un-migrated config keeps working unchanged.
  */
 @NullMarked

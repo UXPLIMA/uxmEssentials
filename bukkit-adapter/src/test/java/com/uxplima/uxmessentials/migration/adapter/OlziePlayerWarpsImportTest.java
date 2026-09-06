@@ -45,7 +45,7 @@ import org.junit.jupiter.api.io.TempDir;
  * The Olzie PlayerWarps end-to-end golden-file, and the last leg of the player-warps rebuild: it seeds an Olzie SQLite
  * fixture, drives the real {@link OlziePlayerWarpsConvert} plan into the shared {@link PlayerWarpRecordWriter}, and
  * asserts the warps land on the new player-warp schema over the default embedded SQLite backend. It proves the whole
- * chain for the richest source — the source name is sanitised into the value-object shape, access is resolved from the
+ * chain for the richest source. The source name is sanitised into the value-object shape, access is resolved from the
  * password / whitelist / locked flags, the plaintext password is hashed so it verifies, the category / description /
  * icon / price carry across, the ratings / whitelist / managers (as members) / bans (with reason) / favourites land in
  * their stores, a warp in an unknown world is dropped, and a second run writes nothing new.
@@ -214,7 +214,7 @@ class OlziePlayerWarpsImportTest {
         }
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

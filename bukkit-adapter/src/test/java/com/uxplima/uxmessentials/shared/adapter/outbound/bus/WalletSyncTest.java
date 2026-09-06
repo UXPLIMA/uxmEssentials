@@ -59,7 +59,7 @@ class WalletSyncTest {
 
         WalletSync.listener(cached).onRemoteChange(new HomeChanged("peer-2", OWNER.uuid()));
 
-        cached.findByOwner(OWNER); // still cached — a non-balance frame does not invalidate
+        cached.findByOwner(OWNER); // still cached. A non-balance frame does not invalidate
         assertThat(delegate.reads.get()).isEqualTo(1);
     }
 

@@ -24,8 +24,8 @@ import org.jspecify.annotations.NullMarked;
  * </ul>
  *
  * <p>SQLite is the schema this importer was written against (the recovered live database). The org.xerial driver
- * rejects flipping a connection to read-only after it is opened, so every SQLite URL — the file fallback and an
- * operator-supplied one alike — is normalised to open in read-only mode ({@code open_mode=1}); the shared
+ * rejects flipping a connection to read-only after it is opened, so every SQLite URL, the file fallback and an
+ * operator-supplied one alike. Is normalised to open in read-only mode ({@code open_mode=1}); the shared
  * {@code JdbcSource} then finds the connection already read-only and its advisory {@code setReadOnly(true)} is a no-op.
  * This is the SQLite equivalent of the AxPlayerWarps source's read-only H2 URL. A network (MySQL/MariaDB) URL is used
  * verbatim, since those drivers accept the advisory read-only flag directly.

@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The vanish-backed {@link StaffVanish}: it routes staff-mode vanish through the dedicated {@code vanish} context's
- * {@link ToggleVanish} use case, so staff mode never owns a second vanish state — a staff member who vanishes on entry
+ * {@link ToggleVanish} use case, so staff mode never owns a second vanish state. A staff member who vanishes on entry
  * is vanished in the one authority every other context reads. The port asks for an <i>absolute</i> set (vanish on
  * enter, reveal on exit), which {@link ToggleVanish#setVanished} makes idempotent by toggling only when the live state
  * differs, leaving an already-correctly-vanished player untouched.

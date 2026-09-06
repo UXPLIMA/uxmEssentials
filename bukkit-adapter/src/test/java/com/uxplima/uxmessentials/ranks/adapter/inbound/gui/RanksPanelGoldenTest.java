@@ -65,7 +65,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * (EMERALD@15) and close (BARRIER@22) over a grey-glass backdrop; the two display items fill their lore from the
  * {@code ranks_*} placeholders the subject carries, so the current rank name and the next rank's cost and
  * requirements actually render. Clicking the rank-up button fires through the engine's own {@link MenuListener}
- * and runs the real {@link Rankup} pipeline — the pointer advances one rung — then redraws with the new standing;
+ * and runs the real {@link Rankup} pipeline, the pointer advances one rung, then redraws with the new standing;
  * clicking close shuts the panel.
  */
 class RanksPanelGoldenTest {
@@ -152,7 +152,7 @@ class RanksPanelGoldenTest {
 
     @Test
     void theBareRanksOpenIsNotWiredWhenTheGuiIsDisabled() {
-        // A disabled GUI hands RanksCommand no panel, so the /ranks root carries no bare-open executor — it stays
+        // A disabled GUI hands RanksCommand no panel, so the /ranks root carries no bare-open executor: it stays
         // the admin setrank-only surface, the operator-visible proof that a disabled GUI registers no open.
         RanksCommand command = new RanksCommand(
                 new SetRank(repository, ladder, event -> {}), ladder, Optional.empty(), new TemplateMessages());
@@ -191,7 +191,7 @@ class RanksPanelGoldenTest {
         return new CurrentRank(repository, ladder);
     }
 
-    /** A ranks panel over a throwaway engine — enough for the command to hold as its {@link Optional} GUI handle. */
+    /** A ranks panel over a throwaway engine, enough for the command to hold as its {@link Optional} GUI handle. */
     private RanksPanelMenu newPanel() {
         MenuBindings bindings = new MenuBindings();
         ItemRenderer itemRenderer = new ItemRenderer(guiText, bindings.placeholders());

@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.staff.domain.SavedLoadout;
  *
  * <p>Ordering is load-bearing and owned by the {@code EnterStaffMode} use case: {@link #capture} runs first,
  * the result is committed to {@link StaffLoadoutRepository}, and only then does {@link #applyGadgetHotbar}
- * overwrite the live inventory — so the real loadout is durable before it is swapped away.
+ * overwrite the live inventory, so the real loadout is durable before it is swapped away.
  */
 public interface StaffLoadoutCapture {
 
@@ -23,7 +23,7 @@ public interface StaffLoadoutCapture {
      * Restore {@code loadout} onto {@code who}, replacing whatever they are currently holding. Returns whether
      * the restore actually reached an online player: {@code true} when {@code who} was online and the items
      * were written back, {@code false} when they were offline (a disconnect race) and nothing was restored. The
-     * exit use case keys its delete-the-durable-copy step on this — the row is dropped only on a {@code true},
+     * exit use case keys its delete-the-durable-copy step on this. The row is dropped only on a {@code true},
      * so a player who vanished off the server between the schedule and the restore keeps their recoverable row.
      */
     boolean restore(PlayerRef who, SavedLoadout loadout);

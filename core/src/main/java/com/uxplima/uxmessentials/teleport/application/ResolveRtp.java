@@ -18,10 +18,10 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportError;
  * The {@code /rtp} use case: serve a pre-validated safe location O(1) from the per-world queue, redirect
  * through the configured fallback world when the requested world has no queue, and hand the destination
  * to the gated teleport machinery. The off-thread safe-search is the queue's refill primitive, fired
- * here below the low-water mark — never an on-demand per-request scan. The requester never waits on a
+ * here below the low-water mark, never an on-demand per-request scan. The requester never waits on a
  * chunk load.
  *
- * <p>Two entry points share the queue: {@link #background} (the manual {@code /rtp} — cost and cooldown are
+ * <p>Two entry points share the queue: {@link #background} (the manual {@code /rtp}. Cost and cooldown are
  * gated up front through {@link TeleportEngine#gateRandom}, then a location is served and handed to the
  * move-cancellable warmup) and {@link #firstJoin} (the involuntary respawn / first-join serve, which polls
  * the pool and teleports immediately with no warmup, cooldown, or charge). Neither ever runs a synchronous
@@ -64,7 +64,7 @@ public final class ResolveRtp {
         }
         Result<Unit, TeleportError> gate = engine.gateRandom(who);
         if (gate.isErr()) {
-            return gate; // gateRandom already notified (cooldown / can't afford / jailed) — queue untouched
+            return gate; // gateRandom already notified (cooldown / can't afford / jailed): queue untouched
         }
         WorldRef world = resolved.get();
         Optional<RtpSafeLocation> location = queue.poll(world);
@@ -80,7 +80,7 @@ public final class ResolveRtp {
     /**
      * The involuntary first-join / respawn serve: poll the pre-warmed pool and teleport immediately (no warmup,
      * cooldown, or charge), or kick a non-blocking refill and report empty when the pool is momentarily drained.
-     * Never a synchronous search — a drained pool simply leaves the player where they joined and warms for next
+     * Never a synchronous search. A drained pool simply leaves the player where they joined and warms for next
      * time. The arrival grace still applies on a successful serve.
      */
     public Result<Unit, TeleportError> firstJoin(PlayerRef who, WorldRef requestedWorld) {

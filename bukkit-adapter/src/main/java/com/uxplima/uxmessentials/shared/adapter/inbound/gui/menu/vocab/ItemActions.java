@@ -22,14 +22,14 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * resolves {@code give-item} / {@code take-item} / {@code set-item} the same way a code-registered feature menu does.
  *
  * <p>An item is named the same two ways everywhere here: a plain {@code <material> [amount]} (amount defaults to one),
- * or a {@code b64:}-prefixed fully-serialized stack decoded through the shared {@link SerializedItems} codec — the
+ * or a {@code b64:}-prefixed fully-serialized stack decoded through the shared {@link SerializedItems} codec, the
  * same token an NPC equipment slot or a {@code /hologram action … give} produces, so an operator writes one grammar
  * across the plugin. The materials and amounts are operator config, so no {@code MessageKey} is involved; the only
  * text any action produces is a diagnostic line on the operator {@code log} when an argument cannot be resolved.
  *
  * <p>Every effect is fail-soft: a blank argument, an unknown material, an undecodable {@code b64:} token, a
  * malformed amount, or a {@code set-item} slot outside the inventory is a logged no-op rather than a throw, and
- * {@link #safe} turns anything a call unexpectedly throws into a logged no-op too — one bad effect must not abort the
+ * {@link #safe} turns anything a call unexpectedly throws into a logged no-op too. One bad effect must not abort the
  * rest of a chain. All of it runs on the viewer's entity thread, where a click already runs and where the inventory
  * is safe to touch; a give whose inventory is full drops the overflow into the world at the viewer's feet.
  */
@@ -40,7 +40,7 @@ public final class ItemActions {
     /**
      * Register the item actions into {@code bindings}. {@code log} is the operator console logger a fail-soft or
      * unresolved action warns through. Left separate from {@link MenuVocabulary#registerActions} so that method's
-     * existing call-sites stay untouched — the composition root calls both.
+     * existing call-sites stay untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -54,7 +54,7 @@ public final class ItemActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs and the npc/
+     * than escaping into the click dispatch. The same fail-soft contract the sibling action packs and the npc/
      * holograms click runner apply to their effect actions.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
@@ -116,7 +116,7 @@ public final class ItemActions {
     /**
      * Overwrite slot {@code <slot>} of the viewer's inventory with a {@code <material> [amount]} (or {@code b64:}
      * serialized) item. A malformed argument, an unresolvable item, or a slot outside the inventory is a fail-soft
-     * skip with an operator warning — the slot is left as it was.
+     * skip with an operator warning: the slot is left as it was.
      */
     private static void setItem(MenuActionContext ctx, Logger log) {
         Optional<SlotItem> parsed = SlotItem.parse(ctx.arg());
@@ -141,7 +141,7 @@ public final class ItemActions {
     /**
      * Resolve an item token into a stack: a {@code b64:} token decodes through {@link SerializedItems}, and anything
      * else parses as {@code <material> [amount]}. Empty when the token is blank, the material is unknown, the amount
-     * is malformed, or the serialized payload is corrupt — every caller reads an empty result as a fail-soft skip.
+     * is malformed, or the serialized payload is corrupt: every caller reads an empty result as a fail-soft skip.
      */
     private static Optional<ItemStack> resolveItem(String token) {
         String trimmed = token.strip();
@@ -159,8 +159,8 @@ public final class ItemActions {
 
     /**
      * A parsed {@code <material> [amount]} item argument: the first whitespace-delimited token is the material name
-     * and an optional second token is a positive whole amount defaulting to one. Parsing is Bukkit-free — it resolves
-     * no {@link Material} — so plain-JUnit grammar tests can exercise it; a blank value, or a present amount that is
+     * and an optional second token is a positive whole amount defaulting to one. Parsing is Bukkit-free: it resolves
+     * no {@link Material}, so plain-JUnit grammar tests can exercise it; a blank value, or a present amount that is
      * not a positive whole number, yields an empty result the actions treat as a fail-soft skip.
      */
     public record ItemArg(String material, int amount) {
@@ -182,7 +182,7 @@ public final class ItemActions {
             return parseAmount(parts[1].strip()).map(amount -> new ItemArg(parts[0], amount));
         }
 
-        /** The positive whole amount in {@code token}, or empty when it is not one — a malformed amount is fail-soft. */
+        /** The positive whole amount in {@code token}, or empty when it is not one: a malformed amount is fail-soft. */
         private static Optional<Integer> parseAmount(String token) {
             try {
                 int amount = Integer.parseInt(token);
@@ -196,8 +196,8 @@ public final class ItemActions {
     /**
      * A parsed {@code <slot> <material> [amount]} set-item argument: the first whitespace-delimited token is the
      * destination slot and the rest is the item token ({@code <material> [amount]} or a {@code b64:} stack), kept
-     * whole for {@link #resolveItem}. Parsing is Bukkit-free — it neither resolves a {@link Material} nor bounds-checks
-     * the slot against a live inventory — so plain-JUnit grammar tests can exercise it; a missing item token or a
+     * whole for {@link #resolveItem}. Parsing is Bukkit-free. It neither resolves a {@link Material} nor bounds-checks
+     * the slot against a live inventory, so plain-JUnit grammar tests can exercise it; a missing item token or a
      * non-numeric slot yields an empty result the action treats as a fail-soft skip.
      */
     public record SlotItem(int slot, String item) {

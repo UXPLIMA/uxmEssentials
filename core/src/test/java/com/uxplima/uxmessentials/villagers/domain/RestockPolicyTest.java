@@ -21,7 +21,7 @@ class RestockPolicyTest {
     void restockIsDueOnceTheIntervalHasElapsed() {
         RestockPolicy policy = RestockPolicy.ofSeconds(60);
 
-        // Last restock 61s ago — older than the 60s interval, so a restock is due.
+        // Last restock 61s ago, older than the 60s interval, so a restock is due.
         assertThat(policy.restockDue(NOW.minusSeconds(61), NOW)).isTrue();
     }
 
@@ -37,7 +37,7 @@ class RestockPolicyTest {
     void restockIsNotDueBeforeTheInterval() {
         RestockPolicy policy = RestockPolicy.ofSeconds(60);
 
-        // Last restock 30s ago — younger than the interval, so no restock is due yet.
+        // Last restock 30s ago: younger than the interval, so no restock is due yet.
         assertThat(policy.restockDue(NOW.minusSeconds(30), NOW)).isFalse();
     }
 

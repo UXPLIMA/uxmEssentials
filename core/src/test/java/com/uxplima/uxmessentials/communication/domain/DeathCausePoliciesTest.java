@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pure selection contract of {@link DeathCausePolicies}: {@link DeathCausePolicies#policyFor(DeathCause)} hands
- * back the cause's own {@link MessagePolicy} when one is configured — pinning that PVP, FALL, and MOB each pick their
- * distinct template — and falls through to the default for a cause with no override, which is the pre-per-cause
+ * back the cause's own {@link MessagePolicy} when one is configured, pinning that PVP, FALL, and MOB each pick their
+ * distinct template, and falls through to the default for a cause with no override, which is the pre-per-cause
  * single-policy behaviour a file that authors only the default death block still gets.
  */
 class DeathCausePoliciesTest {
@@ -35,7 +35,7 @@ class DeathCausePoliciesTest {
     void policyForFallsThroughToTheDefaultForAnUnmappedCause() {
         DeathCausePolicies policies = new DeathCausePolicies(Map.of(DeathCause.PVP, PVP), DEFAULT);
 
-        // A cause with no per-cause entry — and the OTHER catch-all — take the default policy.
+        // A cause with no per-cause entry, and the OTHER catch-all, take the default policy.
         assertThat(policies.policyFor(DeathCause.VOID)).isEqualTo(DEFAULT);
         assertThat(policies.policyFor(DeathCause.OTHER)).isEqualTo(DEFAULT);
     }

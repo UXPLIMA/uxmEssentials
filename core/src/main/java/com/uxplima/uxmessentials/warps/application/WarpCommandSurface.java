@@ -15,15 +15,15 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  * WarpsModule} stays small and the command/permission pairing is one greppable table the permissions guard
  * checks against {@code paper-plugin.yml}.
  *
- * <p>There is a single command literal — {@code /warp} — gated by {@code uxmessentials.warp.use}. Everything
+ * <p>There is a single command literal, {@code /warp}, gated by {@code uxmessentials.warp.use}. Everything
  * a player does with server warps hangs off it: {@code <name>} teleports, while {@code list}, {@code set},
  * {@code del}, {@code info}, {@code move} and the per-warp {@code lock}/{@code password}/{@code rate}/
  * {@code rating}/{@code edit} actions are Brigadier subcommands the inbound adapter gates with their own
  * permission nodes ({@code uxmessentials.warp.list}, {@code .set}, {@code .delete}, {@code .info},
  * {@code .move}, …) via {@code .requires(...)}. Those are not separate command literals, so they are not in
- * this table — only the top-level {@code warp} literal is.
+ * this table: only the top-level {@code warp} literal is.
  *
- * <p>The per-warp permission node {@code uxmessentials.warp.use.<warp>} is not a command base permission —
+ * <p>The per-warp permission node {@code uxmessentials.warp.use.<warp>} is not a command base permission
  * it is the data-driven gate {@code UseWarp} checks per destination, so it is intentionally absent from this
  * table; only the base {@code uxmessentials.warp.use} node guards the {@code /warp} command itself.
  */
@@ -40,7 +40,7 @@ final class WarpCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of one warp command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one warp command, literal and help text, no Brigadier type. */
     private record WarpCommand(String literal, String description) implements BrigadierCommand {
 
         static WarpCommand of(String literal, String description) {

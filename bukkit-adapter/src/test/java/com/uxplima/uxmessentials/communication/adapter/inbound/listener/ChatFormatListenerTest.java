@@ -169,7 +169,7 @@ class ChatFormatListenerTest {
     void aPapiPlaceholderIsLeftUntouchedWhenTheSeamIsAbsent() {
         ChatFormatPolicy policy =
                 new ChatFormatPolicy(true, "%papi_tag% <display_name>: <message>", Map.of(), false, "", "");
-        ChatRenderer renderer = render(policy, ChatMeta.empty()); // identity expander — no PlaceholderAPI
+        ChatRenderer renderer = render(policy, ChatMeta.empty()); // identity expander, no PlaceholderAPI
 
         Component line = renderer.render(speaker, Component.text("Alice"), Component.text("hi"), speaker);
 

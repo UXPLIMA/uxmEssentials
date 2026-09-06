@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * A minimal RFC 4648 Base32 codec — the alphabet an authenticator app (Google Authenticator, Aegis, …) expects a
+ * A minimal RFC 4648 Base32 codec. The alphabet an authenticator app (Google Authenticator, Aegis, …) expects a
  * TOTP shared secret to be written in. The JDK ships Base64 but not Base32, and shading a dependency for one small,
  * well-specified transform is not worth it, so the codec is a hand-rolled part of the domain: it decodes the secret
  * an app scanned back into the raw key bytes the HMAC is keyed with, and encodes freshly generated random bytes into

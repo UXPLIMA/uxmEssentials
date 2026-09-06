@@ -139,7 +139,7 @@ class RequirementConditionsTest {
     @Test
     void hasItemWithANameMatchRequiresTheDisplayName() {
         viewer.getInventory().addItem(named(Material.DIAMOND, "Cool Sword"));
-        // A plain, unnamed diamond as well — it must not satisfy the named match.
+        // A plain, unnamed diamond as well: it must not satisfy the named match.
         viewer.getInventory().addItem(new ItemStack(Material.DIAMOND, 1));
 
         assertThat(test("has-item", "DIAMOND 1 name:Cool Sword")).isTrue();
@@ -236,7 +236,7 @@ class RequirementConditionsTest {
         return test(id, arg, new PlayerRef(viewer.getUniqueId(), viewer.getName()));
     }
 
-    /** Fire condition {@code id} for a viewer UUID with no live player — the fail-closed offline case. */
+    /** Fire condition {@code id} for a viewer UUID with no live player: the fail-closed offline case. */
     private boolean testOffline(String id, String arg) {
         return test(id, arg, new PlayerRef(UUID.randomUUID(), "Ghost"));
     }

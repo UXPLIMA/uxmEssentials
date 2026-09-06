@@ -16,8 +16,8 @@ import org.jspecify.annotations.NullMarked;
  * current. A backend that stops heartbeating ages out of every peer's roster once its last ping leaves the
  * liveness window.
  *
- * <p>It uses the same self-rescheduling loop as the salary and loan-repayment sweeps — schedule the next tick
- * through {@link Scheduler#asyncAfter} rather than holding a raw repeating handle — so a {@code stop()} simply
+ * <p>It uses the same self-rescheduling loop as the salary and loan-repayment sweeps, schedule the next tick
+ * through {@link Scheduler#asyncAfter} rather than holding a raw repeating handle, so a {@code stop()} simply
  * flips the running flag and the in-flight loop drops out on its next check, leaving no orphaned task. The
  * publish is pure bus work (encode plus a fire-and-forget transport send) and touches no Bukkit API, so it
  * runs straight on the async scheduler.

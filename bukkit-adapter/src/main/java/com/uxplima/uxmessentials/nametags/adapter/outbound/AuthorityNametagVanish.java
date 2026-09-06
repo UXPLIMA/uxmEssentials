@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link NametagVanish} implementation, reading the vanish context's single {@link VanishStore} authority directly.
  * A {@code viewer} may see a {@code wearer}'s nametag when the wearer is not vanished, or the viewer's see level clears
- * the wearer's use level — the pure {@code VanishState#canSee} rule the messaging and staff surfaces read too (with the
+ * the wearer's use level. The pure {@code VanishState#canSee} rule the messaging and staff surfaces read too (with the
  * viewer's see level resolved through the shared {@link VanishLevelResolver}), so the nametag cull tracks exactly the
  * same layered visibility every other consumer sees. The renderer builds an eligible-viewer set, so the polarity here
  * is the natural "can this viewer see the wearer?", the inverse of messaging's {@code isHiddenFrom}.

@@ -43,7 +43,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * The Multiverse end-to-end golden-file: it seeds a {@code worlds.yml} fixture, drives the real
  * {@link MultiverseConvert} plan into the live and dry-run writers, and asserts the worlds land in our registry over
- * the default embedded SQLite backend. It proves the whole chain — a fully-configured world carries its alias, seed,
+ * the default embedded SQLite backend. It proves the whole chain. A fully-configured world carries its alias, seed,
  * environment, generator, spawn and settings across; a bare entry takes our defaults instead of Multiverse's; a world
  * named in a shape our registry cannot hold is dropped; a dry run writes nothing; and a second run adds nothing.
  *
@@ -268,7 +268,7 @@ class MultiverseWorldImportTest {
                 .orElseThrow(() -> new AssertionError("no world named " + name + " was imported"));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

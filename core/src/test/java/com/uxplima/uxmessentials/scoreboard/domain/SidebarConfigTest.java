@@ -71,7 +71,7 @@ class SidebarConfigTest {
 
     @Test
     void priorityTiesAreBrokenByConfigOrderFirstWins() {
-        // Both match (always), both priority 5 — the one declared first wins.
+        // Both match (always), both priority 5: the one declared first wins.
         SidebarConfig config = new SidebarConfig(
                 List.of(board("first", DisplayCondition.always(), 5), board("second", DisplayCondition.always(), 5)));
 

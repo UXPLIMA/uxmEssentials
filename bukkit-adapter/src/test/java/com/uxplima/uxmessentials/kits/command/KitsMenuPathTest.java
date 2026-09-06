@@ -66,7 +66,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the kits browse menu through the real Brigadier {@code /kit list} subcommand and the
  * data-driven menu engine. {@code /kit list} opens a six-row engine window whose content slots hold one display
- * icon per kit the player may claim — backed by a fake {@link KitRepository} of three kits — proving the
+ * icon per kit the player may claim, backed by a fake {@link KitRepository} of three kits, proving the
  * read-only menu renders one icon per available kit. In {@code chat} display mode {@code /kit list} prints the
  * clickable chat list instead, asserted by the {@code KIT_LIST} keys it produces and the absence of any open
  * inventory. Per-subcommand permission gating is asserted directly off the built node's {@code .requires(...)}.
@@ -175,7 +175,7 @@ class KitsMenuPathTest {
 
     /**
      * Asserts the {@code subcommand} literal under {@code /kit} is reachable only with {@code grantsAccess}
-     * and not with {@code deniedNode} alone — proving Brigadier {@code .requires(...)} gates the subcommand by
+     * and not with {@code deniedNode} alone. Proving Brigadier {@code .requires(...)} gates the subcommand by
      * its own permission rather than the root's.
      */
     private void assertCanUse(String subcommand, String grantsAccess, String deniedNode) {

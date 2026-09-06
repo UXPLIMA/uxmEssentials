@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * commands a player lacks permission for from the {@code PlayerCommandSendEvent} list, so this is a belt-and-braces
  * cross-check: it reads the command map on the tick thread (where the event fires) and never mutates it.
  *
- * <p>An unknown label — one with no registered command, e.g. a namespaced alias the map does not resolve — is treated
+ * <p>An unknown label (one with no registered command, e.g. a namespaced alias the map does not resolve) is treated
  * as visible ({@code true}) so the rule set and the plugin-hide policy remain the sole authority over such entries.
  */
 @NullMarked
@@ -23,7 +23,7 @@ public interface CommandPermissionView {
     /** True when {@code player} may see the command registered under {@code label}, or the label is unknown. */
     boolean canSee(Player player, String label);
 
-    /** A view that reveals every command — the fallback when no command map is consulted (and used in tests). */
+    /** A view that reveals every command: the fallback when no command map is consulted (and used in tests). */
     static CommandPermissionView allowingAll() {
         return (player, label) -> true;
     }

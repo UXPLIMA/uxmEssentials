@@ -21,7 +21,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  * {@code <accent>} token renders as a real cyan display name (not a leftover {@code <accent>} literal),
  * upright (ITALIC off, the {@code ItemBuilder} default), because {@link StaffGadgetItems} parses the
  * operator-authored name through the shared {@link StyleTags} resolver. The gadget names are operator config,
- * not catalog keys, so there is no locale-parity guard — this test is the regression guard for the wiring.
+ * not catalog keys, so there is no locale-parity guard: this test is the regression guard for the wiring.
  */
 class StaffGadgetItemsStyleTest {
 

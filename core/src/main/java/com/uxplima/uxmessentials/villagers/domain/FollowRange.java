@@ -3,14 +3,14 @@ package com.uxplima.uxmessentials.villagers.domain;
 /**
  * The follow-range rule: given whether a following villager and its owner are in the same world and the squared
  * distance between them, decide whether the villager should pathfind toward the owner this tick or hold still. This
- * is the whole of the follow-movement decision — the live {@code Villager}, its pathfinder, and the owner's live
+ * is the whole of the follow-movement decision, the live {@code Villager}, its pathfinder, and the owner's live
  * {@code Location} are adapter concerns; the domain owns only the range comparison so it can be unit-tested without
  * Bukkit.
  *
  * <p>The villager moves only while it is in the owner's world and within {@code range} blocks of them; once the
  * owner steps beyond the range (or into another world) the villager stops rather than sprinting after them across
  * the map, and it resumes on the next tick that finds the owner back in range. The comparison works in squared
- * distance so the adapter never takes a square root — {@link #rangeSquared()} is compared against the squared
+ * distance so the adapter never takes a square root. {@link #rangeSquared()} is compared against the squared
  * distance Bukkit hands back from {@code Location#distanceSquared}.
  *
  * @param range how far, in blocks, the owner may be from the villager before it stops following; strictly positive

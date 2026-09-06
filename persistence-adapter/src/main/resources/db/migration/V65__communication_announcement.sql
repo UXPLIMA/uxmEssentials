@@ -13,7 +13,7 @@
 --
 -- enabled is an INTEGER flag (1 = on, 0 = off) rather than a BOOLEAN: SQLite (the default backend) has no native
 -- BOOLEAN type and stores it as an integer affinity anyway, while a portable INTEGER reads back as the same shape
--- on SQLite, MySQL/MariaDB and PostgreSQL alike — every other flag in this schema (the V30/V31 staff flags, V62)
+-- on SQLite, MySQL/MariaDB and PostgreSQL alike, every other flag in this schema (the V30/V31 staff flags, V62)
 -- follows the same convention. updated_at is a write-only BIGINT epoch-millis audit stamp the read path ignores,
 -- matching the worth-override store (V12/V63); like every timestamp here it is a BIGINT rather than a SQL
 -- TIMESTAMP for the same cross-backend reason V2 documents.

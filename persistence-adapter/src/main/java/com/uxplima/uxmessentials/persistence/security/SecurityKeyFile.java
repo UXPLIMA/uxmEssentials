@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Loads — or, on first run, creates — the AES key the {@link TotpSecretCipher} encrypts TOTP secrets under. The key
+ * Loads (or, on first run, creates) the AES key the {@link TotpSecretCipher} encrypts TOTP secrets under. The key
  * is 256 bits of {@link SecureRandom}, Base64-encoded into a small key-file beside the plugin's data (e.g.
  * {@code modules/security/secret.key}), and read back verbatim on later starts, so every server run decrypts the
  * same stored secrets. Keeping the key in a file rather than the config or the database is deliberate: an operator

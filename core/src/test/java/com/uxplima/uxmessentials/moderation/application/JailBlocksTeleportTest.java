@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The jail → teleport cross-context seam: the real {@link com.uxplima.uxmessentials.moderation.application.RepositoryJailGate}
  * the moderation context provides, bound into the real {@link TeleportEngine}, denies a jailed player's
- * self-teleport with {@code JAILED} <em>before</em> the cooldown gate or the warmup — so no hop is ever
+ * self-teleport with {@code JAILED} <em>before</em> the cooldown gate or the warmup, so no hop is ever
  * issued. An unjailed player flows through normally. This is what {@code /home}, {@code /warp}, {@code /spawn},
  * {@code /back} and {@code /rtp} all funnel through.
  */

@@ -32,8 +32,8 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p>A console command has no return value, so this backend <strong>cannot observe whether its take command
  * succeeded</strong>. {@link #debit} reads the balance, refuses when it falls short, dispatches the take command, and
- * returns {@link Result#ok()} optimistically. That blind spot is why {@link #atomicDebit()} is false — the serialising
- * wrapper cannot make a fire-and-forget command a guarded compare-and-take — and why config validation refuses to
+ * returns {@link Result#ok()} optimistically. That blind spot is why {@link #atomicDebit()} is false: the serialising
+ * wrapper cannot make a fire-and-forget command a guarded compare-and-take, and why config validation refuses to
  * schedule recurring charges (player-warp rent) against such a currency unless the operator turns on
  * {@code allow-nonatomic-recurring}. The sufficiency check still runs before every take, so a short balance is
  * rejected rather than handed a free purchase.
@@ -41,7 +41,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * <p>{@code Bukkit.dispatchCommand} and {@code PlaceholderAPI.setPlaceholders} are both tick-thread APIs, so the give
  * and take commands and the balance read all reach the global region thread through the injected {@link Scheduler}. A
  * balance read already on a tick thread resolves inline; otherwise it hops onto the global thread, completes a future,
- * and waits with a short bound so a read can never wedge the command that made it — a stall degrades to zero. The
+ * and waits with a short bound so a read can never wedge the command that made it: a stall degrades to zero. The
  * resolve runs through {@link PlaceholderApiSupport}, so no {@code me.clip.placeholderapi} type is named here and a
  * server without PlaceholderAPI loads none of its classes; the placeholder must resolve to a bare number, since
  * {@link #balance} parses it with {@link BigDecimal}.

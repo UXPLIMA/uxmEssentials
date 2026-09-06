@@ -17,12 +17,12 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /pwarp favourite <name>} and its un-favourite counterpart: any viewer stars or un-stars a warp for their own
- * favourites list, and the warp's denormalised {@code favourite_count} is kept in step. Favourite is not role-gated —
+ * favourites list, and the warp's denormalised {@code favourite_count} is kept in step. Favourite is not role-gated
  * anyone who can see a warp may star it.
  *
  * <p>Each verb resolves the warp ({@link PlayerWarpError#NOT_FOUND}), no-ops with a distinct notice when it is already
  * in the wanted state, and otherwise mutates the favourite store then asks the repository to recompute the count from
- * the live favourite rows — a recompute, never a {@code +1}/{@code -1} bump — so a double-click that races the
+ * the live favourite rows (a recompute, never a {@code +1}/{@code -1} bump) so a double-click that races the
  * membership check can never drift the stored count away from the true row count.
  */
 public final class FavouritePlayerWarp {

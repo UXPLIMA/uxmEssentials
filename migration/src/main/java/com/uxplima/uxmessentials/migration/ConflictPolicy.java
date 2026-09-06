@@ -8,10 +8,10 @@ import java.util.Objects;
  * (docs/12-migration §6). The chosen branch is recorded per record in the audit {@code conflict} field.
  *
  * <ul>
- *   <li>{@link #SKIP} (default) — keep the existing record; the safe, re-runnable choice.
- *   <li>{@link #OVERWRITE} — the source value replaces the existing one (balance still honours the
+ *   <li>{@link #SKIP} (default): keep the existing record; the safe, re-runnable choice.
+ *   <li>{@link #OVERWRITE}. The source value replaces the existing one (balance still honours the
  *       separate {@code balance-policy}).
- *   <li>{@link #MERGE} — union by identity: the source contributes only records the target lacks.
+ *   <li>{@link #MERGE}: union by identity: the source contributes only records the target lacks.
  * </ul>
  */
 public enum ConflictPolicy {

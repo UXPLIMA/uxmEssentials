@@ -11,8 +11,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The externalised presentation of an {@link EntityEditorView}: the row count, the ordered slots the property
  * buttons are drawn into (the i-th property goes in the i-th slot), the back button slot, an optional delete
- * button slot, and the back/delete/filler materials. Holds layout integers and materials only — every label,
- * value, and title is a {@code MessageKey} in the catalog — so an operator-edited layout and a translated
+ * button slot, and the back/delete/filler materials. Holds layout integers and materials only, every label,
+ * value, and title is a {@code MessageKey} in the catalog, so an operator-edited layout and a translated
  * catalog never collide.
  *
  * <p>Built once at load time by {@link GuiLayouts#loadEntityEditor}; the editor reads {@link #propertySlots}

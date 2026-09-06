@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * The shared spec loader the four world-editor menu screens use: it resolves a {@code modules/worlds/gui/world-*.conf}
  * disk-first then bundled, falling back to a closeable empty window so a typo or a missing file degrades cleanly rather
  * than aborting worlds wiring. Resolution mirrors {@code GuiLayouts} (disk first, then the classpath default), exactly
- * as each individual migrated menu's private loader does — but the four world-editor screens share one holder/listener
+ * as each individual migrated menu's private loader does, but the four world-editor screens share one holder/listener
  * and are migrated as a coupled set, so they share one loader too rather than copying the boilerplate four times.
  */
 @NullMarked

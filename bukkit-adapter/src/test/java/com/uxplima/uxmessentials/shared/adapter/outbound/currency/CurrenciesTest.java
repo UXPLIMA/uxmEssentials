@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
  * The façade's spec grammar and caching mechanics, over an in-memory backend set: the backend head is
  * normalised while a sub-currency name keeps its case, one provider instance is cached per normalised spec, a
  * blank spec resolves the configured default, and an unknown spec is a safe no-op. The backend-resolution
- * behaviour — a configured currency over its own backend, a bare backend id as a synthetic currency, an
- * unknown spec as unavailable — lives in {@link CurrenciesBackedTest}.
+ * behaviour. A configured currency over its own backend, a bare backend id as a synthetic currency, an
+ * unknown spec as unavailable, lives in {@link CurrenciesBackedTest}.
  */
 class CurrenciesTest {
 
@@ -88,7 +88,7 @@ class CurrenciesTest {
         assertThat(currencies.resolve("").id()).isEqualTo("vault");
     }
 
-    /** A {@link Logger} that drops every line — these tests assert behaviour, not log output. */
+    /** A {@link Logger} that drops every line: these tests assert behaviour, not log output. */
     private static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

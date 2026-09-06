@@ -7,7 +7,7 @@ import java.util.function.LongSupplier;
 
 /**
  * A small sliding-window throttle that protects the Discord channel (and JDA's REST budget) from a flood of
- * host events — a mass {@code /kickall}, a bulk eco-admin sweep, a migration import emitting thousands of
+ * host events, a mass {@code /kickall}, a bulk eco-admin sweep, a migration import emitting thousands of
  * per-record audit lines (CLAUDE.md: "rate-limit/batch if a flood of events"). It admits up to
  * {@code maxPerWindow} notifications per rolling {@code window}; once the window's budget is spent, further
  * notifications are dropped until the window rolls over, so the bridge degrades by shedding load rather than

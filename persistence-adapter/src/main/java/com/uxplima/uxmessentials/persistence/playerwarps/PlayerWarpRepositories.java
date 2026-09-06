@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link PlayerWarpRepository} and the context's social stores (bans, members, whitelist, password) from the
  * {@link Persistence} handle it already holds without ever naming a jOOQ type (jOOQ is an {@code implementation}
  * dependency of this module, kept off the consumer's compile classpath). The returned repository is the cached
- * jOOQ adapter — write-through at the database, invalidate in the Caffeine cache; the stores are the plain jOOQ
+ * jOOQ adapter, write-through at the database, invalidate in the Caffeine cache; the stores are the plain jOOQ
  * adapters keyed by the warp's surrogate id.
  */
 @NullMarked
@@ -47,7 +47,7 @@ public final class PlayerWarpRepositories {
     /**
      * As {@link #cached(Persistence, java.util.function.Function)} but returned as its concrete decorator type, so
      * the wiring can hand the cross-server bus a per-owner invalidation hook on the same cache the {@code /pwarp}
-     * commands read — a remote {@code /setpwarp} drops exactly that owner's cached set. Same backing as
+     * commands read: a remote {@code /setpwarp} drops exactly that owner's cached set. Same backing as
      * {@link #cached}; this overload exposes the decorator only so the invalidation seam can reach it.
      */
     public static CachedPlayerWarpRepository cachedConcrete(
@@ -58,7 +58,7 @@ public final class PlayerWarpRepositories {
     }
 
     /**
-     * The jOOQ {@link com.uxplima.uxmessentials.playerwarps.application.port.PlayerWarpBrowse} — the paged read model
+     * The jOOQ {@link com.uxplima.uxmessentials.playerwarps.application.port.PlayerWarpBrowse}. The paged read model
      * the browse GUI binds. It issues one bounded {@code LIMIT}/{@code OFFSET} page query plus a {@code COUNT} over the
      * same predicate, never a full-table scan, so opening the browse costs the same on a hundred-thousand-warp server
      * as on an eight-warp one. The {@code clock} evaluates the live-sponsorship flag on each card as of the read.
@@ -70,39 +70,39 @@ public final class PlayerWarpRepositories {
         return new JooqPlayerWarpBrowse(persistence.dsl(), clock);
     }
 
-    /** The jOOQ {@link WarpBanStore} — one row per {@code (warp, player)}, active-at expiry evaluated in-store. */
+    /** The jOOQ {@link WarpBanStore}, one row per {@code (warp, player)}, active-at expiry evaluated in-store. */
     public static WarpBanStore banStore(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqWarpBanStore(persistence.dsl());
     }
 
-    /** The jOOQ {@link WarpMemberStore} — the co-owner/manager roster the access gate reads roles from. */
+    /** The jOOQ {@link WarpMemberStore}: the co-owner/manager roster the access gate reads roles from. */
     public static WarpMemberStore memberStore(Persistence persistence, Logger log) {
         Objects.requireNonNull(persistence, "persistence");
         Objects.requireNonNull(log, "log");
         return new JooqWarpMemberStore(persistence.dsl(), log);
     }
 
-    /** The jOOQ {@link WarpWhitelistStore} — the allow-list a whitelist-access warp gates on. */
+    /** The jOOQ {@link WarpWhitelistStore}: the allow-list a whitelist-access warp gates on. */
     public static WarpWhitelistStore whitelistStore(Persistence persistence, Clock clock) {
         Objects.requireNonNull(persistence, "persistence");
         Objects.requireNonNull(clock, "clock");
         return new JooqWarpWhitelistStore(persistence.dsl(), clock);
     }
 
-    /** The jOOQ {@link WarpRatingStore} — the per-vote star rows the rate use case tallies the rollup from. */
+    /** The jOOQ {@link WarpRatingStore}, the per-vote star rows the rate use case tallies the rollup from. */
     public static WarpRatingStore ratingStore(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqWarpRatingStore(persistence.dsl());
     }
 
-    /** The jOOQ {@link WarpRatingRewardStore} — the {@code (subject, warp, rewardId)} ledger that dedups a rating reward. */
+    /** The jOOQ {@link WarpRatingRewardStore}: the {@code (subject, warp, rewardId)} ledger that dedups a rating reward. */
     public static WarpRatingRewardStore ratingRewardStore(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqWarpRatingRewardStore(persistence.dsl());
     }
 
-    /** The jOOQ {@link WarpFavouriteStore} — a player's starred warps, its rows the source of {@code favourite_count}. */
+    /** The jOOQ {@link WarpFavouriteStore}: a player's starred warps, its rows the source of {@code favourite_count}. */
     public static WarpFavouriteStore favouriteStore(Persistence persistence, Clock clock) {
         Objects.requireNonNull(persistence, "persistence");
         Objects.requireNonNull(clock, "clock");
@@ -110,7 +110,7 @@ public final class PlayerWarpRepositories {
     }
 
     /**
-     * The jOOQ {@link PlayerWarpPasswordStore} over the shipped PBKDF2 hasher — the plaintext is hashed inside the
+     * The jOOQ {@link PlayerWarpPasswordStore} over the shipped PBKDF2 hasher. The plaintext is hashed inside the
      * store and only the digest is ever written; the application and domain never hold a secret.
      */
     public static PlayerWarpPasswordStore passwordStore(Persistence persistence) {
@@ -119,7 +119,7 @@ public final class PlayerWarpRepositories {
     }
 
     /**
-     * The jOOQ {@link PendingTeleportStore} — one row per player over the network-shared
+     * The jOOQ {@link PendingTeleportStore}. One row per player over the network-shared
      * {@code player_warp_pending_teleports} table, the handoff between a cross-server teleport's origin and target
      * backends. Every operation is a single indexed statement on the {@code player_uuid} primary key.
      */

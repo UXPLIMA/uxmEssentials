@@ -26,17 +26,17 @@ import com.uxplima.uxmessentials.staff.domain.event.StaffModeExited;
  * that was never written back. The sequence is:
  *
  * <ol>
- *   <li>{@code loadoutRepository.load(uuid)} → {@code capture.restore(actor, loadout)} — put the real loadout
+ *   <li>{@code loadoutRepository.load(uuid)} → {@code capture.restore(actor, loadout)}, put the real loadout
  *       back, reporting whether it reached an online player;
- *   <li>on a confirmed restore: {@code loadoutRepository.delete(uuid)} — now drop the stored copy;
- *   <li>{@code store.clear(actor)} — clear the in-memory staff-mode marker (always, since the session is over);
- *   <li>{@code vanish.setVanished(actor, vanishedBefore)} — restore the pre-mode vanish state through the
+ *   <li>on a confirmed restore: {@code loadoutRepository.delete(uuid)}. Now drop the stored copy;
+ *   <li>{@code store.clear(actor)}. Clear the in-memory staff-mode marker (always, since the session is over);
+ *   <li>{@code vanish.setVanished(actor, vanishedBefore)}, restore the pre-mode vanish state through the
  *       presence seam (a player vanished before entering stays vanished; one who was visible is revealed);
- *   <li>{@code events.publish(StaffModeExited)} — announce the restored state.
+ *   <li>{@code events.publish(StaffModeExited)}: announce the restored state.
  * </ol>
  *
- * <p>When the restore did not reach the player (offline at restore), the row is <i>kept</i>, not deleted — the
- * item-loss-safe net — so {@code RecoverStaffLoadout} finishes the interrupted exit on the player's next join.
+ * <p>When the restore did not reach the player (offline at restore), the row is <i>kept</i>, not deleted, the
+ * item-loss-safe net, so {@code RecoverStaffLoadout} finishes the interrupted exit on the player's next join.
  * The in-memory marker is still cleared (the session has ended), which is exactly what arms that join-recovery
  * path: an orphaned row with no active marker.
  *

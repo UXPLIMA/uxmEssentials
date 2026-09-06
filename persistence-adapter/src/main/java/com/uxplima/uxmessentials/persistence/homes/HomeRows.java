@@ -23,7 +23,7 @@ import org.jooq.Record;
  * that map to {@link Optional} in the domain.
  *
  * <p>The owner name is not persisted (only the uuid is), so a {@link Home} rebuilt from a row carries the
- * owner uuid with the name the caller already holds — the repository passes the queried {@link PlayerRef}
+ * owner uuid with the name the caller already holds. The repository passes the queried {@link PlayerRef}
  * through rather than inventing a display name from the row.
  */
 final class HomeRows {

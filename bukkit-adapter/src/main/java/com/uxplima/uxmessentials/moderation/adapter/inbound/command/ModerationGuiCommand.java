@@ -17,10 +17,10 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /mod}: open the moderation management GUI — the active-punishments list an admin drills into to view a
+ * {@code /mod}: open the moderation management GUI. The active-punishments list an admin drills into to view a
  * punishment's detail, revoke it (confirm-gated), and inspect a target's history. A players-only command gated
  * by {@code uxmessentials.moderation.gui} (default op); it opens the same {@link ModerationGuiViews} entry the
- * {@code /uxmess gui} hub does. It issues no sanction itself — every punishment action routes through the
+ * {@code /uxmess gui} hub does. It issues no sanction itself. Every punishment action routes through the
  * existing moderation use cases the views call.
  */
 @NullMarked

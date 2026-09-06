@@ -41,7 +41,7 @@ class FeatureModuleRegistryDriftTest {
         // teleport execution to it, and economy before warps and kits because each may charge a cost through
         // the economy provider. playerstate is self-contained (transient in-memory snapshots, no DB, no
         // cross-context bridge) and lands after kits. messaging soft-couples to moderation (mute) and
-        // presence (vanish) — both gates degrade gracefully — so it carries no hard dependency edge. presence
+        // presence (vanish), both gates degrade gracefully, so it carries no hard dependency edge. presence
         // owns the vanish state messaging and teleport read through the canSee graph; that coupling is soft.
         // moderation provides the real mute/jail gates messaging and teleport hold placeholders for, a soft
         // couple too. itemworld is stateless and ACL-thin (no DB, no cross-context bridge) and lands after
@@ -139,7 +139,7 @@ class FeatureModuleRegistryDriftTest {
         assertThat(enabled).contains("teleport", "economy", "moderation");
 
         // Enabled, itemworld contributes its full ~40-verb surface: the group-B verbs owned here and the
-        // /repair /repairall /hat /more verbs playerstate deferred (§15.6) — registered here, never twice.
+        // /repair /repairall /hat /more verbs playerstate deferred (§15.6), registered here, never twice.
         Set<String> literals =
                 itemworld.commands().stream().map(CommandSpec::literal).collect(Collectors.toSet());
         assertThat(literals)
@@ -296,7 +296,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule playerwarps = registry.byId(ModuleId.of("playerwarps"))
                 .orElseThrow(() -> new AssertionError("playerwarps is not registered"));
 
-        // playerwarps is the 14th context — player-owned warps keyed (owner, name), delegating teleport
+        // playerwarps is the 14th context. Player-owned warps keyed (owner, name), delegating teleport
         // execution like warps. The later scoreboard context now lands last, so playerwarps must merely be
         // registered, not last.
         assertThat(registry.byId(ModuleId.of("playerwarps"))).isPresent();
@@ -329,7 +329,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule scoreboard = registry.byId(ModuleId.of("scoreboard"))
                 .orElseThrow(() -> new AssertionError("scoreboard is not registered"));
 
-        // scoreboard is the 15th context — a per-player sidebar on uxmlib-hud (the tablist header/footer is its own
+        // scoreboard is the 15th context, a per-player sidebar on uxmlib-hud (the tablist header/footer is its own
         // context now). The later tablist/vote contexts land after it, so scoreboard must merely be registered, not
         // last.
         assertThat(registry.byId(ModuleId.of("scoreboard"))).isPresent();
@@ -361,7 +361,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule tablist = registry.byId(ModuleId.of("tablist"))
                 .orElseThrow(() -> new AssertionError("tablist is not registered"));
 
-        // tablist is the 16th context — the per-player tab-list header/footer split out of scoreboard so the two
+        // tablist is the 16th context, the per-player tab-list header/footer split out of scoreboard so the two
         // enable, author, and refresh independently. It is registered next to scoreboard.
         assertThat(registry.byId(ModuleId.of("tablist"))).isPresent();
 
@@ -378,7 +378,7 @@ class FeatureModuleRegistryDriftTest {
         assertThat(on).contains("tablist", "teleport", "holograms");
         assertThat(on).doesNotContain("scoreboard");
 
-        // The tablist is always-on for every viewer when enabled — there is no per-player visibility toggle — so it
+        // The tablist is always-on for every viewer when enabled, there is no per-player visibility toggle, so it
         // publishes no command, and it persists nothing (the header/footer is config-authored), so it declares no
         // MigrationSet.
         assertThat(tablist.commands()).isEmpty();
@@ -391,7 +391,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule vote =
                 registry.byId(ModuleId.of("vote")).orElseThrow(() -> new AssertionError("vote is not registered"));
 
-        // vote is the 17th context — a Votifier-bridged vote-rewards and vote-party feature. The later
+        // vote is the 17th context: a Votifier-bridged vote-rewards and vote-party feature. The later
         // discordlink context now lands last, so vote must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("vote"))).isPresent();
 
@@ -422,7 +422,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule discordlink = registry.byId(ModuleId.of("discordlink"))
                 .orElseThrow(() -> new AssertionError("discordlink is not registered"));
 
-        // discordlink is the 18th context — Discord account linking — registered after the seventeen prior modules.
+        // discordlink is the 18th context, Discord account linking, registered after the seventeen prior modules.
         // The later nametags context now lands last, so discordlink must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("discordlink"))).isPresent();
 
@@ -455,7 +455,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule nametags = registry.byId(ModuleId.of("nametags"))
                 .orElseThrow(() -> new AssertionError("nametags is not registered"));
 
-        // nametags is the 19th context — a per-wearer above-head TextDisplay nametag on the Scheduler refresh timer.
+        // nametags is the 19th context, a per-wearer above-head TextDisplay nametag on the Scheduler refresh timer.
         // The later staff context now lands last, so nametags must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("nametags"))).isPresent();
 
@@ -472,7 +472,7 @@ class FeatureModuleRegistryDriftTest {
                 .collect(Collectors.toSet());
         assertThat(on).contains("nametags", "teleport", "holograms");
 
-        // The nametag is always-on for every wearer when enabled — there is no per-player visibility toggle — so it
+        // The nametag is always-on for every wearer when enabled, there is no per-player visibility toggle, so it
         // publishes no command, and it persists nothing (the formats are config-authored), so it declares no
         // MigrationSet.
         assertThat(nametags.commands()).isEmpty();
@@ -485,7 +485,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule staff =
                 registry.byId(ModuleId.of("staff")).orElseThrow(() -> new AssertionError("staff is not registered"));
 
-        // staff is the 20th context — a STAFF-MODE-ONLY toolkit (the /staffmode toggle + gadget hotbar + staff chat).
+        // staff is the 20th context, a STAFF-MODE-ONLY toolkit (the /staffmode toggle + gadget hotbar + staff chat).
         // The later npc context now lands last, so staff must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("staff"))).isPresent();
 
@@ -518,11 +518,11 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule npc =
                 registry.byId(ModuleId.of("npc")).orElseThrow(() -> new AssertionError("npc is not registered"));
 
-        // npc is the 21st context — server-wide fake-player NPCs behind /npc. The later custommenus context now lands
+        // npc is the 21st context, server-wide fake-player NPCs behind /npc. The later custommenus context now lands
         // last, so npc must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("npc"))).isPresent();
 
-        // It ships ENABLED but inert (a steady-state feature like holograms — nothing renders until an operator
+        // It ships ENABLED but inert (a steady-state feature like holograms. Nothing renders until an operator
         // creates an NPC): with no modules.conf override it is on, and disabling exactly npc removes only it while
         // every sibling stays on.
         Set<String> defaults = registry.enabledModules(new FixedConfig(Map.of())).stream()
@@ -548,13 +548,13 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule custommenus = registry.byId(ModuleId.of("custommenus"))
                 .orElseThrow(() -> new AssertionError("custommenus is not registered"));
 
-        // custommenus is the 22nd context — the operator surface over the menu engine (/menu). The later poses context
+        // custommenus is the 22nd context, the operator surface over the menu engine (/menu). The later poses context
         // now lands last, so custommenus must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("custommenus"))).isPresent();
 
-        // It ships ENABLED but inert (a steady-state feature — nothing opens until a player runs /menu open): with no
+        // It ships ENABLED but inert (a steady-state feature. Nothing opens until a player runs /menu open): with no
         // modules.conf override it is on, and disabling exactly custommenus removes only it while every sibling stays
-        // on. Crucially a disabled custommenus contributes no command and loads no menus — the four-way guard's
+        // on. Crucially a disabled custommenus contributes no command and loads no menus: the four-way guard's
         // "disabled means absent" property is exactly what makes the /menu surface vanish when it is off.
         Set<String> defaults = registry.enabledModules(new FixedConfig(Map.of())).stream()
                 .map(m -> m.id().value())
@@ -582,11 +582,11 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule poses =
                 registry.byId(ModuleId.of("poses")).orElseThrow(() -> new AssertionError("poses is not registered"));
 
-        // poses is the 23rd context — built-in GSit-parity sitting and posing. The later survival context now lands
+        // poses is the 23rd context: built-in GSit-parity sitting and posing. The later survival context now lands
         // last, so poses must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("poses"))).isPresent();
 
-        // It ships ENABLED (a steady-state feature — the common poses are on out of the box, player-sit is opt-in):
+        // It ships ENABLED (a steady-state feature. The common poses are on out of the box, player-sit is opt-in):
         // with no modules.conf override it is on, and disabling exactly poses removes only it while every sibling
         // stays on.
         Set<String> defaults = registry.enabledModules(new FixedConfig(Map.of())).stream()
@@ -612,7 +612,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule survival = registry.byId(ModuleId.of("survival"))
                 .orElseThrow(() -> new AssertionError("survival is not registered"));
 
-        // survival is the 24th context — opt-in gameplay mechanics (Phase 1: tree-feller + veinminer). The later
+        // survival is the 24th context: opt-in gameplay mechanics (Phase 1: tree-feller + veinminer). The later
         // ranks context now lands last, so survival must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("survival"))).isPresent();
 
@@ -641,7 +641,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule ranks =
                 registry.byId(ModuleId.of("ranks")).orElseThrow(() -> new AssertionError("ranks is not registered"));
 
-        // ranks is the 25th context — rankup/prestige/autorank progression with a DB-backed rank pointer. The later
+        // ranks is the 25th context: rankup/prestige/autorank progression with a DB-backed rank pointer. The later
         // trade context now lands last, so ranks must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("ranks"))).isPresent();
 
@@ -670,7 +670,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule commandControl = registry.byId(ModuleId.of("commandcontrol"))
                 .orElseThrow(() -> new AssertionError("commandcontrol is not registered"));
 
-        // commandcontrol is a new context — command whitelist/blacklist gating. It is registered before trade so trade
+        // commandcontrol is a new context: command whitelist/blacklist gating. It is registered before trade so trade
         // stays last, so it must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("commandcontrol"))).isPresent();
 
@@ -701,11 +701,11 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule trade =
                 registry.byId(ModuleId.of("trade")).orElseThrow(() -> new AssertionError("trade is not registered"));
 
-        // trade is the 26th context — secure player-to-player trading (/trade). The later villagers context now lands
+        // trade is the 26th context: secure player-to-player trading (/trade). The later villagers context now lands
         // last, so trade must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("trade"))).isPresent();
 
-        // It ships ENABLED (a steady-state feature — /trade is offered out of the box): with no modules.conf override
+        // It ships ENABLED (a steady-state feature. /trade is offered out of the box): with no modules.conf override
         // it is on, and disabling exactly trade removes only it while every sibling stays on.
         Set<String> defaults = registry.enabledModules(new FixedConfig(Map.of())).stream()
                 .map(m -> m.id().value())
@@ -730,7 +730,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule villagers = registry.byId(ModuleId.of("villagers"))
                 .orElseThrow(() -> new AssertionError("villagers is not registered"));
 
-        // villagers is a bounded context — villager trade management (Phase 1: infinite trading, restock timer,
+        // villagers is a bounded context. Villager trade management (Phase 1: infinite trading, restock timer,
         // instant restock, disable trades). The later invrollback context now lands last, so villagers must merely
         // be registered, not last.
         assertThat(registry.byId(ModuleId.of("villagers"))).isPresent();
@@ -760,7 +760,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule invrollback = registry.byId(ModuleId.of("invrollback"))
                 .orElseThrow(() -> new AssertionError("invrollback is not registered"));
 
-        // invrollback is a bounded context — AxInventoryRestore-parity inventory snapshots on death and logout. The
+        // invrollback is a bounded context: AxInventoryRestore-parity inventory snapshots on death and logout. The
         // later regions context now lands last, so invrollback must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("invrollback"))).isPresent();
 
@@ -790,7 +790,7 @@ class FeatureModuleRegistryDriftTest {
         FeatureModule regions = registry.byId(ModuleId.of("regions"))
                 .orElseThrow(() -> new AssertionError("regions is not registered"));
 
-        // regions is a bounded context — a GUI to manage WorldGuard regions behind a SOFT dependency. The later
+        // regions is a bounded context: a GUI to manage WorldGuard regions behind a SOFT dependency. The later
         // servertweaks context now lands last, so regions must merely be registered, not last.
         assertThat(registry.byId(ModuleId.of("regions"))).isPresent();
 
@@ -839,7 +839,7 @@ class FeatureModuleRegistryDriftTest {
         assertThat(off).contains("teleport", "holograms");
 
         // The tweaks are Bukkit-facing side effects (a brand plugin-message on join, a Log4j2 console filter)
-        // contributed through the adapter wiring, gated per tweak, not the declarative lists — so the module publishes
+        // contributed through the adapter wiring, gated per tweak, not the declarative lists, so the module publishes
         // no command here, and it persists nothing (each tweak is a live side effect), so it declares no MigrationSet.
         assertThat(serverTweaks.commands()).isEmpty();
         assertThat(serverTweaks.migrations()).isEmpty();
@@ -949,7 +949,7 @@ class FeatureModuleRegistryDriftTest {
     void missingSwitchDefaultsToEnabled() {
         ModuleRegistry registry = new ListModuleRegistry().register(new FakeModule("kits"));
 
-        // No key for modules.kits.enabled — the module defaults to on (operators opt out).
+        // No key for modules.kits.enabled: the module defaults to on (operators opt out).
         assertThat(idsOf(registry.enabledModules(new FixedConfig(Map.of())))).containsExactly("kits");
     }
 
@@ -961,7 +961,7 @@ class FeatureModuleRegistryDriftTest {
         return ids.stream().filter(id -> !id.equals(excluded)).collect(Collectors.toSet());
     }
 
-    /** A minimal {@link FeatureModule} that contributes nothing — enough to exercise the contract. */
+    /** A minimal {@link FeatureModule} that contributes nothing, enough to exercise the contract. */
     private static final class FakeModule implements FeatureModule {
         private final ModuleId id;
 

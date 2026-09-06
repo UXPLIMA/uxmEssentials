@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * collaborator reads the same use cases; the context's only adapter-side runtime state is the in-memory presence map
  * (cleared on stop) and the self-rescheduling sweep (stopped on disable).
  *
- * <p>Vanish is no longer a presence use case — it moved to the dedicated {@code vanish} context, the single vanish
+ * <p>Vanish is no longer a presence use case. It moved to the dedicated {@code vanish} context, the single vanish
  * authority. The presence settings panel toggles vanish through a handle onto that context instead (threaded in by
  * bootstrap), and presence's own readers see the vanish state through the store's overlay.
  *

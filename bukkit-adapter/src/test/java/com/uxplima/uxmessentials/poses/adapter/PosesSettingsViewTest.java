@@ -52,7 +52,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage of the poses settings/status panel — the window a bare {@code /poses} opens. It draws two
+ * MockBukkit coverage of the poses settings/status panel: the window a bare {@code /poses} opens. It draws two
  * buttons over the shared settings-panel runtime: the current-pose status (a live read of the {@link PoseSessions}
  * registry) and the player-sit opt-out (a click flips the PDC preference through the same {@link TogglePlayerSit}
  * the {@code /poses toggle} command uses). Mirrors {@code PresenceSettingsViewTest}: opening reflects the stored

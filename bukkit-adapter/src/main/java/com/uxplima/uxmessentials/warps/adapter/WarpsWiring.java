@@ -36,11 +36,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the warps context's adapters and use cases over the injected kernel ports, the persistence
  * DSL, and the teleport context's engine, and produces the Brigadier command list the plugin registers.
- * This is the one place the warps context is wired — nothing else news up its classes.
+ * This is the one place the warps context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a Caffeine read-cache decorator (write-through at the
- * delegate, invalidate in the cache). The teleporter delegates execution to the teleport context — warps
- * never re-implements movement — which is why the wiring receives the already-constructed
+ * delegate, invalidate in the cache). The teleporter delegates execution to the teleport context, warps
+ * never re-implements movement, which is why the wiring receives the already-constructed
  * {@link TeleportEngine}. The per-warp cost soft-couples to the economy context: the {@link WarpEconomy}
  * seam is injected as an {@link Optional}, currently {@link Optional#empty()} because economy lands in P3,
  * so a priced warp's cost is recorded but not charged until that bridge is wired.
@@ -59,7 +59,7 @@ public final class WarpsWiring {
      * Build the warps context, charging a recorded per-warp cost through {@code economy} when present. The
      * economy context lands before warps in the registry, so its {@link WarpEconomy} bridge is captured during
      * economy wiring and handed in here; when it is empty (economy disabled), a priced warp's cost is recorded
-     * but not charged — the soft coupling the warps context owns.
+     * but not charged: the soft coupling the warps context owns.
      *
      * <p>The {@code menus}/{@code menuBindings} pair is the data-driven menu engine: warps registers the sound
      * selector's list source, placeholders, and actions through the bindings and opens it through the façade. This
@@ -100,7 +100,7 @@ public final class WarpsWiring {
             }
         });
         // Warm the in-memory warp set once on enable so every later /warp resolve, gate, and tab-complete is
-        // served from memory — never a synchronous SQLite read on the command thread. This is the only load on
+        // served from memory: never a synchronous SQLite read on the command thread. This is the only load on
         // the single-server path; the cross-server bus listener drops the set on a peer's change and the next
         // read lazily reloads.
         cached.all();
@@ -219,7 +219,7 @@ public final class WarpsWiring {
         var commands = WarpCommands.all(services, kernel.messages(), () -> ListDisplayMode.from(ctx.config()));
         // The editor and its welcome / sound / particle / category sub-screens all render through the always-on menu
         // engine now, routed and torn down by the one shared menu listener, so the warps context registers no editor
-        // listener of its own — only the arrival-notification and warp-sign listeners remain.
+        // listener of its own: only the arrival-notification and warp-sign listeners remain.
         var listeners = List.<org.bukkit.event.Listener>of(
                 new com.uxplima.uxmessentials.warps.adapter.inbound.listener.WarpArrivalNotificationListener(
                         kernel.scheduler(), ctx.config(), teleportRegistry),

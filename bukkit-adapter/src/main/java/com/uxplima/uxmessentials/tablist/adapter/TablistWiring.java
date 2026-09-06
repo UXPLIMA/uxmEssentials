@@ -38,11 +38,11 @@ import org.jspecify.annotations.NullMarked;
  * listener and the self-rescheduling render timer on the {@code Scheduler} port. This is the one place the tablist
  * context is wired.
  *
- * <p>The tablist is always-on for every viewer when enabled — there is no per-player visibility toggle, so the context
+ * <p>The tablist is always-on for every viewer when enabled. There is no per-player visibility toggle, so the context
  * publishes no command. It persists nothing: the header/footer content is config-authored under
  * {@code modules/tablist/config.conf}. The renderer dogfoods uxmLib's {@link Tablist} for the header/footer and, for a
  * format that authors a custom-skin row, uxmLib's packet {@link TabListPackets} (a {@link ChannelResolver} →
- * {@link PacketSender} → {@link NmsTabListPackets} stack) — the one tab thing native Paper cannot do. Offline skin names
+ * {@link PacketSender} → {@link NmsTabListPackets} stack): the one tab thing native Paper cannot do. Offline skin names
  * are fetched off the tick thread and cached by the {@link TablistSkinResolver}. The render timer on the
  * {@code Scheduler} port is stopped and every active header/footer cleared on disable so a disable or reload tears
  * down cleanly.
@@ -135,7 +135,7 @@ public final class TablistWiring {
     /**
      * Everything the tablist module contributes once wired: the connection listener, the self-rescheduling render
      * timer, and the {@code running} flag the timer observes. The renderer is held so {@link #stop()} can clear every
-     * active header/footer. The command list is always empty — the tablist has no per-player toggle — but it is kept
+     * active header/footer. The command list is always empty, the tablist has no per-player toggle, but it is kept
      * to mirror the other contexts' {@code Wired} shape so the bootstrap wires every context the same way.
      *
      * @param commands the Brigadier command registrations to publish (always empty for tablist)

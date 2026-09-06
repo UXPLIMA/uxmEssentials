@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * {@code /setjail}: saves the staff member's position as a named jail. The store is keyed by name, so a save
- * is an upsert that always succeeds — both a new name and a redefinition publish {@link JailLocationDefined},
+ * is an upsert that always succeeds, both a new name and a redefinition publish {@link JailLocationDefined},
  * audit a {@code jail_location_set} line and confirm with {@code SETJAIL_SAVED}, and the name is normalised to
  * lowercase before it is stored.
  */

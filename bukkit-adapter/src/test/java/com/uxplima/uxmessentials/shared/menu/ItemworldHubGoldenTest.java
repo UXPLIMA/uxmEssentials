@@ -67,7 +67,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The itemworld utilities-hub golden test: the engine-rendered launcher must draw the exact panel the original
  * {@code ItemworldHubView} drew, and its buttons must run the same surfaces. With every permission granted the
  * panel draws the eight workstation buttons, the two time and two weather buttons, the two cleanup buttons, the
- * back arrow, and the glass backdrop in between — snapshotted as {@code (slot -> material, plain name)} and
+ * back arrow, and the glass backdrop in between, snapshotted as {@code (slot -> material, plain name)} and
  * asserted equal, slot for slot, to the baseline the old view produced (frozen here so the old class could be
  * deleted). Clicking the ender-chest button opens that workstation, clicking the night button sets the world time
  * through the same path {@code /night} uses, and clicking the rain button storms the world like {@code /weather};

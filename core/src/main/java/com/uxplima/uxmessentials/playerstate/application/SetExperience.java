@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /exp} (alias {@code /xp}) {@code get | set <amount> | give <amount> | take <amount> | reset [player]}:
- * read or change a player's experience. A live-only effect through the {@link PlayerEffects} port — the adapter
+ * read or change a player's experience. A live-only effect through the {@link PlayerEffects} port, the adapter
  * reads the current total, applies the {@link ExperienceChange} (clamped non-negative in the domain), and
  * reports the resulting level and point total back so this use case can confirm. A read-only {@code get}
  * reports without changing anything; a mutating form confirms the new total to the actor and, for a staff

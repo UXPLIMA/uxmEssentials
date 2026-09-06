@@ -46,10 +46,10 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Two gates run before any mutation. First {@link #enabled} consults the live {@code itemworld.conf} view:
  * a command is available only when its {@link SubFeatureGroup sub-feature group} is enabled and the command
- * itself is not per-command disabled (docs/10-feature-modules.md §15.10) — a disabled command answers with
+ * itself is not per-command disabled (docs/10-feature-modules.md §15.10). A disabled command answers with
  * {@link ItemworldMessageKey#COMMAND_DISABLED} and does nothing else. Then the held-item verbs resolve the
  * player's main hand through {@link #heldItem}, replying {@link ItemworldMessageKey#NO_ITEM_IN_HAND} on an
- * empty hand. Every reply is a {@link MessageKey} rendered in the viewer's locale — there are no inline
+ * empty hand. Every reply is a {@link MessageKey} rendered in the viewer's locale. There are no inline
  * player-facing literals.
  */
 @NullMarked
@@ -130,7 +130,7 @@ abstract class ItemworldCommandSupport {
      * {@code diamond_sword}, {@code sharpness}) must also be permitted under
      * {@code uxmessentials.itemworld.<cmd>.<type>}. The wildcard parent ({@code …spawnmob.*} / {@code …give.*} /
      * {@code …enchant.*}) and every per-type node default {@code true} in {@code paper-plugin.yml}, so a base-perm
-     * holder is unaffected until an operator negates a specific type — non-breaking, opt-out restriction. On a denied
+     * holder is unaffected until an operator negates a specific type, non-breaking, opt-out restriction. On a denied
      * type the sender is told {@link SharedMessageKey#COMMAND_NO_PERMISSION} and the caller must not proceed.
      *
      * @param command the command segment of the node ({@code spawnmob}, {@code give}, {@code enchant})
@@ -225,7 +225,7 @@ abstract class ItemworldCommandSupport {
     /**
      * An {@code attribute} string argument that completes against the attributes in the live registry. The value
      * still parses through {@link com.uxplima.uxmessentials.itemworld.domain.AttributeSpec} at execution, so a
-     * typed-but-unsuggested id keeps working — the registry only drives the type-ahead.
+     * typed-but-unsuggested id keeps working: the registry only drives the type-ahead.
      */
     static RequiredArgumentBuilder<CommandSourceStack, String> attributeArgument() {
         return Commands.argument("attribute", StringArgumentType.word())
@@ -245,7 +245,7 @@ abstract class ItemworldCommandSupport {
     /**
      * Build a suggestion provider over an enum's values: each value is offered by its lower-cased name,
      * prefix-filtered by the partial token. Used for the small Bukkit enums ({@link ItemFlag}, {@link TreeType})
-     * that are not registry {@link Keyed} types — the value set is fixed and read once per keystroke.
+     * that are not registry {@link Keyed} types: the value set is fixed and read once per keystroke.
      */
     private static SuggestionProvider<CommandSourceStack> enumNames(Enum<?>[] values) {
         return (ctx, builder) -> {
@@ -269,7 +269,7 @@ abstract class ItemworldCommandSupport {
     /**
      * An {@code enchant} string argument that completes against the enchantments in the live registry. The
      * value still parses through {@link com.uxplima.uxmessentials.itemworld.domain.EnchantSpec} at execution, so
-     * a typed-but-unsuggested id keeps working — the registry only drives the type-ahead.
+     * a typed-but-unsuggested id keeps working: the registry only drives the type-ahead.
      */
     static RequiredArgumentBuilder<CommandSourceStack, String> enchantArgument() {
         // Enchantments live in the data-driven RegistryAccess (the legacy Registry.ENCHANTMENT is deprecated), the
@@ -283,7 +283,7 @@ abstract class ItemworldCommandSupport {
      * Build a suggestion provider over a Bukkit registry: each entry passing {@code accept} is offered by its
      * key, prefix-filtered by the partial token. A {@code minecraft:} entry is offered by its bare path (the
      * form the commands default the namespace for); any other namespace keeps its full {@code namespace:path}.
-     * The registry is read each keystroke on the tick thread — a non-blocking in-memory lookup.
+     * The registry is read each keystroke on the tick thread: a non-blocking in-memory lookup.
      */
     private static <T extends Keyed> SuggestionProvider<CommandSourceStack> keyedSuggestions(
             Supplier<? extends Iterable<T>> registry, Predicate<? super T> accept) {

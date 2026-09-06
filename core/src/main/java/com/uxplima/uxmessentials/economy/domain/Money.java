@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * An exact amount paired with its {@link Currency}. Value object — equality by value, immutable — backed by
+ * An exact amount paired with its {@link Currency}. Value object (equality by value, immutable) backed by
  * a {@link BigDecimal} scaled to the currency's precision so currency arithmetic never picks up the binary
  * floating-point error a {@code double} would carry; rounding drift is a money bug, not a rounding nicety
  * (the economy GLOSSARY, invariant (b)).
@@ -36,7 +36,7 @@ public record Money(Currency currency, BigDecimal amount) {
         return new Money(currency, BigDecimal.valueOf(amount));
     }
 
-    /** The zero figure for {@code currency} — what an untouched balance projects to. */
+    /** The zero figure for {@code currency}: what an untouched balance projects to. */
     public static Money zero(Currency currency) {
         return new Money(currency, BigDecimal.ZERO);
     }
@@ -73,7 +73,7 @@ public record Money(Currency currency, BigDecimal amount) {
         return amount.signum() == 0;
     }
 
-    /** True when this amount is negative — used by the clamp and the {@code min-pay} validation. */
+    /** True when this amount is negative, used by the clamp and the {@code min-pay} validation. */
     public boolean isNegative() {
         return amount.signum() < 0;
     }

@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>A command runs on the player's region thread, where {@code Player.locale()} is a legal call. This
  * decorator captures that client locale once at dispatch, folds in any persisted {@code /lang} override,
- * and binds the result as a {@link ScopedValue} for the duration of the handler — so every synchronous
+ * and binds the result as a {@link ScopedValue} for the duration of the handler, so every synchronous
  * {@code messages.resolve(...)} the handler makes renders in the right language without threading a
  * {@code Locale} through any signature. Work the handler defers off-tick through the {@code Scheduler}
  * port re-binds the captured locale with {@link LocaleScope#runWith} (the {@code ScopedValue} does not
@@ -39,8 +39,8 @@ import org.jspecify.annotations.NullMarked;
  * place client-locale capture touches the Bukkit API.
  *
  * <p>It wraps a built Brigadier tree by rebuilding each node with the same requirement and a
- * scope-binding {@link Command}, so the binding applies uniformly to every executor in the command —
- * the root and every argument leaf — rather than each handler opening its own scope.
+ * scope-binding {@link Command}, so the binding applies uniformly to every executor in the command
+ * the root and every argument leaf: rather than each handler opening its own scope.
  *
  * <p>Being the one wrapper every published command passes through, this is also the last line of defence
  * against a handler bug. An unexpected {@link RuntimeException} from an executor would otherwise reach
@@ -127,7 +127,7 @@ public final class LocaleBinding {
             try {
                 result[0] = delegate.run(ctx);
             } catch (CommandSyntaxException control) {
-                syntax[0] = control; // Brigadier control flow — rethrown untouched below.
+                syntax[0] = control; // Brigadier control flow: rethrown untouched below.
             } catch (RuntimeException failure) {
                 bug[0] = failure;
                 feedback.send(player, SharedMessageKey.COMMAND_ERROR); // in scope: renders in the bound locale

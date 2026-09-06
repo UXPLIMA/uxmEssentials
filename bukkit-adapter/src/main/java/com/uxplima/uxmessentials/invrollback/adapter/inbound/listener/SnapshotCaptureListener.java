@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  * {@link PlayerQuitEvent} (when {@code capture.on-logout} is set) it reads the leaving player's inventory. Each
  * trigger reads the live inventory on the region tick thread, serializes it there through the
  * {@link InventorySnapshotCodec}, then hops the DB write off the tick thread through the injected
- * {@link Scheduler#async} port — so a capture never blocks a region thread and stays Folia-safe.
+ * {@link Scheduler#async} port, so a capture never blocks a region thread and stays Folia-safe.
  *
  * <p>The death handler runs at {@link EventPriority#MONITOR}: it only observes, it never alters the death, and by
  * that point the drop policy and death message are settled. The ender chest rides along when

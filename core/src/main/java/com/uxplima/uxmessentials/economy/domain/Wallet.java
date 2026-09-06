@@ -13,12 +13,12 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
- * The aggregate root over one player's balances — a {@link Money} <strong>per {@link Currency}</strong>,
+ * The aggregate root over one player's balances, a {@link Money} <strong>per {@link Currency}</strong>,
  * never one scalar (the economy GLOSSARY, {@code docs/11-economy-integration.md} §6.1). It owns the
  * invariants nothing else in the plugin enforces: a balance never drops below the currency's minimum (a
  * debit short of funds is rejected, not clamped), never rises above its maximum (a credit that would breach
  * it is rejected, not clamped), and currency arithmetic never crosses currencies. Every mutation is a pure
- * transition returning a new {@code Wallet} plus the {@link EconomyEvent} it raised — the aggregate never
+ * transition returning a new {@code Wallet} plus the {@link EconomyEvent} it raised, the aggregate never
  * reaches for a repository, a clock, or a provider; the application layer loads the wallet, applies a
  * transition, persists the result, and publishes the event.
  *
@@ -38,7 +38,7 @@ public final class Wallet {
         this.balances = balances;
     }
 
-    /** A wallet with no balances yet — every currency projects to {@code zero}. */
+    /** A wallet with no balances yet: every currency projects to {@code zero}. */
     public static Wallet empty(PlayerRef owner) {
         return new Wallet(Objects.requireNonNull(owner, "owner"), new LinkedHashMap<>());
     }
@@ -132,7 +132,7 @@ public final class Wallet {
     /**
      * The outcome of an applied mutation: the resulting wallet and the event it raised. The application
      * layer persists the new balance and publishes the event. A refused mutation never produces a
-     * {@code Change} — it returns {@code Result.err} carrying the {@link WalletRejected} as a value the
+     * {@code Change}. It returns {@code Result.err} carrying the {@link WalletRejected} as a value the
      * caller publishes itself, so a refusal is still observed exactly once.
      *
      * @param result the wallet after the mutation

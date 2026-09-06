@@ -48,8 +48,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The live {@link RecordWriter}: applies each mapped record to the target contexts' durable repositories,
  * honouring the conflict and balance policies (docs/12-migration §6). Every write is an idempotent upsert
- * keyed by stable identity — a home by {@code (owner, slot)}, a warp by {@code name}, a wallet balance by
- * {@code (uuid, currency)} — so a re-run never duplicates a record, and the wallet balance is always
+ * keyed by stable identity, a home by {@code (owner, slot)}, a warp by {@code name}, a wallet balance by
+ * {@code (uuid, currency)}, so a re-run never duplicates a record, and the wallet balance is always
  * <em>set</em>, never added, so a re-run can never double-credit. It writes through the same repository
  * contracts {@code /sethome}, {@code /setwarp}, and the economy ledger use, so an import can never create
  * a state a live command could not.
@@ -239,7 +239,7 @@ public final class RepositoryRecordWriter implements RecordWriter {
         }
         // Materialise the seen row so an offline target's FK-bearing ban write never breaks integrity; the
         // tempban is a keyed upsert (set, never append), so a re-run replaces the row rather than duplicating
-        // it — a permanent ban rides in as a far-future Active, exactly the row /ban writes (docs/12-migration §6).
+        // it: a permanent ban rides in as a far-future Active, exactly the row /ban writes (docs/12-migration §6).
         moderation.ensureUserExists(target, clock.instant());
         moderation.saveTempban(target, rec.ban());
         return existed ? RecordOutcome.OVERWRITTEN : RecordOutcome.WRITTEN;
@@ -257,7 +257,7 @@ public final class RepositoryRecordWriter implements RecordWriter {
 
     private RecordOutcome writeWarn(ImportRecord.WarnRecord rec) {
         PlayerRef target = rec.target();
-        // The warning history is append-only — a single row cannot be "overwritten" — so idempotence is by
+        // The warning history is append-only, a single row cannot be "overwritten", so idempotence is by
         // content under every policy: a re-run that already holds an equivalent warning (same issuer, reason
         // and issue instant) skips rather than appending a duplicate (docs/12-migration §6).
         if (hasEquivalentWarn(target, rec.warn())) {

@@ -20,10 +20,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /getpos [player]} (aliases {@code /coords}, {@code /whereami}, {@code uxmessentials.getpos.use}): show
- * a player's world, block coordinates, and look direction. Read-only — the {@code ShowPosition} use case reads
+ * a player's world, block coordinates, and look direction. Read-only. The {@code ShowPosition} use case reads
  * through the {@link com.uxplima.uxmessentials.playerstate.application.port.PlayerInfo} port and renders a
  * click-to-copy line. The target is a plain online-player name (never an {@code @a}/{@code @p}/{@code @s}
- * selector — showing one player's position is a single-target read where a fan-out is nonsensical); the
+ * selector. Showing one player's position is a single-target read where a fan-out is nonsensical); the
  * {@code .others} target is gated by the shared {@code uxmessentials.getpos.others} (or the cross-cutting {@code uxmessentials.playerstate.others}) node.
  */
 @NullMarked

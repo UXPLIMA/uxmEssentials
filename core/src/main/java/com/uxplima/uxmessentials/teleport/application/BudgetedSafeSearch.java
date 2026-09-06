@@ -18,12 +18,12 @@ import com.uxplima.uxmessentials.teleport.domain.SearchBudget;
  * {@link AsyncSafeLocationFinder#find} (sample a point, probe its chunk off-thread, judge it); a miss reschedules
  * the next attempt a few ticks later through the injected {@link Scheduler} rather than looping in place, so a
  * long search is sliced across ticks and never fires every candidate at once or monopolises an async worker. The
- * chain stops the instant the {@link SearchBudget} runs out of any of its ceilings — attempts, chunk loads, or
+ * chain stops the instant the {@link SearchBudget} runs out of any of its ceilings. Attempts, chunk loads, or
  * wall-clock time.
  *
  * <p>This replaces the old refill loop's blocking {@code finder.find(area).get(1500ms)} per candidate: nothing
  * here calls {@code get()}/{@code join()}. The public {@link #search} returns a fresh {@link CompletableFuture}
- * that the chain completes — with the accepted location on a hit, or {@link Optional#empty()} on exhaustion —
+ * that the chain completes (with the accepted location on a hit, or {@link Optional#empty()} on exhaustion)
  * so a caller composes onto it instead of parking a worker for the whole search.
  *
  * <p>Termination and slicing are the point: {@code maxAttempts} bounds probes, {@code maxChunkLoads} bounds the
@@ -63,8 +63,8 @@ public final class BudgetedSafeSearch {
             SafeSearchArea area, SearchState state, CompletableFuture<Optional<RtpSafeLocation>> result) {
         state.recordAttempt();
         // The finder never completes exceptionally (the ChunkAccess port always completes, and the pure policy
-        // never throws), so thenAccept always runs with the non-null outcome — a present location on a hit, an
-        // empty one on a miss — and the result future is never orphaned. The budget bounds the miss chain.
+        // never throws), so thenAccept always runs with the non-null outcome, a present location on a hit, an
+        // empty one on a miss, and the result future is never orphaned. The budget bounds the miss chain.
         var ignored = finder.find(area).thenAccept(found -> onProbed(area, state, result, found));
     }
 
@@ -85,7 +85,7 @@ public final class BudgetedSafeSearch {
     /**
      * The running counter of one search. Ownership: <b>single-search-confined</b>. It is created per
      * {@link #search} call and read/written only inside that call's future chain, where each {@link #probeOnce}
-     * strictly happens-after the previous one (through the finder's future and the scheduler hop) — never
+     * strictly happens-after the previous one (through the finder's future and the scheduler hop), never
      * concurrently. The counter is an {@link AtomicInteger} because the chain hands off between the
      * probe-completion thread and the retry thread; that pins visibility across the handoff.
      */

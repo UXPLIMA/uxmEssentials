@@ -5,15 +5,15 @@ import java.time.Duration;
 /**
  * A read-only roll-up of one player's tracked playtime, split into active (non-AFK) and AFK seconds across four
  * windows: today, the last seven days, the last thirty days, and all time. The repository computes each window as
- * a range {@code SUM} over the per-day rows, so this carries no row detail — only the totals the {@code /playtime}
+ * a range {@code SUM} over the per-day rows, so this carries no row detail. Only the totals the {@code /playtime}
  * breakdown renders.
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>immutable value</b>. A snapshot built once per query from a consistent set of {@code SUM}s; safe
  * to hand across threads. The durable source of truth is the database (the per-day ledger), never this object.
  *
- * <p>Every field is a non-negative {@link Duration}. A player with no tracked rows yields {@link #empty()} — all
- * zero — which the command still renders (the breakdown of a never-sampled player reads as a clean zero rather
+ * <p>Every field is a non-negative {@link Duration}. A player with no tracked rows yields {@link #empty()}, all
+ * zero, which the command still renders (the breakdown of a never-sampled player reads as a clean zero rather
  * than no answer at all).
  *
  * @param todayActive active (non-AFK) time accrued on the server's current calendar day
@@ -73,7 +73,7 @@ public record PlaytimeSummary(
                 Duration.ofSeconds(totalAfk));
     }
 
-    /** All-time active + AFK combined — the closest DB-backed analogue to the vanilla lifetime play-one-minute stat. */
+    /** All-time active + AFK combined: the closest DB-backed analogue to the vanilla lifetime play-one-minute stat. */
     public Duration totalCombined() {
         return totalActive.plus(totalAfk);
     }

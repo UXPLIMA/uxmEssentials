@@ -55,16 +55,16 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The transaction-history golden test: the engine-rendered read-only history list must draw the exact content grid
  * and close button the original {@code TransactionsHistoryView} drew. The store holds two rows (a CREDIT and an admin
- * mutation), so the list draws a GREEN_WOOL and a GOLD_BLOCK icon (content slots 0 and 1 — the kind material the
+ * mutation), so the list draws a GREEN_WOOL and a GOLD_BLOCK icon (content slots 0 and 1, the kind material the
  * deleted view's switch resolved, the type surfacing through the {@code history_type_key} the test catalog echoes
  * back) and the BARRIER close at slot 49.
  *
  * <p>The original view set its prev/next arrows and then drew its bottom-row glass fillers <em>over</em> the same
- * 48/50 slots, so those arrows never actually showed — the visible bottom row was the close button and glass. The
+ * 48/50 slots, so those arrows never actually showed: the visible bottom row was the close button and glass. The
  * snapshot therefore compares the content grid and the close slot, skipping filler glass and the nav slots, and
  * asserts the engine draws that identical grid; a separate assertion confirms the migrated spec restores working
  * prev/next arrows the original silently buried, the one deliberate improvement of the move. A click on the first
- * row through the engine's own {@link MenuListener} proves the migrated path is inert — a ledger row is immutable.
+ * row through the engine's own {@link MenuListener} proves the migrated path is inert: a ledger row is immutable.
  */
 class TransactionsHistoryListGoldenTest {
 
@@ -136,7 +136,7 @@ class TransactionsHistoryListGoldenTest {
 
     /**
      * The slot -> (material, plain name) map the deleted {@code TransactionsHistoryView} showed for this fixture (a
-     * CREDIT row then an admin row), restricted to the content grid and close button — the slots the original
+     * CREDIT row then an admin row), restricted to the content grid and close button. The slots the original
      * actually displayed. A GREEN_WOOL and a GOLD_BLOCK icon (content slots 0 and 1, the type surfacing through the
      * {@code history_type_key} token) and the BARRIER close at slot 49.
      */
@@ -180,7 +180,7 @@ class TransactionsHistoryListGoldenTest {
     }
 
     /**
-     * The slot -> (material, plain name) map for the content grid and the close slot only — the slots the original
+     * The slot -> (material, plain name) map for the content grid and the close slot only. The slots the original
      * view actually displayed. Filler glass and the nav slots (which the original buried under glass) are skipped, so
      * the comparison is over the cells both paths agree on.
      */
@@ -211,7 +211,7 @@ class TransactionsHistoryListGoldenTest {
     /**
      * Surfaces the entry name's {@code history_type_key} so a row's kind line appears; else the bare key. The engine
      * resolves a {@code @key} line through a lambda {@link MessageKey} carrying only the key string. The name spec is
-     * {@code @%history_type_key%}: the engine substitutes the placeholder to the kind key, then looks that key up —
+     * {@code @%history_type_key%}: the engine substitutes the placeholder to the kind key, then looks that key up
      * so echoing the key back here makes the rendered name the kind key, which the baseline asserts.
      */
     private static final class KeyMessages implements Messages {

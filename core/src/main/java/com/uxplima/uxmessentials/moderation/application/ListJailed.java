@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.application.port.PlayerLookup;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /jailedplayers}: review the jails still in effect — the companion of {@code /banlist} and
+ * {@code /jailedplayers}: review the jails still in effect, the companion of {@code /banlist} and
  * {@code /mutelist}. A read-only, bounded query against the DB-backed sanction store rendering a header with
  * the count, one entry per jailed target (player, jail, issuer, remaining time), or an empty notice when no
  * one is jailed. The query is capped at {@link #PAGE_LIMIT} rows so the read stays within the main-thread

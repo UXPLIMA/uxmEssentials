@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The queued-credit path must never lose physical money. Since {@code getAndClearPending} atomically deletes the
- * rows, a credit that does not actually land — an unknown currency or a rejected credit (e.g. inventory full) —
+ * rows, a credit that does not actually land (an unknown currency or a rejected credit (e.g. inventory full))
  * has to be re-queued, and the player is told only when the credit succeeds.
  */
 class PendingTransactionListenerTest {

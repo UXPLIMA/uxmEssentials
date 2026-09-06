@@ -25,8 +25,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p><b>Ships enabled by default</b> but inert: the bundled config is a blacklist with empty lists and the plugin-hide
  * is off, so an enabled module gates and hides nothing until an operator names commands or turns the hide on. An
- * operator turns the whole feature off with {@code modules.commandcontrol.enabled = false}. It persists nothing — the
- * rule set and the hide policy are derived from config — so the module owns no Flyway location.
+ * operator turns the whole feature off with {@code modules.commandcontrol.enabled = false}. It persists nothing, the
+ * rule set and the hide policy are derived from config, so the module owns no Flyway location.
  *
  * <p>The gate and the visibility filter are Bukkit-facing listeners contributed through the adapter wiring (they need
  * the live player, the permission check, and the group lookup), so this module publishes no declarative command or

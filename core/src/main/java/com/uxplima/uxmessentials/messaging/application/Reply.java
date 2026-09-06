@@ -20,13 +20,13 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /reply <text>}: answer the player's last conversation without naming the partner. It resolves the
  * reply target from the {@link ConversationStore} and enforces the reply-TTL rule the {@link LastConversation}
- * aggregate owns — a stale conversation (none ever, or the window elapsed) declines with
+ * aggregate owns, a stale conversation (none ever, or the window elapsed) declines with
  * {@link MessagingError#NO_REPLY_TARGET} rather than misdirecting the reply to whoever the player last spoke
  * to long ago. A fresh-but-now-offline or vanished-and-unseeable partner resolves as offline, so a reply
  * never leaks that a vanished partner is still on the server.
  *
  * <p>Once the target is resolved and fresh, delivery and every downstream gate (mute, ignore, toggle,
- * socialspy, the both-sides reply capture, the event) are the {@link SendMessage} engine's job — this use
+ * socialspy, the both-sides reply capture, the event) are the {@link SendMessage} engine's job: this use
  * case only resolves the target and applies the TTL.
  */
 public final class Reply {
@@ -76,7 +76,7 @@ public final class Reply {
             return reject(sender);
         }
         if (!replyRouting.acceptsReplies(online.get())) {
-            // The partner turned reply routing off via /rtoggle — decline as if there were no fresh
+            // The partner turned reply routing off via /rtoggle. Decline as if there were no fresh
             // conversation, so the back-channel reply never leaks that they are on the server.
             return reject(sender);
         }

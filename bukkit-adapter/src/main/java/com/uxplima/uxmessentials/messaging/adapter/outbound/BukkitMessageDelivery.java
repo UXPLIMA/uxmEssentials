@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * hops to the viewer's region thread and silently no-ops when offline). The message body is passed as a
  * literal {@code {message}} placeholder; the catalog template decides the framing ("to X", "from X"), and
  * whether MiniMessage tags inside the body render is governed upstream by the {@code uxmessentials.msg.color}
- * node — this adapter passes the body through as the sender supplied it.
+ * node: this adapter passes the body through as the sender supplied it.
  */
 @NullMarked
 public final class BukkitMessageDelivery implements MessageDelivery {

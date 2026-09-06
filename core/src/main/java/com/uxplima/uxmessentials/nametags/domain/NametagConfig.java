@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.display.ConditionContext;
  *
  * <p>The codec builds this from the {@code formats { … }} config block, or, for back-compat with a single-nametag
  * shape, from one implicit {@code default} format wrapping the top-level {@code nametag { … }} content with an
- * always-true condition. An unauthored module yields {@link #empty()} — no formats, so {@link #select} returns
+ * always-true condition. An unauthored module yields {@link #empty()}. No formats, so {@link #select} returns
  * empty and the renderer carries no nametag.
  *
  * @param formats the authored formats in selection order (defensively copied)
@@ -34,7 +34,7 @@ public record NametagConfig(List<NametagFormat> formats) {
     /**
      * The format the wearer described by {@code ctx} should get: the highest-{@link NametagFormat#priority() priority}
      * format whose {@link NametagFormat#condition() condition} matches, or empty when none match. Ties on priority are
-     * broken by the order the formats are held in — the format earlier in the list wins — which the codec fixes to
+     * broken by the order the formats are held in, the format earlier in the list wins, which the codec fixes to
      * alphabetical name order, so an operator can rely on a deterministic, reload-stable tie-break among equal-priority
      * formats.
      */

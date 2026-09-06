@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * Pure coverage of the file-facing GUIPlus convert service: it turns a GUIPlus {@code .yml} (or a directory of them)
  * under the menus directory into {@code menus/<name>.conf}, tallies the outcome, and never crashes on a bad input. Uses
- * a temp directory rather than MockBukkit — the service is plain file I/O over the converter.
+ * a temp directory rather than MockBukkit: the service is plain file I/O over the converter.
  */
 class GuiPlusConvertServiceTest {
 

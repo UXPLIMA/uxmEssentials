@@ -5,10 +5,10 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The read-only {@code SELECT} statements the AxPlayerWarps source runs, held as constants so no table name is ever
  * concatenated from input. AxPlayerWarps uses a fixed {@code axplayerwarps_} table set (it has no configurable
- * prefix), so — unlike the LiteBans source — there is nothing to sanitise: these are compile-time literal statements.
+ * prefix), so, unlike the LiteBans source, there is nothing to sanitise: these are compile-time literal statements.
  * The warp query resolves the world / category / icon / currency foreign ids to their names with left joins so a warp
  * with an absent facet still returns a row; the owner id is resolved through the pre-loaded player map instead, since
- * the side tables key on that same id. Every value the reader binds afterwards travels as a bind parameter — these
+ * the side tables key on that same id. Every value the reader binds afterwards travels as a bind parameter: these
  * statements bind nothing, and never interpolate a value.
  */
 @NullMarked
@@ -36,7 +36,7 @@ public final class AxTables {
     /** Every whitelist entry. */
     public static final String SELECT_WHITELIST = "SELECT player_id, warp_id, date FROM axplayerwarps_whitelisted";
 
-    /** Every blacklist entry — mapped to a warp ban. */
+    /** Every blacklist entry, mapped to a warp ban. */
     public static final String SELECT_BLACKLIST = "SELECT player_id, warp_id, date FROM axplayerwarps_blacklisted";
 
     /** Every favourite entry. */

@@ -74,7 +74,7 @@ class CompositeClaimProviderTest {
     void banInAnyMemberDenies_underBothModes_evenWhenAnotherTrusts() {
         ClaimProvider anyLand = composite(CombineMode.ANY_LAND, claim().trust(PLAYER), claim().ban(PLAYER));
         assertThat(lookup(anyLand).isBanned(PLAYER)).isTrue();
-        // trust is still reported (any-land), so it is the ban that must win at the policy — proving both are seen.
+        // trust is still reported (any-land), so it is the ban that must win at the policy: proving both are seen.
         assertThat(lookup(anyLand).isTrusted(PLAYER)).isTrue();
 
         ClaimProvider allLand = composite(CombineMode.ALL_LAND, claim().trust(PLAYER), claim().ban(PLAYER));

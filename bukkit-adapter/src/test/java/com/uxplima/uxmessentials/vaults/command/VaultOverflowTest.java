@@ -48,7 +48,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * current size quota now allows (the quota shrank since the last save); when the owner opens it the
  * out-of-range items are handed back to them (added to their inventory, remainder dropped at their feet), the
  * {@code VAULT_OVERFLOW_RETURNED} notice is sent with the rescued count, the GUI exposes only the in-range
- * slots, and the next close persists only the in-range contents — so the overflow is gone from the vault and
+ * slots, and the next close persists only the in-range contents, so the overflow is gone from the vault and
  * safely with the player, with no item lost or duplicated. A vault whose contents fit the live size triggers no
  * rescue and no notice.
  */
@@ -80,8 +80,8 @@ class VaultOverflowTest {
     @Test
     void shrunkSizeReturnsTheOverflowNotifiesAndPersistsOnlyTheInRangeContents() {
         // A vault saved at six rows (54 slots) with a diamond in slot 0 (in range for a one-row vault) and an
-        // emerald in slot 20 (overflow for a one-row vault). It is opened at one row (9 slots) — the quota
-        // shrank — so slot 20 is out of range and must be rescued.
+        // emerald in slot 20 (overflow for a one-row vault). It is opened at one row (9 slots), the quota
+        // shrank, so slot 20 is out of range and must be rescued.
         ItemStack[] stored = new ItemStack[54];
         stored[0] = new ItemStack(Material.DIAMOND, 4);
         stored[20] = new ItemStack(Material.EMERALD, 7);
@@ -96,7 +96,7 @@ class VaultOverflowTest {
         assertThat(gui.getItem(0)).isNotNull();
         assertThat(gui.getItem(0).getType()).isEqualTo(Material.DIAMOND);
 
-        // The overflow emerald came back to the player — nothing lost or duplicated — and the notice fired.
+        // The overflow emerald came back to the player, nothing lost or duplicated, and the notice fired.
         assertThat(countOf(player.getInventory().getContents(), Material.EMERALD))
                 .isEqualTo(7);
         assertThat(countOf(player.getInventory().getContents(), Material.DIAMOND))
@@ -104,7 +104,7 @@ class VaultOverflowTest {
         assertThat(sink.keys).contains(VaultsMessageKey.VAULT_OVERFLOW_RETURNED);
         assertThat(sink.lastOverflowCount).isEqualTo("7");
 
-        // The rescue persisted the truncated contents immediately — before any close — so a crash here cannot
+        // The rescue persisted the truncated contents immediately, before any close, so a crash here cannot
         // leave the overflow in the DB row for the next open to rescue and hand out again. The saved snapshot is
         // already the in-range-only contents: the diamond stays, the emerald is gone.
         assertThat(repository.saves).isEqualTo(1);
@@ -112,7 +112,7 @@ class VaultOverflowTest {
         assertThat(savedOnOpen).isNotNull();
         assertThat(materialsIn(savedOnOpen)).contains(Material.DIAMOND).doesNotContain(Material.EMERALD);
 
-        // Closing the window persists again, idempotently — the live GUI by now equals the truncated contents.
+        // Closing the window persists again, idempotently: the live GUI by now equals the truncated contents.
         server.getPluginManager().callEvent(new InventoryCloseEvent(player.getOpenInventory()));
         ItemStack[] saved = repository.lastSaved;
         assertThat(saved).isNotNull();
@@ -121,7 +121,7 @@ class VaultOverflowTest {
 
     @Test
     void aNormalOpenWithNoOverflowDoesNotPersistUntilClose() {
-        // Contents that fit the live size: nothing to rescue, so the open path must not save — the existing
+        // Contents that fit the live size: nothing to rescue, so the open path must not save: the existing
         // close-only persistence is unchanged for the common case.
         ItemStack[] stored = new ItemStack[9];
         stored[0] = new ItemStack(Material.DIAMOND, 4);
@@ -160,8 +160,8 @@ class VaultOverflowTest {
         view.open(player, ref(), ref(), persisted);
 
         // No second rescue: the player still holds only the single emerald stack, and no notice fired again.
-        // (Re-opening auto-closes the first still-open window, which persists it once more — idempotent, same
-        // truncated contents — so the no-dupe guarantee is the unchanged emerald count and the absent notice.)
+        // (Re-opening auto-closes the first still-open window, which persists it once more, idempotent, same
+        // truncated contents, so the no-dupe guarantee is the unchanged emerald count and the absent notice.)
         assertThat(countOf(player.getInventory().getContents(), Material.EMERALD))
                 .isEqualTo(7);
         assertThat(sink.keys).doesNotContain(VaultsMessageKey.VAULT_OVERFLOW_RETURNED);
@@ -170,7 +170,7 @@ class VaultOverflowTest {
     @Test
     void aConfiguredOpenSoundPlaysWithoutThrowingAndAnUnknownNameIsTolerated() {
         // A resolved sound opens cleanly; an unknown name resolves to null at wire time, so the view simply
-        // plays nothing — neither path throws.
+        // plays nothing: neither path throws.
         org.bukkit.Sound resolved =
                 com.uxplima.uxmessentials.shared.adapter.outbound.BukkitRegistryKeys.resolveSound("block.chest.open");
         assertThat(resolved).isNotNull();

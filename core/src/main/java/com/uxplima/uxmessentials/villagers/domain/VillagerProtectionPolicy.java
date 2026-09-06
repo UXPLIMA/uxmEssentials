@@ -5,12 +5,12 @@ import java.util.Objects;
 /**
  * The villager-saver rule: given whether a villager carries the per-villager "protected" mark and the
  * {@link VillagerThreat} about to end it, decide whether that end must be cancelled. This is the whole of the
- * protection decision — the live {@code Villager}, the Bukkit event, and the PDC flag are adapter concerns; the
+ * protection decision, the live {@code Villager}, the Bukkit event, and the PDC flag are adapter concerns; the
  * domain owns only the boolean logic so it can be unit-tested without Bukkit.
  *
  * <p>A villager is <em>in scope</em> for protection when it is individually marked or when {@code all} is set (the
  * operator chose to shield every villager, not only flagged ones). A threat is cancelled only when the feature is
- * {@code enabled}, the villager is in scope, and the per-threat gate for that threat is on — so an operator can
+ * {@code enabled}, the villager is in scope, and the per-threat gate for that threat is on, so an operator can
  * enable protection yet still let, say, zombie conversions through by turning {@code fromZombies} off. With the
  * feature disabled, or the villager out of scope, nothing is ever cancelled.
  *

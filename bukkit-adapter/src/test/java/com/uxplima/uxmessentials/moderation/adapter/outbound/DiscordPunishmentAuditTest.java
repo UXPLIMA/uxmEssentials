@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The Discord-notification decorator over {@link ModerationAudit}: it always delegates the operator audit line
- * unchanged, and — only when {@code discord-notify} is on — additionally emits a name-based
+ * unchanged, and, only when {@code discord-notify} is on, additionally emits a name-based
  * {@code event=punishment_notify} line on the shared audit channel for each <em>successful</em> punishment. A
  * failed action or a disabled toggle emits no notice. The delegate is verified with Mockito; the notice sink is
  * a recording {@link Logger}.

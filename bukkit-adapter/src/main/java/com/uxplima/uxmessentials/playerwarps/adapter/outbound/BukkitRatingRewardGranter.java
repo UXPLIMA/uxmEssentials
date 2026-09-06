@@ -19,13 +19,13 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The Bukkit {@link RatingRewardGranter}: credits a reward's money to the subject's wallet through the player-warps
  * economy seam and dispatches its console command with {@code %player%} substituted for the subject's name. The
- * money credit reuses {@link PlayerWarpEconomy#refund} — a plain, guarded wallet credit — and the rate use case
+ * money credit reuses {@link PlayerWarpEconomy#refund} (a plain, guarded wallet credit) and the rate use case
  * that drives this granter already runs off the tick thread, so the DB write never touches the main thread. The
  * command must run as the console on the global region thread, so it hops there through the injected
  * {@link Scheduler} port (never a raw off-thread {@code dispatchCommand}).
  *
  * <p>The economy is optional: with no provider present a money reward is a logged no-op (a command-only reward
- * still fires), so the sub-group stays usable before economy is wired — the {@code WarpEconomy} soft-coupling
+ * still fires), so the sub-group stays usable before economy is wired. The {@code WarpEconomy} soft-coupling
  * precedent. An {@link RewardSpec#isEmpty() empty} spec grants nothing. Item rewards are out of scope by design.
  */
 @NullMarked

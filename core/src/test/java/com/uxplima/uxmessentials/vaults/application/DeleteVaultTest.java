@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@code DeleteVault} removes a vault row, freeing the owner's quota slot, and — on the own path — pays back
+ * {@code DeleteVault} removes a vault row, freeing the owner's quota slot, and, on the own path, pays back
  * the configured refund and notifies the owner. Deleting an index with no row returns
  * {@link VaultError#DELETE_UNKNOWN} and writes nothing. The admin path audits the override and, by design,
  * pays no refund. In-memory fakes capture the repository writes, the refund deposit, the audit line and the

@@ -24,13 +24,13 @@ import com.uxplima.uxmessentials.shared.application.port.Messages;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /help [page|query]} — the cross-cutting command listing (docs/13-i18n §7). It is owned by no
+ * {@code /help [page|query]}: the cross-cutting command listing (docs/13-i18n §7). It is owned by no
  * feature context, so it lives in the bootstrap command surface alongside {@code /uxmess} and {@code /lang}.
  * Open to everyone (permission {@code uxmessentials.help}, default true); per-line filtering uses each
  * command's own permission, so the page shows only the commands the sender can actually run.
  *
- * <p>The listing reads the same resolved command surface the plugin registers — the catalog-renamed,
- * module-filtered registrations the {@code LifecycleEvents.COMMANDS} handler publishes — supplied lazily so
+ * <p>The listing reads the same resolved command surface the plugin registers: the catalog-renamed,
+ * module-filtered registrations the {@code LifecycleEvents.COMMANDS} handler publishes, supplied lazily so
  * {@code /help} reflects every operator rename and disable. Each entry is a clickable, hoverable line in the
  * sender's locale carrying the effective name, its short description (or its aliases when it carries none),
  * paginated with clickable prev/next navigation.

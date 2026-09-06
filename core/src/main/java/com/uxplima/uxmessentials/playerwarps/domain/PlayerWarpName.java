@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * A player-warp's name in its canonical form: lowercase, made only of {@code [a-z0-9_-]}, and between
  * {@value #MIN_LENGTH} and {@value #MAX_LENGTH} characters. Normalising to lowercase keeps lookup
- * case-insensitive — {@code /setpwarp Base} and {@code /pwarp base} address the same warp.
+ * case-insensitive: {@code /setpwarp Base} and {@code /pwarp base} address the same warp.
  *
  * <p>This value object enforces only the <em>shape</em> of a name. Whether a name is already taken is not its
  * concern: name uniqueness is enforced at the persistence layer against the {@code player_warps} table. An

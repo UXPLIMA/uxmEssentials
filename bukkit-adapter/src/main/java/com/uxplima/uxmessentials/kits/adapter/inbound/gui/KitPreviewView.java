@@ -22,15 +22,15 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Opens {@code /kit show} as a read-only managed menu: the kit's stacks laid out in their definition-order slots
  * ({@link KitGuiLayout}), with the trailing slots padded by a gray-glass filler. The menu is sized to the
- * smallest whole number of rows that holds the kit (capped at a 54-slot double chest). It is read-only — every
+ * smallest whole number of rows that holds the kit (capped at a 54-slot double chest). It is read-only, every
  * click, drag, and hotbar swap is cancelled by {@link KitPreviewListener}, recognised by the menu's
- * {@link KitPreviewHolder} — so a player can inspect a kit's contents in their real slots without taking
+ * {@link KitPreviewHolder}, so a player can inspect a kit's contents in their real slots without taking
  * anything, and the menu holds no item the player could pull out.
  *
  * <p>{@link #open} touches the live player (it builds and opens an inventory in their screen), so the caller
  * schedules it on the viewer's entity thread through the kernel {@link Scheduler}. The title is a
  * {@link com.uxplima.uxmessentials.shared.application.message.MessageKey} rendered in the viewer's locale and
- * parsed into a {@code Component} — never an inline literal.
+ * parsed into a {@code Component}, never an inline literal.
  */
 @NullMarked
 public final class KitPreviewView {

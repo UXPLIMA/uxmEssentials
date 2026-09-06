@@ -6,8 +6,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * The narrow economy seam the homes context owns so a per-action cost can be charged <em>without</em> a
- * hard dependency on the economy context. This is the entire economy surface homes needs — a balance check
- * and a withdrawal — expressed in homes' own terms; the economy context supplies an adapter that bridges
+ * hard dependency on the economy context. This is the entire economy surface homes needs, a balance check
+ * and a withdrawal. Expressed in homes' own terms; the economy context supplies an adapter that bridges
  * this to its {@code EconomyProvider}/{@code Wallet}, and the homes context never imports an economy type.
  *
  * <p>Soft coupling: this port is injected as an {@link java.util.Optional} into {@code HomeCharge}. When

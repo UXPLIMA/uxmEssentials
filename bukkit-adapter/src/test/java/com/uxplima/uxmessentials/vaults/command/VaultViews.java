@@ -42,7 +42,7 @@ final class VaultViews {
                 null);
     }
 
-    /** A {@link VaultView} that blocks nothing — the default for tests not exercising the blacklist. */
+    /** A {@link VaultView} that blocks nothing: the default for tests not exercising the blacklist. */
     static VaultView view(KernelPorts kernel, SaveVault saveVault) {
         return view(kernel, saveVault, VaultItemPolicy.allowAll());
     }

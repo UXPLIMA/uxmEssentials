@@ -5,7 +5,7 @@
  * objects for the per-player time/weather verbs, and the sealed {@code PlayerStateEvent} family. The snapshot
  * is the value a {@code ConcurrentHashMap<UUID, PlayerStateSnapshot>} holds and the reconciler re-applies to
  * the live player; apply-once effects (heal, feed) leave no flag here and surface only as events. No Bukkit,
- * Paper, Kyori, or logging type appears in this package — the model is built from value objects and the
+ * Paper, Kyori, or logging type appears in this package. The model is built from value objects and the
  * cross-cutting kernel primitives ({@code PlayerRef}).
  */
 @org.jspecify.annotations.NullMarked

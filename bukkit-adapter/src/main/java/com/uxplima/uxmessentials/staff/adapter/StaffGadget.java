@@ -10,8 +10,8 @@ import org.jspecify.annotations.NullMarked;
  * material or display name (which an operator may freely re-skin in config).
  *
  * <p>STAFF-MODE ONLY: the gadgets orchestrate the existing presence, playerstate, moderation, and teleport
- * modules — VANISH toggles vanish, EXAMINE opens an online player's inventory, FREEZE toggles a target's
- * freeze through moderation, COMPASS teleports to a target, FOLLOW keeps the staff member on a target — and
+ * modules. VANISH toggles vanish, EXAMINE opens an online player's inventory, FREEZE toggles a target's
+ * freeze through moderation, COMPASS teleports to a target, FOLLOW keeps the staff member on a target, and
  * never carry a sanction beyond what moderation's freeze use case already audits.
  */
 @NullMarked

@@ -28,10 +28,10 @@ import org.jspecify.annotations.NullMarked;
  * entity).
  *
  * <p>A single {@link MiniMessage} instance handles parsing; production does not split trusted /
- * untrusted at this layer (docs/03-paper-api §4.1) — all templates are operator-owned catalog
+ * untrusted at this layer (docs/03-paper-api §4.1). All templates are operator-owned catalog
  * content.
  *
- * <p>Before MiniMessage parses, the source runs through a per-viewer pre-parse transform — the {@code
+ * <p>Before MiniMessage parses, the source runs through a per-viewer pre-parse transform, the {@code
  * preParse} factory. The default factory yields the identity transform; the PlaceholderAPI integration
  * supplies one that expands {@code %papi%} placeholders against the viewer, so operator-authored catalog
  * content (announcer lines, join messages) may embed third-party placeholders. The transform runs on the
@@ -46,7 +46,7 @@ public final class BukkitMessageSink implements MessageSink {
     private final String prefixTemplate;
     private final Function<UUID, UnaryOperator<String>> preParse;
 
-    /** The pre-parse transform factory that performs no expansion — the no-PlaceholderAPI default. */
+    /** The pre-parse transform factory that performs no expansion, the no-PlaceholderAPI default. */
     public static final Function<UUID, UnaryOperator<String>> NO_PRE_PARSE = uuid -> UnaryOperator.identity();
 
     public BukkitMessageSink(Scheduler scheduler, String prefixTemplate) {

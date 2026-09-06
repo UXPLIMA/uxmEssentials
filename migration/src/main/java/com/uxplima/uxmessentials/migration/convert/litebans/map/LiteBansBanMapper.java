@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Maps one {@code litebans_bans} row into the moderation domain — a UUID {@link ImportRecord.BanRecord} or,
+ * Maps one {@code litebans_bans} row into the moderation domain, a UUID {@link ImportRecord.BanRecord} or,
  * when the row is an IP ban, an {@link ImportRecord.IpBanRecord} (docs/12-migration §5.4). Pure ACL: no
  * JDBC, no Bukkit.
  *
@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link TempbanState.Active} whose expiry is the far-future sentinel span (mirroring how the live
  * {@code /ban} writes a permanent ban as a far-out tempban, {@code ImportRecord.BanRecord} javadoc); a temp
  * ban carries its real {@code until}. A wildcard IP ban (an address range) and a row whose target UUID is a
- * LiteBans sentinel name no real account, so both are dropped — the importer never invents a target.
+ * LiteBans sentinel name no real account, so both are dropped: the importer never invents a target.
  */
 @NullMarked
 public final class LiteBansBanMapper {
@@ -52,7 +52,7 @@ public final class LiteBansBanMapper {
     private Optional<ImportRecord> ipBan(LiteBansRow row) {
         if (row.ipbanWildcard() || row.ip().isEmpty()) {
             // A wildcard (range) ban has no single address to key on, and a row without an IP cannot be an
-            // address ban — drop both rather than guess.
+            // address ban: drop both rather than guess.
             return Optional.empty();
         }
         Instant issuedAt = Instant.ofEpochMilli(row.time());

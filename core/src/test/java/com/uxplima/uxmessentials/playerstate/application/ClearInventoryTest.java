@@ -36,8 +36,8 @@ import org.junit.jupiter.api.Test;
 /**
  * {@code /clearinventory} ({@code /ci}, {@code /clear}): a live-only verb that empties a player's inventory
  * through the {@link PlayerEffects} port without touching the persisted snapshot or publishing a domain event.
- * Pins the two confirmation shapes — a self clear that notifies only the actor, and a staff clear that confirms
- * to the actor with the subject's name and to the subject themselves — plus the opt-in two-step confirm a
+ * Pins the two confirmation shapes. A self clear that notifies only the actor, and a staff clear that confirms
+ * to the actor with the subject's name and to the subject themselves, plus the opt-in two-step confirm a
  * player turns on with {@code /clearinventoryconfirmtoggle}.
  */
 class ClearInventoryTest {

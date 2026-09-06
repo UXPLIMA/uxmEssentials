@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
 /**
  * The modelled reasons a raw {@code /pay} or {@code /eco} amount fails to parse into a usable {@link Money}.
  * Each value carries the {@link EconomyMessageKey} the command adapter renders, mirroring {@link EconomyError}
- * so the failure reason and its localized text never drift apart — a parser returns a
+ * so the failure reason and its localized text never drift apart. A parser returns a
  * {@code Result.err(AmountParseError.X)} and the caller renders {@code X.messageKey()} without re-deriving it.
  *
  * <p>{@link #NOT_A_NUMBER} covers anything that is not a recognisable figure (an unknown suffix, stray
@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
  */
 public enum AmountParseError {
 
-    /** The token is not a recognisable number — bad digits, an unknown suffix, or empty input. */
+    /** The token is not a recognisable number: bad digits, an unknown suffix, or empty input. */
     NOT_A_NUMBER(EconomyMessageKey.PAY_INVALID_AMOUNT),
 
     /** The figure parsed but is not strictly positive, which the amount commands require. */

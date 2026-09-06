@@ -18,9 +18,9 @@ import com.uxplima.uxmessentials.shared.application.command.CommandDefinition;
  * <p>The plural forms {@code homes}/{@code warps}/{@code kits} are shipped as aliases of
  * {@code home}/{@code warp}/{@code kit}: there are no standalone commands under those literals, so the
  * resolver is free to claim them and the plural a player reaches for opens the same command. The
- * time/weather literals ({@code day}/{@code night}/{@code rain}/…) and the speed commands stay reserved —
+ * time/weather literals ({@code day}/{@code night}/{@code rain}/…) and the speed commands stay reserved
  * they are real commands in their own right, so aliasing them would steal a name the resolver would then
- * have to drop. {@link #CONFLICT_TARGETS} backstops that intent — anything that lands on one of those
+ * have to drop. {@link #CONFLICT_TARGETS} backstops that intent. Anything that lands on one of those
  * tokens is filtered out rather than silently shipped.
  */
 public final class CommandAliasDefaults {

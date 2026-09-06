@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /air <seconds> [player]}: set a player's remaining air. A live-only effect through the
- * {@link PlayerEffects} port — the requested value is clamped to the player's maximum air in the domain
+ * {@link PlayerEffects} port. The requested value is clamped to the player's maximum air in the domain
  * ({@link AirAmount}), so the adapter only ever sets a value the server accepts. The actor is confirmed and,
  * for a staff target, the subject is told too.
  */

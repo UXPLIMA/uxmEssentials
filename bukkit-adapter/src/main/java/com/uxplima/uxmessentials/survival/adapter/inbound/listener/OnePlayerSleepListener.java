@@ -21,7 +21,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * One-player-sleep: skip the night once enough of a world's eligible players are asleep. On {@link PlayerBedEnterEvent}
  * (and again on {@link PlayerBedLeaveEvent}) it counts the world's sleeping and eligible players and, if the pure
- * {@link SleepThreshold} is met, advances that world to morning and clears the storm — the same effect a full vanilla
+ * {@link SleepThreshold} is met, advances that world to morning and clears the storm, the same effect a full vanilla
  * sleep has. Eligible means online in the world, not spectating, and not sleep-ignored, so an AFK player the presence
  * context has flagged {@link Player#setSleepingIgnored(boolean)} neither counts toward nor blocks the skip.
  *
@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <h2>Folia</h2>
  * The bed event fires on the bed's region thread, but the roster enumeration and the world-time change are global game
- * state, so the work hops to the global region through the {@link Scheduler} port — the one place that serialisation is
+ * state, so the work hops to the global region through the {@link Scheduler} port. The one place that serialisation is
  * correct, mirroring how {@code /time} advances a world.
  */
 @NullMarked

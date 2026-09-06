@@ -13,11 +13,11 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.junit.jupiter.api.Test;
 
 /**
- * The {@code Wallet} aggregate invariants — the canonical worked DDD example. The balance is held
+ * The {@code Wallet} aggregate invariants: the canonical worked DDD example. The balance is held
  * <em>per {@code Currency}</em>, a credit is additive and raises {@link WalletCredited}, a debit short of
  * funds is rejected (not clamped) and a debit raises {@link WalletDebited}, a credit past the currency's
  * maximum is rejected, currencies never mix, and crediting one currency leaves another untouched. The
- * aggregate is pure — no clock dependency beyond the supplied instant, no repository — so every rule is
+ * aggregate is pure (no clock dependency beyond the supplied instant, no repository) so every rule is
  * asserted here in isolation.
  */
 class WalletTest {

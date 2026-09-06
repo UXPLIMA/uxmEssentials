@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
  * The inbound side of account linking inside Discord: a JDA listener for the {@code /link <code>} slash command
  * that redeems a code through the host's {@link DiscordLinkConfirmation} seam and replies ephemerally with the
  * outcome. The reply is always private to the invoking user (a link code and the result are not channel chatter)
- * and the redemption runs on JDA's own event thread — off any server tick — so the host use case behind the
+ * and the redemption runs on JDA's own event thread, off any server tick, so the host use case behind the
  * seam is called off-tick exactly as it expects.
  *
  * <p>The reply text here is short Discord-side English, not a Minecraft player-locale catalog key: it is sent to
@@ -52,7 +52,7 @@ final class LinkSlashListener extends ListenerAdapter {
     /**
      * Redeem the code through the seam and pick the reply. The seam is contracted never to throw for a
      * modelled outcome, but an unexpected runtime fault (a transient store error) must still resolve the
-     * deferred interaction rather than leave it hung — so it is logged with context and a generic ephemeral
+     * deferred interaction rather than leave it hung, so it is logged with context and a generic ephemeral
      * reply is returned instead of being rethrown back onto JDA's edge.
      */
     private String redeem(String code, String discordId) {

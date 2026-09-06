@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.moderation.application.port;
 
 /**
  * Resolves the named jails an operator configures in {@code moderation.conf}. The jail location itself is not
- * stored on a sanction row — only the jail's name is — so a {@code /jail <player> <jail>} validates the name
+ * stored on a sanction row, only the jail's name is, so a {@code /jail <player> <jail>} validates the name
  * against this directory before writing the sanction, and the join/{@code /jail} listeners ask the
  * {@link Sanctions} port to teleport into the resolved location.
  *

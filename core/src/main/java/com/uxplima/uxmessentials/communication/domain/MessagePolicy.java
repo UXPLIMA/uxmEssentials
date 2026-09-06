@@ -5,16 +5,16 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The operator's policy for one connection channel — join, quit, or death. It pairs a {@link PolicyMode} with
+ * The operator's policy for one connection channel, join, quit, or death. It pairs a {@link PolicyMode} with
  * the list of templates to draw from and the {@link Ordering} that selects among them. The policy is pure: it
  * holds operator content (the templates) and the selection rule, and answers "which raw template, if any,
- * applies to this index?" — it neither substitutes placeholders nor parses MiniMessage, both of which happen
+ * applies to this index?". It neither substitutes placeholders nor parses MiniMessage, both of which happen
  * later in the rendering use case and the adapter.
  *
  * <p>Selection is index-driven so the caller owns the rotation state (an {@code AnnouncerCursor}-style counter
  * for sequential channels, or a freshly drawn random index): a {@link Ordering#SEQUENTIAL} policy wraps the
  * index modulo the template count, a {@link Ordering#RANDOM} policy trusts the caller's already-randomised
- * index. {@link PolicyMode#DISABLE} and {@link PolicyMode#DEFAULT} carry no template — {@link #select} returns
+ * index. {@link PolicyMode#DISABLE} and {@link PolicyMode#DEFAULT} carry no template: {@link #select} returns
  * empty for both, and the use case distinguishes them through {@link #mode()} to decide whether to also clear
  * the vanilla line.
  *

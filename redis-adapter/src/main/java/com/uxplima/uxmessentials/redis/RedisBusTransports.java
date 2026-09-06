@@ -13,7 +13,7 @@ import io.lettuce.core.StaticCredentialsProvider;
 
 /**
  * Factory for the cross-server bus's Redis transport, so the consuming {@code bukkit-adapter} wires a
- * {@link BusTransport} from configuration without ever naming a Lettuce type — Lettuce ({@link RedisClient},
+ * {@link BusTransport} from configuration without ever naming a Lettuce type, Lettuce ({@link RedisClient},
  * {@link RedisURI}) is bundled in this companion jar alone, kept off the host's compile classpath. The host
  * references this factory {@code compileOnly} and guards the call against the jar being absent at runtime.
  */
@@ -24,7 +24,7 @@ public final class RedisBusTransports {
     /**
      * Build the Redis pub/sub transport that carries the full bus frame bytes over a Redis channel with no proxy.
      *
-     * <p>{@code password} is empty to skip auth; {@code db} is the logical database index — Redis pub/sub is
+     * <p>{@code password} is empty to skip auth; {@code db} is the logical database index. Redis pub/sub is
      * global across logical databases, so it has no functional effect on this transport, but it is appended to
      * the connection URI for back-compat with the existing {@code network.redis.db} config so an operator's
      * settings still parse. {@code channel} is the Redis pub/sub channel both sides publish to and subscribe on.

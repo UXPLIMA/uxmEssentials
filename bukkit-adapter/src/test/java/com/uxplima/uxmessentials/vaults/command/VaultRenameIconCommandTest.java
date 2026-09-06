@@ -359,7 +359,7 @@ class VaultRenameIconCommandTest {
         }
     }
 
-    /** Grants exactly one node — used to prove the rename/icon branches are hidden without their node. */
+    /** Grants exactly one node: used to prove the rename/icon branches are hidden without their node. */
     private static final class NodePermissions implements Permissions {
         private final String granted;
 

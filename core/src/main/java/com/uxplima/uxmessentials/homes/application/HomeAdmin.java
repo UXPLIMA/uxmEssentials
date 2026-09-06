@@ -24,8 +24,8 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /homeadmin <player> [del|list|tp|set|clearall|info] [slot]}: full admin management over
  * another player's homes as an explicit verb, audit-logged by the adapter. It reuses the same
- * aggregate transitions the player-facing use cases do — there is no second code path for an admin
- * delete — so the slot/limit invariants hold identically. The acting staff member is the
+ * aggregate transitions the player-facing use cases do. There is no second code path for an admin
+ * delete, so the slot/limit invariants hold identically. The acting staff member is the
  * {@code actor} who receives feedback; the {@code target} is the owner whose set is read or changed.
  */
 public final class HomeAdmin {
@@ -100,7 +100,7 @@ public final class HomeAdmin {
     }
 
     /**
-     * Staff override — place or re-anchor {@code target}'s home in {@code slot} at {@code at},
+     * Staff override, place or re-anchor {@code target}'s home in {@code slot} at {@code at},
      * bypassing quota and economy. If the slot is already occupied it is re-anchored in place
      * (keeping the label and icon); otherwise the home is created with {@link HomeLimit#noLimit()}
      * so the count invariant is never a barrier. Slots ≥ {@value MAX_ADMIN_SLOTS} are still
@@ -114,10 +114,10 @@ public final class HomeAdmin {
         HomeSet set = repository.load(target);
         Result<HomeSet.Change, HomeError> outcome;
         if (set.find(slot).isPresent()) {
-            // Slot occupied — re-anchor, keeping label and icon.
+            // Slot occupied: re-anchor, keeping label and icon.
             outcome = set.relocate(slot, at, clock.instant());
         } else {
-            // Slot free — create, bypassing the owner's quota.
+            // Slot free: create, bypassing the owner's quota.
             outcome = set.createAt(slot, at, HomeLimit.noLimit(), MAX_ADMIN_SLOTS, clock.instant());
         }
         if (outcome.isErr()) {
@@ -133,7 +133,7 @@ public final class HomeAdmin {
 
     /**
      * Remove every home the target holds, reporting the count cleared to {@code actor}. Returns
-     * ok unconditionally — there is nothing to fail after the count is read.
+     * ok unconditionally: there is nothing to fail after the count is read.
      */
     public Result<Unit, HomeError> clearAll(PlayerRef actor, PlayerRef target) {
         Objects.requireNonNull(actor, "actor");
@@ -178,7 +178,7 @@ public final class HomeAdmin {
 
     private static Map<String, String> infoPlaceholders(PlayerRef target, Home home) {
         Position loc = home.location();
-        // Icon: pass the material name when present, empty string when absent — the catalog template
+        // Icon: pass the material name when present, empty string when absent, the catalog template
         // formats the {icon} placeholder and never contains a raw fallback literal.
         String iconValue = home.icon().map(i -> i.materialName()).orElse("");
         String labelValue = home.label().map(l -> l.value()).orElse("");

@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
  * One server-wide fake-player NPC: a {@link NpcName}, the {@link Position} it stands at, its visual
  * {@link NpcAppearance} (skin, entity type, equipment, glow, pose, scale, type-data) and its interactive
  * {@link NpcBehavior} (click command, look-at-player, action list), and the moment it was created. An NPC is a
- * value object — moving it, re-skinning it, or rebinding its click produces a new instance rather than mutating in
+ * value object. Moving it, re-skinning it, or rebinding its click produces a new instance rather than mutating in
  * place, so the aggregate is always in a valid state and a repository save records a fully-formed snapshot.
  *
  * <p>The visual and behavioural fields are grouped into the {@link NpcAppearance} and {@link NpcBehavior} value
@@ -227,7 +227,7 @@ public record Npc(
 
     /**
      * A copy with {@code slot} set to {@code itemToken} (or cleared when {@code itemToken} is {@code null} or
-     * blank), keeping everything else. The token is stored verbatim and uninterpreted — it is either a legacy
+     * blank), keeping everything else. The token is stored verbatim and uninterpreted. It is either a legacy
      * material name or a serialized full-item payload, and the adapter resolves it to a real item at render time,
      * so an unresolvable token simply renders no item in that slot rather than failing here.
      */
@@ -267,7 +267,7 @@ public record Npc(
     /**
      * A copy with the type-data {@code key} set to {@code value} (or cleared when {@code value} is {@code null} or
      * blank), keeping everything else. The key must be non-blank; both key and value are stored verbatim and never
-     * interpreted here — whether the key applies to this NPC's entity type, and how the value parses, is the render
+     * interpreted here. Whether the key applies to this NPC's entity type, and how the value parses, is the render
      * adapter's concern, so an unsupported or unparseable pair simply renders nothing rather than failing here.
      */
     public Npc withTypeData(String key, @Nullable String value) {

@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of the {@link VanishSilentContainerListener}: a vanished player's open of a lidded container is
- * cancelled — suppressing the noisy vanilla open — and re-shown as a detached silent copy, while a visible player, a
+ * cancelled, suppressing the noisy vanilla open, and re-shown as a detached silent copy, while a visible player, a
  * disabled toggle, or a container that does not animate is left to open normally.
  */
 class VanishSilentContainerListenerTest {

@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /kickall [reason]}: eject every connected player except the actor and any exempt holder. Emits one
- * {@code event=player_kickall} audit line with the affected count — never one line per kicked player — so a
+ * {@code event=player_kickall} audit line with the affected count, never one line per kicked player, so a
  * mass disconnect is one greppable record. Returns the number of players kicked.
  */
 public final class KickAll {

@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * Outbound port for joint shared bank accounts persistence.
  *
- * <p>The two money-moving methods — {@link #deposit} and {@link #withdraw} — are <strong>atomic</strong>: each
+ * <p>The two money-moving methods, {@link #deposit} and {@link #withdraw}, are <strong>atomic</strong>: each
  * performs the player's wallet leg (a guarded debit/credit on the native ledger) and the bank-balance change in
  * one transaction, committing together or not at all. A deposit whose guarded wallet debit changes no rows, a
  * withdraw whose guarded bank-balance update changes no rows, or a move against a bank that was deleted
@@ -41,8 +41,8 @@ public interface BankRepository {
 
     /**
      * Atomically add {@code interest} to {@code bankId}'s balance with a single {@code UPDATE … SET balance =
-     * balance + ?} (so a concurrent deposit/withdraw can never be clobbered). This is a system credit — interest
-     * is minted into the bank, no member is debited — applied only when the bank's currency matches.
+     * balance + ?} (so a concurrent deposit/withdraw can never be clobbered). This is a system credit, interest
+     * is minted into the bank, no member is debited: applied only when the bank's currency matches.
      */
     void creditBank(String bankId, Money interest);
 

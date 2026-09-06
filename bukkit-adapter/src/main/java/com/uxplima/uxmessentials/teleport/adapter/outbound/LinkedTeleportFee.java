@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * currency lazily on each call. The economy module is enabled after teleport, so at teleport-wire time the
  * provider and currency are not yet available; the composition root captures them onto its cross-context
  * links and hands their suppliers here. While economy is disabled (the supplier stays null) every request is
- * free — {@link #canAfford} is always {@code true} and {@link #charge} does nothing — so the teleport context
+ * free ({@link #canAfford} is always {@code true} and {@link #charge} does nothing) so the teleport context
  * never branches on economy presence and the wiring stays order-independent.
  *
  * <p>{@code canAfford} is a plain balance read taken on the command thread before the search. {@code charge}
@@ -60,7 +60,7 @@ public final class LinkedTeleportFee implements TeleportFee {
         EconomyProvider live = provider.get();
         Currency unit = currency.get();
         if (live == null || unit == null) {
-            return true; // economy disabled — the cost is free
+            return true; // economy disabled. The cost is free
         }
         return !live.balance(who, unit).isLessThan(Money.of(unit, amount));
     }
@@ -72,7 +72,7 @@ public final class LinkedTeleportFee implements TeleportFee {
         EconomyProvider live = provider.get();
         Currency unit = currency.get();
         if (live == null || unit == null) {
-            return; // economy disabled — nothing to withdraw
+            return; // economy disabled: nothing to withdraw
         }
         scheduler.async(() -> debit(live, unit, who, amount));
     }

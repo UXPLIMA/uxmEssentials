@@ -100,11 +100,11 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the player-warps context's adapters and use cases over the injected kernel ports, the persistence
  * DSL, and the teleport context's engine, and produces the Brigadier command list the plugin registers. This
- * is the one place the player-warps context is wired — nothing else news up its classes.
+ * is the one place the player-warps context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a Caffeine read-cache decorator keyed by owner (write-through
- * at the delegate, invalidate in the cache). The teleporter delegates execution to the teleport context —
- * player-warps never re-implements movement — which is why the wiring receives the already-constructed
+ * at the delegate, invalidate in the cache). The teleporter delegates execution to the teleport context
+ * player-warps never re-implements movement, which is why the wiring receives the already-constructed
  * {@link TeleportEngine}. The per-owner count limit resolves through {@link PlayerWarpQuota} over the shared
  * {@code Permissions} reducer with the module's {@code default-limit} config value as the fallback.
  */
@@ -181,7 +181,7 @@ public final class PlayerwarpsWiring {
         // UsePlayerWarp is built once so the /pwarp command, the browse menu, and the shared warp editor's "go to"
         // button all teleport through the same path; the go-to handle the warps editor reads is bound to it here.
         // The ordered access gate reads the ban/member/whitelist/password stores and rate-limits password attempts
-        // through the shared Cooldowns port. The economy seam is the jOOQ bridge over the resolved provider — a
+        // through the shared Cooldowns port. The economy seam is the jOOQ bridge over the resolved provider, a
         // priced warp charges the visitor and banks the owner's cut through it; when economy is disabled it stays
         // empty and a priced warp teleports for free (the WarpEconomy soft-coupling precedent).
         Optional<PlayerWarpEconomy> economy =
@@ -198,7 +198,7 @@ public final class PlayerwarpsWiring {
         // and the edit verbs' set/clear-password writes, so it is built once here and shared with both.
         PlayerWarpPasswordStore passwordStore = PlayerWarpRepositories.passwordStore(persistence);
         // The cross-server sub-group: when cross-server.enabled is on, a warp tagged for another backend is routed
-        // across the proxy instead of hopped locally — the gate charges here, records the pending row, connects the
+        // across the proxy instead of hopped locally. The gate charges here, records the pending row, connects the
         // player, and the target backend completes the hop on join (or refunds). Off, both seams are empty and the
         // gate fails a remote warp closed (unavailable + refund) rather than a broken local hop. localServerId is
         // this backend's network.server-id, the same source the P3 server-id claim used.
@@ -242,12 +242,12 @@ public final class PlayerwarpsWiring {
         // The rate verb tallies the per-vote star rows and writes the Bayesian rollup back through the repository;
         // the favourite verb toggles the star store and recomputes favourite_count. Both are any-viewer writes, so
         // they go through the same broadcasting repository as every other write. The confidence C is this module's
-        // own tunable — higher pulls a warp's score harder toward the global mean, so few votes cannot top the sort.
+        // own tunable: higher pulls a warp's score harder toward the global mean, so few votes cannot top the sort.
         WarpRatingStore ratingStore = PlayerWarpRepositories.ratingStore(persistence);
         WarpFavouriteStore favouriteStore = PlayerWarpRepositories.favouriteStore(persistence, Clock.systemUTC());
         // The rating-reward sub-group: when ratings.rewards is on, a rating grants a deduped reward to the rater
         // (once per warp) and the owner (once per unique rater). Off, the bundle is empty and nothing is granted or
-        // recorded — a disabled sub-group instantiates no granter and writes no reward row.
+        // recorded: a disabled sub-group instantiates no granter and writes no reward row.
         Optional<RatingRewards> ratingRewards = ratingRewards(ctx, kernel, persistence, economy);
         RatePlayerWarp ratePlayerWarp = new RatePlayerWarp(
                 repository,
@@ -258,14 +258,14 @@ public final class PlayerwarpsWiring {
                 ratingRewards);
         FavouritePlayerWarp favouritePlayerWarp = new FavouritePlayerWarp(repository, favouriteStore, notifier);
         // The role-gated people/money verbs (T6b-2) all gate through the shared WarpAuthorization and reuse the
-        // member/whitelist/ban stores and the economy seam already built above — no new persistence, just use cases.
+        // member/whitelist/ban stores and the economy seam already built above: no new persistence, just use cases.
         ManageMembers manageMembers =
                 new ManageMembers(repository, warpAuthorization, memberStore, notifier, Clock.systemUTC());
         ManageWhitelist manageWhitelist = new ManageWhitelist(repository, warpAuthorization, whitelistStore, notifier);
         ManageBans manageBans = new ManageBans(repository, warpAuthorization, banStore, notifier, Clock.systemUTC());
         WithdrawEarnings withdrawEarnings = new WithdrawEarnings(repository, warpAuthorization, notifier, economy);
         // The single-warp edit verbs and the ownership transfer gate through the same shared WarpAuthorization and
-        // reuse the repository, notifier, and password store built above — no new persistence, just use cases.
+        // reuse the repository, notifier, and password store built above: no new persistence, just use cases.
         EditPlayerWarp editPlayerWarp =
                 new EditPlayerWarp(repository, warpAuthorization, notifier, passwordStore, Clock.systemUTC());
         TransferPlayerWarp transferPlayerWarp =
@@ -295,7 +295,7 @@ public final class PlayerwarpsWiring {
         // opening it is one bounded page query. A tile's left click opens the per-warp detail panel; a right click is
         // the quick-teleport shortcut through the same UsePlayerWarp gate the command drives. The browse and the view
         // open each other (a tile opens the view, the view's back button reopens the browse), so a one-slot holder
-        // breaks the construction cycle — the browse is built first with a deferred view opener, the view second.
+        // breaks the construction cycle: the browse is built first with a deferred view opener, the view second.
         PlayerWarpViewMenu[] viewHolder = new PlayerWarpViewMenu[1];
         PlayerWarpBrowseMenu browseMenu = new PlayerWarpBrowseMenu(
                 menus,
@@ -306,11 +306,11 @@ public final class PlayerwarpsWiring {
                 (viewer, name) -> viewHolder[0].open(viewer, name),
                 sponsorConfig);
         // The browse tile opens the view, the view opens the manage panel, and the manage panel's back button reopens
-        // the view — a three-way construction cycle, so a one-slot holder breaks it: the manage menu is built after the
+        // the view, a three-way construction cycle, so a one-slot holder breaks it: the manage menu is built after the
         // view, and the view's manage-open runs through this holder filled a step later.
         PlayerWarpManageMenu[] manageHolder = new PlayerWarpManageMenu[1];
         // The per-warp detail panel (pwarp-view) and the five-star rating menu (pwarp-rate) behind it. It resolves the
-        // clicked warp off the tick thread — a bounded findByName plus the viewer's favourite and membership flags —
+        // clicked warp off the tick thread (a bounded findByName plus the viewer's favourite and membership flags)
         // and
         // routes its buttons through the same UsePlayerWarp / FavouritePlayerWarp / RatePlayerWarp use cases.
         PlayerWarpViewMenu viewMenu = new PlayerWarpViewMenu(
@@ -331,7 +331,7 @@ public final class PlayerwarpsWiring {
         // open. The manage panel opens them and their back button reopens it, so a one-slot holder breaks that cycle:
         // the people menu is built after the manage panel and reads it back through this holder.
         PlayerWarpPeopleMenu[] peopleHolder = new PlayerWarpPeopleMenu[1];
-        // The manage panel's icon button opens the pwarp-icon selector, whose pick reopens the manage panel — another
+        // The manage panel's icon button opens the pwarp-icon selector, whose pick reopens the manage panel, another
         // one-slot holder breaks that cycle: the icon menu is built after the manage panel and reads it back here.
         PlayerWarpIconMenu[] iconHolder = new PlayerWarpIconMenu[1];
         // The capability-gated management panel (pwarp-manage) the view's manage button opens: it resolves the warp and
@@ -432,7 +432,7 @@ public final class PlayerwarpsWiring {
                 categoriesMenu);
         // The rent sub-group: a config-gated, off-tick, batched sweep that charges due warps (bank-first, then the
         // owner's wallet), suspends then archives the unpaid, and mails owners a heads-up before their term lapses.
-        // Disabled, or with no economy to charge against, it is null and nothing is scheduled — a disabled sub-group
+        // Disabled, or with no economy to charge against, it is null and nothing is scheduled: a disabled sub-group
         // schedules no task and charges nothing.
         RentSweep rentSweep = buildRentSweep(ctx, persistence, kernel, repository, economy);
         // The sponsor expiry sweep: a config-gated, off-tick, batched sweep that frees the slot of every lapsed
@@ -503,7 +503,7 @@ public final class PlayerwarpsWiring {
     /**
      * Build the cross-server sub-group's send seam and arrival handler when {@code cross-server.enabled} is on,
      * else two empty {@link Optional}s. The two share one {@link PendingTeleportStore} over the network-shared
-     * {@code player_warp_pending_teleports} table — the send half writes the row and connects the player, the
+     * {@code player_warp_pending_teleports} table. The send half writes the row and connects the player, the
      * arrival half reads it on join and completes the local hop (or refunds). The {@link ServerConnector} is built
      * fresh over the standard proxy channel, exactly as the {@code npc}/{@code holograms} connectors are; when no
      * proxy is in front its {@code isAvailable()} degrades a send to an unavailable-notice-plus-refund. Disabled,
@@ -545,12 +545,12 @@ public final class PlayerwarpsWiring {
         return new CrossServerParts(Optional.of(seam), Optional.of(arrival));
     }
 
-    /** The cross-server sub-group's two wired seams — both empty when the sub-group is off. */
+    /** The cross-server sub-group's two wired seams: both empty when the sub-group is off. */
     private record CrossServerParts(Optional<CrossServerTeleport> seam, Optional<CrossServerArrival> arrival) {}
 
     /**
      * Read the {@code sponsor} config block into the immutable {@link SponsorConfig}. When the sub-group is enabled but
-     * no economy provider is present it is forced off with an operator warning — a paid pinned slot cannot be sold for
+     * no economy provider is present it is forced off with an operator warning. A paid pinned slot cannot be sold for
      * free, so running the feature with nothing to charge against would only ever hand out placement gratis.
      */
     private static SponsorConfig sponsorConfig(
@@ -604,7 +604,7 @@ public final class PlayerwarpsWiring {
 
     /**
      * Build the jOOQ economy bridge over the resolved provider, or {@link Optional#empty()} when economy is
-     * disabled (any of the provider or the two currency registries absent) so a priced warp stays free — the
+     * disabled (any of the provider or the two currency registries absent) so a priced warp stays free, the
      * {@code WarpEconomy} soft-coupling precedent. The owner-cut percentage and the auto-payout switch are read
      * from this module's own {@code payout} config block, keeping the seam as narrow as the gate needs.
      */
@@ -642,7 +642,7 @@ public final class PlayerwarpsWiring {
     /**
      * Build the player-warp management list (now an engine menu) and editor over the shared GUI framework. The
      * editor's back button reopens the list, so a one-slot holder breaks the list↔editor construction cycle (the
-     * editor is built first, the list second, and the holder is filled before either is shown) — the same pattern
+     * editor is built first, the list second, and the holder is filled before either is shown), the same pattern
      * the NPC GUI uses. The list's grid geometry and per-entry rendering now live in the {@code playerwarp-list}
      * menu spec rather than the old {@code pwarp-list.conf} layout, so only the editor still reads a GUI layout.
      */

@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.villagers.domain.VillagerProtectionPolicy;
  * blanket disable-trades switch, the villager bucket, and leash).
  *
  * <p>It is resolved once from the module's scoped {@link ConfigStore} when the module starts and, per the
- * atomic-reload rule, swapped whole on reload — so a trade handled mid-reload sees one coherent snapshot. The HOCON
+ * atomic-reload rule, swapped whole on reload, so a trade handled mid-reload sees one coherent snapshot. The HOCON
  * keys are kebab-case ({@code infinite-trading}, {@code interval-seconds}); the record components are the camelCase
  * views the adapter reads. Every knob carries the default the bundled config ships, so an operator who deletes a line
  * falls back to the shipped value rather than to zero.
@@ -77,7 +77,7 @@ public record VillagersConfig(
     }
 
     /**
-     * The infinite-trading feature under {@code infinite-trading { … }}: a villager's trades never lock out from use —
+     * The infinite-trading feature under {@code infinite-trading { … }}: a villager's trades never lock out from use
      * on every trade the plugin resets the villager's recipe uses and suppresses the usual use increment, so no trade
      * ever greys out. Ships on as a common convenience; set it to {@code false} to restore vanilla trade limits.
      *
@@ -123,7 +123,7 @@ public record VillagersConfig(
 
     /**
      * The instant-restock feature under {@code instant-restock { … }}: the traded recipe restocks immediately after a
-     * trade, with no cooldown. It composes with the restock timer — instant restock makes the traded recipe available
+     * trade, with no cooldown. It composes with the restock timer. Instant restock makes the traded recipe available
      * again at once, so it effectively wins for the recipe a player just used.
      *
      * @param enabled whether instant restock runs ({@code instant-restock.enabled}, default {@code false})
@@ -154,7 +154,7 @@ public record VillagersConfig(
     /**
      * The trade-manager feature under {@code trade-manager { … }}: with {@code enabled} on, staff run
      * {@code /villager manager} (gated on {@code uxmessentials.villagers.manager}) to open a GUI of the villager they
-     * are looking at and edit its trades — change a recipe's buy/sell items and amounts, add a recipe, remove one, or
+     * are looking at and edit its trades. Change a recipe's buy/sell items and amounts, add a recipe, remove one, or
      * toggle the villager's per-villager disable flag. Edits apply to the live merchant and are PDC-serialised on the
      * villager so they survive a chunk reload / restart (reapplied when the villager loads). When this feature is on
      * the reapply listener registers so a managed villager keeps its custom trades. Ships on as a common staff tool;
@@ -187,8 +187,8 @@ public record VillagersConfig(
 
     /**
      * The protection / saver feature under {@code protect { … }}: with {@code enabled} on, a villager the operator has
-     * chosen to shield never dies to the deaths a settlement loses villagers to — a zombie infection, a lightning
-     * strike (and the witch transform it triggers), suffocation, or any other blow — and is kept loaded so it never
+     * chosen to shield never dies to the deaths a settlement loses villagers to. A zombie infection, a lightning
+     * strike (and the witch transform it triggers), suffocation, or any other blow, and is kept loaded so it never
      * despawns. {@code all} widens the shield from individually-marked villagers (the {@code /villager protect} toggle)
      * to every villager. The four per-threat gates ship on, so the feature shields against every listed threat unless
      * the operator narrows it; the feature itself ships on out of the box, though only villagers marked with
@@ -247,7 +247,7 @@ public record VillagersConfig(
      * The follow feature under {@code follow { … }}: with {@code enabled} on, a player holding
      * {@code uxmessentials.villagers.follow} runs {@code /villager follow} to make the villager they are looking at
      * (or the nearest within reach) pathfind after them. The villager keeps up while it stays within {@code range}
-     * blocks of its owner in the same world — beyond that it stops until the owner returns — and a second
+     * blocks of its owner in the same world, beyond that it stops until the owner returns, and a second
      * {@code /villager follow} un-follows it. The owner is stamped in the villager's PDC so the pairing is durable,
      * and the pure range decision lives in {@link FollowRange}. Ships on as a common tool; set it to {@code false} to
      * drop {@code /villager follow}.
@@ -287,7 +287,7 @@ public record VillagersConfig(
 
     /**
      * The leash feature under {@code leash { … }}: with {@code enabled} on, a player holding
-     * {@code uxmessentials.villagers.leash} right-clicks a villager with a lead in hand to leash it — a lead vanilla
+     * {@code uxmessentials.villagers.leash} right-clicks a villager with a lead in hand to leash it, a lead vanilla
      * never lets you attach to a villager. The adapter intercepts that right-click, attaches the lead, and consumes
      * it, suppressing the trade window that click would otherwise open. A gameplay change, so it ships off.
      *

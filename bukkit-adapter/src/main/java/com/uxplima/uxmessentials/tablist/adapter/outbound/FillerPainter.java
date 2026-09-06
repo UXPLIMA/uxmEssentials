@@ -41,14 +41,14 @@ import org.jspecify.annotations.Nullable;
  * switch away (a format with no or fewer fillers), a {@link #clear}/{@link #forget}, or a disable removes the filler
  * entries by their tracked UUIDs so no fake row is ever orphaned.
  *
- * <p>Every method touches the live viewer, so the renderer must call this on the viewer's region/entity thread — the same
+ * <p>Every method touches the live viewer, so the renderer must call this on the viewer's region/entity thread, the same
  * contract as {@link TablistRenderer#renderFor(Player)}.
  */
 @NullMarked
 final class FillerPainter {
 
     /**
-     * Resolves a filler's raw MiniMessage source to a rendered {@link Component} for a viewer at a render tick — the
+     * Resolves a filler's raw MiniMessage source to a rendered {@link Component} for a viewer at a render tick, the
      * renderer's own pipeline (built-in tokens → PlaceholderAPI → MiniMessage), handed in so the filler cells render
      * identically to the header/footer/name without this class re-implementing it.
      */
@@ -65,7 +65,7 @@ final class FillerPainter {
     /**
      * The filler grid currently painted for each viewer, keyed by viewer UUID then by 1-based slot. The value remembers
      * what was last sent for that (viewer, slot) cell: the rendered text, list order, resolved skin, and whether the skin
-     * was still resolving — so a steady-state tick whose cell is unchanged re-sends nothing (no flicker), while a switch
+     * was still resolving, so a steady-state tick whose cell is unchanged re-sends nothing (no flicker), while a switch
      * to a format with different/fewer fillers removes the cells that fell away by their deterministic {@link #fillerId}
      * UUIDs. An absent viewer key means no fillers are painted for that viewer. The inner map is a {@link LinkedHashMap}
      * guarded by the outer {@link ConcurrentHashMap}; every mutation runs on the viewer's region/entity thread, so the
@@ -122,7 +122,7 @@ final class FillerPainter {
      * Paint one filler into {@code viewer}'s grid, re-sending only when its <em>resolved</em> text, order, or skin
      * changed since the last tick. The text is keyed on the rendered component, not the raw source, so an animated or
      * relational-placeholder filler re-sends as it changes (the animation steps) while a static filler re-sends nothing
-     * on a steady tick — the per-cell flicker guard. The entry id is the deterministic {@link #fillerId} so the same
+     * on a steady tick, the per-cell flicker guard. The entry id is the deterministic {@link #fillerId} so the same
      * cell is always the same tab entry: an update targets it and a later removal removes it exactly.
      *
      * <p>An offline filler skin that is still resolving (the {@link TablistSkinResolver} returns empty while its async
@@ -232,7 +232,7 @@ final class FillerPainter {
         return cells;
     }
 
-    /** Remove the filler entries whose slots are no longer in {@code keptSlots} — the cells the new layout dropped. */
+    /** Remove the filler entries whose slots are no longer in {@code keptSlots}: the cells the new layout dropped. */
     private void removeStaleFillers(
             Player viewer, @Nullable Map<Integer, AppliedFiller> previous, Set<Integer> keptSlots) {
         if (previous == null) {
@@ -249,7 +249,7 @@ final class FillerPainter {
         }
     }
 
-    /** Remove every filler entry the viewer carried — used on a switch to an empty layout, clear, forget, or stop. */
+    /** Remove every filler entry the viewer carried, used on a switch to an empty layout, clear, forget, or stop. */
     private void removeFillers(Player viewer, Map<Integer, AppliedFiller> painted) {
         List<UUID> ids = new ArrayList<>(painted.size());
         for (Integer slot : painted.keySet()) {
@@ -261,7 +261,7 @@ final class FillerPainter {
     }
 
     /**
-     * The deterministic ids of the filler cells currently painted for {@code viewer} — the entries a "suppress real
+     * The deterministic ids of the filler cells currently painted for {@code viewer}. The entries a "suppress real
      * players" mode must keep listed while it hides everything else. An empty set when no fillers are painted. Read on
      * the viewer's region thread, so the snapshot is taken from the per-viewer tracking without extra synchronisation.
      */
@@ -281,7 +281,7 @@ final class FillerPainter {
      * The deterministic ids the filler cells of {@code layout} <em>will</em> carry for {@code viewer}, computed from the
      * layout's slots without painting anything. The suppress mechanism primes its protected-id snapshot with these
      * <em>before</em> {@link #applyFillers} sends a single packet, so a filler painted into a viewer who is already
-     * suppressed is protected the instant its {@code ADD_PLAYER} crosses the live interceptor — otherwise that first
+     * suppressed is protected the instant its {@code ADD_PLAYER} crosses the live interceptor, otherwise that first
      * paint would be force-unlisted, and the per-cell flicker guard would never repaint it, leaving the new filler
      * permanently hidden. An empty layout yields an empty set. Pure: same {@link #fillerId} derivation as the painted ids.
      */
@@ -319,7 +319,7 @@ final class FillerPainter {
 
     /**
      * The deterministic, stable UUID for a (viewer, slot) filler cell, so a re-paint updates the same tab entry and a
-     * removal targets it exactly — never a fresh random id per tick (which would leak a new fake row each refresh). The
+     * removal targets it exactly, never a fresh random id per tick (which would leak a new fake row each refresh). The
      * id is derived from the viewer's id and the slot, so the same cell is always the same entry across ticks and relogs.
      */
     private static UUID fillerId(UUID viewer, int slot) {
@@ -329,9 +329,9 @@ final class FillerPainter {
     /**
      * The filler cell last painted for a (viewer, slot): its <em>rendered</em> text component, list order, resolved skin
      * (or {@code null} for no skin), and whether the skin was still resolving when the cell was painted. Two paints with
-     * an equal tuple are the same cell, so the entry is not re-sent — the per-cell flicker guard. Keying on the rendered
-     * component (not the raw source) means an animated or relational filler re-sends as its frame/placeholder changes —
-     * acceptable, mirroring the scoreboard/header animation surface — while a static filler on a steady-state tick
+     * an equal tuple are the same cell, so the entry is not re-sent, the per-cell flicker guard. Keying on the rendered
+     * component (not the raw source) means an animated or relational filler re-sends as its frame/placeholder changes
+     * acceptable, mirroring the scoreboard/header animation surface, while a static filler on a steady-state tick
      * re-sends nothing. The {@code pending} flag distinguishes a cell painted skinless while its offline texture is still
      * being fetched from the same cell once resolved, so the next tick repaints rather than treating the skinless paint
      * as the steady state. {@link Component} has a value-based {@code equals}.

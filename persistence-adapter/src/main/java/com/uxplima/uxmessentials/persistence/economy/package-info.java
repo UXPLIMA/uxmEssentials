@@ -1,5 +1,5 @@
 /**
- * The economy context's outbound persistence adapter — the native ledger's durable side over the generated
+ * The economy context's outbound persistence adapter. The native ledger's durable side over the generated
  * {@code economy_owners}, {@code wallet_balances}, and {@code transactions} tables. Every balance is a
  * first-class {@code (owner, currency, amount)} row, never an opaque JSON blob, so a {@code Wallet} rebuilds
  * from queryable rows and {@code /baltop} pushes its {@code ORDER BY amount DESC LIMIT ?} to the database.

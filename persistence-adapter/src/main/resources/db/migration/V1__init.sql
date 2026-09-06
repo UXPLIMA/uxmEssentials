@@ -6,7 +6,7 @@
 -- on a backend without a native uuid type; timestamps are epoch milliseconds in a
 -- BIGINT so there is no dialect-specific datetime handling. Every queryable fact
 -- (owner, name, world, coordinates, cost, required permission) is a first-class
--- column — there are no opaque JSON blobs (architecture persistence invariant).
+-- column: there are no opaque JSON blobs (architecture persistence invariant).
 --
 -- jOOQ's code generator parses exactly this file at build time through the Flyway
 -- DDLDatabase, so the generated classes always match the migration that creates

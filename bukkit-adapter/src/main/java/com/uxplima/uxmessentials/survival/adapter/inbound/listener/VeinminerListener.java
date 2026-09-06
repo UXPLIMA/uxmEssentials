@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <h2>Auto-drops</h2>
  * When an auto-* break mechanic (auto-pickup / smelt / sell) is active for the miner, the veined blocks are routed
- * through the shared {@link AutoDropsPipeline} exactly as the block they broke by hand is — so a vein is picked up,
+ * through the shared {@link AutoDropsPipeline} exactly as the block they broke by hand is, so a vein is picked up,
  * smelted, and sold whole, not only the origin. The decision is resolved once per vein; with no pipeline (the auto
  * mechanics disabled) the vein drops naturally on the ground.
  *

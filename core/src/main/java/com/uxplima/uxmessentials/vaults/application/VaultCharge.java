@@ -37,7 +37,7 @@ public final class VaultCharge {
     }
 
     /**
-     * Charge {@code who} the combined create + per-open fee in a single atomic withdrawal — the first-ever
+     * Charge {@code who} the combined create + per-open fee in a single atomic withdrawal, the first-ever
      * allocation of a vault index. Bundling both fees into one debit means a new vault is paid for in one
      * indivisible move: it can never half-charge (take the create fee then fail to take the open fee, leaving
      * the create fee lost with no vault). Returns success immediately when the combined fee is free, when no
@@ -49,7 +49,7 @@ public final class VaultCharge {
     }
 
     /**
-     * Charge {@code who} the per-open fee — re-opening a vault index that already exists. Same gating as
+     * Charge {@code who} the per-open fee: re-opening a vault index that already exists. Same gating as
      * {@link #chargeAllocate(PlayerRef)}; with a zero {@code cost-to-open} this is always free, so re-opening
      * an existing vault never costs unless configured.
      */
@@ -60,7 +60,7 @@ public final class VaultCharge {
     /**
      * Refund {@code who} the configured delete refund. A no-op (returning {@code true}) when no economy
      * provider is present, when the refund is zero, or when the player holds the bypass node (they were never
-     * charged, so nothing is paid back). The deposit is the inverse of the create fee — it makes deleting a
+     * charged, so nothing is paid back). The deposit is the inverse of the create fee. It makes deleting a
      * paid-for vault recoverable.
      *
      * <p>Returns {@code false} only when an economy refund was attempted but the provider rejected the credit
@@ -81,7 +81,7 @@ public final class VaultCharge {
         if (amount.signum() <= 0 || economy.isEmpty() || permissions.has(who, BYPASS_NODE)) {
             return Result.ok();
         }
-        // The withdraw is the guarded debit and reports its own success — there is no preceding canAfford
+        // The withdraw is the guarded debit and reports its own success. There is no preceding canAfford
         // gate, so a concurrent spend (or a min-balance edge) that the guard rejects yields CANNOT_AFFORD
         // rather than a vault allocated without payment.
         return economy.get().withdraw(who, amount) ? Result.ok() : Result.err(VaultError.CANNOT_AFFORD);

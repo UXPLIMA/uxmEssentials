@@ -28,7 +28,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit coverage of the no-chat-reports listener over a real {@link AsyncChatEvent}. When the tweak is on and the
  * message arrived signed, the line is re-delivered to every viewer (an unsigned system message) and the event is
  * cancelled so the server's signed delivery never runs; when the tweak is off, or the message was already unsigned,
- * the listener is a strict no-op — nothing is re-sent and the event is left to flow.
+ * the listener is a strict no-op: nothing is re-sent and the event is left to flow.
  */
 class UnsignedChatListenerTest {
 

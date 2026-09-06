@@ -6,7 +6,7 @@ import java.util.Objects;
  * The vanilla portal coordinate-scaling rule. Travelling between dimensions multiplies the
  * horizontal block coordinates so a journey in the nether covers eight times the distance of the
  * same move in the overworld: the nether runs at a coordinate scale of 8, every other environment at
- * 1. The Y coordinate is never scaled — vertical placement is the caller's concern.
+ * 1. The Y coordinate is never scaled: vertical placement is the caller's concern.
  */
 public final class PortalScaling {
 

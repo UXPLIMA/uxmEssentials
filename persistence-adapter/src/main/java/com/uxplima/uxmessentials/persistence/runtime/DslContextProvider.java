@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Builds the jOOQ {@link DSLContext} over a {@link DataSource} in the backend's dialect.
  *
- * <p>One {@code DSLContext} is created per enable and shared by every repository — it is thread-safe and
+ * <p>One {@code DSLContext} is created per enable and shared by every repository. It is thread-safe and
  * holds no connection itself; each operation borrows a pooled connection and returns it. The dialect is
  * the only backend-specific input, so the generated DSL renders correctly on SQLite, MySQL and
  * PostgreSQL from the same call sites. The provider knows nothing about specific tables; the generated

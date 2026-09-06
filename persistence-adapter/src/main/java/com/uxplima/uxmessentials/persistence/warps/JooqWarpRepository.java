@@ -17,7 +17,7 @@ import org.jooq.DSLContext;
 /**
  * The jOOQ-backed {@link WarpRepository} over the generated {@code WARPS} table. Warps are server-wide and
  * keyed by name alone, so a lookup is a single-row {@code SELECT} on the {@code name} primary key, the list
- * reads every row in stored creation order, and a {@code save} upserts on that key — a re-anchor overwrites
+ * reads every row in stored creation order, and a {@code save} upserts on that key: a re-anchor overwrites
  * the same row. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */
 public final class JooqWarpRepository extends JooqRepository implements WarpRepository {

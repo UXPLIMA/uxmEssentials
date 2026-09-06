@@ -21,15 +21,15 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 /**
  * Converts a zMenu inventory YAML into an equivalent uxmEssentials HOCON menu spec, so an operator migrating off
- * zMenu keeps their menus. It reads the well-known zMenu surface — the top-level {@code name} / {@code size} and each
+ * zMenu keeps their menus. It reads the well-known zMenu surface, the top-level {@code name} / {@code size} and each
  * {@code items.<id>} with its inline {@code item} block (material / name / lore / amount), its {@code slot} /
- * {@code slots}, its default {@code actions} list, and its {@code click-requirement} gates — and emits the
+ * {@code slots}, its default {@code actions} list, and its {@code click-requirement} gates, and emits the
  * {@code title} / {@code rows} / {@code items { … }} shape
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpecLoader} loads.
  *
  * <p>zMenu actions and requirements are <em>typed maps</em> (each a {@code - type: <t>} entry with type-specific
  * fields), not the bracketed {@code [tag] arg} strings DeluxeMenus uses. Each action type maps onto one or more of
- * our registered vocabulary refs — a {@code messages} list of two lines becomes two {@code message:} refs, a
+ * our registered vocabulary refs. A {@code messages} list of two lines becomes two {@code message:} refs, a
  * {@code data} action becomes a {@code data-add} / {@code data-sub} / {@code data-set} / {@code data-remove} ref, and
  * so on. The refs are written in our engine's bare {@code id:value} form (not zMenu's {@code [type]}), the same form
  * the DeluxeMenus converter emits, so the output re-enters the engine through the ordinary {@code menus/} loader.
@@ -37,7 +37,7 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
  * <p>The conversion covers the common surface and degrades gracefully everywhere else: an unknown action type becomes
  * a best-effort {@code console} command when it carries a command-ish field (else it is skipped), an unmappable
  * requirement (a JavaScript condition, a type we have no condition for) is dropped, and a {@code pattern}-backed item
- * — whose expansion needs the referenced pattern file this slice does not read — is skipped whole. Every such
+ * (whose expansion needs the referenced pattern file this slice does not read) is skipped whole. Every such
  * compromise is recorded as a {@link ConversionResult#warnings() warning} the caller logs, never a thrown exception.
  * Only a fundamentally unparsable YAML document raises, which the calling service catches per file so one bad export
  * never aborts a whole directory convert.
@@ -185,7 +185,7 @@ public final class ZMenuConverter {
         }
     }
 
-    /** Map the item's default {@code actions} list onto {@code click.any.actions} — the actions every click runs. */
+    /** Map the item's default {@code actions} list onto {@code click.any.actions}: the actions every click runs. */
     private void buildDefaultActions(ConfigurationNode actions, CommentedConfigurationNode out, List<String> warnings)
             throws SerializationException {
         if (actions.virtual() || actions.isNull()) {

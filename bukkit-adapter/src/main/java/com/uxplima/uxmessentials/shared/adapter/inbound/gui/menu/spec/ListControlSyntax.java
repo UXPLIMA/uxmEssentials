@@ -13,7 +13,7 @@ import java.util.Optional;
  * <p>Pure and Bukkit-free, so it lives beside the rest of the spec grammar ({@link Ref#parse}) and is shared by the
  * three consumers that must read a ref identically: the action pack that dispatches a live click, the
  * {@code MenuBindings} validator that rejects a sort button wired to a list with no sorts at startup, and the tests
- * that pin the grammar. It parses only the ref's already-split value — the {@code list-sort:} / {@code list-filter:} /
+ * that pin the grammar. It parses only the ref's already-split value, the {@code list-sort:} / {@code list-filter:} /
  * {@code list-search:} head has been peeled off by the action registry before this sees it.
  *
  * <p>A list source id may itself carry colons ({@code pw:browse}), so a sort's optional trailing direction is

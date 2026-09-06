@@ -70,7 +70,7 @@ class VanishStateTest {
     @Test
     void aNoLevelNodeVanishedTargetIsLevelOneSoASeeLevelOneViewerReveals() {
         // A plainly-vanished target (no numbered node) sits at level 1 (DEFAULT), so a viewer resolved to see
-        // level 1 (the plain .see node) reveals them — the flat Phase-1 behaviour preserved under the level rule.
+        // level 1 (the plain .see node) reveals them: the flat Phase-1 behaviour preserved under the level rule.
         VanishState state = VanishState.empty().withVanished(target, VanishLevel.DEFAULT);
 
         assertThat(state.levelOf(target)).contains(VanishLevel.DEFAULT);

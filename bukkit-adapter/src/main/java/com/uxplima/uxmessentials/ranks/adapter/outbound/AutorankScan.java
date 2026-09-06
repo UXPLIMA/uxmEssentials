@@ -16,20 +16,20 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The autorank scan: a single repeating task on the {@link Scheduler} port that, every configured interval,
- * promotes each online player who already meets their next rank's requirements — without them running
+ * promotes each online player who already meets their next rank's requirements: without them running
  * {@code /rankup}. It owns no promotion logic of its own; it reuses the {@link Rankup} use case per player, so the
  * requirement, cost and action pipeline is exactly the one {@code /rankup} runs. The {@code charge-cost} setting
  * is threaded straight into {@link Rankup#rankUp(PlayerRef, boolean)}, so a scan promotes for free when an operator
  * turns charging off and charges the rank's cost when they leave it on.
  *
  * <p><b>One step per player per scan.</b> Each pass advances an eligible player at most one rung. A player who
- * qualifies for several ranks at once climbs one per interval rather than all in a single sweep — bounded, simple,
+ * qualifies for several ranks at once climbs one per interval rather than all in a single sweep, bounded, simple,
  * and enough for a periodic promotion; the operator can shorten the interval if faster climbing is wanted.
  *
  * <p><b>Threading (Folia).</b> The repeating task runs on the global region thread, where the online roster is
  * coherent; {@link #tick} does nothing there but snapshot each online player to a {@link PlayerRef} and hop the
  * promotion to that player's own entity thread through {@link Scheduler#onEntity}. It never reads or mutates a
- * foreign entity inline — the {@link Rankup} pipeline (a placeholder or inventory requirement check, the action
+ * foreign entity inline, the {@link Rankup} pipeline (a placeholder or inventory requirement check, the action
  * runner) runs on the owning region thread, exactly as the {@code /rankup} command thread would. This mirrors the
  * {@code WorldAutoUnloadSweep} / {@code StaffFollowService} enumerate-on-global-then-hop-per-entity idiom.
  *

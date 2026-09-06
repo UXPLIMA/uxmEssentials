@@ -25,7 +25,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /clientinfo <player>}: report the client brand a player reported this session — the staff read behind the
+ * {@code /clientinfo <player>}: report the client brand a player reported this session, the staff read behind the
  * ClientID guard. Gated on {@code uxmessentials.security.clientinfo} (staff). The target is resolved online-first
  * and otherwise from the profile cache; the recorded brand is session state held in the in-memory
  * {@link ClientBrandRegistry}, so an offline (or never-seen) player reports no brand. The lookup runs off the tick

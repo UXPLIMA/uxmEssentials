@@ -9,11 +9,11 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * One home in an owner's slot grid: an owner, the {@link HomeSlot} that is its identity, the
- * {@link Position} it points at, and two cosmetic decorations — an optional {@link HomeLabel} and an
+ * {@link Position} it points at, and two cosmetic decorations, an optional {@link HomeLabel} and an
  * optional {@link HomeIcon}. Identity is the slot, not a name: relabelling a home leaves it in the same
  * slot, and the label is purely what the player sees.
  *
- * <p>A home is a value object — relocating, relabelling, or re-iconing one produces a new instance rather
+ * <p>A home is a value object. Relocating, relabelling, or re-iconing one produces a new instance rather
  * than mutating in place, so the {@link HomeSet} aggregate stays immutable between operations. Each
  * copy-op bumps {@link #updatedAt()} while preserving {@link #createdAt()}. The position carries its own
  * {@link com.uxplima.uxmessentials.shared.domain.WorldRef}, so the home's world (which the limit quota may

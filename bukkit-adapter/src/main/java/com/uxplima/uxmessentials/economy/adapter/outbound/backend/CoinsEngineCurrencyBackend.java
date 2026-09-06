@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  *
  * <p>The exact API shape can shift between CoinsEngine versions; any mismatch surfaces as a reflective failure the
  * base class logs once and degrades from, so a version bump never throws into a payment. No {@code su.nightexpress}
- * type is named here — the {@code Currency} parameter class is looked up by string name, so the absent path loads
+ * type is named here. The {@code Currency} parameter class is looked up by string name, so the absent path loads
  * nothing.
  */
 public final class CoinsEngineCurrencyBackend extends ReflectiveCurrencyBackend {

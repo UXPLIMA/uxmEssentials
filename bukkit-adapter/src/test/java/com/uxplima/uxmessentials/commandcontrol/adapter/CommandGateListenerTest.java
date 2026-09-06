@@ -135,7 +135,7 @@ class CommandGateListenerTest {
         when(player.hasPermission(BYPASS)).thenReturn(true);
         CommandGateListener listener = listener(RuleSet.of(RuleMode.WHITELIST, List.of(), Map.of(), BYPASS), noGroup());
 
-        // An empty whitelist denies everyone — but not the bypass holder.
+        // An empty whitelist denies everyone, but not the bypass holder.
         PlayerCommandPreprocessEvent event = new PlayerCommandPreprocessEvent(player, "/op", null);
         listener.onCommand(event);
 

@@ -94,13 +94,13 @@ import org.jspecify.annotations.Nullable;
  * and the operator config under {@code modules/vote/config.conf}, and produces everything the plugin must
  * register: the {@code /vote} and {@code /voteparty} Brigadier commands, the join handler that pays out an
  * offline voter's queued rewards (and optionally sends a login reminder), and the reflective Votifier vote
- * listener. This is the one place the vote context is wired — nothing else news up its classes.
+ * listener. This is the one place the vote context is wired: nothing else news up its classes.
  *
  * <p>The repository is the jOOQ adapter behind a thin party-counter cache (write-through at the database).
  * The reward engine resolves the structured {@code rewards} catalog (per-vote / per-site / first-vote /
  * milestone specs) parsed from the module config by {@link RewardCatalogLoader}; the {@link BukkitRewardApplier}
- * applies each resolved grant — console commands, MiniMessage messages and broadcasts, and item grants for an
- * online voter, queued commands for an offline one — and the {@link BukkitVoteContext} supplies the world,
+ * applies each resolved grant. Console commands, MiniMessage messages and broadcasts, and item grants for an
+ * online voter, queued commands for an offline one, and the {@link BukkitVoteContext} supplies the world,
  * permission, online, and chance-roll seams the engine reads. The party reward is a full {@link RewardSpec}
  * with configurable threshold, escalation, reset schedule, and mid-run announcements. The
  * {@link BukkitRewardDispatcher} is kept for the offline-drain path ({@code ApplyQueuedRewards}).
@@ -211,7 +211,7 @@ public final class VoteWiring {
         events.subscribe(partyEffects);
 
         // Cross-server sync: a remote VoteCounterChanged drops the cached counter; a remote VotePartyFired
-        // drops it and echoes the party announcement (no reward — the origin already paid its players out).
+        // drops it and echoes the party announcement (no reward: the origin already paid its players out).
         // A local VotePartyTriggered is published as a VotePartyFired so peers celebrate the same party. The
         // bus is a no-op when the cluster is disabled, so this is unconditional and free on a single server.
         Set<BroadcastChannel> broadcastChannels = broadcastConfig.settings().channels();
@@ -293,7 +293,7 @@ public final class VoteWiring {
      * Build and subscribe the Discord webhook notifier and schedule the top-voter task, but only when the
      * webhook URL is set and resolves to a live webhook. A disabled config (the default) subscribes nothing
      * and schedules nothing, so the single-server, un-configured path stays free. A malformed URL is caught
-     * inside {@link VoteDiscordNotifier} — the candidate reports {@link VoteDiscordNotifier#active()} false and
+     * inside {@link VoteDiscordNotifier}. The candidate reports {@link VoteDiscordNotifier#active()} false and
      * is wired no further. Package-private so the subscribe/schedule decision is unit-testable without a full
      * {@code wire(...)} stand-up.
      */
@@ -360,7 +360,7 @@ public final class VoteWiring {
             VoteReminderEligibility eligibility,
             PdcReminderPreferences reminderPrefs,
             Notifier notifier) {
-        // This body runs on the global region tick. Only collect online player refs here — the PDC read
+        // This body runs on the global region tick. Only collect online player refs here, the PDC read
         // (entity thread) and the DB eligibility check (off-tick) must not happen on the global tick.
         for (Player online : Bukkit.getOnlinePlayers()) {
             PlayerRef who = new PlayerRef(online.getUniqueId(), online.getName());
@@ -563,7 +563,7 @@ public final class VoteWiring {
 
     /**
      * Build the domain-event consumer that plays the party sound and particle to every online player
-     * when {@link VotePartyTriggered} fires. Both effects are optional — a blank or unresolvable
+     * when {@link VotePartyTriggered} fires. Both effects are optional, a blank or unresolvable
      * config name simply skips that effect without logging so a default-unconfigured server is silent.
      */
     private static Consumer<DomainEvent> buildPartyEffectsHandler(

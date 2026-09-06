@@ -9,8 +9,8 @@ import java.util.Set;
 
 /**
  * The closed set of currencies the economy serves, with one marked default. Built once when the economy
- * module starts from {@code economy.currencies.<id>} and never mutated — currencies cannot be minted at
- * runtime (the economy GLOSSARY) — so a lookup of an unknown id is an error a command surfaces, never a
+ * module starts from {@code economy.currencies.<id>} and never mutated. Currencies cannot be minted at
+ * runtime (the economy GLOSSARY), so a lookup of an unknown id is an error a command surfaces, never a
  * silent fall-back to the default. The default is the currency every command resolves to when the optional
  * {@code [currency]} argument is omitted, and the one a legacy Vault provider degrades to.
  *
@@ -49,7 +49,7 @@ public final class CurrencyRegistry {
         return new CurrencyRegistry(byId, resolved);
     }
 
-    /** A single-currency registry — the out-of-the-box default, the path the worked example walks. */
+    /** A single-currency registry: the out-of-the-box default, the path the worked example walks. */
     public static CurrencyRegistry single(Currency only) {
         Objects.requireNonNull(only, "only");
         return of(Set.of(only), only.id());

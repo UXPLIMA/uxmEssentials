@@ -12,14 +12,14 @@ import com.uxplima.uxmessentials.shared.network.NetworkMessage;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The messaging context's ignore-list cross-server sync seam — the same shape as {@link HomeSync} and
+ * The messaging context's ignore-list cross-server sync seam, the same shape as {@link HomeSync} and
  * {@link PlayerWarpSync}, keyed by the same {@link CachedIgnoreStore} the {@code /msg} delivery path reads. It
  * does two things:
  *
  * <ul>
  *   <li><b>Outbound</b>: {@link #store(CachedIgnoreStore, BusPublisher)} wraps the cached store so every local
- *       ignore-list write — an {@code /ignore} ({@link IgnoreStore#ignore}) or an {@code /unignore}
- *       ({@link IgnoreStore#unignore}) — publishes an {@link IgnoreChanged} frame after the durable write
+ *       ignore-list write, an {@code /ignore} ({@link IgnoreStore#ignore}) or an {@code /unignore}
+ *       ({@link IgnoreStore#unignore}). Publishes an {@link IgnoreChanged} frame after the durable write
  *       commits, so peers learn the owner's ignore set changed.
  *   <li><b>Inbound</b>: {@link #listener(CachedIgnoreStore)} returns a {@link RemoteSyncListener} that, on a
  *       remote {@code IgnoreChanged}, invalidates exactly that owner's cached set so the next ignore-aware
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The decorator wraps the <em>same</em> cache the {@code /msg} path reads, so the loop closes: a write here
  * emits a frame, the peer's listener drops the matching owner there. This is {@link PlayerWarpSync} copied for
- * the per-owner ignore set — a write decorator plus an invalidation listener over its own cached store, with
+ * the per-owner ignore set, a write decorator plus an invalidation listener over its own cached store, with
  * no render: the ignore list is plain data read at delivery time.
  */
 @NullMarked

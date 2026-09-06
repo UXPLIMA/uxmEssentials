@@ -67,7 +67,7 @@ import org.jspecify.annotations.Nullable;
  * <p>The five soft couplings ride rebindable holders ({@link MutableStaffVanish}, {@link MutableStaffInspector},
  * {@link MutableStaffChannel}, {@link MutableStaffFreeze}, {@link MutableStaffTeleport}), each starting on its
  * port's {@code NONE} and bound to the real vanish/playerstate/messaging/moderation/teleport impl only when
- * that module is enabled — so a disabled source module degrades the matching gadget or staff chat to a no-op
+ * that module is enabled, so a disabled source module degrades the matching gadget or staff chat to a no-op
  * rather than failing (mirroring messaging's {@code MutableMutePolicy}). Staff-mode vanish routes through the
  * dedicated vanish context's {@code ToggleVanish}, the single vanish authority.
  *
@@ -86,7 +86,7 @@ public final class StaffWiring {
     /**
      * Build the staff adapters from {@code plugin}, {@code ctx}, the {@code persistence} DSL, the {@code seams},
      * and the in-process event bus. The bus is the concrete {@link InProcessDomainEventPublisher} so the
-     * enter/exit roster-alert subscriber can be registered here and unsubscribed on stop — the kernel port
+     * enter/exit roster-alert subscriber can be registered here and unsubscribed on stop, the kernel port
      * exposes only {@code publish}.
      */
     public static Wired wire(
@@ -240,7 +240,7 @@ public final class StaffWiring {
             Objects.requireNonNull(teleport, "teleport");
         }
 
-        /** The seam set with nothing bound — every soft couple degrades to a no-op. */
+        /** The seam set with nothing bound: every soft couple degrades to a no-op. */
         public static StaffSeams none() {
             return new StaffSeams(
                     Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
@@ -272,7 +272,7 @@ public final class StaffWiring {
     /**
      * Everything the staff module contributes once wired: the Brigadier commands, the gadget/connection
      * listener, and the FOLLOW gadget's repeating task. {@link #stop()} exits every staff member still in staff
-     * mode — restoring their real loadout — and then cancels the follow task, in that order so a follow-shutdown
+     * mode, restoring their real loadout, and then cancels the follow task, in that order so a follow-shutdown
      * failure never aborts the loadout restore and strands anyone in the gadget hotbar or leaves a follow running.
      *
      * @param commands the Brigadier command registrations to publish

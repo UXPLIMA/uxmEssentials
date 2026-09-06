@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.vanish.application.port;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for a player's "pick up items while vanished" preference — the {@code /vanish pickup} toggle. The
+ * Outbound port for a player's "pick up items while vanished" preference, the {@code /vanish pickup} toggle. The
  * preference is per-player transient state that should survive a relog, so the adapter stamps it in PDC under a single
  * pre-created key (the sanctioned use for per-holder state), defaulting an unstamped player to the module's
  * {@code pickup-items} config value.

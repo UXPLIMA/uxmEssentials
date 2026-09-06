@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * The identity of a {@link Snapshot}. Every snapshot carries an id from the moment it is captured — the id is a
+ * The identity of a {@link Snapshot}. Every snapshot carries an id from the moment it is captured. The id is a
  * client-minted {@link UUID}, not a database-assigned autoincrement, because a UUID is unique before the row is
  * written (no read-back) and portable across every backend (the whole schema keys on canonical 36-char UUID
  * text, and no dialect-specific {@code AUTOINCREMENT}/{@code SERIAL}/{@code IDENTITY} is in the portable subset).

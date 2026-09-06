@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-player {@code /unlimited} switch: who has unlimited block placement on. Default is off. When on, the
- * block-place refill listener tops the placed stack back up so the player never runs out — the standard
+ * block-place refill listener tops the placed stack back up so the player never runs out, the standard
  * {@code /unlimited} behaviour (docs/10-feature-modules.md §15.10, mob/entity group).
  *
  * <p>State is transient in-memory runtime state: a concurrent set of the UUIDs that have toggled <em>on</em>,
@@ -38,7 +38,7 @@ public final class UnlimitedPlacementStore {
         return enabled.contains(who.uuid());
     }
 
-    /** Forget {@code who}'s state — called on quit so a relog starts off. */
+    /** Forget {@code who}'s state: called on quit so a relog starts off. */
     public void forget(PlayerRef who) {
         Objects.requireNonNull(who, "who");
         enabled.remove(who.uuid());

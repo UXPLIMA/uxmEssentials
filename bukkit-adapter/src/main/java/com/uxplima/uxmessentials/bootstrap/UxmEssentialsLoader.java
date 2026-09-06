@@ -45,7 +45,7 @@ public final class UxmEssentialsLoader implements PluginLoader {
                 new DefaultArtifact("org.spongepowered:configurate-yaml:" + LoaderDependencies.CONFIGURATE_VERSION),
                 null));
         // No Redis client is resolved here: the cross-server bus's Redis transport ships in the separate
-        // uxmEssentials-redis companion jar (Lettuce, relocated there — see redis-adapter/build.gradle.kts), so
+        // uxmEssentials-redis companion jar (Lettuce, relocated there, see redis-adapter/build.gradle.kts), so
         // the main jar carries no Redis client at all. An operator who wants the Redis transport drops that
         // companion jar in plugins/; otherwise the bus degrades to local-only. gson stays loader-provided: the
         // npc skin and several row codecs compile against it.

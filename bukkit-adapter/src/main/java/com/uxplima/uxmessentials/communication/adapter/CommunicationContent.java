@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * The immutable, parsed operator content of the module's {@code join-quit.conf}, {@code announcer.conf}, and
  * {@code info-pages.conf} siblings: the three connection-message policies (join, quit, death), the rotating
  * announcer config, the optional first-join welcome and after-death info-page name, and the info pages. It is a
- * snapshot — a reload parses a fresh {@code CommunicationContent} and the
+ * snapshot. A reload parses a fresh {@code CommunicationContent} and the
  * adapter swaps it behind its {@code AtomicReference} holders, so the connection listeners, the announcer timer,
  * and the info commands always read whole, consistent content.
  *
@@ -70,7 +70,7 @@ public record CommunicationContent(
 
     /**
      * Fully inert content: every channel defers to vanilla, the announcer is silent, no info pages. The MOTD-on-join
-     * default is off here — inert content is the "module disabled / files unreadable" shape, where nothing should
+     * default is off here. Inert content is the "module disabled / files unreadable" shape, where nothing should
      * fire; the shipped {@code info-pages.conf} turns it on for a normal install.
      */
     public static CommunicationContent inert() {

@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /ice <player> [seconds]}: apply the powder-snow freezing effect to a player for a number of seconds
- * (the cosmetic opposite of {@code /burn}). A live-only effect through the {@link PlayerEffects} port — the
+ * (the cosmetic opposite of {@code /burn}). A live-only effect through the {@link PlayerEffects} port, the
  * duration is clamped to a sane range in the domain ({@link FreezeDuration}) so a typo cannot freeze someone
  * indefinitely. The actor is confirmed and, for a staff target, the subject is told too.
  */

@@ -27,15 +27,15 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Applies a chosen snapshot to a target's live inventory — the action behind the {@code /invrestore} preview's
+ * Applies a chosen snapshot to a target's live inventory. The action behind the {@code /invrestore} preview's
  * restore button. The flow hops three times so every touch happens on the thread that owns it (Folia-safe): on the
  * target's own entity thread it reads and serializes the target's <em>current</em> inventory (main + armor +
  * offhand + ender chest) as the pre-restore state; off the tick thread the {@link RestoreSnapshot} use case freezes
  * that state as a {@link SnapshotCause#RESTORE} safety snapshot and resolves the chosen snapshot; back on the
  * target's entity thread the chosen snapshot is decoded and set onto the live inventory.
  *
- * <p>Restore requires the target <b>online</b> — the snapshot is applied to their live inventory, never written to
- * disk — so a target who has logged off (between the GUI open and the click, or ever) yields a "not online" line to
+ * <p>Restore requires the target <b>online</b>. The snapshot is applied to their live inventory, never written to
+ * disk, so a target who has logged off (between the GUI open and the click, or ever) yields a "not online" line to
  * the staff member and no change; their snapshots persist, so the restore succeeds once they rejoin. A stale
  * snapshot id (pruned or already restored) resolves to nothing and applies no change. The staff confirmation and
  * the offline refusal are delivered to the staff member through the region-hopping {@link MessageSink}.

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The favourite use case over the in-memory fakes: a star adds the row and recomputes the count, an un-star removes
  * it and recomputes, the already-in-state paths are pure no-ops, and the persisted count is always the true row
- * count rather than a running bump — the property that makes it drift-proof under a double-click race.
+ * count rather than a running bump: the property that makes it drift-proof under a double-click race.
  */
 class FavouritePlayerWarpTest {
 

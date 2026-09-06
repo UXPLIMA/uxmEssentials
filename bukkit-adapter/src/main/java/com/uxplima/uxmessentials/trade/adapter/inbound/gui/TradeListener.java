@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The two ways a trade ends that the window itself cannot report: a participant disconnecting and a participant
- * changing world. Everything a player does inside the window — a click on a control, a stack placed in their offer,
- * a close — reaches the view through the menu engine, which owns the window; these two events do not, so they are
+ * changing world. Everything a player does inside the window. A click on a control, a stack placed in their offer,
+ * a close, reaches the view through the menu engine, which owns the window; these two events do not, so they are
  * routed here.
  *
  * <p>The quit handler runs at {@link EventPriority#LOWEST} so it claims the settlement before the engine's own quit

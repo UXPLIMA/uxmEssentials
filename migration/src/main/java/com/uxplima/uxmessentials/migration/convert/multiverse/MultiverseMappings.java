@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The Multiverse source's {@code SupportedMappings} rows — its claim of what it migrates (docs/12-migration §5). The
+ * The Multiverse source's {@code SupportedMappings} rows: its claim of what it migrates (docs/12-migration §5). The
  * whole registry is one file and one mapper, so every row names {@code MultiverseWorldMapper}; they are split by the
  * facet of the world each key lands on, because that is what an operator reading the table wants to check.
  *

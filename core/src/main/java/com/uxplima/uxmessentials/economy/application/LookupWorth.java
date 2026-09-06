@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /worth}: report the configured sell value of a material to a viewer, so a player can price loot
- * before committing to {@code /sell}. A pure pricing read against the {@link WorthSource} — it never touches a
+ * before committing to {@code /sell}. A pure pricing read against the {@link WorthSource}. It never touches a
  * balance. A single item renders the unit worth; a stack renders the unit worth and the stack total; a
  * material absent from the table renders the not-sellable notice. The amount is rendered through the
  * {@link EconomyNotifier} so the worth uses the same currency formatting as every other money figure.

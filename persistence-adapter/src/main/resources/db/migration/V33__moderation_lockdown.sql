@@ -1,4 +1,4 @@
--- Server lockdown flag — a single row that holds whether the server currently
+-- Server lockdown flag. A single row that holds whether the server currently
 -- refuses every login except holders of the lockdown-bypass permission. It is a
 -- runtime toggle (an operator flips it with `/lockdown`), not a config value, so
 -- it must survive a restart the way every other moderation fact does: a server

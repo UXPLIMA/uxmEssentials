@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * query that borrows a pooled connection, and {@link #write} for a unit of work that must commit or roll
  * back atomically. Both translate jOOQ's {@code DataAccessException} into the layer's
  * {@link PersistenceException} so a subclass never leaks a jOOQ exception type past its port. The base is
- * intentionally thin — it carries no caching (that is the cache decorator's job) and no table knowledge.
+ * intentionally thin: it carries no caching (that is the cache decorator's job) and no table knowledge.
  */
 @NullMarked
 public abstract class JooqRepository {

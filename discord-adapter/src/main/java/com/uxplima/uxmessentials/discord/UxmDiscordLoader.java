@@ -29,7 +29,7 @@ public final class UxmDiscordLoader implements PluginLoader {
             resolver.addRepository(new RemoteRepository.Builder(repo.id(), "default", repo.url()).build());
         }
 
-        // Voice/opus is dead weight for a text-only bridge — drop the native codec so its
+        // Voice/opus is dead weight for a text-only bridge, drop the native codec so its
         // platform-specific binary never gets resolved onto the runtime classpath.
         Exclusion opus = new Exclusion("club.minnced", "opus-java", "*", "*");
         resolver.addDependency(

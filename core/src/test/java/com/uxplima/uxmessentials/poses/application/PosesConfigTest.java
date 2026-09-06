@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the poses module's typed config view: the shipped defaults an operator inherits by deleting a line, and the
- * one non-obvious default — {@code features.player-sit} ships OFF because it is the one verb that touches a second
- * player — plus that an explicit override is read back.
+ * one non-obvious default. {@code features.player-sit} ships OFF because it is the one verb that touches a second
+ * player: plus that an explicit override is read back.
  */
 class PosesConfigTest {
 

@@ -1,5 +1,5 @@
 /**
- * The vote context's outbound adapters. {@code BukkitRewardApplier} applies a resolved reward grant — console
+ * The vote context's outbound adapters. {@code BukkitRewardApplier} applies a resolved reward grant, console
  * commands, MiniMessage messages and broadcasts, and item grants for an online voter (dropping overflow at the
  * voter's feet), and queued commands for an offline one. {@code BukkitVoteContext} supplies the engine its
  * world, permission, online, and chance-roll seams. {@code BukkitRewardDispatcher} runs reward console commands

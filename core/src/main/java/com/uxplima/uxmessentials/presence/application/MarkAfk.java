@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@link ReturnedFromAfk} event, and broadcast the away/back line to the online audience.
  *
  * <p>{@code /afk} is a toggle: running it while active goes AFK (with the optional reason), running it while
- * already AFK returns the player. The sweep only ever marks AFK — never the reverse — because returning is the
+ * already AFK returns the player. The sweep only ever marks AFK, never the reverse, because returning is the
  * activity listener's job.
  */
 public final class MarkAfk {

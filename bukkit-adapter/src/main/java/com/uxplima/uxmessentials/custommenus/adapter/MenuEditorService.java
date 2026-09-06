@@ -23,20 +23,20 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The file-level CRUD the menu editor drives over {@code menus/*.conf}: create a blank menu, duplicate one, rename one,
- * delete one. It composes the editor's existing spec service — the {@link MenuSpecPersistence} save (validate → write)
- * — with the loader's single-file reload and a small "forget" hook that drops a menu from the running engine, so a GUI
+ * delete one. It composes the editor's existing spec service, the {@link MenuSpecPersistence} save (validate → write)
+ *. With the loader's single-file reload and a small "forget" hook that drops a menu from the running engine, so a GUI
  * edit lands on disk and in the engine in one call.
  *
  * <p>Bukkit-free by construction: it works with the pure spec model, the persistence service, and {@code java.nio}, and
  * reaches the engine only through the injected {@link Function}s (read a registered spec, single-file reload, forget an
- * id) — never a Bukkit type — so it runs off the tick thread and is exercised by plain JUnit. The caller schedules it
+ * id), never a Bukkit type, so it runs off the tick thread and is exercised by plain JUnit. The caller schedules it
  * off-tick (its file writes and reloads must not sit on the region thread) and turns its typed {@link EditOutcome} into
  * an operator message. It never throws for an expected failure: an unsafe or taken name, a missing source, an
  * unwritable path all come back as an outcome, not a stack trace.
  *
  * <p>Name safety is enforced up front. A new name must be a plain filename token ({@code a-z A-Z 0-9 _ -}) so it can
  * never traverse the directory, must not collide with a reserved non-menu file ({@code openers} / {@code patterns} /
- * {@code placeholders}) or the bundled starter {@code example}, and must not already name a menu — a create or a
+ * {@code placeholders}) or the bundled starter {@code example}, and must not already name a menu, a create or a
  * rename never silently overwrites an operator's menu.
  */
 @NullMarked
@@ -48,7 +48,7 @@ public final class MenuEditorService {
     /** The reserved file stems the loader treats as non-menu configs, plus the bundled starter menu. */
     private static final Set<String> RESERVED_NAMES = Set.of("openers", "patterns", "placeholders", "example");
 
-    /** The rows a freshly created blank menu opens with — a small chest an operator then lays out. */
+    /** The rows a freshly created blank menu opens with, a small chest an operator then lays out. */
     private static final int BLANK_ROWS = 3;
 
     private final Path menusDir;
@@ -92,7 +92,7 @@ public final class MenuEditorService {
 
     /**
      * Copy the registered menu {@code from} to a new menu {@code to}: the source spec written under the new name and
-     * loaded. The copy carries no {@code command {}} block — a duplicate is a fresh menu that gets its own opener — so
+     * loaded. The copy carries no {@code command {}} block (a duplicate is a fresh menu that gets its own opener) so
      * two menus never claim the same open command. Rejected when the new name is unsafe, reserved, or taken, or when
      * the source is not a loaded menu.
      */
@@ -152,7 +152,7 @@ public final class MenuEditorService {
     }
 
     /**
-     * Re-serialise the registered menu {@code name} back to its file and reload it — the editor's "Save" over the
+     * Re-serialise the registered menu {@code name} back to its file and reload it. The editor's "Save" over the
      * P0 write path. The spec (and its {@code command {}} block) round-trips through a {@link MenuEditSession} so the
      * save exercises the same edit model the later phases mutate. Reports {@link EditOutcome#SOURCE_MISSING} for an
      * unregistered menu.
@@ -169,7 +169,7 @@ public final class MenuEditorService {
     }
 
     /**
-     * Save the edited {@code session} back to menu {@code name}'s file and reload it — the slot-grid editor's "Save".
+     * Save the edited {@code session} back to menu {@code name}'s file and reload it: the slot-grid editor's "Save".
      * Unlike {@link #save(String)}, which re-serialises the registered spec unchanged, this writes the caller's mutated
      * {@link MenuEditSession}, so a place / move / clear made in the grid lands on disk. The menu's {@code command {}}
      * block is re-attached from the live open-commands, so a grid save never drops a menu's opener even though the grid
@@ -184,7 +184,7 @@ public final class MenuEditorService {
     }
 
     /**
-     * Save the edited {@code session} back to menu {@code name}'s file with the caller-supplied {@code command} block —
+     * Save the edited {@code session} back to menu {@code name}'s file with the caller-supplied {@code command} block
      * the menu-property editor's "Save". Unlike {@link #saveSession(String, MenuEditSession)}, which re-attaches the
      * live open command and so is safe for the grid (whose session never carries one), this writes the exact command
      * the property editor edited, so adding a {@code command {}} block to a menu that had none, changing it, or clearing
@@ -196,7 +196,7 @@ public final class MenuEditorService {
         return persist(name, session.toSpec(), command, EditOutcome.SAVED);
     }
 
-    /** Validate a spec, write it, and — on a clean write — reload it; maps the persistence status to an outcome. */
+    /** Validate a spec, write it, and, on a clean write, reload it; maps the persistence status to an outcome. */
     private EditOutcome persist(String name, MenuSpec spec, @Nullable OpenCommandSpec command, EditOutcome success) {
         MenuSpecPersistence.SaveResult result = persistence.save(menusDir, name, spec, command);
         return switch (result.status()) {
@@ -236,7 +236,7 @@ public final class MenuEditorService {
         return menusDir.resolve(name + ".conf");
     }
 
-    /** A minimal valid menu: the name as its title, a small chest, and no items — a canvas the operator lays out. */
+    /** A minimal valid menu: the name as its title, a small chest, and no items: a canvas the operator lays out. */
     private static MenuSpec blankSpec(String name) {
         return new MenuSpec(name, BLANK_ROWS, new RefreshSpec(false, 0), List.of(), List.of(), List.of(), Map.of());
     }

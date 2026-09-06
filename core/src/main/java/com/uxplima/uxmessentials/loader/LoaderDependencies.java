@@ -6,7 +6,7 @@ import java.util.List;
  * The runtime-dependency coordinates and Maven repositories shared by every plugin's {@code PluginLoader}
  * (the bukkit-adapter and the discord-adapter each have one). Paper's loader downloads third-party libraries
  * from Maven Central at boot, so each loader builds its own {@code MavenLibraryResolver}; the pieces that are
- * identical across loaders — the two repositories and the libraries shared between them — live here once so a
+ * identical across loaders, the two repositories and the libraries shared between them, live here once so a
  * version pin (notably configurate) cannot drift between two hand-edited loader classes.
  *
  * <p>This is deliberately Paper-free: it holds only coordinate strings and exposes them as data, leaving each

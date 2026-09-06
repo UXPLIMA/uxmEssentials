@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 public interface ScoreboardPlaceholders {
 
     /**
-     * Whether {@code who}'s sidebar display is currently shown — that is, not hidden by {@code /scoreboard}. A player
+     * Whether {@code who}'s sidebar display is currently shown: that is, not hidden by {@code /scoreboard}. A player
      * who never toggled is shown, so the default is {@code true}.
      */
     boolean visible(PlayerRef who);

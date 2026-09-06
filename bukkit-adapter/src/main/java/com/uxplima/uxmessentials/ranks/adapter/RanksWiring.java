@@ -61,7 +61,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /ranks setrank} subcommand (which the top-level {@code /setrank} alias also publishes).
  *
  * <p>The rank cost is charged through the {@link RankEconomy} seam bridged in the economy context and handed in
- * here as an {@link Optional} — empty when economy is disabled, in which case a priced rank is free. The rank
+ * here as an {@link Optional}: empty when economy is disabled, in which case a priced rank is free. The rank
  * action runner is wired with no click-action economy of its own: a rank's paywall is its {@code cost}, so its
  * actions are effects and commands, never a second charge.
  */
@@ -146,7 +146,7 @@ public final class RanksWiring {
     /**
      * The {@code /ranks} ladder panel when {@code gui.enabled} is on: built over the same {@link Rankup} pipeline
      * the {@code /rankup} command runs and registered with the shared menu engine (its spec and per-display
-     * placeholders bound into the shared {@link MenuBindings}), or {@link Optional#empty()} when the GUI is off — in
+     * placeholders bound into the shared {@link MenuBindings}), or {@link Optional#empty()} when the GUI is off, in
      * which case nothing is registered and the {@code /ranks} command stays admin-setrank-only.
      */
     private static Optional<RanksPanelMenu> ladderPanel(

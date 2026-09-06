@@ -1,11 +1,11 @@
 -- Adds the durable store behind /setpwarp and /pwarp: player-owned warps keyed (owner, name).
 -- Player-warps mirror the server warps shape (V1) but are owned per player like homes, so the row
--- carries an owner column and the primary key is the (owner, name) composite — two players may each
+-- carries an owner column and the primary key is the (owner, name) composite. Two players may each
 -- keep a warp named "base". A public flag decides whether non-owners may teleport to the warp.
 --
 -- The location columns match homes/warps verbatim: owner and world are the canonical 36-char UUID
 -- text, world_name the operator-facing name, x/y/z DOUBLE PRECISION, yaw/pitch REAL, created_at epoch
--- milliseconds in a BIGINT — identical column shapes on every backend so a player-warp round-trips the
+-- milliseconds in a BIGINT. Identical column shapes on every backend so a player-warp round-trips the
 -- same in SQLite, MySQL/MariaDB and PostgreSQL.
 --
 -- is_public is stored as an INT (0/1) rather than a BOOLEAN for the same portability reason BIGINT

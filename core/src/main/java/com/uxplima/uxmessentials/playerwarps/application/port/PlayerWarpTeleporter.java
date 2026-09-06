@@ -8,8 +8,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * context. Player-warps never re-implements movement: it resolves which {@link PlayerWarp} a player asked for
  * and gates access (ownership, then the public flag), then hands the warp off here, and the adapter behind
  * this port drives the teleport context's gated machinery (the shared cooldown, the move-cancellable warmup,
- * the region-aware async hop). This keeps the cooldown/warmup invariant owned in one place — the teleport
- * context — while player-warps owns only the aggregate and its access gates.
+ * the region-aware async hop). This keeps the cooldown/warmup invariant owned in one place, the teleport
+ * context, while player-warps owns only the aggregate and its access gates.
  */
 public interface PlayerWarpTeleporter {
 

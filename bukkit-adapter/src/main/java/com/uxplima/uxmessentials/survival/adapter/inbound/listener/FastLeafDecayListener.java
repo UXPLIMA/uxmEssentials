@@ -29,14 +29,14 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The which-leaves decision is the pure {@link LeafDecaySweep}: this listener only supplies the two predicates that
  * resolve a coordinate to a live block and read its type tag and (for a leaf) its persistent flag. A player-placed
- * (persistent) leaf is never decayed, and a leaf still within the support distance of a remaining log survives — so
+ * (persistent) leaf is never decayed, and a leaf still within the support distance of a remaining log survives, so
  * breaking one log of a tree whose trunk still stands does not strip the leaves that trunk holds.
  *
  * <h2>Folia</h2>
  * The sweep mutates blocks, so it must run on the broken log's region. When a delay is configured the listener waits
  * off-thread through {@link Scheduler#asyncAfter} and then hops to the region with {@link Scheduler#onRegion} to do
- * the block work; with no delay it hops straight to the region. The off-thread step only schedules — it touches no
- * Bukkit state — and every block read or break happens inside the region task.
+ * the block work; with no delay it hops straight to the region. The off-thread step only schedules: it touches no
+ * Bukkit state, and every block read or break happens inside the region task.
  */
 @NullMarked
 public final class FastLeafDecayListener implements Listener {

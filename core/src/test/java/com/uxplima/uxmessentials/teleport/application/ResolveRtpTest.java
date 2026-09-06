@@ -60,7 +60,7 @@ class ResolveRtpTest {
         Fixture f = new Fixture();
         f.queue.put(HOME, HOME_LOC);
 
-        // The command hands the TARGET and the target's own world — the issuer is never passed to the resolver.
+        // The command hands the TARGET and the target's own world: the issuer is never passed to the resolver.
         Result<Unit, TeleportError> result = f.resolveRtp.background(TARGET, HOME);
 
         assertThat(result.isOk()).isTrue();

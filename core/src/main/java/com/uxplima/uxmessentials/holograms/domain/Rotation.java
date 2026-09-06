@@ -2,13 +2,13 @@ package com.uxplima.uxmessentials.holograms.domain;
 
 /**
  * A hologram's stored display rotation: a yaw (about the vertical axis) and a pitch (about the horizontal
- * axis), both in degrees. Pure value object (no Bukkit) — the adapter maps it onto the native display
+ * axis), both in degrees. Pure value object (no Bukkit), the adapter maps it onto the native display
  * transform at the rendering boundary, like the rest of the {@link Appearance}.
  *
  * <p>A stored rotation is kept separate from the hologram's location look-direction (the {@code yaw}/{@code
  * pitch} on its {@link com.uxplima.uxmessentials.shared.domain.Position}, which only orients a centred
  * billboard's anchor): this is the explicit operator-set spin of the display itself, and it is only visually
- * meaningful with a {@link Billboard#FIXED} billboard — a billboard that always faces the viewer overrides any
+ * meaningful with a {@link Billboard#FIXED} billboard. A billboard that always faces the viewer overrides any
  * transform rotation. The operator sets the billboard to {@code FIXED} separately; the renderer applies this
  * rotation regardless and lets the billboard decide whether it shows.
  *
@@ -20,7 +20,7 @@ package com.uxplima.uxmessentials.holograms.domain;
  */
 public record Rotation(float yaw, float pitch) {
 
-    /** No rotation — both angles zero; what a new hologram and an un-rotated stored row both resolve to. */
+    /** No rotation: both angles zero; what a new hologram and an un-rotated stored row both resolve to. */
     public static final Rotation NONE = new Rotation(0f, 0f);
 
     private static final float FULL_TURN = 360f;
@@ -35,7 +35,7 @@ public record Rotation(float yaw, float pitch) {
         return new Rotation(yaw, pitch);
     }
 
-    /** Whether either angle is non-zero — i.e. this rotation is anything other than {@link #NONE}. */
+    /** Whether either angle is non-zero: i.e. this rotation is anything other than {@link #NONE}. */
     public boolean isRotated() {
         return yaw != 0f || pitch != 0f;
     }

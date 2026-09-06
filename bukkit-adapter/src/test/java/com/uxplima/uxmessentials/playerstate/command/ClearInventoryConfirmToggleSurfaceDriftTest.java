@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /clearinventoryconfirmtoggle} into the playerstate context's command surface — the per-player
+ * Pins {@code /clearinventoryconfirmtoggle} into the playerstate context's command surface, the per-player
  * toggle that makes a self {@code /clearinventory} ask for a second confirmation before it clears. This guard
  * fails if the literal drops out of the surface or ever wires under a node other than its own
  * {@code uxmessentials.clearinventory.confirmtoggle}, which would otherwise drift the permissions reference and

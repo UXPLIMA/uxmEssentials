@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * Pins the {@code /pwarp} management and admin subcommand wiring: the people-management verbs
  * ({@code members}/{@code ban}/{@code unban}/{@code whitelist}) resolve their offline target and drive the T6b-2
  * use cases with the parsed arguments, and the admin group ({@code restore}/{@code purge}/{@code setowner}) drives
- * the by-id {@code :core} methods — with {@code purge} performing the delete only after the {@code confirm} step.
+ * the by-id {@code :core} methods: with {@code purge} performing the delete only after the {@code confirm} step.
  * The inline scheduler runs the off-tick task within the dispatch so the use-case call is observable; the use-case
  * logic is covered in {@code :core}, so these assert only the wiring.
  */
@@ -220,7 +220,7 @@ class PlayerWarpManagementWiringTest {
 
     @Test
     void theAdminGroupIsRefusedWithoutItsNode() {
-        PlayerMock bob = server.addPlayer("Carl"); // not op — holds only the base use node
+        PlayerMock bob = server.addPlayer("Carl"); // not op, holds only the base use node
         bob.addAttachment(MockBukkit.createMockPlugin(), "uxmessentials.pwarp.use", true);
 
         assertThatThrownBy(() -> dispatcher().execute("pwarp admin restore 42", CommandSourceStackMock.from(bob)))

@@ -18,14 +18,14 @@ import com.uxplima.uxmessentials.vote.domain.event.VotePartyTriggered;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The vote context's cross-server sync seam — the same shape as {@link HomeSync} and {@link WarpSync}, applied
+ * The vote context's cross-server sync seam, the same shape as {@link HomeSync} and {@link WarpSync}, applied
  * to the server-wide vote-party counter. The party counter is one global figure backed by the shared database,
  * so (like warps) the whole cached value is the invalidation unit:
  *
  * <ul>
  *   <li><b>Outbound (counter)</b>: {@link #repository(CachedVoteRepository, BusPublisher)} wraps the cached
  *       repository so every counter mutation ({@code incrementAndGetPartyCount}, {@code setPartyCount},
- *       {@code claimPartyFire}) publishes a {@link VoteCounterChanged} frame after the durable write commits —
+ *       {@code claimPartyFire}) publishes a {@link VoteCounterChanged} frame after the durable write commits
  *       peers learn the running total advanced and drop their cached copy.
  *   <li><b>Outbound (party fire)</b>: {@link #partyPublisher(BusPublisher)} returns a domain-event consumer
  *       that, on a local {@link VotePartyTriggered}, publishes a {@link VotePartyFired} frame so peers run
@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  *   <li><b>Inbound</b>: {@link #listener(CachedVoteRepository, VoteBroadcaster, Set)} returns a
  *       {@link RemoteSyncListener} that, on a remote {@link VoteCounterChanged}, drops the cached counter, and
  *       on a remote {@link VotePartyFired}, drops the cached counter <em>and</em> re-broadcasts the party
- *       announcement on the configured channels. It never applies any reward — the origin backend already paid
+ *       announcement on the configured channels. It never applies any reward, the origin backend already paid
  *       its players out, and the shared DB holds the authoritative reset; a peer only echoes the announcement.
  * </ul>
  *

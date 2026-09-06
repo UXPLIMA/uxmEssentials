@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Bounded, batched, backpressured import pool (docs/12-migration §7, docs/02-concurrency §6.10). It owns
- * a fixed-size <em>platform</em>-thread pool — the deliberate exception to the project's prefer-virtual-
+ * a fixed-size <em>platform</em>-thread pool. The deliberate exception to the project's prefer-virtual-
  * threads default, because the goal is to cap DB write pressure, not maximise parallelism. The bounded
  * queue plus {@link ThreadPoolExecutor.CallerRunsPolicy} makes the producer stall when the writers lag,
  * so a 50 000-file source cannot out-run the writers and OOM the server. The executor is created on
@@ -23,13 +23,13 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class ImportExecutor implements AutoCloseable {
 
-    /** Fixed writer count — caps concurrent DB write pressure (SQLite single-writer interplay, §7.1). */
+    /** Fixed writer count, caps concurrent DB write pressure (SQLite single-writer interplay, §7.1). */
     public static final int WRITERS = 4;
 
     /** Bounded queue depth; full queue triggers caller-runs backpressure. */
     public static final int QUEUE_CAPACITY = 1_000;
 
-    /** Rows per committed transaction — bounds lock duration and replication lag. */
+    /** Rows per committed transaction, bounds lock duration and replication lag. */
     public static final int BATCH = 500;
 
     private final ThreadPoolExecutor pool = new ThreadPoolExecutor(

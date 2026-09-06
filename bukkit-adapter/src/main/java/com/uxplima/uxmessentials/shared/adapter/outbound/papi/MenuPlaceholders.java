@@ -5,11 +5,11 @@ import java.util.OptionalInt;
 import java.util.UUID;
 
 /**
- * Read seam the expansion queries for the {@code menu_*} placeholders — the reverse direction of the engine's
+ * Read seam the expansion queries for the {@code menu_*} placeholders. The reverse direction of the engine's
  * inbound PlaceholderAPI bridge. Instead of resolving PlaceholderAPI tokens inside a menu, this exposes the menu
  * engine's own runtime state as a source other plugins, scoreboards and tab can read: whether the requester is
  * in a menu, which one, its page and rows, and the value of a typed argument it was opened with. Like every seam
- * here it is a plain UUID-in / value-out interface — no PlaceholderAPI type and no live {@code Player} — so the
+ * here it is a plain UUID-in / value-out interface, no PlaceholderAPI type and no live {@code Player}, so the
  * resolver test can populate it with a fake.
  *
  * <p>The menu engine is always wired, so in production this seam is never absent; but the resolver still guards

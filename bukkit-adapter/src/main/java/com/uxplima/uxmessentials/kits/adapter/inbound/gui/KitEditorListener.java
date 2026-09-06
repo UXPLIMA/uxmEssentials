@@ -11,8 +11,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Saves the bespoke {@code /kit editor} item-grid window back to its kit when the editor closes it. Every other kit
- * administration GUI — the manager list, both category GUIs, the kit→category selector, and the per-kit settings
- * panel — now renders through the menu engine and is routed by the engine's own MenuListener, so this listener owns
+ * administration GUI, the manager list, both category GUIs, the kit→category selector, and the per-kit settings
+ * panel. Now renders through the menu engine and is routed by the engine's own MenuListener, so this listener owns
  * only the one still-bespoke window: the editable six-row item grid {@link KitEditorView} opens, recognised by its
  * {@link KitEditorHolder}. The grid is a true item container (the editor drags stacks in and out of it), the one
  * leaf the menu engine deliberately does not model, so it keeps its own close handler.

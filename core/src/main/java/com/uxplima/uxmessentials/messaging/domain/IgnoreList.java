@@ -10,11 +10,11 @@ import java.util.UUID;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The set of players one owner ignores, with the {@link IgnoreScope} of each block — a persistent aggregate
+ * The set of players one owner ignores, with the {@link IgnoreScope} of each block, a persistent aggregate
  * loaded per owner. It is the single authority on the ignore-aware delivery rule: {@link #blocks} answers
  * whether traffic of a given kind from a sender is suppressed, and the {@code /msg} resolution and the async
- * chat-mute path both consult it. The list is immutable between operations — {@link #ignore} and
- * {@link #unignore} return a new list rather than mutating in place — so a concurrent reader of one snapshot
+ * chat-mute path both consult it. The list is immutable between operations, {@link #ignore} and
+ * {@link #unignore} return a new list rather than mutating in place, so a concurrent reader of one snapshot
  * never sees a half-applied change.
  *
  * <p>Entries are keyed by the ignored player's uuid (the {@link PlayerRef} name is informational), so a
@@ -86,7 +86,7 @@ public final class IgnoreList {
     }
 
     /**
-     * True when traffic of {@code channel} from {@code sender} is suppressed for this owner — the
+     * True when traffic of {@code channel} from {@code sender} is suppressed for this owner, the
      * ignore-aware delivery rule. An owner who does not ignore the sender, or ignores them under a scope
      * that does not cover this channel, is not blocked.
      */

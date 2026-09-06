@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.survival.domain;
 
 /**
  * The pure percentage roll behind a head drop: a chance in {@code [0, 100]} that is compared against a bounded random
- * draw. Keeping the comparison here, off any random source, leaves the decision deterministic under test — the adapter
+ * draw. Keeping the comparison here, off any random source, leaves the decision deterministic under test, the adapter
  * draws a value in {@code [0, }{@link #RESOLUTION}{@code )} through its seedable {@code RandomSource} and asks whether
  * that draw {@link #drops(int) drops}, so a test can pin an exact draw against an exact chance and assert drop or
  * no-drop with no real randomness.

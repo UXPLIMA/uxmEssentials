@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by BentoBox islands, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by BentoBox islands, reached <b>entirely by reflection</b>. There is no compile
  * dependency on BentoBox, so this class loads and runs whether or not BentoBox is present. Here a "claim" is an
  * island: the block belongs to a claim exactly when BentoBox reports an island covering it, so a warp can be
  * gated to an island you own or are a member of.
@@ -29,16 +29,16 @@ import org.jspecify.annotations.Nullable;
  * against BentoBox's owner, member and ban concepts.
  *
  * <p>Ownership is the island's owner ({@code Island.getOwner()}), which is empty for an unowned or spawn island
- * — a null owner reads as no owner rather than a match. Trust widens ownership to island membership
+ *: a null owner reads as no owner rather than a match. Trust widens ownership to island membership
  * ({@code Island.getMemberSet()}), matching the owner-or-member reading the other providers use. A ban is the
  * island's own ban list: {@link ClaimLookup#isBanned} defers to {@code Island.isBanned(UUID)}.
  *
  * <p>BentoBox is the framework; game modes (BSkyBlock, AcidIsland, …) run on top of it. The single
  * {@code BentoBox} plugin-present check covers every one of them, because {@code getIslandAt} spans all island
- * worlds — so there is no need to probe individual game-mode plugins.
+ * worlds, so there is no need to probe individual game-mode plugins.
  *
  * <p>{@link #active()} consults only the plugin manager, so constructing this provider and asking whether it is
- * active names no {@code world.bentobox} type — a server without BentoBox loads none of its classes. The
+ * active names no {@code world.bentobox} type: a server without BentoBox loads none of its classes. The
  * BentoBox API chain runs lazily inside {@link #claimAt} past that guard, and any reflective failure logs once
  * and degrades to empty rather than propagating.
  */
@@ -48,8 +48,8 @@ public final class BentoBoxClaimProvider implements ClaimProvider {
     private static final String BENTO_BOX = "BentoBox";
     private static final String BENTO_BOX_CLASS = "world.bentobox.bentobox.BentoBox";
 
-    // BentoBox islands are x/z-bounded areas spanning the full world height — a warp is on an island regardless
-    // of height — so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on
+    // BentoBox islands are x/z-bounded areas spanning the full world height. A warp is on an island regardless
+    // of height, so a constant Y keeps the lookup off getHighestBlockYAt(), which is region-bound and unsafe on
     // Folia, matching the other providers.
     private static final int CLAIM_LOOKUP_Y = 64;
 

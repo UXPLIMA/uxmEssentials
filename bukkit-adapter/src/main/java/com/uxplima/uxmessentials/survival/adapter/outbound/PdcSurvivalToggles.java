@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-player on/off state of the survival mechanics that carry a {@code /command} toggle. Each toggle survives
- * relog, so it is stamped in the player's PDC under a single pre-created key — the sanctioned use for transient
+ * relog, so it is stamped in the player's PDC under a single pre-created key. The sanctioned use for transient
  * per-holder state, like the poses and teleport toggles. The stored byte holds the <em>active</em> state directly: an
  * absent key defaults to on (the mechanic ships enabled, so a player who never touched it has it on), so a first
  * toggle writes an off {@code (byte) 0}.

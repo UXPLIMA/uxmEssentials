@@ -42,7 +42,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The end-to-end proof that a click requirement block gates the click's actions and routes to its deny actions when it
  * fails. The real {@link MenuSpecLoader} reads the map form, the real {@link RequirementConditions} back the
- * {@code has-empty-slots} gate, and the live {@link MenuListener} evaluates the block — so these drive config → open →
+ * {@code has-empty-slots} gate, and the live {@link MenuListener} evaluates the block, so these drive config → open →
  * click → effect, not any part in isolation. A recording {@code record-note} action captures which branch ran, and the
  * viewer's real inventory drives whether the gate holds. Inversion and minimum (AND / OR / N-of-M) are exercised the
  * same way.

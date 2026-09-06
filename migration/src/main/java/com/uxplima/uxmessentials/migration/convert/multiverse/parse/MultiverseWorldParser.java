@@ -49,7 +49,7 @@ public final class MultiverseWorldParser {
         return parse(YamlSource.load(file));
     }
 
-    /** Parse from a reader — the form the golden-file tests drive. */
+    /** Parse from a reader: the form the golden-file tests drive. */
     public List<MultiverseWorld> parse(Reader reader) throws IOException {
         return parse(YamlSource.load(reader));
     }

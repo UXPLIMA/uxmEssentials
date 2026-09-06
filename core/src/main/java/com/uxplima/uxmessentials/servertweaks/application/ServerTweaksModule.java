@@ -13,9 +13,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The server-tweaks bounded context as a first-class {@link FeatureModule}: a grab-bag of small, independent
- * server/infrastructure toggles — a custom F3 server brand, a console-spam filter, unsigned public chat
+ * server/infrastructure toggles, a custom F3 server brand, a console-spam filter, unsigned public chat
  * (no-chat-reports), and a SignedVelocity backend handshake. The module ships enabled so an operator can turn on any
- * single tweak without touching the others, but <b>every individual tweak defaults off</b> — being enabled changes
+ * single tweak without touching the others, but <b>every individual tweak defaults off</b>: being enabled changes
  * nothing until a tweak is switched on in {@code modules.servertweaks}.
  *
  * <p>The tweaks are Bukkit-facing side effects (a join-time plugin message for the brand, a Log4j2 filter on the

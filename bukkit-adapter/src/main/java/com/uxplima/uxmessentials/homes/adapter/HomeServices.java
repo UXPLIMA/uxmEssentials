@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /home} opens the slot grid; {@code /homeadmin} drives the admin use case; {@code /visit},
  * {@code /invite}, and {@code /uninvite} drive the public/visit use cases against another player resolved
  * through {@link PlayerLookup}. The grid and its child menus own every other home operation, so the only
- * per-command use cases held here are admin plus the visit/invite trio — the homes context keeps no other
+ * per-command use cases held here are admin plus the visit/invite trio. The homes context keeps no other
  * adapter-side runtime state.
  *
  * @param homeList the {@code /home} slot grid the player opens

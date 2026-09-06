@@ -23,11 +23,11 @@ import org.jspecify.annotations.NullMarked;
  * their in-memory {@link PlayerStateSnapshot} across the events that reset Bukkit state.
  *
  * <ul>
- *   <li><b>Join</b> — re-apply the snapshot so a returning player keeps the flags they held this session
+ *   <li><b>Join</b>. Re-apply the snapshot so a returning player keeps the flags they held this session
  *       (the in-memory map survives a relog within the same server uptime; it is transient, not persisted).
- *   <li><b>Respawn</b> — re-apply, because a death resets {@code allowFlight} and invulnerability; the
+ *   <li><b>Respawn</b>. Re-apply, because a death resets {@code allowFlight} and invulnerability; the
  *       reconciler runs after the respawn so the values stick.
- *   <li><b>Quit</b> — drop the snapshot so a disconnected player holds no state.
+ *   <li><b>Quit</b>: drop the snapshot so a disconnected player holds no state.
  * </ul>
  *
  * <p>Join and quit also clear the player's glow colour through the shared {@link PlayerTeamCoordinator}. The glowing
@@ -35,7 +35,7 @@ import org.jspecify.annotations.NullMarked;
  * without this a player who glowed before a restart would come back with a coloured name and no outline to explain it.
  *
  * <p>The events fire on the player's region thread, but reconciliation is still routed through the
- * {@link StateReconciler}, which hops to the owning entity thread via the {@code Scheduler} port — the one
+ * {@link StateReconciler}, which hops to the owning entity thread via the {@code Scheduler} port, the one
  * place Bukkit state is mutated, valid on Folia.
  */
 @NullMarked

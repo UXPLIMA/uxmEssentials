@@ -8,7 +8,7 @@ package com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec;
  * <p>{@link #DROP} (the drop key over a slot), {@link #CONTROL_DROP} (drop-stack), and {@link #DOUBLE_CLICK} are the
  * three gestures beyond the mouse buttons. A caveat worth knowing when binding {@code DOUBLE_CLICK}: the client fires
  * a preceding {@code LEFT} click before the double, so a spec that binds both {@code left} and {@code double_click} on
- * one item sees both run on a double — which is how vanilla reports the gesture, not a fault in the engine.
+ * one item sees both run on a double, which is how vanilla reports the gesture, not a fault in the engine.
  */
 public enum ClickKind {
     LEFT,

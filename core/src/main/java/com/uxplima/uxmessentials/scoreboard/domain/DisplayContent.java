@@ -10,7 +10,7 @@ import java.util.Set;
  * The operator-authored content of the per-player scoreboard sidebar: the sidebar title and lines, the refresh
  * cadence the render timer reads each cycle, and the set of world names where the sidebar is suppressed. Every string
  * is raw MiniMessage source the adapter renders per viewer through the placeholder pipeline; the domain never parses
- * or localises them — it only guards the structural invariants.
+ * or localises them: it only guards the structural invariants.
  *
  * <p>The authored catalog may contain more than the vanilla {@link #MAX_LINES} visible rows because conditions and
  * empty-value filtering are evaluated per viewer. The renderer applies the visible limit after those filters. The
@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * <p>{@code hideScoreNumbers} hides the red per-line score numbers vanilla draws down the right edge of the sidebar
  * (the adapter applies a blank number format to each line unless that line overrides it). It defaults on, the clean, modern look operators
- * expect — and is purely a render concern, not a structural one, so it never affects {@link #isBlank()}.
+ * expect, and is purely a render concern, not a structural one, so it never affects {@link #isBlank()}.
  *
  */
 public final class DisplayContent {
@@ -121,7 +121,7 @@ public final class DisplayContent {
         return worldBlacklist.stream().anyMatch(candidate -> candidate.equalsIgnoreCase(worldName));
     }
 
-    /** True when nothing is configured to show — no title and no lines. */
+    /** True when nothing is configured to show: no title and no lines. */
     public boolean isBlank() {
         return title.isEmpty() && lineDefinitions.isEmpty();
     }

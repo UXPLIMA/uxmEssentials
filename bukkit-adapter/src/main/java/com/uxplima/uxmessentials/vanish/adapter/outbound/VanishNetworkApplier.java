@@ -17,8 +17,8 @@ import org.jspecify.annotations.NullMarked;
  * visibility too. It is the handler {@link BusVanishBus} feeds from the bus's off-tick dispatch thread.
  *
  * <p><b>Folia-safe.</b> Updating the {@link NetworkVanishStore} is a pure lock-free map write with no Bukkit touch, so
- * it runs inline on the dispatch thread. Any player/packet work — re-hiding or revealing a player who happens to be
- * online here — is marshalled onto that player's own entity region through the injected {@link Scheduler}; the
+ * it runs inline on the dispatch thread. Any player/packet work. Re-hiding or revealing a player who happens to be
+ * online here. Is marshalled onto that player's own entity region through the injected {@link Scheduler}; the
  * scheduler silently no-ops when the player is offline on this backend (the common case for a remote frame, since a
  * player is online on exactly one backend), so the callback never touches the Bukkit API off-region.
  */

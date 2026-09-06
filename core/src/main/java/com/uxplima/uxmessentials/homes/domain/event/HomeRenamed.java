@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.homes.domain.HomeSlot;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A home's display label changed — the cosmetic {@link com.uxplima.uxmessentials.homes.domain.HomeLabel}
+ * A home's display label changed. The cosmetic {@link com.uxplima.uxmessentials.homes.domain.HomeLabel}
  * set, cleared, or replaced. The slot is the home's identity and is unchanged; only the label the player
  * sees moved.
  *

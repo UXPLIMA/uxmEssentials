@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * Constructs the vaults context's adapters and use cases over the injected kernel ports and the persistence
  * DSL, and produces everything the plugin must register: the Brigadier {@code /vault} command, with the vault
  * windows themselves handled by uxmLib's {@code StorageGui}. This is the one place the vaults context is wired
- * — nothing else news up its classes.
+ *: nothing else news up its classes.
  *
  * <p>The repository is the cached jOOQ adapter over {@code persistence.dsl()} (write-through at the database,
  * invalidate in the Caffeine cache); the two numbered-quota families resolve through the shared
@@ -76,7 +76,7 @@ public final class VaultsWiring {
 
     /**
      * Build the vaults adapters and use cases from {@code ctx}, the {@code persistence} DSL, and the bus, with
-     * no economy bridge — a configured vault cost is recorded but not charged.
+     * no economy bridge: a configured vault cost is recorded but not charged.
      */
     public static Wired wire(
             Plugin plugin,
@@ -238,7 +238,7 @@ public final class VaultsWiring {
     private static VaultCharge buildCharge(
             KernelPorts kernel, VaultSettings settings, Optional<VaultEconomy> vaultEconomy) {
         if (!settings.economyEnabled() || vaultEconomy.isEmpty()) {
-            // Economy disabled in config or no provider wired — every vault action is free, no refund is paid.
+            // Economy disabled in config or no provider wired: every vault action is free, no refund is paid.
             return new VaultCharge(kernel.permissions(), Optional.empty(), VaultChargeSettings.allFree());
         }
         return new VaultCharge(kernel.permissions(), vaultEconomy, settings.chargeSettings());

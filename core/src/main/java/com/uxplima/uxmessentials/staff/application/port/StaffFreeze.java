@@ -4,18 +4,18 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Soft-coupled seam to the moderation context: freeze or unfreeze a target — the FREEZE gadget. Staff mode
+ * Soft-coupled seam to the moderation context: freeze or unfreeze a target, the FREEZE gadget. Staff mode
  * does not own the freeze machinery; it orchestrates the existing moderation module's freeze handling through
  * this port, so there is no second frozen-state to keep in sync with moderation's.
  *
  * <p>The coupling is soft: when the moderation module is disabled (or has not yet landed) the wiring binds
- * {@link #NONE}, so the FREEZE gadget degrades to "freeze is unavailable" rather than failing — the same
+ * {@link #NONE}, so the FREEZE gadget degrades to "freeze is unavailable" rather than failing, the same
  * degrade-when-the-other-module-is-off pattern as {@link StaffVanish#NONE} and {@link StaffInspector#NONE}.
  */
 @NullMarked
 public interface StaffFreeze {
 
-    /** A no-op freeze — the binding when moderation is disabled; reports unavailable and never-frozen. */
+    /** A no-op freeze: the binding when moderation is disabled; reports unavailable and never-frozen. */
     StaffFreeze NONE = new StaffFreeze() {
         @Override
         public FreezeOutcome toggle(PlayerRef actor, PlayerRef target) {

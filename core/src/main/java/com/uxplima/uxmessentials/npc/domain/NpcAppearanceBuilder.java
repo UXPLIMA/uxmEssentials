@@ -8,7 +8,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * A mutable builder for {@link NpcAppearance}, kept package-private so it is purely an internal mechanism: each
  * {@link NpcAppearance} {@code with*} transition reads {@link NpcAppearance#toBuilder()}, changes the one field it
- * owns, and calls {@link #build()} — which routes through the canonical {@code NpcAppearance} constructor, so every
+ * owns, and calls {@link #build()}, which routes through the canonical {@code NpcAppearance} constructor, so every
  * normalisation and range check (entity-type/pose upper-casing, scale and distance validation, the defensive map
  * copies) still fires. Extracting the per-field copy boilerplate here keeps {@code NpcAppearance} small without
  * changing its public surface.

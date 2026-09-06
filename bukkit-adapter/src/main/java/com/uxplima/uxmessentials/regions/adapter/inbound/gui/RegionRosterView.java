@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-region members/owners editor: an engine-backed panel (the shared {@link EntityListView}, so it renders
- * through the menu engine and needs no raw-inventory allow-list entry) with one icon per roster entry — owners first,
+ * through the menu engine and needs no raw-inventory allow-list entry) with one icon per roster entry, owners first,
  * then members. Clicking a uuid-backed entry removes it through {@link RegionService#applyMemberChange} (the same seam
  * a command would use), so the GUI holds no WorldGuard logic of its own; a group or legacy-name entry has no uuid to
  * key the removal, so it renders read-only and a click reports that it must be removed with WorldGuard's own commands.
@@ -42,7 +42,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The roster is read off the tick thread through the {@link RegionService} (WorldGuard's region store is queried on
  * the global region thread, never a viewer's region thread) and each entry's display name is resolved from the offline
  * profile cache in the same pass, then the panel opens on the staff member's own entity thread over that snapshot. A
- * removal applies the write on the global region thread — where WorldGuard mutations belong — then re-reads the roster
+ * removal applies the write on the global region thread, where WorldGuard mutations belong, then re-reads the roster
  * and re-opens the panel on the viewer's entity thread, so a fresh panel always reflects the roster that just changed.
  * A fresh {@link EntityListView} is built per open, so two staff editing different regions never share panel state.
  */

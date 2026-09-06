@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the {@link SecurityModule} feature-module contract: it reports the {@code security} id, ships enabled by
- * default, honours an explicit {@code modules.security.enabled = false}, and — as the Phase-1 skeleton — declares no
+ * default, honours an explicit {@code modules.security.enabled = false}, and, as the Phase-1 skeleton, declares no
  * CommandSpec, listener or migration (the {@code /2fa} and {@code /pin} verbs are Brigadier registrations from the
  * adapter, and the {@code security_2fa} table is in the persistence baseline). Registry wiring is covered by
  * {@code FeatureModuleRegistryDriftTest}.

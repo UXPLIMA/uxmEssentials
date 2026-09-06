@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Registers the homes context's menus with the menu engine and opens them. A single coordinator that holds the
- * engine façade, the home use cases each menu drives, and the specs they render through — the shape the staff and
+ * engine façade, the home use cases each menu drives, and the specs they render through, the shape the staff and
  * vault menus follow, generalised to the homes menu chain (the icon picker and the invited-players list both return
  * to a home's action menu).
  *

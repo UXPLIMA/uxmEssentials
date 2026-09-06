@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit-tests the {@link MojangSkins}'s two-step orchestration, gson parsing, fail-soft empties and
- * caching against a fake HTTP seam — no live Mojang call is ever made. The fake maps each URI to a canned body
+ * caching against a fake HTTP seam: no live Mojang call is ever made. The fake maps each URI to a canned body
  * (or no body for a 404), counts how many fetches it sees per URI, and a deferred scheduler runs the async work
  * synchronously so the returned future is already complete by the time the test reads it.
  */

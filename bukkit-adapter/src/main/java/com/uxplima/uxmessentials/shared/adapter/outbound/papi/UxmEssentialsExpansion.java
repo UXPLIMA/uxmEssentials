@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  * %rel_uxmessentials_<key>%} form: the keys that read the relation between two players (whether one can see,
  * ignores or is trading with the other, and how far apart they stand) rather than one player's own state.
  *
- * <p>{@link #persist()} is {@code true} so the expansion survives a PlaceholderAPI internal reload — the
+ * <p>{@link #persist()} is {@code true} so the expansion survives a PlaceholderAPI internal reload, the
  * plugin owns its lifecycle and unregisters the expansion on its own disable, not when PlaceholderAPI
  * reloads its registry. An unknown key resolves to {@code null}, the PlaceholderAPI signal to leave the raw
  * token in place.

@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /togglejail <player> [jail] [reason]}: a convenience wrapper that releases a jailed target or jails a
- * free one in a single command. It owns no jail logic of its own — the current jail row decides the direction
+ * free one in a single command. It owns no jail logic of its own. The current jail row decides the direction
  * and the existing {@link Jail} / {@link Unjail} use cases do the work (exempt gating, unknown-jail rejection,
  * audit lines, teleport and the cross-context {@code JailGate} update all stay there). A jailed target is
  * released; a free target is confined to the named jail, or the first configured jail when the name is omitted.

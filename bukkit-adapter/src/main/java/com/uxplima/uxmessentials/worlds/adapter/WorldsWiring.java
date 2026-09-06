@@ -93,12 +93,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the worlds context's adapters and use cases over the injected kernel ports, the persistence
  * DSL, and the Bukkit {@link Server}, and produces the Brigadier command list the plugin registers. This
- * is the one place the worlds context is wired — nothing else news up its classes.
+ * is the one place the worlds context is wired: nothing else news up its classes.
  *
  * <p>The repository is the cached jOOQ adapter; its in-memory snapshot is warmed once on enable so every
  * later {@code /worlds} resolve and tab-complete is served from memory rather than a synchronous SQLite
  * read on the command thread. The enable-time reconcile runs on the global region thread (Bukkit world
- * handles require it), then invalidates the warmed snapshot — its adopt/auto-load phases mutated rows — so
+ * handles require it), then invalidates the warmed snapshot, its adopt/auto-load phases mutated rows, so
  * the next read reloads, and refreshes the import-folder snapshot off-tick.
  */
 @NullMarked
@@ -217,8 +217,8 @@ public final class WorldsWiring {
         AutoCloseable sweepHandle = sweep.start();
         WorldsPlaceholders worldsPlaceholders = new RepositoryWorldsPlaceholders(repository, engine);
 
-        // The whole editor — the world picker, the per-world hub, the create screen, the read-only generation summary,
-        // and the shared rules/access grid — now renders through the menu engine. The picker is reopened by the hub
+        // The whole editor, the world picker, the per-world hub, the create screen, the read-only generation summary,
+        // and the shared rules/access grid: now renders through the menu engine. The picker is reopened by the hub
         // and the create screen, so a one-element holder breaks that cycle, exactly the grid<->action seam the homes
         // and npc list migrations use. The reopen seam every "back" path calls resolves to the picker once it is built.
         WorldListMenu[] listHolder = new WorldListMenu[1];

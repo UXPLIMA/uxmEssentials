@@ -19,13 +19,13 @@ import com.uxplima.uxmessentials.discordlink.domain.PendingLink;
  */
 public interface DiscordLinkStore {
 
-    /** Upsert the player's pending code, replacing any previous one — a fresh {@code /discordlink} re-issues. */
+    /** Upsert the player's pending code, replacing any previous one: a fresh {@code /discordlink} re-issues. */
     void savePending(PendingLink pending);
 
     /** The pending row a code belongs to, if one is still outstanding. */
     Optional<PendingLink> findPendingByCode(LinkCode code);
 
-    /** Drop the player's pending row, if any — called on redemption and on an expired-code sweep. */
+    /** Drop the player's pending row, if any, called on redemption and on an expired-code sweep. */
     void deletePending(UUID player);
 
     /** Bind the player to the Discord id and clear that player's pending row, atomically. */
@@ -34,7 +34,7 @@ public interface DiscordLinkStore {
     /** The confirmed binding for a player, if any. */
     Optional<ConfirmedLink> findByPlayer(UUID player);
 
-    /** The confirmed binding for a Discord id, if any — the seam's already-linked guard reads this. */
+    /** The confirmed binding for a Discord id, if any: the seam's already-linked guard reads this. */
     Optional<ConfirmedLink> findByDiscordId(DiscordId discordId);
 
     /** Remove the player's confirmed binding; {@code true} when a binding existed, {@code false} otherwise. */

@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * The bridge-side representation of one host notification — an audit event or an economy notification the host
+ * The bridge-side representation of one host notification, an audit event or an economy notification the host
  * plugin raised on the {@code com.uxplima.uxmessentials.audit} channel / in-process {@code DomainEventPublisher}
  * (docs/09-deployment.md §Audit logging). The host's notification source produces these and feeds them to the
  * {@link AuditNoticeSubscriber}; the {@link NotificationFormatter} turns one into the formatted
@@ -42,7 +42,7 @@ public record AuditNotice(
         Optional<Long> amount,
         String originServer) {
 
-    /** The sentinel origin the bridge stamps on anything it produced — never re-forwarded (the loop guard). */
+    /** The sentinel origin the bridge stamps on anything it produced: never re-forwarded (the loop guard). */
     public static final String DISCORD_ORIGIN = "discord";
 
     public AuditNotice {
@@ -50,7 +50,7 @@ public record AuditNotice(
         Objects.requireNonNull(event, "event");
         Objects.requireNonNull(actor, "actor");
         Objects.requireNonNull(target, "target");
-        // Preserve insertion order so the rendered line keeps the host's field ordering — Map.copyOf would not.
+        // Preserve insertion order so the rendered line keeps the host's field ordering: Map.copyOf would not.
         fields = Collections.unmodifiableMap(new LinkedHashMap<>(Objects.requireNonNull(fields, "fields")));
         Objects.requireNonNull(amount, "amount");
         Objects.requireNonNull(originServer, "originServer");

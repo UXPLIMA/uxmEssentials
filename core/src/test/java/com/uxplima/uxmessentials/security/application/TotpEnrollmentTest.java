@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the TOTP enrolment pair: {@link BeginTotpEnrollment} hands back a challenge and stores nothing durable, and
- * {@link ConfirmTotpEnrollment} enables the factor only when a code from the pending secret verifies — the
+ * {@link ConfirmTotpEnrollment} enables the factor only when a code from the pending secret verifies, the
  * "confirm before enabling" property. The confirming code is generated from the same secret the challenge exposes,
  * so the test never hard-codes a secret.
  */
@@ -43,7 +43,7 @@ class TotpEnrollmentTest {
 
         assertThat(challenge.otpauthUri()).contains("otpauth://totp/uxmEssentials:Steve");
         assertThat(pending.pending(player.uuid())).contains(challenge.secret());
-        // Not yet a real factor — setup alone must never enrol.
+        // Not yet a real factor: setup alone must never enrol.
         assertThat(repository.find(player.uuid())).isEmpty();
     }
 

@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * Turns one page a paged list source returned into the flat entry list the engine renders: the pinned rows first,
  * then the flow rows trimmed to the content slots left once the pinned rows have claimed theirs. A source that
  * over-returns is a bug in the source, not something to hide, so the overflow is dropped and logged once at warn
- * rather than silently kept — a silently kept overflow would read to the operator as "the viewer saw everything".
+ * rather than silently kept: a silently kept overflow would read to the operator as "the viewer saw everything".
  *
  * <p>Both the first-open resolve (the {@code Menus} façade) and a page flip (the {@code MenuListener}) assemble their
  * page through this one method, so the two paths cannot drift on how a page is built or when an overflow is reported.

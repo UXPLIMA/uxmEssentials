@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * One staff member's punishment tallies over a report window — the per-staff row a punishment-stats report
+ * One staff member's punishment tallies over a report window. The per-staff row a punishment-stats report
  * renders and the unit a most-active-staff leaderboard is ordered by. It counts the four punitive actions a
  * staff member issued ({@link SanctionAction#BAN}, {@link SanctionAction#MUTE}, {@link SanctionAction#WARN},
  * {@link SanctionAction#KICK}); the lifts ({@link SanctionAction#UNBAN}, {@link SanctionAction#UNMUTE}) are
@@ -36,7 +36,7 @@ public record StaffPunishmentCount(Optional<UUID> staff, String staffName, int b
         requireNonNegative(kicks, "kicks");
     }
 
-    /** The staff member's total punishments in the window — the leaderboard's ordering key. */
+    /** The staff member's total punishments in the window: the leaderboard's ordering key. */
     public int total() {
         return bans + mutes + warns + kicks;
     }

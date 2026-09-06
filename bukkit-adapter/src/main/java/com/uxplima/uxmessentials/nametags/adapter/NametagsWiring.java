@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * lifecycle listener and the self-rescheduling reconcile/animation timer on the {@code Scheduler} port. This is the one
  * place the nametags context is wired.
  *
- * <p>The nametag is always-on for every eligible wearer when enabled — there is no per-player visibility toggle, so
+ * <p>The nametag is always-on for every eligible wearer when enabled. There is no per-player visibility toggle, so
  * the context publishes no command. It persists nothing: the formats are config-authored. Rendering goes through
  * uxmLib's packet {@link NametagRenderer}: a {@link ChannelResolver} → {@link PacketSender} → {@link NmsNametagPackets}
  * stack sends per-viewer spawn/metadata/remove bundles, and the lib owns a per-wearer refresh task (an entity timer)
@@ -77,10 +77,10 @@ public final class NametagsWiring {
 
         // Vanish is soft-coupled to the vanish module: bootstrap hands in the authority-reading gate (over the single
         // vanish store) when vanish is enabled, or NametagVanish.ALWAYS_VISIBLE ("everyone can see everyone") when it
-        // is off — so no nametag-side branch is needed for the vanish-disabled case.
+        // is off, so no nametag-side branch is needed for the vanish-disabled case.
         // The presenter passes the same configured refresh interval into the lib's per-wearer refresh loop that drives
         // the reconcile/animation timer below, so a refresh-ticks change moves the lib's text/viewer/line-of-sight
-        // cadence and the animation clock in lockstep — the lib loop reads the period once per show, and a
+        // cadence and the animation clock in lockstep. The lib loop reads the period once per show, and a
         // format/appearance change re-shows, so a reload's new cadence takes effect on the next re-show.
         PacketNametagPresenter presenter = new PacketNametagPresenter(
                 settings::formats,
@@ -106,7 +106,7 @@ public final class NametagsWiring {
     /**
      * Everything the nametags module contributes once wired: the connection listener, the self-rescheduling reconcile
      * timer, and the {@code running} flag the timer observes. The presenter is held so {@link #stop()} can remove every
-     * shown nametag. The command list is always empty — the nametag has no per-player toggle — but it is kept to mirror
+     * shown nametag. The command list is always empty, the nametag has no per-player toggle, but it is kept to mirror
      * the other contexts' {@code Wired} shape so the bootstrap wires every context the same way.
      *
      * @param commands the Brigadier command registrations to publish (always empty for nametags)

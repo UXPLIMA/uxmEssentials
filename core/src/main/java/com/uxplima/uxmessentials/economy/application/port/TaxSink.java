@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * Where a {@code /pay} tax goes. The tax is collected <em>from the receiver</em> immediately after the gross
- * transfer credited them — the receiver always holds at least the tax at that moment, so the sink's single
+ * transfer credited them. The receiver always holds at least the tax at that moment, so the sink's single
  * guarded move can never fail for lack of funds and money is conserved in every outcome. An implementation
  * either voids the tax (a guarded debit that destroys it) or routes it to a server account (a transfer into a
  * configured holding wallet); both are atomic single moves, so a sink failure (e.g. the account at its

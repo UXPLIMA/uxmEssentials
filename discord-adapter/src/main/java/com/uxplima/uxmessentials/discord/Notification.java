@@ -5,7 +5,7 @@ import java.util.Optional;
 
 /**
  * A single thing to mirror to Discord: which {@link EventCategory} it belongs to, the already-formatted line,
- * and — for {@link EventCategory#ECONOMY} — the transaction amount used to apply the {@code min-eco-notify}
+ * and, for {@link EventCategory#ECONOMY}, the transaction amount used to apply the {@code min-eco-notify}
  * threshold. Audit notifications carry no amount.
  *
  * <p>This is the bridge's internal value object; the adapter that subscribes to the host plugin's audit /

@@ -40,10 +40,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The open-command sub-editor opened from the menu-property editor's "Open command" row: it edits the menu's
- * {@code command {}} block — the {@code /shop}-style command a menu registers for itself. It is a thin consumer of the
- * shared {@link EntityEditorView} — an enabled {@link ToggleProperty} that adds a command block to a menu that has none
+ * {@code command {}} block: the {@code /shop}-style command a menu registers for itself. It is a thin consumer of the
+ * shared {@link EntityEditorView}. An enabled {@link ToggleProperty} that adds a command block to a menu that has none
  * or clears it, the command name / permission / deny-message / usage as {@link TextProperty} anvils, the aliases as a
- * {@link ListProperty}, and a console {@link ToggleProperty} — so no raw Bukkit inventory is built and the sub-editor
+ * {@link ListProperty}, and a console {@link ToggleProperty}, so no raw Bukkit inventory is built and the sub-editor
  * stays on the menu engine like every other editor surface.
  *
  * <p>Every field reads the menu's command block fresh from the {@link MenuEditSession} and writes back through

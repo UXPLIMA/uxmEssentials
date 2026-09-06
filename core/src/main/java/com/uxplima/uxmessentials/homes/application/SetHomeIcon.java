@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Set or clear the GUI icon of the home in a slot, keeping its location, label, and creation time. The
- * icon is cosmetic — the slot remains the home's identity — so an empty {@code icon} clears it. The
+ * icon is cosmetic, the slot remains the home's identity, so an empty {@code icon} clears it. The
  * aggregate rejects an empty slot with {@link HomeError#NOT_FOUND}; a successful change saves the row,
  * publishes {@code HomeIconChanged}, and notifies {@link HomesMessageKey#HOME_ICON_CHANGED}.
  */

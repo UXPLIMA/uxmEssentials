@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A jail location was defined or re-anchored — {@code /setjail <name>} saved the staff member's current
+ * A jail location was defined or re-anchored. {@code /setjail <name>} saved the staff member's current
  * position under {@code jail}. A {@code /setjail} onto an existing stored name overwrites that jail's location
  * and raises this same event; the store is keyed by name, so a redefinition is an upsert, not a separate kind.
  *

@@ -18,15 +18,15 @@ import org.jspecify.annotations.Nullable;
  * Delivers the {@code GIVE} action's item to a viewer. The value is one of two shapes:
  *
  * <ul>
- *   <li><b>{@code <material>[:amount]}</b> — a Bukkit material name (case-insensitive) and an optional positive
+ *   <li><b>{@code <material>[:amount]}</b>, a Bukkit material name (case-insensitive) and an optional positive
  *       amount (default 1), the plain-reward shape.
- *   <li><b>{@code b64:<base64>}</b> — a full serialized item (enchantments, custom name, lore, custom model data),
+ *   <li><b>{@code b64:<base64>}</b>. A full serialized item (enchantments, custom name, lore, custom model data),
  *       resolved through the injected {@code serializedResolver} (the owning context's serialized-item codec);
  *       this is what {@code add … give hand} stores, so a reward can carry NBT, not just a material.
  * </ul>
  *
  * <p>What does not fit the viewer's inventory drops at their feet rather than vanishing, so a full inventory never
- * silently eats the reward. An unknown material or a corrupt serialized token is logged and skipped — the runner
+ * silently eats the reward. An unknown material or a corrupt serialized token is logged and skipped, the runner
  * treats this as a fail-soft effect, not a gate, so the rest of the chain still runs.
  */
 @NullMarked

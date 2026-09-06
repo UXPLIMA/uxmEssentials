@@ -37,7 +37,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@code /deathback}: return only to a death capture. With no capture, or a capture whose cause is a teleport
  * rather than a death, the command declines (DEATHBACK_NONE) and never hops. With a death capture it honours
- * the death-back gate exactly like {@code /back} — denied without it, returned with it. The general
+ * the death-back gate exactly like {@code /back}: denied without it, returned with it. The general
  * {@code /back} still returns to whatever the latest capture is.
  */
 class CaptureBackTest {

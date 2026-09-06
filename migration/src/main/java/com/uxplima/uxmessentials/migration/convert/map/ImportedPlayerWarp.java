@@ -16,15 +16,15 @@ import org.jspecify.annotations.NullMarked;
  * One parsed-and-mapped player-owned warp, expressed in a competitor-neutral shape the shared
  * {@code PlayerWarpRecordWriter} lands on the new {@code player_warps} schema. It is the player-warps analogue of
  * {@link ImportedWarp}, but deliberately <em>not</em> the domain aggregate: a source records raw facets (a name the
- * new charset may reject, a plaintext password, an ordinal access flag, per-vote ratings) that the writer resolves —
- * sanitise + globally dedupe the name, hash the password, map the access flag — before an aggregate can be built.
+ * new charset may reject, a plaintext password, an ordinal access flag, per-vote ratings) that the writer resolves
+ * sanitise + globally dedupe the name, hash the password, map the access flag: before an aggregate can be built.
  * Every importer (AxPlayerWarps here; Athelion and Olzie later) maps its own storage into this one record, so the
- * write path — collision rename, PBKDF2 hashing, side-list stores, idempotency, dry-run — is written once.
+ * write path (collision rename, PBKDF2 hashing, side-list stores, idempotency, dry-run) is written once.
  *
  * <p>Fields a given source lacks are empty: AxPlayerWarps carries no password (empty), no co-owner members (empty
  * list), and no per-ban reason, so those arrive as absent rather than as a sentinel. The {@link #location} is already
- * resolved to a {@link Position} by the source's mapper — a warp whose world the live server does not know is dropped
- * there, exactly as the EssentialsX warp mapper drops an unknown world — so the writer never touches a Bukkit world.
+ * resolved to a {@link Position} by the source's mapper. A warp whose world the live server does not know is dropped
+ * there, exactly as the EssentialsX warp mapper drops an unknown world, so the writer never touches a Bukkit world.
  *
  * @param owner the warp owner's uuid
  * @param ownerName the owner's name captured by the source, for the browse author line

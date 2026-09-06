@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <h2>Concurrency</h2>
  * Ownership: <b>region-bound</b>. PDC reads and writes go through the live {@link Player}, so this must
- * be called on the player's region/command thread — the broadcaster runs the {@link #receivesBroadcasts}
+ * be called on the player's region/command thread. The broadcaster runs the {@link #receivesBroadcasts}
  * check on each recipient's entity thread and the {@code /vote broadcasts} command runs the toggle on the
  * sender's region thread. The {@link NamespacedKey} is created once in the constructor, never on a hot
  * path. Mirrors {@code PdcReminderPreferences}.
@@ -39,7 +39,7 @@ public final class PdcBroadcastVisibility implements BroadcastVisibility {
         Objects.requireNonNull(who, "who");
         Player player = Bukkit.getPlayer(who.uuid());
         if (player == null) {
-            // Offline — cannot read PDC; default to receiving (the broadcaster only targets online players).
+            // Offline: cannot read PDC; default to receiving (the broadcaster only targets online players).
             return true;
         }
         return currentlyReceives(player);

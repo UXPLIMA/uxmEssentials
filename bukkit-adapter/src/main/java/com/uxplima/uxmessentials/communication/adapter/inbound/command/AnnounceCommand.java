@@ -32,24 +32,24 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /announce} ({@code uxmessentials.announce.admin}, default op): the operator surface over the rotating
- * announcer. Bare {@code /announce} (and {@code /announce editor}) opens the DB-backed announcement editor — a GUI
+ * announcer. Bare {@code /announce} (and {@code /announce editor}) opens the DB-backed announcement editor, a GUI
  * to create, edit, enable/disable, world/permission-target, and delete announcements; the other subcommands stay:
  *
  * <ul>
- *   <li>{@code editor} (and the bare root via {@link #guiRoot()}) — open the {@link AnnouncementEditorView}: a list
+ *   <li>{@code editor} (and the bare root via {@link #guiRoot()}), open the {@link AnnouncementEditorView}: a list
  *       of the store announcements with a create button, each opening a per-announcement property editor.
- *   <li>{@code reload} — re-read {@code announcer.conf} and swap the live config in, then re-arm the
+ *   <li>{@code reload}, re-read {@code announcer.conf} and swap the live config in, then re-arm the
  *       per-announcement override loops so a newly-added override fires (it is excluded from the shared rotation).
- *       The re-read is HOCON file I/O, so it runs off-tick on the {@code Scheduler} and the confirmation —
- *       the count of announcements through {@link CommunicationMessageKey#ANNOUNCER_RELOADED} — bridges back to the
+ *       The re-read is HOCON file I/O, so it runs off-tick on the {@code Scheduler} and the confirmation
+ *       the count of announcements through {@link CommunicationMessageKey#ANNOUNCER_RELOADED}, bridges back to the
  *       global region for delivery, mirroring {@code /uxmess}'s off-tick reload commands.
- *   <li>{@code list} — list the announcement ids and the channels each pushes to. The set listed is the same merged
+ *   <li>{@code list}: list the announcement ids and the channels each pushes to. The set listed is the same merged
  *       set the announcer rotates: the file {@code announcer.conf} announcements plus the enabled editor-managed
  *       store announcements, so an announcement created in the GUI appears here too.
- *   <li>{@code preview <id>} — show that announcement to the invoking player alone, bypassing the opt-out and
+ *   <li>{@code preview <id>}. Show that announcement to the invoking player alone, bypassing the opt-out and
  *       condition gates; the id is resolved against the same merged set, so a GUI-created id previews. An unknown id
  *       answers with {@link CommunicationMessageKey#ANNOUNCE_PREVIEW_UNKNOWN}.
- *   <li>{@code toggle} — flip the invoking player's broadcast opt-out, an alias for {@code /broadcasttoggle} so the
+ *   <li>{@code toggle}. Flip the invoking player's broadcast opt-out, an alias for {@code /broadcasttoggle} so the
  *       opt-out lives under one verb too; it reuses the same {@link BroadcastOptOut} use case.
  * </ul>
  *
@@ -135,7 +135,7 @@ public final class AnnounceCommand extends CommunicationCommandSupport implement
     }
 
     /**
-     * Bare {@code /announce} opens the editor GUI — the same screen {@code /announce editor} opens. The
+     * Bare {@code /announce} opens the editor GUI: the same screen {@code /announce editor} opens. The
      * {@code GuiRootBinding} installs this on the root when the command's catalog {@code gui} flag is on (the
      * untouched default), so an operator who has not turned the flag off types {@code /announce} and lands in the
      * editor; with it off the root falls through to the usage text instead.
@@ -173,7 +173,7 @@ public final class AnnounceCommand extends CommunicationCommandSupport implement
     private int list(CommandContext<CommandSourceStack> ctx) {
         CommandSender sender = ctx.getSource().getSender();
         // The merged set reads the enabled store announcements, a DB query, so it is resolved off the tick thread and
-        // the framing hops back to the global region for delivery — the same off-tick shape as reload.
+        // the framing hops back to the global region for delivery, the same off-tick shape as reload.
         scheduler.async(() -> {
             AnnouncerConfig config = mergedConfig.get();
             scheduler.onGlobal(() -> sendList(sender, config));

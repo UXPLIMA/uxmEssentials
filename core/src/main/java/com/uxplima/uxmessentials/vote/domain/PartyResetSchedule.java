@@ -7,7 +7,7 @@ package com.uxplima.uxmessentials.vote.domain;
  */
 public enum PartyResetSchedule {
 
-    /** No periodic reset — the counter only resets when a party fires. */
+    /** No periodic reset: the counter only resets when a party fires. */
     NONE,
 
     /** Reset the counter at the start of each calendar day (server timezone). */

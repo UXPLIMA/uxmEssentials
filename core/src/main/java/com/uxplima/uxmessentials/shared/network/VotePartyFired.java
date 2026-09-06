@@ -8,7 +8,7 @@ import java.util.Objects;
  * accumulated vote total and the fired stamp; this frame is the notification that lets every backend
  * celebrate the same party once, in lockstep, rather than each backend racing to detect the threshold from
  * its own cached counter. The {@code threshold} travels with the frame for the broadcast and audit context
- * only — the count itself stays in the DB.
+ * only: the count itself stays in the DB.
  *
  * @param originServer the backend on which the party fired
  * @param threshold the vote count at which the party fired, for broadcast and logging context

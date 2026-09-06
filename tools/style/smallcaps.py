@@ -120,8 +120,8 @@ def strip_decorations(value):
 
 def de_dash(value):
     """Replace the em dash: a separator becomes a dim bullet, prose takes a comma."""
-    value = value.replace("<muted>—</muted>", "<dim>•</dim>").replace("<dim>—</dim>", "<dim>•</dim>")
-    value = value.replace(" — ", ", ").replace("—", ",")
+    value = value.replace("<muted> (</muted>", "<dim>•</dim>").replace("<dim>) </dim>", "<dim>•</dim>")
+    value = value.replace(" (", ", ").replace(") ", ",")
     return value
 
 

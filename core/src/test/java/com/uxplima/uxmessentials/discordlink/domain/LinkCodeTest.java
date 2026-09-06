@@ -19,7 +19,7 @@ class LinkCodeTest {
         assertThatThrownBy(() -> LinkCode.of("")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> LinkCode.of("AB2")).isInstanceOf(IllegalArgumentException.class); // too short
         assertThatThrownBy(() -> LinkCode.of("ABCDE234567")).isInstanceOf(IllegalArgumentException.class); // too long
-        // O, I, 0 and 1 are not in the accepted shape — a code carrying one is rejected.
+        // O, I, 0 and 1 are not in the accepted shape: a code carrying one is rejected.
         assertThatThrownBy(() -> LinkCode.of("ABCDEF0")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> LinkCode.of("ABCDEFI")).isInstanceOf(IllegalArgumentException.class);
     }

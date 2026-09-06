@@ -48,11 +48,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * "child" category over a three-category set, so the candidate list is the two others (a {@code DIAMOND}-iconed "pvp"
  * and a default-BOOK "misc"), drawn at content slots 0 and 1, with the "No Parent" BARRIER at slot 49 and the back
  * ARROW at slot 53. The window is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for
- * slot, to the analytic baseline the old view produced — candidate icons, the two fixed buttons, and the engine's
- * mandatory nav arrows at 45/46 — and the category being edited never appears (the cyclic-parent guard). Then a left
+ * slot, to the analytic baseline the old view produced. Candidate icons, the two fixed buttons, and the engine's
+ * mandatory nav arrows at 45/46, and the category being edited never appears (the cyclic-parent guard). Then a left
  * click on the first candidate through the engine's own
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} proves the migrated path runs
- * the same assign the old click did — the edited category saved with that parent id — and returns the viewer to its
+ * the same assign the old click did, the edited category saved with that parent id, and returns the viewer to its
  * settings window, faithful in both appearance and behaviour.
  */
 class KitCategoryParentSelectorGoldenTest {

@@ -20,8 +20,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqAnnouncementStore} against the default embedded SQLite backend with the Flyway
- * ladder applied through V65. It proves the round-trip (save → find) preserves every editable field — lines,
- * channels, the enabled flag, the raw condition string, the sound, and the interval override — that a re-save
+ * ladder applied through V65. It proves the round-trip (save → find) preserves every editable field, lines,
+ * channels, the enabled flag, the raw condition string, the sound, and the interval override: that a re-save
  * upserts in place on the id key, that the enabled filter excludes a disabled row, and that delete returns true
  * once then false.
  */
@@ -132,7 +132,7 @@ class JooqAnnouncementStoreTest {
         assertThat(store.exists("tips")).isTrue();
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {
@@ -150,7 +150,7 @@ class JooqAnnouncementStoreTest {
         }
     }
 
-    /** A logger that drops everything — the store test asserts on rows, not log output. */
+    /** A logger that drops everything: the store test asserts on rows, not log output. */
     private static final class NoopLogger implements Logger {
         @Override
         public void info(String message, Object... args) {}

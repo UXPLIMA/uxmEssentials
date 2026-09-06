@@ -5,19 +5,19 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The discord-link context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code DISCORD_LINK_CODE} ↔ {@code discordlink.code}); the constant is the
- * compile-time handle, the catalog holds the text. There are no inline player-facing literals in the context —
+ * compile-time handle, the catalog holds the text. There are no inline player-facing literals in the context
  * every message resolves through one of these.
  *
  * <p>These render only the in-game side ({@code /discordlink}, {@code /discordunlink}). The text the bridge
- * replies with inside Discord is not a player-locale catalog key — it is sent on JDA's own thread to a Discord
- * user with no Minecraft locale — so the slash handler carries its own short literals, not these keys.
+ * replies with inside Discord is not a player-locale catalog key. It is sent on JDA's own thread to a Discord
+ * user with no Minecraft locale, so the slash handler carries its own short literals, not these keys.
  *
  * <p>Per the i18n contract a disabled module still ships its keys so the catalog stays whole and the
  * locale-parity guard sees the full {@code en} key set.
  */
 public enum DiscordlinkMessageKey implements MessageKey {
 
-    // /discordlink — issuing and reporting a code
+    // /discordlink. Issuing and reporting a code
     DISCORD_LINK_CODE("discordlink.code"),
     DISCORD_LINK_HOWTO("discordlink.howto"),
     DISCORD_LINK_ALREADY("discordlink.already"),
@@ -36,7 +36,7 @@ public enum DiscordlinkMessageKey implements MessageKey {
     // the Discord bridge is not installed/connected, so a link code would have nothing to redeem it
     DISCORD_NOT_CONFIGURED("discordlink.not-configured"),
 
-    // /discordlink gui — the per-player link-status panel
+    // /discordlink gui. The per-player link-status panel
     GUI_TITLE("discordlink.gui.title"),
     GUI_VALUE_LORE("discordlink.gui.value-lore"),
     GUI_ACTION_HINT("discordlink.gui.action-hint"),

@@ -49,7 +49,7 @@ public record SafeSearchArea(
         }
     }
 
-    /** An untargeted area — the plain {@code /rtp} refill, with no per-biome constraint. */
+    /** An untargeted area, the plain {@code /rtp} refill, with no per-biome constraint. */
     public SafeSearchArea(
             WorldRef world,
             double centerX,
@@ -60,7 +60,7 @@ public record SafeSearchArea(
         this(world, centerX, centerZ, minRadius, configuredMaxRadius, borderRadius, null);
     }
 
-    /** A copy of this area constrained to {@code biome} — the {@code /rtp biome} search path. */
+    /** A copy of this area constrained to {@code biome}, the {@code /rtp biome} search path. */
     public SafeSearchArea withTargetBiome(BiomeName biome) {
         Objects.requireNonNull(biome, "biome");
         return new SafeSearchArea(world, centerX, centerZ, minRadius, configuredMaxRadius, borderRadius, biome);

@@ -15,10 +15,10 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * {@code refresh-slot} / {@code reset-pagination} the same way a code-registered feature menu does.
  *
  * <ul>
- *   <li>{@code refresh} repaints the whole menu at its current page — the way a spec whose items read a live value
+ *   <li>{@code refresh} repaints the whole menu at its current page. The way a spec whose items read a live value
  *       (a balance, a toggle the click just flipped) shows the new state without the viewer reopening it.
  *   <li>{@code refresh-slot:<n>} repaints so slot {@code n} redraws; an out-of-range or malformed slot is a no-op.
- *   <li>{@code reset-pagination} (alias {@code reset-page}) resets the menu to page zero — the way a filter or search
+ *   <li>{@code reset-pagination} (alias {@code reset-page}) resets the menu to page zero, the way a filter or search
  *       change returns a paginated menu to its first page rather than a now-empty later one.
  * </ul>
  *
@@ -35,7 +35,7 @@ public final class MenuControlActions {
     /**
      * Register the menu-control actions into {@code bindings}. {@code log} is the operator console logger a fail-soft
      * action warns through. Left separate from {@link MenuVocabulary#registerActions} so that method's existing
-     * call-sites stay untouched — the composition root calls both.
+     * call-sites stay untouched: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -54,7 +54,7 @@ public final class MenuControlActions {
     }
 
     /**
-     * The whole-number slot in {@code value}, or empty when it is blank or not a whole number — the signal to skip.
+     * The whole-number slot in {@code value}, or empty when it is blank or not a whole number, the signal to skip.
      * Bukkit-free and side-effect-free (a negative slot parses and is left for the control to reject as out-of-range),
      * so a plain-JUnit grammar test can exercise it.
      */
@@ -69,7 +69,7 @@ public final class MenuControlActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs apply.
+     * than escaping into the click dispatch: the same fail-soft contract the sibling action packs apply.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
         return ctx -> {

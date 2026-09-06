@@ -51,7 +51,7 @@ class TempBanIpTest {
         // Before the hour is up, the login listener refuses a connection from the banned address.
         LoginEnforcement gate = enforcement(repository, NOW.plus(Duration.ofMinutes(30)));
         assertThat(gate.evaluate(OFFENDER, IP, false).allowed()).isFalse();
-        // After the hour, the same address is admitted again — the ban auto-expired.
+        // After the hour, the same address is admitted again: the ban auto-expired.
         LoginEnforcement later = enforcement(repository, NOW.plus(Duration.ofHours(2)));
         assertThat(later.evaluate(OFFENDER, IP, false).allowed()).isTrue();
     }

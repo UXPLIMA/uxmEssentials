@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
- * Starts a sitting pose — {@code /sit} in place or on a right-clicked block. It gates on the {@code features.sit}
+ * Starts a sitting pose: {@code /sit} in place or on a right-clicked block. It gates on the {@code features.sit}
  * switch, the {@link PoseRegionGate}, and the one-session-per-player invariant (a player already posing is turned
  * away rather than double-seated), then spawns and mounts the seat through the {@link SeatPort} and records the
  * {@link PoseSession} in the registry, publishing {@link PoseStarted}.
@@ -105,7 +105,7 @@ public final class StartSit {
         /** The pose began; the seat is spawned and the player mounted. */
         STARTED,
 
-        /** {@code features.sit} is off — sitting is not offered. */
+        /** {@code features.sit} is off: sitting is not offered. */
         DISABLED,
 
         /** The region gate refused the pose here (a claim or WorldGuard veto). */

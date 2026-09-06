@@ -27,7 +27,7 @@ import org.junit.jupiter.api.io.TempDir;
  * SQLite backend with the Flyway V4 messaging tables applied. It proves mail survives a round-trip and is
  * read newest-first, the unread count, mark-all-read, clear, and the by-send-time expiry sweep; and that the
  * ignore store upserts the {@code (owner, ignored)} key idempotently, persists the scope, and removes on
- * unignore — the durable facts behind ignore-aware delivery and the persistent mailbox.
+ * unignore: the durable facts behind ignore-aware delivery and the persistent mailbox.
  */
 class JooqMessagingRepositoriesTest {
 
@@ -108,7 +108,7 @@ class JooqMessagingRepositoriesTest {
     @Test
     void ignoreUpsertsIdempotentlyOnTheOwnerIgnoredKey() {
         ignores.ignore(alice, bob, IgnoreScope.MESSAGES);
-        ignores.ignore(alice, bob, IgnoreScope.ALL); // same (owner, ignored) — a re-scope, not a duplicate
+        ignores.ignore(alice, bob, IgnoreScope.ALL); // same (owner, ignored), a re-scope, not a duplicate
 
         IgnoreList list = ignores.load(alice);
         assertThat(list.size()).isEqualTo(1);
@@ -128,7 +128,7 @@ class JooqMessagingRepositoriesTest {
         return MailItem.compose(alice, MailSender.player(bob), MessageBody.of(body), sentAt);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

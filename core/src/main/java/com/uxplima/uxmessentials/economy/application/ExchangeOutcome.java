@@ -25,7 +25,7 @@ public record ExchangeOutcome(
 
         /**
          * The active economy provider is foreign (Treasury/Vault), so the atomic two-currency move cannot be
-         * applied through the native ledger and the feature is refused without moving anything — the same
+         * applied through the native ledger and the feature is refused without moving anything, the same
          * gating loans and banks use.
          */
         PROVIDER_UNSUPPORTED

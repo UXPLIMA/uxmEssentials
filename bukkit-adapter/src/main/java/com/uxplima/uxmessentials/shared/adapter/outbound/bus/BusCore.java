@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
  * The transport-agnostic heart of the cross-server bus. Everything that does not depend on <em>how</em> bytes
  * are moved lives here: encoding an outbound {@link NetworkMessage} to its wire frame and handing it to the
  * {@link BusTransport}, decoding an inbound frame, dropping the ones this backend originated (the replication
- * loop sentinel), and dispatching the rest to the {@link RemoteSyncRegistry}. The "how bytes are moved" half —
- * the plugin-messaging carrier flush today, Redis pub/sub tomorrow — sits behind the {@link BusTransport} seam.
+ * loop sentinel), and dispatching the rest to the {@link RemoteSyncRegistry}. The "how bytes are moved" half
+ * the plugin-messaging carrier flush today, Redis pub/sub tomorrow, sits behind the {@link BusTransport} seam.
  *
  * <p>It implements {@link BusPublisher}, the narrow outbound surface a context's broadcasting decorator holds:
  * a {@link #publish} encodes the frame (origin already stamped into the message by the caller) and forwards
@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <h2>Loop sentinel</h2>
  * Every frame carries its origin {@code server-id}. On receipt {@link #onFrame} drops any frame whose origin
- * equals {@link #serverId()} — this backend's own mutation echoed back — so a write is applied on every peer
+ * equals {@link #serverId()}, this backend's own mutation echoed back, so a write is applied on every peer
  * once and never bounces around the cluster ({@code docs/02-concurrency.md}).
  */
 @NullMarked
@@ -55,7 +55,7 @@ final class BusCore implements BusPublisher {
         return transport.healthy();
     }
 
-    /** This backend's {@code server-id} — the origin stamped into outbound frames and the loop sentinel. */
+    /** This backend's {@code server-id}: the origin stamped into outbound frames and the loop sentinel. */
     @Override
     public String serverId() {
         return serverId;

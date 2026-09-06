@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * In-memory {@link BroadcastThrottle} backing the
  * {@link com.uxplima.uxmessentials.vote.domain.BroadcastType#COOLDOWN_PER_PLAYER} policy: a
  * {@code ConcurrentHashMap<UUID, Instant>} of when each voter was last announced. The state is the
- * plugin's own transient cooldown clock, not operator data, so it does not survive a restart — a
+ * plugin's own transient cooldown clock, not operator data, so it does not survive a restart, a
  * player whose stamp is forgotten simply gets announced again, which is harmless.
  *
  * <h2>Concurrency</h2>

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.ranks.domain.RankId;
 
 /**
  * Outbound port for the durable, per-player rank pointer. It stores exactly the raw rank id and prestige a
- * player is on — the queryable facts of the {@code player_ranks} row — so the application decides what happens
+ * player is on, the queryable facts of the {@code player_ranks} row, so the application decides what happens
  * when the stored id is no longer on the ladder; the port only records and reads. The pointer is DB-backed and
  * survives a world rollback, never PDC (the same hard invariant the economy ledger holds). The jOOQ adapter
  * implements this; the use cases depend only on the contract.

@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link TeleportFlags} implementation. The {@code /tptoggle} un-teleportable switch is a per-player
  * preference that survives relog, so it is stamped in PDC under a single pre-created key. The
- * {@code /tpblock} list is transient session state — a per-player set of blocked requester uuids held
+ * {@code /tpblock} list is transient session state. A per-player set of blocked requester uuids held
  * in-memory and dropped on {@code stop()} via {@link #clear()}.
  *
  * <h2>Concurrency</h2>

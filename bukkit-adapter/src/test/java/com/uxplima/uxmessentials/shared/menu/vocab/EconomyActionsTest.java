@@ -37,7 +37,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * withdraw / set is asserted concretely against the fake balance; the {@code playerpoints} back-end is absent in the
  * mock, so a {@code playerpoints}-routed action is proved not to touch the default vault balance. The experience and
  * level actions ride Paper's native {@code giveExp} / {@code giveExpLevels}, which MockBukkit models over its
- * level/experience fields — so those are asserted concretely, including the {@code take} clamps at zero. The
+ * level/experience fields, so those are asserted concretely, including the {@code take} clamps at zero. The
  * permission actions record their grant/revoke against a fake {@link PermissionQuery}, and the absent-Vault path
  * ({@link PermissionQuery#ABSENT}) is proved to be a silent, throw-free no-op.
  */
@@ -116,7 +116,7 @@ class EconomyActionsTest {
         invoke("set-money", "250");
 
         assertThat(economy.balances.get(viewer.getUniqueId())).isEqualTo(250.0);
-        // No move happened at all — not a deposit-then-withdraw round-trip.
+        // No move happened at all, not a deposit-then-withdraw round-trip.
         assertThat(economy.deposits).isZero();
         assertThat(economy.withdrawals).isZero();
     }
@@ -126,7 +126,7 @@ class EconomyActionsTest {
         economy.balances.put(viewer.getUniqueId(), 10.0);
 
         // PlayerPoints is absent in the mock, so its provider no-ops; the point is that the default vault balance is
-        // untouched — the amount did not land in the default currency.
+        // untouched: the amount did not land in the default currency.
         invoke("give-money", "50 playerpoints");
 
         assertThat(economy.balances.get(viewer.getUniqueId())).isEqualTo(10.0);

@@ -114,7 +114,7 @@ class RentSweepTest {
 
         sweep(config(true), mock(Scheduler.class)).sweepOnce();
 
-        // The due warp renewed (ACTIVE, term advanced) and the suspended one was restored — both saved.
+        // The due warp renewed (ACTIVE, term advanced) and the suspended one was restored: both saved.
         PlayerWarp renewed = repo.saved(1);
         assertThat(renewed.status()).isEqualTo(WarpStatus.ACTIVE);
         assertThat(renewed.rent().orElseThrow().paidUntil()).isEqualTo(NOW.plus(Duration.ofDays(7)));

@@ -37,7 +37,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The new-world create-screen golden test: the engine-rendered create screen must draw the field buttons the original
- * {@code WorldCreateView} drew — the NAME_TAG name button at 4, the GRASS_BLOCK environment selector at 10, the MAP
+ * {@code WorldCreateView} drew. The NAME_TAG name button at 4, the GRASS_BLOCK environment selector at 10, the MAP
  * type selector at 12, the COMMAND_BLOCK generator selector at 14, the WHEAT_SEEDS seed button at 16, the ARROW back
  * button at 18, and the NETHER_STAR create button at 22. The engine's window is snapshotted as {@code (slot ->
  * material, plain name)} and asserted equal, slot for slot, to that baseline. Then the migrated behaviours are proved

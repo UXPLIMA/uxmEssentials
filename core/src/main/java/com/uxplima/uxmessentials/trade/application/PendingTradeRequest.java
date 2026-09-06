@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * One in-flight {@code /trade <player>} request awaiting the target's {@code /trade accept} or {@code /trade deny}. It
- * records who asked, who was asked, and when — the {@code createdAt} stamp is what the {@link TradeRequests} book reads
+ * records who asked, who was asked, and when. The {@code createdAt} stamp is what the {@link TradeRequests} book reads
  * to expire a request the target never answered. The request carries no offer: a request only opens the window on
  * accept, and the offers are staked in the window itself.
  *

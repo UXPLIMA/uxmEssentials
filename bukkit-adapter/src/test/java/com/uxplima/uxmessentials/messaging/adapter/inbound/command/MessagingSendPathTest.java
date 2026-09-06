@@ -173,7 +173,7 @@ class MessagingSendPathTest {
         executeMsg(alice, "msg Bob you there?");
 
         // No live delivery (neither the sender echo nor the recipient line), but a mail was stored for Bob and
-        // the sender got MSG_SENT_TO_MAIL — byte-identical to messaging a genuinely-offline player.
+        // the sender got MSG_SENT_TO_MAIL: byte-identical to messaging a genuinely-offline player.
         assertThat(sink.keys).doesNotContain(MessagingMessageKey.MSG_RECEIVED, MessagingMessageKey.MSG_SENT);
         assertThat(mail.appended).hasSize(1);
         MailItem stored = mail.appended.get(0);
@@ -208,7 +208,7 @@ class MessagingSendPathTest {
 
         executeMail(CommandSourceStackMock.from(staff), "mail sendall server restart soon");
 
-        // One durable mail per online player (Staff included — the broadcaster is not auto-excluded).
+        // One durable mail per online player (Staff included: the broadcaster is not auto-excluded).
         assertThat(mail.appended).hasSize(3);
         assertThat(mail.appended)
                 .extracting(item -> item.recipient().name())

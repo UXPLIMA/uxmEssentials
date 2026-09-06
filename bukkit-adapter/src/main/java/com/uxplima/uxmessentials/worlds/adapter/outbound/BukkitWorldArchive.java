@@ -45,12 +45,12 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>A backup runs zip → prune: it copies the on-disk world folder (kept current by Paper/Folia's periodic
  * auto-save) rather than forcing a synchronous {@code World#save()}, because a full-world save has no single
- * owning thread on Folia — each region of a world is owned by a different region thread, so flushing it from
+ * owning thread on Folia. Each region of a world is owned by a different region thread, so flushing it from
  * the command's {@code onGlobal} hop is unsafe. The long-running zip and the prune of older archives run
  * off-tick through the {@code Scheduler}'s async context, and the completion notification bounces back onto
  * the operator's entity thread.
  *
- * <p>A restore is the dangerous half — it deletes the world folder — so it validates before it destroys:
+ * <p>A restore is the dangerous half, it deletes the world folder, so it validates before it destroys:
  * the archive file must exist and the world must be managed (needed to reload it with its spec) <em>before</em>
  * any player is evacuated, the world is unloaded, or the folder is touched. Evacuation is asynchronous, so the
  * folder is touched only after the world is provably empty <em>and</em> unloaded: after evacuating, a bounded
@@ -230,7 +230,7 @@ public final class BukkitWorldArchive implements WorldArchive {
      *
      * <p>Evacuation is asynchronous ({@code teleportAsync}), so the players are still present for a few ticks after
      * {@link #restore} returns. This runs every 50ms and only proceeds once the world reports no players: it unloads,
-     * stops itself, and — only if the unload succeeds — hands the folder swap off-tick. A vanished world short-circuits
+     * stops itself, and, only if the unload succeeds, hands the folder swap off-tick. A vanished world short-circuits
      * to the swap; a world that never empties within {@link #RESTORE_EVACUATE_MAX_TICKS} is aborted with the folder
      * left intact, because deleting a still-loaded world's files corrupts the live server.
      */
@@ -244,12 +244,12 @@ public final class BukkitWorldArchive implements WorldArchive {
             AtomicInteger attempts) {
         World live = server.getWorld(world.value());
         if (live == null) {
-            closeHandle(handle); // already gone — nothing to evacuate or unload
+            closeHandle(handle); // already gone. Nothing to evacuate or unload
             scheduler.async(() -> swapAndReload(initiator, world, id, archive, managed));
             return;
         }
         if (live.getPlayers().isEmpty()) {
-            Result<Unit, WorldError> unloaded = engine.unload(world, false); // checked — replacing the folder
+            Result<Unit, WorldError> unloaded = engine.unload(world, false); // checked, replacing the folder
             closeHandle(handle);
             if (unloaded.isErr()) {
                 notify(initiator, WorldsMessageKey.WORLD_RESTORE_FAILED, Map.of("world", world.value()));

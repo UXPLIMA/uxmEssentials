@@ -20,7 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqPlayerRankRepository} against the default embedded SQLite backend with the
- * Flyway V74 {@code player_ranks} table applied — the tested default of the backend-parity matrix. It proves the
+ * Flyway V74 {@code player_ranks} table applied: the tested default of the backend-parity matrix. It proves the
  * default-absent read (a player with no pointer reads empty, the signal to default to the ladder's first rank),
  * the save → find round-trip carrying both the rank id and the prestige level, and that a re-save upserts on the
  * player uuid rather than inserting a second row (the second write's values win and the pointer stays single).
@@ -70,7 +70,7 @@ class JooqPlayerRankRepositoryTest {
     @Test
     void saveUpsertsOnThePlayerUuidRatherThanInserting() {
         repository.save(player, RankId.of("first"), Prestige.INITIAL);
-        repository.save(player, RankId.of("vip"), new Prestige(1)); // same player — an advance, not a new row
+        repository.save(player, RankId.of("vip"), new Prestige(1)); // same player, an advance, not a new row
 
         PlayerRank reloaded = repository.find(player).orElseThrow();
         assertThat(reloaded.rankId()).isEqualTo(RankId.of("vip"));
@@ -86,7 +86,7 @@ class JooqPlayerRankRepositoryTest {
         assertThat(repository.find(player)).isPresent();
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

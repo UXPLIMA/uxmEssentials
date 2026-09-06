@@ -14,16 +14,16 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Resolves a handful of built-in {@code {token}} placeholders against the live {@link Player} and server, so the
  * shipped scoreboard sidebar and tablist show real values out of the box <em>without</em> PlaceholderAPI installed.
- * Applied in the renderers — where the live player is in hand — as a distinct pass before the PlaceholderAPI bridge,
+ * Applied in the renderers, where the live player is in hand, as a distinct pass before the PlaceholderAPI bridge,
  * so a {@code {token}} and a {@code %papi%} placeholder never collide: this pass only ever rewrites the curly-brace
  * tokens it knows, leaving every {@code %…%} (and unknown {@code {…}}) untouched for PlaceholderAPI or MiniMessage.
  *
  * <p>This is the same convenience syntax the tablist name-format already used for {@code {player}}; that ad-hoc
- * substitution now routes through here so every rendered HUD source — scoreboard title and lines, tablist header,
- * footer, and name-format — resolves the same token set consistently.
+ * substitution now routes through here so every rendered HUD source. Scoreboard title and lines, tablist header,
+ * footer, and name-format, resolves the same token set consistently.
  *
- * <p>Alongside the per-viewer tokens it also resolves a handful of server-wide metric tokens — {@code {tps}},
- * {@code {tps_colored}}, {@code {uptime}}, {@code {ram_used}}, {@code {ram_max}} — which ignore the viewer. These
+ * <p>Alongside the per-viewer tokens it also resolves a handful of server-wide metric tokens, {@code {tps}},
+ * {@code {tps_colored}}, {@code {uptime}}, {@code {ram_used}}, {@code {ram_max}}, which ignore the viewer. These
  * mirror the {@code %uxmessentials_server_*%} PlaceholderAPI placeholders but work with no PlaceholderAPI installed,
  * which is the point of the built-in pass: a HUD header can show live TPS and memory out of the box.
  *
@@ -50,7 +50,7 @@ public final class BuiltinTokens {
         out = replace(out, "{displayname}", () -> displayName(player));
         // The {online} token reads only the roster size, never a player's mutable entity state. This pass runs in
         // the scoreboard/tablist renderers, which already hold the live viewer on its own region thread, and on the
-        // PlaceholderAPI bridge thread for the metric tokens — neither is the global thread, but a global marshal is
+        // PlaceholderAPI bridge thread for the metric tokens. Neither is the global thread, but a global marshal is
         // both unnecessary (a torn count during a join/quit self-corrects on the next HUD refresh) and unsafe off a
         // region tick. So read the count inline rather than hop.
         out = replace(
@@ -60,7 +60,7 @@ public final class BuiltinTokens {
         out = replace(out, "{max_players}", () -> Integer.toString(Bukkit.getMaxPlayers()));
         out = replace(out, "{world}", () -> player.getWorld().getName());
         out = replace(out, "{ping}", () -> Integer.toString(player.getPing()));
-        // Server-wide metric tokens — the viewer is irrelevant, they read the live server and JVM.
+        // Server-wide metric tokens: the viewer is irrelevant, they read the live server and JVM.
         out = replace(out, "{tps}", BuiltinTokens::tps);
         out = replace(out, "{tps_colored}", BuiltinTokens::tpsColored);
         out = replace(out, "{uptime}", BuiltinTokens::uptime);
@@ -87,7 +87,7 @@ public final class BuiltinTokens {
     }
 
     /**
-     * A tick rate rounded to two decimal places with trailing zeros stripped — so 20.0 reads {@code 20} and
+     * A tick rate rounded to two decimal places with trailing zeros stripped, so 20.0 reads {@code 20} and
      * 19.97 reads {@code 19.97}, matching the {@code %uxmessentials_server_tps%} rendering.
      */
     private static String formatTps(double value) {

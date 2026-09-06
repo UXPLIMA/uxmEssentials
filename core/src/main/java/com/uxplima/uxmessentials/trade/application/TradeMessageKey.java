@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The trade context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code TRADE_REQUEST_SENT} ↔ {@code trade.request-sent}); the constant is the
- * compile-time handle, the catalog holds the text. There are no inline player-facing literals in the context — every
+ * compile-time handle, the catalog holds the text. There are no inline player-facing literals in the context, every
  * message resolves through one of these.
  *
  * <p>Per the i18n contract a disabled module still ships its keys so the catalog stays whole and the locale-parity
@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  */
 public enum TradeMessageKey implements MessageKey {
 
-    // Request flow — /trade <player> and /trade accept|deny.
+    // Request flow, /trade <player> and /trade accept|deny.
     TRADE_REQUEST_SENT("trade.request-sent"),
     TRADE_REQUEST_RECEIVED("trade.request-received"),
     TRADE_REQUEST_EXPIRED("trade.request-expired"),
@@ -23,11 +23,11 @@ public enum TradeMessageKey implements MessageKey {
     TRADE_ACCEPTED("trade.accepted"),
     TRADE_DENIED("trade.denied"),
 
-    // Window lifecycle — the session opened, was aborted, or completed the swap.
+    // Window lifecycle: the session opened, was aborted, or completed the swap.
     TRADE_CANCELLED("trade.cancelled"),
     TRADE_COMPLETED("trade.completed"),
 
-    // Trade window — the dual-inventory GUI: its title and the confirm/status control items.
+    // Trade window, the dual-inventory GUI: its title and the confirm/status control items.
     TRADE_WINDOW_TITLE("trade.window.title"),
     TRADE_WINDOW_CONFIRM("trade.window.confirm"),
     TRADE_WINDOW_CONFIRMED("trade.window.confirmed"),
@@ -57,7 +57,7 @@ public enum TradeMessageKey implements MessageKey {
     TRADE_EXPERIENCE_PROMPT("trade.experience-prompt"),
     TRADE_EXPERIENCE_INVALID("trade.experience-invalid"),
 
-    // Refusals — the request or the open could not proceed.
+    // Refusals: the request or the open could not proceed.
     TRADE_ALREADY_TRADING("trade.already-trading"),
     TRADE_TARGET_BUSY("trade.target-busy"),
     TRADE_CANNOT_TRADE_SELF("trade.cannot-trade-self"),
@@ -66,13 +66,13 @@ public enum TradeMessageKey implements MessageKey {
     TRADE_ITEM_BLACKLISTED("trade.item-blacklisted"),
     TRADE_CROSS_SERVER_DISABLED("trade.cross-server-disabled"),
 
-    // Cross-server trade — the bus rendezvous and the escrow-backed two-phase commit.
+    // Cross-server trade: the bus rendezvous and the escrow-backed two-phase commit.
     TRADE_CROSS_SERVER_REQUEST_SENT("trade.cross-server-request-sent"),
     TRADE_CROSS_SERVER_INCOMING("trade.cross-server-incoming"),
     TRADE_CROSS_SERVER_ESCROWED("trade.cross-server-escrowed"),
     TRADE_CROSS_SERVER_COMPLETED("trade.cross-server-completed"),
 
-    // The bare /trade root's usage line — shown to a sender who ran it without a target or subcommand.
+    // The bare /trade root's usage line, shown to a sender who ran it without a target or subcommand.
     TRADE_USAGE("trade.usage");
 
     private final String key;

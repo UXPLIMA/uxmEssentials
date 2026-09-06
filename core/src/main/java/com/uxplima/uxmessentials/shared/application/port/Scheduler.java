@@ -9,16 +9,16 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  * Folia-aware scheduling port. Application and use-case code schedule every piece of work through
  * this contract; the adapter dispatches each call to the right Folia scheduler
  * ({@code GlobalRegionScheduler} / {@code RegionScheduler} / {@code EntityScheduler} /
- * {@code AsyncScheduler}). The legacy {@code BukkitScheduler} is never used — that assumption (one
+ * {@code AsyncScheduler}). The legacy {@code BukkitScheduler} is never used: that assumption (one
  * main thread owns every entity and world) is exactly what Folia breaks.
  *
  * <p>Pick the most specific method: {@link #onEntity} for per-player work, {@link #onRegion} for
  * work bound to a block or location (chunk load for an RTP candidate, a setwarp block check),
- * {@link #onGlobal} only for genuinely global state ({@code /time}, {@code /weather}, a broadcast) —
+ * {@link #onGlobal} only for genuinely global state ({@code /time}, {@code /weather}, a broadcast)
  * it serialises onto one thread and kills Folia's parallelism. Plan each flow to hop once, do the
  * work, and finish; do not ping-pong between schedulers.
  *
- * <p>The port is deliberately fire-and-forget — every method returns {@code void} and there is no
+ * <p>The port is deliberately fire-and-forget. Every method returns {@code void} and there is no
  * cancellation handle. Production found callers either need no cancellation or model it in their own
  * state (the teleport context's warmup re-checks a {@code cancelled} flag each tick rather than
  * holding a handle), and the fire-and-forget shape is what lets a {@code FeatureModule} drain its own
@@ -29,10 +29,10 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  */
 public interface Scheduler {
 
-    /** Run on the global region thread — global game state only; serialises, so use sparingly. */
+    /** Run on the global region thread: global game state only; serialises, so use sparingly. */
     void onGlobal(Runnable task);
 
-    /** Run on the region thread owning {@code position} — block, chunk, and location work. */
+    /** Run on the region thread owning {@code position}, block, chunk, and location work. */
     void onRegion(Position position, Runnable task);
 
     /**
@@ -58,7 +58,7 @@ public interface Scheduler {
     }
 
     /**
-     * Whether the calling thread already owns the global region — i.e. {@link #onGlobal} work would
+     * Whether the calling thread already owns the global region. I.e. {@link #onGlobal} work would
      * run on this very thread. A caller that marshals onto the global region and then blocks on the
      * result must check this first: scheduling and blocking from the global thread itself deadlocks,
      * because the scheduled task cannot run until the blocked caller returns.
@@ -71,7 +71,7 @@ public interface Scheduler {
     }
 
     /**
-     * Whether the calling thread already owns {@code player}'s entity region — i.e. {@link #onEntity}
+     * Whether the calling thread already owns {@code player}'s entity region, i.e. {@link #onEntity}
      * work for this player would run on this very thread. Same deadlock guard as {@link #onGlobalThread}
      * for the per-entity case; defaults to {@code false} for the same reason.
      */

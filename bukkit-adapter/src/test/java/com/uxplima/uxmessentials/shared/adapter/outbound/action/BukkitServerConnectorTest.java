@@ -22,7 +22,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * Pins the proxy {@link BukkitServerConnector}: the BungeeCord channel it registers on construction, the exact
  * {@code Connect} + server frame it encodes (which Velocity honours on the same legacy name), and the degraded
  * single-server path where the channel is gone and a connect request becomes a logged no-op rather than a thrown
- * "channel not registered". The real connector had no direct test before — the action runner only ever exercised
+ * "channel not registered". The real connector had no direct test before. The action runner only ever exercised
  * a recording fake of the {@link ServerConnector} port, so the byte encoding and the availability guard went
  * unpinned until the menu engine started reaching the same connector for its {@code [connect]} action.
  */

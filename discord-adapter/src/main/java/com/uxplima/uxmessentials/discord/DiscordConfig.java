@@ -17,7 +17,7 @@ import java.util.Optional;
  * @param token the Discord bot token; blank means "not configured" and the bridge stays dormant
  * @param channels per-category target channel ids; a category absent here is not forwarded
  * @param minEcoNotify only economy transactions at or above this amount are mirrored (avoids spamming /pay)
- * @param maxPerMinute flood cap — at most this many notifications are mirrored per rolling minute (load shed)
+ * @param maxPerMinute flood cap. At most this many notifications are mirrored per rolling minute (load shed)
  */
 public record DiscordConfig(
         boolean enabled, String token, Map<EventCategory, String> channels, long minEcoNotify, int maxPerMinute) {

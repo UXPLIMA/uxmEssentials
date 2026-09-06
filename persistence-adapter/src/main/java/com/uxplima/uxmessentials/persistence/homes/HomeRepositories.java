@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * Factory for the homes context's persistence adapter, so the consuming bukkit-adapter wires a
  * {@link HomeRepository} from the {@link Persistence} handle it already holds without ever naming a jOOQ
  * type (jOOQ is an {@code implementation} dependency of this module, kept off the consumer's compile
- * classpath). The returned repository is the cached jOOQ adapter — write-through at the database,
+ * classpath). The returned repository is the cached jOOQ adapter, write-through at the database,
  * invalidate in the Caffeine cache.
  */
 @NullMarked
@@ -27,7 +27,7 @@ public final class HomeRepositories {
 
     /**
      * The cached jOOQ {@link HomeRepository} as its concrete decorator type, so the wiring can hand the
-     * cross-server bus a per-owner invalidation hook on the same cache the commands read — a remote
+     * cross-server bus a per-owner invalidation hook on the same cache the commands read, a remote
      * {@code /sethome} drops exactly that owner's cached set. Same backing as {@link #cached}; this overload
      * exposes the decorator only so the invalidation seam can reach it.
      */
@@ -38,7 +38,7 @@ public final class HomeRepositories {
 
     /**
      * A jOOQ {@link HomeInviteRepository} over the shared persistence DSL. Invite lists are small and
-     * short-lived enough that an in-process cache adds more complexity than it saves — every read hits the
+     * short-lived enough that an in-process cache adds more complexity than it saves, every read hits the
      * DB directly, which keeps the invite state consistent across a multi-server deployment without
      * requiring a cross-server invalidation channel.
      */

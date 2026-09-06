@@ -4,14 +4,14 @@ import java.security.SecureRandom;
 
 /**
  * Mints a fresh {@link TwoFactorSecret} from cryptographically strong randomness. A new secret is 160 bits (20
- * bytes) of {@link SecureRandom} output — the size RFC 4226 §4 recommends for an HMAC-SHA1 key and the length
- * authenticator apps expect — Base32-encoded into the 32-character string shown once at enrolment. It lives in the
+ * bytes) of {@link SecureRandom} output. The size RFC 4226 §4 recommends for an HMAC-SHA1 key and the length
+ * authenticator apps expect: Base32-encoded into the 32-character string shown once at enrolment. It lives in the
  * domain because the encoding is domain knowledge; the randomness source ({@code java.security.SecureRandom}) is a
  * platform primitive the domain is allowed to use, and it never touches Bukkit.
  */
 public final class SecretGenerator {
 
-    /** 160 bits — the RFC 4226 recommended HMAC-SHA1 key length. */
+    /** 160 bits: the RFC 4226 recommended HMAC-SHA1 key length. */
     private static final int SECRET_BYTES = 20;
 
     private final SecureRandom random;

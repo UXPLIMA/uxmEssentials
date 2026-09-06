@@ -45,9 +45,9 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * filler), so page 0 fills all 45 content slots with player heads and page 1 carries the remaining two; the nav
  * buttons are ARROW icons at slots 48 and 50 on every page. The engine window is snapshotted as {@code (slot ->
  * material, plain name)} and asserted equal, slot for slot, to the analytic baseline the old view produced for this
- * fixture — content heads, nav, and the page-1 placements all included. Then a click on the first head through the
+ * fixture: content heads, nav, and the page-1 placements all included. Then a click on the first head through the
  * engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} proves the
- * migrated path hands that entity to the {@code onSelect} drill-down the old grid drove — faithful in both
+ * migrated path hands that entity to the {@code onSelect} drill-down the old grid drove, faithful in both
  * appearance and behaviour.
  */
 class OnlinePlayerListGoldenTest {
@@ -154,7 +154,7 @@ class OnlinePlayerListGoldenTest {
         player.closeInventory();
         player.closeInventory(); // a double-close is a harmless no-op
 
-        // A list window arms no refresh timer, so start and cancel both stay at zero — perfectly balanced.
+        // A list window arms no refresh timer, so start and cancel both stay at zero: perfectly balanced.
         assertThat(recording.scheduled).isZero();
         assertThat(recording.cancelled).isZero();
     }

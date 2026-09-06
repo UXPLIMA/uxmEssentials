@@ -67,15 +67,15 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The bank-members golden test: the engine-rendered members menu must draw the exact grid the original
  * {@code BankMembersView} drew. The fresh bank holds two members (the viewer "Alice" as LEADER, "Bob" as MEMBER), so
- * the list draws two PLAYER_HEAD icons (content slots 0 and 1 — each member's name surfaces through the {@code
+ * the list draws two PLAYER_HEAD icons (content slots 0 and 1. Each member's name surfaces through the {@code
  * bank_member} token), the prev ARROW (slot 45), the ARROW back button (slot 47), the EMERALD_BLOCK add button (slot
- * 49 — shown because the LEADER viewer may add through the {@code economy:can-add-member} condition), and the next
+ * 49. Shown because the LEADER viewer may add through the {@code economy:can-add-member} condition), and the next
  * ARROW (slot 53). The engine window is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot
  * for slot, to the baseline the old view produced for this fixture, frozen here as the contract so the old class could
  * be deleted.
  *
  * <p>A right click on Bob's head through the engine's own {@link MenuListener} proves the migrated path removes that
- * member through the same {@link BankService} the {@code /bank removemember} command takes — captured by the mock the
+ * member through the same {@link BankService} the {@code /bank removemember} command takes, captured by the mock the
  * remove use case calls. The {@code KeyMessages} catalog surfaces the entry name's {@code bank_member} token; every
  * other key renders verbatim, so a real rendering difference still shows up as a snapshot mismatch.
  */
@@ -146,7 +146,7 @@ class BankMembersListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code BankMembersView} produced for this fixture (the LEADER
      * viewer "Alice" and the MEMBER "Bob"), captured while both paths rendered it identically and frozen here: two
-     * PLAYER_HEAD icons (content slots 0 and 1 — the names surface through the {@code bank_member} token), the prev
+     * PLAYER_HEAD icons (content slots 0 and 1. The names surface through the {@code bank_member} token), the prev
      * ARROW (slot 45), the ARROW back button (slot 47), the EMERALD_BLOCK add button (slot 49), and the next ARROW
      * (slot 53).
      */

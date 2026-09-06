@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.network.MuteChanged;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The moderation context's cross-server seam — the same two halves as {@link VaultSync}, but with no
+ * The moderation context's cross-server seam. The same two halves as {@link VaultSync}, but with no
  * repository decorator and no cache: a ban/mute is already enforced durably across the cluster by the shared
  * DB (every backend re-reads it on the next login), so this carries only the <em>live</em> effect.
  *
@@ -26,8 +26,8 @@ import org.jspecify.annotations.NullMarked;
  *       shared DB on the next chat attempt, so there is no in-memory mute state to refresh.
  * </ul>
  *
- * <p>Self-origin frames never reach the listener — the {@link BusCore} drops any frame whose origin equals
- * this backend's id before dispatch — so the player the local {@code /ban} already kicked is never kicked
+ * <p>Self-origin frames never reach the listener. The {@link BusCore} drops any frame whose origin equals
+ * this backend's id before dispatch, so the player the local {@code /ban} already kicked is never kicked
  * twice. With the bus disabled the publisher is {@link SanctionSync#NONE} and the listener is never invoked, so
  * the single-server path is unchanged.
  */
@@ -54,7 +54,7 @@ public final class ModerationSync {
             if (message instanceof BanChanged changed) {
                 onRemoteBan.accept(changed.target());
             }
-            // MuteChanged: no in-memory mute cache to refresh — the mute gate re-reads the shared DB on next chat.
+            // MuteChanged: no in-memory mute cache to refresh: the mute gate re-reads the shared DB on next chat.
         };
     }
 

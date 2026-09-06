@@ -60,8 +60,8 @@ import org.junit.jupiter.api.io.TempDir;
  * <p>MockBukkit's {@code ServerMock} cannot back these tests: {@code getWorldContainer()} throws
  * {@code UnimplementedOperationException}, so the world container has to be a {@link TempDir} we control
  * and {@link Server}, {@link World} and {@link Player} are Mockito doubles here. Backup deliberately does
- * NOT call {@code World#save()} (a full-world flush has no single owning thread on Folia) — it copies the
- * on-disk, auto-saved world folder — so the backup test below loads no world at all and still produces a
+ * NOT call {@code World#save()} (a full-world flush has no single owning thread on Folia): it copies the
+ * on-disk, auto-saved world folder, so the backup test below loads no world at all and still produces a
  * complete archive. The load-bearing coverage is the {@code WorldArchiver} (zip/unzip/delete) and the
  * orchestration order, both of which run live; {@code getPlayers()} returns the doubles we seed.
  */
@@ -100,7 +100,7 @@ class BukkitWorldArchiveTest {
             throws IOException {
         seedWorldFolder(container, "level.dat", "level-bytes");
         seedWorldFolder(container, "region/r.0.0.mca", "region-bytes");
-        // The world is loaded, but backup must NOT flush it with World#save() — a full-world save has no single
+        // The world is loaded, but backup must NOT flush it with World#save(). A full-world save has no single
         // owning thread on Folia. It copies the on-disk, auto-saved folder instead, so save() is never called.
         World live = world(new ArrayList<>());
         when(server.getWorld("arena")).thenReturn(live);
@@ -204,7 +204,7 @@ class BukkitWorldArchiveTest {
         CapturedLoop drain = scheduler.last();
         assertThat(drain.initialDelay).isEqualTo(Duration.ZERO);
         assertThat(drain.period).isEqualTo(Duration.ofMillis(50));
-        // Nothing touched the folder yet — the players are still present, so the world is still loaded.
+        // Nothing touched the folder yet: the players are still present, so the world is still loaded.
         assertThat(engine.unloaded).isEmpty();
         assertThat(read(container.resolve("arena/level.dat"))).isEqualTo("live-and-stale");
 
@@ -231,7 +231,7 @@ class BukkitWorldArchiveTest {
         seedWorldFolder(container, "level.dat", "live-and-stale");
         repository.save(ManagedWorld.created(WORLD, WorldSpec.normal(), true, Optional.empty(), Instant.EPOCH));
         engine.loaded.add(WORLD.value());
-        List<Player> residents = new ArrayList<>(List.of(player())); // never cleared — the world stays occupied
+        List<Player> residents = new ArrayList<>(List.of(player())); // never cleared. The world stays occupied
         World live = world(residents);
         when(server.getWorld("arena")).thenReturn(live);
         BukkitWorldArchive archive = archive(container, dataFolder, settings("backups/worlds", 10));
@@ -245,7 +245,7 @@ class BukkitWorldArchiveTest {
         assertThat(drain.handle.closed).isTrue(); // the loop aborted and stopped itself
         assertThat(engine.unloaded).isEmpty(); // never unloaded a loaded world
         assertThat(read(container.resolve("arena/level.dat"))).isEqualTo("live-and-stale"); // folder NOT deleted
-        assertThat(engine.lastLoaded).isNull(); // no reload — the swap never ran
+        assertThat(engine.lastLoaded).isNull(); // no reload, the swap never ran
         assertThat(messages.keysFor(INITIATOR)).contains(WorldsMessageKey.WORLD_RESTORE_FAILED);
     }
 
@@ -274,7 +274,7 @@ class BukkitWorldArchiveTest {
         assertThat(engine.unloaded).containsExactly(WORLD); // the unload was attempted
         assertThat(drain.handle.closed).isTrue(); // the loop stopped itself
         assertThat(read(container.resolve("arena/level.dat"))).isEqualTo("live-and-stale"); // folder NOT deleted
-        assertThat(engine.lastLoaded).isNull(); // no reload — the swap never ran
+        assertThat(engine.lastLoaded).isNull(); // no reload, the swap never ran
         assertThat(messages.keysFor(INITIATOR)).contains(WorldsMessageKey.WORLD_RESTORE_FAILED);
     }
 
@@ -385,8 +385,8 @@ class BukkitWorldArchiveTest {
     // ---- doubles --------------------------------------------------------------------------------
 
     /**
-     * Collapses the tick boundary for the fire-and-forget contexts — {@code async}/{@code onGlobal}/
-     * {@code onEntity}/{@code onRegion} all run inline — but <em>captures</em> the restore drain loop
+     * Collapses the tick boundary for the fire-and-forget contexts, {@code async}/{@code onGlobal}/
+     * {@code onEntity}/{@code onRegion} all run inline, but <em>captures</em> the restore drain loop
      * registered through {@code repeatGlobal} rather than running it. A test advances the drain by
      * invoking {@link CapturedLoop#task} and asserts the loop was stopped via {@link RecordingHandle#closed}.
      */

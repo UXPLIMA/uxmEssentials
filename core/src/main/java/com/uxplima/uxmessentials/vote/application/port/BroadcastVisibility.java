@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * or per-player PDC, so a read on the broadcaster's fan-out thread and a write on the toggling player's
  * region thread never race. Mirrors {@code BroadcastOptOutStore} from the communication context.
  *
- * <p>The store holds only the visibility bit — no message content — so it is the plugin's own transient
+ * <p>The store holds only the visibility bit, no message content, so it is the plugin's own transient
  * state, not operator data. {@link #toggle} flips the bit and returns the new visibility state in one
  * atomic step for the toggle command to report back to the player.
  */

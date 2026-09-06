@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The permission-driven {@link TaxExemption}: a payer's {@code /pay} is untaxed when they hold the configured
- * {@code pay.tax.bypass-permission} — staff, shops, automated systems. Permission-based like
+ * {@code pay.tax.bypass-permission}: staff, shops, automated systems. Permission-based like
  * {@link PermissionBaltopExemption}, so it survives a UUID change and needs no per-account flag.
  */
 @NullMarked

@@ -37,9 +37,9 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * Drives the package-private apply seams of the engine-rendered loan dashboard — the branches the anvil prompts'
+ * Drives the package-private apply seams of the engine-rendered loan dashboard. The branches the anvil prompts'
  * submit callbacks run. MockBukkit cannot drive a live anvil, so the golden test (in the menu's sibling package)
- * covers the render and the click-driven repayment while this test — in the menu's own package — proves a typed
+ * covers the render and the click-driven repayment while this test, in the menu's own package, proves a typed
  * custom repayment reaches {@code LoanService.payInstallment} and a request's amount/installment seam reaches
  * {@code LoanService.takeLoan}, with malformed or out-of-range input running no use case, exactly as the old
  * {@code LoanGuiView} / {@code LoanRequestFlow} did.

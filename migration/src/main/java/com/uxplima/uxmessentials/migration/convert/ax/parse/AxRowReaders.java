@@ -4,7 +4,7 @@ import com.uxplima.uxmessentials.migration.convert.jdbc.RowMapper;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The per-row readers the AxPlayerWarps source binds to its {@link AxTables} statements — the {@code java.sql} seam
+ * The per-row readers the AxPlayerWarps source binds to its {@link AxTables} statements, the {@code java.sql} seam
  * from a {@link java.sql.ResultSet} row to a parse record, one factory per table. Each reads columns by name and never
  * advances the cursor (the {@code JdbcSource} owns iteration). A nullable text column is read straight through and may
  * come back {@code null}; the mapper decides what an absent facet means, never this reader.

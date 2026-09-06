@@ -20,12 +20,12 @@ import com.uxplima.uxmessentials.shared.application.port.Scheduler;
  * Builds the closed set of currency backends this server actually has. The native ledger and Paper experience are
  * unconditional; every other backend is admitted only when its host plugin is present and enabled, checked through
  * the plugin manager before any SDK type is named, so a server without CoinsEngine never classloads a CoinsEngine
- * class. Every non-atomic backend is wrapped by {@code SerialisingCurrencyBackend} on the way in — the native ledger
+ * class. Every non-atomic backend is wrapped by {@code SerialisingCurrencyBackend} on the way in, the native ledger
  * passes straight through, the foreign ones gain a per-owner debit lock.
  *
  * <p>CoinsEngine and zEssentials are multi-currency, so their backends are enumerated from the operator's
  * {@code backends.coinsengine} / {@code backends.zessentials} config maps: one backend per named entry. The
- * placeholder escape hatch is enumerated the same way from {@code backends.placeholder}, but gated on no host plugin —
+ * placeholder escape hatch is enumerated the same way from {@code backends.placeholder}, but gated on no host plugin
  * it is the backend for an economy nobody wrote a bridge for. An absent map registers none, which is the correct
  * default for a server that runs neither.
  */

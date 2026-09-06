@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /exp} (alias {@code /xp}, {@code uxmessentials.exp.use}): read or change a player's experience —
+ * {@code /exp} (alias {@code /xp}, {@code uxmessentials.exp.use}): read or change a player's experience
  * {@code get}, {@code set <amount>}, {@code give <amount>}, {@code take <amount>}, or {@code reset}, with an
  * optional {@code levels}/{@code points} unit and an optional {@code [player]} target gated by the shared
  * {@code uxmessentials.exp.others} (or the cross-cutting {@code uxmessentials.playerstate.others}) node. The non-negative amount is bounded by Brigadier; the domain

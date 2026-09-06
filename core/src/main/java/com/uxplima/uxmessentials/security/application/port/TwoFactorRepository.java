@@ -7,11 +7,11 @@ import com.uxplima.uxmessentials.security.domain.TwoFactorSecret;
 
 /**
  * Outbound port for the durable, per-player two-factor store. It is DB-backed and survives a world rollback, never
- * PDC — a second factor a world reset could wipe would be no protection at all (the same hard invariant the economy
+ * PDC. A second factor a world reset could wipe would be no protection at all (the same hard invariant the economy
  * ledger holds). One row per player carries at most one PIN and one TOTP secret; the two enrol independently.
  *
  * <p>The port draws the crypto boundary deliberately. The <b>PIN is one-way hashed</b> at rest, so it is written
- * through {@link #setPin} and checked through {@link #verifyPin} (which re-hashes the candidate) — the plaintext
+ * through {@link #setPin} and checked through {@link #verifyPin} (which re-hashes the candidate), the plaintext
  * never leaves the adapter and the hash never leaves the store. The <b>TOTP secret is encrypted, not hashed</b>,
  * because verification needs the shared secret back: {@link #enableTotp} encrypts it and {@link #find} returns it
  * decrypted. The application holds neither key nor cipher; it only names this contract.

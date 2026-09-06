@@ -82,7 +82,7 @@ class LeafDecaySweepTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new LeafDecaySweep(1, 6, 0));
     }
 
-    /** No coordinate holds a log — the felled-tree case where every leaf within radius is unsupported. */
+    /** No coordinate holds a log: the felled-tree case where every leaf within radius is unsupported. */
     private static boolean noLogs(BlockPos pos) {
         return false;
     }

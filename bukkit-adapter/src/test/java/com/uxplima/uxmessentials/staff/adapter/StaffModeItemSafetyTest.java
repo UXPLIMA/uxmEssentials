@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
  *
  * <ul>
  *   <li><b>Commit before swap.</b> The real inventory is saved to the repository BEFORE it is overwritten by
- *       the gadget hotbar — the saved {@code SavedLoadout} holds the real items and the {@code save} call lands
+ *       the gadget hotbar. The saved {@code SavedLoadout} holds the real items and the {@code save} call lands
  *       before the hotbar is applied. So a crash after the swap leaves the real loadout recoverable.
  *   <li><b>Exact restore, then delete.</b> Exit restores the real inventory byte-for-byte (no loss, no dupe)
  *       and deletes the row only after, in that order.
@@ -82,7 +82,7 @@ class StaffModeItemSafetyTest {
 
         enter.enter(who);
 
-        // The saved row holds the REAL items, not the gadget hotbar — proof the capture ran on the live
+        // The saved row holds the REAL items, not the gadget hotbar, proof the capture ran on the live
         // inventory before the swap.
         SavedLoadout saved = java.util.Objects.requireNonNull(repository.rows.get(who.uuid()), "saved");
         PlayerInventory restored = restoreInto(saved);
@@ -95,7 +95,7 @@ class StaffModeItemSafetyTest {
         assertThat(gadgetItems.gadgetOf(player.getInventory().getItem(1))).contains(StaffGadget.EXAMINE);
 
         // The first repository call is the enter-never-overwrites guard load (no prior row), then exactly one
-        // save — and it commits before the hotbar swap (the live inventory above already holds the gadgets).
+        // save, and it commits before the hotbar swap (the live inventory above already holds the gadgets).
         assertThat(repository.calls).containsExactly("load", "save");
         assertThat(store.isActive(who)).isTrue();
         assertThat(vanish.states).containsExactly(true);
@@ -158,7 +158,7 @@ class StaffModeItemSafetyTest {
         giveRealLoadout();
         // A /staffmode run with a held cursor item: the enter flow closes the inventory FIRST. On a real server
         // closing returns the cursor item to a free slot (so the following capture snapshots it, rather than the
-        // gadget-hotbar clear dropping it). The observable seam here is that capture closed the inventory — after
+        // gadget-hotbar clear dropping it). The observable seam here is that capture closed the inventory, after
         // enter the cursor is no longer holding the item. (MockBukkit's closeInventory clears the cursor rather
         // than returning it to a slot, so item-survival itself is only assertable against a live server.)
         player.setItemOnCursor(new ItemStack(Material.EMERALD, 3));

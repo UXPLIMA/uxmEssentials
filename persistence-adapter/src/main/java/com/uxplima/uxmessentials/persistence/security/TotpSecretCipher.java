@@ -12,7 +12,7 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * AES-256-GCM encryption for the TOTP shared secret at rest. Unlike the PIN — a one-way hash — the TOTP secret must
+ * AES-256-GCM encryption for the TOTP shared secret at rest. Unlike the PIN, a one-way hash, the TOTP secret must
  * be recoverable, because verification recomputes the expected code from the secret every 30 seconds; so it is
  * <b>encrypted, not hashed</b>, under a server-held key (a random key-file in the data folder, see
  * {@link SecurityKeyFile}). AES-GCM is authenticated encryption: a tampered ciphertext fails to decrypt rather than

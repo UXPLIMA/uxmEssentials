@@ -66,18 +66,18 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The player-warps golden test: the engine-rendered {@code /pwarp} list must draw the exact grid the original
  * {@code PlayerWarpListView} drew. The store holds two warps the viewer owns ("alpha", "beta", neither with a
- * custom icon), so the list draws two ENDER_PEARL icons (content slots 0 and 1 — the warp's fallback material),
+ * custom icon), so the list draws two ENDER_PEARL icons (content slots 0 and 1. The warp's fallback material),
  * the LIME_DYE create button (slot 49), and the two ARROW nav buttons (slots 48 and 50). The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — captured once while both rendered the same fixture, then frozen here as the contract so the old
+ * view produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old
  * class could be deleted. Then a left click on the first warp icon through the engine's own {@link MenuListener}
- * proves the migrated path opens that warp's bespoke {@link PlayerWarpEditorView} — so the move is faithful in both
+ * proves the migrated path opens that warp's bespoke {@link PlayerWarpEditorView}, so the move is faithful in both
  * appearance and behaviour.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code pwarp_name} token, so a warp's name appears in
  * the rendered label; every other key renders verbatim. A real rendering difference (a wrong key, a wrong material,
  * a misplaced cell, a lost name token) therefore still shows up as a snapshot mismatch. A separate test pins that an
- * operator holding the manage node sees every owner's warps while a plain player sees only their own — the scope the
+ * operator holding the manage node sees every owner's warps while a plain player sees only their own, the scope the
  * subject carries from the open site, where the permission read legally runs.
  */
 class PlayerWarpListGoldenTest {
@@ -172,7 +172,7 @@ class PlayerWarpListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code PlayerWarpListView} produced for this fixture (two
      * warps "alpha" and "beta", neither with a custom icon), captured once while both paths rendered it identically
-     * and frozen here as the contract: two ENDER_PEARL icons (content slots 0 and 1 — the fallback icon, with the
+     * and frozen here as the contract: two ENDER_PEARL icons (content slots 0 and 1, the fallback icon, with the
      * names surfacing through the {@code pwarp_name} token), the LIME_DYE create button (slot 49), and the two nav
      * ARROWs (slots 48 and 50).
      */

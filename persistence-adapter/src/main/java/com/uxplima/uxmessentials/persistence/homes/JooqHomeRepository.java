@@ -19,7 +19,7 @@ import org.jooq.DSLContext;
  * The jOOQ-backed {@link HomeRepository} over the generated {@code HOMES} table. Reads rebuild an owner's
  * {@link HomeSet} from queryable rows in slot order; the quota count is a {@code COUNT(*)} so the limit
  * check never materialises the whole set. A {@code save} upserts on the {@code (owner, slot)} primary key
- * — a re-anchor or label/icon change overwrites the same row — and a delete is a keyed {@code DELETE}.
+ * (a re-anchor or label/icon change overwrites the same row) and a delete is a keyed {@code DELETE}.
  * Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  */
 public final class JooqHomeRepository extends JooqRepository implements HomeRepository {

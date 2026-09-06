@@ -12,10 +12,10 @@ import org.jspecify.annotations.NullMarked;
  * its playtime sampler) is wired before the presence context lands in registry order, so the sampler is built
  * against this holder while it still delegates to {@link AfkStatus#NEVER}. When presence wires, the bootstrap
  * calls {@link #bind} with a {@code PresenceAfkStatus} over the live presence store, and the already-running
- * sampler begins classifying AFK seconds correctly — no re-wiring. Same rebindable-holder shape messaging's
+ * sampler begins classifying AFK seconds correctly: no re-wiring. Same rebindable-holder shape messaging's
  * {@code MutableAfkStatus} uses for its AFK courtesy notice.
  *
- * <p>If presence is disabled the delegate stays {@link AfkStatus#NEVER}, so every sample counts as active time —
+ * <p>If presence is disabled the delegate stays {@link AfkStatus#NEVER}, so every sample counts as active time
  * the honest answer when there is no AFK source. The reference is atomic so the rebind on the enable thread is
  * safely visible to the sampler's async threads.
  */

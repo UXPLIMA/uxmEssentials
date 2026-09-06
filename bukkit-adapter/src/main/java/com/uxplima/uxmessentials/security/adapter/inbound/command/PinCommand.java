@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /pin}: the numeric PIN factor's own self-service surface — {@code set <pin>} to enrol a first PIN,
+ * {@code /pin}: the numeric PIN factor's own self-service surface, {@code set <pin>} to enrol a first PIN,
  * {@code change <old> <new>} to replace it, and {@code remove <pin>} to drop it. Bare {@code /pin} reports whether
  * one is set. Gated on {@code uxmessentials.security.pin}, which ships {@code true}.
  *
@@ -195,7 +195,7 @@ public final class PinCommand extends SecurityCommandSupport implements CommandR
 
     /**
      * {@code /pin remove <pin>}: drop the PIN factor after proving it. Unlike set and change this is <b>not</b> gated
-     * on the enrolment switches — an operator who turns PIN enrolment off must not strand the players who already
+     * on the enrolment switches. An operator who turns PIN enrolment off must not strand the players who already
      * hold one with no way to take it back off.
      */
     private int remove(CommandContext<CommandSourceStack> ctx) {

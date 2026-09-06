@@ -6,13 +6,13 @@ import java.util.Optional;
 
 /**
  * One item in a menu spec. It declares the slots it occupies, a priority used when several items contend for the
- * same slot, the raw material/name/lore text (a {@code @key}, an inline literal, or a {@code %placeholder%} —
+ * same slot, the raw material/name/lore text (a {@code @key}, an inline literal, or a {@code %placeholder%}
  * resolved later), its decoration, how its lore combines with the base icon's own lore, the {@link RequirementSpec}
  * view block that gates visibility, click handling, whether it re-renders on refresh, an optional list expansion, and
  * its pagination role.
  *
  * <p>The {@code view} gate is a {@link RequirementSpec}, the same block that backs a click gesture, so an item can
- * gate visibility on a minimum (OR / N-of-M) or an inverted condition — not just a flat AND list. A flat view list
+ * gate visibility on a minimum (OR / N-of-M) or an inverted condition, not just a flat AND list. A flat view list
  * lifts into an all-mandatory block through {@link RequirementSpec#allOf(List)}, which the {@code List<Ref>}-taking
  * constructors below do for their callers, so a spec that wrote a plain condition list keeps its exact meaning.
  *
@@ -144,7 +144,7 @@ public record MenuItemSpec(
 
     // --- immutable field-copy helpers (the in-game item editor rebuilds one field at a time) ---
 
-    /** A copy occupying {@code slots}, every other field unchanged — the canonical way to relocate an item. */
+    /** A copy occupying {@code slots}, every other field unchanged, the canonical way to relocate an item. */
     public MenuItemSpec withSlots(SlotSet slots) {
         return new MenuItemSpec(
                 slots, priority, material, name, lore, decor, loreMode, view, click, update, list, type, itemDrag);

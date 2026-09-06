@@ -19,13 +19,13 @@ import org.jspecify.annotations.Nullable;
 /**
  * The multi-currency façade the menu vocabulary spends through: it maps a spec string to the
  * {@link CurrencyProvider} that serves it, over the same {@link CurrencyBackend} set a warp fee or a
- * {@code /pay} routes through. A {@code give-money} click and a warp fee therefore move the same money — a
+ * {@code /pay} routes through. A {@code give-money} click and a warp fee therefore move the same money, a
  * native currency now passes through the guarded debit and lands in the transaction ledger, which it never
  * did while this façade owned a parallel, {@code double}-surfaced set of providers.
  *
  * <p>Ordering: this façade is built while the menu engine wires, long before the economy module does, so it
  * cannot receive the registries at construction. It holds a supplier of {@link EconomyBackends} instead and
- * reads it on the first click that resolves a currency — by which point the economy wiring has filled it. A
+ * reads it on the first click that resolves a currency: by which point the economy wiring has filled it. A
  * resolve that somehow beats the wiring warns once and returns an unavailable provider <em>without caching
  * it</em>, so the façade heals the moment the economy is up instead of staying broken for the session.
  *
@@ -39,7 +39,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>A spec is normalised (trimmed, the backend head lower-cased, any sub-currency name left verbatim) so it
  * keys the cache stably; {@link #resolve(String)} returns the same provider instance for the same normalised
- * spec once the registries are present. No static state — the supplier and logger are constructor-injected.
+ * spec once the registries are present. No static state: the supplier and logger are constructor-injected.
  */
 public final class Currencies {
 

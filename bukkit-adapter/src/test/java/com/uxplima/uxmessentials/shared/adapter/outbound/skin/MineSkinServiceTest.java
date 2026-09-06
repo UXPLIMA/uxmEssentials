@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit-tests {@link MineSkinService}'s MineSkin v2 generate/queue flow, defensive parsing, fail-soft empties and
- * URL-keyed caching against a fake HTTP seam — no live MineSkin call is ever made. The fake records each call
+ * URL-keyed caching against a fake HTTP seam: no live MineSkin call is ever made. The fake records each call
  * (count + last body + the {@code Authorization} token it was handed) and returns a scripted sequence of
  * {@link HttpResponseView}s, so a test can model a {@code 200} inline skin, a {@code 202} queued job followed by
  * a ready poll, a {@code 429} rate limit, or a transport error. A deferred scheduler runs the async work (and the
@@ -35,7 +35,7 @@ class MineSkinServiceTest {
 
     private static final String IMAGE_URL = "https://example.com/skin.png";
 
-    /** A v1-shaped success body (data.texture.*) — proves the v2 service still parses a v1 response. */
+    /** A v1-shaped success body (data.texture.*): proves the v2 service still parses a v1 response. */
     private static final String V1_GENERATED =
             "{\"data\":{\"texture\":{\"value\":\"Z2VuZXJhdGVk\",\"signature\":\"genSig=\"}}}";
 
@@ -92,7 +92,7 @@ class MineSkinServiceTest {
     void aQueuedJobStillPendingAcrossEveryAttemptYieldsEmpty() {
         FakeSeam seam = new FakeSeam();
         seam.script(new HttpResponseView(202, Optional.of(V2_QUEUED), OptionalLong.empty()));
-        // Every poll re-answers "still queued" (echoes the job, no texture) — the bound must give up, not loop.
+        // Every poll re-answers "still queued" (echoes the job, no texture): the bound must give up, not loop.
         seam.getDefault = new HttpResponseView(200, Optional.of(V2_QUEUED), OptionalLong.empty());
         MineSkinService service = newService(seam, null);
 
@@ -109,7 +109,7 @@ class MineSkinServiceTest {
         MineSkinService service = newService(seam, null);
 
         assertThat(await(service.fetchFromUrl(IMAGE_URL))).isEmpty();
-        // At most a bounded number of POST attempts — never an unbounded retry storm.
+        // At most a bounded number of POST attempts: never an unbounded retry storm.
         assertThat(seam.posts).isLessThanOrEqualTo(MineSkinService.MAX_RATE_LIMIT_RETRIES + 1);
     }
 
@@ -222,7 +222,7 @@ class MineSkinServiceTest {
     @Test
     void aSeamThatThrowsMidPollCompletesTheFutureEmptyRatherThanOrphaningIt() {
         FakeSeam seam = new FakeSeam();
-        // The POST succeeds and hands back a queued job, so the throw only fires once the queue-poll GET runs —
+        // The POST succeeds and hands back a queued job, so the throw only fires once the queue-poll GET runs
         // proving a throw deeper in the poll loop (not just on the first POST) still completes the future empty
         // rather than escaping the async stage and hanging the operator on the "generating" line.
         seam.script(new HttpResponseView(202, Optional.of(V2_QUEUED), OptionalLong.empty()));
@@ -257,7 +257,7 @@ class MineSkinServiceTest {
         seam.script(HttpResponseView.of(200, V2_GENERATED));
         MineSkinService service = newService(seam, null);
         // A real URL with query params and percent-escapes: the body must be parseable JSON whose url field is
-        // the input verbatim and whose visibility is the v2 string form — proving it is built (and escaped)
+        // the input verbatim and whose visibility is the v2 string form. Proving it is built (and escaped)
         // through gson rather than hand-concatenated, so an awkward URL can never break the body or inject a field.
         String url = "https://example.com/path/skin%20file.png?a=1&b=two";
 
@@ -283,7 +283,7 @@ class MineSkinServiceTest {
     /**
      * A scripted HTTP seam over the v2 {@code exchange}/{@code exchangeGet} variants: records each call (count +
      * last body + last uri + the {@code Authorization} token), and returns the next scripted response for that
-     * verb (falling back to a per-verb default once the script is drained), or — when {@code thrower} is set —
+     * verb (falling back to a per-verb default once the script is drained), or, when {@code thrower} is set,
      * throws it, modelling a faulty seam that must not orphan the service's future.
      */
     private static final class FakeSeam implements HttpFetcher {

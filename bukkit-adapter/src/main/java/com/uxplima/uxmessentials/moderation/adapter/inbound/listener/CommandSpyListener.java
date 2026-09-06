@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Powers {@code /commandspy}: when a player runs a command, every staff member currently spying (and not the
- * one running it) is shown a spy line naming the runner and the command. Read-only — the dispatch is never
+ * one running it) is shown a spy line naming the runner and the command. Read-only. The dispatch is never
  * cancelled and the event is observed, not consumed.
  *
  * <p>Runs at {@link EventPriority#MONITOR} with {@code ignoreCancelled = true} so a command another listener
@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * spying the listener short-circuits before resolving the runner, so an idle server pays nothing.
  *
  * <p>The runner's name and the command they typed are player-controlled and flow into a MiniMessage template
- * downstream, so both are run through {@link MiniMessage#escapeTags} here before substitution — otherwise a
+ * downstream, so both are run through {@link MiniMessage#escapeTags} here before substitution, otherwise a
  * player could type a command containing MiniMessage markup (including a clickable {@code run_command}) and
  * have it rendered, and clicked, in staff chat.
  */

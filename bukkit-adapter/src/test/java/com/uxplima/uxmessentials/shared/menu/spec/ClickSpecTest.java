@@ -11,8 +11,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.Ref;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pure checks on {@link ClickSpec#hasAnyAction()} — the flag the Bedrock form renderer reads to tell a tappable
- * button from a decorative filler — plus a guard that adding it leaves {@link ClickSpec#actionsFor} untouched.
+ * Pure checks on {@link ClickSpec#hasAnyAction()}. The flag the Bedrock form renderer reads to tell a tappable
+ * button from a decorative filler: plus a guard that adding it leaves {@link ClickSpec#actionsFor} untouched.
  */
 class ClickSpecTest {
 

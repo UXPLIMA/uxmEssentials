@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.economy.domain.TransferError;
 /**
  * What a {@code /pay} attempt resolved to, distinguishing the three shapes the command adapter must render
  * differently: the transfer was {@link #SENT}, it was {@link #STAGED} for {@code /payconfirm} (above the
- * currency's confirm-threshold — no money moved yet), or it was rejected with a {@link TransferError}. This
+ * currency's confirm-threshold: no money moved yet), or it was rejected with a {@link TransferError}. This
  * lets {@link Pay} return one value the command branches on without re-deriving the path.
  *
  * @param kind which of the three resolutions occurred

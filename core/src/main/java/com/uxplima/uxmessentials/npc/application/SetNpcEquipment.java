@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /npc equip <name> <slot> <material|hand|air>}: set (or clear) the item an NPC wears in one slot, save the
- * new snapshot, and re-render so the change shows at once. The material name is stored verbatim — the adapter
+ * new snapshot, and re-render so the change shows at once. The material name is stored verbatim, the adapter
  * resolves and validates it against the live registry at render time, so an unknown name simply renders an empty
  * slot. A {@code null} material clears the slot. A name no NPC exists at is rejected with {@link
  * NpcError#NOT_FOUND}. The operator-only permission is enforced at the command gate.

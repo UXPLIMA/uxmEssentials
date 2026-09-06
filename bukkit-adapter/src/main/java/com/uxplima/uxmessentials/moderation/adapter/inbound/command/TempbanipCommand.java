@@ -24,8 +24,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /tempbanip <player|ip> <duration> [reason]}: ban an address until a wall-clock expiry. The target is
- * resolved exactly as {@code /banip} does — an IP literal is banned directly, a player name resolves their
- * last-seen IP from the DB-backed seen record — and the {@code TempBanIp} use case enforces that the duration
+ * resolved exactly as {@code /banip} does. An IP literal is banned directly, a player name resolves their
+ * last-seen IP from the DB-backed seen record, and the {@code TempBanIp} use case enforces that the duration
  * is timed (a permanent IP ban is {@code /banip}). Shares the {@code moderation.banip} node, like
  * {@code /unbanip} does.
  */

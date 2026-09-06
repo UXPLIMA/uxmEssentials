@@ -33,13 +33,13 @@ import org.junit.jupiter.api.Test;
  * hologram sources DecentHolograms and FancyHolograms, the three player-warp sources AxPlayerWarps, Athelion
  * PlayerWarps and Olzie PlayerWarps, and the world source Multiverse-Core; the remaining planned sources have a reserved id but
  * no registry entry (planned ≠ stubbed, §1.2). The registry keys, the per-source mapping tables, and the
- * built-source roster stay in lock-step — a {@code Convert} impl with no mapping table, or a planned id that
+ * built-source roster stay in lock-step. A {@code Convert} impl with no mapping table, or a planned id that
  * tab-completes, fails here.
  */
 class MigrationSourceRegistryDriftTest {
 
     /**
-     * The reserved ids of the planned sources — documented in §1.2, deliberately not built. {@code libertybans}
+     * The reserved ids of the planned sources. Documented in §1.2, deliberately not built. {@code libertybans}
      * is reserved here as the next moderation JDBC source after LiteBans (deferred): planned, never stubbed,
      * so it must not resolve and must contribute no rows until it is built.
      */

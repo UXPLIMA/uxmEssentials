@@ -20,8 +20,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The {@link SocialSpyStore} implementation: which staff currently observe private messages. Spying is
- * session state — a per-player global ALL flag and a per-player target set, both held in-memory and dropped
- * on {@code stop()} via {@link #clear()} — so a relog clears it, which is the staff-tool default.
+ * session state, a per-player global ALL flag and a per-player target set, both held in-memory and dropped
+ * on {@code stop()} via {@link #clear()}, so a relog clears it, which is the staff-tool default.
  * {@link #activeSpies()} and {@link #observersOf} resolve each spying uuid to a currently-online
  * {@link PlayerRef}, skipping any who logged off, so the send-path fan-out never targets an offline observer.
  *

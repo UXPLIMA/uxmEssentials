@@ -129,7 +129,7 @@ class RoutingEconomyProviderTest {
         repo.upsertBalance(ALICE, Money.of(capped, new BigDecimal("100")));
 
         // Crediting 100 would breach Bob's cap. This is the same pathological setup as the
-        // compensation-fails test above — but the native ledger runs it as one atomic repository transaction:
+        // compensation-fails test above, but the native ledger runs it as one atomic repository transaction:
         // the guarded debit and the clamp commit together, so a failed credit leg rolls the debit back rather
         // than needing a compensating re-credit. Alice therefore keeps every coin and nothing is ever logged,
         // in contrast to the compensation path, which loses Alice's money and logs the failed refund.

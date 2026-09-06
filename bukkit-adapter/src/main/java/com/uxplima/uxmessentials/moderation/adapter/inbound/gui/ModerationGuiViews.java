@@ -22,8 +22,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Assembles the moderation management GUI's three views — the active-punishments list, the per-punishment
- * detail/manage view, and a target's read-only history — and threads the navigation between them. The list
+ * Assembles the moderation management GUI's three views. The active-punishments list, the per-punishment
+ * detail/manage view, and a target's read-only history, and threads the navigation between them. The list
  * opens by default ({@code /mod} with no args and the {@code /uxmess gui} hub entry); a click drills into the
  * detail view, which can revoke (confirm-gated) or open the clicked target's history. The list is the
  * engine-rendered {@link ModerationActiveMenu}; the detail/manage view stays bespoke (an {@code EntityEditorView}
@@ -108,7 +108,7 @@ public final class ModerationGuiViews {
         return new ModerationGuiViews(list, historyMenu);
     }
 
-    /** Open the active-punishments list — the management GUI's entry point — for {@code viewer}. */
+    /** Open the active-punishments list, the management GUI's entry point, for {@code viewer}. */
     public void open(Player player, PlayerRef viewer) {
         Objects.requireNonNull(player, "player");
         Objects.requireNonNull(viewer, "viewer");
@@ -129,7 +129,7 @@ public final class ModerationGuiViews {
 
     private static EntityEditorLayout detailCodeDefault() {
         // Six properties (target, type, issuer, reason, remaining, history) across the upper rows, a back button,
-        // and a revoke button wired to the editor's delete slot — the framework confirm-gates the revoke.
+        // and a revoke button wired to the editor's delete slot: the framework confirm-gates the revoke.
         return new EntityEditorLayout(
                 3,
                 java.util.List.of(10, 11, 12, 13, 14, 16),

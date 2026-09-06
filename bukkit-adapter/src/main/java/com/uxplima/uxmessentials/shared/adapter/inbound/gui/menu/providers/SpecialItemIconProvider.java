@@ -18,9 +18,9 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuCon
  * a specific data value rather than a distinct material:
  *
  * <ul>
- *   <li>{@code water_bottle} — a {@link Material#POTION} whose base potion type is {@link PotionType#WATER}, i.e.
+ *   <li>{@code water_bottle}, a {@link Material#POTION} whose base potion type is {@link PotionType#WATER}, i.e.
  *       a plain water bottle (there is no {@code WATER_BOTTLE} material).
- *   <li>{@code light:<0-15>} — a {@link Material#LIGHT} block item with its light-block level set; the level is
+ *   <li>{@code light:<0-15>}, a {@link Material#LIGHT} block item with its light-block level set; the level is
  *       clamped to {@code 0..15} and a malformed or absent level falls back to the full {@code 15}.
  * </ul>
  *

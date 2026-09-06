@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link MenuSpecLoader} parses the block, a real {@link Menus} wired with the live {@link MenuBindings} action
  * registry opens it, and a fake {@link BedrockDetector} / {@link BedrockScreen} stand in for the Cumulus/Floodgate
  * SDK (a {@code compileOnly} soft-depend absent from the test runtime). A Bedrock viewer opening a menu that HAS a
- * {@code bedrock {}} block gets that CustomForm — not the chest and not the automatic SimpleForm — with the widgets
+ * {@code bedrock {}} block gets that CustomForm, not the chest and not the automatic SimpleForm, with the widgets
  * resolved in order; submitting binds each widget value to a {@code %name%} placeholder the on-submit actions read.
  * A menu without the block still auto-degrades to a SimpleForm, and a Java viewer keeps the chest.
  */

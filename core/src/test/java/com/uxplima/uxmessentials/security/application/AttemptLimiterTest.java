@@ -40,7 +40,7 @@ class AttemptLimiterTest {
         assertThat(limiter.isLockedOut(player, NOW)).isFalse();
 
         // A reconnect touches no reset on the account-scoped counter (there is nothing here that a rejoin clears), so
-        // the very next failure is the maxAttempts-th and locks the account out — the budget was not reset.
+        // the very next failure is the maxAttempts-th and locks the account out: the budget was not reset.
         AttemptLimiter.Outcome outcome = limiter.recordFailure(player, NOW);
 
         assertThat(outcome.lockedOut()).isTrue();

@@ -90,7 +90,7 @@ public final class KingdomsClaimProvider implements ClaimProvider {
         }
     }
 
-    /** {@code Land.getLand(Location)} — the land covering the block, or {@code null} outside a KingdomsX world. */
+    /** {@code Land.getLand(Location)}: the land covering the block, or {@code null} outside a KingdomsX world. */
     private static @Nullable Object landAt(Location location) throws ReflectiveOperationException {
         return Class.forName(LAND_CLASS).getMethod("getLand", Location.class).invoke(null, location);
     }

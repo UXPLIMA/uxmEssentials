@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Awaits a {@link CompletableFuture} with a hard time bound.
  *
- * <p>A foreign provider — a Treasury economy backed by a remote service, for instance — can stall
+ * <p>A foreign provider (a Treasury economy backed by a remote service, for instance) can stall
  * indefinitely, and an unbounded {@code join()} on its future would hold the calling thread for as long
  * as it hangs. This bounds the wait: a stall or a provider failure surfaces as an
  * {@link IllegalStateException} carrying the provider's own cause, so the operation fails loudly rather

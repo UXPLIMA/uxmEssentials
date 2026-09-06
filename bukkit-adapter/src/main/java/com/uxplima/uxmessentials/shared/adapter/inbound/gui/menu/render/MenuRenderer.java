@@ -40,11 +40,11 @@ import org.jspecify.annotations.Nullable;
  * {@link PriorityLayering} (the visible, highest-priority item wins each slot) and rendered into place; a
  * list-backed item draws its entries from the {@code resolvedLists} the caller passes in and
  * {@link Pagination paginates} them across its content slots, stamping the list template once per entry. The
- * renderer never queries a list source itself — {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.Menus}
+ * renderer never queries a list source itself. {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.Menus}
  * resolves every source off the viewer's region thread once and hands the cached result here, so a redraw (a page
  * flip, a refresh tick) re-renders from the cache and never blocks the region thread on a database. Every slot the
  * renderer fills is reported to {@code clickSink} as a {@link RenderedSlot} so the runtime can route a later click
- * back to the spec — and, for a list cell, to the live element that filled it. The renderer reads only the
+ * back to the spec, and, for a list cell, to the live element that filled it. The renderer reads only the
  * conditions registry, the spec, and the resolved lists; it never names a feature.
  */
 @NullMarked
@@ -57,8 +57,8 @@ public final class MenuRenderer {
     private final ConditionRegistry conditions;
 
     /**
-     * The providers that fill a menu's {@code content {}} regions. Null on an engine wired without any — every
-     * spec-only test fixture — in which case a region (if a spec even declares one) is left empty, exactly what an
+     * The providers that fill a menu's {@code content {}} regions. Null on an engine wired without any, every
+     * spec-only test fixture, in which case a region (if a spec even declares one) is left empty, exactly what an
      * unregistered provider gets. Only production wiring, which holds the feature-populated registry, passes it.
      */
     @Nullable private final ContentProviderRegistry contents;
@@ -76,7 +76,7 @@ public final class MenuRenderer {
     }
 
     /**
-     * The item renderer this menu renderer draws each icon through — the same collaborator the grid canvas needs to
+     * The item renderer this menu renderer draws each icon through. The same collaborator the grid canvas needs to
      * render a slot preview. Exposed so the engine can build a {@link GridRenderer} from an already-wired
      * {@code MenuRenderer} without threading a second {@code ItemRenderer} through every engine constructor; it is
      * engine-internal (both live under {@code ..gui.menu..}), so no consumer outside the engine reaches it.
@@ -97,7 +97,7 @@ public final class MenuRenderer {
     }
 
     /**
-     * The menu's title as plain text — the same title {@link #title} resolves, flattened of all formatting. A
+     * The menu's title as plain text: the same title {@link #title} resolves, flattened of all formatting. A
      * Bedrock form title is a flat string, so the hybrid form renderer reads the title through here rather than as
      * a rich component.
      */
@@ -108,7 +108,7 @@ public final class MenuRenderer {
     }
 
     /**
-     * The button label the hybrid form renderer shows in place of {@code item} — its resolved display name as plain
+     * The button label the hybrid form renderer shows in place of {@code item}. Its resolved display name as plain
      * text. Delegates to the item renderer, which owns the name resolution, so a form button reads the exact name a
      * chest icon would carry.
      */
@@ -119,8 +119,8 @@ public final class MenuRenderer {
     }
 
     /**
-     * The resolved icon material spec for {@code item} — a material name or a {@code skull:}/{@code head:} value with
-     * any {@code %token%} expanded — the hybrid form renderer reads to source a button's image. Delegates to the item
+     * The resolved icon material spec for {@code item}, a material name or a {@code skull:}/{@code head:} value with
+     * any {@code %token%} expanded: the hybrid form renderer reads to source a button's image. Delegates to the item
      * renderer, which owns the material resolution, so a form button sources its icon from the exact spec a chest icon
      * renders from.
      */
@@ -132,7 +132,7 @@ public final class MenuRenderer {
 
     /**
      * A raw spec string resolved for {@code ctx} through the same {@code %token%}/{@code @key} path an item name takes,
-     * flattened to plain text — a Bedrock CustomForm's title, intro content and widget labels/options are flat strings.
+     * flattened to plain text: a Bedrock CustomForm's title, intro content and widget labels/options are flat strings.
      * Delegates to the item renderer, which owns the resolution, so an operator string in a {@code bedrock {}} block
      * fills its tokens exactly as a menu title or item name would.
      */
@@ -143,7 +143,7 @@ public final class MenuRenderer {
     }
 
     /**
-     * A shared {@link MessageKey} resolved for {@code viewer} and flattened to plain text — a label (a confirm
+     * A shared {@link MessageKey} resolved for {@code viewer} and flattened to plain text, a label (a confirm
      * window's yes/no) the hybrid form renderer needs as a flat string where the chest paints wordless wool.
      * Delegates to the item renderer, which owns the catalog lookup, so the label honours the viewer's locale exactly
      * as a menu title or item name does.
@@ -155,13 +155,13 @@ public final class MenuRenderer {
     }
 
     /**
-     * The actionable static items of {@code spec}, in ascending slot order — what the hybrid renderer turns into a
+     * The actionable static items of {@code spec}, in ascending slot order. What the hybrid renderer turns into a
      * Bedrock SimpleForm's button list. Visibility is the same view-requirement rule the chest render uses (a hidden
      * or out-priority item is dropped, resolved through {@link PriorityLayering}), so a Bedrock viewer sees the same
-     * items a Java viewer would. On top of that, only items that carry a click action become form buttons — a
+     * items a Java viewer would. On top of that, only items that carry a click action become form buttons, a
      * decorative/filler item (the auto-filler, a blank border pane, any display-only item with no click) is omitted,
      * since a Bedrock button that does nothing on tap is meaningless; the Java chest still paints it. A menu whose
-     * every item is decorative therefore yields an empty button list — the form still opens with just its title.
+     * every item is decorative therefore yields an empty button list: the form still opens with just its title.
      * List-backed items are skipped here: this method returns only the static buttons, and the form path pages a
      * list's own entries into buttons after them.
      */
@@ -237,7 +237,7 @@ public final class MenuRenderer {
      * Take aside what sits in the slots of every region the viewer physically fills, so a redraw can put it back
      * exactly as it was. The chrome underneath such a region (a window-wide filler is the usual thing) is redrawn on
      * every pass and would otherwise paint over the stacks a player has placed but the feature has not yet read back.
-     * Empty slots are held too — as null entries — because a slot the viewer has just emptied must stay empty rather
+     * Empty slots are held too, as null entries, because a slot the viewer has just emptied must stay empty rather
      * than get a filler tile the feature would later read back as an item. Only ever called for a redraw, and only for
      * a region whose provider opts out of repainting, so an ordinary menu allocates nothing here.
      */
@@ -261,12 +261,12 @@ public final class MenuRenderer {
     /**
      * Fill each of {@code spec}'s content regions from its registered provider, last so a region always wins the
      * slots it declares over the chrome (a full-window filler is the usual thing underneath it). The slots are
-     * cleared first, so a region whose provider is missing — or whose feature has nothing to show right now — leaves
+     * cleared first, so a region whose provider is missing, or whose feature has nothing to show right now, leaves
      * genuinely empty slots rather than a stale tile the viewer could try to take. The engine records no click
      * routing for them: a click there is resolved against the region itself, not the spec's items.
      *
-     * <p>A region whose provider does not repaint on a redraw is skipped entirely once the window is up — not even
-     * cleared — because on a redraw its slots hold the viewer's own stacks, which only the feature's read-back may
+     * <p>A region whose provider does not repaint on a redraw is skipped entirely once the window is up, not even
+     * cleared, because on a redraw its slots hold the viewer's own stacks, which only the feature's read-back may
      * dispose of.
      */
     private void populateContent(Inventory inv, MenuSpec spec, MenuContext ctx, boolean initialPaint) {
@@ -297,12 +297,12 @@ public final class MenuRenderer {
     }
 
     /**
-     * Paint a bottom-inventory menu's bottom items — those whose raw slot sits at or past the chest top — into the
+     * Paint a bottom-inventory menu's bottom items (those whose raw slot sits at or past the chest top) into the
      * viewer's own {@code playerInv}, mapping each raw slot to its player index and recording the <em>raw</em> slot so a
      * later click routes through the holder's click map exactly as a top slot does. The 36-slot canvas is cleared
      * first so a re-render leaves no stale tile behind; the viewer's real items are held in the holder snapshot, not
      * here. Static items only, resolved through the same priority/view layering the top uses, so a hidden or
-     * out-priority bottom item is treated identically — a list-backed item pages across the chest top alone, never the
+     * out-priority bottom item is treated identically. A list-backed item pages across the chest top alone, never the
      * player inventory.
      */
     public void populateBottom(
@@ -337,13 +337,13 @@ public final class MenuRenderer {
     }
 
     /**
-     * The context a static item renders with, carrying the {@code %page%}/{@code %max_page%} its page indicator reads —
+     * The context a static item renders with, carrying the {@code %page%}/{@code %max_page%} its page indicator reads
      * computed once before static items draw so the indicator matches the count {@link #populateList} pages across. A
-     * spec with no list item stays a single page. Only the first list item is consulted — a spec pairs one scrollable
+     * spec with no list item stays a single page. Only the first list item is consulted. A spec pairs one scrollable
      * list with its page controls, and the page count those controls report is that list's.
      *
      * <p>When that list is a paged source (its id is in {@link MenuContext#pagedViews()}), the page and count come from
-     * its snapshot — the corpus total the source reported, not the length of the one rendered page — so a "Page x/y"
+     * its snapshot (the corpus total the source reported, not the length of the one rendered page) so a "Page x/y"
      * indicator is right even though the engine holds only the page it can see. An in-memory list keeps the historic
      * behaviour: it paginates its whole corpus in place to learn the count.
      */
@@ -447,11 +447,11 @@ public final class MenuRenderer {
 
     /**
      * Whether an item's {@code view} requirement block passes for {@code ctx}. The block decides how its requirements
-     * combine — an all-mandatory AND (the historic flat list), a minimum OR / N-of-M, or an inverted condition — and
+     * combine (an all-mandatory AND (the historic flat list), a minimum OR / N-of-M, or an inverted condition) and
      * this supplies the per-requirement outcome it asks for: the condition is resolved against the registry (so a
      * valued condition written {@code has-money:100} splits its head off and the handler sees {@code value=100}, the
      * same registry-aware split the click and action paths take), tested, and negated when the requirement carries a
-     * leading {@code !}. An empty block is visible; an unregistered condition holds {@code false} — fail-closed — so a
+     * leading {@code !}. An empty block is visible; an unregistered condition holds {@code false}, fail-closed, so a
      * wiring gap hides the item rather than silently showing it. The condition's args have their
      * {@code %argument_<name>%} tokens expanded from the arguments the menu was opened with first, so a view can gate on
      * a typed open-command's argument; an argument-less open takes the identity fast-path and is byte-identical.

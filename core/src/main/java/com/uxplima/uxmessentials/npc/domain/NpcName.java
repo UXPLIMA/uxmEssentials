@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * An NPC's name, normalised to its canonical lowercase form so uniqueness and lookup are case-insensitive —
+ * An NPC's name, normalised to its canonical lowercase form so uniqueness and lookup are case-insensitive
  * {@code /npc create Guide} and {@code /npc delete guide} address the same NPC.
  *
  * <p>The name is the NPC's identity: NPCs are server-wide, so a name is unique across the whole {@code npc}

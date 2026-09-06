@@ -6,7 +6,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The click callbacks a caller hands {@link Menus#openGrid} — the behaviour half of a grid open, kept separate from
+ * The click callbacks a caller hands {@link Menus#openGrid}, the behaviour half of a grid open, kept separate from
  * the {@link GridSpec} layout half so the same visual canvas can be driven by different editing policy. Every grid
  * carries a content-slot handler for its editor gestures; a grid may additionally carry a {@link GridCaptureHandler},
  * which makes it "capture-enabled": the operator can then drag or place one of their own items straight onto a content
@@ -22,7 +22,7 @@ public record GridHandlers(
         Objects.requireNonNull(onSlot, "onSlot");
     }
 
-    /** A grid with editor gestures only, no capture — the shape every non-editor caller uses. */
+    /** A grid with editor gestures only, no capture, the shape every non-editor caller uses. */
     public GridHandlers(GridClickHandler onSlot) {
         this(onSlot, null);
     }

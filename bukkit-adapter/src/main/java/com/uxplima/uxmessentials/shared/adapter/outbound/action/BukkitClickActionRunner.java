@@ -39,15 +39,15 @@ import org.jspecify.annotations.Nullable;
 /**
  * The Bukkit/Adventure {@link ClickActionRunner}: it filters an action chain by click trigger and runs the
  * matching actions as an ordered <em>sequence</em>. An effect action (console/player command, message/action-bar/
- * title, sound, connect, give) performs its effect and the sequence moves on, fail-soft — one bad effect logs a
+ * title, sound, connect, give) performs its effect and the sequence moves on, fail-soft, one bad effect logs a
  * one-line warning and is skipped, the chain continues. A gate action (chance, permission, condition, cost)
  * decides whether the rest of the chain runs at all through {@link ClickActionGates}: a denied gate stops the
  * remaining actions, a malformed gate spec is skipped (never aborting). A {@code DELAY} parks the rest of the
  * chain: the tail is re-scheduled after the stated tick count through the {@link Scheduler} port (ticks converted
- * at the fixed 50&nbsp;ms cadence) and then hops back onto the viewer's entity region to resume — a tiny
+ * at the fixed 50&nbsp;ms cadence) and then hops back onto the viewer's entity region to resume, a tiny
  * in-adapter sequencer rather than a single straight loop. A viewer who logs off during the wait aborts the rest
  * silently (the entity hop no-ops on a despawned entity). A {@code RANDOM n} marker names the next {@code n}
- * actions as a group: exactly one of them — picked uniformly at random — runs, the rest of the group is skipped,
+ * actions as a group: exactly one of them, picked uniformly at random, runs, the rest of the group is skipped,
  * and the chain continues after the whole group (see {@link #runFrom}).
  *
  * <p>Command dispatch (console/player) reuses the same {@link ClickCommandRunner} and {@code [console]}/{@code
@@ -147,7 +147,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
      * member, picked uniformly at random, runs through the normal single-action handling; the rest of the group
      * is skipped and the chain continues after the whole group ({@code at + n + 1}). The count clamps to the
      * actions that remain (a marker near the end), and a non-positive count skips the marker (a no-op) so the
-     * actions after it run as ordinary, un-grouped actions. The chosen member runs exactly as it would inline —
+     * actions after it run as ordinary, un-grouped actions. The chosen member runs exactly as it would inline
      * so a chosen gate that denies still stops the chain, and a chosen {@code DELAY} still parks the tail (which
      * then resumes after the group); both are acceptable and intentional.
      */
@@ -184,7 +184,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
      * parked delay elapses. A {@code DELAY} parks the tail via {@link #delayThenContinue} and reports
      * {@link Step#PARKED}; a denied gate reports {@link Step#STOP}; every effect reports {@link Step#CONTINUE}.
      * The {@code continueIndex} is {@code at + 1} inline, or the index past the whole {@code RANDOM} group when the
-     * action is the group's chosen member — so a chosen {@code DELAY} resumes after the group, not inside it.
+     * action is the group's chosen member, so a chosen {@code DELAY} resumes after the group, not inside it.
      */
     private Step step(Player viewer, List<ClickAction> actions, int at, int continueIndex) {
         ClickAction action = actions.get(at);
@@ -215,7 +215,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
         } catch (RuntimeException failure) {
             // A gate that throws (a PAPI placeholder, the economy debit, a permission lookup) must not escape to
             // the interaction listener or the delayed resume's scheduler task. Fail closed: stop the chain rather
-            // than run the actions a passed gate would have unlocked — for COST especially, a thrown withdraw
+            // than run the actions a passed gate would have unlocked, for COST especially, a thrown withdraw
             // leaves the charge outcome unknown, so handing out the reward could give it away for free.
             log.warn(
                     "event=click_action_gate_failed type={} value={}",
@@ -242,7 +242,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
     private void resume(PlayerRef ref, List<ClickAction> actions, int index) {
         Player viewer = org.bukkit.Bukkit.getPlayer(ref.uuid());
         if (viewer == null || !viewer.isOnline()) {
-            return; // logged off during the wait — abort the rest of the chain
+            return; // logged off during the wait, abort the rest of the chain
         }
         runFrom(viewer, actions, index);
     }
@@ -280,7 +280,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
             return Long.parseLong(raw.strip());
         } catch (NumberFormatException notANumber) {
             log.warn("event=click_action_bad_delay value={}", raw);
-            return 0L; // a bad delay is treated as no delay — the chain continues immediately
+            return 0L; // a bad delay is treated as no delay. The chain continues immediately
         }
     }
 
@@ -351,7 +351,7 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
 
     /**
      * A parsed {@code title|subtitle|fadeIn|stay|fadeOut} title value. The title is always present; the subtitle
-     * and the three tick counts are optional. The timings are taken as a set — either all three trailing segments
+     * and the three tick counts are optional. The timings are taken as a set. Either all three trailing segments
      * parse as whole numbers, or the whole tail is ignored and the vanilla defaults apply (so a partial or
      * non-numeric tail never half-applies). Defaults match vanilla: 10 fade-in, 70 stay, 20 fade-out ticks. The
      * subtitle keeps any {@code |} the title text never can, because only the first {@code |} splits title from
@@ -406,14 +406,14 @@ public final class BukkitClickActionRunner implements ClickActionRunner {
     /**
      * A parsed {@code KEY[:volume[:pitch]]} sound value. The key may itself be namespaced ({@code
      * minecraft:entity.player.levelup}), so volume and pitch are read as the trailing one or two numeric
-     * {@code :}-separated segments and everything before them is the key — splitting on the first colon would
+     * {@code :}-separated segments and everything before them is the key. Splitting on the first colon would
      * eat a namespace. A missing volume/pitch defaults to {@code 1.0}.
      */
     record SoundSpec(String key, float volume, float pitch) {
 
         static SoundSpec parse(String value) {
             // The trailing numeric segments are, left to right, volume then pitch. Peel them off the right
-            // (so a single trailing number is the volume), and whatever remains — rejoined on ':' — is the key,
+            // (so a single trailing number is the volume), and whatever remains, rejoined on ':', is the key,
             // so a namespaced key keeps its own colon instead of being eaten by a split-on-first-colon.
             List<String> parts = new ArrayList<>(Splitter.on(':').trimResults().splitToList(value));
             Float last = trailingFloat(parts);

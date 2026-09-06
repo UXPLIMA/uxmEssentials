@@ -24,7 +24,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Bridges a legacy Vault economy into this plugin's {@link EconomyProvider} port — the compatibility bridge
+ * Bridges a legacy Vault economy into this plugin's {@link EconomyProvider} port, the compatibility bridge
  * for the large installed base of Vault-only economies ({@code docs/11-economy-integration.md} §2, §6). One
  * of only two classes (with {@code TreasuryEconomyAdapter}) allowed to import a provider SDK; the ArchUnit
  * fence {@code economyDomainHasNoProviderSdk} forbids {@code net.milkbowl.vault..} anywhere above this
@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>Vault's {@code Economy} API has no notion of multiple currencies, so this adapter is
  * <strong>single-currency</strong>: it exposes exactly the configured default {@link Currency} from
  * {@link #currencies()}, and any operation in another currency resolves {@code CURRENCY_UNSUPPORTED} (a
- * {@link TransferResult.DenyWith} for a transfer) rather than silently converting — there is no implicit
+ * {@link TransferResult.DenyWith} for a transfer) rather than silently converting. There is no implicit
  * cross-currency conversion. Amounts cross the boundary as {@code double} because that is Vault's surface;
  * inside this plugin they are {@link Money}/{@link BigDecimal}, so the conversion lives here and only here.
  */

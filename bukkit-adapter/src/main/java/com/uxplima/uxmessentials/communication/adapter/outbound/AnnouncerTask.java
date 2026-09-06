@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The default interval and the per-announcement overrides are read fresh from the live {@link AnnouncerConfig}
  * each reschedule, so a {@code /announce reload} (or {@code /uxmess reload communication}) that swaps a new config
  * in changes a cadence on the next tick without re-arming the task. A reload that <em>adds</em> a brand-new override
- * announcement, however, needs a loop armed for it — that announcement is excluded from the shared rotation, so
+ * announcement, however, needs a loop armed for it. That announcement is excluded from the shared rotation, so
  * without {@link #rearmOverrides()} it would silently never broadcast. {@link #rearmOverrides()} cancels every
  * currently-armed override loop and arms one fresh loop per announcement that currently declares an override.
  *
@@ -81,7 +81,7 @@ public final class AnnouncerTask {
      * Cancel every currently-armed override loop and arm a fresh loop per announcement that currently declares an
      * {@code interval-seconds} override, reading the live (just-reloaded) config. Idempotent and safe to call
      * repeatedly: a second call with an unchanged config cancels the loops it armed and arms equivalent ones. The
-     * default rotation loop is untouched — it already re-resolves {@link AnnouncerConfig#rotating()} each tick.
+     * default rotation loop is untouched: it already re-resolves {@link AnnouncerConfig#rotating()} each tick.
      */
     public void rearmOverrides() {
         synchronized (overrideLoops) {

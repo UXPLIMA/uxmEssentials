@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqWorthOverrideStore} against the default embedded SQLite backend with the
- * Flyway baseline applied (including the V12 worth-override table) — the tested default of the backend-parity
+ * Flyway baseline applied (including the V12 worth-override table). The tested default of the backend-parity
  * matrix. It proves the round-trip (set → find) preserves the price, the case-folded lookup, the
  * material-key upsert (a re-set overwrites the price in place rather than inserting), the {@code exists} check,
  * and the remove contract (true on the first removal, false on the second).

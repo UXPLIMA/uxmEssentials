@@ -5,7 +5,7 @@ package com.uxplima.uxmessentials.playerstate.domain;
  * the domain so the adapter only ever calls {@code Entity#setFreezeTicks} with a non-negative tick count. A
  * request below zero is treated as zero (which thaws the player); a request beyond the cap is held at the cap
  * so a typo cannot freeze someone for an absurd length of time. This is the cosmetic opposite of
- * {@link BurnDuration} — the powder-snow shiver instead of fire.
+ * {@link BurnDuration}, the powder-snow shiver instead of fire.
  *
  * @param seconds the clamped freeze duration in seconds
  */

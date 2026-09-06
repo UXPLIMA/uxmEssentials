@@ -28,8 +28,8 @@ import org.jspecify.annotations.NullMarked;
  * Assembles the {@code /jail} management GUI's three capabilities and threads the navigation between them: the
  * jail-a-player flow ({@link JailGuiFlow}, capability A), the jail-list manager ({@link JailListView},
  * capability B), and the jailed-players release list ({@link ModerationJailedMenu}, capability C). The hub is the
- * jail flow's player picker carrying two footer buttons — [Jails] opening the jail list, [Jailed players]
- * opening the release list — so the operator reaches every capability from the one screen {@code /jail} opens.
+ * jail flow's player picker carrying two footer buttons. [Jails] opening the jail list, [Jailed players]
+ * opening the release list, so the operator reaches every capability from the one screen {@code /jail} opens.
  *
  * <p>The views are constructed once here and reused for every viewer. The footer buttons read the live player at
  * click time (re-deriving a {@link PlayerRef}) so a hub built once still routes each click to the clicker. The
@@ -99,7 +99,7 @@ public final class JailGuiViews {
         return new JailGuiViews(flow, jailList, jailedPlayers);
     }
 
-    /** Open the hub — the jail-a-player picker with the [Jails] and [Jailed players] footer buttons. */
+    /** Open the hub: the jail-a-player picker with the [Jails] and [Jailed players] footer buttons. */
     public void openHub(Player player, PlayerRef viewer) {
         Objects.requireNonNull(player, "player");
         Objects.requireNonNull(viewer, "viewer");

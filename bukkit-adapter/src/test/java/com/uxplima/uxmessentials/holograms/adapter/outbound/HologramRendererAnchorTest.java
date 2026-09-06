@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit coverage of the renderer's anchor resolution — the pure {@link HologramRenderer#anchorFor} seam that
+ * Unit coverage of the renderer's anchor resolution, the pure {@link HologramRenderer#anchorFor} seam that
  * decides where a hologram renders: at its linked NPC's head, or (fail-soft) at its own stored location.
  */
 class HologramRendererAnchorTest {

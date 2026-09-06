@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The six wearable slots a fake-player NPC's equipment can occupy. This is a pure domain enum — the slot is named
+ * The six wearable slots a fake-player NPC's equipment can occupy. This is a pure domain enum. The slot is named
  * here without any {@code org.bukkit} reference, so the {@code Npc} aggregate and its equipment map stay
  * Bukkit-free. The adapter maps each constant onto the uxmLib packet slot when it renders, and {@code /npc equip}
  * parses an operator's slot word through {@link #parse}.

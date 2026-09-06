@@ -46,7 +46,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The playerstate use cases through their real implementations against in-memory fakes — the same wiring the
+ * The playerstate use cases through their real implementations against in-memory fakes. The same wiring the
  * Brigadier handlers drive, minus Bukkit. It proves the headline rules of this context: a toggle mutates the
  * snapshot, reconciles, and publishes; an apply-once effect (heal/feed) changes no snapshot but still fires
  * its effect and event; a staff toggle affects the subject (not the actor); and the {@code .others} target is
@@ -656,7 +656,7 @@ class PlayerStateUseCasesTest {
 
     /**
      * A nearby scan that pushes a fixed list to the supplied callback and records the radius it was asked for.
-     * Invokes the callback inline (synchronously), standing in for the adapter's global-thread resolve — the
+     * Invokes the callback inline (synchronously), standing in for the adapter's global-thread resolve, the
      * use case must not block on or otherwise depend on a returned value, only on the push.
      */
     private static final class FakeNearby implements NearbyPlayers {

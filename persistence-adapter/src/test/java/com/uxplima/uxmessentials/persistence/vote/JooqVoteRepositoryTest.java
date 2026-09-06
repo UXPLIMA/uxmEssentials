@@ -195,7 +195,7 @@ class JooqVoteRepositoryTest {
         PlayerRef alice = new PlayerRef(UUID.randomUUID(), "Alice");
         PlayerRef charlie = new PlayerRef(UUID.randomUUID(), "Charlie");
 
-        // Monthly: alice=5, bob=3, charlie=10 — expected order: charlie, alice, bob.
+        // Monthly: alice=5, bob=3, charlie=10, expected order: charlie, alice, bob.
         repository.saveTotals(alice, new VoteTally(10L, 2L, 4L, 5L, 100L, 202401L, 24277L, 0L, 0L, 0L));
         repository.saveTotals(bob, new VoteTally(5L, 1L, 2L, 3L, 100L, 202401L, 24277L, 0L, 0L, 0L));
         repository.saveTotals(charlie, new VoteTally(15L, 4L, 8L, 10L, 100L, 202401L, 24277L, 0L, 0L, 0L));
@@ -498,7 +498,7 @@ class JooqVoteRepositoryTest {
         return new QueuedReward(player, List.of(command), Instant.EPOCH);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

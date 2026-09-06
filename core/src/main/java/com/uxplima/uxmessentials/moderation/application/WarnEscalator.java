@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * the warning's actor is told {@code MOD_WARN_ESCALATED}.
  *
  * <p>The escalated sanction is driven through the existing {@link Mute}/{@link TempBan}/{@link Ban}/{@link Kick}
- * use cases — never back through a warn — so escalation cannot recurse: a tempban from the 5th warning is a
+ * use cases, never back through a warn, so escalation cannot recurse: a tempban from the 5th warning is a
  * plain tempban, it does not re-enter the ladder. It is issued under a stable system actor (so the audit and
  * broadcast attribute it to the server's rule, not the staff member who happened to land the final warning),
  * and inherits the warning's {@code silent} flag, so a silent warn escalates silently.

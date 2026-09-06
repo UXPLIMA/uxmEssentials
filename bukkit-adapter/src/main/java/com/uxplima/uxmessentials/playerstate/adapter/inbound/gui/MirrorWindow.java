@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The two managed mirror windows as the operator sees them: {@code modules/playerstate/gui/invsee.conf} and
  * {@code endersee.conf} plus the bindings behind them. The files own each window's height, its wording and whatever
- * pads the slots that map to nothing on a player; this class owns what a file cannot — the titles resolved from the
+ * pads the slots that map to nothing on a player; this class owns what a file cannot. The titles resolved from the
  * message catalog, and the one block of slots each file hands over as a {@code content {}} region, where the real
  * stacks live and the rules that stop an item being duplicated apply.
  *

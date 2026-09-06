@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  *
  * <p>The {@code .others} target form of each self/other command is gated by the single shared
  * {@code uxmessentials.playerstate.others} node, checked per-invocation in the adapter rather than declared
- * as a separate command literal — so it is intentionally absent from this table. The {@code /gmc /gms /gma
+ * as a separate command literal, so it is intentionally absent from this table. The {@code /gmc /gms /gma
  * /gmsp} mode shortcuts, {@code /nv}, and {@code /extinguish} are aliases of their base commands, registered
  * through the {@link BrigadierCommand#aliases()} list, not as separate specs. {@code /repair}, {@code /repairall},
  * {@code /hat}, and {@code /more} belong to the itemworld context and are intentionally not registered here.
@@ -83,6 +83,6 @@ final class PlayerstateCommandSurface {
         return new PlayerstateCommand(literal, description);
     }
 
-    /** The kernel-side description of one playerstate command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one playerstate command, literal and help text, no Brigadier type. */
     private record PlayerstateCommand(String literal, String description) implements BrigadierCommand {}
 }

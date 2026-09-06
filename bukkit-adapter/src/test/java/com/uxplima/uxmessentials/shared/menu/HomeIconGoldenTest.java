@@ -60,10 +60,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code IconSelectorView} drew. The code-default palette is 42 materials (RED_BED first), so the grid fills content
  * slots 0..41, with the BARRIER reset button (slot 45) and the three ARROW nav buttons (slots 48 back-row prev, 49
  * back, 50 next) on the bottom row. The window is snapshotted as {@code (slot -> material, plain name)} and asserted
- * equal, slot for slot, to the baseline the old view produced — captured while both rendered the same fixture, then
+ * equal, slot for slot, to the baseline the old view produced. Captured while both rendered the same fixture, then
  * frozen here so the old class could be deleted. Then a click on a palette cell, the reset button, and the back
  * button through the engine's own {@link MenuListener} prove the migrated path sets the icon, clears it, and returns
- * to the action menu — faithful in both appearance and behaviour.
+ * to the action menu, faithful in both appearance and behaviour.
  */
 class HomeIconGoldenTest {
 

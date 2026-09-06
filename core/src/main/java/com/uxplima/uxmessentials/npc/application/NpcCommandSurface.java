@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
 
 /**
  * The npc context's command surface as a platform-neutral {@link CommandSpec}: the single {@code /npc} literal,
- * gated by {@code uxmessentials.npc.admin}, that serves every form through its subcommands — {@code create},
+ * gated by {@code uxmessentials.npc.admin}, that serves every form through its subcommands, {@code create},
  * {@code delete}, {@code list}, {@code movehere}, {@code skin}, and {@code command}. The npc inbound adapter
  * realises the Brigadier node from the started module's context on the next {@code COMMANDS} fire. Collected
  * here so {@code NpcModule} stays small and the command/permission pairing is one greppable row the permissions
@@ -29,6 +29,6 @@ final class NpcCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of the npc command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of the npc command, literal and help text, no Brigadier type. */
     private record NpcCommand(String literal, String description) implements BrigadierCommand {}
 }

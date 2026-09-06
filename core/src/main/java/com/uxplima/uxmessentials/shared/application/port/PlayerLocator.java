@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  *
  * <p>The teleport context captures the requester's pre-teleport position for {@code /back}, records a
  * warmup's origin block for the move-cancel comparison, and reads the {@code /tphere} target's
- * location through this port. Reading a live location is region-bound work — the adapter performs it
+ * location through this port. Reading a live location is region-bound work. The adapter performs it
  * on the player's region thread and returns empty when the player is offline.
  */
 public interface PlayerLocator {

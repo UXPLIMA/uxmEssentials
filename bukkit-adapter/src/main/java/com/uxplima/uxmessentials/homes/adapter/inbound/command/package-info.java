@@ -1,5 +1,5 @@
 /**
- * The homes context's inbound Brigadier command handler — the single {@code /home} command and its
+ * The homes context's inbound Brigadier command handler, the single {@code /home} command and its
  * subcommand tree ({@code visit}, {@code invite}, {@code uninvite}, {@code admin}). The no-arg invocation
  * opens the slot grid; each subcommand maps a command source and its arguments onto exactly one homes
  * use-case call and is gated by its own permission node via {@code requires(...)}. All player-facing feedback

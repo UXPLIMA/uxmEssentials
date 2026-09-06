@@ -12,11 +12,11 @@ import com.uxplima.uxmessentials.communication.domain.PlaceholderBindings;
  * Resolves the death message for a player by applying the death channel's per-cause {@link DeathCausePolicies} and
  * the event's placeholders through the shared {@link ResolveConnectionMessage} engine. The table is read fresh each
  * call from the supplied holder, so a reload that swaps the death policies takes effect on the next death. The
- * {@link DeathCause} the adapter classified the death as picks the {@link MessagePolicy} — a cause with its own
+ * {@link DeathCause} the adapter classified the death as picks the {@link MessagePolicy}, a cause with its own
  * template renders it, every other cause falls through to the default policy.
  *
- * <p>The standard death tokens — {@code {player}} (the victim's display name), {@code {killer}} (the killer's name
- * when a player dealt the blow), {@code {killer_weapon}} (the weapon that killer held), {@code {cause}} — are bound
+ * <p>The standard death tokens. {@code {player}} (the victim's display name), {@code {killer}} (the killer's name
+ * when a player dealt the blow), {@code {killer_weapon}} (the weapon that killer held), {@code {cause}}, are bound
  * by the adapter from the live death event, which already holds the vanilla death cause; this use case never
  * touches a Bukkit type. The returned {@link ResolvedMessage} carries operator content for the adapter to render
  * through MiniMessage.

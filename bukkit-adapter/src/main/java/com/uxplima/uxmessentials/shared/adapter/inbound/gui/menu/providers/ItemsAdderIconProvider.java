@@ -11,7 +11,7 @@ import org.jspecify.annotations.Nullable;
  * {@code dev.lone.itemsadder.api.CustomStack.getInstance(String)} that returns a {@code CustomStack} wrapper (or
  * {@code null} for an unknown id), whose {@code getItemStack()} hands back the built {@link ItemStack}.
  *
- * <p>No {@code dev.lone} type is named here — the SDK is reached only by string class-name through reflection — so a
+ * <p>No {@code dev.lone} type is named here (the SDK is reached only by string class-name through reflection) so a
  * server without ItemsAdder loads none of its classes and the present-guard in {@link ReflectiveItemProvider}
  * short-circuits before any lookup runs.
  */

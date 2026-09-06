@@ -77,7 +77,7 @@ class SafeLocationGuardTest {
 
     @Test
     void rejectsSolidBlockAtFeet() {
-        // STONE directly at the feet position — player would be inside a block.
+        // STONE directly at the feet position: player would be inside a block.
         world.getBlockAt(X, Y, Z).setType(Material.STONE);
         SafeLocationGuard guard = guard(true, false);
 
@@ -89,7 +89,7 @@ class SafeLocationGuardTest {
 
     @Test
     void rejectsSolidBlockAtHead() {
-        // Y is air, Y+1 is STONE — head would be inside a block.
+        // Y is air, Y+1 is STONE: head would be inside a block.
         world.getBlockAt(X, Y + 1, Z).setType(Material.STONE);
         SafeLocationGuard guard = guard(true, false);
 
@@ -101,7 +101,7 @@ class SafeLocationGuardTest {
 
     @Test
     void rejectsLavaDirectlyBelowFeet() {
-        // Y-1 is LAVA — lethal underfoot.
+        // Y-1 is LAVA, lethal underfoot.
         world.getBlockAt(X, Y - 1, Z).setType(Material.LAVA);
         SafeLocationGuard guard = guard(true, /* considerMidair= */ false);
 
@@ -124,7 +124,7 @@ class SafeLocationGuardTest {
 
     @Test
     void rejectsFloatingWithNoGroundInRange() {
-        // All blocks within MIDAIR_DEPTH below Y are AIR (MockBukkit default) — player is floating.
+        // All blocks within MIDAIR_DEPTH below Y are AIR (MockBukkit default): player is floating.
         SafeLocationGuard guard = guard(true, /* considerMidair= */ true);
 
         Result<Unit, HomeError> result = guard.check(owner, slot, position(Y));

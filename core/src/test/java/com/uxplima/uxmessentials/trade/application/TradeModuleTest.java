@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the {@link TradeModule} feature-module contract: it reports the {@code trade} id, ships enabled by default,
- * honours an explicit {@code modules.trade.enabled = false}, and — as the Phase-1 skeleton — contributes no command,
+ * honours an explicit {@code modules.trade.enabled = false}, and, as the Phase-1 skeleton, contributes no command,
  * listener, or migration. The registry-level wiring is covered by {@code FeatureModuleRegistryDriftTest}.
  */
 class TradeModuleTest {

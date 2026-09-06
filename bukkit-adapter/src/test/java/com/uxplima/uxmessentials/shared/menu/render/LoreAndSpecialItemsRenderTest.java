@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * Golden renders of the lore-append modes and the three native icon sources — a serialized {@code b64:} stack, the
+ * Golden renders of the lore-append modes and the three native icon sources. A serialized {@code b64:} stack, the
  * {@code water_bottle} keyword, and {@code light:<n>}. Each item is rendered through the real {@link ItemRenderer}
  * (built with the composition root's {@link IconProviders#full full} chain, where those providers live) against
  * MockBukkit so the outcome is asserted on a concrete {@link ItemStack}. MockBukkit v26.2 round-trips a stack's

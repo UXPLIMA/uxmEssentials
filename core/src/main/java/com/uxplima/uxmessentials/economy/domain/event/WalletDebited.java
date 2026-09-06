@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.economy.domain.Transaction;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A debit applied to a wallet — the debit leg of a {@code /pay}, a {@code WarpCost} charge, an admin take.
+ * A debit applied to a wallet, the debit leg of a {@code /pay}, a {@code WarpCost} charge, an admin take.
  * Carries the {@link Transaction} the aggregate minted and the resulting per-currency balance. Maps to one
  * {@code event=economy_debit} audit line. A transfer that resolves to an applied move emits exactly one
  * {@code WalletDebited} and one {@link WalletCredited}.

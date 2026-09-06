@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the no-chat-reports decision: a disabled tweak never re-delivers anything, and an enabled tweak re-delivers
- * only the messages that actually arrived signed — an already-unsigned message is left alone even when the tweak is on.
+ * only the messages that actually arrived signed: an already-unsigned message is left alone even when the tweak is on.
  */
 class ChatReportPolicyTest {
 

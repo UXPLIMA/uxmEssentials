@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
  * name before a mutation; those reads must be served from the warm-loaded in-memory set, never a synchronous
  * SQLite query on that thread. So after a single warm load (which the renderer's spawn-on-enable triggers), any
  * number of command-style {@code exists}/{@code find}/{@code all} reads hit the delegate zero further times,
- * while a {@code save} makes the new NPC immediately findable and a {@code delete} immediately absent — both
+ * while a {@code save} makes the new NPC immediately findable and a {@code delete} immediately absent, both
  * write-through at the delegate and reflected in memory with no extra delegate read.
  */
 class CachedNpcRepositoryTest {
@@ -186,7 +186,7 @@ class CachedNpcRepositoryTest {
         CachedNpcRepository cached = new CachedNpcRepository(delegate);
 
         // Even without an explicit warm load, the first lookup loads the set, then every later read is served
-        // from memory — a later miss never re-queries the delegate.
+        // from memory: a later miss never re-queries the delegate.
         assertThat(cached.exists(GUIDE)).isTrue();
         for (int i = 0; i < 50; i++) {
             assertThat(cached.exists(SHOP)).isFalse();

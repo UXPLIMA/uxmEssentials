@@ -23,12 +23,12 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
  * {@code /jail <player> <jail> [duration] [reason]}: confine a player to a named jail. With no duration the
- * jail is permanent; with one it is timed — online-only by default (the countdown advances only while the
+ * jail is permanent; with one it is timed. Online-only by default (the countdown advances only while the
  * player is connected in the jail), or wall-clock when the operator opts that jail into {@code jail-countdown
  * = wall-clock} in {@code moderation.conf}. The exempt target, an unknown jail and a malformed duration are
  * refused (audit-logged). On success the jail row is upserted, an online target is teleported into the jail
  * via {@link Sanctions}, {@code PlayerJailed} is published, and the teleport context's {@code JailGate} starts
- * blocking their self-teleports on its next read. An offline target is a DB write only — the join listener
+ * blocking their self-teleports on its next read. An offline target is a DB write only, the join listener
  * re-applies it on reconnect (offline jail).
  */
 public final class Jail {

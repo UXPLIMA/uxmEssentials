@@ -396,10 +396,10 @@ final class TablistContentCodec {
      * Parse a format's optional {@code skin} value, the one tab thing native Paper cannot do. Two prefixes are accepted:
      *
      * <ul>
-     *   <li>{@code "texture:<base64>"} or {@code "texture:<base64>:<signature>"} — a Mojang texture property given
+     *   <li>{@code "texture:<base64>"} or {@code "texture:<base64>:<signature>"}, a Mojang texture property given
      *       directly. The base64 value may itself contain {@code =} padding but no {@code :}, so the part after the first
      *       colon up to an optional second colon is the value and the remainder (if any) the signature;</li>
-     *   <li>{@code "player:<name>"} — copy a named player's skin (read live when online, fetched when offline).</li>
+     *   <li>{@code "player:<name>"}. Copy a named player's skin (read live when online, fetched when offline).</li>
      * </ul>
      *
      * <p>The parse is tolerant like the rest of the codec: an absent, blank, or unrecognised value yields empty (no

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * The captured pre-staff-mode state of a player, held so the exact loadout can be restored when the
- * player leaves staff mode. The four item/effect regions are opaque {@link LoadoutBlob}s — the adapter
+ * player leaves staff mode. The four item/effect regions are opaque {@link LoadoutBlob}s, the adapter
  * encodes and decodes them through the same {@code VaultItemCodec} the vaults context uses, so this record
  * stays a pure value with no Bukkit, Paper, or NBT type leaking into the domain. The scalars carry the rest
  * of the visible player state staff mode overwrites: the held hotbar slot, the experience bar, the game
@@ -12,8 +12,8 @@ import java.util.Objects;
  *
  * <p>This is the item-loss-safe heart of staff mode: it is committed to the loadout repository <i>before</i>
  * the player's inventory is swapped for the gadget hotbar, so a crash mid-swap leaves the real loadout
- * recoverable from the database rather than lost. The record never lives in PDC — it is DB-backed (it must
- * survive a world rollback) — which is why it carries the full snapshot rather than a reference. The regions
+ * recoverable from the database rather than lost. The record never lives in PDC. It is DB-backed (it must
+ * survive a world rollback), which is why it carries the full snapshot rather than a reference. The regions
  * are wrapped in {@link LoadoutBlob} value objects rather than raw {@code byte[]} so the record stays a clean
  * value type.
  *

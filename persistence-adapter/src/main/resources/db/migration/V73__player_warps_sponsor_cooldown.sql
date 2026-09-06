@@ -2,7 +2,7 @@
 -- column with sponsored_until + cooldown-days; BuySponsorship then refuses a re-sponsor while sponsor_cooldown_until
 -- is still in the future. Keying the cooldown to the warp (not the player) is deliberate: a player-scoped cooldown
 -- would be sidestepped by transferring the warp to an alt, so the no-transfer guard and this column together close
--- that off. It is a persistence-only column — never a fact on the PlayerWarp aggregate — so no domain field maps to
+-- that off. It is a persistence-only column, never a fact on the PlayerWarp aggregate, so no domain field maps to
 -- it; a bounded reader queries it and the sweep's guarded UPDATE writes it.
 --
 -- Additive, portable DDL only: a plain ADD COLUMN with no default, no dialect clause and no ON DELETE CASCADE, so it

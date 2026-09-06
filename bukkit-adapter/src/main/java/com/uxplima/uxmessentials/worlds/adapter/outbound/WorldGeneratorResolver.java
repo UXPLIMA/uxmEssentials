@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * Maps a built-in generator id ({@code void}/{@code flat}, case-insensitive) to the matching
  * {@link ChunkGenerator}. Both generators are built <em>once</em> at construction from the resolved
  * config (the immutable flat plan and the two biomes) and held in final fields, so the resolver and
- * the generators it hands out are stateless beyond that snapshot — safe to share across Paper's
+ * the generators it hands out are stateless beyond that snapshot. Safe to share across Paper's
  * parallel, off-tick worldgen threads.
  *
  * <p>This is the single handle both {@code BukkitWorldEngine} (internal {@code /worlds create}) and the

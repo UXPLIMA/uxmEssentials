@@ -16,14 +16,14 @@ import org.jspecify.annotations.NullMarked;
  * backend. V70 already added the nullable {@code server_id} column; this is a runtime routine, not a migration,
  * because SQL cannot know the runtime backend id or which worlds are loaded on this server.
  *
- * <p>V62 backfilled its own server-id column to the constant default {@code server-1} inside the migration SQL —
+ * <p>V62 backfilled its own server-id column to the constant default {@code server-1} inside the migration SQL
  * correct only for a single-server install. Player-warps supports a real Velocity + Redis network where a warp that
  * lives in backend B's worlds must be stamped {@code server=B}, not a constant, so the claim runs at enable and is
  * scoped to the worlds loaded on this backend.
  *
  * <p>The claim is idempotent by construction: it only ever writes rows where {@code server_id IS NULL}, so a second
  * enable claims nothing and a row already stamped (by this backend or another) is never overwritten. It is also
- * always scoped — when no worlds are loaded it writes nothing rather than running an unscoped UPDATE that would
+ * always scoped. When no worlds are loaded it writes nothing rather than running an unscoped UPDATE that would
  * wrongly claim another backend's warps.
  */
 @NullMarked

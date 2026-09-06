@@ -10,10 +10,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The anti-corruption boundary that resolves an itemworld domain's already-normalised mob-type id against the
- * live Paper {@link EntityType} registry — the entity-side counterpart of {@link BukkitItemResolver}. The
+ * live Paper {@link EntityType} registry, the entity-side counterpart of {@link BukkitItemResolver}. The
  * domain ({@code MobSpec}, {@code PurgeSelection}) owns the id <em>shape</em> (lowercase {@code namespace:path},
  * count/radius caps); this resolver owns the registry lookup, the one remaining failure mode a
- * well-formed-but-unknown type hits — mapped by the caller to {@code SPAWNMOB_UNKNOWN}.
+ * well-formed-but-unknown type hits, mapped by the caller to {@code SPAWNMOB_UNKNOWN}.
  *
  * <p>Resolution is pure and side-effect-free: {@link #spawnable} returns empty for an unknown id or a
  * non-spawnable type ({@code UNKNOWN}, {@code PLAYER}), so a command renders the localized failure and stops

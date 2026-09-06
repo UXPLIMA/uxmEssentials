@@ -31,7 +31,7 @@ import org.jspecify.annotations.NullMarked;
  * per-hologram list source, the placeholders its entries need, the edit and create click actions, then loads the
  * {@code hologram-list} spec and hands it to {@link Menus}.
  *
- * <p>The grid is the {@code holograms:list} source — it reads the cached hologram registry directly (the warm
+ * <p>The grid is the {@code holograms:list} source. It reads the cached hologram registry directly (the warm
  * in-memory set, never the database, never the Bukkit API), so the engine may resolve it off the viewer's region
  * thread. Each hologram carries no item of its own, so the icon is a fixed {@code ARMOR_STAND} literal in the spec;
  * the {@code hologram_name} / {@code hologram_lines} / {@code hologram_world} / {@code hologram_x} / {@code
@@ -39,7 +39,7 @@ import org.jspecify.annotations.NullMarked;
  * coordinates into the catalog entry. A left click runs {@code holograms:edit}, which opens the still-bespoke
  * {@link HologramEditorView} for the clicked hologram; the create button runs {@code holograms:create}, which
  * prompts for a name and creates a fresh text hologram at the operator's feet through the same {@link
- * HologramServices#create()} use case {@code /hologram create} drives — so the list adds no domain logic of its own.
+ * HologramServices#create()} use case {@code /hologram create} drives, so the list adds no domain logic of its own.
  */
 @NullMarked
 public final class HologramListMenu {
@@ -115,7 +115,7 @@ public final class HologramListMenu {
 
     /**
      * Left-click the create button: prompt for a name, then create a fresh text hologram at the operator's feet,
-     * reopening the list on cancel — exactly what the old create button did.
+     * reopening the list on cancel: exactly what the old create button did.
      */
     private void create(MenuActionContext ctx) {
         Player player = ctx.player();

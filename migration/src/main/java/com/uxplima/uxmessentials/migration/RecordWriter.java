@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * conflict-resolution logic and reports the same outcomes without touching the database
  * (docs/12-migration §1, §7).
  *
- * <p>This port is the <em>only</em> difference between a live run and a dry run — the parse, map, and
+ * <p>This port is the <em>only</em> difference between a live run and a dry run, the parse, map, and
  * conflict-resolve stages are shared, so a dry run's per-record and summary audit are byte-for-byte the
  * lines a live run would emit (modulo {@code dry_run=true}).
  */

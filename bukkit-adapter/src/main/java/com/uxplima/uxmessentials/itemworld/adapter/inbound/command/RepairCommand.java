@@ -21,7 +21,7 @@ import com.uxplima.uxmlib.item.ItemBuilder;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /repair}: repair the held item — reset its durability damage to zero. Owned here in the itemworld
+ * {@code /repair}: repair the held item, reset its durability damage to zero. Owned here in the itemworld
  * surface (it shares the playerstate repair semantics; both nodes gate the same action, docs/permissions.md
  * §Itemworld), gated by the {@code uxmessentials.repair.itemworld} node. A held item with no durability damage
  * (or a non-damageable item) replies {@link ItemworldMessageKey#REPAIR_NOTHING}; an empty hand replies

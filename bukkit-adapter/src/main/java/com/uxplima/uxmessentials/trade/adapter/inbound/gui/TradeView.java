@@ -37,16 +37,16 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Drives the two live views of one same-server trade over the shared {@link TradeExchange}. Each participant sees
- * their own {@link TradeWindow} — an engine menu whose chrome comes from {@code modules/trade/gui/trade.conf} and
+ * their own {@link TradeWindow}. An engine menu whose chrome comes from {@code modules/trade/gui/trade.conf} and
  * whose two blocks of item slots are content regions this class fills: their editable offer on one side, the
  * counterpart's offer mirrored read-only on the other. Placing or removing an item re-reads that side's offer into
- * the domain {@link TradeSession} (which clears both confirmations — the anti-scam invariant) and redraws both
+ * the domain {@link TradeSession} (which clears both confirmations. The anti-scam invariant) and redraws both
  * windows, so the other player sees the change and both confirms reset. When both sides confirm with no pending
  * change the swap runs: each player receives the other's stacks, with any overflow dropped at their feet rather than
  * deleted.
  *
  * <p>Item safety is absolute. An offered stack physically sits in the placing player's window, out of their
- * inventory; every terminal path — a commit, a window close, a disconnect, a world change, or a plugin stop — either
+ * inventory; every terminal path (a commit, a window close, a disconnect, a world change, or a plugin stop) either
  * swaps or returns those stacks exactly once, gated by the exchange's single-winner settle flag. Every live-player
  * touch hops to that player's region thread through the injected {@link Scheduler}, so the flow is Folia-safe.
  */
@@ -73,14 +73,14 @@ public final class TradeView {
     /** Where the two facts a trade ends with are published, whatever the audit knob is set to. */
     private final DomainEventPublisher events;
 
-    /** Whether a completed trade emits an audit line — the module's {@code audit} config knob, resolved once. */
+    /** Whether a completed trade emits an audit line: the module's {@code audit} config knob, resolved once. */
     private final boolean auditEnabled;
 
     /** The materials refused into the window, resolved once from {@code item-blacklist}. */
     private final List<Material> blacklist;
 
     /**
-     * Viewers whose window closed only to show an amount prompt — their next close is a re-open, not a cancel.
+     * Viewers whose window closed only to show an amount prompt: their next close is a re-open, not a cancel.
      * Concurrent because the two participants' region threads touch it independently on Folia.
      */
     private final Set<UUID> promptingViewers = ConcurrentHashMap.newKeySet();
@@ -119,7 +119,7 @@ public final class TradeView {
         window.register(bindings, this, blacklist);
     }
 
-    /** The lifecycle listener bound to this view — the wiring registers it. */
+    /** The lifecycle listener bound to this view: the wiring registers it. */
     public TradeListener newListener() {
         return new TradeListener(this);
     }
@@ -154,12 +154,12 @@ public final class TradeView {
         return exchange != null && !exchange.session().state().isTerminal();
     }
 
-    /** The stacks this side has staked, in region order — what the offer region is filled with when it opens. */
+    /** The stacks this side has staked, in region order: what the offer region is filled with when it opens. */
     List<@Nullable ItemStack> ownOffer(TradeHolder holder) {
         return offerOf(holder, true);
     }
 
-    /** The other side's stakes, in region order — the read-only mirror, repainted on every redraw. */
+    /** The other side's stakes, in region order: the read-only mirror, repainted on every redraw. */
     List<@Nullable ItemStack> mirroredOffer(TradeHolder holder) {
         return offerOf(holder, false);
     }
@@ -228,7 +228,7 @@ public final class TradeView {
         }
     }
 
-    /** Refuse a blacklisted item back into the window — tell the viewer their placement was rejected. */
+    /** Refuse a blacklisted item back into the window: tell the viewer their placement was rejected. */
     void refuseBlacklisted(TradeHolder holder) {
         PlayerRef viewer = holder.viewer();
         messageSink.deliver(viewer, messages.resolve(viewer, TradeMessageKey.TRADE_ITEM_BLACKLISTED, Map.of()));
@@ -237,8 +237,8 @@ public final class TradeView {
     /**
      * A window closed, with {@code contents} the stacks that were still in its offer region. Two closes reach here.
      * One is the window stepping aside for an amount prompt, which reopens it: the contents are held on the exchange
-     * so the reopened window paints them back, and the trade carries on. The other is the real thing — the player
-     * closed the window — which cancels the trade and returns both sides' items, from what was physically in the
+     * so the reopened window paints them back, and the trade carries on. The other is the real thing, the player
+     * closed the window, which cancels the trade and returns both sides' items, from what was physically in the
      * window rather than from the last recorded offer, so a stack placed in the closing tick is still returned.
      */
     void onWindowClosed(TradeHolder holder, List<@Nullable ItemStack> contents) {
@@ -250,7 +250,7 @@ public final class TradeView {
             return;
         }
         if (exchange == null || !exchange.beginCancel()) {
-            // Another path — a commit, or the counterpart's own close — already owns the settlement, and it emptied
+            // Another path (a commit, or the counterpart's own close) already owns the settlement, and it emptied
             // this region before the window closed, so there is nothing here to return.
             return;
         }
@@ -388,7 +388,7 @@ public final class TradeView {
         return List.copyOf(materials);
     }
 
-    /** A participant changed world — treat it like a close, returning both sides' items. */
+    /** A participant changed world: treat it like a close, returning both sides' items. */
     void onLeave(UUID player) {
         TradeExchange exchange = sessions.find(player);
         if (exchange != null) {
@@ -396,7 +396,7 @@ public final class TradeView {
         }
     }
 
-    /** A participant disconnected — return the quitter's items inline (their thread is theirs now) and the other's async. */
+    /** A participant disconnected: return the quitter's items inline (their thread is theirs now) and the other's async. */
     void onQuit(Player quitter) {
         TradeExchange exchange = sessions.find(quitter.getUniqueId());
         if (exchange == null || !exchange.beginCancel()) {
@@ -430,7 +430,7 @@ public final class TradeView {
     /**
      * Both sides confirmed: settle the trade all-or-nothing. First hop to each side's region to read its LIVE window
      * and freeze it, then off the tick thread move the staked money (guarded, double-spend-safe) and only on success
-     * swap the item clones — a money failure leaves every stack with its owner, so nothing moves partway. Reading the
+     * swap the item clones: a money failure leaves every stack with its owner, so nothing moves partway. Reading the
      * live window here (rather than the last snapshot) is the Folia sub-tick fix: a stack a player places in the same
      * tick as the counterpart's confirm, before its deferred re-read runs, is delivered instead of discarded. The
      * settle runs only once both region reads complete, so it never races an un-read window.

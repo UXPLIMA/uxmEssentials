@@ -28,7 +28,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import com.uxplima.uxmessentials.shared.domain.Result;
 
 /**
- * {@code /ban <player> [reason]}: a permanent UUID ban. A permanent ban reuses the tempban row — it is a
+ * {@code /ban <player> [reason]}: a permanent UUID ban. A permanent ban reuses the tempban row: it is a
  * {@link TempbanState.Active} whose expiry is so far out ({@link #PERMANENT_SPAN}) that the ban-on-login
  * listener's {@code isActiveAt} check stays true for any realistic reconnection, so the existing login
  * enforcement bars the player unchanged. The expiry is a far-future sentinel computed from the clock rather
@@ -44,7 +44,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
  * <p>Address-strictness: under {@link AddressStrictness#STRICT} (opt-in; default {@link AddressStrictness#NORMAL}
  * is zero behaviour change) a successful UUID ban additionally IP-bans every address the target is known to
  * have connected from, so a banned account cannot return on a fresh one from the same connection. The fan-out
- * is fail-safe — if no IP is on record the UUID ban still succeeds — and never runs against an exempt target
+ * is fail-safe (if no IP is on record the UUID ban still succeeds) and never runs against an exempt target
  * (the exempt gate already refused them above; this is a second guard so STRICT never IP-bans an exempt
  * player's shared connection collaterally).
  */
@@ -153,8 +153,8 @@ public final class Ban {
      * from the same connection. Skipped for an exempt target (a defensive second
      * guard so STRICT never collaterally IP-bans an exempt player's shared connection) and fail-safe: an empty
      * IP set leaves the UUID ban as the only effect. The IP bans carry the UUID ban's own effective expiry
-     * ({@code until}) — permanent when the ban is permanent, the capped expiry when a {@code maxduration} tier
-     * reduced the ban to a tempban — so the collateral never outlives the sanction that triggered it.
+     * ({@code until}). Permanent when the ban is permanent, the capped expiry when a {@code maxduration} tier
+     * reduced the ban to a tempban, so the collateral never outlives the sanction that triggered it.
      */
     private void fanOutToIps(
             PlayerRef actor, PlayerRef target, Optional<String> reason, Optional<Instant> until, Instant now) {

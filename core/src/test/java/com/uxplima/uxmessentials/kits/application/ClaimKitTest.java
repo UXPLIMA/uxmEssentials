@@ -46,10 +46,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The {@code /kit} claim path through the real use cases against in-memory ports — the same wiring the
+ * The {@code /kit} claim path through the real use cases against in-memory ports. The same wiring the
  * Brigadier handler drives, minus Bukkit. It exercises the claim rules in one place: the cooldown gate (a
  * kit on cooldown is refused, a ready kit grants), the one-time rule (a consumed one-time kit is refused and
- * dropped from the list), the per-kit permission gate, and — the headline of this context — that the per-kit
+ * dropped from the list), the per-kit permission gate, and, the headline of this context, that the per-kit
  * cost <em>soft-couples</em> to economy: with a provider present the charge gates the grant, and with no
  * provider a priced kit is claimable for free.
  */

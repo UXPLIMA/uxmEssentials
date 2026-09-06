@@ -18,9 +18,9 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * The eco-admin surface — {@code /eco give|take|set|reset} per target and {@code /eco giveall|giverandom|resetall}
+ * The eco-admin surface, {@code /eco give|take|set|reset} per target and {@code /eco giveall|giverandom|resetall}
  * in bulk. Every verb is permission-gated at the command boundary and audited exactly once here (bulk verbs
- * with an affected-count, never per-target spam — {@code docs/11-economy-integration.md} §9.4–§9.5). The
+ * with an affected-count, never per-target spam, {@code docs/11-economy-integration.md} §9.4 to §9.5). The
  * single-sided {@code give}/{@code take} route through the {@link EconomyProvider} so they honour the
  * currency clamp and the offline-target upsert; {@code set}/{@code reset} target an exact balance, which only
  * the native ledger expresses, so they go through the {@link WalletRepository} the economy context owns.

@@ -18,8 +18,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /punish <player> <template>}: apply a configured punishment template — a preset reason plus an
- * optional duration — to a target. The template resolution and the ban/tempban dispatch (with the exempt
+ * {@code /punish <player> <template>}: apply a configured punishment template, a preset reason plus an
+ * optional duration, to a target. The template resolution and the ban/tempban dispatch (with the exempt
  * gate, kick, audit, history, duration cap and broadcast) are the {@code Punish} use case's job; this handler
  * only maps the name and the template argument and suggests the configured template names. An unknown template
  * is reported by the use case. Whether the sanction broadcasts follows the module's silent-by-default setting.

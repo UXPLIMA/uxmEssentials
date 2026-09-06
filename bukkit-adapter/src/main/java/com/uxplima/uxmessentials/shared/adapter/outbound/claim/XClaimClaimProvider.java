@@ -18,25 +18,25 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by XClaim, reached <b>entirely by reflection</b> — there is no compile
+ * {@link ClaimProvider} backed by XClaim, reached <b>entirely by reflection</b>. There is no compile
  * dependency on XClaim, so this class loads and runs whether or not XClaim is present.
  *
  * <p>XClaim publishes no resolvable Maven coordinate (its JitPack build fails; only the shaded plugin jar is
  * distributed on the Releases tab), so a typed {@code compileOnly} dependency is impossible. Its API surface
- * is a stable static registry — {@code codes.wasabi.xclaim.api.Claim} — which this provider reaches
+ * is a stable static registry, {@code codes.wasabi.xclaim.api.Claim}, which this provider reaches
  * reflectively.
  *
  * <p>XClaim is chunk-based and stores claims in an in-memory registry keyed by {@code ChunkReference}. Rather
  * than {@code Claim.getByChunk(Chunk)} (which would force a chunk load), this provider builds a
  * {@code ChunkReference(World, int chunkX, int chunkZ)} directly and calls {@code Claim.getByChunk(cr)}, a
- * pure in-memory registry scan that never loads a chunk — Folia-safe. Trust is owner (via
+ * pure in-memory registry scan that never loads a chunk, Folia-safe. Trust is owner (via
  * {@code Claim.getOwner().getUniqueId()}) or an explicit per-player BUILD grant
  * ({@code getUserPermission(OfflinePlayer, Permission.BUILD)}). XClaim has no per-claim ban concept, so
  * {@link ClaimLookup#isBanned} is always {@code false}.
  *
  * <p>{@link #active()} is {@code true} only when XClaim is enabled and the API class resolves. Reflective
  * handles are resolved on first success and cached; any reflective failure logs once and degrades to
- * inactive/empty — it never propagates.
+ * inactive/empty: it never propagates.
  */
 @NullMarked
 public final class XClaimClaimProvider implements ClaimProvider {
@@ -97,7 +97,7 @@ public final class XClaimClaimProvider implements ClaimProvider {
             return Optional.empty();
         }
         resolveHandles();
-        // Build a ChunkReference from the world and chunk coordinates directly (block >> 4) — the registry
+        // Build a ChunkReference from the world and chunk coordinates directly (block >> 4), the registry
         // scan compares references in memory, so no chunk is ever loaded, unlike getByChunk(Chunk).
         Object chunkRef = requireCtor(chunkRefCtor).newInstance(bukkitWorld, blockX >> 4, blockZ >> 4);
         Object claim = requireHandle(getByChunk).invoke(null, chunkRef);
@@ -165,7 +165,7 @@ public final class XClaimClaimProvider implements ClaimProvider {
 
         @Override
         public boolean isBanned(UUID player) {
-            // XClaim has no per-claim ban concept — access is a permission/trust deny-model only.
+            // XClaim has no per-claim ban concept: access is a permission/trust deny-model only.
             return false;
         }
 

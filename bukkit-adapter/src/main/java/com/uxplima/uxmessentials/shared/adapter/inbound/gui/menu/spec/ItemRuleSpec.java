@@ -8,7 +8,7 @@ import java.util.Objects;
  * stays Bukkit-free and plain-JUnit testable. The actual {@code ItemStack} comparison lives runtime-side (in the
  * menu listener), which is the only place that may touch Bukkit; this record only describes what to match.
  *
- * <p>{@code materials} is a whitelist of uppercase {@code Material} names — an empty list means any material passes.
+ * <p>{@code materials} is a whitelist of uppercase {@code Material} names: an empty list means any material passes.
  * {@code minAmount} is the least stack size the cursor must carry (a value below one is treated as one at match
  * time). {@code nameContains} is a case-insensitive substring the cursor's display name must contain; an empty
  * string skips the name check.

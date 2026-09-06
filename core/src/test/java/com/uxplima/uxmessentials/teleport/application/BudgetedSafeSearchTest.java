@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins the budget-bounded, tick-sliced async safe-search. The search chains attempts through the {@link
- * Scheduler} port — a probe, and on a miss a rescheduled retry a few ticks later — never blocking a thread on
+ * Scheduler} port (a probe, and on a miss a rescheduled retry a few ticks later) never blocking a thread on
  * a {@code .get()}/{@code .join()}, and it terminates the moment any one of the budget's ceilings (attempts,
  * chunk loads, wall clock) is hit.
  *
@@ -65,7 +65,7 @@ class BudgetedSafeSearchTest {
 
         CompletableFuture<Optional<RtpSafeLocation>> result = search.search(AREA, new SearchBudget(5, 100, 10_000));
 
-        // The chain settled synchronously through the scheduler — no thread was parked on a get()/join().
+        // The chain settled synchronously through the scheduler: no thread was parked on a get()/join().
         assertThat(result).isCompleted();
         assertThat(result.getNow(Optional.empty())).isEmpty();
         assertThat(access.calls()).isEqualTo(5);
@@ -125,7 +125,7 @@ class BudgetedSafeSearchTest {
         BudgetedSafeSearch search = searchOver(access, clock, scheduler);
 
         // The scheduler advances the clock by the 100ms retry each hop, so a 250ms deadline bites after a few
-        // attempts — well before the 40-attempt ceiling.
+        // attempts: well before the 40-attempt ceiling.
         CompletableFuture<Optional<RtpSafeLocation>> result = search.search(AREA, new SearchBudget(40, 100, 250));
 
         assertThat(result).isCompleted();

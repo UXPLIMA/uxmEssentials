@@ -34,7 +34,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The proof that a menu item's click action resolves {@code %argument_<name>%} from the arguments the menu was
- * opened with — the action-side twin of the renderer's TEXT substitution. A menu opened carrying {@code amount=5}
+ * opened with: the action-side twin of the renderer's TEXT substitution. A menu opened carrying {@code amount=5}
  * whose left-click runs {@code record:%argument_amount%} must reach the registered action with the value {@code 5};
  * an action with no argument token is unchanged; and a menu opened with no arguments passes the ref's args through
  * verbatim (the identity fast-path), so the literal token survives. These drive the whole open → click → effect path

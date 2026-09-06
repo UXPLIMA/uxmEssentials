@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The reward step of the rate use case over in-memory fakes: a rating grants the rater their configured reward once
- * per warp (re-rating grants nothing — the anti-farming dedup), the owner is rewarded once per <em>unique</em>
+ * per warp (re-rating grants nothing. The anti-farming dedup), the owner is rewarded once per <em>unique</em>
  * rater, and with the sub-group disabled nothing is granted and no ledger row is written.
  */
 class RatePlayerWarpRewardsTest {

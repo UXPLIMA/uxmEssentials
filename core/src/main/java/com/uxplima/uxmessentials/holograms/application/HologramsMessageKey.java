@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * The holograms context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code HOLOGRAM_CREATED} ↔ {@code hologram.created}); the constant is the
  * compile-time handle, the catalog holds the text. There are no inline player-facing literals anywhere in
- * the context — every message resolves through one of these.
+ * the context: every message resolves through one of these.
  *
  * <p>Per the i18n contract, a disabled module still ships its keys so the catalog stays whole and the
  * locale-parity guard sees the full {@code en} key set.
@@ -134,7 +134,7 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_LIST_ENTRY("hologram.list.entry"),
     HOLOGRAM_LIST_EMPTY("hologram.list.empty"),
 
-    // management GUI — the /hologram list menu
+    // management GUI, the /hologram list menu
     HOLOGRAM_GUI_LIST_TITLE("hologram.gui.list.title"),
     HOLOGRAM_GUI_LIST_ENTRY_NAME("hologram.gui.list.entry-name"),
     HOLOGRAM_GUI_LIST_ENTRY_LORE("hologram.gui.list.entry-lore"),
@@ -143,14 +143,14 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_GUI_LIST_CREATE("hologram.gui.list.create"),
     HOLOGRAM_GUI_LIST_CREATE_PROMPT("hologram.gui.list.create-prompt"),
 
-    // management GUI — the per-hologram editor frame
+    // management GUI, the per-hologram editor frame
     HOLOGRAM_GUI_EDITOR_TITLE("hologram.gui.editor.title"),
     HOLOGRAM_GUI_EDITOR_VALUE_LORE("hologram.gui.editor.value-lore"),
     HOLOGRAM_GUI_EDITOR_BACK("hologram.gui.editor.back"),
     HOLOGRAM_GUI_EDITOR_DELETE("hologram.gui.editor.delete"),
     HOLOGRAM_GUI_EDITOR_DELETE_CONFIRM("hologram.gui.editor.delete-confirm"),
 
-    // management GUI — per-property labels
+    // management GUI: per-property labels
     HOLOGRAM_GUI_PROP_NAME("hologram.gui.prop.name"),
     HOLOGRAM_GUI_PROP_NAME_PROMPT("hologram.gui.prop.name-prompt"),
     HOLOGRAM_GUI_PROP_MOVE("hologram.gui.prop.move"),
@@ -178,7 +178,7 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_GUI_PROP_NPC_LINK_PROMPT("hologram.gui.prop.npc-link-prompt"),
     HOLOGRAM_GUI_PROP_BLACKLIST("hologram.gui.prop.blacklist"),
 
-    // management GUI — appearance properties wired through the colour picker / number steppers
+    // management GUI. Appearance properties wired through the colour picker / number steppers
     HOLOGRAM_GUI_PROP_BACKGROUND("hologram.gui.prop.background"),
     HOLOGRAM_GUI_PROP_GLOW("hologram.gui.prop.glow"),
     HOLOGRAM_GUI_PROP_TEXT_OPACITY("hologram.gui.prop.text-opacity"),
@@ -188,13 +188,13 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_GUI_PROP_TRANSLATION_Y("hologram.gui.prop.translation-y"),
     HOLOGRAM_GUI_PROP_TRANSLATION_Z("hologram.gui.prop.translation-z"),
 
-    // management GUI — value display words (booleans, modes, the "none/unset" placeholder)
+    // management GUI. Value display words (booleans, modes, the "none/unset" placeholder)
     HOLOGRAM_GUI_VALUE_ON("hologram.gui.value.on"),
     HOLOGRAM_GUI_VALUE_OFF("hologram.gui.value.off"),
     HOLOGRAM_GUI_VALUE_NONE("hologram.gui.value.none"),
     HOLOGRAM_GUI_VALUE_DEFAULT("hologram.gui.value.default"),
 
-    // management GUI — the lines sub-menu (a ListProperty of text lines)
+    // management GUI. The lines sub-menu (a ListProperty of text lines)
     HOLOGRAM_GUI_LINES_TITLE("hologram.gui.lines.title"),
     HOLOGRAM_GUI_LINES_ENTRY_NAME("hologram.gui.lines.entry-name"),
     HOLOGRAM_GUI_LINES_ENTRY_HINTS("hologram.gui.lines.entry-hints"),
@@ -204,7 +204,7 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_GUI_LINES_REMOVE_CONFIRM("hologram.gui.lines.remove-confirm"),
     HOLOGRAM_GUI_LINES_BACK("hologram.gui.lines.back"),
 
-    // management GUI — the blacklist sub-menu (a ListProperty of player names)
+    // management GUI. The blacklist sub-menu (a ListProperty of player names)
     HOLOGRAM_GUI_BLACKLIST_TITLE("hologram.gui.blacklist.title"),
     HOLOGRAM_GUI_BLACKLIST_ENTRY_NAME("hologram.gui.blacklist.entry-name"),
     HOLOGRAM_GUI_BLACKLIST_ENTRY_HINTS("hologram.gui.blacklist.entry-hints"),
@@ -214,7 +214,7 @@ public enum HologramsMessageKey implements MessageKey {
     HOLOGRAM_GUI_BLACKLIST_REMOVE_CONFIRM("hologram.gui.blacklist.remove-confirm"),
     HOLOGRAM_GUI_BLACKLIST_BACK("hologram.gui.blacklist.back"),
 
-    // management GUI — enum selector sub-menu titles
+    // management GUI. Enum selector sub-menu titles
     HOLOGRAM_GUI_SELECT_BILLBOARD("hologram.gui.select.billboard"),
     HOLOGRAM_GUI_SELECT_ALIGNMENT("hologram.gui.select.alignment"),
     HOLOGRAM_GUI_SELECT_VISIBILITY("hologram.gui.select.visibility"),

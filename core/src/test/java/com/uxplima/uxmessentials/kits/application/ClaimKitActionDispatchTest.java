@@ -41,7 +41,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The action-engine dispatch contract {@link ClaimKit} owns: on a successful claim the before-items claim
- * actions run, then the items are granted, then the after-items claim actions run — in that order — and on a
+ * actions run, then the items are granted, then the after-items claim actions run, in that order, and on a
  * refused claim the kit's deny actions run instead (and nothing is granted). A single shared transcript records
  * every grant and every action the {@link KitActionRunner} is handed, so the assertions read the exact ordering
  * the player would observe.

@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * Reads the Discord bridge's presence off the Bukkit {@code ServicesManager}: the optional bridge jar registers
  * a {@link DiscordBridgePresence} once its gateway connects and the host's confirmation seam is wired, and
  * unregisters it on shutdown. The bridge is a separate plugin with its own lifecycle, so the registration
- * comes and goes after the host has enabled — the lookup is therefore live on every call, never cached, so a
+ * comes and goes after the host has enabled. The lookup is therefore live on every call, never cached, so a
  * bridge that connects (or drops) after the host started is reflected immediately.
  *
  * <p>This is the only place the discord-link context touches a platform service registry; the use cases see

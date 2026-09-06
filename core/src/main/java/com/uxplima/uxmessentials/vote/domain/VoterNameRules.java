@@ -9,12 +9,12 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The validity rules a voter name must satisfy before a vote is credited: a maximum length and an
- * optional whitelist pattern. A Votifier payload can arrive with a junk username — empty, the literal
+ * optional whitelist pattern. A Votifier payload can arrive with a junk username, empty, the literal
  * string {@code "null"}, an over-long value, or one carrying characters the server's name policy
- * forbids — and crediting such a name spawns a phantom entry on the leaderboard and pays a reward into
+ * forbids, and crediting such a name spawns a phantom entry on the leaderboard and pays a reward into
  * a player that does not exist. These rules let the adapter reject those payloads at the boundary.
  *
- * <p>Pure value — no I/O, no Bukkit. The optional pattern, when present, is matched against the whole
+ * <p>Pure value, no I/O, no Bukkit. The optional pattern, when present, is matched against the whole
  * name ({@link java.util.regex.Matcher#matches()}); when absent only the length and the always-on
  * blank/{@code "null"} checks apply.
  *
@@ -32,7 +32,7 @@ public record VoterNameRules(int maxLength, Optional<Pattern> pattern) {
 
     /**
      * Whether {@code name} is a usable voter name: non-null, non-blank, not the literal {@code "null"},
-     * within {@link #maxLength}, and — when a pattern is configured — matching it in full. A {@code null}
+     * within {@link #maxLength}, and, when a pattern is configured, matching it in full. A {@code null}
      * is accepted as an argument (a Votifier payload may carry one) and rejected as invalid.
      */
     public boolean isValid(@Nullable String name) {
@@ -46,7 +46,7 @@ public record VoterNameRules(int maxLength, Optional<Pattern> pattern) {
     /**
      * Build rules from a max length and a regex string. A blank or {@code null} pattern yields
      * length-only validation. A malformed regex is tolerated: it compiles to no pattern (so only the
-     * length and blank/{@code "null"} checks apply) rather than failing construction — the adapter is
+     * length and blank/{@code "null"} checks apply) rather than failing construction: the adapter is
      * expected to log the bad regex so the operator can fix it.
      */
     public static VoterNameRules of(int maxLength, String patternOrBlank) {

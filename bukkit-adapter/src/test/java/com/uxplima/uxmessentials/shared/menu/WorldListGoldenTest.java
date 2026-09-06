@@ -75,13 +75,13 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The worlds golden test: the engine-rendered {@code /worlds editor} world picker must draw the exact grid the
  * original {@code WorldListView} drew. The store holds two managed worlds ("alpha" normal, "beta" nether), so the
- * list draws a GRASS_BLOCK and a NETHERRACK icon (content slots 0 and 1 — the environment icon each world resolves
+ * list draws a GRASS_BLOCK and a NETHERRACK icon (content slots 0 and 1. The environment icon each world resolves
  * to), the NETHER_STAR create button (slot 49), and the two ARROW nav buttons (slots 48 and 50). The engine's window
  * is snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — captured once while both rendered the same fixture, then frozen here as the contract so the old
+ * view produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old
  * class could be deleted. Then, through the engine's own {@link MenuListener}, a left click on the first world icon
  * proves the migrated path opens that world's engine {@link WorldMainMenu} hub, and a right click proves it runs the
- * forced teleport — so the move is faithful in both appearance and behaviour, including the picker's distinct
+ * forced teleport, so the move is faithful in both appearance and behaviour, including the picker's distinct
  * left-edits / right-teleports gesture split.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code world_name} token, so a world's name appears in
@@ -166,7 +166,7 @@ class WorldListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code WorldListView} produced for this fixture (two managed
      * worlds, "alpha" normal and "beta" nether), captured once while both paths rendered it identically and frozen
-     * here as the contract: a GRASS_BLOCK and a NETHERRACK icon (content slots 0 and 1 — the names surface through the
+     * here as the contract: a GRASS_BLOCK and a NETHERRACK icon (content slots 0 and 1. The names surface through the
      * {@code world_name} token), the NETHER_STAR create button (slot 49), and the two nav ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

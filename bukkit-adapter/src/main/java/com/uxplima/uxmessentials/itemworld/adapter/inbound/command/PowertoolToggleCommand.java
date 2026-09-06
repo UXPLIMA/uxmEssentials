@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /powertooltoggle}: flip whether your powertool bindings fire on interact, without re-binding any item.
- * The bindings stamped onto items stay put — only the per-player gate the interact listener consults changes —
+ * The bindings stamped onto items stay put, only the per-player gate the interact listener consults changes,
  * so a player can silence and re-enable their tools at will. The new state is reported through
  * {@link ItemworldMessageKey#POWERTOOL_ENABLED} / {@link ItemworldMessageKey#POWERTOOL_DISABLED}.
  */

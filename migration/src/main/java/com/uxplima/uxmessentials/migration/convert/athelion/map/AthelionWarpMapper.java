@@ -27,11 +27,11 @@ import org.jspecify.annotations.Nullable;
  *       maps to {@link WarpAccess#PASSWORD}, a {@code CLOSED} warp to {@link WarpAccess#PRIVATE}, and everything else
  *       (an {@code OPENED} or status-less warp) to {@link WarpAccess#PUBLIC}. Athelion has no whitelist gate.
  *   <li><b>Ratings.</b> Athelion stores only the accumulated star total and the set of reviewers, not per-vote stars, so
- *       the total is distributed as evenly as possible across the reviewers — the count and the average survive exactly,
+ *       the total is distributed as evenly as possible across the reviewers, the count and the average survive exactly,
  *       which is what the browse rollup shows; the per-vote timestamp Athelion never kept is left at the epoch.
  *   <li><b>The rest.</b> {@code admission} becomes the entry price in the server default currency, {@code blocked-players}
  *       become warp bans, {@code category} carries across (Athelion's {@code all} bucket meaning "uncategorised" is
- *       dropped to empty), and the owner <em>name</em> — which Athelion never serialised — falls back to a placeholder.
+ *       dropped to empty), and the owner <em>name</em>, which Athelion never serialised, falls back to a placeholder.
  * </ul>
  *
  * <p>A warp whose world the live server does not know is dropped ({@link Optional#empty()}, counted as skipped), exactly
@@ -101,7 +101,7 @@ public final class AthelionWarpMapper {
     /**
      * A warp with a password is password-gated; a {@code CLOSED} warp is private; everything else is public. The password
      * presence wins so a {@code PASSWORD_PROTECTED} warp whose password somehow went missing is never claimed gated
-     * without a hash — it degrades to public rather than to an un-enterable warp.
+     * without a hash: it degrades to public rather than to an un-enterable warp.
      */
     private static WarpAccess access(Optional<String> password, @Nullable String status) {
         if (password.isPresent()) {
@@ -156,7 +156,7 @@ public final class AthelionWarpMapper {
         List<ImportedPlayerWarp.Ban> bans =
                 new ArrayList<>(warp.blockedPlayers().size());
         for (UUID blocked : warp.blockedPlayers()) {
-            // Athelion records no reason, expiry or issuer for a block, and no timestamp — the ban carries only the
+            // Athelion records no reason, expiry or issuer for a block, and no timestamp. The ban carries only the
             // player.
             bans.add(new ImportedPlayerWarp.Ban(
                     blocked, Optional.empty(), Optional.empty(), Optional.empty(), Instant.EPOCH));

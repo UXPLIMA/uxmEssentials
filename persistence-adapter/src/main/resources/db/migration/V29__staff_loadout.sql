@@ -1,4 +1,4 @@
--- Schema for the staff bounded context — the DB-backed pre-staff-mode loadout. When
+-- Schema for the staff bounded context: the DB-backed pre-staff-mode loadout. When
 -- a player enters staff mode their real inventory, armour, off-hand and active potion
 -- effects are captured and committed to this table BEFORE the inventory is swapped for
 -- the gadget hotbar; on exit the row is read back, the real loadout restored, and only
@@ -18,19 +18,19 @@
 -- schema.
 --
 -- Queryable-vs-opaque split (architecture persistence invariant, 01-architecture
--- §"No opaque JSON-blob columns"): the scalar facts of the captured state — the held
+-- §"No opaque JSON-blob columns"): the scalar facts of the captured state, the held
 -- hotbar slot, the experience level and progress, the game-mode name, the flight flag and
--- the capture instant — are first-class columns. The four item/effect regions are
+-- the capture instant: are first-class columns. The four item/effect regions are
 -- intrinsically opaque payload (the adapter's serialized item/effect bytes, never filtered,
--- ordered or partially updated — a save rewrites the whole cell), so they are stored as
+-- ordered or partially updated. A save rewrites the whole cell), so they are stored as
 -- those bytes encoded to base64 in TEXT columns, exactly as the vaults context stores its
 -- ItemStack[] (V6). base64 TEXT is byte-identical across SQLite, MySQL/MariaDB and
--- PostgreSQL, whereas BLOB is not portable (PostgreSQL has no BLOB type — it uses bytea —
+-- PostgreSQL, whereas BLOB is not portable (PostgreSQL has no BLOB type, it uses bytea, 
 -- and the SQLite/MySQL BLOB shapes differ).
 
 -- One row per owner: the loadout is keyed by the player who owns it, so the table is keyed
 -- the same way (a single-row-per-owner table, upsert on the player key). inventory, armor,
--- offhand and potion_effects are the base64-encoded serialized regions — the opaque
+-- offhand and potion_effects are the base64-encoded serialized regions, the opaque
 -- payload; held_slot/exp_level/exp_progress/game_mode/flying are the captured scalars;
 -- entered_at is the epoch-millis of the capture.
 CREATE TABLE staff_loadout (

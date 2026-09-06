@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link BukkitSanctions} adapter owns; a relog clears the freeze (the set is in-memory), so this listener
  * naturally stops blocking once the set no longer contains the player.
  *
- * <p>The block-position check means head movement (yaw/pitch only) is not cancelled — cancelling every micro
+ * <p>The block-position check means head movement (yaw/pitch only) is not cancelled, cancelling every micro
  * move would be both jarring and needless event churn on the hot move path.
  */
 @NullMarked

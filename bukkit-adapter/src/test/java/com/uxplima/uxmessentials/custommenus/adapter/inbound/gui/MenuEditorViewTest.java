@@ -58,7 +58,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * per-menu overview, the overview's save button rewrites the file, and delete is gated behind the engine confirm and
  * then removes the file and unregisters the menu. Create is driven through the view's apply seam (the anvil prompt is
  * not fired live, matching the other editor view tests), and it lands a new loadable file in the engine. Everything is
- * an engine window — a {@link MenuHolder} backs each — so the editor never touches a raw Bukkit inventory.
+ * an engine window, a {@link MenuHolder} backs each, so the editor never touches a raw Bukkit inventory.
  */
 class MenuEditorViewTest {
 

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * {@code ResolvePortalDestination} maps a portal entered in a source world to the exit world configured by that
  * world's per-kind link property, scaling the horizontal coordinates by the vanilla rule between the two
  * environments. It resolves to nothing whenever the source is unknown, the link is unset, the link names a world
- * that is not registered, or the link is syntactically invalid — a corrupt or missing link can never carry a
+ * that is not registered, or the link is syntactically invalid. A corrupt or missing link can never carry a
  * teleport to a phantom world. The repository is an in-memory fake so the resolution is asserted without Bukkit.
  */
 class ResolvePortalDestinationTest {

@@ -8,7 +8,7 @@ package com.uxplima.uxmessentials.vaults.domain;
  *
  * <p>The cap is checked against the one-based index the player requests ({@code /vault <n>}): a request for
  * vault {@code n} is allowed only when {@code n} is within the cap. A re-open of an already-owned vault is
- * always allowed (it consumes no new quota) — that distinction lives in {@link Vault} rather than here.
+ * always allowed (it consumes no new quota): that distinction lives in {@link Vault} rather than here.
  *
  * @param cap the maximum number of vaults the owner may have, or any value when {@link #unlimited}
  * @param unlimited true when the owner may own any number of vaults
@@ -23,7 +23,7 @@ public record VaultAmount(int cap, boolean unlimited) {
         return new VaultAmount(cap, false);
     }
 
-    /** The "no limit at all" quota — an owner with the {@code -1} sentinel or unlimited meta. */
+    /** The "no limit at all" quota: an owner with the {@code -1} sentinel or unlimited meta. */
     public static VaultAmount noLimit() {
         return new VaultAmount(Integer.MAX_VALUE, true);
     }

@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
  * The externalised geometry and palette of the home-icon picker, loaded once from
  * {@code modules/homes/gui/icon-selector.conf}: the row count, the offered {@link Material} icons, the navigation
  * materials, and the four navigation slots (reset, previous, back, next). Titles and lore stay in code as
- * {@code MessageKey} lookups — this record holds layout integers and materials only, never localised strings.
+ * {@code MessageKey} lookups: this record holds layout integers and materials only, never localised strings.
  *
  * @param rows the menu row count, 1..6
  * @param icons the materials offered as home icons, paged through the content cells

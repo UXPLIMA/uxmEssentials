@@ -56,7 +56,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of {@code /iteminfo} through the real Brigadier node: a held item carrying a custom name,
  * an enchantment and custom model data is inspected, and the report line carries the material id, the display
- * name, the enchantment list and the custom model data. Read-only — the item is never changed.
+ * name, the enchantment list and the custom model data. Read-only: the item is never changed.
  */
 class ItemInfoTest {
 

@@ -53,7 +53,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@code /world}: report the name, environment, and online player count of the world the
- * sender is standing in, read straight from {@code Player#getWorld()}. A pure read in the adapter — none of the
+ * sender is standing in, read straight from {@code Player#getWorld()}. A pure read in the adapter, none of the
  * playerstate use cases run, so they are all mocked. The {@link Messages} fake echoes the resolved key and its
  * placeholders so the show line and the {@code world}/{@code environment}/{@code players} placeholders are
  * observable through the sender's message queue.

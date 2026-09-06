@@ -18,7 +18,7 @@ import org.jspecify.annotations.NullMarked;
  * read answers empty, so the {@code /regions} command degrades to a "WorldGuard not installed" message and opens no
  * window. It names no {@code com.sk89q} type, so a server without WorldGuard carries none of its classes.
  *
- * <p>The mutations throw {@link UnsupportedOperationException} — they have no meaning without WorldGuard, and no
+ * <p>The mutations throw {@link UnsupportedOperationException}. They have no meaning without WorldGuard, and no
  * Phase 1 caller reaches them regardless; the exception makes a future miswiring fail loudly rather than silently
  * discarding an edit.
  */

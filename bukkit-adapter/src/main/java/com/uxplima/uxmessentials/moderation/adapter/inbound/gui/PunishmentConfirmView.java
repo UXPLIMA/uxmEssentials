@@ -23,16 +23,16 @@ import org.jspecify.annotations.NullMarked;
  * Registers the per-target punishment confirm screen with the menu engine and opens it. The bare {@code /ban},
  * {@code /mute}, {@code /tempban}, {@code /tempmute}, {@code /warn} and {@code /banip} GUI flow opens this once a
  * target is chosen in the {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.PlayerPickerView}. It shows
- * the target's head, two unambiguous confirm actions — apply (broadcast) and apply silently — an optional "set
+ * the target's head, two unambiguous confirm actions, apply (broadcast) and apply silently, an optional "set
  * reason" button that captures a free-text reason through the shared text-input seam, and a back button to the
  * picker. One spec serves every sanction: the {@link Confirm} subject carries the {@link PunishmentAction}, so the
  * title and the two confirm-button labels resolve through subject-driven catalog keys, and the
- * {@link PunishmentAction.Executor} the confirm click runs is carried on the subject too — this class holds no
+ * {@link PunishmentAction.Executor} the confirm click runs is carried on the subject too. This class holds no
  * ban/mute-specific branch.
  *
  * <p>{@code /banip} has no silent form, so its silent button is hidden by the
  * {@code moderation:confirm-silent-offered} view condition. The confirm click hops to the actor's entity region
- * thread, runs the audited use-case call there, and closes — the use case itself kicks/notifies and broadcasts.
+ * thread, runs the audited use-case call there, and closes: the use case itself kicks/notifies and broadcasts.
  * The reason is carried across the input round-trip by reopening the screen with the captured value in the
  * subject, so the menu stays single-viewer and stateless between opens. {@link #confirm} is package-private so a
  * test can drive the normal/silent click and assert the executor sees the right {@code silent} flag.
@@ -156,7 +156,7 @@ public final class PunishmentConfirmView {
 
     /**
      * Reopen the confirm screen for {@code actor} carrying {@code reason} in the subject. Package-private so a test
-     * drives the reason-input submit branch — the round-trip that reopens with the captured reason — without a live
+     * drives the reason-input submit branch, the round-trip that reopens with the captured reason, without a live
      * anvil (MockBukkit cannot drive one), mirroring the economy amount seam.
      */
     void applyReason(PlayerRef actor, Confirm subject, Optional<String> reason) {

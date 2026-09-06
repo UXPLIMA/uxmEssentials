@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code computeIfAbsent}, so a reader on another region thread always sees a coherent immutable snapshot and
  * concurrent toggles never lose an update (docs/02-concurrency §the playerstate snapshot pattern).
  *
- * <p>The state is in-memory only — playerstate persists nothing (no migration, no DB). A player's snapshot is
+ * <p>The state is in-memory only: playerstate persists nothing (no migration, no DB). A player's snapshot is
  * seeded on join, mutated by the toggle/set use cases, re-read by the reconciler, and dropped on quit.
  */
 public interface PlayerStateStore {
@@ -21,8 +21,8 @@ public interface PlayerStateStore {
 
     /**
      * Atomically replace {@code who}'s snapshot by applying {@code mutator} to the current one (or the initial
-     * state when absent) and return the new value. The mutator must be a pure function of its input — it may
-     * be retried under contention — and must not perform I/O or touch the live player.
+     * state when absent) and return the new value. The mutator must be a pure function of its input: it may
+     * be retried under contention, and must not perform I/O or touch the live player.
      */
     PlayerStateSnapshot update(PlayerRef who, UnaryOperator<PlayerStateSnapshot> mutator);
 

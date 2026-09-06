@@ -15,13 +15,13 @@ import com.uxplima.uxmlib.packet.tablist.TabSkin;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Resolves a {@link TablistSkinSource} to a uxmLib {@link TabSkin} for the render path — non-blocking, so the renderer
+ * Resolves a {@link TablistSkinSource} to a uxmLib {@link TabSkin} for the render path, non-blocking, so the renderer
  * never waits on a Mojang call. Three paths by source kind:
  *
  * <ul>
- *   <li>{@link Texture} — the base64 value (and optional signature) is used as-is; no lookup;</li>
- *   <li>{@link PlayerName} naming an online player — their texture is read inline from the live profile (no I/O);</li>
- *   <li>{@link PlayerName} naming an offline player — the texture is served from a small bounded Caffeine cache; on a
+ *   <li>{@link Texture}. The base64 value (and optional signature) is used as-is; no lookup;</li>
+ *   <li>{@link PlayerName} naming an online player. Their texture is read inline from the live profile (no I/O);</li>
+ *   <li>{@link PlayerName} naming an offline player. The texture is served from a small bounded Caffeine cache; on a
  *       cache miss the resolver returns empty <em>now</em> (the renderer takes the native no-skin path this tick) and
  *       schedules a one-shot {@code async} fetch that fills the cache, so a later refresh picks the skin up.</li>
  * </ul>
@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The cache holds a present-or-absent result ({@link Optional}) keyed by lower-cased name so a name that resolves to
  * no texture (a never-joined name, a fetch failure) is remembered for the TTL rather than re-fetched every refresh. An
  * {@link #inFlight} guard keeps a slow fetch from being scheduled many times while it is running. Every failure path
- * falls back to no skin — the resolver never blocks, never throws.
+ * falls back to no skin: the resolver never blocks, never throws.
  */
 @NullMarked
 public final class TablistSkinResolver {

@@ -184,7 +184,7 @@ class BedrockModalFormGoldenTest {
         return top != null && top.getHolder() instanceof MenuHolder;
     }
 
-    /** The two shared confirm-button keys as the fake {@link Messages} renders them — its catalog lookup is the key. */
+    /** The two shared confirm-button keys as the fake {@link Messages} renders them: its catalog lookup is the key. */
     private static final class MenuMessage {
         static final String CONFIRM_YES = "gui.confirm.yes";
         static final String CONFIRM_NO = "gui.confirm.no";

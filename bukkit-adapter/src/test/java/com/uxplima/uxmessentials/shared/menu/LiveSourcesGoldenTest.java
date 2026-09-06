@@ -32,11 +32,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * through the real {@link Menus} open path (async list-resolution → global-thread snapshot → entity-thread render):
  * an {@code online-players} menu draws a {@code %online_player_skull%} head per online player named by
  * {@code %online_player_name%}, and a {@code worlds} menu draws a {@code %worlds_icon%} tile per loaded world named
- * by {@code %worlds_name%}. The snapshot hand-off resolves under the test scheduler through the latch path — it runs
+ * by {@code %worlds_name%}. The snapshot hand-off resolves under the test scheduler through the latch path: it runs
  * {@code onGlobal} synchronously, so the source's {@link java.util.concurrent.CountDownLatch} completes at once.
  *
  * <p>MockBukkit models a UUID-owned player head as a {@link Material#PLAYER_HEAD} but does not carry a rendered skin,
- * so the head cases assert the material type plus the resolved display name — the skinning itself is uxmLib's
+ * so the head cases assert the material type plus the resolved display name. The skinning itself is uxmLib's
  * {@code SkullData}, proven elsewhere. The environment→icon variety (nether/end) is covered by the pure unit test;
  * MockBukkit's simple worlds are all {@code NORMAL}, so the golden case asserts the overworld's {@code GRASS_BLOCK}.
  */
@@ -141,7 +141,7 @@ class LiveSourcesGoldenTest {
     }
 
     /**
-     * A synchronous scheduler that runs every hop inline, including {@code onGlobal} — so the live source's snapshot
+     * A synchronous scheduler that runs every hop inline, including {@code onGlobal}, so the live source's snapshot
      * latch is released the moment it is scheduled, exercising the helper's latch path (it reports itself off the
      * global thread, the {@link Scheduler} default).
      */

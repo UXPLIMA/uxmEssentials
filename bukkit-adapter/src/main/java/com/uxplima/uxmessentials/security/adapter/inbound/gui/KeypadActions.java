@@ -14,9 +14,9 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public interface KeypadActions {
 
-    /** The player submitted {@code candidate} (a PIN or code) from the keypad — verify it and unfreeze or count a fail. */
+    /** The player submitted {@code candidate} (a PIN or code) from the keypad, verify it and unfreeze or count a fail. */
     void submit(Player player, PlayerRef viewer, String candidate);
 
-    /** The player asked to type an authenticator code instead — hand off to the text-input prompt. */
+    /** The player asked to type an authenticator code instead, hand off to the text-input prompt. */
     void requestTotp(Player player, PlayerRef viewer);
 }

@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The per-vault presentation use cases and the summary listing. {@code RenameVault} and {@code SetVaultIcon}
- * load an owned vault, apply the pure transition, persist it and notify the owner — and refuse an index with no
+ * load an owned vault, apply the pure transition, persist it and notify the owner, and refuse an index with no
  * row as {@link VaultError#VAULT_UNKNOWN}, writing nothing. {@code ListVaults} returns each owned vault's
  * {@link VaultSummary} (index + name + icon) or {@link VaultError#NONE_OWNED} when the owner has none. In-memory
  * fakes capture the repository writes and the rendered notifications.

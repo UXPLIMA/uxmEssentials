@@ -45,7 +45,7 @@ public record ServerTweaksConfig(
     /**
      * The {@code f3-brand { … }} block: the server brand shown on the client's F3 debug screen (the
      * {@code minecraft:brand} the server reports). The client shows it as plain text, so the value is a short plain
-     * string — MiniMessage or rich formatting is not interpreted.
+     * string: MiniMessage or rich formatting is not interpreted.
      *
      * @param enabled whether the custom brand is sent on join ({@code f3-brand.enabled}, default {@code true})
      * @param brand the brand string sent verbatim to the client ({@code f3-brand.brand}, default {@code uxmEssentials})
@@ -97,7 +97,7 @@ public record ServerTweaksConfig(
     /**
      * The {@code no-chat-reports { … }} block: when on, the server re-delivers public chat as unsigned messages so
      * they carry no signature and cannot be reported to Mojang. This is the whole of what a server can do without a
-     * client mod — a vanilla client still signs its own messages; the server only chooses not to relay the signature.
+     * client mod: a vanilla client still signs its own messages; the server only chooses not to relay the signature.
      *
      * @param enabled whether public chat is re-delivered unsigned ({@code no-chat-reports.enabled}, default
      *     {@code false})

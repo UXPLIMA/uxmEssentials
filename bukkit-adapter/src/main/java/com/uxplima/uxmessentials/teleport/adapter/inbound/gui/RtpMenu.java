@@ -92,7 +92,7 @@ public final class RtpMenu {
         for (World world : server.getWorlds()) {
             WorldRef ref = BukkitRefs.toRef(world);
             if (!services.rtpQueue().hasQueue(ref)) {
-                continue; // a world with no valid RTP zone is not offered — clicking it would only be denied
+                continue; // a world with no valid RTP zone is not offered. Clicking it would only be denied
             }
             rows.add(new WorldRow(
                     ref,

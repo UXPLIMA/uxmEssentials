@@ -60,7 +60,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The per-bank actions panel golden test: the engine-rendered panel must draw the exact window the original
  * {@code BankActionsView} drew, and its buttons must keep the behaviour. The panel draws deposit GOLD_INGOT@10,
- * withdraw IRON_INGOT@12, members PLAYER_HEAD@14, logs BOOK@16 and back BARRIER@22 over a grey-glass backdrop —
+ * withdraw IRON_INGOT@12, members PLAYER_HEAD@14, logs BOOK@16 and back BARRIER@22 over a grey-glass backdrop
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal slot for slot to the baseline the old
  * view produced (frozen here so the old class could be deleted). Deposit / withdraw capture an amount through the
  * anvil seam (MockBukkit cannot drive a live anvil), so the apply branch their submit callback drives is verified
@@ -141,8 +141,8 @@ class BankActionsGoldenTest {
     }
 
     // Deposit / withdraw capture an amount through the anvil seam, which MockBukkit leaves unimplemented (no
-    // player.openAnvil), so the prompt-opening click cannot be exercised here. The apply seam — the branch the
-    // prompt's submit callback drives — is verified to reach BankService.deposit/withdraw with Money.of(currency,
+    // player.openAnvil), so the prompt-opening click cannot be exercised here. The apply seam, the branch the
+    // prompt's submit callback drives. Is verified to reach BankService.deposit/withdraw with Money.of(currency,
     // amount) in BankActionsMenuApplyTest, which lives in the menu's own package and so can drive the package-private
     // applyTransfer. This golden test covers the click-driven flows the engine routes: the render and the
     // members/logs/back navigation.

@@ -48,7 +48,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * off never touches the player inventory at all.
  *
  * <p>The scheduler used here queues every entity hop so the deferral is exercised for real: an open, a click and a
- * close each enqueue their work, and {@link QueueingScheduler#drain()} runs it — so the close-restore is asserted to
+ * close each enqueue their work, and {@link QueueingScheduler#drain()} runs it, so the close-restore is asserted to
  * be a scheduled next-tick pass, not an inline mutation inside {@link InventoryCloseEvent} (the Paper gotcha the
  * production code defers around).
  *
@@ -56,7 +56,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * so the snapshot/clear/paint, the mapped raw-slot routing and the death-drop rewrite all run against real state. The
  * click and death paths drive the raw slot and the drop list directly (an {@code InventoryClickEvent} carrying raw
  * slot 54, a {@code PlayerDeathEvent} carrying the drop list), because MockBukkit does not model a chest
- * {@code InventoryView}'s raw-slot geometry or a server-computed death drop set — the engine's own mapping and guard
+ * {@code InventoryView}'s raw-slot geometry or a server-computed death drop set. The engine's own mapping and guard
  * are what these assert.
  */
 class BottomInventoryGoldenTest {
@@ -157,7 +157,7 @@ class BottomInventoryGoldenTest {
                 .as("running the deferred task restores the real diamond to its slot")
                 .isEqualTo(new ItemStack(Material.DIAMOND));
         assertThat(MenuItemMark.isMarked(player.getInventory().getItem(9)))
-                .as("the menu tile is gone — the restore overwrote the whole canvas with the real snapshot")
+                .as("the menu tile is gone. The restore overwrote the whole canvas with the real snapshot")
                 .isFalse();
     }
 
@@ -219,7 +219,7 @@ class BottomInventoryGoldenTest {
 
     /**
      * A scheduler that runs global/region/async work inline but queues every per-entity hop, so a test can drive the
-     * open, click and close deferrals by hand — proving the close-restore is a scheduled next-tick pass rather than an
+     * open, click and close deferrals by hand. Proving the close-restore is a scheduled next-tick pass rather than an
      * inline mutation inside {@link InventoryCloseEvent}.
      */
     private static final class QueueingScheduler implements Scheduler {

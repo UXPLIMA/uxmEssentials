@@ -32,14 +32,14 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /pwarp <name>}: teleport a player to a player-warp resolved by its server-wide-unique name, through the
- * full ordered access gate. The gate runs six checks in a fixed precedence — <em>status → ban → membership →
- * access → safe-landing → cost</em> — and each check that a warp does not need short-circuits to a pass:
+ * full ordered access gate. The gate runs six checks in a fixed precedence. <em>status → ban → membership →
+ * access → safe-landing → cost</em>, and each check that a warp does not need short-circuits to a pass:
  *
  * <ol>
  *   <li><b>Status</b> refuses everyone, including the owner, when the warp is not
  *       {@link WarpStatus#ACTIVE ACTIVE}: a suspended or archived warp is settled by its owner before anyone
  *       teleports, so there is deliberately no bypass here.
- *   <li><b>Ban</b> refuses a banned actor — again including a banned owner — unless they hold the ban bypass.
+ *   <li><b>Ban</b> refuses a banned actor, again including a banned owner, unless they hold the ban bypass.
  *       Ban precedes membership so a warp owner cannot ban-evade their own sanction, and a co-owner cannot
  *       walk past a ban an admin placed.
  *   <li><b>Membership</b> (owner, co-owner, or manager) admits past the access step <em>and</em> the cost step:
@@ -53,7 +53,7 @@ import org.jspecify.annotations.Nullable;
  *   <li><b>Cost</b> is the guarded last gate: only for a non-member, only for a priced warp, only when the actor
  *       lacks the cost bypass, and only when an economy provider is wired. It runs <em>after</em> safety so a
  *       payer is never debited for a hop that safety would refuse, and the visit and teleport happen only once
- *       it succeeds — a refused charge leaves no recorded visit and no hop.
+ *       it succeeds: a refused charge leaves no recorded visit and no hop.
  * </ol>
  *
  * <p>This use case never moves the player itself: once the gate passes it <em>delegates</em> execution to the
@@ -164,7 +164,7 @@ public final class UsePlayerWarp {
             return refuse(actor, warp, admission.refusal());
         }
         // The gate has passed and, for a priced non-member, already charged. If the warp lives on another backend,
-        // the local hop would land nowhere, so route it across the proxy instead — carrying the exact charge so an
+        // the local hop would land nowhere, so route it across the proxy instead, carrying the exact charge so an
         // arrival failure refunds precisely.
         if (isRemote(warp)) {
             routeCrossServer(actor, warp, admission.charged());
@@ -174,7 +174,7 @@ public final class UsePlayerWarp {
                 actor,
                 PlayerwarpsMessageKey.PWARP_TELEPORTING,
                 Map.of("warp", warp.name().value()));
-        // Bump the visit counter in storage rather than read-modify-write here — the atomic increment avoids a
+        // Bump the visit counter in storage rather than read-modify-write here. The atomic increment avoids a
         // last-writer-wins race and needless cross-server cache invalidation. It runs only after the whole gate
         // (including the charge) has passed, so a refused teleport leaves no phantom visit.
         repository.recordVisit(warp.id().orElseThrow());
@@ -190,7 +190,7 @@ public final class UsePlayerWarp {
     /**
      * Hand a remote warp to the {@link CrossServerTeleport} seam when the sub-group is on; when it is off the seam
      * is absent, so rather than a broken local hop the player is told the warp is unreachable and any charge is
-     * refunded — they never moved.
+     * refunded: they never moved.
      */
     private void routeCrossServer(PlayerRef actor, PlayerWarp warp, Optional<WarpCost> charged) {
         if (crossServer.isPresent()) {
@@ -248,12 +248,12 @@ public final class UsePlayerWarp {
         }
     }
 
-    /** Step 1 — a warp that is not ACTIVE refuses everyone, with no bypass. */
+    /** Step 1: a warp that is not ACTIVE refuses everyone, with no bypass. */
     private @Nullable PlayerWarpError checkStatus(PlayerWarp warp) {
         return warp.status() == WarpStatus.ACTIVE ? null : PlayerWarpError.SUSPENDED;
     }
 
-    /** Step 2 — an in-force ban refuses the actor unless they hold the ban bypass. */
+    /** Step 2: an in-force ban refuses the actor unless they hold the ban bypass. */
     private @Nullable PlayerWarpError checkBan(PlayerRef actor, PlayerWarp warp, Instant now) {
         boolean banned = banStore.isBannedAt(warp.id().orElseThrow(), actor.uuid(), now);
         if (banned && !permissions.has(actor, BYPASS_BAN)) {
@@ -262,13 +262,13 @@ public final class UsePlayerWarp {
         return null;
     }
 
-    /** Step 3 — the owner and any co-owner/manager are members; a member skips the access and cost steps. */
+    /** Step 3: the owner and any co-owner/manager are members; a member skips the access and cost steps. */
     private boolean isMember(PlayerRef actor, PlayerWarp warp) {
         return actor.uuid().equals(warp.owner().uuid())
                 || memberStore.roleOf(warp.id().orElseThrow(), actor.uuid()).isPresent();
     }
 
-    /** Step 4 — the access branch, reached only for non-members. */
+    /** Step 4: the access branch, reached only for non-members. */
     private @Nullable PlayerWarpError checkAccess(PlayerRef actor, PlayerWarp warp, Optional<String> password) {
         return switch (warp.access()) {
             case PUBLIC -> null;
@@ -283,7 +283,7 @@ public final class UsePlayerWarp {
      * bypass skips it entirely. An active attempt cooldown refuses {@link PlayerWarpError#RATE_LIMITED} before any
      * match is tried; otherwise a correct password passes, and a wrong (or absent) one stamps the attempt cooldown
      * and refuses {@link PlayerWarpError#WRONG_PASSWORD}. The plaintext is only ever handed to the password store
-     * to verify — it is never logged, rendered, or placed in a message placeholder.
+     * to verify: it is never logged, rendered, or placed in a message placeholder.
      */
     private @Nullable PlayerWarpError passwordStep(PlayerRef actor, PlayerWarp warp, Optional<String> entered) {
         if (permissions.has(actor, BYPASS_PASSWORD)) {
@@ -307,7 +307,7 @@ public final class UsePlayerWarp {
         return allowed ? null : PlayerWarpError.NOT_WHITELISTED;
     }
 
-    /** Step 5 — an unsafe destination refuses unless the actor holds the safety bypass (applies to members too). */
+    /** Step 5: an unsafe destination refuses unless the actor holds the safety bypass (applies to members too). */
     private @Nullable PlayerWarpError checkSafety(PlayerRef actor, PlayerWarp warp) {
         if (safetyChecker.isSafe(warp.location()) || permissions.has(actor, BYPASS_SAFETY)) {
             return null;
@@ -316,7 +316,7 @@ public final class UsePlayerWarp {
     }
 
     /**
-     * Step 6 — the guarded charge, reached only for a non-member. A free warp, the cost bypass, or an absent
+     * Step 6: the guarded charge, reached only for a non-member. A free warp, the cost bypass, or an absent
      * economy provider all skip the debit and admit for free (the {@code WarpEconomy} soft-coupling precedent).
      * A priced warp with a provider present charges through {@link PlayerWarpEconomy#chargeAndAccrue}; any
      * {@link ChargeError} refuses {@link PlayerWarpError#CANNOT_AFFORD} so no visit is recorded and no hop occurs.

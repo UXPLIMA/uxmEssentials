@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * <p>Modules are added in dependency-first wiring order via {@link #register(FeatureModule)};
  * registration order is preserved by {@link #all()} and {@link #enabledModules(ConfigStore)}. A
  * duplicate {@link ModuleId} is rejected so the set stays unambiguous. The registry holds no Bukkit
- * or infrastructure type — it is pure application code.
+ * or infrastructure type: it is pure application code.
  */
 public final class ListModuleRegistry implements ModuleRegistry {
 

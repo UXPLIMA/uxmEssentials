@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The social-spy toggle is staff-only: it is built into the panel only for a viewer who holds the social-spy
  * permission, so a player without it sees one toggle and the second property slot stays empty. The panel holds
- * no logic of its own — the settings are re-read fresh on every open, closing over the viewer.
+ * no logic of its own: the settings are re-read fresh on every open, closing over the viewer.
  *
  * <p>The panel renders through the menu engine's property-editor runtime: the geometry and materials still come
  * from the {@code messaging-settings} layout conf, the title/value/back text still resolve through the messaging

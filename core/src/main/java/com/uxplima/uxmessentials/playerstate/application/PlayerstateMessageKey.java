@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 /**
  * The playerstate context's user-visible message keys. Each constant maps 1:1 to a kebab-case catalog key in
  * {@code messages_<lang>.conf} ({@code GOD_ON} ↔ {@code playerstate.god.on}); the constant is the compile-time
- * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context —
+ * handle, the catalog holds the text. There are no inline player-facing literals anywhere in the context
  * every message resolves through one of these.
  *
  * <p>Toggle commands carry an {@code .on}/{@code .off} pair plus an {@code .other} variant for the
@@ -183,7 +183,7 @@ public enum PlayerstateMessageKey implements MessageKey {
     // per-world command blocker
     WORLD_COMMAND_BLOCKED("playerstate.world.command-blocked"),
 
-    // /compass — the framing line plus the eight cardinal/intercardinal direction words it embeds
+    // /compass. The framing line plus the eight cardinal/intercardinal direction words it embeds
     COMPASS_SHOW("playerstate.compass.show"),
     COMPASS_NORTH("playerstate.compass.north"),
     COMPASS_NORTH_EAST("playerstate.compass.north-east"),

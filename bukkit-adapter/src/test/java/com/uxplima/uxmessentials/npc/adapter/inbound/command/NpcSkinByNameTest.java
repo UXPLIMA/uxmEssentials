@@ -32,7 +32,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Drives the {@code /npc skin name:<username>} orchestration with fakes — no MockBukkit, no live Mojang. Pins
+ * Drives the {@code /npc skin name:<username>} orchestration with fakes, no MockBukkit, no live Mojang. Pins
  * the four observable behaviours: a missing NPC is rejected before any fetch, a present fetch result is applied
  * through {@link SetNpcSkin} (saved + rendered), an empty result reports a fetch failure, and the apply step
  * runs on the bridged scheduler rather than the calling thread.

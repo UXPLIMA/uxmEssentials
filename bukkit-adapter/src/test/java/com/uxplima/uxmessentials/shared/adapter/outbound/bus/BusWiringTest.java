@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import org.junit.jupiter.api.Test;
 
 /**
- * Lifecycle coverage of {@link BusWiring} on the disabled path — the property the heartbeat must honour: a
+ * Lifecycle coverage of {@link BusWiring} on the disabled path. The property the heartbeat must honour: a
  * backend with {@code network.enabled = false} runs purely local and starts no heartbeat. The disabled branch
  * returns before any transport is built, so a bare Mockito {@link Plugin} stands in (it is never touched), and a
  * scheduler that records every {@code asyncAfter} proves the start/stop hooks schedule nothing.

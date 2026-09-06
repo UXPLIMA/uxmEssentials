@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /health <amount> [player]}: set a player's health to a specific value. A live-only effect through the
- * {@link PlayerEffects} port — the requested amount is floored at {@code 0} in the domain ({@link HealthLevel})
+ * {@link PlayerEffects} port. The requested amount is floored at {@code 0} in the domain ({@link HealthLevel})
  * and capped to the player's live maximum health in the adapter, so a request of {@code 0} kills. Distinct from
  * {@code /heal}, which always restores to full. The actor is confirmed and, for a staff target, the subject is
  * told too.

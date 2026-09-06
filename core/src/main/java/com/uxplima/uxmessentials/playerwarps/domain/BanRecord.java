@@ -10,7 +10,7 @@ import java.util.UUID;
  * when. A ban is keyed on the warp id plus this {@link #player}; re-banning the same player updates the row
  * (the store owns that upsert) so there is at most one ban per player per warp.
  *
- * <p>An {@link #until} of {@link Optional#empty()} is a <em>permanent</em> ban — it never lifts. A present
+ * <p>An {@link #until} of {@link Optional#empty()} is a <em>permanent</em> ban: it never lifts. A present
  * {@code until} is the absolute instant the ban expires, stored as a wall-clock moment rather than a duration
  * so a slow read can never silently extend it. The {@link #reason} and {@link #bannedBy} are optional because a
  * ban may be imposed by the console or without a stated reason.

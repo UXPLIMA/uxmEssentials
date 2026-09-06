@@ -6,7 +6,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * How far a UUID ban reaches across the banned player's known addresses (the {@code address-strictness}
- * moderation setting). {@link #NORMAL} is the default and the privacy-conservative behaviour — a {@code /ban}
+ * moderation setting). {@link #NORMAL} is the default and the privacy-conservative behaviour, a {@code /ban}
  * bans the one account and nothing else. {@link #STRICT} also IP-bans every address the target is known to
  * have connected from, so a banned cheater cannot simply log back in on a fresh account from the same
  * connection; the collateral is that anyone who legitimately shares that address (a household, a shared

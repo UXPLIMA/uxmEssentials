@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /socialspy} into the messaging context's command surface — the staff toggle that observes other
+ * Pins {@code /socialspy} into the messaging context's command surface. The staff toggle that observes other
  * players' private messages, now in both its global and per-player forms. Both forms ride the one literal and
  * the one node, so the surface still declares a single {@code socialspy} spec; this guard fails if the literal
  * drops out of the surface or ever wires under a node other than {@code uxmessentials.msg.socialspy}.

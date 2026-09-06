@@ -31,7 +31,7 @@ public interface WarpsPlaceholders {
     /**
      * The placeholder-facing projection of one warp: the world it points into, its block-rounded coordinates,
      * its visit count, its owner's name, and its price ({@link BigDecimal#ZERO} for a free warp). Only the
-     * fields the {@code Warp} aggregate actually carries are exposed — coordinates are block-rounded because a
+     * fields the {@code Warp} aggregate actually carries are exposed. Coordinates are block-rounded because a
      * placeholder shows a position, not a teleport target.
      *
      * @param world the world name the warp points into

@@ -7,7 +7,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * One player's last private-message partner and when the conversation was last touched — the target a
+ * One player's last private-message partner and when the conversation was last touched, the target a
  * {@code /reply} resolves to. It is transient session state (a private message is real-time, never
  * persisted), captured both when the player sends a {@code /msg} and when they receive one, so either side
  * can {@code /reply} without naming the other.
@@ -33,7 +33,7 @@ public record LastConversation(PlayerRef partner, Instant lastTouched) {
         return new LastConversation(partner, at);
     }
 
-    /** A copy re-stamped to {@code at}, keeping the same partner — the conversation continued. */
+    /** A copy re-stamped to {@code at}, keeping the same partner: the conversation continued. */
     public LastConversation touchedAt(Instant at) {
         return new LastConversation(partner, Objects.requireNonNull(at, "at"));
     }

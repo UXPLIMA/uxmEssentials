@@ -11,8 +11,8 @@ import com.uxplima.uxmessentials.economy.fakes.InMemoryWalletRepository;
 /**
  * Runs the {@link EconomyProviderContractTest} against the native ledger provider over an in-memory
  * {@link InMemoryWalletRepository} whose guarded debit/transfer models the database's serialised guard. This
- * is the canonical worked example pinning all four contract properties — including the concurrent
- * double-spend repetition — for the implementation the plugin registers by default.
+ * is the canonical worked example pinning all four contract properties, including the concurrent
+ * double-spend repetition: for the implementation the plugin registers by default.
  */
 final class NativeLedgerEconomyProviderTest extends EconomyProviderContractTest {
 

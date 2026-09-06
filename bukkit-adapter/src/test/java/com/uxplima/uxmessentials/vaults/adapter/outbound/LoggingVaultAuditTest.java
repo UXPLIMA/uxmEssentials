@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Unit coverage of {@link LoggingVaultAudit}: every staff override emits exactly one structured line on the
- * audit channel — {@code event=vault_admin_open} for an inspect and {@code event=vault_admin_delete} for a
- * deletion — carrying the actor and owner by UUID, the owner name, and the vault index. A recording
+ * audit channel, {@code event=vault_admin_open} for an inspect and {@code event=vault_admin_delete} for a
+ * deletion, carrying the actor and owner by UUID, the owner name, and the vault index. A recording
  * {@link Logger} captures the line so the format an operator's log filter matches against is pinned.
  */
 class LoggingVaultAuditTest {

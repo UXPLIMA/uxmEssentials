@@ -22,7 +22,7 @@ public record WarpTimingOverrides(Optional<Double> warmupSeconds, Optional<Doubl
         requireNonNegative(cooldownSeconds, "cooldown");
     }
 
-    /** A warp with no timing overrides — both warmup and cooldown fall back to the configured defaults. */
+    /** A warp with no timing overrides, both warmup and cooldown fall back to the configured defaults. */
     public static WarpTimingOverrides none() {
         return new WarpTimingOverrides(Optional.empty(), Optional.empty());
     }

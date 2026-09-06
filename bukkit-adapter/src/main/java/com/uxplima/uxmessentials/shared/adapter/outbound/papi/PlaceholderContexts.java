@@ -14,8 +14,8 @@ import org.jspecify.annotations.Nullable;
  * failing.
  *
  * <p>The bundle is assembled once in bootstrap through {@link Builder} as each context's adapters are
- * wired, then handed to the resolver. It holds only adapter-side read seams — no PlaceholderAPI type and
- * no live {@code Player} — so it is a plain value that the resolver test can populate with fakes.
+ * wired, then handed to the resolver. It holds only adapter-side read seams, no PlaceholderAPI type and
+ * no live {@code Player}, so it is a plain value that the resolver test can populate with fakes.
  */
 public final class PlaceholderContexts {
 
@@ -103,7 +103,7 @@ public final class PlaceholderContexts {
         this.trade = builder.trade;
     }
 
-    /** A fresh, empty builder — every seam starts absent until a wired context registers it. */
+    /** A fresh, empty builder: every seam starts absent until a wired context registers it. */
     public static Builder builder() {
         return new Builder();
     }
@@ -273,7 +273,7 @@ public final class PlaceholderContexts {
         return Optional.ofNullable(ranks);
     }
 
-    /** True when no context registered a seam — registering the expansion would surface nothing. */
+    /** True when no context registered a seam: registering the expansion would surface nothing. */
     public boolean isEmpty() {
         return homes == null
                 && economy == null

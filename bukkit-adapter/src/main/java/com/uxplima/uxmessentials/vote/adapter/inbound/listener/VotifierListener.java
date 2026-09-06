@@ -28,11 +28,11 @@ import org.jspecify.annotations.NullMarked;
  * type purely by reflection: it loads the event class by name, registers a dynamic handler for it via
  * {@link Bukkit#getPluginManager()}'s {@code registerEvent}, and reads the vote's service name and username off
  * the {@code getVote()} object reflectively. When Votifier is absent the plugin-present guard makes the whole
- * listener a no-op — the module still ships and {@code /vote} / {@code /voteparty} still work; only the
+ * listener a no-op. The module still ships and {@code /vote} / {@code /voteparty} still work; only the
  * vote-triggered rewards are dormant until Votifier is installed.
  *
  * <p>It implements {@link Listener} so it can flow through the standard listener registration alongside the
- * join handler, but it carries no {@code @EventHandler} methods of its own — the Votifier handler is the
+ * join handler, but it carries no {@code @EventHandler} methods of its own. The Votifier handler is the
  * dynamically-registered one. {@link #unregister()} drops that dynamic handler on module stop.
  */
 @NullMarked
@@ -92,7 +92,7 @@ public final class VotifierListener implements Listener {
     /**
      * Validate the raw username and, when it passes, resolve the voter and dispatch the vote. A junk Votifier
      * username (empty, {@code "null"}, over-long, or off the name policy) would mint a phantom leaderboard entry
-     * and pay a reward into a non-existent player, so it is rejected — logged and dropped — before any vote is
+     * and pay a reward into a non-existent player, so it is rejected, logged and dropped, before any vote is
      * built (no tally, no queue, no cooldown). Package-private as the test seam for the validation gate.
      */
     void handleRaw(String service, String username) {

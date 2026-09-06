@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /tpauto} into the teleport context's command surface. {@code /tpauto} auto-accepts incoming
- * teleport requests — the toggle that sits alongside {@code /tptoggle}, {@code /tpon} and
+ * teleport requests, the toggle that sits alongside {@code /tptoggle}, {@code /tpon} and
  * {@code /tpoff}; this guard fails if the literal drops out of the surface or wires under a node other than
  * {@code uxmessentials.tpa.auto}.
  */

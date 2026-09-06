@@ -34,7 +34,7 @@ public interface PlaytimeRepository {
     void addSeconds(UUID uuid, LocalDate day, long activeDelta, long afkDelta);
 
     /**
-     * The windowed active/AFK totals for {@code uuid} as of {@code today} — today, the last seven days, the last
+     * The windowed active/AFK totals for {@code uuid} as of {@code today}, today, the last seven days, the last
      * thirty days, and all time. Each window is a range {@code SUM} over the per-day rows; a player with no rows
      * yields {@link PlaytimeSummary#empty()}.
      *

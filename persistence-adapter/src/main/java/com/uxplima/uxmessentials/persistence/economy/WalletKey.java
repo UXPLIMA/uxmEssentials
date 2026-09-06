@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.economy.domain.Currency;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * The {@code (owner, currency)} identity a debounced settle and the offline read-cache are keyed by — the
+ * The {@code (owner, currency)} identity a debounced settle and the offline read-cache are keyed by, the
  * same compound key the {@code wallet_balances} row carries. Equality is by owner uuid and currency id (the
  * owner name is informational on {@link PlayerRef}), so two settles for the same wallet/currency collapse
  * onto one pending entry regardless of which name resolved them.

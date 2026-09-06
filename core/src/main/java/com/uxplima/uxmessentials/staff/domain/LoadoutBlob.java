@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * One opaque, serialized region of a {@link SavedLoadout} — a player's main inventory, armour, off-hand, or
+ * One opaque, serialized region of a {@link SavedLoadout}. A player's main inventory, armour, off-hand, or
  * active potion effects, each encoded to bytes by the adapter. Mirrors the vaults context's
  * {@code VaultContents}: the domain never sees a Bukkit {@code ItemStack} or {@code PotionEffect}, only these
  * bytes, which the adapter encodes on capture and decodes on restore (and the persistence layer base64s into
@@ -24,7 +24,7 @@ public final class LoadoutBlob {
         this.bytes = bytes;
     }
 
-    /** An empty region — nothing serialized. */
+    /** An empty region: nothing serialized. */
     public static LoadoutBlob empty() {
         return EMPTY;
     }

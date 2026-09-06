@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * jOOQ-backed {@link TradeEscrowStore} over the generated {@code TRADE_ESCROW} table — one row per side of a live
+ * jOOQ-backed {@link TradeEscrowStore} over the generated {@code TRADE_ESCROW} table, one row per side of a live
  * cross-server trade, keyed by {@code (trade_id, owner_uuid)}. Every state change is a single guarded jOOQ statement so
  * a duplicate bus signal, a double region hop, or a rejoin can never move a side's goods twice: {@link #commitBoth}
  * flips both rows only when both are {@code HELD} (in one transaction), {@link #claim} advances a single
@@ -104,7 +104,7 @@ public final class JooqTradeEscrowStore extends JooqRepository implements TradeE
         } catch (CommitConflict conflict) {
             // A concurrent refund or claim on the peer backend flipped or removed one leg between our commit decision
             // and our write, so the single guarded UPDATE moved fewer than both rows and the transaction rolled that
-            // partial flip back. Report no commit, leaving the still-held leg refundable — the two-phase point of no
+            // partial flip back. Report no commit, leaving the still-held leg refundable, the two-phase point of no
             // return is crossed for both sides or for neither, never for one alone.
             return false;
         }
@@ -113,7 +113,7 @@ public final class JooqTradeEscrowStore extends JooqRepository implements TradeE
     /**
      * Flip both still-{@code HELD} legs to {@code COMMITTED} in one atomic guarded write, deriving the commit decision
      * from the UPDATE's own affected-row count rather than a prior non-locking count. A write that moves fewer than
-     * both rows — a leg already committed, claimed, or refunded away by the peer between our two backends — throws
+     * both rows (a leg already committed, claimed, or refunded away by the peer between our two backends) throws
      * {@link CommitConflict} so the enclosing transaction rolls the partial flip back and {@link #commitBoth} reports
      * failure. This closes the count-then-update TOCTOU: the decision and the transition are now the same statement,
      * so no interleaving can leave one side committed while its counterpart is still refundable.
@@ -184,7 +184,7 @@ public final class JooqTradeEscrowStore extends JooqRepository implements TradeE
                 Instant.ofEpochMilli(row.getCreatedAt()));
     }
 
-    /** Encode the staked money map as {@code currency=amount} pairs joined by {@code ;} — empty for no money. */
+    /** Encode the staked money map as {@code currency=amount} pairs joined by {@code ;}, empty for no money. */
     private static String encodeMoney(Map<String, BigDecimal> money) {
         StringBuilder text = new StringBuilder();
         for (Map.Entry<String, BigDecimal> leg : money.entrySet()) {

@@ -12,9 +12,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The wallet legs the loan and bank repositories run inside their own transactions so a money move stays atomic
- * with its aggregate row. These are the exact guarded credit/debit idioms {@code JooqWalletRepository} uses —
+ * with its aggregate row. These are the exact guarded credit/debit idioms {@code JooqWalletRepository} uses
  * a debit is a single {@code UPDATE … WHERE amount >= ?} that changes 0 or 1 rows, a credit is a clamp-checked
- * upsert — lifted here so a loan disburse or a bank deposit performs the same database-serialised move within
+ * upsert, lifted here so a loan disburse or a bank deposit performs the same database-serialised move within
  * the transaction that also writes the loan/bank row. Every statement is typed jOOQ DSL; no SQL is concatenated.
  */
 @NullMarked

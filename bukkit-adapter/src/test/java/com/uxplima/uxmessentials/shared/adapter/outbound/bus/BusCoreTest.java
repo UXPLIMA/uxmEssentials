@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
  * <ul>
  *   <li>a {@link #publish} encodes the message and the transport receives exactly the codec bytes;
  *   <li>an injected frame from a peer reaches every registered {@link RemoteSyncListener};
- *   <li>an injected frame whose origin is this backend's own id is dropped — the loop sentinel — and never
+ *   <li>an injected frame whose origin is this backend's own id is dropped, the loop sentinel, and never
  *       reaches a listener.
  * </ul>
  */

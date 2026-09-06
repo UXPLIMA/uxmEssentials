@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code /commandspy} (alias {@code /cspy}): flip whether a staff member watches the commands other players
  * run. While on, the command-watch listener fans out each player's command to this observer unless the
  * observer ran it themselves. The new state is reported to the staff member. The flag lives in the
- * {@link CommandSpyStore} (per-holder session state); this use case just flips it and renders the outcome —
+ * {@link CommandSpyStore} (per-holder session state); this use case just flips it and renders the outcome
  * the moderation sibling of the messaging {@code SocialSpy} toggle.
  */
 public final class CommandSpy {

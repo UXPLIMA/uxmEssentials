@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pure coverage of the {@code menu_*} placeholder family, exercising {@link PlaceholderResolver} against a fake
- * {@link MenuPlaceholders} — no PlaceholderAPI, no MockBukkit. It pins the six keys the menu-engine source exposes
+ * {@link MenuPlaceholders}, no PlaceholderAPI, no MockBukkit. It pins the six keys the menu-engine source exposes
  * and the absent-seam degrade contract the drift guard depends on.
  */
 class MenuSourcePlaceholderResolverTest {

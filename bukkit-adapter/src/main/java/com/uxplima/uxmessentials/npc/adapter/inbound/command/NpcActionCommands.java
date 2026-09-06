@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The {@code /npc action <add|list|remove|clear>} subcommands: edit the ordered click-action chain. {@code add}
- * takes a trigger word (left/right/any), a type word, and the rest of the line as the value — the type word is
+ * takes a trigger word (left/right/any), a type word, and the rest of the line as the value. The type word is
  * one of the effects ({@code console}, {@code player}, {@code message}, {@code actionbar}, {@code title},
  * {@code sound}, {@code connect}, {@code give}), the sequencer's {@code delay} or {@code random}, or a gate
  * ({@code chance}, {@code permission}, {@code condition}, {@code cost}); the cheap value shapes are validated at

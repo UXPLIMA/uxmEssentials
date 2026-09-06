@@ -27,12 +27,12 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Spawns a short-lived floating number at an entity when it is hurt or healed (the damage-indicator feature, off
- * by default). On a combat hit it shows the final damage — in the crit format when the attacker's state matches a
- * vanilla critical hit — and on a heal it shows the gained health, gated per victim kind (players / mobs) by the
+ * by default). On a combat hit it shows the final damage. In the crit format when the attacker's state matches a
+ * vanilla critical hit, and on a heal it shows the gained health, gated per victim kind (players / mobs) by the
  * {@link DamageIndicatorConfig}. The indicator is an ephemeral, non-persistent {@link TextDisplay} spawned on the
  * event's region thread and removed after the configured duration: the removal waits off-thread, then hops back
  * onto the entity's region thread (Folia) so the despawn is always region-correct, mirroring how the renderer
- * removes its display entities. No per-tick rise/fade — the indicator simply pops and is removed (the scheduler
+ * removes its display entities. No per-tick rise/fade. The indicator simply pops and is removed (the scheduler
  * port carries no per-region repeating task), and nothing is persisted, so a crash leaves no stray entity.
  */
 @NullMarked

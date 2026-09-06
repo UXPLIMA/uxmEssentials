@@ -27,7 +27,7 @@ import com.uxplima.uxmessentials.shared.domain.WorldRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /killall [type]}: purge entities world-wide — a single named type, or every removable entity when no
+ * {@code /killall [type]}: purge entities world-wide. A single named type, or every removable entity when no
  * type is given. An entity-purge verb (audit-logged). The selection is shaped by the domain {@link PurgePolicy}
  * ({@code killall} with a blank type sweeps all entities, a named type sweeps that type only); players and tamed
  * pets are never swept.

@@ -5,7 +5,7 @@ plugins {
 
 // The optional proxy-side cross-server bus broker. It depends on :core only for the pure
 // NetworkMessage hierarchy + codec it shares with the bukkit-side bus client (a single pure-codec
-// shared by both ends); it compiles against velocity-api ONLY — no paper/bukkit — and ships as a separate jar.
+// shared by both ends); it compiles against velocity-api ONLY, no paper/bukkit, and ships as a separate jar.
 
 dependencies {
     implementation(project(":core"))

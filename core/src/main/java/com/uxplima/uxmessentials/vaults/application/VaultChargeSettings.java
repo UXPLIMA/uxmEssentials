@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * <p>Amounts are exact {@link BigDecimal} values so currency arithmetic never picks up binary
  * floating-point error, matching the economy ledger invariant. A non-positive amount means "free" for that
- * action — {@link VaultCharge} skips the economy entirely when the relevant cost is zero.
+ * action: {@link VaultCharge} skips the economy entirely when the relevant cost is zero.
  *
  * @param costToCreate charged once when a not-yet-existing vault index is first allocated
  * @param costToOpen charged each time a vault is opened (a per-open fee; zero disables it)
@@ -27,7 +27,7 @@ public record VaultChargeSettings(BigDecimal costToCreate, BigDecimal costToOpen
         requireNonNegative(refundOnDelete, "refundOnDelete");
     }
 
-    /** A settings instance with every action free and no refund — used when economy is disabled or unwired. */
+    /** A settings instance with every action free and no refund: used when economy is disabled or unwired. */
     public static VaultChargeSettings allFree() {
         return new VaultChargeSettings(BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
     }

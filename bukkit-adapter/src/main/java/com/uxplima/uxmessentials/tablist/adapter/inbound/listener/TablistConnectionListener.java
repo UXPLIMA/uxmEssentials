@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Renders a player's tablist header/footer the moment they join so they do not wait a full refresh interval for the
  * first paint, and clears it on quit so a dropped player leaves no stale header/footer behind. Both events fire on the
- * joining/quitting player's region thread, so reading the live player and touching their tablist is region-local — no
+ * joining/quitting player's region thread, so reading the live player and touching their tablist is region-local, no
  * scheduler hop is needed here.
  *
  * <p>The join also repaints every already-skinned online player's packet entry to the joiner: native Paper replicates a

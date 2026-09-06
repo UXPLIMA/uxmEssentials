@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * jOOQ-backed {@link BanknoteStore} over the generated {@code ECONOMY_ACTIVE_BANKNOTES} table. Every
- * statement is typed jOOQ DSL — no string-concatenated SQL. The store is the anti-dupe registry: a banknote
+ * statement is typed jOOQ DSL: no string-concatenated SQL. The store is the anti-dupe registry: a banknote
  * is redeemable only while its token row exists, and {@link #redeem} deletes that row, so two attempts to
  * cash a duplicated item race on the single {@code DELETE} and only the one that removes the row wins.
  *

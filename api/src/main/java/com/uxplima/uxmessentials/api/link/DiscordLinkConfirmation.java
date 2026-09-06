@@ -8,15 +8,15 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The host plugin's account-linking confirmation seam, consumed by the optional Discord bridge through
- * Bukkit's {@code ServicesManager} — there is no compile-time link between the two jars (docs/01-architecture,
+ * Bukkit's {@code ServicesManager}. There is no compile-time link between the two jars (docs/01-architecture,
  * docs/09-deployment Path C). The host registers an implementation backed by its {@code ConfirmLink} use case
  * over the jOOQ link store; the bridge looks it up once its gateway is ready and, when present, registers the
  * {@code /link} slash command that redeems a code through it. When the host exposes no implementation the
  * bridge stays connected but linking is dormant, exactly like the notification source.
  *
- * <p>This contract lives in {@code :api} (the only module both jars depend on) and carries no domain type —
+ * <p>This contract lives in {@code :api} (the only module both jars depend on) and carries no domain type
  * the code and the Discord id cross the seam as plain strings, the outcome as a small enum plus an optional
- * resolved player name — so {@code :api} stays a pure-contract module with no persistence or Bukkit dependency.
+ * resolved player name, so {@code :api} stays a pure-contract module with no persistence or Bukkit dependency.
  * Implementations run on the bridge's calling thread (JDA's own pool, off any server tick); they must not block
  * a tick and must validate their inputs.
  */
@@ -25,7 +25,7 @@ public interface DiscordLinkConfirmation {
 
     /**
      * Redeem a link code presented in Discord, binding the presenting Discord account to the player who issued
-     * the code. Never throws for a modelled outcome — a bad or expired code, or an already-bound Discord
+     * the code. Never throws for a modelled outcome. A bad or expired code, or an already-bound Discord
      * account, is reported through the returned {@link Outcome}, not an exception.
      *
      * @param code the code the Discord user typed, in any case (the host normalises it)

@@ -17,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
  * and every other standard authenticator app implement, so a code generated here matches the code on the player's
  * phone for the same 30-second window.
  *
- * <p>Everything here is deterministic in {@code (secret, instant)} — no {@code SecureRandom}, no wall clock read —
+ * <p>Everything here is deterministic in {@code (secret, instant)} (no {@code SecureRandom}, no wall clock read)
  * so it is unit-tested directly against the RFC 6238 Appendix B reference vectors at fixed timestamps. {@link
  * #verify} accepts a small ± window of steps to tolerate clock skew and the player typing a code as its window
  * rolls, comparing candidate against expected in constant time so verification leaks nothing about which digits
@@ -33,7 +33,7 @@ public final class TotpCode {
     /** RFC 6238's default 30-second time-step. */
     private static final long TIME_STEP_SECONDS = 30L;
 
-    /** The number of decimal digits in a code — the near-universal authenticator default. */
+    /** The number of decimal digits in a code, the near-universal authenticator default. */
     private static final int DIGITS = 6;
 
     /** {@code 10^DIGITS}, the modulus dynamic truncation reduces the binary code by. */

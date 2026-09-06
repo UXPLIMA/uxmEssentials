@@ -21,8 +21,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The EssentialsX source's lazy {@link ImportPlan}. It composes three sub-streams — userdata files,
- * warp files, and the kits file — into one {@link ImportRecord} stream, each evaluated on demand as the
+ * The EssentialsX source's lazy {@link ImportPlan}. It composes three sub-streams: userdata files,
+ * warp files, and the kits file. Into one {@link ImportRecord} stream, each evaluated on demand as the
  * importer's bounded executor drains it (docs/12-migration §7). A malformed individual file is dropped
  * from the stream (the run continues and counts it as skipped/failed downstream), so one bad
  * {@code userdata/<uuid>.yml} never aborts the import (§4).
@@ -75,7 +75,7 @@ final class EssentialsXPlan implements ImportPlan {
 
     private Stream<ImportRecord> userRecords(EssXUserdata parsed) {
         // One userdata file yields the player record plus, when the player carries a mute or jail, a separate
-        // moderation record — both keyed by the same uuid so a re-run upserts each idempotently (§6).
+        // moderation record: both keyed by the same uuid so a re-run upserts each idempotently (§6).
         ImportRecord user = new ImportRecord.UserRecord(userMapper.map(parsed));
         PlayerRef owner = new PlayerRef(parsed.uuid(), parsed.name());
         return jailMuteMapper
@@ -118,8 +118,8 @@ final class EssentialsXPlan implements ImportPlan {
             return Stream.empty();
         }
         // The directory listing is collected eagerly inside try-with-resources so the directory handle is
-        // released immediately; only the cheap path list is held. The expensive work — parsing each file's
-        // content — still happens lazily as the records stream is drained downstream (docs/12-migration §7).
+        // released immediately; only the cheap path list is held. The expensive work: parsing each file's
+        // content: still happens lazily as the records stream is drained downstream (docs/12-migration §7).
         try (Stream<Path> listing = Files.list(dir)) {
             return listing.filter(p -> p.getFileName().toString().endsWith(".yml")).toList().stream();
         } catch (IOException unreadableDir) {

@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * The renderer keeps the spawn/refresh/remove lifecycle and the per-viewer text dispatch; this collaborator
  * answers "who sees it" and applies it, so the two concerns live apart and each stays small.
  *
- * <p>An {@code ALL} hologram is the cheap default — the shared entity is visible to everyone, so it is never
+ * <p>An {@code ALL} hologram is the cheap default. The shared entity is visible to everyone, so it is never
  * restricted and never enumerated. A {@code PERMISSION} hologram is restricted to the online holders of its
  * gating node, recomputed on every spawn; a {@code MANUAL} hologram is restricted to its persisted shown-viewer
  * set, queried per hologram through the injected {@code manualViewers} lookup. The per-player decision itself is
@@ -50,7 +50,7 @@ public final class HologramViewers {
         this.blacklist = Objects.requireNonNull(blacklist, "blacklist");
     }
 
-    /** The online players who may currently see {@code hologram} under its visibility — the override audience. */
+    /** The online players who may currently see {@code hologram} under its visibility, the override audience. */
     List<Player> eligible(Hologram hologram) {
         Visibility visibility = hologram.visibility();
         Set<UUID> shown = shownViewersFor(hologram);
@@ -66,7 +66,7 @@ public final class HologramViewers {
     /**
      * Apply {@code visibility} to a freshly spawned entity on its own region thread. {@code ALL} keeps the entity
      * visible by default (no work). {@code PERMISSION} and {@code MANUAL} restrict it to an explicit viewer set,
-     * then show it to each online player who qualifies (a node-holder, or a member of the manual shown set) — so a
+     * then show it to each online player who qualifies (a node-holder, or a member of the manual shown set), so a
      * non-qualifier never sees it and a qualifier sees it at once.
      */
     void applyOnSpawn(RenderedHologram spawned, Hologram hologram) {
@@ -98,7 +98,7 @@ public final class HologramViewers {
         }
     }
 
-    /** Whether {@code viewer} is on {@code hologram}'s blacklist — hidden from it regardless of visibility mode. */
+    /** Whether {@code viewer} is on {@code hologram}'s blacklist: hidden from it regardless of visibility mode. */
     boolean isBlacklisted(Hologram hologram, Player viewer) {
         return blacklist.apply(hologram.name()).contains(viewer.getUniqueId());
     }

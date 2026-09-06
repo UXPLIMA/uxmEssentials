@@ -29,7 +29,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code self-enderchest} (their ender chest), each entry being the actual {@link ItemStack} so a template's
  * {@code material = "entry"} draws the real item. Each source is a list handler plus the per-entry {@code %token%}
  * placeholders a template reads to draw one row, all registered once at startup into the shared {@link MenuBindings}
- * — a spec's {@code list { source = self-inventory, template { … } }} then resolves the same way a code-registered
+ *. A spec's {@code list { source = self-inventory, template { … } }} then resolves the same way a code-registered
  * feature source does.
  *
  * <p>The two storage sources are strictly read-only: they snapshot clones and never touch a target other than the
@@ -37,8 +37,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * deliberately non-engine concern (the {@code /invsee} / {@code /endersee} inventory leaves and the future
  * storage-menu click mechanics), never built here.
  *
- * <p>The Folia constraint shapes the whole design. A list source runs on an async thread — {@code Menus} resolves a
- * spec's lists off the tick thread — and there the entity/world API is off-limits: {@code player.getWorld()},
+ * <p>The Folia constraint shapes the whole design. A list source runs on an async thread. {@code Menus} resolves a
+ * spec's lists off the tick thread, and there the entity/world API is off-limits: {@code player.getWorld()},
  * {@code getPing()}, {@code getGameMode()}, {@code world.getPlayers()} and a player's own {@code getInventory()} all
  * touch region state that is unsafe off the owning region thread. So the roster sources snapshot on the global region
  * thread and the storage sources snapshot on the <em>viewer's</em> entity region thread, each returning immutable
@@ -101,13 +101,13 @@ public final class LiveDataSources {
 
     /**
      * Take a snapshot of live server state on the global region thread and return it to the async caller. When the
-     * caller already owns the global thread (the deadlock guard — a global-thread invocation, or a test scheduler
+     * caller already owns the global thread (the deadlock guard, a global-thread invocation, or a test scheduler
      * that reports itself global), the supplier runs inline, because scheduling then blocking on the same thread
      * would deadlock. Otherwise the supplier runs on the global thread and this thread waits on a latch for it.
      *
      * <p>That wait is on the async list-resolution thread, never the main thread, so it is legal: the forbidden rule
      * is blocking the <em>main</em> thread, and this bounded off-tick wait keeps a hung global thread from stalling a
-     * menu open forever — an empty roster is served on timeout or interruption instead. No {@code CompletableFuture}
+     * menu open forever: an empty roster is served on timeout or interruption instead. No {@code CompletableFuture}
      * is used; a bare {@link CountDownLatch} plus {@link AtomicReference} makes the hand-off unambiguous.
      */
     private static <T> List<T> snapshot(Scheduler scheduler, Supplier<List<T>> supplier) {
@@ -124,14 +124,14 @@ public final class LiveDataSources {
     }
 
     /**
-     * Snapshot the viewer's own storage — the inventory or the ender chest {@code pick} selects — on the viewer's
+     * Snapshot the viewer's own storage, the inventory or the ender chest {@code pick} selects, on the viewer's
      * entity region thread, where a player's inventory is safe to read. When the async caller already owns that
      * region (the deadlock guard, and the path a synchronous test scheduler takes) the read runs inline; otherwise
      * it hops onto the entity thread and this thread waits on a latch for the clones to come back.
      *
      * <p>The three-argument {@link Scheduler#onEntity(PlayerRef, Runnable, Runnable) onEntity} is used so a viewer
      * who has just logged off (a retired entity the scheduler silently drops) still releases the latch through the
-     * {@code retired} callback — the wait then returns an empty list rather than hanging for the full timeout. As in
+     * {@code retired} callback: the wait then returns an empty list rather than hanging for the full timeout. As in
      * the roster snapshot, this wait is on the async list-resolution thread, never the main thread, so it is legal:
      * the forbidden rule is blocking the <em>main</em> thread. No {@code CompletableFuture} is used.
      */

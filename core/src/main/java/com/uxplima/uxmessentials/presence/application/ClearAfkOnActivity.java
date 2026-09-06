@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * Records player activity (a move, a chat line, a command) so the idle clock resets and an AFK player returns
  * on their first sign of life. Called from the sync activity listeners on the hot path, so it does the cheap
- * work in the common case — re-stamp the last-activity instant — and only fires the {@link ReturnedFromAfk}
+ * work in the common case, re-stamp the last-activity instant, and only fires the {@link ReturnedFromAfk}
  * event and the back-broadcast when the player was actually AFK.
  *
  * <p>The whole transition runs inside the {@link PresenceStore}'s atomic {@code compute}: the new aggregate is

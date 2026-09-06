@@ -68,7 +68,7 @@ public final class HologramRefreshTask {
     }
 
     private int effectiveInterval(int interval) {
-        // Round a sub-base interval up to the base cadence — the timer cannot fire more often than baseTicks.
+        // Round a sub-base interval up to the base cadence: the timer cannot fire more often than baseTicks.
         return Math.max(baseTicks, interval - (interval % baseTicks));
     }
 }

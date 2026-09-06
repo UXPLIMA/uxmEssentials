@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * The pure decision for whether a vanilla teleport overwrites a player's {@code /back} return point. A
  * player who throws an ender pearl or eats a chorus fruit usually wants {@code /back} to still point at
- * where they were <em>before</em> the pearl, not at the pearl's landing spot — so those causes are ignored
+ * where they were <em>before</em> the pearl, not at the pearl's landing spot, so those causes are ignored
  * by default. Operators tune the ignored set through {@code teleport.conf}'s {@code back.ignored-causes}.
  *
  * <p>This governs the vanilla-teleport capture only. Plugin-driven hops ({@code /home}, {@code /warp},
@@ -28,7 +28,7 @@ public record BackCapturePolicy(Set<TeleportCauseCategory> ignoredCauses) {
         return new BackCapturePolicy(EnumSet.of(TeleportCauseCategory.ENDER_PEARL, TeleportCauseCategory.CHORUS_FRUIT));
     }
 
-    /** A policy that captures on every cause — the pre-toggle behaviour, for operators who want it. */
+    /** A policy that captures on every cause: the pre-toggle behaviour, for operators who want it. */
     public static BackCapturePolicy captureAll() {
         return new BackCapturePolicy(Set.of());
     }

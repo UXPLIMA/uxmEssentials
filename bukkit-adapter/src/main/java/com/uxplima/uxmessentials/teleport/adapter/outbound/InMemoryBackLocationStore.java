@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * In-memory {@link BackLocationStore}: each player's current {@code /back} return point, replaced on
- * every capture. A {@code /back} point is transient session state — never PDC-stamped, never DB-backed —
+ * every capture. A {@code /back} point is transient session state (never PDC-stamped, never DB-backed)
  * so it lives in a per-player map the teleport module drops on {@code stop()} via {@link #clear()} and
  * re-arms on the next capture (a relog clears it).
  *

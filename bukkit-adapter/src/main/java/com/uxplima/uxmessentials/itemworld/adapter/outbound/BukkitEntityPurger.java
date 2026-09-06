@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link Tameable} that is tamed is left alone (a player's pet survives a {@code /killall}).
  *
  * <p>The two scopes thread very differently on Folia. A {@link PurgeSelection.Scope#RADIUS} sweep reads only the
- * actor's nearby entities — a single region the caller already owns (it schedules via {@code onEntity(actor)}) —
+ * actor's nearby entities (a single region the caller already owns (it schedules via {@code onEntity(actor)}))
  * so {@link #purge} stays a synchronous read-and-remove returning the count. A {@link PurgeSelection.Scope#WORLD}
  * sweep is a different shape entirely: {@code world.getEntities()} spans every region of the world and each
  * matching entity is owned by the region thread its location falls in, not the actor's. Enumerating and removing
@@ -49,7 +49,7 @@ public final class BukkitEntityPurger {
     /**
      * Remove the radius-bounded entities {@code selection} targets around {@code actor}, returning how many were
      * removed. The caller must already be on {@code actor}'s region thread (the {@code Scheduler.onEntity} hop the
-     * purge commands make), since this reads the actor's nearby entities — a single region. Only valid for a
+     * purge commands make), since this reads the actor's nearby entities, a single region. Only valid for a
      * {@link PurgeSelection.Scope#RADIUS} selection; a world sweep goes through {@link #purgeWorld}.
      */
     public static int purge(Player actor, PurgeSelection selection) {
@@ -75,7 +75,7 @@ public final class BukkitEntityPurger {
      * candidate is then re-checked and removed on the region that owns its location via
      * {@link Scheduler#onRegion(Position, Runnable)}. {@code onComplete} fires on whichever region thread runs the
      * final removal (or inline on the global thread when the world holds no matching entity), carrying the total
-     * removed — so the caller must route any reply it makes back to the recipient's own thread.
+     * removed, so the caller must route any reply it makes back to the recipient's own thread.
      */
     public static void purgeWorld(Scheduler scheduler, Player actor, PurgeSelection selection, IntConsumer onComplete) {
         Objects.requireNonNull(scheduler, "scheduler");

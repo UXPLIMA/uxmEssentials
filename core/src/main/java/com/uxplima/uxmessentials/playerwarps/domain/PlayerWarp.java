@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpCost;
 
 /**
  * One player-owned warp, identified by a durable surrogate {@link PlayerWarpId} that the database assigns on the
- * first save. Its {@link PlayerWarpName} is server-wide unique — two players can never hold the same name — so the
+ * first save. Its {@link PlayerWarpName} is server-wide unique, two players can never hold the same name, so the
  * name alone addresses a warp, and access is governed by an ordered {@link WarpAccess} axis
  * (public / password / whitelist / private) crossed with a {@link WarpStatus} lifecycle
  * (active / suspended / archived), not a single public flag.
@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpCost;
  * for listing; a {@link WarpCost} entry price and accrued {@link WarpEarnings}; denormalised {@link RatingSummary}
  * and {@link VisitSummary} rollups plus a favourite count for sorting without scanning child tables; optional
  * {@link Sponsorship} and {@link RentState} for paid placement; and the {@link WarpEffects} / {@link WarpTimingOverrides}
- * a warp customises its teleport with. The password itself is never held here — only a {@link #passwordSet} flag;
+ * a warp customises its teleport with. The password itself is never held here, only a {@link #passwordSet} flag;
  * the hash lives in persistence and is verified through a hashing port, so the domain never touches a secret.
  */
 public record PlayerWarp(
@@ -189,8 +189,8 @@ public record PlayerWarp(
 
     /**
      * A copy carrying a new {@link RentState}, stamping {@code now} as the edit time. This is the rent lifecycle's
-     * transition — a renewal advances {@link RentState#paidUntil} and clears the suspend/archive marks, a suspension
-     * stamps them — and is kept orthogonal to {@link #withStatus}: the sweep pairs the two (suspend flips the status
+     * transition. A renewal advances {@link RentState#paidUntil} and clears the suspend/archive marks, a suspension
+     * stamps them, and is kept orthogonal to {@link #withStatus}: the sweep pairs the two (suspend flips the status
      * <em>and</em> writes the marks) so each stays a single-responsibility edit.
      */
     public PlayerWarp withRent(RentState newRent, Instant now) {

@@ -44,7 +44,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@link RegionRosterView} over a real menu engine, a fake {@link RegionService} and a fake
- * {@link PlayerLookup} (WorldGuard is not on the test classpath — the editor is exercised through the ports): it draws
+ * {@link PlayerLookup} (WorldGuard is not on the test classpath. The editor is exercised through the ports): it draws
  * one icon per roster entry (owners first, then members, then groups), clicking a uuid-backed member removes it
  * through {@link RegionService#applyMemberChange} and the reopened panel reflects the shrunken roster, and clicking a
  * read-only group entry sends the "can't remove here" line and touches the port not at all.
@@ -121,7 +121,7 @@ class RegionRosterViewTest {
                         REGION, MEMBER, RegionMemberChange.Role.MEMBER, RegionMemberChange.Action.REMOVE));
 
         // The reopened panel now shows only the owner and the group; the group slides up to slot 1 and the vacated
-        // slot 2 falls back to the glass filler — the member's head is gone.
+        // slot 2 falls back to the glass filler: the member's head is gone.
         Inventory reopened = staff.getOpenInventory().getTopInventory();
         assertThat(reopened.getItem(0).getType()).isEqualTo(Material.GOLDEN_HELMET);
         assertThat(reopened.getItem(1).getType()).isEqualTo(Material.OAK_SIGN);
@@ -132,7 +132,7 @@ class RegionRosterViewTest {
     void clickingAReadOnlyGroupSendsTheNotRemovableLineAndTouchesNoPort() {
         view.open(staffRef, REGION);
 
-        // Slot 2 is the g: group entry — it has no uuid to key a removal.
+        // Slot 2 is the g: group entry: it has no uuid to key a removal.
         fireClick(2);
 
         assertThat(sink.last()).isEqualTo("regions.members.not-removable");

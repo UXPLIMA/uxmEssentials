@@ -23,8 +23,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Pure coverage of the money-settlement decision and its all-or-nothing execution over a fake {@link TradeEconomy}. The
  * enumeration turns each side's staked money into one leg per non-zero currency entry (including a multi-currency,
- * both-directions offer); {@code settle} moves every leg atomically, and a payer who cannot cover their leg — whether
- * caught by the affordability probe or only by the guarded transfer — blocks the whole settlement with no net money
+ * both-directions offer); {@code settle} moves every leg atomically, and a payer who cannot cover their leg, whether
+ * caught by the affordability probe or only by the guarded transfer, blocks the whole settlement with no net money
  * moved.
  */
 class TradeSettlementTest {
@@ -151,7 +151,7 @@ class TradeSettlementTest {
 
     /**
      * A fake economy that records every transfer and lets the "coins move" affordability pass while failing any
-     * transfer whose payer was marked broke — the mid-settlement failure the reversal must undo.
+     * transfer whose payer was marked broke: the mid-settlement failure the reversal must undo.
      */
     private static final class RecordingEconomy implements TradeEconomy {
         private final List<Move> moves = new ArrayList<>();

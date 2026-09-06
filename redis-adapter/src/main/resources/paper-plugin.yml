@@ -11,7 +11,7 @@ folia-supported: true
 
 # This companion implements the host plugin's BusTransport SPI and registers the implementation with the
 # ServicesManager. The transport instance is handed to the host's bus core, so both sides must resolve
-# BusTransport to the same class object — join-classpath puts the host's classes on this plugin's classloader
+# BusTransport to the same class object. Join-classpath puts the host's classes on this plugin's classloader
 # (the modern paper-plugin loader isolates classpaths by default, so this opt-in is mandatory, not cosmetic).
 # load: AFTER means the host is enabled first; the host defers resolving the Redis transport to its first global
 # tick, by which point this plugin's onEnable has registered the factory.

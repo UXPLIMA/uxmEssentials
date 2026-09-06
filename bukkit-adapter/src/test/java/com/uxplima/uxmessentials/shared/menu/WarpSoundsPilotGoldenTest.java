@@ -55,7 +55,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The pilot's golden test: the warp sound selector must render identically whether it is drawn by the original
  * fixed view or by the menu engine. Both are opened for the same server warp on the departure side, and the
- * populated slots — the preset option grid plus the back / custom / remove buttons — are snapshotted as
+ * populated slots (the preset option grid plus the back / custom / remove buttons) are snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal slot for slot. A final click on an option through the
  * engine's own listener proves the migrated path also writes the warp's sound, so the move is faithful in both
  * appearance and behaviour.

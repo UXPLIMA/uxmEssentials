@@ -59,7 +59,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The baltop golden test: the engine-rendered read-only leaderboard must draw the exact grid the original
  * {@code BaltopGuiView} drew. The snapshot cache holds two ranked owners for the queried currency, so the list draws
  * two PLAYER_HEAD skulls (content slots 0 and 1, the rank surfacing through the {@code baltop_player} token the test
- * catalog echoes back), the prev ARROW at slot 45, the close BARRIER at slot 49, and the next ARROW at slot 53 —
+ * catalog echoes back), the prev ARROW at slot 45, the close BARRIER at slot 49, and the next ARROW at slot 53
  * the corner-and-centre bottom-row geometry the original leaderboard used. The engine window is snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced
  * for this fixture, frozen here as the contract so the old class could be deleted. A click on the first skull

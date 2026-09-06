@@ -17,13 +17,13 @@ import com.uxplima.uxmlib.redis.RedisBus;
  * context replicates straight between backends sharing a Redis server.
  *
  * <p>This is a thin adapter over uxmlib's {@link RedisBus}, whose SPI takes the channel as a per-call argument
- * and has no {@code start}/{@code healthy} of its own. The byte-moving — Lettuce PUBLISH / SUBSCRIBE, binary
- * codec, auto-reconnect, the Netty event loop — lives in {@link RedisBus}; this adapter pins the fixed channel,
+ * and has no {@code start}/{@code healthy} of its own. The byte-moving, Lettuce PUBLISH / SUBSCRIBE, binary
+ * codec, auto-reconnect, the Netty event loop. Lives in {@link RedisBus}; this adapter pins the fixed channel,
  * adds the {@link BusTransport} lifecycle, and re-applies the fail-degraded publish guard at the synchronous
  * seam (the lib only catches an asynchronous publish future's failure, not a synchronous throw from the publish
  * call itself).
  *
- * <p>Frames are carried as opaque binary: the transport knows nothing about {@code NetworkMessage} or the codec —
+ * <p>Frames are carried as opaque binary: the transport knows nothing about {@code NetworkMessage} or the codec
  * the encode/decode, origin stamp, self-origin loop sentinel and listener dispatch all live above this seam in
  * {@code BusCore}, which also bridges inbound frames back onto a tick thread through the {@link Scheduler} port.
  * This transport adds no second de-duplication mechanism, and Lettuce already runs its I/O off any tick thread,
@@ -34,7 +34,7 @@ import com.uxplima.uxmlib.redis.RedisBus;
  *
  * <h2>Concurrency</h2>
  * Ownership: the {@code running} flag is <b>volatile</b>, written by {@link #start}/{@link #stop} and read by
- * {@link #send} and {@link #healthy}. {@link RedisBus} owns its own threading — Lettuce runs all I/O on its event
+ * {@link #send} and {@link #healthy}. {@link RedisBus} owns its own threading, Lettuce runs all I/O on its event
  * loop, so neither subscribe nor publish ever blocks a tick or region thread.
  */
 public final class RedisBusTransportAdapter implements BusTransport {

@@ -22,7 +22,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The load-safe contract of the three reflection backends (PlayerPoints, CoinsEngine, zEssentials) — the
+ * The load-safe contract of the three reflection backends (PlayerPoints, CoinsEngine, zEssentials), the
  * property their whole reflective design exists to protect. Naming one of these currencies on a server without
  * its host plugin must never classload the plugin's SDK, because a hard SDK reference would surface as a
  * {@link NoClassDefFoundError} at enable. This pins both halves: with the host plugin absent every operation is
@@ -108,7 +108,7 @@ class ReflectiveCurrencyBackendAbsentTest {
         return type.getName().startsWith(prefix);
     }
 
-    /** A {@link Logger} that drops every line — this test asserts behaviour, not log output. */
+    /** A {@link Logger} that drops every line: this test asserts behaviour, not log output. */
     private static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

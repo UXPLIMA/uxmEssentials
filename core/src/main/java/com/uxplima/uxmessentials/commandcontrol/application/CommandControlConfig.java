@@ -38,7 +38,7 @@ import com.uxplima.uxmessentials.shared.application.port.ConfigStore;
  * @param defaultCommands the fallback command list ({@code commands.default})
  * @param groupCommands the per-group command lists, keyed by permission group name
  * @param tabCompletionEnabled scrub the disallowed commands from the client command list / tab-completion
- *     ({@code tab-completion.enabled}, default {@code true} — a no-op while the rule set stays inert)
+ *     ({@code tab-completion.enabled}, default {@code true}. A no-op while the rule set stays inert)
  * @param pluginHideEnabled hide the plugin-listing / help commands from players without the view permission
  *     ({@code plugin-hide.enabled}, default {@code true}; the view permission defaults to op, so only non-ops are hit)
  * @param hiddenCommands the plugin-listing / help commands the hide covers ({@code plugin-hide.hidden-commands})

@@ -15,16 +15,16 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The playerstate bounded context as a first-class {@link FeatureModule}: it owns the per-player toggle/effect
- * surface — {@code /god /fly /heal /feed /gamemode /speed} plus the {@code /ext /suicide /near /nightvision
+ * surface. {@code /god /fly /heal /feed /gamemode /speed} plus the {@code /ext /suicide /near /nightvision
  * /flyspeed /walkspeed /ptime /pweather} verbs and the {@code /exp /air /burn /ice /getpos /ping /rest} utility
- * verbs — over an immutable {@code PlayerStateSnapshot} reconciled with the live player on its owning region
+ * verbs. Over an immutable {@code PlayerStateSnapshot} reconciled with the live player on its owning region
  * thread. The module declares its command surface and enable gate here;
  * {@code start} arms the lifecycle bookkeeping, and the bukkit-side adapters (the Brigadier handlers, the
  * in-memory snapshot store, the reconciler, the effects bridge, and the join/quit/respawn listener) are
  * constructed in the adapter wiring once the module has started.
  *
  * <p>The module needs no database: the snapshot map is transient in-memory state held only while a player is
- * online (no persistence, no PDC), so the module declares no migration location — a disabled module wires
+ * online (no persistence, no PDC), so the module declares no migration location. A disabled module wires
  * nothing and leaves no schema or state behind. {@code /repair}, {@code /repairall}, {@code /hat}, and
  * {@code /more} are owned by the itemworld context and are deliberately not part of this surface.
  */

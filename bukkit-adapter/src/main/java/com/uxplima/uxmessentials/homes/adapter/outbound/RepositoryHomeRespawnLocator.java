@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@link HomeRespawnLocator} backed by the home repository's non-blocking {@link HomeRepository#peek}
  * cache read. On a cache hit it returns the owner's lowest-slot home position; on a cold miss or an owner
  * with no homes it returns empty so the respawn chain falls through to its next step. It never calls
- * {@link HomeRepository#load} — the respawn listener runs on the player's region thread inside the respawn
+ * {@link HomeRepository#load}. The respawn listener runs on the player's region thread inside the respawn
  * event, where a disk read is forbidden.
  */
 @NullMarked

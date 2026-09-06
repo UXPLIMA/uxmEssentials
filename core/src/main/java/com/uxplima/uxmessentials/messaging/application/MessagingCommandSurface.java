@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  *
  * <p>Only {@code /msg} {@code /reply} {@code /mail} are the private-channel surface; {@code /msgtoggle}
  * {@code /ignore} {@code /unignore} {@code /ignorelist} {@code /socialspy} {@code /mailclear} {@code /helpop}
- * round it out. There is no public-chat command — that is out of charter.
+ * round it out. There is no public-chat command: that is out of charter.
  */
 final class MessagingCommandSurface {
 
@@ -50,6 +50,6 @@ final class MessagingCommandSurface {
         return new MessagingCommand(literal, description);
     }
 
-    /** The kernel-side description of one messaging command — literal and help text, no Brigadier type. */
+    /** The kernel-side description of one messaging command, literal and help text, no Brigadier type. */
     private record MessagingCommand(String literal, String description) implements BrigadierCommand {}
 }

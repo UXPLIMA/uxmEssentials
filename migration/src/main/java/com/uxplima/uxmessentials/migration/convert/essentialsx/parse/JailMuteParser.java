@@ -49,7 +49,7 @@ public final class JailMuteParser {
     private Optional<EssXJail> jail(ConfigurationNode root) {
         String name = root.node("jail").getString();
         if (name == null || name.isBlank()) {
-            // Jailed with no named jail is an unusable record — skipped, never fatal (docs/12-migration §4).
+            // Jailed with no named jail is an unusable record, skipped, never fatal (docs/12-migration §4).
             return Optional.empty();
         }
         ConfigurationNode timestamps = root.node("timestamps");

@@ -12,8 +12,8 @@ import java.util.Optional;
  * grants that variant's items, falling back to the base kit when the player holds none. This lets one
  * {@code /kit daily} hand out richer loot to higher ranks without an admin defining a separate kit per rank.
  *
- * <p>The permission is resolved through the shared {@code Permissions} port — the same numbered-node
- * convention the cooldown tiers use ({@code uxmessentials.kit.tier.<name>}) — so the kernel never inspects
+ * <p>The permission is resolved through the shared {@code Permissions} port, the same numbered-node
+ * convention the cooldown tiers use ({@code uxmessentials.kit.tier.<name>}), so the kernel never inspects
  * the node itself, it only carries it. A variant with no cooldown override inherits the base kit's cooldown;
  * a variant with no cost override inherits the base kit's cost. The items list is non-empty: a variant that
  * granted nothing would be indistinguishable from the player simply lacking it.

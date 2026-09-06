@@ -27,13 +27,13 @@ import org.junit.jupiter.api.Test;
 
 /**
  * In-process round-trip for the LiteBans JDBC source. It stands up an H2 in-memory database with the three
- * LiteBans tables, inserts rows covering every mapping branch — permanent ({@code until=-1}, {@code until=0}),
+ * LiteBans tables, inserts rows covering every mapping branch, permanent ({@code until=-1}, {@code until=0}),
  * temp, removed ({@code active=0}), an IP ban, a sentinel target (skipped), a console-issued ban, a mute, and
- * a warning — then drives {@link LiteBansConvert#plan} and asserts the mapped {@link ImportRecord}s.
+ * a warning, then drives {@link LiteBansConvert#plan} and asserts the mapped {@link ImportRecord}s.
  *
  * <p>This validates the reader and mapper logic against a real JDBC driver. The H2 <em>file</em> layout a live
  * LiteBans 2.x install writes is a separate compatibility concern (a much older bundled engine), and is a
- * maintainer-verify caveat — this test exercises the dependable connectable-URL path.
+ * maintainer-verify caveat: this test exercises the dependable connectable-URL path.
  */
 class LiteBansConvertTest {
 

@@ -16,7 +16,7 @@ public final class SpawnCodec {
 
     /**
      * Encodes the five components on their own, for a caller that has coordinates but no world identity to build a
-     * {@link Position} from — the world-import path, where the world's uid is not known until it is first loaded.
+     * {@link Position} from: the world-import path, where the world's uid is not known until it is first loaded.
      */
     public static String encode(double x, double y, double z, float yaw, float pitch) {
         return x + ";" + y + ";" + z + ";" + yaw + ";" + pitch;

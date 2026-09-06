@@ -28,9 +28,9 @@ import org.junit.jupiter.api.Test;
 
 /**
  * In-process round-trip for the AxPlayerWarps JDBC source. It stands up an H2 database with the AxPlayerWarps schema,
- * seeds a small warp network — two owners, a public warp with a category / icon / price / description plus ratings,
+ * seeds a small warp network. Two owners, a public warp with a category / icon / price / description plus ratings,
  * a blacklist, a favourite and repeat visits, a whitelist-access warp, and a warp in a world the server no longer
- * knows — then drives {@link AxPlayerWarpsConvert#plan} and asserts the mapped {@link ImportedPlayerWarp}s. This is the
+ * knows, then drives {@link AxPlayerWarpsConvert#plan} and asserts the mapped {@link ImportedPlayerWarp}s. This is the
  * golden-file for the mapping: the {@code Access} ordinal becomes our access axis, the per-warp currency collapses to
  * the default, the source name is kept as the display label, the side tables land on the right warp, and a warp whose
  * world does not resolve is dropped rather than failing the run.

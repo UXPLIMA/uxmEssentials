@@ -38,15 +38,15 @@ import org.jspecify.annotations.Nullable;
  * <ul>
  *   <li>a right-click arrives as {@link PlayerInteractEntityEvent} (the legacy clickable path);
  *   <li>a left-click (attack) arrives as Paper's {@link PrePlayerAttackEntityEvent}, which fires before any damage
- *       logic for the attacked entity — including a non-damageable {@link Interaction} box — and carries the box
+ *       logic for the attacked entity, including a non-damageable {@link Interaction} box, and carries the box
  *       as its attacked entity. This is the one clean Bukkit/Paper event surfacing a left-click attack, so no
  *       packet path is fabricated for it.
  * </ul>
  *
  * <p>On a resolved click the legacy single click command runs first on a right-click (kept for backward-compat,
  * and right-click-only exactly as an NPC's single click command is); a multi-page hologram with no command cycles
- * the viewer's page instead. Then the ordered action chain — every
- * {@link com.uxplima.uxmessentials.shared.domain.action.ClickAction} whose trigger matches the click — runs through
+ * the viewer's page instead. Then the ordered action chain, every
+ * {@link com.uxplima.uxmessentials.shared.domain.action.ClickAction} whose trigger matches the click, runs through
  * the shared {@link ClickActionRunner}, so a hologram may carry a legacy click command <em>and</em> an action
  * chain (additive, exactly as an NPC keeps its click command alongside its actions). The chain is given
  * {@code attack = true} for a left-click, {@code false} for a right-click. A short per-player cooldown debounces
@@ -117,7 +117,7 @@ public final class HologramClickListener implements Listener {
             case RUN_COMMAND -> player.performCommand(Objects.requireNonNull(hologram.clickCommand(), "clickCommand"));
             case CYCLE_PAGE -> pageCycler.cyclePage(player, hologram.name());
             case NONE -> {
-                // No legacy command and not a paged hologram — the action chain below is the only behaviour.
+                // No legacy command and not a paged hologram: the action chain below is the only behaviour.
             }
         }
         // The action chain always runs after the legacy behaviour, so a hologram may have both (additive); it

@@ -22,7 +22,7 @@ import com.uxplima.uxmlib.item.PdcFlag;
 /**
  * Builds a menu opener {@link ItemStack} from an {@link OpenerSpec} and reads the menu id back off one. The item is
  * tagged in its persistent data with the target menu id under a single cached {@link NamespacedKey}, so the interact
- * listener can recognise an opener a player right-clicks without matching on material or name — an operator is free
+ * listener can recognise an opener a player right-clicks without matching on material or name. An operator is free
  * to reskin the item. The {@link #build} / {@link #menuOf} pair is a clean round-trip: what is written by build is
  * exactly what menuOf reads.
  *
@@ -31,7 +31,7 @@ import com.uxplima.uxmlib.item.PdcFlag;
  *
  * <h2>NamespacedKey discipline</h2>
  * The opener tag key is built once in the constructor. The per-menu given-flag keys are open-ended (one per menu
- * id), so each is built on first use and cached in a {@link ConcurrentHashMap} — the CLAUDE.md rule forbids building
+ * id), so each is built on first use and cached in a {@link ConcurrentHashMap}. The CLAUDE.md rule forbids building
  * a {@link NamespacedKey} on a hot path, and an interact/join event is one. Both key families live under the plugin's
  * own namespace, with the menu-id segment folded to the legal {@code [a-z0-9._-]} alphabet.
  */

@@ -5,13 +5,13 @@ package com.uxplima.uxmessentials.playerwarps.domain;
  * {@link RentState} against the configured rent term.
  *
  * <ul>
- *   <li>{@link #DUE} — an {@link WarpStatus#ACTIVE ACTIVE} warp whose paid term has lapsed: attempt a charge, and
+ *   <li>{@link #DUE}. An {@link WarpStatus#ACTIVE ACTIVE} warp whose paid term has lapsed: attempt a charge, and
  *       on failure suspend it.
- *   <li>{@link #RETRY} — a {@link WarpStatus#SUSPENDED SUSPENDED} warp still inside its grace window: re-attempt a
+ *   <li>{@link #RETRY}. A {@link WarpStatus#SUSPENDED SUSPENDED} warp still inside its grace window: re-attempt a
  *       charge, restoring it to {@code ACTIVE} on success and otherwise leaving it suspended.
- *   <li>{@link #ARCHIVE} — a {@code SUSPENDED} warp whose grace window has lapsed: retire it to
- *       {@link WarpStatus#ARCHIVED ARCHIVED} (recoverable — never a hard delete).
- *   <li>{@link #NONE} — nothing to do: the sub-group is off, the warp is still paid through, or it is already
+ *   <li>{@link #ARCHIVE}. A {@code SUSPENDED} warp whose grace window has lapsed: retire it to
+ *       {@link WarpStatus#ARCHIVED ARCHIVED} (recoverable, never a hard delete).
+ *   <li>{@link #NONE}. Nothing to do: the sub-group is off, the warp is still paid through, or it is already
  *       archived.
  * </ul>
  */

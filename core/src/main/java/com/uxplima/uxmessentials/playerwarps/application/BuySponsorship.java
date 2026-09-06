@@ -25,8 +25,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /pwarp sponsor <name> [days]}: buy a paid, time-limited pinned browse slot for the warp. Owner-only by the
- * capability matrix — {@link WarpCapability#SPONSOR} is denied to co-owners and managers, so a delegate can never
- * spend the owner's money on placement — the buy runs a fixed sequence of guards before the single guarded debit:
+ * capability matrix. {@link WarpCapability#SPONSOR} is denied to co-owners and managers, so a delegate can never
+ * spend the owner's money on placement. The buy runs a fixed sequence of guards before the single guarded debit:
  *
  * <ol>
  *   <li>resolve the warp ({@link PlayerWarpError#NOT_FOUND} when absent);
@@ -38,8 +38,8 @@ import org.jspecify.annotations.NullMarked;
  *   <li>charge the owner ({@link PlayerWarpError#CANNOT_AFFORD} when the debit cannot take).
  * </ol>
  *
- * <p>Only once the debit succeeds is the sponsorship written — {@code sponsored_until = now + days}, the chosen
- * slot — so a failed charge never marks a warp sponsored. The charge is the DB-guarded, double-spend-safe point:
+ * <p>Only once the debit succeeds is the sponsorship written. {@code sponsored_until = now + days}, the chosen
+ * slot, so a failed charge never marks a warp sponsored. The charge is the DB-guarded, double-spend-safe point:
  * there is no affordability probe before it (that would open a double-spend window), the debit itself decides.
  */
 @NullMarked
@@ -94,12 +94,12 @@ public final class BuySponsorship {
         return commit(actor, warp, name, slot.getAsInt(), days, now);
     }
 
-    /** The guarded charge, then — only on success — the sponsorship write and the confirmation notice. */
+    /** The guarded charge, then, only on success, the sponsorship write and the confirmation notice. */
     private Result<Unit, PlayerWarpError> commit(
             PlayerRef actor, PlayerWarp warp, PlayerWarpName name, int slot, int days, Instant now) {
         // The debit is the double-spend-safe point: no affordability probe precedes it, the debit itself decides. With
-        // no economy provider present there is nothing to charge against, so the purchase cannot take — a paid feature
-        // cannot run for free — and it refuses exactly as an unaffordable charge would.
+        // no economy provider present there is nothing to charge against, so the purchase cannot take, a paid feature
+        // cannot run for free, and it refuses exactly as an unaffordable charge would.
         boolean charged = economy.map(e -> e.chargeOwner(actor, config.price(), config.currencyId())
                         .isOk())
                 .orElse(false);

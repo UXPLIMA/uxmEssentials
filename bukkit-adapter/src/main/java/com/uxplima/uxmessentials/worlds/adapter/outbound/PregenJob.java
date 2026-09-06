@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><b>Field ownership / threading.</b> {@link #done} and {@link #inFlight} are the only fields the
  * chunk-generation completion callback touches, and they are atomics precisely because that callback may
- * run off the region thread. Every other field — the iterator, the boss bar, the cancel handle — is read
+ * run off the region thread. Every other field (the iterator, the boss bar, the cancel handle) is read
  * and mutated only from the engine's tick/finish/cancel methods, which run on the global region thread
  * (the iterator) or the initiator's entity thread (the boss bar), never concurrently. The {@link #handle}
  * is assigned once, immediately after the job is registered, before the first tick can fire.

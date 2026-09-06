@@ -70,7 +70,7 @@ public final class TeleportSettings {
     /**
      * The per-verb cooldown override in seconds for {@code kind}, or {@code -1} to inherit. Read from
      * {@code cooldowns.<verb>} (e.g. {@code cooldowns.back}); a verb the config never names returns {@code -1}.
-     * A non-negative value is that verb's fallback cooldown — the numbered {@code uxmessentials.tp.cooldown.<n>}
+     * A non-negative value is that verb's fallback cooldown. The numbered {@code uxmessentials.tp.cooldown.<n>}
      * tier still refines it via the min-reducer; {@code -1} keeps the shared {@link #defaultCooldownSeconds()}.
      */
     public long verbCooldownOverrideSeconds(TeleportKind kind) {
@@ -227,7 +227,7 @@ public final class TeleportSettings {
 
     /**
      * Whether {@code /rtp} avoids landing inside land claims ({@code rtp.respect-claims}, default {@code true}). When
-     * off, the claim seam is skipped and claimed land is treated as unprotected — the graceful default a server with
+     * off, the claim seam is skipped and claimed land is treated as unprotected, the graceful default a server with
      * no claim plugin also lands on.
      */
     public boolean respectClaims() {

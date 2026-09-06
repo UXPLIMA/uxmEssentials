@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
  * redaction so a digest cannot leak into a log line (a {@code PasswordHash} rides on the aggregate through
  * every debug/trace path).
  *
- * <p>The schema check reads the authoritative table definition — the {@code CREATE TABLE player_warps} block in
- * the V70 rebuild migration — rather than scanning every migration, because the pre-rebuild {@code password}
+ * <p>The schema check reads the authoritative table definition. The {@code CREATE TABLE player_warps} block in
+ * the V70 rebuild migration. Rather than scanning every migration, because the pre-rebuild {@code password}
  * column legitimately exists in the historical V17 migration (on the table V70 renames to {@code _v1_legacy}
  * and the data migration then drops); asserting on V70's create is precise and cannot false-positive on that
  * history.
@@ -29,7 +29,7 @@ class NoPlaintextWarpPasswordDriftTest {
     private static final String MIGRATION = "/db/migration/V70__player_warps_rebuild.sql";
     private static final String CREATE_MARKER = "CREATE TABLE player_warps (";
 
-    // A column literally named `password` followed by a type — the plaintext shape. `password_algorithm`,
+    // A column literally named `password` followed by a type, the plaintext shape. `password_algorithm`,
     // `password_salt`, `password_hash` never match because the underscore is not whitespace.
     private static final Pattern BARE_PASSWORD_COLUMN = Pattern.compile("(?im)^\\s*password\\s+[a-z]");
 

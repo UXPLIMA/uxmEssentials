@@ -9,14 +9,14 @@ import java.util.Optional;
  * sealed set of three outcomes so a caller must handle each explicitly:
  *
  * <ul>
- *   <li>{@link Allow} — deliver the message/command unchanged.
- *   <li>{@link Cancel} — drop it; the proxy has already vetoed it.
- *   <li>{@link Modify} — replace its content with the proxy-supplied text.
+ *   <li>{@link Allow}: deliver the message/command unchanged.
+ *   <li>{@link Cancel}: drop it; the proxy has already vetoed it.
+ *   <li>{@link Modify}: replace its content with the proxy-supplied text.
  * </ul>
  *
  * <p>Keeping the outcome consistent on both sides of the proxy hop is the whole point of SignedVelocity: a signed
  * message vetoed or rewritten at the proxy must be vetoed or rewritten identically at the backend, or the client's
- * signed-chat chain desynchronises. Pure Java — the Bukkit event mutation that acts on the directive lives in the
+ * signed-chat chain desynchronises. Pure Java, the Bukkit event mutation that acts on the directive lives in the
  * adapter.
  */
 public sealed interface SignedChatDirective

@@ -67,7 +67,7 @@ class JooqHomeRepositoryTest {
     @Test
     void saveUpsertsOnTheOwnerSlotKeyRatherThanInserting() {
         repository.save(home(HomeSlot.of(0), 0, 0, 0));
-        repository.save(home(HomeSlot.of(0), 100, 70, 100)); // same (owner, slot) — a re-anchor
+        repository.save(home(HomeSlot.of(0), 100, 70, 100)); // same (owner, slot), a re-anchor
 
         assertThat(repository.count(owner)).isEqualTo(1);
         Home reanchored = repository.load(owner).find(HomeSlot.of(0)).orElseThrow();
@@ -234,7 +234,7 @@ class JooqHomeRepositoryTest {
                 Instant.ofEpochMilli(1_000));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

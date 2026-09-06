@@ -14,7 +14,7 @@ import java.util.Objects;
  * by setting it to {@code 0} (or negative), so an operator can bound by count only, by age only, both, or
  * neither.
  *
- * <p>No I/O, no clock of its own — the caller passes the reference instant, which keeps the rule deterministic
+ * <p>No I/O, no clock of its own. The caller passes the reference instant, which keeps the rule deterministic
  * and trivially testable. The adapter's scheduled sweep feeds it the player's snapshots and applies its verdict.
  *
  * @param maxPerPlayer the most snapshots to keep per player, or {@code <= 0} for no count limit
@@ -23,7 +23,7 @@ import java.util.Objects;
 public record RetentionPolicy(int maxPerPlayer, int maxAgeDays) {
 
     /**
-     * The snapshots from {@code snapshots} that should be pruned as of {@code now} — those beyond the newest
+     * The snapshots from {@code snapshots} that should be pruned as of {@code now}. Those beyond the newest
      * {@code maxPerPlayer}, plus those older than {@code maxAgeDays}. The returned list preserves newest-first
      * order and never contains a snapshot that should be kept.
      */

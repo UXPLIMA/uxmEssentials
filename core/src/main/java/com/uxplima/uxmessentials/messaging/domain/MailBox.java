@@ -8,14 +8,14 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * One recipient's persistent mailbox — the aggregate over their {@link MailItem}s. Mail is DB-backed and
+ * One recipient's persistent mailbox, the aggregate over their {@link MailItem}s. Mail is DB-backed and
  * survives restart (the hard messaging invariant): an offline recipient still has the mail waiting and reads
  * it on next join. The box is rebuilt from queryable rows; this aggregate enforces the read-order and
  * counting rules over them and is immutable between operations.
  *
  * <p>Items are held newest-first so {@code /mail read} shows the latest first and the unread count is read
  * without re-sorting. The aggregate decides; the application layer applies its outcome through the
- * {@code MailRepository} (the actual insert/mark-read/delete) — the box never talks to a database.
+ * {@code MailRepository} (the actual insert/mark-read/delete): the box never talks to a database.
  */
 public final class MailBox {
 
@@ -61,7 +61,7 @@ public final class MailBox {
         return items.size();
     }
 
-    /** How many items are unread — the new-mail notify count. */
+    /** How many items are unread, the new-mail notify count. */
     public long unreadCount() {
         return items.stream().filter(item -> !item.read()).count();
     }
@@ -79,7 +79,7 @@ public final class MailBox {
         return MailBox.of(recipient, next);
     }
 
-    /** A copy with every item marked read — the {@code /mail read} side-effect. */
+    /** A copy with every item marked read, the {@code /mail read} side-effect. */
     public MailBox markAllRead() {
         List<MailItem> next = new ArrayList<>(items.size());
         for (MailItem item : items) {

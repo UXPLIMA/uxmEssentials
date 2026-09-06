@@ -14,7 +14,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The real {@link HeadQuery}, backed by HeadDatabase and reached only from {@link HeadDatabaseHook#whenPresent},
  * past {@code Hooks}' present-guard. HeadDatabase is not a compile dependency: this class names it purely by
- * string class-name through reflection — {@code new HeadDatabaseAPI()}, then {@code getItemHead(String)} — so no
+ * string class-name through reflection ({@code new HeadDatabaseAPI()}, then {@code getItemHead(String)}) so no
  * {@code me.arcaniax} type appears in any field or method signature and constructing this on a server without
  * HeadDatabase loads none of its classes.
  *

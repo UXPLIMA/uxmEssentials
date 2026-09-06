@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The vanish-aware target gate {@code /msg} applies lives in the command itself: a target the sender cannot
  * see is routed through the offline path (so it is indistinguishable from a genuinely-offline player and a
- * vanished player's presence is never leaked) — the same {@code canSee} seam the teleport context applies to
+ * vanished player's presence is never leaked), the same {@code canSee} seam the teleport context applies to
  * {@code /tpa}.
  */
 @NullMarked

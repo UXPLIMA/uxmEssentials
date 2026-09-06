@@ -2,7 +2,7 @@
 -- players on different backends completes its two-phase commit. Same-server trades are transient in-memory sessions
 -- and never touch this table; a row exists only for a live cross-server trade and is deleted once the trade settles
 -- or is refunded. Both participants own one row each, keyed by (trade_id, owner_uuid), so either backend and a
--- rejoining player reconcile the trade from these rows — the bus signal is only a poke to re-read them.
+-- rejoining player reconcile the trade from these rows: the bus signal is only a poke to re-read them.
 --
 -- item_data is the base64 of the owner's serialised item stacks (TEXT, the same idiom V45/V68 use for a base64
 -- payload the application treats as opaque); money is the base64-free "currency=amount" encoding of the staked

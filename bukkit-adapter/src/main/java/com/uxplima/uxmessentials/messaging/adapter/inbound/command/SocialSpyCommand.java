@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /socialspy}: flip whether a staff member observes other players' private messages (audit-relevant),
- * in one of two forms. With no argument it toggles the global ALL flag — observe every private message —
+ * in one of two forms. With no argument it toggles the global ALL flag, observe every private message,
  * while {@code /socialspy <player>} toggles one player on the staff member's target set, so they observe only
  * conversations that player is a party to. The target name completes against the online roster but parses any
  * name, so an offline player is targetable too (the watch is a UUID, resolved later by the send-path

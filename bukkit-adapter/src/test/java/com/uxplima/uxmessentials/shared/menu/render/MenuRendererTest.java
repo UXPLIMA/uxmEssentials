@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
  * Renders a whole parsed spec into an inventory under MockBukkit. The spec mixes a static border, a paginated
- * list whose template name echoes the entry, and an item whose view condition always fails — so one populate call
+ * list whose template name echoes the entry, and an item whose view condition always fails, so one populate call
  * exercises priority layering, the list source, pagination, and view gating together.
  */
 class MenuRendererTest {

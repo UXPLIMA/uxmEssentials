@@ -10,14 +10,14 @@ import org.jspecify.annotations.Nullable;
 /**
  * One warp read from Athelion's {@code data.yml}, in the source's own shape. Athelion serialises every warp as a
  * {@code ConfigurationSerializable} under a top-level {@code warps:} map keyed by the warp uuid; this record is the parsed
- * form of one such entry, before any translation to the domain. Foreign detail Athelion carries but we cannot land — the
- * serialised menu {@code item}, {@code need-verification}, {@code last-activity}, {@code featured} — is not read here; the
+ * form of one such entry, before any translation to the domain. Foreign detail Athelion carries but we cannot land, the
+ * serialised menu {@code item}, {@code need-verification}, {@code last-activity}, {@code featured}, is not read here; the
  * owner <em>name</em> is not serialised at all, so it is resolved to a placeholder by the mapper.
  *
  * <p>The world is a bare name (Athelion keeps no uid), so a warp whose world the live server does not know is dropped by
  * the mapper, not here. {@code ratingSum} is Athelion's accumulated star total (its {@code ratings} field) and
  * {@code reviewers} the players who cast those stars, so the per-warp count is {@code reviewers.size()} and the average is
- * {@code ratingSum / reviewers.size()} — Athelion stores no per-vote breakdown.
+ * {@code ratingSum / reviewers.size()}: Athelion stores no per-vote breakdown.
  *
  * @param owner the warp owner's uuid
  * @param name the warp's id-name

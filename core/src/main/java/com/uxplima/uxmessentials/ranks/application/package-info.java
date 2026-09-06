@@ -6,7 +6,7 @@
  * into a {@link com.uxplima.uxmessentials.ranks.domain.RankLadder}, the
  * {@link com.uxplima.uxmessentials.ranks.application.RanksMessageKey} catalog handles, and the
  * {@link com.uxplima.uxmessentials.ranks.application.CurrentRank} read use case that resolves a stored pointer
- * against the ladder. Pure application code: no Bukkit, Paper, Kyori, jOOQ, or SLF4J — the rank pointer is reached
+ * against the ladder. Pure application code: no Bukkit, Paper, Kyori, jOOQ, or SLF4J. The rank pointer is reached
  * only through the {@link com.uxplima.uxmessentials.ranks.application.port.PlayerRankRepository} port.
  */
 @org.jspecify.annotations.NullMarked

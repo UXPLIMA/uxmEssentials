@@ -107,12 +107,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The npc golden test: the engine-rendered {@code /npc} list must draw the exact grid the original {@code
  * NpcListView} drew. The store holds two fake-player NPCs ("alpha", "beta"), so the list draws two PLAYER_HEAD
- * icons (content slots 0 and 1 — the type icon a default fake-player NPC resolves to), the LIME_DYE create button
+ * icons (content slots 0 and 1. The type icon a default fake-player NPC resolves to), the LIME_DYE create button
  * (slot 49), and the two ARROW nav buttons (slots 48 and 50). The engine's window is snapshotted as {@code (slot ->
- * material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced — captured once
+ * material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced, captured once
  * while both rendered the same fixture, then frozen here as the contract so the old class could be deleted. Then a
  * left click on the first NPC icon through the engine's own {@link MenuListener} proves the migrated path opens that
- * NPC's bespoke {@link NpcEditorView} — so the move is faithful in both appearance and behaviour.
+ * NPC's bespoke {@link NpcEditorView}, so the move is faithful in both appearance and behaviour.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code npc_name} token, so an NPC's name appears in
  * the rendered label; every other key renders verbatim. A real rendering difference (a wrong key, a wrong material,
@@ -123,7 +123,7 @@ class NpcListGoldenTest {
     private static final WorldRef WORLD = new WorldRef(UUID.randomUUID(), "world");
     private static final Position AT = Position.of(WORLD, 1, 64, 1);
 
-    /** Editor property slots, in the order NpcEditorView builds them — slot 10 is the NAME_TAG name property. */
+    /** Editor property slots, in the order NpcEditorView builds them: slot 10 is the NAME_TAG name property. */
     private static final List<Integer> EDITOR_SLOTS =
             List.of(10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32);
 
@@ -190,7 +190,7 @@ class NpcListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code NpcListView} produced for this fixture (two
      * fake-player NPCs "alpha" and "beta"), captured once while both paths rendered it identically and frozen here
-     * as the contract: two PLAYER_HEAD icons (content slots 0 and 1 — the names surface through the {@code npc_name}
+     * as the contract: two PLAYER_HEAD icons (content slots 0 and 1. The names surface through the {@code npc_name}
      * token), the LIME_DYE create button (slot 49), and the two nav ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.npc.application.NpcMessageKey;
 /**
  * The modelled failures an NPC operation can produce. Each value carries the {@link NpcMessageKey} the command
  * adapter renders, so a use case returns a {@code Result.err(NpcError.X)} and the caller never re-derives the
- * message — the error carries it, and the failure reason and its localized text never drift apart.
+ * message: the error carries it, and the failure reason and its localized text never drift apart.
  */
 public enum NpcError {
 

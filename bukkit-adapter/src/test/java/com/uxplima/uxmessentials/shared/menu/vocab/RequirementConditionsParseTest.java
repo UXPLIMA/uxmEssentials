@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Plain-JUnit coverage of the {@code has-item} argument grammar {@code <material> [amount] [name:<exact>]}. The
- * parse is Bukkit-free — it carries the material token verbatim (resolution to a real {@code Material} happens in the
- * condition) — so this exercises the amount defaulting and the optional display-name suffix in isolation.
+ * parse is Bukkit-free. It carries the material token verbatim (resolution to a real {@code Material} happens in the
+ * condition), so this exercises the amount defaulting and the optional display-name suffix in isolation.
  */
 class RequirementConditionsParseTest {
 

@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.OpenMenuInfo;
 
 /**
  * The {@link MenuPlaceholders} seam over the live {@link Menus} façade. Every read maps a {@code UUID} onto the
- * façade's public {@link Menus#currentMenu} / {@link Menus#lastMenuId} — the two methods that read the engine's
- * open-window holder and its reopen history from behind the engine-internals fence — so this adapter itself never
+ * façade's public {@link Menus#currentMenu} / {@link Menus#lastMenuId}. The two methods that read the engine's
+ * open-window holder and its reopen history from behind the engine-internals fence, so this adapter itself never
  * touches an engine internal. The scalar reads all derive from the one {@code currentMenu} snapshot, so a single
  * placeholder request reads the live window at most once.
  */
@@ -55,7 +55,7 @@ public final class MenusMenuPlaceholders implements MenuPlaceholders {
     @Override
     public Optional<String> argument(UUID player, String name) {
         // Optional.map dropping a null map value degrades an unknown argument to empty, which the resolver renders
-        // as the dash — matching an argument that was present but absent from this open.
+        // as the dash: matching an argument that was present but absent from this open.
         return menus.currentMenu(player).map(info -> info.arguments().get(name));
     }
 }

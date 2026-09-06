@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The enable-time startup sequence for the persisted RTP pool: sweep the aged-out columns, then pre-warm each loaded
- * world's in-memory queue from the columns still on disk. It is the payoff of persisting the pool — the first {@code
+ * world's in-memory queue from the columns still on disk. It is the payoff of persisting the pool, the first {@code
  * /rtp} per world after a restart serves from a warm queue instead of triggering a cold search storm.
  *
  * <p>The world iteration reads the live server on the enable (global) thread, but every heavy step is dispatched off

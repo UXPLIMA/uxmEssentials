@@ -5,12 +5,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * One issued warning — a row in the append-only warning history ({@code /warn}, {@code /tempwarn}). The history
+ * One issued warning: a row in the append-only warning history ({@code /warn}, {@code /tempwarn}). The history
  * is never updated or overwritten, so a target's full record of warnings is preserved and {@code /warns
  * <player>} lists it newest-first.
  *
  * <p>A {@code /warn} produces a warning with no {@link #expiresAt()} (it stands until {@code /unwarn} clears
- * it); a {@code /tempwarn} carries a wall-clock {@code expiresAt} after which the warning no longer counts —
+ * it); a {@code /tempwarn} carries a wall-clock {@code expiresAt} after which the warning no longer counts
  * the review and the count drop it once {@link #isExpiredAt(Instant)} holds, so a timed warning lapses on its
  * own without an operator clearing it.
  *

@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The recipe blob rides {@link PersistentDataType#BYTE_ARRAY} under a single pre-created {@link NamespacedKey}; the
  * serialization itself lives in {@link VillagerRecipeCodec}. A villager that was never managed carries no key, so
- * {@link #hasCustomRecipes} reads {@code false} and {@link #apply} is a no-op for it — an ordinary villager keeps its
+ * {@link #hasCustomRecipes} reads {@code false} and {@link #apply} is a no-op for it. An ordinary villager keeps its
  * vanilla trades untouched.
  *
  * <h2>Concurrency</h2>

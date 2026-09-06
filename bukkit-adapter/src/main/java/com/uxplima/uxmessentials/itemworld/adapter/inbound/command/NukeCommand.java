@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /nuke [player]}: rain lightning over the target area. With no argument the centre is wherever the
- * caller is aiming — the self form is the "storm where I aim" verb: the block under the cross-hair, or the
+ * caller is aiming. The self form is the "storm where I aim" verb: the block under the cross-hair, or the
  * point along the look direction when that is open air (so aiming at the sky still strikes out in front, not
  * back on the caller). With a named player or a selector the centre is each <em>target's own position</em>,
  * never the caller's look direction, and {@code @a} fans the storm out to every online player. An admin-fun
@@ -136,7 +136,7 @@ public final class NukeCommand extends ItemworldCommandSupport implements Comman
     }
 
     /**
-     * The centre of the self/look storm: the block under the cross-hair, or — when that is open air — the point
+     * The centre of the self/look storm: the block under the cross-hair, or, when that is open air, the point
      * {@code REACH} away along the caller's look direction. Aiming at the sky must never fall back to the
      * caller's own position; the storm follows the aim, and the bolt grounds itself at that column.
      */

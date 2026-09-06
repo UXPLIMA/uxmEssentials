@@ -11,7 +11,7 @@ public enum HealthStatus {
     /** The subsystem is healthy. */
     OK,
 
-    /** The subsystem runs but is degraded or misconfigured — worth an operator's attention. */
+    /** The subsystem runs but is degraded or misconfigured: worth an operator's attention. */
     WARN,
 
     /** The subsystem is broken and needs operator action. */

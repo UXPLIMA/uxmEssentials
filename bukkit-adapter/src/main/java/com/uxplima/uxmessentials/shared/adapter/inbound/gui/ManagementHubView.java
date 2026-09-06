@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  * The {@code /uxmess gui} hub menu: a config-driven paginated grid of the {@link ManagementGuiRegistry}
  * entries the viewer is permitted, each a clickable icon that opens the owning module's management GUI.
  *
- * <p>The hub is itself a consumer of the SP0-a framework — it draws through {@link EntityListView} with
+ * <p>The hub is itself a consumer of the SP0-a framework. It draws through {@link EntityListView} with
  * {@link ManagementGuiEntry} as the entity type, so geometry/materials come from
  * {@code modules/management/gui/hub.conf} and every visible string from the {@code gui.hub.*} catalog
  * block. The permitted-entry set is re-read on each open (a viewer who gains a node mid-session sees the

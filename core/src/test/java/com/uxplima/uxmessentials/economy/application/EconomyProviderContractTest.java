@@ -24,8 +24,8 @@ import org.junit.jupiter.api.Test;
  * The behavioural contract every {@link EconomyProvider} implementation must satisfy, written once and
  * subclassed by each implementation with a factory ({@code docs/11-economy-integration.md} §7,
  * {@code docs/05-testing.md} §3.4). The four pinned properties are: atomic pay, insufficient-funds
- * rejection (rejected, never clamped, and non-mutating), descending baltop ordering, and — the load-bearing
- * case — concurrent-debit double-spend safety. A provider that passes single-threaded but loses the
+ * rejection (rejected, never clamped, and non-mutating), descending baltop ordering, and: the load-bearing
+ * case, concurrent-debit double-spend safety. A provider that passes single-threaded but loses the
  * concurrent race is unfit to register via the {@code ServicesManager}; this suite is where that surfaces.
  */
 abstract class EconomyProviderContractTest {

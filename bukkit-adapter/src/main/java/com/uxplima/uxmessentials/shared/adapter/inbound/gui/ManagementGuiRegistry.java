@@ -12,11 +12,11 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The hand-wired registry every feature module's management GUI plugs into. A module, in its own wiring,
- * registers one {@link ManagementGuiEntry} — its label, icon, permission node, and an opener — and the
+ * registers one {@link ManagementGuiEntry} (its label, icon, permission node, and an opener) and the
  * {@code /uxmess gui} hub draws each registered entry the viewer is permitted as a clickable icon.
  *
  * <p>This is a single instance constructed in {@code bootstrap/PluginModule} and passed to each module's
- * wiring (the DI rule — no statics, constructor injection); a disabled module simply never registers, so
+ * wiring (the DI rule. No statics, constructor injection); a disabled module simply never registers, so
  * an empty registry is the valid first state. Registration order is preserved so the hub's icon order is
  * deterministic; a second registration under the same {@link ManagementGuiEntry#id()} replaces the first,
  * which keeps a module's re-wire on reload idempotent.

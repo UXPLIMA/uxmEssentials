@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * mode placeholder matches whether the player is actually in staff mode in game.
  *
  * <p>The online-staff count enumerates the connected players holding the {@code uxmessentials.staff.member}
- * marker — the same node {@code /stafflist} and the presence {@code /staff} roster agree on. The loop is over
+ * marker, the same node {@code /stafflist} and the presence {@code /staff} roster agree on. The loop is over
  * the online set (bounded by the player cap) and is a plain permission read, so it is cheap on the placeholder
  * path; it counts every staff-marker holder regardless of who asks, since the roster size is server-wide.
  */
@@ -43,7 +43,7 @@ public final class StaffStaffPlaceholders implements StaffPlaceholders {
         // wrong here (it cannot marshal back to a caller that is not on any region) and pointless: this reads only
         // a count of permission-marker holders, never any player's mutable entity state. A torn read across a
         // concurrent join/quit at worst reports a count off by one for a single refresh, which self-corrects on
-        // the next HUD tick — acceptable for a cosmetic placeholder, and far cheaper than a blocking marshal.
+        // the next HUD tick, acceptable for a cosmetic placeholder, and far cheaper than a blocking marshal.
         int count = 0;
         for (Player player : server.getOnlinePlayers()) {
             if (player.hasPermission(STAFF_MEMBER_NODE)) {

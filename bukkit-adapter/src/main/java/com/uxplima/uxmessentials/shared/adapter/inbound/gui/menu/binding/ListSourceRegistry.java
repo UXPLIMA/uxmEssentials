@@ -35,7 +35,7 @@ public final class ListSourceRegistry {
         return handlers.containsKey(id);
     }
 
-    /** Every registered list-source id, sorted — the catalog a list-backed item's source picker offers. */
+    /** Every registered list-source id, sorted: the catalog a list-backed item's source picker offers. */
     public List<String> ids() {
         return handlers.keySet().stream().sorted().toList();
     }

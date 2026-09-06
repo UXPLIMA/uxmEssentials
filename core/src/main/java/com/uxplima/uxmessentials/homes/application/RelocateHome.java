@@ -21,10 +21,10 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Re-anchor the home in a slot to the player's current position, keeping its label, icon, and creation
- * time. Every registered {@link SethomeGuard} runs first — the first failure short-circuits with its
+ * time. Every registered {@link SethomeGuard} runs first. The first failure short-circuits with its
  * {@link HomeError} without touching the aggregate. The aggregate then rejects an empty slot with
  * {@link HomeError#NOT_FOUND}; once the aggregate transition succeeds, the optional economy charge is
- * applied before committing — a successful relocate saves the row, publishes {@code HomeRelocated}, and
+ * applied before committing. A successful relocate saves the row, publishes {@code HomeRelocated}, and
  * notifies {@link HomesMessageKey#HOME_RELOCATED}.
  */
 public final class RelocateHome {

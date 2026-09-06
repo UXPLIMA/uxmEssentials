@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>This is the platform-side {@link BalanceFeed} the {@code vault} live source reads through, so the
  * migration module stays free of the Vault SDK. The read runs off the calling thread on the import
  * executor, the same as the old {@code /eco migrate} path did; the Vault economy calls themselves run off
- * the main thread, which matches that prior behaviour — Vault providers are expected to answer balance
+ * the main thread, which matches that prior behaviour. Vault providers are expected to answer balance
  * queries off-tick.
  *
  * <p>A provider naming itself {@code uxmEssentials} is us: the feed reports unavailable and yields nothing

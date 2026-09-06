@@ -17,8 +17,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link CommandSpyStore} implementation: which staff currently watch the commands other players run.
- * Spying is session state — a per-player flag held in-memory and dropped on {@code stop()} via
- * {@link #clear()} — so a relog clears it, which is the staff-tool default. {@link #activeSpies()} resolves
+ * Spying is session state. A per-player flag held in-memory and dropped on {@code stop()} via
+ * {@link #clear()}, so a relog clears it, which is the staff-tool default. {@link #activeSpies()} resolves
  * each spying uuid to a currently-online {@link PlayerRef}, skipping any who logged off, so the
  * command-watch fan-out never targets an offline observer. Mirrors the messaging in-memory socialspy store.
  *

@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Background sweep that applies due loan auto-repayments, using the same self-rescheduling loop as the salary
  * task. Each tick enumerates the active debtors and applies their installments off the tick thread through
- * {@link LoanService#processAutoRepayments()} — that path goes through the loan repository's atomic repayment,
+ * {@link LoanService#processAutoRepayments()}. That path goes through the loan repository's atomic repayment,
  * so the move commits or the cycle is pushed, never a partial debit. The sweep is purely repository work and
  * touches no Bukkit API, so it runs directly on the async scheduler.
  */

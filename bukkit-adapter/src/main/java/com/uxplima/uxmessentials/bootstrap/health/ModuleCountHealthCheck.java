@@ -11,7 +11,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A summary line for {@code /uxmess doctor}: how many of the registered feature modules are enabled. It reads the
  * same {@link ModuleRegistry} and {@link ConfigStore} the {@code /uxmess status} listing does, so the counts
- * stay in lockstep with that surface. Always {@code OK} — the count is informational, not a fault condition.
+ * stay in lockstep with that surface. Always {@code OK}: the count is informational, not a fault condition.
  */
 @NullMarked
 public final class ModuleCountHealthCheck implements HealthCheck {

@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * One Olzie PlayerWarps warp row from {@code playerwarps_warps}. Unlike the normalised AxPlayerWarps schema, Olzie
  * denormalises everything onto the warp: the owner is stored as a uuid string, and the world / icon / category are
- * stored by name rather than by a lookup id, so no join is needed to read a warp — only the side tables key on the
+ * stored by name rather than by a lookup id, so no join is needed to read a warp. Only the side tables key on the
  * warp's id. Olzie's warps table carries no explicit id column, so {@code id} is the SQLite {@code rowid} the reader's
  * {@code SELECT rowid AS id} surfaces; every side row references that same value.
  *

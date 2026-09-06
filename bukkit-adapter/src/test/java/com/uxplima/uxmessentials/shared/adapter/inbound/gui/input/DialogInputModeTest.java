@@ -41,7 +41,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * wired-and-supported dialog backend is what a {@code dialog} key selects (never the sign), an unwired one falls back
  * with a single {@code event=input_mode_unavailable} log line so the operator is never left guessing, and the
  * {@link DialogTextBackend} delivers a submitted line and a cancel through the same {@link InputResult} contract the
- * sign backend uses — driven through a fake {@link DialogTextBackend.Prompt} seam, since MockBukkit cannot back a live
+ * sign backend uses, driven through a fake {@link DialogTextBackend.Prompt} seam, since MockBukkit cannot back a live
  * Paper dialog.
  */
 class DialogInputModeTest {

@@ -31,9 +31,9 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The view-requirement builder opened from the item editor's "View requirements" row. It is an engine
- * {@link EntityEditorView} of three rows — the condition list (a {@link MenuRefListEditor.RefList} over the schema's
+ * {@link EntityEditorView} of three rows, the condition list (a {@link MenuRefListEditor.RefList} over the schema's
  * condition ids), the {@code minimum} combinator (a {@link NumberProperty}: 0 is all/AND, 1 is any/OR, N is N-of-M),
- * and the deny-action list (a ref-list over the action ids) — so an item can gate visibility on a minimum or a set of
+ * and the deny-action list (a ref-list over the action ids), so an item can gate visibility on a minimum or a set of
  * conditions and react when the gate fails. Every row reads the item's {@code view} block fresh and writes back through
  * the session's view setters; back returns to the item editor, which the row's caller supplies as {@code onBack}.
  */

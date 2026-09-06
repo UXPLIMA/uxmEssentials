@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>The keys, relative to {@code storage}: {@code backend} (sqlite|mysql|postgres), the network
  * coordinates {@code host}/{@code port}/{@code database}/{@code username}/{@code password}, and the
  * pool sizes {@code read-pool-size} (network backends) and {@code connection-timeout-ms}. SQLite needs
- * none of the network coordinates — its file lives under the plugin data folder.
+ * none of the network coordinates: its file lives under the plugin data folder.
  */
 @NullMarked
 public final class DatabaseSettings {
@@ -67,7 +67,7 @@ public final class DatabaseSettings {
     }
 
     /**
-     * The read-pool size for a network backend (HikariCP formula starts at 8–10 for a small host);
+     * The read-pool size for a network backend (HikariCP formula starts at 8 to 10 for a small host);
      * default 8. Ignored for SQLite, whose write pool is fixed at one connection.
      */
     public int readPoolSize() {

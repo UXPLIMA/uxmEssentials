@@ -19,12 +19,12 @@ import org.jspecify.annotations.Nullable;
  * <p>A stored token is one of two shapes, kept unambiguous by a prefix:
  *
  * <ul>
- *   <li><b>Serialized item</b> — {@code b64:<base64>}, the full item (components, enchantments, custom name,
+ *   <li><b>Serialized item</b>. {@code b64:<base64>}, the full item (components, enchantments, custom name,
  *       lore, custom model data) as Paper's {@link ItemStack#serializeAsBytes()} bytes encoded to Base64. This
  *       is what {@link #serialize(ItemStack)} writes and the path a held or custom item takes.
- *   <li><b>Legacy material name</b> — a bare uppercase {@link Material} name ({@code DIAMOND_HELMET}), the shape
+ *   <li><b>Legacy material name</b>, a bare uppercase {@link Material} name ({@code DIAMOND_HELMET}), the shape
  *       the original V40 equipment columns hold. It carries no NBT, so it resolves to a plain
- *       {@code new ItemStack(material)} — the original behaviour, kept so existing NPCs keep their gear.
+ *       {@code new ItemStack(material)}: the original behaviour, kept so existing NPCs keep their gear.
  * </ul>
  *
  * <p>{@link #resolve(String)} is fail-soft: a corrupt Base64 payload, an unknown material name, or a non-item
@@ -73,7 +73,7 @@ public final class EquipmentPayloads {
             // A truncated, hand-edited or version-incompatible payload (bad base64 from the decoder, or NBT the
             // item deserializer rejects) must not crash the render. This codec's contract is to translate a bad
             // token into an absent item; the slot is dropped fail-soft and the spawn still goes out. The render
-            // runs per viewer every reconcile tick, so logging here would flood — the "no item" result is the
+            // runs per viewer every reconcile tick, so logging here would flood. The "no item" result is the
             // signal, matching how an unknown material name already resolves to an empty slot.
             return Optional.empty();
         }

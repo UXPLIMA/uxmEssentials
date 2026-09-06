@@ -32,8 +32,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The proof that a menu spec's {@code inventory-type} opens the window in a non-chest shape, end to end: a real
  * {@link MenuSpecLoader} parses the spec and a real {@link Menus} opens it, and the live top inventory is asserted to
  * carry the requested Bukkit {@link InventoryType} and size. It also pins the two robustness guarantees the feature
- * rests on — a spec slot that overflows a small window (slot 8 in a five-slot hopper) is skipped rather than crashing
- * the open, and an unknown type falls back to the default {@code rows}-based chest — plus the unchanged chest default
+ * rests on. A spec slot that overflows a small window (slot 8 in a five-slot hopper) is skipped rather than crashing
+ * the open, and an unknown type falls back to the default {@code rows}-based chest. Plus the unchanged chest default
  * for a spec that names no type, so every existing menu opens exactly as before.
  */
 class InventoryTypeMenuGoldenTest {

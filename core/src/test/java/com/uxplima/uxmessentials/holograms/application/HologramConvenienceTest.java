@@ -166,7 +166,7 @@ class HologramConvenienceTest {
     void nearbyListsOnlyHologramsWithinTheRadiusNearestFirst() {
         store("close", 5, 64, 0, "a"); // 5 blocks
         store("mid", 12, 64, 0, "b"); // 12 blocks
-        store("far", 200, 64, 0, "c"); // 200 blocks — outside radius 16
+        store("far", 200, 64, 0, "c"); // 200 blocks: outside radius 16
         repository.save(Hologram.create(
                 HologramName.of("other-world"),
                 new Position(NETHER, 1, 64, 0, 0f, 0f),

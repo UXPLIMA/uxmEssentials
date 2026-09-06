@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Builds the cross-server bus once from the plugin-wide {@code network.conf}. The bus is a shared-kernel
- * concern, not a feature context — every backend has at most one — so it is wired here in the bootstrap
+ * concern, not a feature context, every backend has at most one, so it is wired here in the bootstrap
  * surface alongside the other kernel adapters, and handed to the contexts that opt into sync.
  *
  * <p>An enabled backend gets a {@link PluginMessagingTransport} (the byte-moving machinery) wrapped by a
@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  * every listener is in place. On disable {@link Wired#stop()} unregisters the channel and drops the buffer.
  *
  * <p>When {@code network.conf > enabled} is false the bus is built in a disabled shape: a no-op publisher and
- * an unread registry ({@link Bus#disabled}), and no plugin-messaging channel is registered — the backend runs
+ * an unread registry ({@link Bus#disabled}), and no plugin-messaging channel is registered, the backend runs
  * purely local with no behavioural change, which is the optional-jar contract.
  */
 @NullMarked
@@ -53,7 +53,7 @@ public final class BusWiring {
         // The cluster roster and the presence heartbeat are kernel concerns (one per backend), so they are wired
         // here next to the core rather than in any feature context. The roster's listener records inbound pings;
         // the heartbeat publishes this backend's own ping on the bounded interval, both bound to the live
-        // lifecycle below — a disabled backend builds neither.
+        // lifecycle below: a disabled backend builds neither.
         ClusterPeers peers = new ClusterPeers(network.peerLivenessWindow());
         registry.register(peers.listener());
         ClusterHeartbeat heartbeat = new ClusterHeartbeat(core, scheduler, network.heartbeatInterval(), log);
@@ -91,7 +91,7 @@ public final class BusWiring {
     /**
      * The Redis arm of the bus. The Redis transport ships in the optional {@code uxmEssentials-redis} companion
      * plugin, which publishes a {@code RedisTransportFactory} through the {@code ServicesManager} when it enables.
-     * Because the companion loads after the host, the factory is not yet registered while this wiring runs — so we
+     * Because the companion loads after the host, the factory is not yet registered while this wiring runs, so we
      * hand back a {@link DeferredRedisTransport} that resolves the factory at start time (the host defers starting
      * the bus to its first global tick, past every plugin's enable). Companion present → the real Redis transport;
      * companion absent → a {@link LocalOnlyBusTransport} with one WARN, the transport degradation contract.
@@ -103,7 +103,7 @@ public final class BusWiring {
     /**
      * The wired bus: the {@link Bus} handle contexts opt into sync through, plus the lifecycle of the live core
      * (absent for a disabled backend, in which case start/stop are no-ops). It deliberately exposes only the
-     * {@link Bus}, the two lifecycle hooks, and the read-only {@link BusHealth} diagnostic view — never the
+     * {@link Bus}, the two lifecycle hooks, and the read-only {@link BusHealth} diagnostic view, never the
      * {@link BusCore} or the transport behind them.
      */
     public static final class Wired {
@@ -167,7 +167,7 @@ public final class BusWiring {
 
         /**
          * Start the bus, deferred to the first global tick. The Redis transport resolves the companion plugin's
-         * factory through the {@code ServicesManager}, and the companion is declared to load after the host — so
+         * factory through the {@code ServicesManager}, and the companion is declared to load after the host, so
          * its factory is not registered yet while the host enables. Deferring the start to the first global tick
          * (past every plugin's enable) lets the redis arm find the factory; the proxy and disabled paths are
          * unaffected by the one-tick delay. A disabled backend has no lifecycle and schedules nothing.

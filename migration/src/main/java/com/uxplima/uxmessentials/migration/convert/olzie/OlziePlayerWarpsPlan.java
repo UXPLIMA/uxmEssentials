@@ -32,8 +32,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The Olzie PlayerWarps source's {@link ImportPlan}. Olzie stores every player as a uuid text and keys each side table
- * on the warp's SQLite {@code rowid}, so the plan first loads the small side tables — the whitelist, managers, bans,
- * ratings, favourites and the distinct-visitor tally — grouped by warp id, then streams the warps, joining each to its
+ * on the warp's SQLite {@code rowid}, so the plan first loads the small side tables. The whitelist, managers, bans,
+ * ratings, favourites and the distinct-visitor tally. Grouped by warp id, then streams the warps, joining each to its
  * side data and handing it to the {@link OlzieWarpMapper}. The side tables are bounded (a player-warp network is modest
  * next to a 50 000-file userdata tree), so gathering them eagerly is what lets each warp be assembled without a
  * per-warp query; the warp stream itself stays lazy.

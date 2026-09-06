@@ -20,8 +20,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
  * Plugin-messaging coverage of {@link PluginMessagingTransport} against the real (mock) Bukkit messenger. The
- * transport owns only the byte-moving machinery — channel registration, the bounded outbound buffer, the
- * carrier flush, and feeding inbound frame bytes back to its {@code onFrame} sink — so the test asserts those
+ * transport owns only the byte-moving machinery. Channel registration, the bounded outbound buffer, the
+ * carrier flush, and feeding inbound frame bytes back to its {@code onFrame} sink, so the test asserts those
  * four moves directly, with no {@link BusCore} or codec in the loop:
  *
  * <ul>
@@ -86,7 +86,7 @@ class PluginMessagingTransportTest {
         transport.start(frame -> {});
 
         // No player online to carry the frame: the flush hop runs but drains nothing, so no carrier touch happens
-        // and the buffered frame waits for a later flush — the degrade-to-local-only contract.
+        // and the buffered frame waits for a later flush, the degrade-to-local-only contract.
         transport.send(FRAME.clone());
 
         assertThat(scheduler.ran).isEqualTo(1);

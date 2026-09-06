@@ -38,10 +38,10 @@ import net.minecraft.world.level.storage.ValueOutput;
  * persist with, so the on-disk shape stays exactly correct across the data-component model:
  *
  * <ul>
- *   <li>main inventory (slots 0..35) — the {@code "Inventory"} list of {@link ItemStackWithSlot#CODEC};
- *   <li>armour and offhand (slots 36..40) — the {@code "equipment"} {@link EntityEquipment#CODEC} map, keyed by
+ *   <li>main inventory (slots 0..35), the {@code "Inventory"} list of {@link ItemStackWithSlot#CODEC};
+ *   <li>armour and offhand (slots 36..40). The {@code "equipment"} {@link EntityEquipment#CODEC} map, keyed by
  *       {@link EquipmentSlot}; the server omits the key entirely when nothing is worn, so this does too;
- *   <li>ender chest (slots 0..26) — the {@code "EnderItems"} list of {@link ItemStackWithSlot#CODEC}.
+ *   <li>ender chest (slots 0..26): the {@code "EnderItems"} list of {@link ItemStackWithSlot#CODEC}.
  * </ul>
  *
  * <p>This class is deliberately not {@code @NullMarked}: the NMS surface it touches is unannotated, so it stays
@@ -168,7 +168,7 @@ public final class NmsOfflinePlayerStorage implements OfflinePlayerStorage {
     private void mutate(UUID uuid, BiConsumer<CompoundTag, HolderLookup.Provider> edit) {
         Path file = datFile(uuid);
         if (!Files.isRegularFile(file)) {
-            return; // no stored data to write onto — the caller gates on hasData, but a logout can race it
+            return; // no stored data to write onto. The caller gates on hasData, but a logout can race it
         }
         try {
             CompoundTag root = NbtIo.readCompressed(file, NbtAccounter.unlimitedHeap());

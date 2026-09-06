@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * Set with one {@link #dispatch} call rather than a switch of its own, and a test can capture the verb and the
  * {@link Money} a button raised without driving the whole use case. The single-target verbs route to the
  * matching {@code EcoAdmin} method; {@link #reset} and the bulk ops pass straight through. Every call assumes it
- * runs off the tick thread — the same contract {@code EcoAdmin} states — so the view hops first.
+ * runs off the tick thread, the same contract {@code EcoAdmin} states, so the view hops first.
  */
 @NullMarked
 public final class EcoAdminOps {

@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  * are fixed and greppable so the surface guard checks them against {@code paper-plugin.yml}; the realised
  * Brigadier handlers are built in the adapter.
  *
- * <p>There is deliberately no sanction command here — staff mode only orchestrates the existing modules.
+ * <p>There is deliberately no sanction command here: staff mode only orchestrates the existing modules.
  */
 final class StaffCommandSurface {
 
@@ -43,6 +43,6 @@ final class StaffCommandSurface {
         return new StaffCommand(literal, description, aliases);
     }
 
-    /** The kernel-side description of one staff command — literal, help text, and aliases, no Brigadier type. */
+    /** The kernel-side description of one staff command: literal, help text, and aliases, no Brigadier type. */
     private record StaffCommand(String literal, String description, List<String> aliases) implements BrigadierCommand {}
 }

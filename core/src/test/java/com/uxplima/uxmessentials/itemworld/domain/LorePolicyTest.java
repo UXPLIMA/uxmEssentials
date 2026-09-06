@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /**
- * Boundary coverage for the pure {@code /itemedit lore} line rules — the append/replace/insert/remove/clear
+ * Boundary coverage for the pure {@code /itemedit lore} line rules, the append/replace/insert/remove/clear
  * operations and their 1-based index-bounds checks. None of this touches Bukkit: {@link LorePolicy} reasons only
  * over an abstract {@code List<String>} of lore lines, so the adapter can lean on it having got the bounds right
  * before it ever rewrites an {@code ItemMeta}. Every operation returns a fresh copy and leaves the input untouched.

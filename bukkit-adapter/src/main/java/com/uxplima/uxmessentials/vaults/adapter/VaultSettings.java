@@ -17,8 +17,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Typed view over the {@code vaults.conf} subtree: the per-context fallbacks the two numbered-quota families
- * fold against when a player holds no matching node — {@code default-amount} (how many vaults) and
- * {@code default-size} (rows per vault) — plus the optional {@code economy} block (whether vault actions cost
+ * fold against when a player holds no matching node. {@code default-amount} (how many vaults) and
+ * {@code default-size} (rows per vault), plus the optional {@code economy} block (whether vault actions cost
  * and how much), the {@code blacklist-materials} list (materials a vault refuses to store), and the
  * {@code selector} block (the {@code /vault} picker menu). Read once at wire time from the module's scoped
  * config. The size default is clamped into the renderable {@code [1, 6]} row range so a misconfigured value

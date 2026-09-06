@@ -89,7 +89,7 @@ class KitClaimStoreTest {
         PlayerRef ghost = new PlayerRef(java.util.UUID.randomUUID(), "Ghost");
 
         assertThat(claims.hasClaimed(ghost, KitId.of("vote"))).isFalse();
-        claims.markClaimed(ghost, KitId.of("vote")); // no PDC to write — silently no-ops
+        claims.markClaimed(ghost, KitId.of("vote")); // no PDC to write: silently no-ops
         assertThat(claims.hasClaimed(ghost, KitId.of("vote"))).isFalse();
     }
 
@@ -253,7 +253,7 @@ class KitClaimStoreTest {
         com.uxplima.uxmessentials.kits.domain.KitDefinition kit =
                 kitWith(List.of(KitItemCodec.encode(new ItemStack(Material.DIAMOND, 1))), false);
 
-        // DROP is the default policy, so a full inventory never refuses the claim — the item is delivered,
+        // DROP is the default policy, so a full inventory never refuses the claim. The item is delivered,
         // either into a remaining slot or dropped at the player's feet (the long-standing behaviour).
         KitGranter.Grant grant = granter.grant(BukkitRefs.toRef(alice), kit);
 
@@ -414,7 +414,7 @@ class KitClaimStoreTest {
         KitGranter.Grant grant = granter.grant(BukkitRefs.toRef(alice), kit);
 
         // PlaceholderAPI is not loadable under MockBukkit, so the bridge is the identity and the token survives
-        // the MiniMessage round-trip — the path runs end to end without throwing and still delivers the item.
+        // the MiniMessage round-trip: the path runs end to end without throwing and still delivers the item.
         assertThat(grant.fitInInventory()).isTrue();
         ItemStack granted = firstStack(alice, Material.PAPER);
         assertThat(plain(granted)).contains("{player}'s Reward");

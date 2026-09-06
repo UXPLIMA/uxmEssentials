@@ -40,14 +40,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers and opens the per-warp detail panel ({@code pwarp-view}) a browse tile opens, and the five-star rating
  * menu ({@code pwarp-rate}) behind its rate button. The clicked warp is the engine subject: {@link #open} resolves it
- * once off the tick thread — a bounded {@code findByName} plus the viewer's favourite and membership flags, never a
- * full-table scan — snapshots it into an immutable {@link Subject}, and hands that to the engine, which then paints the
+ * once off the tick thread. A bounded {@code findByName} plus the viewer's favourite and membership flags, never a
+ * full-table scan, snapshots it into an immutable {@link Subject}, and hands that to the engine, which then paints the
  * window on the viewer's entity thread. Opening the panel is read-only; only a button click runs a use case.
  *
  * <p>Each button routes through the same use case the {@code /pwarp} command drives. Teleport goes through
  * {@link UsePlayerWarp}: an open card teleports straight with no password, while a PASSWORD-access card the viewer is
  * neither owner nor member of is shown a locked teleport button whose click prompts for the password through the
- * engine's {@code input:} step and threads the typed line into {@code useFor(..., Optional.of(entered))} — the plaintext
+ * engine's {@code input:} step and threads the typed line into {@code useFor(..., Optional.of(entered))}, the plaintext
  * is only ever handed to the use case, never echoed, logged, or placed in a message. Favourite / unfavourite toggle
  * through {@link FavouritePlayerWarp}, the pair of buttons picked by a {@code favourited} view condition. Rate opens
  * {@code pwarp-rate}, whose star buttons call {@link RatePlayerWarp}; the rate button is hidden for the owner (a
@@ -122,11 +122,11 @@ public final class PlayerWarpViewMenu {
         bindings.condition("playerwarps:favourited", (ctx, args) -> subject(ctx).viewerFavourited());
         bindings.condition("playerwarps:not-owner", (ctx, args) -> !subject(ctx).viewerOwner());
         // The manage button shows only to a viewer who owns the warp or holds a role on it (a member: owner, co-owner,
-        // or manager) — the same set the pwarp-manage capability gate admits — so a stranger never sees it.
+        // or manager), the same set the pwarp-manage capability gate admits, so a stranger never sees it.
         bindings.condition(
                 "playerwarps:viewer-member", (ctx, args) -> subject(ctx).viewerMember());
         // Teleport and rate carry a value in their ref token (the typed password as %input%, the star count), which the
-        // engine can only split off a single-segment head — a namespaced feature:action id would keep the whole
+        // engine can only split off a single-segment head. A namespaced feature:action id would keep the whole
         // feature:action:value token as its id and never resolve. So these two use single-segment ids; the value-free
         // actions stay namespaced.
         bindings.action("pwarp-teleport", this::teleport);
@@ -176,7 +176,7 @@ public final class PlayerWarpViewMenu {
     /**
      * Teleport the viewer to the subject warp through the {@link UsePlayerWarp} gate. The action arg carries the typed
      * password on the locked card's {@code input:} chain (as {@code %input%}) and is blank on the open card, so a blank
-     * arg passes {@link Optional#empty()} and a typed one {@code Optional.of(entered)} — the plaintext is never echoed
+     * arg passes {@link Optional#empty()} and a typed one {@code Optional.of(entered)}. The plaintext is never echoed
      * or logged. The write runs off the tick thread; the window closes on the viewer's entity thread this click runs on.
      */
     private void teleport(MenuActionContext ctx) {
@@ -228,7 +228,7 @@ public final class PlayerWarpViewMenu {
     }
 
     /**
-     * The subject warp's full detail lore as the catalog lines joined by {@code \n} in a fixed order — owner, world,
+     * The subject warp's full detail lore as the catalog lines joined by {@code \n} in a fixed order, owner, world,
      * optional server, visits, unique visitors, rating, favourites, optional price, access. The engine's multi-line
      * placeholder expansion splits this back into one lore component per line, each rendered as MiniMessage.
      */

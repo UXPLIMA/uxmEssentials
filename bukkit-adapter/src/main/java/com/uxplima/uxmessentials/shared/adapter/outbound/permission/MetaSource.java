@@ -22,7 +22,7 @@ public interface MetaSource {
     /** The numeric meta value for {@code who} under {@code familyNode}, or empty when absent. */
     OptionalLong metaValue(UUID who, String familyNode);
 
-    /** A source that never reports meta — the default when no permission plugin exposes meta. */
+    /** A source that never reports meta: the default when no permission plugin exposes meta. */
     static MetaSource none() {
         return (who, familyNode) -> OptionalLong.empty();
     }

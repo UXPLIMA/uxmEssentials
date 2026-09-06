@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link SanctionBroadcast} implementation: fans a non-silent sanction's one-line announcement out to every
  * online player holding {@code uxmessentials.moderation.broadcast.receive} plus the server console. Each
- * recipient is sent the message resolved in their own locale — the player path delegates to the shared
+ * recipient is sent the message resolved in their own locale. The player path delegates to the shared
  * {@link MessageSink}, which parses the MiniMessage source once and hops to the recipient's region thread; the
  * console path renders against {@code en} and prints on the global thread.
  *
@@ -38,7 +38,7 @@ public final class PermissionSanctionBroadcast implements SanctionBroadcast {
     /** The node a player must hold to receive the staff/public sanction broadcast. */
     private static final String RECEIVE_NODE = "uxmessentials.moderation.broadcast.receive";
 
-    /** The locale dimension the console line is resolved against — the console has no per-viewer locale. */
+    /** The locale dimension the console line is resolved against: the console has no per-viewer locale. */
     private static final PlayerRef CONSOLE = PlayerRef.system("console");
 
     private final Server server;

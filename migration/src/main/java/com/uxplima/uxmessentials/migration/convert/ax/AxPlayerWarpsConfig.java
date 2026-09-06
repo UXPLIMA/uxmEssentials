@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  *       server's own database file is never written.</li>
  * </ul>
  *
- * <p>AxPlayerWarps uses a fixed {@code axplayerwarps_} table set, so — unlike LiteBans — there is no table prefix to
+ * <p>AxPlayerWarps uses a fixed {@code axplayerwarps_} table set, so, unlike LiteBans, there is no table prefix to
  * carry or sanitise. The H2 file fallback shares the LiteBans caveat: a live AxPlayerWarps H2 file was written by that
  * plugin's bundled engine, and a much newer reader may refuse its storage format; the connectable-URL path (a network
  * backend, or an H2 URL an operator points at the file) is the dependable route.

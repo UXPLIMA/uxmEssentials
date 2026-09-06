@@ -19,19 +19,19 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The one place a villager's custom {@link MerchantRecipe} set is turned into an opaque byte blob and back, so the
  * trade manager can stamp the edited trades into the villager's PDC and reapply them verbatim when the villager
- * loads. A recipe is a template — its buy ingredients, its sell result, and the counters that govern how often it
- * may be used — so the blob stores, per recipe: the result item, the ingredient items, the max uses, and the
+ * loads. A recipe is a template. Its buy ingredients, its sell result, and the counters that govern how often it
+ * may be used, so the blob stores, per recipe: the result item, the ingredient items, the max uses, and the
  * experience/villager-experience/price-multiplier trade metadata. Item stacks ride Paper's
  * {@link ItemStack#serializeAsBytes()} / {@link ItemStack#deserializeBytes(byte[])}, which round-trips the full item
- * (components, enchantments, custom name, amount — so a trade's amounts survive).
+ * (components, enchantments, custom name, amount, so a trade's amounts survive).
  *
  * <p>Decoded recipes always start at zero uses (a freshly-loaded villager offers its trades), so only {@code maxUses}
- * is persisted, not the live {@code uses} counter — the restock features own that counter at runtime.
+ * is persisted, not the live {@code uses} counter: the restock features own that counter at runtime.
  */
 @NullMarked
 public final class VillagerRecipeCodec {
 
-    /** The uses a decoded recipe starts at — a reapplied trade is offered fresh, its use counter reset. */
+    /** The uses a decoded recipe starts at: a reapplied trade is offered fresh, its use counter reset. */
     private static final int FRESH_USES = 0;
 
     private VillagerRecipeCodec() {}

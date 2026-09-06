@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * The commands behind {@code /hologram blacklist|unblacklist <name> <player>}: grow or shrink a hologram's
- * viewer blacklist — the players it is hidden from regardless of its visibility mode — persist the change, and
+ * viewer blacklist (the players it is hidden from regardless of its visibility mode) persist the change, and
  * re-render the live entity so the change takes effect at once. The blacklist is a persisted association keyed
  * by hologram name (it survives a restart), separate from the hologram snapshot so it never re-writes the whole
  * aggregate. A re-render re-applies the current blacklist on spawn (hiding the listed players and showing a

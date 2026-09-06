@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.display.DisplayCondition;
  * <p>The id, lines, channels, condition string, sound, and interval are exactly what a row of the
  * {@code communication_announcement} table holds; {@link #toAnnouncement()} bridges to the domain
  * {@link Announcement} the announcer needs by parsing the condition fail-safe through {@link ConditionParser}. A
- * disabled stored announcement still round-trips through the store — it is the announcer's merge step, not the
+ * disabled stored announcement still round-trips through the store. It is the announcer's merge step, not the
  * record, that excludes a disabled one from the rotation, so toggling enabled never loses the rest of the edit.
  *
  * @param id a non-blank stable identifier, the table's primary key
@@ -59,7 +59,7 @@ public record StoredAnnouncement(
     }
 
     /**
-     * A fresh announcement with one placeholder line, enabled, on the CHAT channel and unconditional — the shape
+     * A fresh announcement with one placeholder line, enabled, on the CHAT channel and unconditional, the shape
      * the editor's create button stores for a new id before the operator edits any field.
      */
     public static StoredAnnouncement fresh(String id, String firstLine) {
@@ -92,8 +92,8 @@ public record StoredAnnouncement(
     /**
      * The rendered {@link Announcement} the announcer rotates, built by parsing the raw {@link #condition} through
      * {@link ConditionParser} (blank is unconditional, an unparseable one fails safe to never-show per the parser
-     * contract). The interval override and the enabled flag are not part of {@link Announcement} — the interval is
-     * threaded separately and the enabled flag gates the merge — so this carries only what the broadcast needs.
+     * contract). The interval override and the enabled flag are not part of {@link Announcement}: the interval is
+     * threaded separately and the enabled flag gates the merge, so this carries only what the broadcast needs.
      */
     public Announcement toAnnouncement() {
         Optional<java.time.Duration> override = intervalSeconds.stream()

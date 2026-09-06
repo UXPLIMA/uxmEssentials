@@ -29,8 +29,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * Unit coverage of the {@link ListProperty} apply seam — the package-private {@code applyAdd}/{@code applyEdit} the
- * anvil's submit branch calls — independent of which runtime opened the sub-menu. A non-blank add appends and saves
+ * Unit coverage of the {@link ListProperty} apply seam, the package-private {@code applyAdd}/{@code applyEdit} the
+ * anvil's submit branch calls: independent of which runtime opened the sub-menu. A non-blank add appends and saves
  * through the setter; a non-blank edit rewrites one entry and saves; a blank line writes nothing. The reopen after a
  * save rides a no-op selector opener so the seam runs on the engine path without painting a real window, exactly the
  * way {@code ColourPropertyTest} drives {@code applyCustom}. The scheduler runs every hop inline so the off-thread

@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Parses and renders the human-friendly duration strings the sanction commands accept — {@code 30s},
+ * Parses and renders the human-friendly duration strings the sanction commands accept, {@code 30s},
  * {@code 15m}, {@code 2h}, {@code 7d}, {@code 4w}, or a concatenation like {@code 1h30m}. A blank string or
  * the literal {@code permanent}/{@code perm} parses to {@link Optional#empty()} (a permanent sanction); a
  * malformed or non-positive string parses to no value, which a use case maps to {@code BAD_DURATION}.
@@ -23,7 +23,7 @@ public final class SanctionDuration {
     /**
      * Parse {@code raw} into an optional span: empty for a permanent sanction ({@code permanent}/{@code perm}
      * or blank), a present positive {@link Duration} for a timed one. A string that contains no valid unit
-     * token, or sums to zero/negative, yields a malformed {@link Parsed} — callers distinguish "permanent"
+     * token, or sums to zero/negative, yields a malformed {@link Parsed}, callers distinguish "permanent"
      * from "malformed" through the {@link Parsed} record.
      */
     public static Parsed parse(String raw) {

@@ -14,12 +14,12 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The optional HeadDatabase hook in its absent state — the only state reachable in a test, since HeadDatabase
+ * The optional HeadDatabase hook in its absent state, the only state reachable in a test, since HeadDatabase
  * is not on the classpath (it is reached purely by reflection, like the NBT-API hook and the currency
  * reflection providers). The contract proved here is the load-safe one: a HeadDatabase-less server resolves the
  * hook to the no-op {@link HeadQuery} whose every call is safe, and its interface and absent default declare no
  * {@code me.arcaniax} type (so loading them pulls in zero SDK class). The present SDK happy-path stays untested
- * by design — there is no HeadDatabase to delegate to — so the absent path, the null/blank-id contract, and the
+ * by design, there is no HeadDatabase to delegate to, so the absent path, the null/blank-id contract, and the
  * registration are the tested contract.
  */
 class HeadDatabaseHookTest {
@@ -67,7 +67,7 @@ class HeadDatabaseHookTest {
     void absentDefaultAndInterfaceDeclareNoHeadDatabaseType() {
         // The structural confirmation that the no-op default carries no SDK type, so loading the interface (and
         // its ABSENT field initializer) on a HeadDatabase-less server cannot pull in me.arcaniax. Only
-        // HeadDatabaseService — reached past Hooks' present-guard — references HeadDatabase, and even then only
+        // HeadDatabaseService, reached past Hooks' present-guard, references HeadDatabase, and even then only
         // by reflective string name.
         assertThat(referencesHeadDatabaseSdk(HeadQuery.class)).isFalse();
         assertThat(referencesHeadDatabaseSdk(HeadQuery.ABSENT.getClass())).isFalse();

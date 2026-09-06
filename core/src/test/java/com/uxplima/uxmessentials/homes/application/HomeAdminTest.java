@@ -39,7 +39,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Unit tests for {@link HomeAdmin}'s staff override operations — set, clearAll, and info. The
+ * Unit tests for {@link HomeAdmin}'s staff override operations, set, clearAll, and info. The
  * repository, notifier, and event publisher are in-memory fakes so no adapters are involved.
  */
 class HomeAdminTest {

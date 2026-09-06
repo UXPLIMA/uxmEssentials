@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The runtime registry in isolation, with no server: a registered provider's claim is returned, an empty registry
- * resolves to empty, and when two providers both claim a spec the first registered wins — the same first-non-empty
+ * resolves to empty, and when two providers both claim a spec the first registered wins, the same first-non-empty
  * rule the built-in {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.providers.IconProviders} chain
  * follows. {@link ItemStack} stand-ins are mocked so the test stays a plain unit with no MockBukkit server.
  */

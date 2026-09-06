@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  * Opens a vault as a uxmLib {@link StorageGui}: a storage menu sized to the vault's resolved {@link VaultSize}
  * that lets the player take, place, and swap freely. The vault's opaque contents are decoded into the slots
  * through {@link VaultItemCodec}, and the title is a {@link MessageKey} rendered in the viewer's locale and
- * parsed into a {@code Component} — never an inline literal.
+ * parsed into a {@code Component}, never an inline literal.
  *
  * <p>The window's {@code (owner, vault)} identity is captured per open, so the {@link StorageGui#onClose close
  * handler} writes exactly that vault straight to the database; each open window is tracked so {@link #flushAll}
@@ -59,14 +59,14 @@ import org.jspecify.annotations.Nullable;
  * return and the {@code VAULT_ITEM_BLOCKED} notice happen on that player's region thread.
  *
  * <p>Overflow is rescued on open. The stored contents are decoded in full ({@link VaultItemCodec#decodeAll}),
- * not truncated to the live size, so items left in slots beyond the current {@link VaultSize} — the size quota
- * shrank since the vault was last saved — are visible rather than silently dropped. Only the first {@code size}
+ * not truncated to the live size, so items left in slots beyond the current {@link VaultSize}, the size quota
+ * shrank since the vault was last saved: are visible rather than silently dropped. Only the first {@code size}
  * slots seed the GUI; any occupied overflow slot is handed back to the opener (added to their inventory,
- * remainder dropped at their feet — the same give-or-drop helper the blacklist uses) and counted into one
+ * remainder dropped at their feet, the same give-or-drop helper the blacklist uses) and counted into one
  * {@code VAULT_OVERFLOW_RETURNED} notice. When overflow is rescued the truncated (live-size) contents are
- * persisted immediately — not just on close — so a crash before the window closes cannot leave the overflow in
+ * persisted immediately, not just on close, so a crash before the window closes cannot leave the overflow in
  * the DB row for the next open to rescue and hand out a second time. The overflow is gone from the vault and
- * safely with the player — no loss, no dupe. When staff open another player's vault the overflow returns to the
+ * safely with the player, no loss, no dupe. When staff open another player's vault the overflow returns to the
  * staff opener, consistent with the blacklist's admin semantics.
  *
  * <p>A non-blank {@code open-sound} is played to the opener as the window opens (resolved once at wire time, so
@@ -170,12 +170,12 @@ public final class VaultView {
     }
 
     /**
-     * Return any item left in a slot at or beyond {@code size} to {@code opener} — the live player who opened
-     * the window — and notify {@code viewer} once with the rescued count. The size quota shrank below the stored
+     * Return any item left in a slot at or beyond {@code size} to {@code opener}. The live player who opened
+     * the window, and notify {@code viewer} once with the rescued count. The size quota shrank below the stored
      * slot count since the last save, so {@code decodeAll} surfaced these out-of-range items; they are handed
      * back (added to the opener's inventory, remainder dropped at their feet) instead of being silently dropped.
      * The caller persists the truncated GUI immediately when this returns a non-zero count, so the overflow is
-     * gone from the vault and safely with the player — no loss, no dupe, and no crash window that could re-rescue.
+     * gone from the vault and safely with the player, no loss, no dupe, and no crash window that could re-rescue.
      * A vault whose contents fit the live size has no overflow and triggers no notice. Returns the total item
      * amount handed back, so the caller knows whether an immediate persist is needed.
      */
@@ -247,7 +247,7 @@ public final class VaultView {
         }
     }
 
-    /** Add {@code stack} to the player's inventory, dropping any overflow at their feet — never vanish it. */
+    /** Add {@code stack} to the player's inventory, dropping any overflow at their feet, never vanish it. */
     private void returnToPlayer(Player player, ItemStack stack) {
         Map<Integer, ItemStack> overflow = player.getInventory().addItem(stack);
         overflow.values().forEach(extra -> player.getWorld().dropItemNaturally(player.getLocation(), extra));

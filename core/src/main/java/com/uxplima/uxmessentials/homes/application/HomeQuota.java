@@ -32,7 +32,7 @@ public final class HomeQuota {
     /**
      * @param permissions the permission port used to resolve quota nodes
      * @param configDefault the per-server default home count for players with no matching tier node
-     * @param limitMode how multiple tier nodes combine — {@link QuotaReduction#MAX} keeps the highest,
+     * @param limitMode how multiple tier nodes combine. {@link QuotaReduction#MAX} keeps the highest,
      *     {@link QuotaReduction#STACK} sums them all
      */
     public HomeQuota(Permissions permissions, int configDefault, QuotaReduction limitMode) {
@@ -46,7 +46,7 @@ public final class HomeQuota {
     }
 
     /**
-     * The quota family built for the configured {@code limitMode} — exposed so placeholders and views can
+     * The quota family built for the configured {@code limitMode}. Exposed so placeholders and views can
      * pass the same family to {@link Permissions#resolveQuota} without constructing a second instance.
      */
     public QuotaFamily family() {

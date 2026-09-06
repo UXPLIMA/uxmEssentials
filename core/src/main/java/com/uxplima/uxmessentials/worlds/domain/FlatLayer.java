@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * One band of a flat world: a block type repeated {@code height} times (≥ 1), ordered bottom→top
- * within a {@link FlatLayerPlan}. Pure data — the adapter resolves {@link #block()} to a
+ * within a {@link FlatLayerPlan}. Pure data. The adapter resolves {@link #block()} to a
  * {@code Material} and writes the band via {@code ChunkData.setRegion}.
  */
 public record FlatLayer(BlockId block, int height) {

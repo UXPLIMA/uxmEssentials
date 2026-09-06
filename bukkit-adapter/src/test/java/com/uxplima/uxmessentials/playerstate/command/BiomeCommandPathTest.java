@@ -53,7 +53,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * MockBukkit coverage of {@code /biome}: report the biome the player is standing in, read from the world at the
- * player's block position. A pure read in the adapter — none of the playerstate use cases run, so they are all
+ * player's block position. A pure read in the adapter. None of the playerstate use cases run, so they are all
  * mocked. The {@link Messages} fake echoes the resolved key and its placeholders so the show line and the
  * {@code biome} placeholder are observable through the sender's message queue. The biome name itself is data, so
  * the test asserts on the {@code biome=} token rather than a specific biome to stay robust across MockBukkit's

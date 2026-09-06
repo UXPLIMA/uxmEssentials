@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The inbound-facing service the {@code /uxmess import} node calls. It resolves a source from the
  * registry, builds the run's {@link ImportOptions} from config, and hands the import to the bounded
- * executor <em>off the tick thread</em> through the {@link Scheduler#async} port — the command handler
+ * executor <em>off the tick thread</em> through the {@link Scheduler#async} port, the command handler
  * returns immediately and never blocks (docs/12-migration §3, §7). A dry run binds the no-op accumulator
  * writer; a live run binds the repository writer. Nothing here runs at plugin enable; the importer fires
  * only when this {@code dispatch} is called.

@@ -25,7 +25,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * The {@code luckperms-groups} fail-safe golden test: a custom menu whose only content is a
- * {@code list { source = luckperms-groups }} opens cleanly on a server with no LuckPerms and renders an empty grid —
+ * {@code list { source = luckperms-groups }} opens cleanly on a server with no LuckPerms and renders an empty grid
  * no tiles, no crash, no thrown exception. Real LuckPerms is a soft-depend not on the test classpath, so the absent
  * path is the primary tested behaviour (the reflective happy path is proven only in production, as the Jobs/WorldGuard
  * gates are). The open goes through the real {@link Menus} path (async list-resolution → render); with the source

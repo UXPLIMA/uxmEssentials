@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
  * The single owner of a world's live random-teleport zone. It reads the world border and the current per-world
  * radii to build the {@link SafeSearchArea} both the pre-warmed queue refills against and the {@code /rtp biome}
  * search draws from, so the two paths share one source of truth and one {@code /settpr} swap. The radii sit behind
- * an {@link AtomicReference} so {@code /settpr} can reset the zone at runtime with a single whole-record swap — an
+ * an {@link AtomicReference} so {@code /settpr} can reset the zone at runtime with a single whole-record swap, an
  * in-flight read sees either the whole previous tuning or the whole new one, never a torn mix.
  *
  * <h2>Concurrency</h2>
@@ -35,7 +35,7 @@ public final class BukkitRtpAreaSource implements RtpAreaSource {
         this.settings = new AtomicReference<>(Objects.requireNonNull(settings, "settings"));
     }
 
-    /** The live per-world tuning — radii, queue sizing, and the search budget — read lock-free. */
+    /** The live per-world tuning (radii, queue sizing, and the search budget) read lock-free. */
     public RtpWorldSettings current() {
         // Seeded non-null and only ever replaced with a non-null value; requireNonNull makes that explicit.
         return Objects.requireNonNull(settings.get(), "settings");

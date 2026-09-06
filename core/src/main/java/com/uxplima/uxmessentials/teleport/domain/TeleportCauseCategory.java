@@ -4,7 +4,7 @@ package com.uxplima.uxmessentials.teleport.domain;
  * A coarse, Bukkit-free classification of why a vanilla teleport happened, used by {@link
  * BackCapturePolicy} to decide whether a teleport should overwrite a player's {@code /back} point. The
  * adapter maps Paper's {@code PlayerTeleportEvent.TeleportCause} onto these so the back-capture decision
- * stays pure — the domain never sees a Bukkit enum.
+ * stays pure, the domain never sees a Bukkit enum.
  *
  * <p>The names mirror the vanilla causes an operator reasons about in {@code teleport.conf}'s
  * {@code back.ignored-causes} list (a misclick on an ender pearl should not erase where you were), so the

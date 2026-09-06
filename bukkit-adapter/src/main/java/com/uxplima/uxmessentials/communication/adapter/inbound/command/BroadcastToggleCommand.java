@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
  * receives announcer broadcasts. The {@code BroadcastOptOut} use case owns the PDC-backed bit flip, the
  * confirmation (one of the plugin's own {@code CommunicationMessageKey} strings through the {@code MessageSink}),
  * and the {@code BroadcastOptOutToggled} event; this handler only maps the invoking player. The static surface,
- * the plugin's own string — distinct from the operator-authored announcer lines the toggle governs.
+ * the plugin's own string: distinct from the operator-authored announcer lines the toggle governs.
  */
 @NullMarked
 public final class BroadcastToggleCommand extends CommunicationCommandSupport implements CommandRegistration {

@@ -50,7 +50,7 @@ class ScoreboardContentCodecTest {
 
         ScoreboardContentCodec.Parsed parsed = ScoreboardContentCodec.read(root, LOG);
 
-        // 40 ticks at 50ms each is two seconds — the global cadence comes from scoreboard.refresh-ticks here.
+        // 40 ticks at 50ms each is two seconds: the global cadence comes from scoreboard.refresh-ticks here.
         assertThat(parsed.refreshInterval()).isEqualTo(Duration.ofSeconds(2L));
         assertThat(parsed.boards().boards()).hasSize(1);
         SidebarBoard board = parsed.boards().boards().get(0);
@@ -94,7 +94,7 @@ class ScoreboardContentCodecTest {
         assertThat(parsed.refreshInterval()).isEqualTo(Duration.ofMillis(500L));
         SidebarConfig boards = parsed.boards();
         // HOCON does not preserve declaration order, so the codec emits the boards sorted by name for a deterministic
-        // tie-break — both boards are present regardless of how they were declared.
+        // tie-break: both boards are present regardless of how they were declared.
         assertThat(boards.boards()).extracting(SidebarBoard::name).containsExactly("default", "staff");
 
         // A staff sees the staff board; a non-staff falls through to the always-true default.
@@ -138,7 +138,7 @@ class ScoreboardContentCodecTest {
 
         SidebarBoard board = parsed.boards().boards().get(0);
         assertThat(board.content().lines()).hasSize(DisplayContent.MAX_LINES + 5);
-        // An absent hide-score-numbers defaults to true — the modern look.
+        // An absent hide-score-numbers defaults to true, the modern look.
         assertThat(board.content().hideScoreNumbers()).isTrue();
         // A non-positive refresh-ticks falls back to one second (20 ticks) rather than busy-spinning.
         assertThat(parsed.refreshInterval()).isEqualTo(Duration.ofSeconds(1L));

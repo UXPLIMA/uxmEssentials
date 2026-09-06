@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.economy.application.port.PayPreferences;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A hand-rolled {@link PayPreferences} for the pay tests — a per-player accept-pay flag defaulting to
+ * A hand-rolled {@link PayPreferences} for the pay tests. A per-player accept-pay flag defaulting to
  * accepting, flipped by {@code /paytoggle}.
  */
 public final class InMemoryPayPreferences implements PayPreferences {

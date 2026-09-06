@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.communication.domain.InfoPage;
 /**
  * Pages an {@link InfoPage} for display: given the page and a requested 1-based page number, it clamps the request
  * into {@code 1..pageCount} and returns the {@link InfoPageView} slice the adapter renders. This is the pure half of
- * the data-driven info commands ({@code /rules}, {@code /motd}, {@code /info}, any operator-added page) — it holds no
+ * the data-driven info commands ({@code /rules}, {@code /motd}, {@code /info}, any operator-added page): it holds no
  * Bukkit, no MiniMessage, and no I/O, so it is unit-tested against plain values; the adapter binds the result to a
  * viewer and draws the header/footer/body.
  *

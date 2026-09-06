@@ -24,8 +24,8 @@ import org.jspecify.annotations.Nullable;
  * <p>The open runs on the viewer's entity thread (the menu lives in their screen); the target's contents are
  * snapshotted first on the target's own entity thread (on Folia the live ender chest is owned by that region
  * thread). The write-back runs on the target's entity thread (it mutates the target's entity), each through the
- * kernel {@link Scheduler}. Every open window is tracked so a single write-back claims it — whichever of the close
- * or {@link #flushAll} (on module stop) reaches it first — and a still-open window is never written back twice. A
+ * kernel {@link Scheduler}. Every open window is tracked so a single write-back claims it, whichever of the close
+ * or {@link #flushAll} (on module stop) reaches it first, and a still-open window is never written back twice. A
  * target who logged off before the close drops their write-back silently; the menu copy is discarded.
  *
  * <p>This is the ender-chest mirror of {@link InvseeView}; online {@code /endersee} is always editable, matching the
@@ -45,8 +45,8 @@ public final class EnderseeView {
 
     /**
      * Open {@code subject}'s ender chest for {@code viewer}. The target's contents are snapshotted on the target's
-     * own entity thread — on Folia the live ender chest is owned by that region thread, so reading it from the
-     * viewer's thread is the asymmetric unsafe half this fix removes — and the menu is then opened on the viewer's
+     * own entity thread. On Folia the live ender chest is owned by that region thread, so reading it from the
+     * viewer's thread is the asymmetric unsafe half this fix removes, and the menu is then opened on the viewer's
      * entity thread from that snapshot. The open is skipped when either player has gone offline.
      */
     public void open(PlayerRef viewer, PlayerRef subject) {

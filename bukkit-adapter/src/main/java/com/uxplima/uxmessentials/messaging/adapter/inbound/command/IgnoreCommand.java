@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /ignore [player]}: with a player argument, add them to the owner's persistent ignore list — the verb
+ * {@code /ignore [player]}: with a player argument, add them to the owner's persistent ignore list, the verb
  * form of the ignore behaviour. With no argument it opens the ignore-list manager GUI, where the owner reviews
  * and un-ignores the players they ignore and adds new ones. The target is resolved offline-capably by name
  * (the ignore store is UUID-keyed, so a player who has joined before can be ignored while offline); only a name

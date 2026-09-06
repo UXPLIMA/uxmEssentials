@@ -92,7 +92,7 @@ class BuiltinTokensTest {
     void leavesPlaceholderApiTokensAndPlainTextAndUnknownTokensUntouched() {
         PlayerMock player = server.addPlayer();
 
-        // A %papi% placeholder is for PlaceholderAPI; an unknown {token} is not ours — both pass through verbatim, as
+        // A %papi% placeholder is for PlaceholderAPI; an unknown {token} is not ours, both pass through verbatim, as
         // does plain text and MiniMessage markup.
         String source = "<gold>%server_online% {player} {unknown_token}";
 

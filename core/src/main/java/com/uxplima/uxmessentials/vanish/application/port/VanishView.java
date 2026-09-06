@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.vanish.domain.VanishLevel;
  * Outbound port that applies a player's vanish state to the live server view: hiding a vanished player from every
  * viewer whose see level is below the player's use level, and revealing them again on unvanish. The adapter prefers
  * packet-level hiding (drop the player entity + tablist entry for each ineligible viewer), falling back to Bukkit's
- * {@code hidePlayer} / {@code showPlayer} graph — which also removes the tablist entry and is what the
+ * {@code hidePlayer} / {@code showPlayer} graph, which also removes the tablist entry and is what the
  * {@code canSee}-reading surfaces observe.
  *
  * <p>Every method hops to the owning region/entity thread through the {@code Scheduler} port inside the adapter; the

@@ -27,13 +27,13 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Replaces the vanilla death line per the configured death policy and optionally shows the dying player a
- * configured info page. The death's cause — classified by {@link DeathCauses} from the killer and last damage —
+ * configured info page. The death's cause (classified by {@link DeathCauses} from the killer and last damage)
  * picks the {@code MessagePolicy} from the per-cause table, so a fall, a mob, and a PVP kill can each read
  * differently; a cause with no override falls through to the default. A {@code DISABLE} policy clears the death
  * message, {@code DEFAULT} leaves the vanilla line, and {@code CUSTOM} swaps in the operator template the
  * {@code ResolveDeathMessage} use case selected, rendered through MiniMessage with {@code {player}},
- * {@code {count}}, {@code {world}}, the vanilla {@code {message}}, the classified {@code {cause}}, and — when a
- * player dealt the blow —
+ * {@code {count}}, {@code {world}}, the vanilla {@code {message}}, the classified {@code {cause}}, and, when a
+ * player dealt the blow
  * {@code {killer}} and {@code {killer_weapon}} substituted. The templates and the info-page bodies are operator
  * content, never {@code MessageKey}s.
  *

@@ -91,7 +91,7 @@ class JooqSnapshotRepositoryTest {
         repository.save(b);
 
         repository.delete(a.id());
-        repository.delete(SnapshotId.random()); // no such row — a silent no-op
+        repository.delete(SnapshotId.random()); // no such row, a silent no-op
 
         assertThat(repository.list(owner)).extracting(Snapshot::id).containsExactly(b.id());
     }
@@ -148,7 +148,7 @@ class JooqSnapshotRepositoryTest {
         return Snapshot.of(SnapshotId.random(), owner, cause, createdAt, contents);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

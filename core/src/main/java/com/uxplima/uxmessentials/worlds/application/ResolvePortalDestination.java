@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.worlds.domain.WorldProperty;
  * Resolves the exit a player should arrive at when stepping through a nether or end portal in a given source
  * world. The destination world is whatever the source world's per-kind link property names; the horizontal
  * coordinates are scaled by the vanilla rule between the two environments and the vertical coordinate is carried
- * across unchanged. Resolution yields nothing — and the caller falls back to vanilla behaviour — whenever the
+ * across unchanged. Resolution yields nothing, and the caller falls back to vanilla behaviour, whenever the
  * source is unmanaged, the link is unset, the linked world is unregistered, or the link is syntactically invalid.
  */
 public final class ResolvePortalDestination {

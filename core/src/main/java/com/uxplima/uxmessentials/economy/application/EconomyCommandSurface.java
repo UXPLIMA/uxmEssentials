@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
  * greppable table the permissions guard checks against {@code paper-plugin.yml}.
  *
  * <p>The fine-grained eco-admin nodes ({@code uxmessentials.economy.admin.give|take|set|bulk}) and the
- * data-driven {@code uxmessentials.economy.baltop.exempt} marker are not command base permissions — they are
+ * data-driven {@code uxmessentials.economy.baltop.exempt} marker are not command base permissions: they are
  * sub-action gates the {@code /eco} handler and the baltop snapshot check, so only the umbrella
  * {@code uxmessentials.economy.admin} node guards the {@code /eco} command itself here.
  */
@@ -97,7 +97,7 @@ final class EconomyCommandSurface {
         return new CommandSpec(literal, permission, factory);
     }
 
-    /** The kernel-side description of one economy command — literal, aliases, and help text, no Brigadier type. */
+    /** The kernel-side description of one economy command: literal, aliases, and help text, no Brigadier type. */
     private record EconomyCommand(String literal, List<String> aliases, String description)
             implements BrigadierCommand {
 

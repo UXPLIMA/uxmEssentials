@@ -16,7 +16,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 /**
  * Pure coverage of the zMenu → uxmEssentials converter mapping. Each test feeds a zMenu inventory YAML fragment,
  * converts it, and re-parses the emitted HOCON so the assertions read the converted structure rather than a brittle
- * string — the name/size/items/action/requirement mappings, the typed-action map (with multi-value expansion), the
+ * string. The name/size/items/action/requirement mappings, the typed-action map (with multi-value expansion), the
  * placeholder requirement operator map, the {@code math} value wrapping, the pattern-backed skip, the JavaScript
  * skip, and the size-to-rows clamp.
  */

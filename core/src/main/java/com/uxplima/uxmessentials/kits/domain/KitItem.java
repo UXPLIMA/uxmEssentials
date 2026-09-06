@@ -4,8 +4,8 @@ import java.util.Objects;
 
 /**
  * One stack a kit grants, modelled as an opaque platform-neutral payload plus its amount. The {@code data}
- * string is the serialized item form the adapter round-trips through Bukkit's item codec — the domain never
- * parses or inspects it, it only carries it — so the {@code :core} layer stays free of any {@code ItemStack}
+ * string is the serialized item form the adapter round-trips through Bukkit's item codec, the domain never
+ * parses or inspects it, it only carries it, so the {@code :core} layer stays free of any {@code ItemStack}
  * type while a kit still describes concrete items.
  *
  * <p>An item is a value object: equality is by its serialized data and amount, which is what lets a kit

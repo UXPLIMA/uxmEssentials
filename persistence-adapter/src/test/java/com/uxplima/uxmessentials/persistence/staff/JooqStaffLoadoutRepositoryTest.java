@@ -21,15 +21,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqStaffLoadoutRepository} against the default embedded SQLite backend with the
- * Flyway staff_loadout table applied through V62 — the tested default of the backend-parity matrix. It proves the
+ * Flyway staff_loadout table applied through V62: the tested default of the backend-parity matrix. It proves the
  * round-trip (save → load): all four opaque item/effect regions survive the base64 TEXT columns byte-for-byte
  * and all five scalars reconstruct equal, so a saved {@link SavedLoadout} equals the loaded one; that a re-save
  * upserts on the {@code (player, server_id)} key rather than inserting a second row (the second save wins); that
  * load on a player with no row is empty; and that delete removes exactly the one row.
  *
  * <p>Since V62 the loadout is keyed per {@code (player, server_id)}: the {@code serverScoping} tests prove a
- * loadout saved under server A for a player is independent of server B — B's save does not overwrite A's row, B's
- * load does not return A's row, and B's delete does not remove A's row — so two backends sharing one DB can no
+ * loadout saved under server A for a player is independent of server B. B's save does not overwrite A's row, B's
+ * load does not return A's row, and B's delete does not remove A's row, so two backends sharing one DB can no
  * longer clobber each other's captured pre-mode inventory.
  */
 class JooqStaffLoadoutRepositoryTest {
@@ -134,7 +134,7 @@ class JooqStaffLoadoutRepositoryTest {
         SavedLoadout second = loadoutWith(LoadoutBlob.of(new byte[] {9, 9}), 7, "SPECTATOR", true);
 
         repository.save(owner, first);
-        repository.save(owner, second); // same owner, same server — a re-save
+        repository.save(owner, second); // same owner, same server, a re-save
 
         SavedLoadout loaded = repository.load(owner).orElseThrow();
         assertThat(loaded).isEqualTo(second);
@@ -156,7 +156,7 @@ class JooqStaffLoadoutRepositoryTest {
 
     @Test
     void deletingAPlayerWithNoLoadoutIsANoOp() {
-        repository.delete(owner); // never entered staff mode — no row to remove
+        repository.delete(owner); // never entered staff mode, no row to remove
 
         assertThat(repository.load(owner)).isEmpty();
     }
@@ -179,7 +179,7 @@ class JooqStaffLoadoutRepositoryTest {
         SavedLoadout onB = loadoutWith(LoadoutBlob.of(new byte[] {9, 9}), 5, "SPECTATOR", false);
 
         serverA.save(owner, onA);
-        serverB.save(owner, onB); // same player, different backend — must insert a second row, not clobber A
+        serverB.save(owner, onB); // same player, different backend, must insert a second row, not clobber A
 
         // Each server round-trips its own captured loadout independently.
         assertThat(serverA.load(owner)).contains(onA);
@@ -215,7 +215,7 @@ class JooqStaffLoadoutRepositoryTest {
                 flying);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

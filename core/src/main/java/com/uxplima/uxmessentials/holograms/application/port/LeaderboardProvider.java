@@ -5,7 +5,7 @@ import java.util.List;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A ranked data source a leaderboard hologram renders — e.g. the top balances, the most playtime. One
+ * A ranked data source a leaderboard hologram renders: e.g. the top balances, the most playtime. One
  * implementation per source, supplied by the adapter (the holograms context stays free of the source's domain;
  * the impl reaches into the economy/playerstate context and formats each row). The holograms renderer holds a
  * registry of these by id and lays the rows out into lines on the hologram's refresh cadence.

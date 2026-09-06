@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleId;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@code /togglejail} into the moderation context's command surface — the convenience wrapper that
+ * Pins {@code /togglejail} into the moderation context's command surface, the convenience wrapper that
  * releases a jailed target or jails a free one in a single command, reusing the {@code /jail} and
  * {@code /unjail} use cases. This guard fails if the literal drops out of the surface or ever wires under a
  * node other than its own {@code uxmessentials.moderation.togglejail}.

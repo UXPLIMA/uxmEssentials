@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /communication gui} ({@code uxmessentials.communication.gui}, default op): open the communication admin
- * panel — the chat-lock toggle, the clearchat and broadcast actions, and the read-only announcer list. A
+ * panel: the chat-lock toggle, the clearchat and broadcast actions, and the read-only announcer list. A
  * players-only, admin command that opens the same {@link CommunicationAdminMenu} the {@code /uxmess gui} hub does;
  * it mutates nothing itself, routing every action through the surfaces the communication commands already use.
  */

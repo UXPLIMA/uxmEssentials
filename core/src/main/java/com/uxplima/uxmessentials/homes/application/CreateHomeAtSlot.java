@@ -24,11 +24,11 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /sethome}: create a home in a given slot at the player's current position. The owner's limit is
  * resolved through {@link HomeQuota} scoped to the home's world and folded into a maximum-slot count, then
- * every registered {@link SethomeGuard} runs in order — the first failure short-circuits with its
+ * every registered {@link SethomeGuard} runs in order. The first failure short-circuits with its
  * {@link HomeError} and no aggregate change. If the guards pass, the aggregate gates the slot against the
  * range/occupancy/limit invariants and creates the home; if the transition succeeds, the optional economy
  * charge is applied before the result is committed. Hitting the cap publishes {@code HomeLimitReached} and
- * returns {@link HomeError#LIMIT_REACHED} so the command renders the limit message — never an inline literal.
+ * returns {@link HomeError#LIMIT_REACHED} so the command renders the limit message, never an inline literal.
  */
 public final class CreateHomeAtSlot {
 
@@ -81,7 +81,7 @@ public final class CreateHomeAtSlot {
         if (guarded.isErr()) {
             return guarded;
         }
-        // Validate via the aggregate first — free checks before the paid charge gate.
+        // Validate via the aggregate first: free checks before the paid charge gate.
         Result<HomeSet.Change, HomeError> outcome = set.createAt(slot, at, limit, max, clock.instant());
         if (outcome.isErr()) {
             return reject(set, limit, outcome.errorOrThrow());

@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.teleport.adapter.TeleportServices;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The no-argument tpa resolution verbs — {@code /tpaccept}, {@code /tpdeny}, {@code /tpcancel} — each a
+ * The no-argument tpa resolution verbs ({@code /tpaccept}, {@code /tpdeny}, {@code /tpcancel}) each a
  * single call into {@link com.uxplima.uxmessentials.teleport.application.AcceptTeleport}. {@code accept}
  * passes the acceptor's live position as the warmup anchor (read here on the player's region thread); the
  * other verbs need only the invoking player. The verb is selected by a {@link Mode} so the three share

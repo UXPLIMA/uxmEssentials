@@ -6,8 +6,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * The narrow economy seam a {@code COST} click action uses to charge the clicking viewer <em>without</em> a hard
- * dependency on the economy context. This is the entire economy surface the shared click-action runner needs — a
- * single guarded withdrawal — so a feature context that owns click actions (npc, holograms, …) never imports an
+ * dependency on the economy context. This is the entire economy surface the shared click-action runner needs, a
+ * single guarded withdrawal, so a feature context that owns click actions (npc, holograms, …) never imports an
  * economy type. The economy context supplies an adapter that bridges this to its {@code EconomyProvider}/
  * {@code Wallet} (mirrors the kits {@code KitEconomy} and warps {@code WarpEconomy} seams).
  *
@@ -22,7 +22,7 @@ public interface ClickActionEconomy {
     /**
      * Withdraw {@code amount} of {@code currencyId} from {@code who}'s balance, returning {@code true} on a
      * successful debit and {@code false} when the balance was insufficient. The debit is guarded at the source so
-     * a {@code true} return means the money left the account exactly once — there is no separate balance read to
+     * a {@code true} return means the money left the account exactly once. There is no separate balance read to
      * race against, so a {@code COST} action can never double-charge.
      */
     boolean withdraw(PlayerRef who, BigDecimal amount, String currencyId);

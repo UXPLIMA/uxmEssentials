@@ -53,7 +53,7 @@ class JooqMainHomePreferenceTest {
 
     @Test
     void homesTableHasSlotKeyedShapeAfterMigration() {
-        // A home with all new columns round-trips cleanly — the schema accepted slot, label, icon, updated_at.
+        // A home with all new columns round-trips cleanly: the schema accepted slot, label, icon, updated_at.
         Home home = new Home(
                 owner,
                 HomeSlot.of(0),
@@ -103,7 +103,7 @@ class JooqMainHomePreferenceTest {
                 Instant.ofEpochMilli(1_000));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

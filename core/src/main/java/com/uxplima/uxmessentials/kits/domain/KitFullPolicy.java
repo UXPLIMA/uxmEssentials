@@ -6,7 +6,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * What a kit does when the recipient's inventory cannot hold everything it grants. {@link #DROP} keeps the
- * long-standing behaviour — the items that did not fit are dropped at the player's feet; {@link #DENY} refuses
+ * long-standing behaviour. The items that did not fit are dropped at the player's feet; {@link #DENY} refuses
  * the claim outright when there is not enough free space, granting nothing and leaving the cooldown, the
  * one-time stamp, and the stock untouched so the player may retry once they have made room.
  *
@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
  */
 public enum KitFullPolicy {
 
-    /** Drop the overflow at the player's feet — the default, the historical kit behaviour. */
+    /** Drop the overflow at the player's feet, the default, the historical kit behaviour. */
     DROP,
 
     /** Refuse the claim when the inventory cannot hold everything, granting nothing. */

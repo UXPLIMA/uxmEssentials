@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 /**
  * The {@code /give}//{@code /item}//{@code /more} cap policy: validate the requested item and amount against
  * the configured caps before the adapter materialises a stack, and decide whether the give is bulk enough to
- * audit. This is the one real rule in the item-utils group — everything else is an ACL-thin adapter call — so
+ * audit. This is the one real rule in the item-utils group, everything else is an ACL-thin adapter call, so
  * it lives in the application layer and is unit-testable in {@code :core}.
  *
  * <p>The amount cap comes from {@link ItemworldConfig#giveCap()} (or {@link ItemworldConfig#moreCap()} for

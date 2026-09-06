@@ -7,16 +7,16 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Expands a hologram line's optional inline animation directive into the MiniMessage source rendered for the
  * current frame. A line whose source starts with {@code <anim:TYPE>} animates as the hologram re-renders on its
- * refresh interval — each re-render passes a higher {@code phase}, so the rendered text advances a frame. A line
+ * refresh interval: each re-render passes a higher {@code phase}, so the rendered text advances a frame. A line
  * with no directive is returned unchanged, so the whole mechanism costs nothing for a normal line and needs no
  * persistence or command of its own (the directive is part of the line text the operator already sets).
  *
  * <p>Built-in types (the text after the directive is the placeholder-resolved line):
  *
  * <ul>
- *   <li>{@code rainbow} — wraps the text in MiniMessage's {@code <rainbow:phase>}, so the hue cycles each frame.
- *   <li>{@code typewriter} — reveals one more character per frame, holds the full text briefly, then restarts.
- *   <li>{@code scroll} — marquees the text horizontally, one character per frame, with a short trailing gap.
+ *   <li>{@code rainbow}: wraps the text in MiniMessage's {@code <rainbow:phase>}, so the hue cycles each frame.
+ *   <li>{@code typewriter}: reveals one more character per frame, holds the full text briefly, then restarts.
+ *   <li>{@code scroll}, marquees the text horizontally, one character per frame, with a short trailing gap.
  * </ul>
  *
  * <p>{@code typewriter} and {@code scroll} cut the text by character, so they expect plain text (a MiniMessage

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
  * cases mirror the moderation-verdict shape so the pattern is recognisable across contexts: {@link Allow}
  * applied both legs atomically; {@link InsufficientFunds} means the debit leg would have driven the balance
  * negative and nothing applied; {@link DenyWith} means a policy gate (self-pay, a disabled target, an
- * unsupported currency) refused before any leg. A transfer is atomic — either both legs commit or neither
+ * unsupported currency) refused before any leg. A transfer is atomic, either both legs commit or neither
  * does (the economy GLOSSARY, the double-spend invariant in {@code docs/02-concurrency.md}).
  *
  * <p>This is the return type of {@code EconomyProvider.transfer}; a foreign Treasury/Vault provider produces
@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 public sealed interface TransferResult
         permits TransferResult.Allow, TransferResult.InsufficientFunds, TransferResult.DenyWith {
 
-    /** True only for {@link Allow} — both legs committed. Lets a caller branch without a full match. */
+    /** True only for {@link Allow}: both legs committed. Lets a caller branch without a full match. */
     boolean isOk();
 
     /** Both legs of the transfer applied atomically. */

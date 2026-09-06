@@ -21,9 +21,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The shared multi-channel broadcaster: fans a per-viewer {@link Component} out to every online player across a set
- * of {@link BroadcastChannel surfaces} — CHAT to {@code sendMessage}, ACTION_BAR to {@code sendActionBar},
+ * of {@link BroadcastChannel surfaces}, CHAT to {@code sendMessage}, ACTION_BAR to {@code sendActionBar},
  * TITLE/SUBTITLE through uxmLib's {@link Titles} with the configured {@link ChannelDisplay} timing, and BOSS_BAR via
- * an Adventure {@link BossBar} hidden after the configured seconds — and optionally plays a sound. Both the vote
+ * an Adventure {@link BossBar} hidden after the configured seconds, and optionally plays a sound. Both the vote
  * thank-you/party broadcasts and the rotating communication announcer drive it, so the channel dispatch lives in one
  * place.
  *
@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
  * {@code Bukkit.getOnlinePlayers()} is not safe to iterate off-thread), then each recipient is delivered on their
  * own entity region thread so every live API touch is region-correct under Folia. The boss-bar hide is scheduled
  * off-tick via {@link Scheduler#asyncAfter} and hops back onto the recipient's entity thread to call
- * {@code hideBossBar} — never the legacy {@code BukkitScheduler}.
+ * {@code hideBossBar}, never the legacy {@code BukkitScheduler}.
  */
 @NullMarked
 public final class ChannelBroadcaster {

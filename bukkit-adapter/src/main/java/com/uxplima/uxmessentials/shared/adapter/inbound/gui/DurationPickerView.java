@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * submitting a string the supplied validator accepts, fires the caller's {@code onPick} with that exact duration
  * string; a malformed typed string replies with the caller's reject {@link MessageKey} and reopens the anvil.
  *
- * <p>The view holds no sanction logic. One instance is shared across callers — the framework collaborators (the menu
+ * <p>The view holds no sanction logic. One instance is shared across callers. The framework collaborators (the menu
  * engine, text, scheduler, anvil, sink, messages) live on the instance, and the per-use parts (the title, the preset
  * list, the pick callback, the reject key, and an optional back action) are passed to {@link #open} through a
  * {@link Request}. The typed string is validated through {@link Request#validator}, which a caller backs with
@@ -57,7 +57,7 @@ public final class DurationPickerView {
     private static final Material CUSTOM_ICON = Material.WRITABLE_BOOK;
     private static final Material BACK_ICON = Material.ARROW;
 
-    // The default preset ladder offered when a caller does not supply its own — a sensible spread from a short
+    // The default preset ladder offered when a caller does not supply its own, a sensible spread from a short
     // cooldown to a month, all valid SanctionDuration grammar.
     private static final List<String> DEFAULT_PRESETS =
             List.of("30m", "1h", "6h", "12h", "1d", "3d", "7d", "14d", "30d");

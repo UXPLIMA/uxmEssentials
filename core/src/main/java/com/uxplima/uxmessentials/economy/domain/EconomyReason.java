@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.economy.domain;
 
 /**
- * Why a wallet change happened — a closed enum carried into the audit log so a ledger review can tell a
+ * Why a wallet change happened. A closed enum carried into the audit log so a ledger review can tell a
  * {@code /pay} from a kit refund from an admin correction, and so audit queries can {@code GROUP BY reason}
  * rather than parse free text (the economy GLOSSARY, {@code docs/11-economy-integration.md} §9.4). The
  * reason is set by the caller at the use-case boundary; a change with no explicit reason defaults to
@@ -60,6 +60,6 @@ public enum EconomyReason {
     /** An installment debited from a debtor's wallet when a loan is repaid. */
     LOAN_REPAY,
 
-    /** No reason was declared at the call site — logs a warning in dev builds. */
+    /** No reason was declared at the call site: logs a warning in dev builds. */
     UNSPECIFIED
 }

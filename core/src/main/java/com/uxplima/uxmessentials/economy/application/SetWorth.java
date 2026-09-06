@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@link WorthOverrideStore}, the writable counterpart to the config {@code WorthTable}. A positive price
  * upserts the override (overwriting any earlier one for the same material) so {@code /worth} and {@code /sell}
  * price the item at it immediately; a non-positive price or an explicit clear removes the override so the item
- * falls back to its configured worth — or becomes not-sellable when config has none. The override is
+ * falls back to its configured worth, or becomes not-sellable when config has none. The override is
  * relational, never PDC, so a set price survives a world rollback like a balance does.
  *
  * <p>Unlike a balance mutation this is a pricing-policy change, so it publishes no economy domain event (the

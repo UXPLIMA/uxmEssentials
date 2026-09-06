@@ -29,14 +29,14 @@ import org.jspecify.annotations.Nullable;
  * handler maps the name, the jail, the optional duration token and the greedy reason. The target may be
  * offline (offline jail re-applied at the next login).
  *
- * <p>{@code /jail del <name>} removes a stored jail, freeing its name — the folded-in counterpart to
+ * <p>{@code /jail del <name>} removes a stored jail, freeing its name, the folded-in counterpart to
  * {@code /jail <player> <jail> ...}, mirroring how {@code /warp del} sits under {@code /warp}. Only a stored
  * jail can be removed this way; a config-defined jail name lives in {@code moderation.conf}, not the store. The
  * not-found feedback and the confirmation are the {@link com.uxplima.uxmessentials.moderation.application.DelJail}
  * use case's job. A console source is allowed since no position is captured.
  *
- * <p>Bare {@code /jail} (no arguments) opens the jail management hub — the player picker → jail chooser →
- * duration flow, with footer buttons into the jail-list manager and the jailed-players release list — when the
+ * <p>Bare {@code /jail} (no arguments) opens the jail management hub, the player picker → jail chooser →
+ * duration flow, with footer buttons into the jail-list manager and the jailed-players release list, when the
  * command's catalog {@code gui} flag is on: {@link #guiRoot()} returns the opener and the shared
  * {@code GuiRootBinding} installs it as the root executor. The raw {@code /jail <player> <jail> ...} subcommand
  * is unchanged either way, and the same {@code .requires} gate covers the bare-root opener.

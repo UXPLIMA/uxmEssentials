@@ -8,10 +8,10 @@ package com.uxplima.uxmessentials.security.application;
  */
 public enum VerifyResult {
 
-    /** The submitted value matched the player's TOTP code or their PIN — verification passes. */
+    /** The submitted value matched the player's TOTP code or their PIN: verification passes. */
     SUCCESS,
 
-    /** The player is enrolled but the submitted value matched neither factor — a failed attempt. */
+    /** The player is enrolled but the submitted value matched neither factor: a failed attempt. */
     INVALID,
 
     /** The player holds no factor, so there is nothing to verify. */

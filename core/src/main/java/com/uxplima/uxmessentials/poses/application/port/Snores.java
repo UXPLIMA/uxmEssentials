@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.poses.application.port;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port over the sleeping-pose snore — the soft, resource-pack-free sound a laying player emits on a loop so
+ * Outbound port over the sleeping-pose snore. The soft, resource-pack-free sound a laying player emits on a loop so
  * a lie-down reads as sleeping to those nearby. It is a per-player toggle, not a one-shot: {@link #startSnoring} adds
  * the player to the snoring set when a {@code /lay} begins (and the {@code snore} config is on), and
  * {@link #stopSnoring} drops them when the pose ends. The adapter owns the actual interval loop and plays the sound
@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  */
 public interface Snores {
 
-    /** Start {@code who} snoring — they are added to the loop that emits the snore sound near them at an interval. */
+    /** Start {@code who} snoring: they are added to the loop that emits the snore sound near them at an interval. */
     void startSnoring(PlayerRef who);
 
     /** Stop {@code who} snoring; a no-op when they were not. */

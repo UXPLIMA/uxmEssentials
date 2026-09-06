@@ -10,8 +10,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * adapter reads the viewer's live location and the rest of the roster's positions on the global region thread
  * (each player's position is owned by its own region under Folia, so the viewer's region thread cannot read
  * them), maps each hit to a {@link Nearby} (the ref plus the integer block distance), and pushes the result to
- * {@code onResolved} once it is computed — never blocking the calling region thread on a foreign read.
- * Application code never iterates {@code Bukkit.getOnlinePlayers()} — it asks this port.
+ * {@code onResolved} once it is computed: never blocking the calling region thread on a foreign read.
+ * Application code never iterates {@code Bukkit.getOnlinePlayers()}: it asks this port.
  */
 public interface NearbyPlayers {
 

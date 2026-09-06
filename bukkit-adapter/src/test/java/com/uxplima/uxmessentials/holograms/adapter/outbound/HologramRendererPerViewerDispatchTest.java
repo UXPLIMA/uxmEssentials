@@ -33,12 +33,12 @@ import org.junit.jupiter.api.Test;
  * {@link HologramRenderer#dispatchPerViewerText} must hop <em>each</em> viewer's resolve onto <em>that
  * viewer's own</em> entity thread (one {@code onEntity} hop per viewer, keyed to that viewer), never resolving
  * inline on the caller's thread. Resolving a player-relative {@code %papi%} token reads the viewer's live entity
- * state, which under Folia is only safe to touch from the entity's owning thread — the same rule the scoreboard
+ * state, which under Folia is only safe to touch from the entity's owning thread, the same rule the scoreboard
  * and tablist render loops follow. A regression that resolved every viewer inline on the hologram's region
  * thread (a cross-region read) would record zero entity hops and fail the first assertion here.
  *
  * <p>The dispatch is exercised against a recording {@link Scheduler} and a recording packet sink, with viewers
- * as lightweight proxies — no MockBukkit, no NMS, no PlaceholderAPI.
+ * as lightweight proxies, no MockBukkit, no NMS, no PlaceholderAPI.
  */
 class HologramRendererPerViewerDispatchTest {
 
@@ -59,7 +59,7 @@ class HologramRendererPerViewerDispatchTest {
         HologramRenderer.dispatchPerViewerText(
                 scheduler, overrides, List.of(player(ALICE), player(BOB)), ENTITY_ID, hologram("hi %name%"));
 
-        // Exactly one entity hop per viewer, each keyed to that viewer — never an inline resolve.
+        // Exactly one entity hop per viewer, each keyed to that viewer, never an inline resolve.
         assertThat(scheduler.entityHops).containsExactly(ALICE, BOB);
         // And the resolve that ran inside each hop produced that viewer's own text.
         assertThat(packets.textFor(ALICE)).isEqualTo("hi Alice");

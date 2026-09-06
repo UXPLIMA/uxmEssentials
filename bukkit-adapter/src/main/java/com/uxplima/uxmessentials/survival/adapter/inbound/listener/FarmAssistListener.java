@@ -26,12 +26,12 @@ import org.jspecify.annotations.NullMarked;
  * <p>Only a crop the operator configured (resolved to a {@link Material} → seed {@link Material} map at wiring time)
  * and grown to its maximum {@link Ageable} age is acted on; a young crop is left to keep growing, and a right-click on
  * anything else is ignored. The interaction is cancelled so the held item is not also used (a hoe swing, a block
- * placed), which is what stops the plain hand-break exploit — the player harvests through the assist, not by breaking
+ * placed), which is what stops the plain hand-break exploit. The player harvests through the assist, not by breaking
  * the plant.
  *
  * <h2>Folia</h2>
  * The interact event runs on the region owning the crop, so the harvest, the seed spend, and the replant all mutate
- * state the event thread already owns — no scheduler hop is needed.
+ * state the event thread already owns: no scheduler hop is needed.
  */
 @NullMarked
 public final class FarmAssistListener implements Listener {

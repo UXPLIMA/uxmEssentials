@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * }</pre>
  *
  * <p>Once registered, an id becomes usable in any menu spec: {@code registerAction} adds an action a
- * {@code click { left { click = ["my-award"] } }} or an open-action can fire — a custom "button" is simply a menu
+ * {@code click { left { click = ["my-award"] } }} or an open-action can fire. A custom "button" is simply a menu
  * item whose click runs a registered action, so this one method covers buttons; {@code registerRequirement} adds a
  * {@code view}/{@code click} condition written {@code my-cond:<value>}; {@code registerPlaceholder} adds a
  * {@code %my-token%} the renderer expands; and {@code registerListSource} adds a {@code list { source = my-src }}.
@@ -39,11 +39,11 @@ import org.jspecify.annotations.NullMarked;
  * <h2>Load or reload the menu after registering</h2>
  * A menu spec that names a custom id is validated when it loads: an unknown id is a loud load-time failure, not a
  * broken menu a player meets. Register your ids <em>before</em> the menu that uses them loads. A menu already on
- * disk when your plugin enables must therefore be re-validated afterwards — run {@code /uxmess reload} or
+ * disk when your plugin enables must therefore be re-validated afterwards. Run {@code /uxmess reload} or
  * {@code /menu reload} once your registrations are in place.
  *
  * <h2>Folia threading</h2>
- * Every registered handler runs on the <em>viewer's own region thread</em> — the thread the engine renders or
+ * Every registered handler runs on the <em>viewer's own region thread</em>. The thread the engine renders or
  * clicks the menu on, which on Folia is that entity's region rather than a single main thread. A handler may read
  * its context and act on the viewing player inline, but any world or cross-entity work it triggers must be
  * scheduled onto the owning region, never run inline against another region's state.
@@ -62,7 +62,7 @@ public interface MenuApi {
      * Register a custom action under {@code id}. A menu spec fires it by naming the id in a click gesture's action
      * list ({@code left { click = ["my-award"] } }) or in a menu's open/close actions; an {@code id:value} form
      * arrives on the handler as {@link MenuActionContext#arg()}. This is also how a custom clickable button is added
-     * — a button is just a menu item whose click runs a registered action.
+     *: a button is just a menu item whose click runs a registered action.
      *
      * @throws IllegalStateException if an action is already registered under {@code id}
      */
@@ -112,7 +112,7 @@ public interface MenuApi {
 
     /**
      * Render {@code spec} to the {@link ItemStack} a viewer would see, resolving its material spec through the icon
-     * providers, expanding every {@code %placeholder%}, and layering the name, lore and decor — exactly as a menu
+     * providers, expanding every {@code %placeholder%}, and layering the name, lore and decor, exactly as a menu
      * icon is built. Handy for a plugin that wants a menu-styled item outside a menu (a hotbar item, a hand-built
      * inventory) without re-implementing the pipeline.
      */

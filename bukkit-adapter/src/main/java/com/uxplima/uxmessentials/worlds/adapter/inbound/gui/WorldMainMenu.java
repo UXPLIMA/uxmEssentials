@@ -168,8 +168,8 @@ public final class WorldMainMenu {
     }
 
     /**
-     * The subject of an open hub: the world being edited and its summary snapshot — environment, type, loaded state,
-     * player count and alias — read on the viewer's entity thread before the open so the engine renders without a
+     * The subject of an open hub: the world being edited and its summary snapshot. Environment, type, loaded state,
+     * player count and alias. Read on the viewer's entity thread before the open so the engine renders without a
      * Bukkit read. The placeholders read this directly, so the render touches no port.
      *
      * @param world the world this hub edits

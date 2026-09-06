@@ -70,7 +70,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link Menus#openEditor} (its {@link SettingsPanelView} is a thin shim over the engine), so this asserts the
  * engine-rendered editor draws the exact panel the bespoke view drew: same material and same plain name at every
  * slot, and the same value-lore for each toggle, for both toggle states. The baseline is frozen from the panel's
- * geometry + catalog keys — the shim replaces the live "before" render, so the parity contract is the frozen
+ * geometry + catalog keys. The shim replaces the live "before" render, so the parity contract is the frozen
  * {@code (slot → material, name, value-lore)}, the way the kit/warp golden tests freeze a baseline. A real click on
  * the AFK slot through the engine's own {@link MenuListener} then proves the migrated path flips the state through
  * the same {@code MarkAfk} use case the {@code /afk} command drives and re-renders the slot to the new value.

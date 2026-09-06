@@ -14,7 +14,7 @@ import java.util.Objects;
  * As a warp's vote count grows the prior's weight fades and the score converges on the warp's own average; with few
  * votes it sits close to {@code m}. A warp with no votes scores zero rather than {@code m}, so an unrated warp never
  * floats above a genuinely-rated one. The confidence is a config value, injected here so the policy stays pure and
- * unit-testable; {@link RatingSummary} deliberately does not recompute — it only stores what this hands it.
+ * unit-testable; {@link RatingSummary} deliberately does not recompute: it only stores what this hands it.
  *
  * @param confidence the smoothing constant {@code C}: how many global-mean votes of prior every warp starts with
  */
@@ -28,7 +28,7 @@ public record BayesianRating(int confidence) {
 
     /**
      * Roll {@code tally} up into a {@link RatingSummary}, folding {@code globalMean} in through the Bayesian prior.
-     * An empty tally (no votes) yields {@link RatingSummary#empty()} — both the average and the score are zero, so
+     * An empty tally (no votes) yields {@link RatingSummary#empty()}. Both the average and the score are zero, so
      * an unrated warp sorts below every rated one.
      *
      * @param tally the warp's raw star sum and vote count

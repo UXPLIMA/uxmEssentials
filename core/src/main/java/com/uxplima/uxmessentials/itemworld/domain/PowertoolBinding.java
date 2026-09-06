@@ -40,7 +40,7 @@ public record PowertoolBinding(String itemKey, List<String> commands) {
         return new PowertoolBinding(itemKey, List.of(normalised));
     }
 
-    /** An empty binding for {@code itemKey} — applying it clears whatever was bound. */
+    /** An empty binding for {@code itemKey}: applying it clears whatever was bound. */
     public static PowertoolBinding cleared(String itemKey) {
         return new PowertoolBinding(itemKey, List.of());
     }

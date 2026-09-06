@@ -136,7 +136,7 @@ class VanishLifecycleJoinTest {
         network.apply(VanishSync.vanished(new PlayerRef(alice.getUniqueId(), "Alice"), VanishLevel.DEFAULT));
         PlayerJoinEvent event = join(alice);
 
-        listener(config(false)).onJoin(event); // join-vanished off — the hide comes purely from the network view
+        listener(config(false)).onJoin(event); // join-vanished off. The hide comes purely from the network view
 
         assertThat(store.isVanished(alice.getUniqueId())).isTrue(); // seeded from the synced state
         assertThat(event.joinMessage()).isNull(); // arrives silently
@@ -152,7 +152,7 @@ class VanishLifecycleJoinTest {
         return new PlayerJoinEvent(player, Component.text(player.getName() + " joined"));
     }
 
-    /** A buffs port that does nothing — the join behaviour under test does not assert on buffs. */
+    /** A buffs port that does nothing: the join behaviour under test does not assert on buffs. */
     private static final class NoopBuffs implements VanishBuffs {
         @Override
         public void apply(PlayerRef who) {}

@@ -6,16 +6,16 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.mockbukkit.mockbukkit.MockBukkit;
 
 /**
- * Reusable present/absent test harness for {@link PluginHook}s — the seam every later hook feature (Vault,
+ * Reusable present/absent test harness for {@link PluginHook}s, the seam every later hook feature (Vault,
  * HeadDatabase, the item providers) reuses for its absent-path test. A hook test mocks the server in its own
  * {@code @BeforeEach}/{@code @AfterEach}, then drives the hook through one of two entry points:
  *
  * <ul>
- *   <li>{@link #absent} resolves the hook with its target plugin not installed — the returned capability is
+ *   <li>{@link #absent} resolves the hook with its target plugin not installed. The returned capability is
  *       the hook's no-op default, and every call on it must be a safe no-op: no exception, and crucially no
  *       {@link NoClassDefFoundError}, since the real implementation is never constructed.
  *   <li>{@link #present} registers a fake plugin named after the hook's target into the current mock, then
- *       resolves — the returned capability is the real implementation.
+ *       resolves: the returned capability is the real implementation.
  * </ul>
  *
  * <p>The harness owns only the plugin-presence dimension; a hook whose real implementation needs further
@@ -23,7 +23,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  */
 final class HookHarness {
 
-    /** A {@link Logger} that drops every line — a hook test asserts behaviour, not bootstrap log output. */
+    /** A {@link Logger} that drops every line: a hook test asserts behaviour, not bootstrap log output. */
     static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

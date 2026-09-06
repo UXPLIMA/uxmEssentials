@@ -7,7 +7,7 @@ import java.util.UUID;
 /**
  * A confirmed binding between a Minecraft account and a Discord user. One row per player (keyed by the account
  * uuid) and the Discord id is unique across rows, so a single Discord account can be bound to at most one
- * player — the {@code /link} confirmation rejects a code when the presenting Discord id is already bound to a
+ * player. The {@code /link} confirmation rejects a code when the presenting Discord id is already bound to a
  * different player.
  *
  * @param player the bound Minecraft account

@@ -36,7 +36,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the invrollback context's adapters and use cases over the injected kernel ports, the persistence DSL
  * and the shared menu engine, and produces everything the plugin registers: the death/logout capture listener, the
- * read-only snapshot-preview listener, the {@code /invrestore} staff command, and — as the {@code stop} hook — the
+ * read-only snapshot-preview listener, the {@code /invrestore} staff command, and, as the {@code stop} hook, the
  * scheduled retention sweep's cancel handle.
  *
  * <p>The snapshot repository is the jOOQ adapter built by {@link SnapshotRepositories} (so this module never names a

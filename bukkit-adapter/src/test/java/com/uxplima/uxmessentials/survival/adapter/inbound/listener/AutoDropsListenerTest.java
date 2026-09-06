@@ -41,7 +41,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of the composed break-drop pipeline: auto-pickup routes a break's drops into the inventory and
  * overflows the surplus to the ground, auto-smelt yields the smelted item and composes with pickup, and auto-sell
- * credits the wallet at the configured price — and stays inert with no economy provider.
+ * credits the wallet at the configured price, and stays inert with no economy provider.
  */
 class AutoDropsListenerTest {
 

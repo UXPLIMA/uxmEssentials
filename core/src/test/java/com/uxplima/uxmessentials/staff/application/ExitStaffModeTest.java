@@ -54,7 +54,7 @@ class ExitStaffModeTest {
     @Test
     void offlineRestoreDoesNotDeleteTheRow() {
         // A disconnect race: the player is gone by the time the restore runs, so it reaches no one and reports
-        // false. The row must NOT be deleted — it is the only copy of the real loadout — but the marker is cleared
+        // false. The row must NOT be deleted, it is the only copy of the real loadout, but the marker is cleared
         // so the join-recovery path re-arms.
         StaffTestFakes fakes = new StaffTestFakes();
         fakes.store.active.put(ACTOR.uuid(), "default");
@@ -71,7 +71,7 @@ class ExitStaffModeTest {
 
     @Test
     void restoresThePreModeVanishStateRatherThanRevealing() {
-        // A player vanished via /vanish BEFORE entering stays vanished on exit — exit sets vanishedBefore, not false.
+        // A player vanished via /vanish BEFORE entering stays vanished on exit, exit sets vanishedBefore, not false.
         StaffTestFakes fakes = new StaffTestFakes();
         fakes.store.active.put(ACTOR.uuid(), "default");
         fakes.repository.rows.put(ACTOR.uuid(), loadoutVanishedBefore(true));

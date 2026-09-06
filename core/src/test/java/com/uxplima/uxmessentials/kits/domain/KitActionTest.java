@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit coverage of {@link KitAction#parse} and {@link KitActionType#parse}: each action type parses from its
  * kebab-case token (and the {@code _} alias), the before-items and count-as-item flags are carried through, and
- * a token naming no known type is skipped (empty) rather than throwing — so a malformed kit action never fails
+ * a token naming no known type is skipped (empty) rather than throwing, so a malformed kit action never fails
  * the whole kit on load.
  */
 class KitActionTest {

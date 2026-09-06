@@ -17,23 +17,23 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 
 /**
  * The movement slice of the menu action vocabulary: the two ways a click (or an operator's {@code /menu} spec) can
- * relocate the viewer — {@code teleport} within this server and {@code connect} to another proxy backend.
+ * relocate the viewer, {@code teleport} within this server and {@code connect} to another proxy backend.
  * Registered once at startup into the shared {@link MenuBindings} alongside {@link MenuVocabulary},
  * {@link MessagingActions} and {@link CommandActions}, so a disk-loaded spec resolves {@code teleport} /
  * {@code connect} the same way a code-registered feature menu does.
  *
- * <p>The destination is operator content — a world name and coordinates from the spec, not a code-authored string —
+ * <p>The destination is operator content (a world name and coordinates from the spec, not a code-authored string)
  * so no {@code MessageKey} is involved; the only text either action produces is a diagnostic line on the operator
  * {@code log}. {@code teleport} goes through Paper's {@code teleportAsync}, the Folia-safe primitive: the click
  * already runs on the viewer's own entity thread, and {@code teleportAsync} performs the region hop and async chunk
- * load itself. It is fire-and-forget by design — the returned future is never joined, so the tick thread is never
+ * load itself. It is fire-and-forget by design. The returned future is never joined, so the tick thread is never
  * blocked waiting on it.
  *
  * <p>Both actions are fail-soft. {@code teleport} skips (with a one-line operator warning) on a malformed
  * destination or an unknown world rather than throwing; {@code connect} is a silent no-op on a blank target, and the
  * connector itself already degrades to a logged no-op when no proxy channel is registered. Every handler is also
  * wrapped in {@link #safe}, so anything unexpected a call throws becomes a logged no-op instead of an exception
- * escaping back into the click dispatch — one bad effect must not abort the rest of a chain.
+ * escaping back into the click dispatch: one bad effect must not abort the rest of a chain.
  */
 public final class MovementActions {
 
@@ -43,7 +43,7 @@ public final class MovementActions {
      * Register the movement actions into {@code bindings}. {@code connector} is the shared proxy seam the
      * {@code connect} action sends players through (a no-op when no proxy channel is registered); {@code log} is the
      * operator console logger a fail-soft or skipped action warns through. Left separate from
-     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched — the composition
+     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched, the composition
      * root calls both.
      */
     public static void register(MenuBindings bindings, ServerConnector connector, Logger log) {
@@ -60,7 +60,7 @@ public final class MovementActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract {@link MessagingActions} and the npc/
+     * than escaping into the click dispatch. The same fail-soft contract {@link MessagingActions} and the npc/
      * holograms click runner apply to their effect actions. On MockBukkit the {@code teleportAsync} stub throws, so
      * this is also what keeps a valid teleport from crashing a test run; on real Paper it is the last-resort guard.
      */
@@ -76,7 +76,7 @@ public final class MovementActions {
 
     /**
      * Teleport the viewer to a {@code <world> <x> <y> <z> [yaw] [pitch]} destination. A malformed argument (too few
-     * tokens, a non-numeric coordinate) or an unknown/blank world is a fail-soft skip with an operator warning — the
+     * tokens, a non-numeric coordinate) or an unknown/blank world is a fail-soft skip with an operator warning, the
      * viewer stays put. The hop uses {@code teleportAsync} and is fire-and-forget: the future is deliberately not
      * joined, since blocking the tick thread on it is forbidden and the click already runs on the viewer's region.
      */
@@ -100,15 +100,15 @@ public final class MovementActions {
     private static void connect(MenuActionContext ctx, ServerConnector connector) {
         String server = ctx.arg().strip();
         if (server.isBlank()) {
-            return; // no backend named — nothing to connect to, but not an error
+            return; // no backend named. Nothing to connect to, but not an error
         }
         connector.connect(ctx.player(), server);
     }
 
     /**
      * A parsed {@code <world> <x> <y> <z> [yaw] [pitch]} teleport destination. The world name and the three
-     * coordinates are required; the yaw and pitch are optional and default to {@code 0f}. Parsing is Bukkit-free —
-     * it resolves no world and builds no {@link Location} — so it can be exercised by plain-JUnit grammar tests; the
+     * coordinates are required; the yaw and pitch are optional and default to {@code 0f}. Parsing is Bukkit-free
+     * it resolves no world and builds no {@link Location}, so it can be exercised by plain-JUnit grammar tests; the
      * action resolves the world and constructs the location. Too few tokens, or any non-numeric number, yields an
      * empty result, which the action treats as a fail-soft skip.
      */

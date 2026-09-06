@@ -139,8 +139,8 @@ final class NpcSkinCommands extends NpcCommandSupport {
 
     /**
      * Set the skin from a raw {@code texture:<value>[:<signature>]} spec directly, no fetch. A blank value is
-     * rejected with {@link NpcMessageKey#NPC_SKIN_INVALID_TEXTURE}. A value with no signature is allowed — it
-     * renders on our packet NPC — but a one-line note recommends a signature, since a strict client may show an
+     * rejected with {@link NpcMessageKey#NPC_SKIN_INVALID_TEXTURE}. A value with no signature is allowed: it
+     * renders on our packet NPC, but a one-line note recommends a signature, since a strict client may show an
      * unsigned skin from another account as the default Steve/Alex.
      */
     private @Nullable NpcSkin skinFromTexture(CommandSender sender, String raw) {

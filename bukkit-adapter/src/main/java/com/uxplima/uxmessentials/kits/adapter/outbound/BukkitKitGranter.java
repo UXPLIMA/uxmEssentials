@@ -21,12 +21,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link KitGranter} implementation: decodes each {@link KitItem} through the {@link KitItemCodec} and
  * adds it to the recipient's inventory, dropping any overflow at their feet under the default {@code on-full:
- * drop} policy. A kit set to {@code on-full: deny} is pre-checked for room and granted nothing — a refused
- * {@link Grant#denied()} — when the inventory has too little free space, so the player keeps the claim. The
+ * drop} policy. A kit set to {@code on-full: deny} is pre-checked for room and granted nothing: a refused
+ * {@link Grant#denied()}: when the inventory has too little free space, so the player keeps the claim. The
  * grant runs on the claim command thread, which is the player's own region thread (a command source resolves
  * to the player's region), so the inventory mutation is region-correct without an extra hop.
  *
- * <p>An offline recipient has no inventory to fill, so the grant no-ops and reports that everything "fit" —
+ * <p>An offline recipient has no inventory to fill, so the grant no-ops and reports that everything "fit"
  * there is nothing to overflow. A single corrupt kit item is logged and skipped rather than aborting the
  * whole claim, so one bad item never denies a player the rest of a kit.
  *
@@ -91,7 +91,7 @@ public final class BukkitKitGranter implements KitGranter {
 
     /**
      * The number of empty slots in the main inventory (0&ndash;35). The {@code on-full: deny} gate requires one
-     * free slot per kit stack — a conservative pre-check that guarantees every item fits without overflow, so a
+     * free slot per kit stack. A conservative pre-check that guarantees every item fits without overflow, so a
      * denied claim is never half-filled.
      */
     private int countFreeMainSlots(Player player) {

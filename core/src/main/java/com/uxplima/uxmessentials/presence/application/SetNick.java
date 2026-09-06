@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /nick <name>} and {@code /nick <player> <name>}: set a player's display name. The nick is validated
- * at entry — non-blank, within the length cap, and limited to the safe MiniMessage-free character set — before
+ * at entry (non-blank, within the length cap, and limited to the safe MiniMessage-free character set) before
  * any stamp, so a malformed nick never reaches the {@link NickStore}. Setting your own nick confirms with
  * {@link PresenceMessageKey#NICK_SET}; setting another player's (gated by the adapter's others-node) confirms
  * with {@link PresenceMessageKey#NICK_SET_OTHER} so the actor sees whose name changed.

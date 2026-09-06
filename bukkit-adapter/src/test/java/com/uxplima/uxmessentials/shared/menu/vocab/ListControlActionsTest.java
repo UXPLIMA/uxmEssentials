@@ -54,8 +54,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The three bottom-bar controls a browse menu drives its paged list with — {@code list-sort}, {@code list-filter} and
- * {@code list-search} — exercised end to end through the real {@link MenuListener}. A control click must enter the very
+ * The three bottom-bar controls a browse menu drives its paged list with, {@code list-sort}, {@code list-filter} and
+ * {@code list-search}, exercised end to end through the real {@link MenuListener}. A control click must enter the very
  * same re-query-and-repaint path a page flip takes (Task 6): a scheduler that queues async work lets the in-flight
  * query be observed between clicks, so each control is shown to defer exactly one query behind the shared in-flight
  * flag and to target page zero because the changed sort or filter makes any later page meaningless. A
@@ -349,7 +349,7 @@ class ListControlActionsTest {
         return rows;
     }
 
-    /** Collect what the {@link MenuListener} logs while {@code body} runs — how the unknown-list warning is read. */
+    /** Collect what the {@link MenuListener} logs while {@code body} runs: how the unknown-list warning is read. */
     private static List<LogRecord> captureListenerLog(Runnable body) {
         Logger logger = Logger.getLogger(MenuListener.class.getName());
         List<LogRecord> records = new ArrayList<>();
@@ -452,7 +452,7 @@ class ListControlActionsTest {
 
     /**
      * A scheduler that runs entity/region/global work inline but queues {@code async} work, so a test can observe a
-     * control's query held in flight between clicks and then release it — the same shape {@code PagedListFlipTest} uses.
+     * control's query held in flight between clicks and then release it, the same shape {@code PagedListFlipTest} uses.
      */
     private static final class RecordingScheduler implements Scheduler {
         private final List<Runnable> asyncQueue = new ArrayList<>();

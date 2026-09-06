@@ -5,7 +5,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The read-only {@code SELECT} statements the Olzie PlayerWarps source runs, held as constants so no table name is
  * ever concatenated from input. Olzie uses a fixed {@code playerwarps_} table set (it has no configurable prefix), so
- * — unlike the LiteBans source — there is nothing to sanitise: these are compile-time literal statements that bind
+ *, unlike the LiteBans source, there is nothing to sanitise: these are compile-time literal statements that bind
  * nothing.
  *
  * <p>The warps table carries no explicit id column, so its SQLite {@code rowid} is surfaced as {@code id} and is the
@@ -33,7 +33,7 @@ public final class OlzieTables {
     /** Every whitelist entry. */
     public static final String SELECT_WHITELIST = "SELECT warp_id, player_uuid FROM playerwarps_warps_whitelisted";
 
-    /** Every manager entry — mapped to a warp member with the manager role. */
+    /** Every manager entry, mapped to a warp member with the manager role. */
     public static final String SELECT_MANAGERS = "SELECT warp_id, player_uuid FROM playerwarps_warps_managers";
 
     /** Every ban, with its reason and imposed-at instant. */

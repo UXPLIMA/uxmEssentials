@@ -16,11 +16,11 @@ import org.jspecify.annotations.Nullable;
 /**
  * The in-memory book of pending {@code /trade} requests, keyed by target so {@code /trade accept|deny [player]} can find
  * a request the invoking player was sent. Each entry carries its own send time; a request older than the {@code ttl} is
- * treated as expired — {@link #resolve} removes and reports it as {@link Status#EXPIRED} rather than opening a window, so
+ * treated as expired. {@link #resolve} removes and reports it as {@link Status#EXPIRED} rather than opening a window, so
  * a target who ignores a request for a minute finds it gone. The book keeps at most one live request per
  * (requester, target) pair: a re-send overwrites the previous entry.
  *
- * <p>The decision logic is pure — it reads only its own maps and the injected {@link Clock} — so the expiry and the
+ * <p>The decision logic is pure (it reads only its own maps and the injected {@link Clock}) so the expiry and the
  * accept/deny resolution are unit-testable with a controllable clock. The maps are concurrent because command threads on
  * Folia touch the book from different regions.
  */
@@ -29,7 +29,7 @@ public final class TradeRequests {
 
     /** How a {@code /trade accept|deny} lookup resolved against the book. */
     public enum Status {
-        /** A live request was found and removed — open (accept) or acknowledge (deny) it. */
+        /** A live request was found and removed, open (accept) or acknowledge (deny) it. */
         MATCHED,
         /** A request was found but had already expired; it was removed and no trade should open. */
         EXPIRED,
@@ -109,7 +109,7 @@ public final class TradeRequests {
         return request != null && !expired(request);
     }
 
-    /** The names of everyone with a live request outstanding to {@code target} — the accept/deny suggestion list. */
+    /** The names of everyone with a live request outstanding to {@code target}, the accept/deny suggestion list. */
     public List<String> pendingRequesterNames(UUID target) {
         Objects.requireNonNull(target, "target");
         ConcurrentHashMap<UUID, PendingTradeRequest> pending = byTarget.get(target);

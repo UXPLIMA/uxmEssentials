@@ -173,7 +173,7 @@ class MessagingSettingsGoldenTest {
      * The frozen parity baseline the engine render is asserted against: the exact {@code (slot → material, name,
      * value-lore)} the bespoke {@code SettingsPanelView} drew for a staff fixture with social-spy off. The shim now
      * makes {@code SettingsPanelView} ride the engine, so a live "before" render is no longer a faithful "before";
-     * the baseline is therefore the geometry + catalog keys read off the retired view — the same way the kit/warp
+     * the baseline is therefore the geometry + catalog keys read off the retired view, the same way the kit/warp
      * golden tests freeze their baseline. Names resolve to the catalog key itself ({@code KeyMessages} echoes it),
      * and each toggle's value-lore is {@code value=<on/off key>}, with the social-spy toggle always off here.
      */

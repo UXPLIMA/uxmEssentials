@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  * Pins the {@link com.uxplima.uxmessentials.ranks.application.Prestige} use case's eligibility and ordering. A
  * player at the very top rank prestiges: the pointer resets to the first rank, the level increments, the cost is
  * charged and the actions fire, and the earned reward multiplier is carried back. Off the top rank, at the level
- * cap, on a failed requirement or a short balance the attempt refuses atomically — nothing charged, no reset, no
+ * cap, on a failed requirement or a short balance the attempt refuses atomically. Nothing charged, no reset, no
  * actions. The economy, requirement evaluator and action runner are fakes, so the decision logic is exercised in
  * pure isolation from Bukkit, PlaceholderAPI and the database. The domain {@code Prestige} value is imported
  * here, so the use case is referenced by its fully qualified name.

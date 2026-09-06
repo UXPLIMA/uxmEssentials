@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.shared.network.BusTransport;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The no-op {@link BusTransport} the bus degrades to when the configured transport cannot be wired — most
+ * The no-op {@link BusTransport} the bus degrades to when the configured transport cannot be wired, most
  * notably when {@code network.transport=redis} is selected but the {@code uxmEssentials-redis} companion jar is
  * not deployed, so its factory class is absent at runtime. It delivers no frames and reports unhealthy, which is
  * exactly the {@link BusTransport} degradation contract: the bus runs local-only with no behavioural change to
@@ -21,7 +21,7 @@ final class LocalOnlyBusTransport implements BusTransport {
 
     @Override
     public void start(Consumer<byte[]> onFrame) {
-        // Nothing to start — no wire to peers exists, so no inbound frame is ever delivered to onFrame.
+        // Nothing to start: no wire to peers exists, so no inbound frame is ever delivered to onFrame.
     }
 
     @Override

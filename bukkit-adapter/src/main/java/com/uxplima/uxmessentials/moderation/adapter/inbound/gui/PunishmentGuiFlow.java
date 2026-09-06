@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * duration step. The reusable views stay generic: this flow supplies the per-verb titles, the offline-name
  * resolver (the moderation {@code TargetResolver}, so a typed offline name still resolves), the unknown-player
  * reply key, the duration validator (backed by {@link SanctionDuration}), and the pick/confirm callbacks. The
- * {@link PunishmentAction.Executor} is the only verb-specific code — it routes the chosen target to the matching
+ * {@link PunishmentAction.Executor} is the only verb-specific code. It routes the chosen target to the matching
  * audited use case. No sanction is issued until a confirm button is clicked.
  *
  * <p>{@code /banip} bans the picked player's last-known address: its executor resolves the IP from the same
@@ -45,7 +45,7 @@ public final class PunishmentGuiFlow {
     /** A permanent mute carries no duration token; the timed form is {@code /tempmute}. */
     private static final String PERMANENT = "";
 
-    /** {@code /banip} is permanent — its address ban carries no duration token. */
+    /** {@code /banip} is permanent: its address ban carries no duration token. */
     private static final String NO_DURATION = "";
 
     private final ModerationServices services;
@@ -117,7 +117,7 @@ public final class PunishmentGuiFlow {
         confirm.open(viewer, viewerRef, target, action, executor, () -> open(viewer, viewerRef, action));
     }
 
-    /** A timed verb accepts only a positive, well-formed span — a permanent or malformed parse is rejected. */
+    /** A timed verb accepts only a positive, well-formed span: a permanent or malformed parse is rejected. */
     private static boolean isTimedDuration(String raw) {
         return SanctionDuration.parse(raw).duration().isPresent();
     }

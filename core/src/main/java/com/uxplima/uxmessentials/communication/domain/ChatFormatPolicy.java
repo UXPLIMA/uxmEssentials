@@ -10,10 +10,10 @@ import org.jspecify.annotations.Nullable;
  * optional per-group override map (keyed by a player's primary permission group) and the two switches that
  * decide how much of a message the plugin styles: {@link #enabled} (off leaves vanilla chat untouched) and
  * {@link #allowPlayerFormat} (whether a permitted speaker may write MiniMessage in their own message). The
- * policy is pure operator content — it holds the raw format strings and answers "which format applies to this
+ * policy is pure operator content. It holds the raw format strings and answers "which format applies to this
  * group?"; it neither substitutes tokens nor parses MiniMessage, both of which happen in the adapter renderer.
  *
- * <p>The format strings are MiniMessage with the placeholders the renderer resolves — {@code <prefix>},
+ * <p>The format strings are MiniMessage with the placeholders the renderer resolves, {@code <prefix>},
  * {@code <suffix>}, {@code <display_name>}, {@code <name>}, {@code <world>}, and {@code <message>}. The
  * {@link #nameHover} / {@link #nameClick} strings are the optional hover text and click target the renderer
  * decorates the name span with; blank means none.

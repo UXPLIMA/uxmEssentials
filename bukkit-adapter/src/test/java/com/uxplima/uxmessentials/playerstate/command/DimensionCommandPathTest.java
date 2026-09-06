@@ -58,7 +58,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of {@code /dimension}: report the canonical dimension key plus the friendly environment of
  * the world the player is standing in, read from {@code World#getKey()} and {@code World#getEnvironment()}. A pure
- * read in the adapter — none of the playerstate use cases run, so they are all mocked. The {@link Messages} fake
+ * read in the adapter: none of the playerstate use cases run, so they are all mocked. The {@link Messages} fake
  * echoes the resolved key and its placeholders so the show line and the {@code dimension} placeholder are
  * observable through the sender's message queue. The dimension key is data, so the test asserts on the
  * {@code dimension=} token rather than a specific value to stay robust across MockBukkit's default world.
@@ -122,7 +122,7 @@ class DimensionCommandPathTest {
         PlayerMock player = server.addPlayer("Explorer");
         player.addAttachment(MockBukkit.createMockPlugin(), PERMISSION, true);
         // MockBukkit's stock WorldMock#getKey() is unimplemented, so stand the player in a world that
-        // returns a real key — that key is exactly what /dimension reports and /world never shows.
+        // returns a real key: that key is exactly what /dimension reports and /world never shows.
         WorldMock keyed = new KeyedWorldMock(NamespacedKey.minecraft("the_nether"));
         server.addWorld(keyed);
         player.setLocation(new Location(keyed, 0, 64, 0));

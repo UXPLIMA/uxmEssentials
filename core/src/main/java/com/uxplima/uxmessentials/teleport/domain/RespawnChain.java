@@ -37,7 +37,7 @@ public record RespawnChain(List<RespawnStep> steps) {
         return new RespawnChain(parsed);
     }
 
-    /** True when the chain names no steps — the caller falls back to vanilla respawn. */
+    /** True when the chain names no steps: the caller falls back to vanilla respawn. */
     public boolean isEmpty() {
         return steps.isEmpty();
     }

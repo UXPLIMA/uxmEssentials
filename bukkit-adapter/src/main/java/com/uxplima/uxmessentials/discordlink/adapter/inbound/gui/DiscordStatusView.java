@@ -33,14 +33,14 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The per-player Discord link-status panel ({@code /discordlink gui}, and the discordlink entry on the
- * {@code /uxmess gui} hub): a {@link SettingsPanelView} of two buttons read FRESH each open — a read-only status
+ * {@code /uxmess gui} hub): a {@link SettingsPanelView} of two buttons read FRESH each open: a read-only status
  * line showing the viewer's current binding, and a state-dependent action. When the viewer is not linked the
  * action runs the {@link BeginLink} use case (exactly what {@code /discordlink} does), telling them the generated
  * code through the same {@link Notifier} chat messages; when they are linked the action runs the
  * {@link Unlink} use case behind a confirm (exactly what {@code /discordunlink} does).
  *
- * <p>The panel holds no domain logic of its own. Linking is code-based — the redemption itself happens in Discord
- * through the bridge's {@code /link} slash command, not in any in-game menu — so the panel honestly surfaces only
+ * <p>The panel holds no domain logic of its own. Linking is code-based. The redemption itself happens in Discord
+ * through the bridge's {@code /link} slash command, not in any in-game menu, so the panel honestly surfaces only
  * what the use cases support: the status, a generate-code button, and an unlink button. Every visible string is a
  * {@link DiscordlinkMessageKey}; the use-case writes hop off the tick thread through the kernel {@link Scheduler}.
  */

@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * An {@link EconomyAudit} decorator that, alongside the wrapped trail, appends a plain human-readable line to a
- * dedicated {@code economy/operations.log} an operator can grep — separate from both the structured operator log
+ * dedicated {@code economy/operations.log} an operator can grep. Separate from both the structured operator log
  * ({@link LoggingEconomyAudit}) and the {@code transactions} telemetry table. Lines use player names rather than
  * UUIDs (a review reads "Steve paid 500 to Alex", not two UUIDs). Every write is dispatched off the calling
  * thread through the kernel {@link com.uxplima.uxmessentials.shared.application.port.Scheduler}, so the audit

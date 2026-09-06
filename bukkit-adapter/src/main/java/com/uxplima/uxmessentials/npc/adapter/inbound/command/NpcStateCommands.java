@@ -41,7 +41,7 @@ final class NpcStateCommands extends NpcCommandSupport {
     private static final String NOT_VISIBLE_KEYWORD = "not_visible";
 
     private static final String ALWAYS_VISIBLE_KEYWORD = "always_visible";
-    /** The block range that stands in for "always visible" — far beyond any practical view distance, still finite. */
+    /** The block range that stands in for "always visible", far beyond any practical view distance, still finite. */
     private static final double ALWAYS_VISIBLE_BLOCKS = 100_000.0;
 
     NpcStateCommands(NpcServices services, Supplier<? extends Collection<String>> npcNames, Messages messages) {
@@ -168,7 +168,7 @@ final class NpcStateCommands extends NpcCommandSupport {
         return Command.SINGLE_SUCCESS;
     }
 
-    /** Resolve a visibility sentinel to its block range — 0 for {@code not_visible}, far for {@code always_visible} — or {@code null}. */
+    /** Resolve a visibility sentinel to its block range (0 for {@code not_visible}, far for {@code always_visible}) or {@code null}. */
     static @org.jspecify.annotations.Nullable Double sentinelBlocks(String word) {
         if (word.equalsIgnoreCase(NOT_VISIBLE_KEYWORD)) {
             return 0.0;

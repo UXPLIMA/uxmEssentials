@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A player's hunger was restored by {@code /feed} — an apply-once effect with no persisted flag, so this
+ * A player's hunger was restored by {@code /feed}. An apply-once effect with no persisted flag, so this
  * event is the only record the context emits for it.
  *
  * @param subject the player who was fed

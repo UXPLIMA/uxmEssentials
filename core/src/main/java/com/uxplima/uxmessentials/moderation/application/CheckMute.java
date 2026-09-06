@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /checkmute <player>}: report whether a player is currently muted, and if so the issuer, reason and
  * expiry of the active mute. A read-only point lookup against the DB-backed sanction store ({@code loadMute})
- * — unlike {@code /mutehistory}, which lists the full record, this answers the single "is this player muted
+ *. Unlike {@code /mutehistory}, which lists the full record, this answers the single "is this player muted
  * right now?" question staff ask before a fresh sanction. The command runs the read off the tick thread.
  *
  * <p>A timed mute whose expiry has already passed reports as not muted, so the check reflects the live gate the

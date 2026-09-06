@@ -19,14 +19,14 @@ import com.uxplima.uxmessentials.teleport.domain.SafeSearchArea;
  * The pre-warm half of the durable RTP pool: on module enable it re-populates a world's in-memory queue from the
  * persisted columns, so the first {@code /rtp} after a restart serves instantly instead of triggering a cold
  * search storm. It loads up to {@code limit} columns for the world off the tick thread, then re-probes each one
- * through the {@link AsyncSafeLocationFinder} — a persisted column is trusted only as a horizontal coordinate, so
+ * through the {@link AsyncSafeLocationFinder}. A persisted column is trusted only as a horizontal coordinate, so
  * the finder resolves a fresh landing Y and re-runs the full safety policy before the column re-enters the queue.
  * A known-good column re-probes fast with a high hit rate (one async chunk load that almost always passes), which
  * is the whole point: it replaces the cold 40-attempt search the first player would otherwise pay for.
  *
  * <p>Nothing here blocks or storms. The load is dispatched through the {@link Scheduler} so the synchronous
  * relational read never runs on a region thread, and the re-probes are run one at a time, spaced a couple of ticks
- * apart through the same scheduler — the P1 budget/slicing discipline — so pre-warm itself never fires N chunk
+ * apart through the same scheduler, the P1 budget/slicing discipline, so pre-warm itself never fires N chunk
  * loads at once. Each re-validated location is handed to the {@code sink} (which offers it into the queue); a
  * column the world has changed under resolves to empty and is silently dropped, never served stale.
  */

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * In-memory {@link DiscordGateway} for tests — records every send instead of talking to Discord, so the
+ * In-memory {@link DiscordGateway} for tests. Records every send instead of talking to Discord, so the
  * {@link NotificationForwarder} rules are verified with no live JDA connection (CLAUDE.md: "tests use a fake
  * gateway").
  */

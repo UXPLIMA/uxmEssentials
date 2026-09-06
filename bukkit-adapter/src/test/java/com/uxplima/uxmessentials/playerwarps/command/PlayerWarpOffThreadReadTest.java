@@ -89,14 +89,14 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * Pins that {@code /pwarp} resolves the player-warp store <em>off</em> the command (tick/region) thread. A
- * {@code /pwarp} subcommand that reads the database to decide its outcome — here {@code edit}, which looks the warp
- * up before opening its editor or reporting it missing — must not read on the thread Brigadier dispatched it on; the
+ * {@code /pwarp} subcommand that reads the database to decide its outcome. Here {@code edit}, which looks the warp
+ * up before opening its editor or reporting it missing. Must not read on the thread Brigadier dispatched it on; the
  * read belongs in a {@link Scheduler#async} task that bridges its feedback back to the player's region thread, the
  * same shape {@code /home} uses.
  *
  * <p>The scheduler here is a <em>deferring</em> double: {@code async} captures the task without running it, and
- * {@code onEntity} runs inline (the region bridge). So after dispatch the repository has seen zero reads —
- * proving the lookup did not run on the command thread — and only once the captured task is drained does the
+ * {@code onEntity} runs inline (the region bridge). So after dispatch the repository has seen zero reads
+ * proving the lookup did not run on the command thread, and only once the captured task is drained does the
  * read happen and the feedback land.
  */
 class PlayerWarpOffThreadReadTest {
@@ -133,14 +133,14 @@ class PlayerWarpOffThreadReadTest {
 
         execute(dispatcher, "pwarp edit hub");
 
-        // The command returned without touching the database — the existence read was handed to scheduler.async.
+        // The command returned without touching the database: the existence read was handed to scheduler.async.
         assertThat(repository.reads).isZero();
         assertThat(scheduler.deferred).hasSize(1);
 
         scheduler.drain();
 
         // Draining the captured task is what performed the existence read and the not-found feedback, which the
-        // region bridge (onEntity, run inline here) delivered to the player — no warp named "hub" exists.
+        // region bridge (onEntity, run inline here) delivered to the player: no warp named "hub" exists.
         assertThat(repository.reads).isPositive();
         assertThat(player.nextMessage()).isNotNull();
     }
@@ -151,7 +151,7 @@ class PlayerWarpOffThreadReadTest {
 
         execute(dispatcher, "pwarp access hub PUBLIC");
 
-        // The edit verb returned without touching the database — the warp lookup was handed to scheduler.async.
+        // The edit verb returned without touching the database: the warp lookup was handed to scheduler.async.
         assertThat(repository.reads).isZero();
         assertThat(scheduler.deferred).hasSize(1);
 

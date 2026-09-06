@@ -18,8 +18,8 @@ import org.jspecify.annotations.NullMarked;
  * party counter. Built during vote wiring from the same repository the {@code HandleVote} use case
  * holds, so the placeholder counts match what the leaderboard and total commands display.
  *
- * <p>The threshold placeholders reflect the <em>effective</em> threshold — the stored override when
- * one is active, the configured base otherwise — so they stay accurate under escalation.
+ * <p>The threshold placeholders reflect the <em>effective</em> threshold. The stored override when
+ * one is active, the configured base otherwise, so they stay accurate under escalation.
  *
  * <p>Indexed leaderboard placeholders ({@link #topAt}, {@link #positionOf}) fetch the top-{@value #LEADERBOARD_LIMIT}
  * rows per query. The result is small and bounded, so no extra cache is added at this layer; the
@@ -27,7 +27,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The repository stores each ranked player's name as their UUID string (the persistence layer has no
  * profile table), so {@link #topAt} resolves the UUID to a display name through the supplied
- * {@code nameResolver} — the same lookup the {@code /vote top} command uses — before handing the row
+ * {@code nameResolver}, the same lookup the {@code /vote top} command uses, before handing the row
  * back. Without this, a {@code votes_top_<period>_<n>_name} placeholder on a hologram or scoreboard
  * would render a raw UUID. The resolver falls back to the UUID string when the profile is unknown.
  */

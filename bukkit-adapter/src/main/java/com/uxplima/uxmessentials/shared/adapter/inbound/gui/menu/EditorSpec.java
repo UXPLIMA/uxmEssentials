@@ -20,10 +20,10 @@ import org.jspecify.annotations.Nullable;
 /**
  * The editor analog of a {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpec}: the
  * recipe the engine draws a typed property editor from. It re-homes exactly the fields the bespoke
- * {@code EntityEditorView.Builder} already collects — the {@link EntityEditorLayout} (rows, the ordered property
+ * {@code EntityEditorView.Builder} already collects. The {@link EntityEditorLayout} (rows, the ordered property
  * slots, the back/delete slots and their materials), a per-viewer title, the value-lore catalog line each
  * property's current value renders into, the back label, an optional delete label plus confirm title, and the
- * function that derives the live property list from the subject — and adds the back/optional-delete callbacks.
+ * function that derives the live property list from the subject, and adds the back/optional-delete callbacks.
  *
  * <p>This is the engine's public editor surface, opened through {@link Menus#openEditor}. Unlike the bespoke view
  * it is type-erased on the subject ({@code Object}): the engine routes clicks and re-renders without naming the

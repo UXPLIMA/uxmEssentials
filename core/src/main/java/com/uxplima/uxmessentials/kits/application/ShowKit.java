@@ -18,11 +18,11 @@ import com.uxplima.uxmessentials.shared.domain.Result;
  * so a player can see what a kit grants before spending its cooldown (or its cost). An id no kit exists under
  * is refused with {@link KitError#NOT_FOUND}.
  *
- * <p>This never grants anything and never touches the claim/cooldown state — it is a pure read. On a
+ * <p>This never grants anything and never touches the claim/cooldown state: it is a pure read. On a
  * missing kit the not-found feedback is pushed through the notifier so it resolves from
  * {@link KitError}. On a hit the resolved definition is returned so the adapter can render the header and
  * one entry per stack: the per-item line needs the stack's material/display name, which lives in the
- * opaque {@code KitItem} payload the kernel must not parse, so only the adapter — holding the item codec —
+ * opaque {@code KitItem} payload the kernel must not parse, so only the adapter, holding the item codec,
  * can render those lines.
  */
 public final class ShowKit {

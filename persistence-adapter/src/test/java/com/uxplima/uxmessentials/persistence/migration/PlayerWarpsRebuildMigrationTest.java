@@ -24,8 +24,8 @@ import org.junit.jupiter.api.io.TempDir;
  * Covers V70 ({@code player_warps} rebuilt around a surrogate id, plus the nine side tables) the way the
  * established migration tests cover their version, against the default embedded SQLite backend. It proves the
  * rebuilt table carries the new typed columns and a full row round-trips, that every one of the nine side tables
- * exists, that the globally-unique {@code name} constraint rejects a duplicate under a different owner, and — the
- * point of a rename-not-drop rebuild — that the two legacy tables survive under their {@code _v1_legacy} names so
+ * exists, that the globally-unique {@code name} constraint rejects a duplicate under a different owner, and, the
+ * point of a rename-not-drop rebuild. That the two legacy tables survive under their {@code _v1_legacy} names so
  * the one-shot data migration can still read them.
  *
  * <p>Infrastructure mirrors {@code WarpCategoriesMigrationTest}: it reuses the production
@@ -172,7 +172,7 @@ class PlayerWarpsRebuildMigrationTest {
                 .execute());
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

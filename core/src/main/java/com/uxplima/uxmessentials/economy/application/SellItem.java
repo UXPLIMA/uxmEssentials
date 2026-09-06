@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /sell}: convert a counted material into currency at its configured {@link WorthSource} worth and
- * credit the seller through the {@link EconomyProvider} — never a PDC stamp, so the proceeds survive a world
+ * credit the seller through the {@link EconomyProvider}. Never a PDC stamp, so the proceeds survive a world
  * rollback like every other balance (the economy hard invariant). Returns a {@link SellOutcome} so the
  * adapter knows whether to remove the items from the inventory: only a credit that actually applied is
  * {@code sold}. An unpriced material, an empty hand, and a clamp rejection are each refused with the matching

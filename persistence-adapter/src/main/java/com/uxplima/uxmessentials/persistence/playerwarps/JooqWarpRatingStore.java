@@ -17,7 +17,7 @@ import org.jooq.impl.DSL;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * jOOQ-backed {@link WarpRatingStore} over the generated {@code PLAYER_WARP_RATINGS} table — one row per
+ * jOOQ-backed {@link WarpRatingStore} over the generated {@code PLAYER_WARP_RATINGS} table, one row per
  * {@code (warp_id, player_uuid)}. {@link #put} upserts on the composite key, so re-rating overwrites a player's star
  * in place rather than stacking a second vote; the star and its timestamp are the only columns a re-rate moves.
  * {@link #tally} folds the warp's rows into a {@link RatingTally}, guarding the null {@code SUM} a rating-less warp

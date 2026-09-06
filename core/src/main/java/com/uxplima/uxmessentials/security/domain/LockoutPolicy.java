@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.security.domain;
 /**
  * The pure decision behind the join-verification lockout: given how many times a player has failed to prove their
  * second factor this session, decide whether they may try again or have exhausted their attempts and must be kicked.
- * It is a value object so the rule is unit-testable without a player, a keypad, or a clock — the keypad adapter feeds
+ * It is a value object so the rule is unit-testable without a player, a keypad, or a clock. The keypad adapter feeds
  * it the running failure count and acts on the verdict.
  *
  * <p>The count passed to {@link #evaluate(int)} is the total <em>after</em> the latest failure, so a policy of
@@ -29,7 +29,7 @@ public record LockoutPolicy(int maxAttempts) {
         return failuresSoFar >= maxAttempts ? AttemptOutcome.LOCKED_OUT : AttemptOutcome.RETRY;
     }
 
-    /** How many attempts remain after {@code failuresSoFar} failures — clamped at zero, never negative. */
+    /** How many attempts remain after {@code failuresSoFar} failures, clamped at zero, never negative. */
     public int remaining(int failuresSoFar) {
         return Math.max(0, maxAttempts - Math.max(0, failuresSoFar));
     }

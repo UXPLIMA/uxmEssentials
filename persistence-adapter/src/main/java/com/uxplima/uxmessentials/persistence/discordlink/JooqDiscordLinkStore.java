@@ -19,12 +19,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The jOOQ-backed {@link DiscordLinkStore} over the generated {@code DISCORD_LINK_PENDING} and
  * {@code DISCORD_LINKS} tables. A pending code is one row per player keyed on the player uuid, so
- * {@code savePending} upserts on that key — a fresh {@code /discordlink} replaces the player's previous code in
+ * {@code savePending} upserts on that key. A fresh {@code /discordlink} replaces the player's previous code in
  * place. A confirmation upserts the binding and deletes the player's pending row in a single transaction so a
  * redeemed code is never redeemable twice. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.
  *
  * <p>The store carries no Caffeine cache: linking is a rare, low-traffic operation, so a read-through cache
- * would add invalidation surface for no benefit — this matches the un-cached jail-location store rather than
+ * would add invalidation surface for no benefit. This matches the un-cached jail-location store rather than
  * the per-owner warp/home repositories.
  */
 @NullMarked

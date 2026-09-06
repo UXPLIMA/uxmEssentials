@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * The minimal projection the reminder pass reads for one warp whose paid term is approaching: its id and name, its
  * owner (the mail recipient), when its rent falls due, and the highest reminder stage it has already been mailed.
  * This is a persistence read model, not the full {@link com.uxplima.uxmessentials.playerwarps.domain.PlayerWarp}
- * aggregate — the {@code rent_reminded_stage} dedup counter lives only on the row, never on the aggregate, so the
+ * aggregate. The {@code rent_reminded_stage} dedup counter lives only on the row, never on the aggregate, so the
  * reminder pass reads exactly these columns rather than materialising every warp fact just to send a heads-up.
  *
  * @param id the warp's surrogate key

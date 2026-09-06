@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  * registered management-GUI entry the viewer may use, each a clickable icon launching that module's GUI.
  *
  * <p>Attached under the {@code /uxmess} root (alongside {@code status}/{@code doctor}/{@code reload}), it
- * gates on its own {@code uxmessentials.gui} node — the per-module entries inside the hub gate further on
+ * gates on its own {@code uxmessentials.gui} node. The per-module entries inside the hub gate further on
  * each module's own {@code uxmessentials.<module>.gui} node, resolved through the shared {@link Permissions}
  * port when the hub filters its contents. The command is player-only (a hub is a screen): a console source
  * gets the shared players-only reply, and a viewer who is permitted no entries gets the {@code gui.hub.empty}

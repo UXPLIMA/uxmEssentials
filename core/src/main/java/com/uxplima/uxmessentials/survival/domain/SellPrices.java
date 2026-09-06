@@ -10,12 +10,12 @@ import java.util.Optional;
 /**
  * The autosell price table: the per-item price each sellable material fetches when autosell credits a break's drops to
  * the player's wallet. It is the pure lookup behind "sell drops to the economy at configured prices" (modelled on
- * AdvancedAutoSmelt's {@code sell_prices.yml}) — the adapter iterates the computed drops and credits the wallet, but
+ * AdvancedAutoSmelt's {@code sell_prices.yml}). The adapter iterates the computed drops and credits the wallet, but
  * the price maths carries no economy or Bukkit identity, so it is unit-testable on plain strings and {@link BigDecimal}.
  *
  * <p>Prices are stored per single item; {@link #saleValue(String, int)} multiplies by the stack amount so a stack of
  * sixty-four sells for sixty-four times its unit price. A material absent from the table is not sellable and its drop
- * simply falls through to autopickup or the ground — autosell never destroys an item it cannot price.
+ * simply falls through to autopickup or the ground: autosell never destroys an item it cannot price.
  *
  * @param prices the material name → per-item price pairs (each price finite and non-negative)
  */

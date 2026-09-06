@@ -5,7 +5,7 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
 /**
  * The modelled failures a single-sided wallet operation (a credit or a debit) can produce. Each value
  * carries the {@link EconomyMessageKey} the command adapter renders, so a use case returns a
- * {@code Result.err(EconomyError.X)} and the caller never re-derives the message — the failure reason and
+ * {@code Result.err(EconomyError.X)} and the caller never re-derives the message, the failure reason and
  * its localized text never drift apart, mirroring {@code HomeError}/{@code WarpError}.
  *
  * <p>A debit short of funds is {@link #INSUFFICIENT_FUNDS} (rejected, never clamped); a credit that would

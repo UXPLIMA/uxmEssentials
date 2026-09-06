@@ -207,7 +207,7 @@ class VillagerManagerViewTest {
         return recipe;
     }
 
-    /** Resolves each key to its own id — enough for the text path the tests do not assert wording on. */
+    /** Resolves each key to its own id: enough for the text path the tests do not assert wording on. */
     private static final class KeyMessages implements Messages {
         @Override
         public String resolve(PlayerRef viewer, MessageKey key, Map<String, String> placeholders) {

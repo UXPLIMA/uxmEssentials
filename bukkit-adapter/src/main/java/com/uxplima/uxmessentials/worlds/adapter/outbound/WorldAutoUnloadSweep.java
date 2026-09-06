@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The idle world auto-unload sweep. When enabled, a repeating global-region task wakes every configured
  * interval, looks at every loaded world, and unloads the ones that have sat empty at-or-past the configured
- * idle threshold — skipping the protected default world and any explicitly excluded world. The pure
+ * idle threshold: skipping the protected default world and any explicitly excluded world. The pure
  * {@link AutoUnloadPolicy#shouldUnload(int, Duration, Duration)} owns the decision; this adapter only feeds
  * it live counts and acts on the verdict.
  *
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p><b>Threading.</b> {@link #tick} runs on the global region thread (where unloading a world handle is
  * legal), so it is the only place that reads the idle map and calls into the engine. The map is a
- * {@link ConcurrentHashMap} purely as belt-and-suspenders — the sweep is single-threaded on that one thread,
+ * {@link ConcurrentHashMap} purely as belt-and-suspenders. The sweep is single-threaded on that one thread,
  * so no entry is ever touched concurrently.
  */
 @NullMarked

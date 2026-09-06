@@ -9,12 +9,12 @@ import java.util.Optional;
  * The pure line-editing rules behind {@code /itemedit lore}: append, replace, insert, remove and clear operations
  * over an abstract {@code List<String>} of lore lines, with the index-bounds checking owned here rather than at the
  * Bukkit boundary. Each line is an opaque source string (a MiniMessage line in the adapter's use), so the policy
- * knows nothing of {@code ItemMeta} or {@code Component} — the adapter reads the held item's current lore into a
+ * knows nothing of {@code ItemMeta} or {@code Component}. The adapter reads the held item's current lore into a
  * string list, applies one operation here, and writes the result back onto the meta.
  *
  * <p>Line numbers are <em>1-based</em>, matching how a player counts lore lines in the {@code /itemedit lore set 3
  * …} form: {@link #set} and {@link #remove} accept {@code 1..size}, and {@link #insert} accepts {@code 1..size+1}
- * (inserting at {@code size+1} appends). An out-of-range line number is a first-class, expected outcome — the
+ * (inserting at {@code size+1} appends). An out-of-range line number is a first-class, expected outcome, the
  * operation returns {@link Optional#empty()} (the adapter renders {@link ItemworldMessageKey#ITEMEDIT_LORE_OUT_OF_RANGE})
  * rather than throwing. Every returned list is a fresh immutable copy; the input list is never mutated.
  */

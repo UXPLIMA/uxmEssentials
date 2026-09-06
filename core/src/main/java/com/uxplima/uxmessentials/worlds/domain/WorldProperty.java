@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 /**
  * A single typed per-world property: its catalog key, default, string codec (the {@code decode}
- * doubles as the validator — empty means "invalid" for the typed properties; the string properties
+ * doubles as the validator. Empty means "invalid" for the typed properties; the string properties
  * accept any value, treating {@code ""} as the explicit "unset / vanilla" link), and tab-completion
  * suggestions. One descriptor
  * is the single source of truth driving the {@code /worlds set} argument, the {@code world_setting}

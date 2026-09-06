@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /broadcastworld <message>} (alias {@code /bcw}, node
  * {@code uxmessentials.communication.broadcastworld}): fire a one-off announcement only to the players in the
- * sender's own world. It mirrors {@code /broadcast} but restricts the fan-out, so it is players-only — the
+ * sender's own world. It mirrors {@code /broadcast} but restricts the fan-out, so it is players-only, the
  * sender's world is the filter, and a console source has none, so it falls through the players-only gate the
  * {@link CommunicationCommandSupport} provides.
  *

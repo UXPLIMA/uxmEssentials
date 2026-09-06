@@ -24,7 +24,7 @@ public final class AnnouncementStores {
         return new JooqAnnouncementStore(persistence.dsl());
     }
 
-    /** A jOOQ {@link AnnouncerSettingsStore} over the shared persistence DSL — the single global-settings row. */
+    /** A jOOQ {@link AnnouncerSettingsStore} over the shared persistence DSL: the single global-settings row. */
     public static AnnouncerSettingsStore settings(Persistence persistence) {
         Objects.requireNonNull(persistence, "persistence");
         return new JooqAnnouncerSettingsStore(persistence.dsl());

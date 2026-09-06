@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Identity of a single trade session — a surrogate {@link UUID} minted when two players open a trade.
+ * Identity of a single trade session: a surrogate {@link UUID} minted when two players open a trade.
  *
  * <p>A trade has no natural key: the same pair of players may trade many times, so the session is addressed by a
  * generated id rather than by its participants. The id travels with the session across a region hop and, in the

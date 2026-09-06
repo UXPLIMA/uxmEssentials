@@ -14,7 +14,7 @@ import java.util.Optional;
  * <p>The layout positions entries through the client's <em>list-order</em> sort key (Paper 1.21.2+): a higher order sorts
  * a row nearer the top. {@link #slotToListOrder} turns a slot into that key so slot {@code 1} sorts highest among the
  * fillers and the last slot lowest. {@link #realPlayerOrder()} sits above every filler order so the real players occupy
- * the early slots and the fillers fill the cells after them. This is pure arithmetic — no Bukkit, no packets.
+ * the early slots and the fillers fill the cells after them. This is pure arithmetic: no Bukkit, no packets.
  *
  * <p>An {@link #empty()} layout carries no fillers and renders inert: a format with no layout behaves exactly as it did
  * before fillers existed (the native/skin name/order path, untouched). The fillers are held in the order the codec hands
@@ -48,7 +48,7 @@ public record TablistLayout(
     /** The vanilla tab list is four columns wide; the slot arithmetic mirrors the client's fill order. */
     public static final int COLUMNS = 4;
 
-    /** The standard tab list is four columns of twenty cells — eighty slots. */
+    /** The standard tab list is four columns of twenty cells: eighty slots. */
     public static final int DEFAULT_GRID_ROWS = 20;
 
     /** Modern clients accept at most eighty player-list entries in the conventional four-column grid. */
@@ -113,7 +113,7 @@ public record TablistLayout(
         return new TablistLayout(List.of(), List.of(), Optional.empty(), Direction.COLUMNS, DEFAULT_GRID_ROWS, false);
     }
 
-    /** True when this layout paints no filler rows — the format renders exactly as it did before fillers existed. */
+    /** True when this layout paints no filler rows: the format renders exactly as it did before fillers existed. */
     public boolean isEmpty() {
         return fillers.isEmpty() && groups.isEmpty() && !exact;
     }

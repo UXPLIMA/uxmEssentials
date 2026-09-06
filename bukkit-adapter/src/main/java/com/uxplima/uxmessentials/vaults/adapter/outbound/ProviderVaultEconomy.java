@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Bridges the vaults context's narrow {@link VaultEconomy} seam to the resolved {@link EconomyProvider}, so a
- * per-action vault fee can be charged — and a delete refund paid — in the server's default currency without
+ * per-action vault fee can be charged, and a delete refund paid, in the server's default currency without
  * the vaults context ever importing an economy type (docs/11-economy-integration.md §4.2). This adapter is
  * constructed only when economy is wired <em>and</em> the vaults config opts in; when economy is absent the
  * wiring hands {@link VaultEconomy#NONE} to {@code VaultCharge} instead, so no charge ever fires on a server

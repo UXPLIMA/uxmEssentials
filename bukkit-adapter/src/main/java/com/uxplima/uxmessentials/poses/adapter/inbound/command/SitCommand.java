@@ -36,8 +36,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /sit} ({@code uxmessentials.sit.use}): sit down where you stand, or on the sittable block you look at
  * within reach. The {@link StartSit} use case owns the region gate, the one-session invariant, and the seat; this
- * handler only resolves <em>which</em> block to sit on — the {@link SeatGeometry} of the looked-at block when
- * {@code sit-on-blocks} is on and it is sittable, otherwise the player's own feet — and renders the outcome.
+ * handler only resolves <em>which</em> block to sit on, the {@link SeatGeometry} of the looked-at block when
+ * {@code sit-on-blocks} is on and it is sittable, otherwise the player's own feet, and renders the outcome.
  *
  * <p>The command is a toggle: run it while already sitting and it stands the player back up, so the same word both
  * seats and unseats. Only a plain sit toggles; a player sitting <em>on another player</em> is a different session

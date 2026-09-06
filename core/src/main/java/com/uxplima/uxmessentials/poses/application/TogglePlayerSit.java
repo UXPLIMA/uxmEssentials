@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.poses.application.port.PlayerSitPreferences;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Flips a player's personal "may others sit on me" preference — the {@code /poses toggle} verb. It is a thin
+ * Flips a player's personal "may others sit on me" preference: the {@code /poses toggle} verb. It is a thin
  * front over {@link PlayerSitPreferences#toggle}, returning the new state so the command renders the right message
  * ({@code now allowed} / {@code now refused}). The default is permissive, so a first toggle turns refusal on.
  */

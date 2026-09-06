@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.economy.domain.Money;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A loan's principal was credited to the debtor's wallet — the disbursement leg of {@code /loan take}. Carries
+ * A loan's principal was credited to the debtor's wallet, the disbursement leg of {@code /loan take}. Carries
  * the loan id, the debtor, and the principal moved, so audit and any consuming context observe the
  * money-creation event exactly once. Maps to one {@code event=loan_disburse} audit line.
  *

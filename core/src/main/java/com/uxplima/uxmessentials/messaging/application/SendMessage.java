@@ -29,11 +29,11 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /msg <player> <text>}: send a private message, applying every delivery gate in order. The target is
  * already resolved by the command adapter, whose lookup is vanish-aware (a vanished target the sender cannot
- * see is handed to this use case as offline — {@code targetOnline=false} — so its presence is never leaked,
+ * see is handed to this use case as offline, {@code targetOnline=false}, so its presence is never leaked,
  * the same {@code canSee} seam the teleport context applies to {@code /tpa}). This use case then gates on the
  * online branch on mute (the moderation soft-couple), self,
  * toggle, and ignore: a target who toggled DMs off rejects with a visible reason; a target who ignores the
- * sender silently declines — the sender's echo still says delivered, so an ignore is not observable,
+ * sender silently declines. The sender's echo still says delivered, so an ignore is not observable,
  * matching the ignore-aware contract.
  *
  * <p>On delivery it echoes to the sender, delivers to the recipient, fans out to active socialspy staff,
@@ -42,7 +42,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p>Two presence-aware courtesies wrap that core flow. <strong>AFK notice:</strong> after a real delivery to
  * an AFK target the sender is also told the target is away (the {@link AfkStatus} soft-couple), so they know
- * not to expect a reply — AFK is a notice, never a block, and the message still delivers. The notice fires
+ * not to expect a reply: AFK is a notice, never a block, and the message still delivers. The notice fires
  * only on a genuine delivery, never on a silently-dropped ignore: telling the sender "they're AFK" there
  * would leak that the (ignoring) target is online, breaking the ignore-is-not-observable contract.
  * <strong>Offline → mail fallback:</strong> when the caller reports the target is offline and the
@@ -52,7 +52,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  *
  * <p><strong>Vanish privacy is untouched.</strong> A vanished target the sender cannot see is routed by the
  * command adapter ({@code MsgCommand}) through the same {@code targetOnline=false} offline path as a genuinely
- * offline player — so this use case treats it exactly as offline: it stores mail when {@code offlineToMail} is
+ * offline player, so this use case treats it exactly as offline: it stores mail when {@code offlineToMail} is
  * on (the note waits in the vanished player's box) and renders the {@code TARGET_OFFLINE} rejection when it is
  * off. A hidden target never takes the live delivery branch, so their presence is never leaked and the sender's
  * feedback is byte-identical to that for a real offline target in both config modes.
@@ -101,7 +101,7 @@ public final class SendMessage {
 
     /**
      * Send {@code body} from {@code sender} to an online {@code target}, applying every gate. Convenience for
-     * the common online case (and the {@link Reply} path, whose lookup only resolves online targets) — equal
+     * the common online case (and the {@link Reply} path, whose lookup only resolves online targets), equal
      * to {@link #send(PlayerRef, PlayerRef, MessageBody, boolean)} with {@code targetOnline=true}.
      */
     public Result<Unit, MessagingError> send(PlayerRef sender, PlayerRef target, MessageBody body) {
@@ -113,7 +113,7 @@ public final class SendMessage {
      * is false the target is genuinely offline: with the offline-to-mail policy on the message is stored as
      * mail and the sender is told; with it off the {@code TARGET_OFFLINE} rejection stands. (A vanished,
      * unseeable target is routed here on this same {@code targetOnline=false} branch, so it is handled exactly
-     * as a genuinely-offline target — see the class note on vanish privacy.)
+     * as a genuinely-offline target: see the class note on vanish privacy.)
      */
     public Result<Unit, MessagingError> send(
             PlayerRef sender, PlayerRef target, MessageBody body, boolean targetOnline) {

@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 /**
  * {@code VaultCharge} expresses the economy soft coupling: the charge is skipped entirely when the action is
  * free (zero cost), when no economy provider is wired, or when the player holds {@code uxmessentials.vault.free}
- * — and only otherwise does it consult {@link VaultEconomy}. The withdraw is itself the guarded debit and is
+ *, and only otherwise does it consult {@link VaultEconomy}. The withdraw is itself the guarded debit and is
  * the gate: it succeeds and charges, or rejects with {@link VaultError#CANNOT_AFFORD}. A first allocation is a
  * single combined create + open withdrawal so a new vault is never half-charged. The refund deposits only when
  * configured and the player was not bypassed, and surfaces a dropped (capped) refund as {@code false}. A
@@ -51,7 +51,7 @@ class VaultChargeTest {
 
         assertThat(charge.chargeAllocate(WHO).isOk()).isTrue();
         assertThat(charge.chargeOpen(WHO).isOk()).isTrue();
-        assertThat(charge.refund(WHO)).isTrue(); // no economy, nothing to deposit — must not throw
+        assertThat(charge.refund(WHO)).isTrue(); // no economy, nothing to deposit, must not throw
     }
 
     @Test

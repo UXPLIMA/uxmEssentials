@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /nick} into the presence context's command surface. {@code /nick} sets or clears a player's
- * display name — the same display name {@code /list}, {@code /realname} and the connection {@code displayname}
- * placeholder already read — and is a staple display-name feature; this guard fails if the literal drops out of
+ * display name, the same display name {@code /list}, {@code /realname} and the connection {@code displayname}
+ * placeholder already read, and is a staple display-name feature; this guard fails if the literal drops out of
  * the surface or wires under a node other than {@code uxmessentials.nick.use}.
  */
 class NickSurfaceDriftTest {

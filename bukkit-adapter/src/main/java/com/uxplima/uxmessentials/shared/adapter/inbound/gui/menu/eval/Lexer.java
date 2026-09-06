@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * Turns an expression string into a flat token list the {@link Parser} walks. The lexer recognises only the
- * sandbox's vocabulary — numbers, quoted strings, bare identifiers (function names and keywords), parentheses,
+ * sandbox's vocabulary. Numbers, quoted strings, bare identifiers (function names and keywords), parentheses,
  * commas, and the fixed operator set. Any character outside that vocabulary is an error, which is the first line
  * of the sandbox: there is no syntax through which to reach a method call, a field, or the host runtime.
  */

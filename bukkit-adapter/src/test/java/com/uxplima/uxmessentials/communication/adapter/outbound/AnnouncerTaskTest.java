@@ -145,7 +145,7 @@ class AnnouncerTaskTest {
         scheduler.drainRound(); // only the default-rotation tick, which has nothing to pick
         assertThat(alice.nextComponentMessage()).isNull();
 
-        // A reload adds a brand-new override announcement — the bug was that it never broadcast.
+        // A reload adds a brand-new override announcement: the bug was that it never broadcast.
         live.set(config(0, override("fresh", "hello", 30)));
         task.rearmOverrides();
         scheduler.drainRound();
@@ -195,7 +195,7 @@ class AnnouncerTaskTest {
         AnnouncerTask task = task(config);
 
         task.start();
-        scheduler.drainOne(); // exactly the default-rotation tick — must pick "rotation", never "override"
+        scheduler.drainOne(); // exactly the default-rotation tick, must pick "rotation", never "override"
 
         assertThat(PLAIN.serialize(alice.nextComponentMessage())).isEqualTo("rotation");
         assertThat(alice.nextComponentMessage()).isNull();

@@ -51,11 +51,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The moderation history golden test: the engine-rendered read-only history list must draw the exact grid the
  * original {@code PlayerHistoryView} drew. The store holds two history rows for the target (a BAN and a MUTE), so the
- * list draws a BARRIER and a BOOK icon (content slots 0 and 1 — the per-action material the deleted view's switch
+ * list draws a BARRIER and a BOOK icon (content slots 0 and 1. The per-action material the deleted view's switch
  * resolved) and the two ARROW nav buttons (slots 48 and 50). The engine window is snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced for
  * this fixture, then frozen here as the contract so the old class could be deleted. Then a click on the first icon
- * through the engine's own {@link MenuListener} proves the migrated path is inert — an audit row is immutable, so the
+ * through the engine's own {@link MenuListener} proves the migrated path is inert. An audit row is immutable, so the
  * window stays open and unchanged, exactly as the old read-only view behaved.
  *
  * <p>The {@code KeyMessages} catalog surfaces the entry name's {@code mod_history_action} token, so a row's action
@@ -120,7 +120,7 @@ class ModerationHistoryListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code PlayerHistoryView} produced for this fixture (a BAN
      * row then a MUTE row), captured while both paths rendered it identically and frozen here: a BARRIER and a BOOK
-     * icon (content slots 0 and 1 — the action surfaces through the {@code mod_history_action} token) and the two nav
+     * icon (content slots 0 and 1. The action surfaces through the {@code mod_history_action} token) and the two nav
      * ARROWs (slots 48 and 50).
      */
     private static Map<Integer, Snapshot> oldViewBaseline() {

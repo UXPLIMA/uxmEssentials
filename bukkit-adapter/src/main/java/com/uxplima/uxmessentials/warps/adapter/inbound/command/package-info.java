@@ -1,5 +1,5 @@
 /**
- * The warps context's inbound Brigadier command handler — the single {@code /warp} command and its
+ * The warps context's inbound Brigadier command handler, the single {@code /warp} command and its
  * subcommand tree ({@code list}, {@code set}, {@code del}, {@code info}, {@code move}, plus the per-warp
  * {@code lock}/{@code password}/{@code rate}/{@code rating}/{@code edit} actions). {@code /warp <name>}
  * teleports; each subcommand maps a command source and its arguments onto exactly one warps use-case call and

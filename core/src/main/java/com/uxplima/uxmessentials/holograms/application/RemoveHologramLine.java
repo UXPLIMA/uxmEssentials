@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * 0-based here), save the new snapshot, and re-render the live entity. A name no hologram exists at is
  * rejected with {@link HologramError#NOT_FOUND}; an index outside the line range with
  * {@link HologramError#LINE_INDEX_OUT_OF_RANGE}; and a removal that would empty the hologram with
- * {@link HologramError#WOULD_BE_EMPTY} — a hologram must keep at least one line, so the operator deletes the
+ * {@link HologramError#WOULD_BE_EMPTY}. A hologram must keep at least one line, so the operator deletes the
  * whole hologram instead. The operator-only permission is enforced at the command gate.
  */
 public final class RemoveHologramLine {

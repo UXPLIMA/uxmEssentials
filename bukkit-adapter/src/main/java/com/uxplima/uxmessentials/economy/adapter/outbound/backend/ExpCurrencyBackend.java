@@ -38,7 +38,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * <p>Behind {@code EconomyProvider} every provider call is off-tick (an economy call is treated as DB I/O), but a
  * {@link Player} is owned by its region/entity thread and mutating it from any other thread is unsupported on Paper
  * and a hard violation on Folia. So each operation hops onto the owner's entity thread through the injected
- * {@link Scheduler}, does its read and write there in one hop — a check-and-set is never split across threads — and
+ * {@link Scheduler}, does its read and write there in one hop, a check-and-set is never split across threads, and
  * bridges the result back through a bounded await. A call already on a tick thread runs inline to avoid blocking
  * itself. A player who leaves mid-hop, or a hop that stalls past the bound, degrades to
  * {@link TransferError#PLAYER_OFFLINE} (or a zero balance) rather than wedging the caller.
@@ -141,12 +141,12 @@ public final class ExpCurrencyBackend implements CurrencyBackend {
 
     /**
      * Run {@code work} on the owner's entity thread and return its result. Already on a tick thread the work runs
-     * inline — scheduling then blocking that same thread would deadlock. Otherwise the hop completes a future,
+     * inline: scheduling then blocking that same thread would deadlock. Otherwise the hop completes a future,
      * awaited with a hard bound; a retired owner (left mid-hop) or a stall yields {@code offline}, the stall logged
      * once so a persistently wedged hop cannot spam the log.
      */
     private <T> T onOwnerThread(PlayerRef owner, Supplier<T> work, T offline) {
-        // Folia splits the tick across region threads, so "am I on a tick thread" is the wrong question — a caller
+        // Folia splits the tick across region threads, so "am I on a tick thread" is the wrong question, a caller
         // on one region's thread must still hop to reach an entity owned by another. The Scheduler port answers the
         // right one.
         if (scheduler.ownsEntity(owner)) {

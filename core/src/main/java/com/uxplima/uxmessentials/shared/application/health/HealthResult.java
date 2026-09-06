@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * The outcome of one {@link HealthCheck}: a {@link HealthStatus} severity plus a short human message an operator
- * reads on the {@code /uxmess doctor} surface. A value type, platform-neutral by design — the bukkit-side checks
+ * reads on the {@code /uxmess doctor} surface. A value type, platform-neutral by design: the bukkit-side checks
  * produce it from probes against persistence, the {@code ServicesManager}, and the soft-depend plugins, but it
  * names none of them.
  *

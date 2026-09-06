@@ -47,7 +47,7 @@ import org.spongepowered.configurate.serialize.SerializationException;
  * canonicalised to their fully-expanded form, but re-loading the emitted text yields a {@link MenuSpec} that
  * {@code equals} the original. Only non-default keys are emitted where the loader treats absence as a default, so the
  * output stays clean and a menu that declared little writes little. Load-time inputs the loader consumes before the
- * model exists — {@code patterns {}}, {@code layout}, the {@code fill-item}'s auto-computed slots — are not (and need
+ * model exists ({@code patterns {}}, {@code layout}, the {@code fill-item}'s auto-computed slots) are not (and need
  * not be) reproduced: the items they expand into are written concretely and round-trip on their own.
  *
  * <p>Pure and Bukkit-free like the spec model it walks: it references only the {@code spec/} records, the menu's
@@ -59,7 +59,7 @@ public final class MenuSpecWriter {
     /** The reserved id the loader stores the {@code fill-item} background under; written back as {@code fill-item}. */
     private static final String FILL_ITEM_ID = "__fill__";
 
-    /** The HOCON gesture key each {@link ClickKind} is written under — the kebab spelling the loader accepts. */
+    /** The HOCON gesture key each {@link ClickKind} is written under: the kebab spelling the loader accepts. */
     private static final Map<ClickKind, String> GESTURE_KEYS = gestureKeys();
 
     /** Serialize a menu with no {@code command {}} block. */
@@ -68,7 +68,7 @@ public final class MenuSpecWriter {
     }
 
     /**
-     * Serialize {@code spec} — and, when non-null, the {@code command}'s {@code command {}} open-command block — into
+     * Serialize {@code spec} (and, when non-null, the {@code command}'s {@code command {}} open-command block) into
      * one menu file's HOCON. Re-loading the result through {@code MenuSpecLoader} (and {@code parseOpenCommand} for the
      * command block) reproduces an equal {@link MenuSpec} and {@link OpenCommandSpec}.
      */
@@ -125,7 +125,7 @@ public final class MenuSpecWriter {
         }
     }
 
-    /** Emit the refresh block only when it says something — an enabled refresh or a stashed non-zero interval. */
+    /** Emit the refresh block only when it says something: an enabled refresh or a stashed non-zero interval. */
     private void writeRefresh(CommentedConfigurationNode root, RefreshSpec refresh) throws SerializationException {
         if (!refresh.enabled() && refresh.intervalTicks() == 0) {
             return;
@@ -161,8 +161,8 @@ public final class MenuSpecWriter {
     // --- one item -----------------------------------------------------------------------------------------------
 
     /**
-     * Emit one item's fields. The {@code fill} flag drops the two the loader forces for the background icon — its
-     * auto-computed slots and its lowest priority — so re-loading recomputes them identically.
+     * Emit one item's fields. The {@code fill} flag drops the two the loader forces for the background icon, its
+     * auto-computed slots and its lowest priority, so re-loading recomputes them identically.
      */
     private void writeItem(CommentedConfigurationNode node, MenuItemSpec item, boolean fill)
             throws SerializationException {
@@ -306,7 +306,7 @@ public final class MenuSpecWriter {
      * Emit an item's {@code view} visibility gate as a {@code requirements}/{@code minimum} block. A gate that carries
      * only the {@code pages} shorthand's {@code on-page} requirement is written back through that shorthand: unlike
      * every other valued ref its token would not round-trip (the loader splits {@code id:value} only for a fixed set of
-     * generic prefixes, and {@code on-page} is not among them — it is reachable only via the sugar).
+     * generic prefixes, and {@code on-page} is not among them: it is reachable only via the sugar).
      */
     private void writeView(CommentedConfigurationNode itemNode, RequirementSpec view) throws SerializationException {
         if (view.equals(RequirementSpec.NONE)) {
@@ -527,7 +527,7 @@ public final class MenuSpecWriter {
         setIfTrue(node.node("greedy"), argument.greedy());
     }
 
-    /** The config token an {@link ArgumentSpec.ArgType} parses back from — the inverse of {@code ArgType.parse}. */
+    /** The config token an {@link ArgumentSpec.ArgType} parses back from, the inverse of {@code ArgType.parse}. */
     private static String argTypeToken(ArgumentSpec.ArgType type) {
         return switch (type) {
             case STRING -> "string";
@@ -638,7 +638,7 @@ public final class MenuSpecWriter {
         }
     }
 
-    /** A serializing step usable from a lambda — it may raise the checked {@link SerializationException}. */
+    /** A serializing step usable from a lambda: it may raise the checked {@link SerializationException}. */
     @FunctionalInterface
     private interface SerializingAction {
         void run() throws SerializationException;

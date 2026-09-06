@@ -29,14 +29,14 @@ import org.jspecify.annotations.NullMarked;
  * window's final contents through the {@link KitEditor#save} use case. The window is a private six-row chest the
  * editor drags items into and out of freely; the kit's stored data and the editor's own live inventory are never
  * touched while it is open, so the round-trip is dupe-safe: an item moved inside the window is moved, an item the
- * editor brought in is theirs to bring, and on close the kit is overwritten wholesale (replace, never append) —
+ * editor brought in is theirs to bring, and on close the kit is overwritten wholesale (replace, never append)
  * there is no path that accumulates a stack twice. The non-item kit settings (cooldown, one-time, permission,
  * cost) are carried untouched from the {@link KitEditorHolder}.
  *
  * <p>{@link #open} touches the live player (it builds and opens an inventory in their screen), so the caller
  * schedules it on the editor's entity thread through the kernel {@link Scheduler}; the persist is dispatched
  * async off that same scheduler because it writes the kit's file. Every open window is tracked so a single save
- * claims it — whichever of the close handler or {@link #flushAll} (on module stop) reaches it first — and a
+ * claims it (whichever of the close handler or {@link #flushAll} (on module stop) reaches it first) and a
  * still-open window is never saved twice.
  */
 @NullMarked

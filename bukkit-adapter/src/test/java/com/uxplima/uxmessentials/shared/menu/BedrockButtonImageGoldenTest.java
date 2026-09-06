@@ -42,7 +42,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The proof that a Bedrock form button carries an icon sourced from its item's material spec: a plain material becomes
  * a Bedrock texture-path image, a {@code skull:} icon becomes an mc-heads avatar URL, and the icon is purely additive
- * — a tap still routes into the item's own click actions. A real {@link MenuSpecLoader} and {@link Menus} drive it; a
+ *: a tap still routes into the item's own click actions. A real {@link MenuSpecLoader} and {@link Menus} drive it; a
  * fake {@link BedrockDetector} / {@link BedrockScreen} stand in for the Cumulus/Floodgate SDK, a {@code compileOnly}
  * soft-depend absent from the test runtime.
  */
@@ -124,7 +124,7 @@ class BedrockButtonImageGoldenTest {
 
         screen.tap(1);
         assertThat(captured.get())
-                .as("tapping the skull button still runs its own click action — the image changed nothing else")
+                .as("tapping the skull button still runs its own click action. The image changed nothing else")
                 .isEqualTo("head");
 
         screen.tap(0);

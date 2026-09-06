@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * baltop read-model) plus the operator-selected {@code AmountFormat} (the v2.1 compact format), all wired
  * during bootstrap; when the economy module is disabled the seam is absent and the placeholders degrade.
  *
- * <p>The no-currency methods read the configured default currency — the placeholder surface that carries no
+ * <p>The no-currency methods read the configured default currency. The placeholder surface that carries no
  * currency argument. The currency-bearing methods resolve a currency by its id so a multi-currency server can
  * surface a balance or leaderboard for any configured currency. Every balance is served from the offline
  * read-cache the provider sits in front of, so an offline player's balance still resolves.

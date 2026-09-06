@@ -10,7 +10,7 @@ import java.util.UUID;
 
 /**
  * One decoded SignedVelocity plugin-message frame: the proxy's {@link SignedChatDirective} for a specific player's
- * chat or command stream. The frame is the unit of coordination across the proxy hop — the proxy writes one per signed
+ * chat or command stream. The frame is the unit of coordination across the proxy hop. The proxy writes one per signed
  * message/command it has ruled on, and this backend applies it to the matching event.
  *
  * <p>The wire layout is fixed by the SignedVelocity protocol and read as a sequence of modified-UTF-8 strings (Java

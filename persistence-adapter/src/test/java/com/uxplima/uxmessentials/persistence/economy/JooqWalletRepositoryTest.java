@@ -33,9 +33,9 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * End-to-end coverage of {@link JooqWalletRepository} against the default embedded SQLite backend with the
  * Flyway V2 economy baseline applied. It proves the credit/debit/transfer round-trip, the guarded debit (an
- * over-draw changes zero rows and mutates nothing — the double-spend guard), the offline-owner upsert
+ * over-draw changes zero rows and mutates nothing, the double-spend guard), the offline-owner upsert
  * ({@code ensureOwner} before an offline-target write), the {@code (owner, currency)} balance key, baltop
- * ordering off the descending index, and — the load-bearing case — concurrent debits against the single
+ * ordering off the descending index, and, the load-bearing case, concurrent debits against the single
  * SQLite writer never double-spending past zero.
  */
 class JooqWalletRepositoryTest {

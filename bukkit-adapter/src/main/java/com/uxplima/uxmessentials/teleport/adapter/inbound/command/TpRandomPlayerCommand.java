@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /tprandomplayer} (alias {@code /tprp}): hop the invoking staff member to a random online player. A
- * roulette variant of {@code /tp} — instant, with no warmup or cooldown — that picks uniformly among the
+ * roulette variant of {@code /tp} (instant, with no warmup or cooldown) that picks uniformly among the
  * players the sender can see (so a vanished staff member is never a target), excluding the sender. With no
  * such target it replies {@link TeleportMessageKey#TPRANDOM_NONE} and does nothing. Shares the staff
  * {@code uxmessentials.tp.use} node with {@code /tp}.

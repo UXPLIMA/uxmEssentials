@@ -169,7 +169,7 @@ class EcoAdminTest {
 
     @Test
     void aFailedTakeRecordsNoTransaction() {
-        // The target has no funds, so the guarded debit rejects — nothing should reach the transaction trail.
+        // The target has no funds, so the guarded debit rejects: nothing should reach the transaction trail.
         admin.take(operator, target, Money.of(Currencies.COINS, 40));
 
         assertThat(history.entries()).isEmpty();

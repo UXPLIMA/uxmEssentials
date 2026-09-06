@@ -14,8 +14,8 @@ import org.jspecify.annotations.Nullable;
  * The dupe-safe click/drag policy for the in-inventory shulker view. Unlike the invsee mirrors, the source is an
  * item in the <em>same</em> inventory that forms the bottom of the view, so the policy locks two things: the source
  * box may not leave its hotbar slot ({@link ShulkerBoxHolder#sourceSlot()}), and no shulker box may be placed
- * <em>into</em> the view (nesting a box inside a box). Everything else — moving ordinary items in and out of the
- * 27-slot view — is the player's to do. Slots are matched by raw index so the policy never depends on the click's
+ * <em>into</em> the view (nesting a box inside a box). Everything else. Moving ordinary items in and out of the
+ * 27-slot view: is the player's to do. Slots are matched by raw index so the policy never depends on the click's
  * slot-conversion, and shulker boxes are unstackable so a single-item lock is complete.
  */
 @NullMarked

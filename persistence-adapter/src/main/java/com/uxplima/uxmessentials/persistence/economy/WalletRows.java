@@ -21,7 +21,7 @@ import org.jooq.Record;
  * is a map from {@link Currency} to {@link Money}, so the table is keyed {@code (owner, currency)} and one
  * owner's balances are several rows; this class rebuilds the aggregate from those rows and projects a single
  * balance back to a row for an upsert. UUIDs are the canonical 36-character text and amounts are the stored
- * {@code DECIMAL} the guarded debit compares — never a float, never an opaque JSON blob.
+ * {@code DECIMAL} the guarded debit compares, never a float, never an opaque JSON blob.
  *
  * <p>A row carries only the currency id, not the full {@link Currency} value object (symbol, precision, the
  * clamp). The configured {@link CurrencyRegistry} resolves the id back to its policy; a row in a currency the

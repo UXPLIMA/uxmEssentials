@@ -54,8 +54,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code TREE_UNKNOWN_TYPE} and nothing in range answers {@code TREE_NO_TARGET}. MockBukkit does not raytrace,
  * so the looked-at block is supplied through a {@code getTargetBlockExact} stub on the player. World tree
  * generation under MockBukkit is unreliable, so the generation outcome is asserted only as one of the two
- * spawned/failed keys plus the audit being called only on success; the unknown-type and no-target branches —
- * which do not depend on generation — carry the deterministic assertions.
+ * spawned/failed keys plus the audit being called only on success; the unknown-type and no-target branches
+ * which do not depend on generation: carry the deterministic assertions.
  */
 class TreeCommandTest {
 

@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
  * this sends the type-specific data ({@code baby}, {@code size}, {@code charged}, {@code villager_*}).
  *
  * <p>The correctness invariant is that a metadata value is never sent for an entity type that has no such field,
- * and never through an accessor whose data index differs for that type — a size only to a slime/magma cube,
+ * and never through an accessor whose data index differs for that type, a size only to a slime/magma cube,
  * charged only to a creeper, the villager data only to a villager. The baby flag is the subtle one: the breeding
  * animals, the villager line, and the hoglin are real {@code AgeableMob} subclasses and take the {@code baby}
  * packet, but the zombie line, piglins, and zoglins extend {@code Monster} and carry their baby flag at a
@@ -101,7 +101,7 @@ public final class NpcTypeData {
         // Route to the builder whose accessor index matches the type. The breeding-animal/villager/hoglin line are
         // real AgeableMob subclasses (Bukkit Breedable); the zombie line, the piglin, and the zoglin extend Monster
         // and carry their baby flag at their own index, so each takes its own packet. A piglin brute (Ageable but no
-        // baby form) and every non-ageable type get nothing — a baby value never reaches a wrong field.
+        // baby form) and every non-ageable type get nothing: a baby value never reaches a wrong field.
         if (isBreedable(type)) {
             packets.send(viewer, packets.baby(id, baby));
         } else if (ZOMBIE_FAMILY.contains(type)) {
@@ -162,7 +162,7 @@ public final class NpcTypeData {
         packets.send(viewer, packets.villagerData(id, villagerType, profession, badge));
     }
 
-    /** Whether {@code key} is one this adapter knows how to apply — the set the command validates against. */
+    /** Whether {@code key} is one this adapter knows how to apply: the set the command validates against. */
     public static boolean isKnownKey(String key) {
         return switch (key.toLowerCase(Locale.ROOT)) {
             case KEY_BABY, KEY_SIZE, KEY_CHARGED, KEY_VILLAGER_TYPE, KEY_VILLAGER_PROFESSION, KEY_VILLAGER_LEVEL ->
@@ -197,7 +197,7 @@ public final class NpcTypeData {
     }
 
     /**
-     * Whether {@code type} is a breeding mob — the Bukkit {@code Breedable} marker, which is exactly the set of
+     * Whether {@code type} is a breeding mob. The Bukkit {@code Breedable} marker, which is exactly the set of
      * server-side {@code AgeableMob} subclasses (the breeding animals, the villager line, the hoglin). Bukkit's
      * wider {@code Ageable} also covers the zombie line, piglins, and zoglins, but those extend {@code Monster} and
      * keep their baby flag at a different index, so {@code Breedable} is the precise gate for the {@code baby}

@@ -12,11 +12,11 @@ import com.uxplima.uxmessentials.vote.domain.QueuedReward;
  * Pays out the rewards a player accrued while offline. Run on the player's join: it drains every pending
  * reward batch for them (a transactional select-then-delete in the repository, so each batch pays out
  * exactly once) and dispatches each batch's commands for the now-online player. A player with nothing
- * queued is a cheap no-op — the {@link VoteRepository#hasPending} probe short-circuits before the drain.
+ * queued is a cheap no-op: the {@link VoteRepository#hasPending} probe short-circuits before the drain.
  *
  * <p>{@link #applyFor} returns the total number of reward <em>commands</em> applied, not the number of
  * batches: the production repository collapses a player's queued rows into a single batch on drain, so a
- * batch count would always read 0 or 1. With one command queued per vote — the common case — the command
+ * batch count would always read 0 or 1. With one command queued per vote, the common case, the command
  * total equals the number of votes the returning player is being paid for.
  */
 public final class ApplyQueuedRewards {

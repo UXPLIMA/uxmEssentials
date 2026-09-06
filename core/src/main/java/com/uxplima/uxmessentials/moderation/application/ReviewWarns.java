@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /warns <player>}: review a player's warning history newest-first. A read-only query against the
- * append-only history — it renders a header with the count, one entry per warning (issuer, reason, when), or
+ * append-only history. It renders a header with the count, one entry per warning (issuer, reason, when), or
  * an empty notice when the target has none. A {@code /tempwarn} that has lapsed by the read instant is dropped
  * from both the count and the listing, so a review reflects only the warnings still in effect.
  */

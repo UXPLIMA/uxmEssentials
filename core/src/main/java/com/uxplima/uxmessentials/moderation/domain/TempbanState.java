@@ -6,7 +6,7 @@ import java.util.Optional;
 
 /**
  * A target's tempban, as a closed set: {@link None} (not banned) and {@link Active} (banned until a
- * wall-clock instant). A tempban always has an expiry — a permanent ban is an external ban-list or an
+ * wall-clock instant). A tempban always has an expiry. A permanent ban is an external ban-list or an
  * {@code /banip}, not a tempban. The ban-on-login listener reads {@link #isActiveAt(Instant)} at
  * {@code PlayerLoginEvent} and kicks before player data loads while the ban is still in the future.
  *

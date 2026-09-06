@@ -10,11 +10,11 @@ import org.jspecify.annotations.NullMarked;
  * logic is unit-testable against a fake without a live server. Two reads, split by their cost:
  *
  * <ul>
- *   <li>{@link #onlineTexture(String)} reads a currently-online player's texture from their live {@code PlayerProfile} —
+ *   <li>{@link #onlineTexture(String)} reads a currently-online player's texture from their live {@code PlayerProfile}
  *       no network, safe on any thread, so the resolver calls it inline on the render path;</li>
  *   <li>{@link #fetchTexture(String)} resolves an <em>offline</em> name through Mojang ({@code Bukkit.createProfile(name)}
  *       then {@code complete()}). It blocks on the network, so the resolver only ever calls it on the {@code async}
- *       scheduler — never on a tick thread.</li>
+ *       scheduler, never on a tick thread.</li>
  * </ul>
  *
  * <p>Both return empty rather than throw on any miss (unknown name, no texture property, fetch failure) so the resolver

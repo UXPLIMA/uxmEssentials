@@ -25,14 +25,14 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The jOOQ-backed {@link WalletRepository} over the generated {@code ECONOMY_OWNERS} and
- * {@code WALLET_BALANCES} tables — the native ledger's durable side. It honours invariant (d): balances are
+ * {@code WALLET_BALANCES} tables: the native ledger's durable side. It honours invariant (d): balances are
  * DB-backed and survive a world rollback (never PDC, never an in-memory authority). Every statement is typed
  * jOOQ DSL; no SQL is ever string-concatenated.
  *
  * <p>The load-bearing rule is the guarded debit ({@code docs/02-concurrency.md} §6.7): a debit is a single
  * {@code UPDATE … WHERE owner = ? AND currency = ? AND amount >= ?}, so the database serialises two
  * concurrent debits and an over-draw updates zero rows ({@link TransferError#INSUFFICIENT_FUNDS}). A transfer
- * is that guarded debit plus the credit in one transaction — both legs commit together or neither does. No
+ * is that guarded debit plus the credit in one transaction: both legs commit together or neither does. No
  * application-level lock exists or is wanted; a JVM lock would be wrong the moment two servers share the DB.
  */
 @NullMarked
@@ -105,7 +105,7 @@ public final class JooqWalletRepository extends JooqRepository implements Wallet
         Objects.requireNonNull(amount, "amount");
         // The guarded debit of `from` and the clamp-checked credit of `to` commit together or neither does. The
         // clamp can only be evaluated after the debit has taken (its row must be readable in the same
-        // transaction), so a max breach throws a rollback signal to undo the committed debit — a returned err
+        // transaction), so a max breach throws a rollback signal to undo the committed debit: a returned err
         // would otherwise commit (the write helper only rolls back on a throw), leaving `from` debited while
         // `to` was never credited. This is the same shape as exchange, across two owners of one currency.
         try {
@@ -159,7 +159,7 @@ public final class JooqWalletRepository extends JooqRepository implements Wallet
         // One transaction, mirroring transfer but across two currencies of the same owner: the guarded debit of
         // the source and the clamp-checked credit of the target commit together or neither does. The guarded
         // debit is atomic (a concurrent over-draw changes no rows). The clamp can only be evaluated after the
-        // debit has taken, so a clamp breach throws a rollback signal to undo the committed debit — a returned
+        // debit has taken, so a clamp breach throws a rollback signal to undo the committed debit: a returned
         // err would otherwise commit (the write helper only rolls back on a throw), leaving the source debited.
         try {
             return write(dsl -> {

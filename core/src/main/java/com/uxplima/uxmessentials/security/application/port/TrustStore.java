@@ -9,7 +9,7 @@ import java.util.UUID;
  * DB-backed and survives a restart or a world rollback (never PDC): a trust that a reboot forgot would send a player
  * back to the keypad every day, and a trust a rollback forgot would be worse.
  *
- * <p>A device is identified by a <b>salted-or-hashed IP token</b>, never the raw address — the adapter hashes the
+ * <p>A device is identified by a <b>salted-or-hashed IP token</b>, never the raw address. The adapter hashes the
  * connecting IP before it reaches this port, so the store holds no personally identifying network data. A trust
  * carries an expiry instant; {@link #isTrusted} answers only for a token whose trust has not lapsed, and re-trusting
  * the same {@code (player, ipHash)} simply slides the expiry forward.

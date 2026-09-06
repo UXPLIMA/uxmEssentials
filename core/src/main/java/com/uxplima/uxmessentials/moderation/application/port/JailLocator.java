@@ -7,7 +7,7 @@ import java.util.Optional;
  * Read seam that resolves a named jail to the coordinates it sits at, merging the two jail sources the
  * {@link Sanctions} adapter already teleports against: the DB-backed {@link JailLocationStore} an operator fills
  * with {@code /setjail} (store-first), falling back to the read-only config jails. It is the display complement
- * to {@code sendToJail} — where that hops a player to the jail, this hands back the world and block coordinates
+ * to {@code sendToJail}, where that hops a player to the jail, this hands back the world and block coordinates
  * a management GUI shows in a jail's lore so an operator can see where a jail is without going there.
  *
  * <p>The adapter resolves both sources and rounds to block coordinates; a jail whose world is unresolved (a

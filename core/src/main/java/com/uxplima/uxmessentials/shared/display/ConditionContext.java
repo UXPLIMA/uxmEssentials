@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 /**
  * Everything a {@link DisplayCondition} needs to evaluate, gathered at the boundary so the condition model
- * itself stays a pure function — mirroring vote's {@code RewardContext} seam. The condition decides
+ * itself stays a pure function: mirroring vote's {@code RewardContext} seam. The condition decides
  * <em>what</em> to ask; this context supplies the runtime answers the adapter knows and the domain does not:
  * the viewer's permission check, the world they are in, their gamemode, and a placeholder bridge.
  *

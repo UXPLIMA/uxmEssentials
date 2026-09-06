@@ -41,7 +41,7 @@ public final class ConditionRegistry {
         return handlers.containsKey(id);
     }
 
-    /** Every registered condition id, sorted — the catalog the in-game requirement picker offers a spec author. */
+    /** Every registered condition id, sorted: the catalog the in-game requirement picker offers a spec author. */
     public List<String> ids() {
         return handlers.keySet().stream().sorted().toList();
     }

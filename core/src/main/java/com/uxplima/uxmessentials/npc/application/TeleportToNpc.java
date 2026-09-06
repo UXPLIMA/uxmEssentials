@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * {@code /npc teleport <name>}: send the operator to an NPC's location — the inverse of {@code movehere}. The NPC
+ * {@code /npc teleport <name>}: send the operator to an NPC's location, the inverse of {@code movehere}. The NPC
  * is resolved here and its location handed to the {@link DirectTeleporter} port, which performs the region-aware
  * async hop. A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}. The operator-only permission is
  * enforced at the command gate.

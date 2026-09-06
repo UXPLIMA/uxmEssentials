@@ -11,15 +11,15 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pure decision guard for the command whitelist / blacklist. Exercises the four ways the {@link RuleSet} reads
- * its lists — whitelist allows only the listed roots, blacklist denies only the listed roots, a group selects its own
- * list, and an unmatched group falls through to the default list — plus the two always-allow escapes ({@code .bypass}
+ * its lists. Whitelist allows only the listed roots, blacklist denies only the listed roots, a group selects its own
+ * list, and an unmatched group falls through to the default list. Plus the two always-allow escapes ({@code .bypass}
  * and the inert short-circuit) and the case/slash normalisation the adapter relies on.
  */
 class RuleSetTest {
 
     private static final String BYPASS = "uxmessentials.commandcontrol.bypass";
 
-    /** A player in {@code group} with no bypass node — the common case the mode rules are tested against. */
+    /** A player in {@code group} with no bypass node: the common case the mode rules are tested against. */
     private static PlayerFacts inGroup(String group) {
         return facts(Optional.of(group), false);
     }

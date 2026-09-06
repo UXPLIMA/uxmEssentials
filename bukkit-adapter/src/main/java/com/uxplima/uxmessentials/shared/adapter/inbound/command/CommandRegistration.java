@@ -13,7 +13,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
  *
  * <p>{@code PluginModule} collects these into one list; the plugin's {@code LifecycleEvents.COMMANDS}
  * handler iterates it and registers each node with its description and aliases in a single loop.
- * Adding a command is one new class plus one line in the owning module's contribution — no central
+ * Adding a command is one new class plus one line in the owning module's contribution, no central
  * registration file to edit.
  */
 public interface CommandRegistration {
@@ -48,7 +48,7 @@ public interface CommandRegistration {
      * The executor to install on the bare root when this command's catalog {@code gui} flag is on. A command
      * that opens a GUI on bare input returns its opener here; the {@link GuiRootBinding} swaps it onto the
      * root (replacing any existing root executor) only when gui is enabled, and otherwise leaves the root for
-     * the {@link UsageBinding} to give its usage-text fallback. Empty by default — a command that has no GUI
+     * the {@link UsageBinding} to give its usage-text fallback. Empty by default. A command that has no GUI
      * never changes shape regardless of the flag.
      */
     default Optional<Command<CommandSourceStack>> guiRoot() {

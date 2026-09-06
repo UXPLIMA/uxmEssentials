@@ -29,11 +29,11 @@ import com.uxplima.uxmlib.packet.display.DisplayTextPackets;
 import org.junit.jupiter.api.Test;
 
 /**
- * Pins {@link HologramTextOverrides} — the collaborator that resolves a hologram's lines per viewer and sends a
+ * Pins {@link HologramTextOverrides}. The collaborator that resolves a hologram's lines per viewer and sends a
  * text-override packet for one viewer. A line with a {@code %...%} token marks the hologram as per-viewer; a
  * static hologram gets no override at all. Each viewer's packet carries <em>their</em> resolved text (the
  * injected bridge factory returns a viewer-specific transform), and one viewer's resolve throwing must not stop
- * the renderer's loop over the others — exercised here by sending each viewer in turn through the per-viewer
+ * the renderer's loop over the others. Exercised here by sending each viewer in turn through the per-viewer
  * {@code sendOverride}, exactly as the renderer's per-viewer entity hop does. The packet sink and bridge factory
  * are fakes, so no NMS and no PlaceholderAPI is needed.
  */
@@ -82,7 +82,7 @@ class HologramTextOverridesTest {
     @Test
     void resolvesGlobalMiniPlaceholdersTagsInThePerViewerText() {
         // The global MiniPlaceholders resolver (a <tag> source) is applied during deserialize, alongside the
-        // per-viewer %token% bridge — so a per-viewer hologram renders both for the viewer.
+        // per-viewer %token% bridge, so a per-viewer hologram renders both for the viewer.
         FakeDisplayTextPackets packets = new FakeDisplayTextPackets();
         Supplier<TagResolver> greeting = () -> Placeholder.parsed("greeting", "Howdy");
         HologramTextOverrides overrides =

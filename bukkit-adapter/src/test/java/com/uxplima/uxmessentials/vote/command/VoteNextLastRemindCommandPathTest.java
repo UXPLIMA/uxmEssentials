@@ -85,9 +85,9 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * subcommands added in V4-3.
  *
  * <ul>
- *   <li>{@code /vote next} routes to {@link ShowNextVote} — asserts the use case is called by
+ *   <li>{@code /vote next} routes to {@link ShowNextVote}. Asserts the use case is called by
  *       checking the repository is consulted for per-site timestamps.
- *   <li>{@code /vote last} routes to {@link ShowLastVote} — same assertion shape.
+ *   <li>{@code /vote last} routes to {@link ShowLastVote}, same assertion shape.
  *   <li>{@code /vote remind} toggles the reminder preference and sends the correct key.
  * </ul>
  */

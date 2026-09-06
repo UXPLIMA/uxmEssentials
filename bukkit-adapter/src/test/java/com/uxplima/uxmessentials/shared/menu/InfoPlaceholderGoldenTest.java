@@ -105,7 +105,7 @@ class InfoPlaceholderGoldenTest {
     @Test
     void everyViewerStatePlaceholderFailsSoftToEmptyForAnOfflineViewer() {
         // A random UUID no online player owns: Bukkit.getPlayer returns null, so each viewer-state read is empty,
-        // never a throw. server_date still resolves — it reads the real clock, not the viewer.
+        // never a throw. server_date still resolves: it reads the real clock, not the viewer.
         MenuContext offline = MenuContext.of(new PlayerRef(UUID.randomUUID(), "Ghost"), null, 0);
 
         assertThat(bindings.placeholders().resolve("stat_MOB_KILLS", offline)).contains("");

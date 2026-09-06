@@ -14,9 +14,9 @@ import org.jooq.Record;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The anti-corruption mapping between a {@code vaults} row and the domain {@link Vault}. The queryable facts —
+ * The anti-corruption mapping between a {@code vaults} row and the domain {@link Vault}. The queryable facts
  * owner uuid (canonical 36-char text), the one-based index, the size in rows, and the last-touched epoch
- * millis — are first-class columns; only the {@code ItemStack[]} contents are opaque payload, stored as the
+ * millis. Are first-class columns; only the {@code ItemStack[]} contents are opaque payload, stored as the
  * base64 text of the adapter's already-serialized item bytes (the architecture persistence invariant,
  * docs/01-architecture.md). This class is the single place that translation lives, so the row shape stays
  * identical on every backend.

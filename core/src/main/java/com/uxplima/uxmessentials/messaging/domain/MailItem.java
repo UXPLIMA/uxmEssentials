@@ -8,11 +8,11 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * One delivered piece of mail: its {@link MailId}, the recipient, the {@link MailSender}, the
- * {@link MessageBody}, when it was sent, and whether it has been read. A mail item is a value object —
+ * {@link MessageBody}, when it was sent, and whether it has been read. A mail item is a value object
  * marking it read produces a new instance rather than mutating in place, so the {@link MailBox} aggregate
  * stays immutable between operations.
  *
- * <p>Mail is text-only — there are no item attachments (out of scope), so the body is the whole payload.
+ * <p>Mail is text-only: there are no item attachments (out of scope), so the body is the whole payload.
  * The send time drives both the newest-first listing and expiry: {@link #isExpired} answers whether the
  * item has outlived a retention window, which the expiry sweep uses to bound its delete.
  *

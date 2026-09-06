@@ -17,15 +17,15 @@ class VoteTallyTest {
 
     private static final ZoneId UTC = ZoneId.of("UTC");
 
-    // 2024-01-15 12:00:00 UTC — a Monday, ISO week 3 of 2024
+    // 2024-01-15 12:00:00 UTC, a Monday, ISO week 3 of 2024
     private static final Instant JAN_15 = Instant.parse("2024-01-15T12:00:00Z");
-    // 2024-01-16 12:00:00 UTC — the next day (still ISO week 3 of 2024)
+    // 2024-01-16 12:00:00 UTC, the next day (still ISO week 3 of 2024)
     private static final Instant JAN_16 = Instant.parse("2024-01-16T12:00:00Z");
-    // 2024-01-17 12:00:00 UTC — two days after Jan 15 (one day missed if voting jumps Jan 15 → Jan 17)
+    // 2024-01-17 12:00:00 UTC. Two days after Jan 15 (one day missed if voting jumps Jan 15 → Jan 17)
     private static final Instant JAN_17 = Instant.parse("2024-01-17T12:00:00Z");
-    // 2024-02-25 12:00:00 UTC — 41 days after Jan 15 (a different ISO week and a different month)
+    // 2024-02-25 12:00:00 UTC, 41 days after Jan 15 (a different ISO week and a different month)
     private static final Instant FEB_25 = Instant.parse("2024-02-25T12:00:00Z");
-    // 2025-01-15 12:00:00 UTC — a different year, different everything
+    // 2025-01-15 12:00:00 UTC. A different year, different everything
     private static final Instant JAN_15_NEXT_YEAR = Instant.parse("2025-01-15T12:00:00Z");
 
     @Test
@@ -166,7 +166,7 @@ class VoteTallyTest {
 
     @Test
     void aTwoDayGapWithNoGraceResetsTheStreakToOne() {
-        // JAN_15 then JAN_17 — one day missed, grace 0 → streak breaks.
+        // JAN_15 then JAN_17: one day missed, grace 0 → streak breaks.
         VoteTally after = VoteTally.empty().recordVote(JAN_15, UTC).recordVote(JAN_17, UTC, 0);
 
         assertThat(after.currentStreak()).isEqualTo(1);
@@ -176,7 +176,7 @@ class VoteTallyTest {
 
     @Test
     void aTwoDayGapWithOneGraceDayContinuesTheStreak() {
-        // JAN_15 then JAN_17 — one day missed, grace 1 → streak continues.
+        // JAN_15 then JAN_17: one day missed, grace 1 → streak continues.
         VoteTally after = VoteTally.empty().recordVote(JAN_15, UTC).recordVote(JAN_17, UTC, 1);
 
         assertThat(after.currentStreak()).isEqualTo(2);

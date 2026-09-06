@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * player"), and {@link #onPlayer} for a right-click landing on a player entity (FREEZE/FOLLOW/COMPASS act,
  * VANISH/EXAMINE fall back to their air behaviour). Each soft-coupled port degrades on its {@code NONE} binding.
  *
- * <p>The FREEZE gadget delegates straight to the moderation freeze use case and shows no line of its own — that
+ * <p>The FREEZE gadget delegates straight to the moderation freeze use case and shows no line of its own: that
  * use case already confirms to the actor (and tells an exempt target it cannot be frozen), exactly as
  * {@code /freeze} does, so the gadget would otherwise double-notify.
  */

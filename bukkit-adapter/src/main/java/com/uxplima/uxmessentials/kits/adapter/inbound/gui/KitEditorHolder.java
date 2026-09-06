@@ -15,7 +15,7 @@ import org.jspecify.annotations.Nullable;
  * close as belonging to one of these editable views (and never to a vanilla container the editor happens to have
  * open) and read the kit being edited and who is editing it. The holder carries the kit's definition as it stood
  * when the window opened, so the close handler can rebuild the replacement from the window's items while
- * preserving the kit's cooldown, one-time flag, permission flag, and cost — only the items are edited here.
+ * preserving the kit's cooldown, one-time flag, permission flag, and cost: only the items are edited here.
  *
  * <p>The holder is created first and the menu is built against it; {@link #attach} then stores the built
  * inventory so {@link #getInventory()} can answer it, the way Bukkit's holder contract expects.

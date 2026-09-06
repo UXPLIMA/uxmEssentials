@@ -39,12 +39,12 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the same-server trade window: two live views over one shared {@code TradeSession}. Placing a
  * stack re-reads the offer into the session and resets both confirmations (anti-scam); a change after one side has
- * confirmed un-confirms both; a both-confirm swaps the stacks between the two players; and every abort — a close — or a
+ * confirmed un-confirms both; a both-confirm swaps the stacks between the two players; and every abort, a close, or a
  * commit into a full inventory returns or delivers every stack with none lost or duplicated.
  *
  * <p>The scheduler is a synchronous double so the entity-bound open, the live re-render, and the settlement all run
  * inline. A placement is driven by putting the stack in the window's editable slot and calling the same {@code
- * syncOffer} re-read the listener schedules after a click resolves — this keeps the test deterministic without
+ * syncOffer} re-read the listener schedules after a click resolves. This keeps the test deterministic without
  * simulating Bukkit's mid-click slot mechanics.
  */
 class TradeWindowTest {
@@ -119,7 +119,7 @@ class TradeWindowTest {
         TradeExchange exchange = exchange(alice);
         assertThat(exchange.confirmed(TradeSide.INITIATOR)).isTrue();
 
-        // Bob changes his offer after Alice confirmed — the invariant clears BOTH confirmations.
+        // Bob changes his offer after Alice confirmed: the invariant clears BOTH confirmations.
         place(bob, 0, new ItemStack(Material.EMERALD, 1));
 
         assertThat(exchange.confirmed(TradeSide.INITIATOR)).isFalse();
@@ -153,7 +153,7 @@ class TradeWindowTest {
         view.confirm(holder(alice));
 
         // Bob drops an emerald into his window and confirms in the same tick, before the deferred re-read (syncOffer)
-        // that would fold it into the offer snapshot has run — so the domain session still shows Bob's offer empty. The
+        // that would fold it into the offer snapshot has run, so the domain session still shows Bob's offer empty. The
         // Folia sub-tick fix reads each side's LIVE window at commit, so the emerald is delivered rather than
         // discarded.
         bob.getOpenInventory().getTopInventory().setItem(window.offerSlot(0), new ItemStack(Material.EMERALD, 2));
@@ -224,7 +224,7 @@ class TradeWindowTest {
         assertThat(bob.getOpenInventory().getTopInventory().getItem(window.offerSlot(0)))
                 .isNotNull();
 
-        // The same click one region over, in Alice's own offer, goes through — so the refusal above is the mirror
+        // The same click one region over, in Alice's own offer, goes through, so the refusal above is the mirror
         // being read-only, not the window cancelling everything.
         alice.setItemOnCursor(new ItemStack(Material.EMERALD));
         InventoryClickEvent intoOwnOffer = new InventoryClickEvent(

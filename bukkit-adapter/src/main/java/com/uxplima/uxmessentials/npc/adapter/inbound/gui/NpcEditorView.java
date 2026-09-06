@@ -124,7 +124,7 @@ public final class NpcEditorView {
         view.open(player, viewer, npc);
     }
 
-    /** The underlying property grid — exposed for tests to resolve a slot to its property without a live click. */
+    /** The underlying property grid: exposed for tests to resolve a slot to its property without a live click. */
     EntityEditorView<Npc> grid() {
         return view;
     }
@@ -179,7 +179,7 @@ public final class NpcEditorView {
     }
 
     /**
-     * Rename an NPC by copying it under the new name and deleting the original — there is no standalone rename
+     * Rename an NPC by copying it under the new name and deleting the original. There is no standalone rename
      * use case, so this composes the existing {@code copy} and {@code delete} use cases (the same pair an operator
      * would run by hand). A no-op when the new name equals the old. The copy lands at the original's position.
      */
@@ -443,7 +443,7 @@ public final class NpcEditorView {
     /**
      * The inverse of {@link #moveProperty}: teleport the viewer to the NPC's location, the GUI twin of
      * {@code /npc teleport <name>}. Reuses the existing {@code teleport} use case, which hands the destination to
-     * the region-aware teleport adapter (Folia-safe {@code teleportAsync}); the editor is not reopened — the
+     * the region-aware teleport adapter (Folia-safe {@code teleportAsync}); the editor is not reopened, the
      * viewer is leaving for the NPC, so the menu closes as the inventory click resolves. The value lore shows the
      * destination coordinates, the same hint the move button shows for the current anchor.
      */
@@ -584,7 +584,7 @@ public final class NpcEditorView {
         return entityClass != null && org.bukkit.entity.LivingEntity.class.isAssignableFrom(entityClass);
     }
 
-    /** The body poses the selector offers — the same names {@code /npc pose} accepts (uxmLib {@code NpcPose}). */
+    /** The body poses the selector offers: the same names {@code /npc pose} accepts (uxmLib {@code NpcPose}). */
     private static final List<String> POSES =
             List.of("STANDING", "SLEEPING", "SWIMMING", "GLIDING", "CROUCHING", "SPIN_ATTACK", "SITTING");
 

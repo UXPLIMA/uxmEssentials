@@ -48,7 +48,7 @@ class MessagingStaffAlertsTest {
 
         alerts.announceEnter(alice);
 
-        // Bob and Carol hear it; Alice (the actor) does not — the echo folds the actor name into the enter key.
+        // Bob and Carol hear it; Alice (the actor) does not: the echo folds the actor name into the enter key.
         assertThat(sink.delivered).hasSize(2);
         assertThat(sink.delivered).allMatch(line -> line.startsWith("staff.alert.enter") && line.contains("Alice"));
     }
@@ -73,7 +73,7 @@ class MessagingStaffAlertsTest {
         PlayerRef bob = new PlayerRef(UUID.randomUUID(), "Bob");
         StaffKeySink sink = new StaffKeySink();
         // The audience records the thread-ownership answer it saw when it was enumerated; the toggle drives the
-        // alert off the global thread, so it must observe "on global" — proving the read was marshalled, not inline.
+        // alert off the global thread, so it must observe "on global": proving the read was marshalled, not inline.
         RecordingScheduler scheduler = new RecordingScheduler();
         boolean[] enumeratedOnGlobal = {false};
         StaffAudience audience = node -> {

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.homes.domain.HomeSlot;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Reads the guest list of one of an owner's homes — the UUIDs the owner has invited to the home in a slot.
+ * Reads the guest list of one of an owner's homes: the UUIDs the owner has invited to the home in a slot.
  * The adapter resolves those UUIDs to names when it renders the list; this use case only exposes the raw
  * identities so the application layer never touches a player handle.
  */

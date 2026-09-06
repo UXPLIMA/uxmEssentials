@@ -16,8 +16,8 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Orchestrates a player's currency conversions. The money move is a single atomic call into the
- * {@link WalletRepository} — the guarded debit of the source currency and the clamp-checked credit of the
- * target currency commit together or not at all — so a conversion can never debit one currency without
+ * {@link WalletRepository}. The guarded debit of the source currency and the clamp-checked credit of the
+ * target currency commit together or not at all, so a conversion can never debit one currency without
  * crediting the other, exactly as a {@code /pay} can never debit a sender without crediting a receiver.
  *
  * <p>Exchange is a native-ledger feature: the atomic two-currency move runs through the wallet repository the
@@ -73,7 +73,7 @@ public final class ExchangeService {
         ExchangeRate rate = rateOpt.get();
         Optional<BigDecimal> targetOpt = rate.calculateTargetAmount(sourceAmount, targetCurrency.precision());
         if (targetOpt.isEmpty()) {
-            // The source is so small the target rounds to zero — refuse rather than debit for nothing.
+            // The source is so small the target rounds to zero: refuse rather than debit for nothing.
             return ExchangeOutcome.failed(TransferError.BELOW_MINIMUM);
         }
         BigDecimal targetAmount = targetOpt.get();

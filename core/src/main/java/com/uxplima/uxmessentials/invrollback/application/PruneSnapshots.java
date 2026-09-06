@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.invrollback.domain.RetentionPolicy;
  * capture, so between sweeps only the age half accrues; the sweep additionally catches an owner left over the cap
  * after an operator lowers {@code max-per-player} at reload. Either limit set to zero is disabled and skipped.
  *
- * <p>Pure application code — no Bukkit, no clock of its own: the caller passes the reference instant, so the rule
+ * <p>Pure application code, no Bukkit, no clock of its own: the caller passes the reference instant, so the rule
  * stays deterministic and testable. The adapter runs {@link #sweep} off the tick thread through the injected
  * {@code Scheduler} (a global repeating tick that hands the DB work to the async lane), never on a region thread.
  */

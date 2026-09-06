@@ -17,7 +17,7 @@ import org.jspecify.annotations.Nullable;
  * effective command surface the adapter registers.
  *
  * <p>Pure application logic: it knows nothing about Brigadier or config files. Resolution is
- * deterministic in definition order — the first command to claim a name or alias keeps it, and a later
+ * deterministic in definition order, the first command to claim a name or alias keeps it, and a later
  * collision is dropped with a {@link CatalogWarning} rather than failing the build. A disabled command
  * claims nothing, so disabling one frees its name and aliases for another command.
  */

@@ -41,9 +41,9 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>Deposit and withdraw capture an amount through the shared input seam, then the bank use case runs off the tick
  * thread, exactly as the old view did. Members opens the engine bank-members grid, logs opens the engine
- * transaction-history list scoped to this bank, and back reopens the engine bank list — all resolved through the
+ * transaction-history list scoped to this bank, and back reopens the engine bank list. All resolved through the
  * {@link BankNavigation} supplier injected at construction so the cross-links stay final and non-null without
- * post-construction setters. The menu holds no new domain logic — it replays the old view's handlers verbatim through
+ * post-construction setters. The menu holds no new domain logic. It replays the old view's handlers verbatim through
  * the engine.
  */
 @NullMarked
@@ -121,7 +121,7 @@ public final class BankActionsMenu {
 
     /**
      * Capture an amount through the input seam, then deposit (or withdraw) it, exactly as the old view did. A
-     * malformed amount sends the existing parse-error rejection and reopens the bank list — no op runs.
+     * malformed amount sends the existing parse-error rejection and reopens the bank list, no op runs.
      */
     private void promptTransfer(MenuActionContext ctx, boolean deposit) {
         Player player = ctx.player();
@@ -141,7 +141,7 @@ public final class BankActionsMenu {
 
     /**
      * Parse the typed amount against the bank's currency and, when valid, run the deposit/withdraw off the tick
-     * thread, then reopen the bank list. A malformed amount sends the parse rejection and reopens — no op runs.
+     * thread, then reopen the bank list. A malformed amount sends the parse rejection and reopens, no op runs.
      * Package-private so the amount branch is unit-tested without driving a live anvil, mirroring the old view.
      */
     void applyTransfer(Player player, PlayerRef viewer, SharedBank bank, String input, boolean deposit) {

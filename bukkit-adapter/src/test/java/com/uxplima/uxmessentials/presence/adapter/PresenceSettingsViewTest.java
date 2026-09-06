@@ -87,7 +87,7 @@ class PresenceSettingsViewTest {
         guiText = new GuiText(new KeyMessages());
         scheduler = new SyncScheduler();
         Clock clock = Clock.systemUTC();
-        // A fake vanish authority: the store overlays its vanished bit from this set, and the toggle handle flips it —
+        // A fake vanish authority: the store overlays its vanished bit from this set, and the toggle handle flips it
         // the same contract the real vanish store and ToggleVanish satisfy in production.
         Set<UUID> vanished = ConcurrentHashMap.newKeySet();
         vanishToggle = who -> {

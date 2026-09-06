@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * root logger config by {@link ConsoleFilterInstaller}, it is consulted for every log event reaching the console and
  * denies exactly the events whose rendered message the policy marks for suppression; everything else is
  * {@link Result#NEUTRAL neutral}, so an event this filter does not deny is decided by the rest of the pipeline
- * exactly as before — the filter can only remove configured spam, never add or reroute a line.
+ * exactly as before: the filter can only remove configured spam, never add or reroute a line.
  *
  * <p>Only the {@link #filter(LogEvent)} hook is overridden: that is the one the root logger config consults for an
  * actual event, and leaving the pre-log message overloads at their neutral defaults keeps the surface (and the

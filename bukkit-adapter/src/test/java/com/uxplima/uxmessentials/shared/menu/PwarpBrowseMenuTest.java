@@ -177,7 +177,7 @@ class PwarpBrowseMenuTest {
         assertThat(firstPage.rows()).hasSize(PAGE_SIZE);
         assertThat(firstPage.totalCount()).isEqualTo(TOTAL);
         assertThat(secondPage.rows()).hasSize(TOTAL - PAGE_SIZE);
-        // A later page is a different page — the source paged the corpus rather than reading it whole and slicing.
+        // A later page is a different page: the source paged the corpus rather than reading it whole and slicing.
         assertThat(secondPage.rows()).isNotEqualTo(firstPage.rows());
         // The query the read model saw was the safe public browse, bounded to the requested window.
         assertThat(browse.queries).allSatisfy(query -> {

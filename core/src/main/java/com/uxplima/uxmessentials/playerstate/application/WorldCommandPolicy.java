@@ -15,8 +15,8 @@ import java.util.Set;
  * {@code world} run the command {@code label}?" against that configured map, and the adapter cancels the
  * dispatch when the answer is no and the player lacks the bypass node.
  *
- * <p>The match is on the bare command label only — the leading slash, any {@code uxmessentials:} namespace
- * prefix, and the arguments are stripped by the caller — and is case-insensitive on both the world name and
+ * <p>The match is on the bare command label only. The leading slash, any {@code uxmessentials:} namespace
+ * prefix, and the arguments are stripped by the caller, and is case-insensitive on both the world name and
  * the label, since Bukkit world names are case-sensitive on disk but operators reasonably expect a
  * case-insensitive config match here. The domain never reads the live world or the wall clock; the adapter
  * passes in the player's current world name and the typed label, so the rule stays a pure function of its

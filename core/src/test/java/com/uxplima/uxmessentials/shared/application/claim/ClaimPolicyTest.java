@@ -55,7 +55,7 @@ class ClaimPolicyTest {
     }
 
     // -----------------------------------------------------------------------
-    // canPlace — claim present
+    // canPlace, claim present
     // -----------------------------------------------------------------------
 
     @Test
@@ -87,7 +87,7 @@ class ClaimPolicyTest {
 
     @Test
     void bannedFromClaim_canPlace_isDeniedAccess() {
-        // PLAYER is a trusted member but banned — the ban denies placement ahead of the trust test.
+        // PLAYER is a trusted member but banned: the ban denies placement ahead of the trust test.
         provider.addClaimTrusting(0, 0, OWNER, PLAYER, true);
         ClaimPolicySettings settings = new ClaimPolicySettings(false, true, 0, false);
         ClaimPolicy policy = new ClaimPolicy(provider, settings);
@@ -96,7 +96,7 @@ class ClaimPolicyTest {
     }
 
     // -----------------------------------------------------------------------
-    // canPlace — owner-only membership (playerwarps "own-land" mode)
+    // canPlace. Owner-only membership (playerwarps "own-land" mode)
     // -----------------------------------------------------------------------
 
     @Test
@@ -149,7 +149,7 @@ class ClaimPolicyTest {
     }
 
     // -----------------------------------------------------------------------
-    // canPlace — unclaimed land
+    // canPlace, unclaimed land
     // -----------------------------------------------------------------------
 
     @Test
@@ -167,13 +167,13 @@ class ClaimPolicyTest {
         ClaimPolicySettings settings = new ClaimPolicySettings(false, false, 1, false);
         ClaimPolicy policy = new ClaimPolicy(provider, settings);
 
-        // Target block is at (0, 0) — base chunk (0, 0); neighbouring chunk (1, 0) has a foreign claim.
+        // Target block is at (0, 0): base chunk (0, 0); neighbouring chunk (1, 0) has a foreign claim.
         assertThat(policy.canPlace(PLAYER, WORLD, 0, 0)).isEqualTo(ClaimDecision.DENIED_TOO_CLOSE);
     }
 
     @Test
     void unclaimedWithProximityToOwnClaim_canPlace_isAllowed() {
-        // Nearby claim belongs to the same player — not a foreign claim.
+        // Nearby claim belongs to the same player, not a foreign claim.
         provider.addClaim(16, 0, PLAYER, false);
         ClaimPolicySettings settings = new ClaimPolicySettings(false, false, 1, false);
         ClaimPolicy policy = new ClaimPolicy(provider, settings);
@@ -205,7 +205,7 @@ class ClaimPolicyTest {
 
     @Test
     void bannedFromClaim_canAccess_isDeniedAccess() {
-        // PLAYER is a trusted member here, so only the ban can deny access — the trust test would allow it.
+        // PLAYER is a trusted member here, so only the ban can deny access: the trust test would allow it.
         provider.addClaimTrusting(0, 0, OWNER, PLAYER, true);
         ClaimPolicySettings settings = new ClaimPolicySettings(false, false, 0, true);
         ClaimPolicy policy = new ClaimPolicy(provider, settings);
@@ -222,7 +222,7 @@ class ClaimPolicyTest {
     }
 
     // -----------------------------------------------------------------------
-    // isWithinClaim — the player-agnostic "is this land claimed at all" check RTP uses
+    // isWithinClaim. The player-agnostic "is this land claimed at all" check RTP uses
     // -----------------------------------------------------------------------
 
     @Test
@@ -251,7 +251,7 @@ class ClaimPolicyTest {
     }
 
     // -----------------------------------------------------------------------
-    // ClaimPolicySettings — ownerOnly field, delegating constructor, equality
+    // ClaimPolicySettings. OwnerOnly field, delegating constructor, equality
     // -----------------------------------------------------------------------
 
     @Test
@@ -303,7 +303,7 @@ class ClaimPolicyTest {
 
         /**
          * Register a claim owned by {@code owner} but with {@code member} also trusted, so {@code member} is a
-         * trusted-but-not-owner player — the case that separates owner-only placement from owner-or-member.
+         * trusted-but-not-owner player: the case that separates owner-only placement from owner-or-member.
          */
         void addClaimTrusting(int blockX, int blockZ, UUID owner, UUID member, boolean banTestPlayer) {
             claims.put(key(blockX, blockZ), new FakeLookup(owner, Set.of(owner, member), banTestPlayer));

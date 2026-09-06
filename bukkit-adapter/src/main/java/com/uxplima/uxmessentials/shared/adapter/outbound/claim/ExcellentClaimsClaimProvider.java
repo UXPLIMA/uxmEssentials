@@ -17,13 +17,13 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@link ClaimProvider} backed by ExcellentClaims (nightexpress), reached <b>entirely by reflection</b> —
+ * {@link ClaimProvider} backed by ExcellentClaims (nightexpress), reached <b>entirely by reflection</b>
  * there is no compile dependency on the ExcellentClaims API, so this class loads and runs whether or not
  * ExcellentClaims is present.
  *
  * <p>ExcellentClaims is a premium plugin with no public Maven coordinate (its API jar is not published to any
  * anonymous repository), so a typed {@code compileOnly} dependency is impossible. Its API surface is a stable
- * static entry point — {@code su.nightexpress.excellentclaims.ClaimsAPI} — populated on plugin enable, which
+ * static entry point, {@code su.nightexpress.excellentclaims.ClaimsAPI}, populated on plugin enable, which
  * this provider reaches reflectively.
  *
  * <p>The API chain is {@code ClaimsAPI.getClaimManager()} →
@@ -34,7 +34,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>{@link #active()} is {@code true} only when the plugin is enabled and {@code ClaimsAPI.isLoaded()} is
  * {@code true}. Reflective handles are resolved on first success and cached; any reflective failure logs once
- * and degrades to inactive/empty — it never propagates.
+ * and degrades to inactive/empty: it never propagates.
  */
 @NullMarked
 public final class ExcellentClaimsClaimProvider implements ClaimProvider {
@@ -160,7 +160,7 @@ public final class ExcellentClaimsClaimProvider implements ClaimProvider {
 
         @Override
         public boolean isBanned(UUID player) {
-            // ExcellentClaims has no per-claim ban concept — access is owner/member/rank-permission only.
+            // ExcellentClaims has no per-claim ban concept: access is owner/member/rank-permission only.
             return false;
         }
 

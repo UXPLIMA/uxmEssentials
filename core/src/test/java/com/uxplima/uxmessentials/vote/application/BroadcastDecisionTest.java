@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The pure broadcast policy: every {@link BroadcastType} against the facts of a credited vote, plus the
- * blacklist short-circuit and the cooldown-window edges. No port is involved — the decision is a function
+ * blacklist short-circuit and the cooldown-window edges. No port is involved. The decision is a function
  * of its arguments.
  */
 class BroadcastDecisionTest {

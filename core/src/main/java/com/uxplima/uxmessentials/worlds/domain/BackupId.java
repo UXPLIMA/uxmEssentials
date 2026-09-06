@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
- * The identity of a single world backup archive — its on-disk file-stem under the backups directory.
+ * The identity of a single world backup archive: its on-disk file-stem under the backups directory.
  * Constrained to a safe shape so it can never carry a path separator or a traversal segment: the value
  * is therefore filesystem-safe and non-traversing, and can be appended to a directory path directly.
  */

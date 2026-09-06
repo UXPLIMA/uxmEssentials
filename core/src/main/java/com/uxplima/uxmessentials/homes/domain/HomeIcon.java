@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * A Bukkit material identifier stored as an uppercase string — for example {@code "GRASS_BLOCK"}.
+ * A Bukkit material identifier stored as an uppercase string: for example {@code "GRASS_BLOCK"}.
  *
  * <p>The identifier is kept as a plain {@code String} rather than a Bukkit {@code Material} enum
  * so the domain stays free of platform types. The adapter resolves it to a {@code Material} when

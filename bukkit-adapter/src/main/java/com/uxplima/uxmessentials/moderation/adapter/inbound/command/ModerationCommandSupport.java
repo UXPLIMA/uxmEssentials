@@ -28,7 +28,7 @@ import org.jspecify.annotations.Nullable;
  * directly. Concrete command classes extend this so each stays focused on building its node and mapping its
  * arguments to one use-case call.
  *
- * <p>{@link #actor} maps the sender to a {@link PlayerRef} — a console actor gets a stable nil-UUID ref so an
+ * <p>{@link #actor} maps the sender to a {@link PlayerRef}, a console actor gets a stable nil-UUID ref so an
  * offline {@code /jail}/{@code /banip} from console still attributes an issuer. {@link #targetByName} resolves
  * a target online-first, then from the profile cache so an offline target can still be muted/jailed/banned
  * (the offline-jail/offline-banip paths). The optional reason is the greedy trailing argument.
@@ -114,7 +114,7 @@ abstract class ModerationCommandSupport {
         sink.deliver(actor(ctx), messages.resolve(actor(ctx), key, placeholders));
     }
 
-    /** The live player behind {@code target}, if connected — for a command that must act on a session. */
+    /** The live player behind {@code target}, if connected: for a command that must act on a session. */
     static @Nullable Player onlinePlayer(CommandContext<CommandSourceStack> ctx, PlayerRef target) {
         return ctx.getSource().getSender().getServer().getPlayer(target.uuid());
     }

@@ -21,9 +21,9 @@ import com.uxplima.uxmessentials.teleport.domain.event.BackLocationCaptured;
 
 /**
  * The {@code /back} use case: capture a return point before a teleport hop and on death, and return the
- * player to their most recent capture. Death-back is gated separately — {@code deathBackAllowed}
+ * player to their most recent capture. Death-back is gated separately: {@code deathBackAllowed}
  * combines the operator's {@code back.on-death} setting with the player's
- * {@code uxmessentials.back.ondeath} permission — so a server can offer {@code /back} after a teleport
+ * {@code uxmessentials.back.ondeath} permission, so a server can offer {@code /back} after a teleport
  * but not after dying.
  *
  * <p>Capture happens just before the hop (the pre-teleport position) so the most recent of (last

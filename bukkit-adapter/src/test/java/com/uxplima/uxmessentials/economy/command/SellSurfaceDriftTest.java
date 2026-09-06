@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@code /sell} into the economy context's command surface. {@code /sell} is the natural companion to
- * {@code /worth} — it converts held items into currency at their configured worth — and is a standard
+ * {@code /worth} (it converts held items into currency at their configured worth) and is a standard
  * economy verb; this guard fails if the literal drops out of the surface or wires under a node
  * other than {@code uxmessentials.economy.sell}.
  */

@@ -44,7 +44,7 @@ import com.uxplima.uxmessentials.worlds.application.WorldsMessageKey;
  * block and every feature context (the twelve landed contexts plus the round-3 {@code communication} module).
  *
  * <p>This is the one place that enumerates the per-module key enums, so the catalog is whole regardless
- * of which modules are enabled at runtime (docs/13-i18n §6 — a disabled module still ships its keys).
+ * of which modules are enabled at runtime (docs/13-i18n §6: a disabled module still ships its keys).
  * Two collaborators read it: the {@code GlobalTranslator} wiring (which registers every key for the
  * {@code translatable} path) and the locale-parity guard (which asserts this constant set equals
  * {@code messages_en.conf}'s key set, bidirectionally). Adding a context's enum here is the one edit a

@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /reply <text>}: answer the last conversation without naming the partner. The reply target resolution
  * and the reply-TTL rule are the {@link com.uxplima.uxmessentials.messaging.application.Reply} use case's
- * job — a stale or now-unreachable (offline / vanished) partner declines with the no-reply-target message.
+ * job: a stale or now-unreachable (offline / vanished) partner declines with the no-reply-target message.
  * This handler only maps the greedy text.
  */
 @NullMarked

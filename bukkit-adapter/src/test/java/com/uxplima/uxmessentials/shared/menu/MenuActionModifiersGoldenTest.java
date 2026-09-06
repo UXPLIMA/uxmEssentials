@@ -36,8 +36,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * End-to-end coverage of per-action modifiers through the real {@link MenuListener}, the only path that applies a
- * click's chance roll, delay, and deny fallback. Two recording actions — {@code hit} (the main effect) and
- * {@code miss} (the deny fallback) — count their fires, so which branch ran is observed concretely. The chance
+ * click's chance roll, delay, and deny fallback. Two recording actions, {@code hit} (the main effect) and
+ * {@code miss} (the deny fallback): count their fires, so which branch ran is observed concretely. The chance
  * boundaries (0 and 100) are deterministic, so no test depends on the RNG; the delay is proven with a scheduler
  * that captures the off-tick task and lets the test fire it, so nothing waits on a wall clock.
  */

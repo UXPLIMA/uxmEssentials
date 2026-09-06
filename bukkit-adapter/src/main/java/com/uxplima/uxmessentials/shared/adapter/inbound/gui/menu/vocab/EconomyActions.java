@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * {@code take-exp} / {@code give-permission} the same way a code-registered feature menu does. This is the first
  * consumer of the Phase-0 {@link Currencies} multi-currency façade and the Vault {@link PermissionQuery} seam.
  *
- * <p>Every effect here is <em>silent</em> by design — none of them tells the player anything. That mirrors
+ * <p>Every effect here is <em>silent</em> by design: none of them tells the player anything. That mirrors
  * DeluxeMenus: an operator who wants feedback pairs the economy action with a {@code [message]} action of their own.
  * So no {@code MessageKey} is involved; the amounts, currency specs and permission nodes are operator config, and
  * the only text any action produces is a diagnostic line on the operator {@code log} when an argument is malformed.
@@ -34,10 +34,10 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
  * Paper's native {@code giveExp} / {@code giveExpLevels}; a {@code take} never drives a player negative (experience
  * is bounded by the player's current total, a level is clamped at zero). The permission actions go through the
  * Vault {@link PermissionQuery}; when Vault (or its permission service) is absent the query is
- * {@link PermissionQuery#ABSENT} and {@code add}/{@code remove} are graceful no-ops — never an error.
+ * {@link PermissionQuery#ABSENT} and {@code add}/{@code remove} are graceful no-ops, never an error.
  *
  * <p>Every action is fail-soft: a malformed amount is a logged no-op, and anything a call unexpectedly throws is
- * turned into a logged no-op by {@link #safe} rather than escaping back into the click dispatch — one bad effect
+ * turned into a logged no-op by {@link #safe} rather than escaping back into the click dispatch, one bad effect
  * must not abort the rest of a chain. All of it runs on the viewer's entity thread, where a click already runs and
  * where the currency and permission capabilities document they must be called.
  */
@@ -51,7 +51,7 @@ public final class EconomyActions {
      * actions grant/revoke through (its {@link PermissionQuery#ABSENT} default makes those graceful no-ops when
      * Vault is absent); {@code log} is the operator console logger a fail-soft or malformed action warns through.
      * Left separate from {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched
-     * — the composition root calls both.
+     *: the composition root calls both.
      */
     public static void register(MenuBindings bindings, Currencies currencies, PermissionQuery permissions, Logger log) {
         Objects.requireNonNull(bindings, "bindings");
@@ -102,7 +102,7 @@ public final class EconomyActions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs and the npc/
+     * than escaping into the click dispatch. The same fail-soft contract the sibling action packs and the npc/
      * holograms click runner apply to their effect actions.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
@@ -181,7 +181,7 @@ public final class EconomyActions {
 
     /**
      * Remove {@code <amount>} experience points from the viewer, bounded by their current total so the removal never
-     * drives experience below zero — {@code giveExp} of a negative that would underflow the total is otherwise an
+     * drives experience below zero. {@code giveExp} of a negative that would underflow the total is otherwise an
      * error on Paper. A player with less than {@code amount} is simply emptied.
      */
     private static void takeExp(MenuActionContext ctx, Logger log) {
@@ -220,7 +220,7 @@ public final class EconomyActions {
     private static void givePerm(MenuActionContext ctx, PermissionQuery permissions) {
         String node = ctx.arg().strip();
         if (node.isEmpty()) {
-            return; // no node to grant — nothing to do, but not an error
+            return; // no node to grant. Nothing to do, but not an error
         }
         permissions.add(ctx.viewer().uuid(), node);
     }
@@ -247,7 +247,7 @@ public final class EconomyActions {
     /**
      * A parsed {@code <amount> [currency-spec]} money argument: the first whitespace-delimited token is a
      * non-negative amount, and the rest (blank when absent) is the currency spec {@link Currencies#resolve(String)}
-     * reads — a blank spec is the configured default. Parsing is Bukkit-free so plain-JUnit grammar tests can
+     * reads: a blank spec is the configured default. Parsing is Bukkit-free so plain-JUnit grammar tests can
      * exercise it; a missing, non-numeric, negative or non-finite amount yields an empty result, which the actions
      * treat as a fail-soft warn-and-skip.
      */

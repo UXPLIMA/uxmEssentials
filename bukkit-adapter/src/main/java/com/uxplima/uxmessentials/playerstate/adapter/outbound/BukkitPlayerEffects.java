@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The {@link PlayerEffects} implementation: the apply-once and live-only verbs that act on the live player
- * without changing the persisted snapshot — heal, feed, extinguish, suicide, night-vision, glow, and the
+ * without changing the persisted snapshot, heal, feed, extinguish, suicide, night-vision, glow, and the
  * per-player time/weather overrides. Each resolves the live {@code Player} and runs on the player's owning
  * region/entity thread through the injected {@link Scheduler} port; an offline target is a silent no-op.
  *

@@ -10,10 +10,10 @@ import com.uxplima.uxmessentials.shared.domain.Position;
  *
  * <p><b>{@code set-pwarp} is a veto, off by default.</b> The flag registers as a {@code StateFlag} defaulting to ALLOW,
  * so "not set" reads as allowed and only an explicit DENY on a covering region blocks. {@link #deniesFlag} therefore
- * answers {@code true} <em>only</em> when a region covering {@code where} sets the named flag to DENY — an operator
+ * answers {@code true} <em>only</em> when a region covering {@code where} sets the named flag to DENY, an operator
  * adds the flag as DENY to forbid warp creation in a region, and playerwarps treats
- * {@code deniesFlag("set-pwarp", loc) == true} as "creation forbidden here". A location no region touches — and every
- * location on a server without WorldGuard — answers {@code false}.
+ * {@code deniesFlag("set-pwarp", loc) == true} as "creation forbidden here". A location no region touches, and every
+ * location on a server without WorldGuard, answers {@code false}.
  *
  * <p>The seam is fail-open: a lookup it cannot evaluate reports {@code false} rather than blocking, because wrongly
  * refusing a legitimate warp is worse than missing a rare veto.

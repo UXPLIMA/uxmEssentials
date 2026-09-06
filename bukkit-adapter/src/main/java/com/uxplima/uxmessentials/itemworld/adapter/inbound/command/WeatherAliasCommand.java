@@ -21,8 +21,8 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandRegistrat
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One quick weather-alias verb — {@code /sun} ({@link WeatherSpec.Kind#CLEAR}), {@code /rain}
- * ({@link WeatherSpec.Kind#RAIN}) or {@code /thunder} ({@link WeatherSpec.Kind#THUNDER}) — parameterised by its
+ * One quick weather-alias verb, {@code /sun} ({@link WeatherSpec.Kind#CLEAR}), {@code /rain}
+ * ({@link WeatherSpec.Kind#RAIN}) or {@code /thunder} ({@link WeatherSpec.Kind#THUNDER}), parameterised by its
  * {@link WeatherSpec.Kind} and its own literal so the three share one class rather than three near-identical
  * files. Each is its own command literal in the time/weather sub-feature group, gated by its own per-command
  * disable. World weather is global state, so the set runs on the global region thread through the kernel
@@ -41,17 +41,17 @@ public final class WeatherAliasCommand extends ItemworldCommandSupport implement
         this.kind = java.util.Objects.requireNonNull(kind, "kind");
     }
 
-    /** {@code /sun} — clear the weather. */
+    /** {@code /sun}, clear the weather. */
     public static WeatherAliasCommand sun(ItemworldServices services) {
         return new WeatherAliasCommand(services, "sun", "Clear the weather.", WeatherSpec.Kind.CLEAR);
     }
 
-    /** {@code /rain} — start rain. */
+    /** {@code /rain}, start rain. */
     public static WeatherAliasCommand rain(ItemworldServices services) {
         return new WeatherAliasCommand(services, "rain", "Start rain.", WeatherSpec.Kind.RAIN);
     }
 
-    /** {@code /thunder} — start a thunderstorm. */
+    /** {@code /thunder}, start a thunderstorm. */
     public static WeatherAliasCommand thunder(ItemworldServices services) {
         return new WeatherAliasCommand(services, "thunder", "Start a thunderstorm.", WeatherSpec.Kind.THUNDER);
     }

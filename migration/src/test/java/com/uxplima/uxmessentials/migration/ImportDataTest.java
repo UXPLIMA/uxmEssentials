@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
  * Exercises the source-agnostic {@link ImportData} use case end to end with an in-process fake source and
  * a counting writer: a live run emits {@code start → per-record → finish} audit and writes once; a re-run
  * with the same records is idempotent at the writer (set-not-add); a dry run takes no backup and still
- * produces the identical summary. No Bukkit, no disk — the use case is pure application code.
+ * produces the identical summary. No Bukkit, no disk: the use case is pure application code.
  */
 class ImportDataTest {
 
@@ -52,7 +52,7 @@ class ImportDataTest {
         importData.run("admin", source(2), ImportOptions.live(Path.of(".")), writer);
         importData.run("admin", source(2), ImportOptions.live(Path.of(".")), writer);
 
-        // Two runs of the same two users leave exactly two stored owners — the set-not-add upsert.
+        // Two runs of the same two users leave exactly two stored owners, the set-not-add upsert.
         assertThat(writer.stored).hasSize(2);
     }
 
@@ -109,7 +109,7 @@ class ImportDataTest {
         }
     }
 
-    /** A writer that "sets" each owner into a map — a re-run replaces, never duplicates. */
+    /** A writer that "sets" each owner into a map: a re-run replaces, never duplicates. */
     private static final class SetWriter implements RecordWriter {
         private final AtomicInteger writes = new AtomicInteger();
         private final ConcurrentHashMap<UUID, Boolean> stored = new ConcurrentHashMap<>();

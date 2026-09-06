@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>The count and limit are read for a specific player. The limit resolves through the same world-scoped
  * quota reducer {@code /sethome} uses, but the placeholder has no world in hand, so it resolves the
- * unscoped family (a {@code null} world) — the value an operator sees on a hub or a non-world-scoped
+ * unscoped family (a {@code null} world), the value an operator sees on a hub or a non-world-scoped
  * server. A negative {@code limit()} encodes "unlimited". The {@link #list(PlayerRef)} read returns the
  * player's homes in their stable slot order so the indexed and list placeholders render deterministically.
  */
@@ -30,7 +30,7 @@ public interface HomesPlaceholders {
     /**
      * The placeholder-facing projection of one home: the display name (the player's label when set, else the
      * 1-based slot number), the world name, and the block-rounded coordinates. Coordinates are block-rounded
-     * because a placeholder shows a position, not a teleport target — the sub-block precision is noise on a
+     * because a placeholder shows a position, not a teleport target. The sub-block precision is noise on a
      * scoreboard or in chat.
      *
      * @param name the home's display name

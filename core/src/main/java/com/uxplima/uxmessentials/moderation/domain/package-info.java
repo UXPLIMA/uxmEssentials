@@ -1,5 +1,5 @@
 /**
- * The moderation bounded context's domain — pure Java, no Bukkit/Paper/Adventure/SLF4J imports.
+ * The moderation bounded context's domain, pure Java, no Bukkit/Paper/Adventure/SLF4J imports.
  *
  * <p>It models the DB-backed sanction state that survives restart: a {@link
  * com.uxplima.uxmessentials.moderation.domain.MuteState mute} (none / permanent / timed), a {@link
@@ -10,7 +10,7 @@
  * {@link com.uxplima.uxmessentials.moderation.domain.ModerationProfile} aggregate gathers a target's mute,
  * jail and tempban into one value and answers the gate questions the messaging and teleport contexts ask.
  *
- * <p>All time reasoning takes an explicit instant — the domain never reads the wall clock — so the
+ * <p>All time reasoning takes an explicit instant, the domain never reads the wall clock, so the
  * online-only jail countdown and the tempban expiry are deterministic and unit-testable.
  */
 @org.jspecify.annotations.NullMarked

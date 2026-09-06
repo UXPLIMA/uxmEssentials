@@ -35,14 +35,14 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Registers the server-wide eco-admin screen with the menu engine and opens it. A three-row panel reached from the
  * bare-/eco hub's [Server-wide] button: Give to All (an amount captured through the shared input seam, credited to
- * every online wallet) and Reset All (confirm-gated, zeroing every online balance), with — when more than one
- * currency is configured — a shared paginated {@link CurrencyPickerMenu} between them to switch the active currency.
+ * every online wallet) and Reset All (confirm-gated, zeroing every online balance), with, when more than one
+ * currency is configured: a shared paginated {@link CurrencyPickerMenu} between them to switch the active currency.
  * Both ops operate on the currently-online roster, the same scope the {@code /eco giveall|resetall} commands use.
  *
  * <p>The screen carries only the active currency as its {@link BulkSubject}, so each button's active-currency line
  * fills from the shared {@code eco_currency} placeholder without the renderer touching a port. The roster is
  * enumerated on the global region thread (the one thread {@code Server.getOnlinePlayers()} is safely readable on
- * Folia) when an op fires, snapshotted to {@link PlayerRef}s, and the bulk op runs off the tick thread — exactly as
+ * Folia) when an op fires, snapshotted to {@link PlayerRef}s, and the bulk op runs off the tick thread, exactly as
  * the old view did. The menu holds no new domain logic. Every visible string resolves from the economy catalog.
  *
  * <p>The shared {@code eco_currency} placeholder and the {@code economy:multi-currency} view condition are
@@ -132,7 +132,7 @@ public final class EconomyBulkMenu {
 
     /**
      * Parse the typed amount, and on success snapshot the online roster on the global thread and credit it off the
-     * tick thread, then re-open. A malformed amount sends the existing parse-error rejection and re-opens — no op
+     * tick thread, then re-open. A malformed amount sends the existing parse-error rejection and re-opens, no op
      * runs. Package-private so the amount branch is unit-tested without driving a live anvil, mirroring the old view.
      */
     void applyGiveAll(Player viewer, PlayerRef viewerRef, Currency active, String raw) {

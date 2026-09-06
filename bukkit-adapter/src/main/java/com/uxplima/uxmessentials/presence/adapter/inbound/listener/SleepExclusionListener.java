@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  * down and re-counts one who has since returned. {@link PlayerBedEnterEvent#enterAction()} is read so a
  * pointless reconcile is skipped when the player cannot actually sleep here. The event fires on the bed's region
  * thread, so the reconcile hops to the global thread to enumerate the roster, then to each player's own entity
- * thread to set their sleeping-ignored flag — Folia forbids touching a foreign entity from another region.
+ * thread to set their sleeping-ignored flag: Folia forbids touching a foreign entity from another region.
  */
 @NullMarked
 public final class SleepExclusionListener implements Listener {

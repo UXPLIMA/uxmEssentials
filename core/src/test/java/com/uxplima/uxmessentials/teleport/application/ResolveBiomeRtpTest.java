@@ -101,7 +101,7 @@ class ResolveBiomeRtpTest {
 
     @Test
     void aBiomeFoundOnlyByTheLiveSearchTeleportsThePlayer() {
-        slice.columns = List.of(); // nothing persisted for this biome — fall through to the live search
+        slice.columns = List.of(); // nothing persisted for this biome, fall through to the live search
         ResolveBiomeRtp resolve = resolve(new MatchingChunkAccess(DESERT), slice);
 
         Result<Unit, TeleportError> result = resolve.targeted(WHO, WORLD, "desert");
@@ -227,7 +227,7 @@ class ResolveBiomeRtpTest {
         }
     }
 
-    /** A chunk access that never yields a candidate — every probe misses. */
+    /** A chunk access that never yields a candidate: every probe misses. */
     private static final class EmptyChunkAccess implements ChunkAccess {
         @Override
         public CompletableFuture<Optional<SafeCandidate>> probe(SafeSearchArea area, int blockX, int blockZ) {

@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 /**
- * Read seam the expansion queries for the {@code server_*} placeholders — the server-wide metrics that need no
+ * Read seam the expansion queries for the {@code server_*} placeholders. The server-wide metrics that need no
  * requesting player (online count, slots, version, process uptime, TPS, heap usage, per-world population). Unlike
  * every other seam this one is not owned by a feature context: it reads Bukkit and JVM globals, so it is always
  * present, wired once in bootstrap regardless of which modules are enabled.
@@ -25,7 +25,7 @@ public interface ServerMetricsPlaceholders {
     /** The running Minecraft version, e.g. {@code 1.21.11}. */
     String minecraftVersion();
 
-    /** How long the plugin has been enabled — captured from the enable timestamp, not JVM start. */
+    /** How long the plugin has been enabled, captured from the enable timestamp, not JVM start. */
     Duration uptime();
 
     /**

@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
  * <h2>Folia</h2>
  * The cascade breaks each connected block inline on the {@code BlockBreakEvent} thread. That thread already owns the
  * broken block's region, and the search is bounded ({@code max-blocks}) and grows only through immediate neighbours,
- * so every block it reaches sits in the same local neighbourhood the event thread owns — the region the task guidance
+ * so every block it reaches sits in the same local neighbourhood the event thread owns, the region the task guidance
  * says is safe to mutate here without a scheduler hop. The one piece of work that must outlive the event, the
  * tree-feller sapling replant, is deferred through the {@code Scheduler} port by the listener that needs it.
  */
@@ -70,7 +70,7 @@ final class SurvivalBlocks {
     /**
      * Break every block connected to {@code origin} that shares its material, up to the search's cap, leaving the
      * origin itself to the event's own break. Drops respect {@code tool} (enchantments, silk touch), and fall on the
-     * ground as a natural break — the plain cascade with no auto-drops routing.
+     * ground as a natural break: the plain cascade with no auto-drops routing.
      *
      * @return how many blocks were broken, the origin excluded
      */
@@ -80,7 +80,7 @@ final class SurvivalBlocks {
 
     /**
      * Break the connected group as {@link #breakConnected(ConnectedBlockSearch, Block, ItemStack)} does, but when
-     * {@code sink} is present route each broken block's drops through it instead of dropping them on the ground —
+     * {@code sink} is present route each broken block's drops through it instead of dropping them on the ground
      * this is how the tree-feller and veinminer cascades feed the auto-drops pipeline (auto-pickup / smelt / sell).
      * With a sink, the block is computed for its drops, cleared to air (no vanilla ground drop), and the sink is
      * handed the captured drops at that block's location; with none, the block breaks naturally. A block carrying a

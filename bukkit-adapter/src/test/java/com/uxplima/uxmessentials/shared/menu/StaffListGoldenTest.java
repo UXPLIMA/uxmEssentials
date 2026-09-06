@@ -47,7 +47,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The {@code /stafflist} golden test: the engine-rendered staff picker must draw the exact window the deleted
  * {@code StaffListView} drew. The fixture is three online staff members, so the window draws a PLAYER_HEAD named
- * with each member's name at content slots 0, 1, 2, with the rest of the grid and the whole bottom row empty — the
+ * with each member's name at content slots 0, 1, 2, with the rest of the grid and the whole bottom row empty, the
  * old picker placed no filler and no navigation buttons. The engine's window is snapshotted as
  * {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old view produced,
  * captured once while both rendered the same fixture and frozen here as the contract so the old class could be
@@ -118,7 +118,7 @@ class StaffListGoldenTest {
     /**
      * The slot -> (material, plain name) map the deleted {@code StaffListView} produced for this fixture (three
      * staff), captured once while both paths rendered it identically and frozen here as the contract: a PLAYER_HEAD
-     * named with each member's name at content slots 0, 1, 2, and nothing else — the old picker placed no filler and
+     * named with each member's name at content slots 0, 1, 2, and nothing else. The old picker placed no filler and
      * no navigation buttons, so the rest of the grid and the whole bottom row are empty.
      */
     private static Map<Integer, Snapshot> baseline() {

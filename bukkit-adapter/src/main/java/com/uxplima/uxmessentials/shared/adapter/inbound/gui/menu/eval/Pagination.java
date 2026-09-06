@@ -11,8 +11,8 @@ import java.util.Set;
  * Slices a flat list of list-source entries into the slots a single rendered page can show. The content slots are
  * the cells a menu reserves for its scrollable list (everything else is fixed decoration), so the page size is
  * simply how many of those slots exist. Entries are laid into those slots in order, and a request for a page past
- * the end is clamped back to the last real page rather than rendering an empty screen. With no entries — or no
- * content slots at all — there is still exactly one page, just an empty one, which keeps the renderer's paging
+ * the end is clamped back to the last real page rather than rendering an empty screen. With no entries, or no
+ * content slots at all. There is still exactly one page, just an empty one, which keeps the renderer's paging
  * controls consistent.
  */
 public final class Pagination {

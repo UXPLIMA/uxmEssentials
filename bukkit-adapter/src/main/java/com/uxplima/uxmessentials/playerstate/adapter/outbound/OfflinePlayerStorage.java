@@ -10,14 +10,14 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Outbound port for reading and writing an <em>offline</em> player's stored inventory and ender chest directly
- * on their {@code playerdata/<uuid>.dat} file — the data {@code /invsee} and {@code /endersee} reach for when the
+ * on their {@code playerdata/<uuid>.dat} file, the data {@code /invsee} and {@code /endersee} reach for when the
  * target is not online and so has no live {@link org.bukkit.inventory.PlayerInventory}. The single implementation
  * goes through Mojang-mapped server internals (the only deliberate NMS coupling in the plugin), kept behind this
  * Bukkit-typed port so the rest of the playerstate context never sees it.
  *
  * <p>All four methods touch the disk and must run off the main/region thread (the caller schedules them through
  * the kernel {@code Scheduler}'s async lane). A read failure surfaces as an empty {@link Optional} (logged); a
- * write failure is logged and dropped — never thrown into the scheduler.
+ * write failure is logged and dropped, never thrown into the scheduler.
  */
 @NullMarked
 public interface OfflinePlayerStorage {

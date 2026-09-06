@@ -5,8 +5,8 @@ import java.util.Objects;
 
 /**
  * One leg of a trade's money settlement: the {@code payer} side owes {@code amount} of {@code currencyId} to the other
- * side. A {@code MoneyTransfer} is derived purely from the two {@link TradeOffer}s a session holds — one leg per
- * non-zero money entry a side has staked — so the settlement decision stays testable without an economy provider. The
+ * side. A {@code MoneyTransfer} is derived purely from the two {@link TradeOffer}s a session holds, one leg per
+ * non-zero money entry a side has staked, so the settlement decision stays testable without an economy provider. The
  * recipient is always {@code payer.other()}; naming only the payer keeps the value minimal.
  *
  * @param payer the side that staked, and therefore pays, this money
@@ -27,7 +27,7 @@ public record MoneyTransfer(TradeSide payer, String currencyId, BigDecimal amoun
         }
     }
 
-    /** The side that receives this money — always the opposite of the payer. */
+    /** The side that receives this money, always the opposite of the payer. */
     public TradeSide recipient() {
         return payer.other();
     }

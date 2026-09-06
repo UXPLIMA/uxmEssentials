@@ -25,13 +25,13 @@ import org.jspecify.annotations.Nullable;
  * Strips plugin-granted flight when a flying player enters a no-fly world ({@code no-fly-worlds}). On
  * {@link PlayerChangedWorldEvent} into a listed world, a player who is currently flying has
  * {@code setAllowFlight(false)}/{@code setFlying(false)} applied on their owning entity thread via the
- * {@code Scheduler} port and is told flight is disabled here — unless they hold the bypass node
+ * {@code Scheduler} port and is told flight is disabled here, unless they hold the bypass node
  * {@code uxmessentials.playerstate.fly.allworlds}.
  *
  * <p>Gamemode flight is left to the gamemode: a creative or spectator player is never touched, so the
  * listener only removes flight the {@code /fly} toggle would have granted. The world change fires on the
  * player's region thread, but the Bukkit mutation is still routed through the {@code Scheduler} so it lands
- * on the owning entity thread — valid on Folia. When the configured list is empty the listener short-circuits
+ * on the owning entity thread, valid on Folia. When the configured list is empty the listener short-circuits
  * before any work.
  */
 @NullMarked

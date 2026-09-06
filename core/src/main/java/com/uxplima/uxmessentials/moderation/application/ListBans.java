@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /banlist}: review the bans still in effect. A read-only, bounded query against the DB-backed sanction
- * store — it renders a header with the count, one entry per ban (target, issuer, reason, expiry), or an empty
+ * store. It renders a header with the count, one entry per ban (target, issuer, reason, expiry), or an empty
  * notice when nobody is banned. The query is capped at {@link #PAGE_LIMIT} rows so the read stays within the
  * main-thread budget; the command runs it off the tick thread. Target names are resolved from each entry's
  * stored UUID through the {@link PlayerLookup}, falling back to the raw UUID when the account is unknown.

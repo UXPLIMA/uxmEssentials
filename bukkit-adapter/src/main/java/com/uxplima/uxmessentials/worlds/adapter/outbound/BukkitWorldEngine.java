@@ -91,7 +91,7 @@ public final class BukkitWorldEngine implements WorldEngine {
      * every path that supplies the spec: an internal {@link #create}, a {@link #load} of a registered
      * world (the spec is re-applied), and a world configured in {@code bukkit.yml} and served through the
      * plugin's {@code getDefaultWorldGenerator} hook. Any other token, an unknown built-in id or an external
-     * {@code plugin[:args]} ref — takes Bukkit's String overload unchanged.
+     * {@code plugin[:args]} ref: takes Bukkit's String overload unchanged.
      */
     void applyGenerator(WorldCreator creator, GeneratorRef g) {
         BuiltInGenerators.idOf(g.value())

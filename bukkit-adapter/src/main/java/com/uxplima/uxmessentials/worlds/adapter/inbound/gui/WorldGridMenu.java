@@ -32,7 +32,7 @@ import org.jspecify.annotations.Nullable;
  * Registers the shared property grid that drives both the rules and access screens with the menu engine and opens it.
  * A six-row panel with one button per settable {@link WorldProperty}: each shows the property's label, a value-lore
  * reporting the world's current encoded setting, and a cycle hint. Which property set a window shows is the subject's
- * choice — the hub opens it with the rules set for the rules screen and the access set for the access screen — so one
+ * choice (the hub opens it with the rules set for the rules screen and the access set for the access screen) so one
  * spec serves both, the way one confirm spec serves every sanction. A click cycles the clicked property's value (left
  * next, right previous, shift clears) through {@link WorldPropertyCycle}, persists it via {@link SetWorldProperty}
  * (which writes off-tick), then re-opens the grid with the new value applied so the change shows immediately. A back
@@ -40,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The {@code (world, property set, rows)} pair is handed in as the {@link GridSubject}, snapshotted on the viewer's
  * entity thread at open, so the {@code worlds:grid} list source reads only that subject and the placeholders read the
- * bound row — the engine touches no port off-thread. A cycle is optimistic: the new value is written through the use
+ * bound row: the engine touches no port off-thread. A cycle is optimistic: the new value is written through the use
  * case and the re-opened subject carries it, so the viewer sees the change without re-reading the cache the async save
  * updates. This replays the old bespoke {@code WorldPropertyGridView} verbatim through the engine. The per-world hub
  * the back button returns to is injected through {@link #bind} after this menu so their re-open cycle is broken.

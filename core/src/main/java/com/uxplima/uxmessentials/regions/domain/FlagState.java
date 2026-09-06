@@ -9,7 +9,7 @@ import java.util.Objects;
  * string tokens the {@code RegionService} port speaks, and the adapter never has to reason about WorldGuard's typed
  * flag registry to know what a click means.
  *
- * <p>The declared order is the cycle {@link #next} advances through — {@code UNSET → ALLOW → DENY → UNSET} — so a
+ * <p>The declared order is the cycle {@link #next} advances through, {@code UNSET → ALLOW → DENY → UNSET}, so a
  * fresh flag first enables, then denies, then clears. {@link #token} is the wire form carried inside a
  * {@link FlagValue} ({@code "ALLOW"}, {@code "DENY"}, or the empty string for a cleared flag). Pure Java: no Bukkit,
  * Paper, Kyori, or WorldGuard.
@@ -47,7 +47,7 @@ public enum FlagState {
 
     /**
      * Strictly parse a rendered flag value into a state: a blank value (or {@code "unset"}) is {@link #UNSET}, and
-     * {@code "allow"} / {@code "deny"} (any case) are the matching states. Any other token is rejected — this is the
+     * {@code "allow"} / {@code "deny"} (any case) are the matching states. Any other token is rejected: this is the
      * validate boundary that keeps an out-of-range value from ever reaching WorldGuard.
      *
      * @throws IllegalArgumentException when {@code raw} names no known state

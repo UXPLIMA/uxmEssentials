@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.teleport.domain.TeleportKind;
  * resolved {@link Destination} (which may follow a live target) and a {@link TeleportKind} for the audit
  * verb; it never touches a Bukkit {@code Location} itself.
  *
- * <p>The call is the single point where the entity hop happens — it is reached only after every gate
+ * <p>The call is the single point where the entity hop happens. It is reached only after every gate
  * (permission, cooldown, warmup) has passed, so by contract no I/O precedes it on the tick thread.
  */
 public interface TeleportExecutor {
@@ -25,7 +25,7 @@ public interface TeleportExecutor {
 
     /**
      * The same hop, but run {@code onLanded} on the player's region thread once the async teleport resolves
-     * to an actual landing — never on a refusal (Paper returning {@code false}) or an error. This is the
+     * to an actual landing: never on a refusal (Paper returning {@code false}) or an error. This is the
      * single seam the gated flow uses so the cooldown stamp, the RTP charge, and the arrival grace fire only
      * after the player truly arrives.
      *

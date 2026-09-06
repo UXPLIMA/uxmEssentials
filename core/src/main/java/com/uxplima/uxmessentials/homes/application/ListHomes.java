@@ -8,8 +8,8 @@ import com.uxplima.uxmessentials.homes.domain.Home;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Reads an owner's homes for the {@code /homes} GUI to render. Homes are per-player with no access filter —
- * every home in the owner's own set is theirs to teleport to — and are returned in slot-ascending order.
+ * Reads an owner's homes for the {@code /homes} GUI to render. Homes are per-player with no access filter
+ * every home in the owner's own set is theirs to teleport to, and are returned in slot-ascending order.
  * The chat-list feedback path is gone: the slot-grid GUI lists the homes now, so this use case owns only
  * the side-effect-free read.
  */

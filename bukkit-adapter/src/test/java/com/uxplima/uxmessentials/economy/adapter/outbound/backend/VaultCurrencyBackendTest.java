@@ -30,7 +30,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
  * The Vault-backed currency backend over its {@link EconomyQuery} hook. A live hook is read and its balance,
  * credit and debit outcomes are translated into {@link Money} and {@link TransferError}; a debit the owner
  * cannot cover is refused before any withdraw runs; and when the economy reports unavailable every call is a
- * safe no-op — a zero balance and a rejected {@link TransferError#CURRENCY_UNSUPPORTED}, never a throw and
+ * safe no-op. A zero balance and a rejected {@link TransferError#CURRENCY_UNSUPPORTED}, never a throw and
  * never a mutation.
  */
 class VaultCurrencyBackendTest {
@@ -176,7 +176,7 @@ class VaultCurrencyBackendTest {
         }
     }
 
-    /** A {@link Logger} that drops every line — these tests assert behaviour, not log output. */
+    /** A {@link Logger} that drops every line: these tests assert behaviour, not log output. */
     private static final Logger SILENT = new Logger() {
         @Override
         public void info(String message, Object... args) {}

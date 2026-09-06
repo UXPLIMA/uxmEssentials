@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 /**
  * A mutable builder for {@link Warp}, kept package-private so it is purely an internal mechanism: each
  * {@link Warp} {@code with*}/transition reads {@link Warp#toBuilder()}, changes the one field it owns, and calls
- * {@link #build()} — which routes through the canonical {@code Warp} constructor, so every null-check still fires.
+ * {@link #build()}, which routes through the canonical {@code Warp} constructor, so every null-check still fires.
  * Extracting the per-field copy boilerplate here keeps {@code Warp} small without changing its public surface.
  */
 final class WarpBuilder {

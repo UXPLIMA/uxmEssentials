@@ -29,27 +29,27 @@ import org.jspecify.annotations.Nullable;
 /**
  * The player-warps {@link PlayerWarpEconomy} seam over the resolved {@link EconomyProvider}: it charges a
  * visitor the warp's entry price, banks the owner's share on the {@code player_warps.earned_amount} column, and
- * pays that bank out to the owner on withdraw. It lives in the persistence adapter — not the {@code :core}
- * player-warps context — precisely because it is the one place allowed to see both the economy types and the
+ * pays that bank out to the owner on withdraw. It lives in the persistence adapter, not the {@code :core}
+ * player-warps context. Precisely because it is the one place allowed to see both the economy types and the
  * warp bank column; the narrow port keeps the domain free of any economy import (the {@code WarpEconomy}
  * precedent, {@code docs/11-economy-integration.md} §4.2).
  *
- * <h2>The cut is deflationary — never a {@code TaxSink}</h2>
+ * <h2>The cut is deflationary, never a {@code TaxSink}</h2>
  * The payer is debited the full {@code price}; the bank accrues only {@code price − cut}. So the server's cut is
- * exactly the gap between what left the payer's wallet and what will ever be credited to the owner — money that
+ * exactly the gap between what left the payer's wallet and what will ever be credited to the owner, money that
  * is never minted anywhere and therefore leaves circulation on its own. Accruing {@code net = price − cut}
  * <em>is</em> the cut; there is no separate sink credit. Routing the cut to a named holding account instead of
  * deflating it is a future config option, deliberately out of scope here.
  *
  * <h2>debit-then-accrue-then-compensate</h2>
  * A single transaction spanning the wallet table and the warp bank would mean reaching across the economy port
- * into its storage — a layering violation, and impossible for a foreign backend that offers no transaction. So
+ * into its storage: a layering violation, and impossible for a foreign backend that offers no transaction. So
  * the charge is uniform for every backend: the {@link EconomyProvider#debit(PlayerRef, Money) debit} is the
  * DB-guarded, double-spend-safe point (two concurrent uses can never both pass it past zero), and only once it
  * takes does the bank accrue. If the accrue then throws, a compensating {@link EconomyProvider#credit credit}
  * makes the payer whole and the charge reports {@link ChargeError#ACCRUAL_FAILED}; if that compensation also
  * fails the payer is genuinely short, which is logged at error as an operator-visible money discrepancy (never a
- * secret) — the honest outcome, never swallowed. There is no check-then-charge: the debit either takes in full
+ * secret): the honest outcome, never swallowed. There is no check-then-charge: the debit either takes in full
  * or reports {@link ChargeError#INSUFFICIENT_FUNDS}, so no affordability probe opens a double-spend window.
  *
  * <h2>Withdraw is a guarded read-then-zero</h2>
@@ -113,7 +113,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
             return compensate(payer, warp, charge, accrualFailure);
         }
         if (accrued == 0) {
-            // The warp row vanished between the debit and this accrue — a concurrent /pwarp delete or admin purge
+            // The warp row vanished between the debit and this accrue, a concurrent /pwarp delete or admin purge
             // in the off-tick window (holding the aggregate in memory does not lock the DB row). The increment hit
             // no rows, so nothing banked; refund the payer exactly as a thrown accrue would rather than debiting
             // them with nothing to show for it.
@@ -240,7 +240,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
         if (due.signum() <= 0) {
             return Result.ok();
         }
-        // A plain guarded owner debit with nowhere to accrue — the sponsorship fee leaves circulation, exactly like
+        // A plain guarded owner debit with nowhere to accrue. The sponsorship fee leaves circulation, exactly like
         // the entry-fee cut and the rent shortfall. The debit is the DB-guarded, double-spend-safe point, so there is
         // no check-then-charge: it either takes in full or reports INSUFFICIENT_FUNDS.
         return economy.debit(owner, Money.of(currency, due)).mapErr(JooqPlayerWarpEconomy::chargeErrorFor);
@@ -248,7 +248,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
 
     /**
      * {@code net = price − cut}, where {@code cut = price × cutPercent / 100}, each figure scaled to the
-     * currency's precision so the banked amount never carries stray digits. The cut is not credited anywhere —
+     * currency's precision so the banked amount never carries stray digits. The cut is not credited anywhere
      * it is the deflationary gap between the debit and the eventual owner credit (see the class note).
      */
     private BigDecimal netOf(Currency currency, BigDecimal price) {
@@ -259,7 +259,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
     /**
      * Accrue {@code delta} onto the warp bank as one guarded PK update, recording the currency it now holds, and
      * return the affected-row count. A {@code 0} means the warp row is gone (a concurrent delete/purge) so nothing
-     * was banked — callers treat that as a failed accrue, not a silent success.
+     * was banked: callers treat that as a failed accrue, not a silent success.
      */
     private int bumpBank(PlayerWarpId warp, BigDecimal delta, String currencyId) {
         return write(dsl -> dsl.update(PLAYER_WARPS)
@@ -310,7 +310,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
         try {
             if (bumpBank(warp, payout.amount(), payout.currency().id().value()) == 0) {
                 // The warp was deleted after its bank had been zeroed, so the money cannot go back onto a row that
-                // no longer exists — it is genuinely lost from the bank. Surface it as an operator-visible
+                // no longer exists: it is genuinely lost from the bank. Surface it as an operator-visible
                 // discrepancy rather than discarding the row count and losing it silently.
                 log.error(
                         "event=playerwarp_reaccrue_lost warp=" + warp.value() + " currency="
@@ -339,7 +339,7 @@ public final class JooqPlayerWarpEconomy extends JooqRepository implements Playe
         } catch (RuntimeException payoutFailure) {
             // The debit and accrue have already committed, so the owner's share is safely banked and a manual
             // /pwarp withdraw settles it. A fault in this convenience payout (e.g. the snapshot read throwing) must
-            // never turn a correctly-banked charge into a thrown call — log it (no secret; the money is safe) and
+            // never turn a correctly-banked charge into a thrown call. Log it (no secret; the money is safe) and
             // leave the amount in the bank. The charge stays ok either way, which is the contract.
             log.warn(
                     "event=playerwarp_auto_payout_failed warp={} currency={} reason={}",

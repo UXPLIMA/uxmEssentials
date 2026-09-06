@@ -29,7 +29,7 @@ class ShadowJarNettyRelocationTest {
     void shadow_jar_relocates_netty_and_keeps_lettuce_in_place() throws IOException {
         Path jar = findShadowJar();
         if (jar == null) {
-            assumeTrue(false, "uxmEssentials-redis shadow jar not built — skipping (run :redis-adapter:shadowJar)");
+            assumeTrue(false, "uxmEssentials-redis shadow jar not built, skipping (run :redis-adapter:shadowJar)");
             return;
         }
 
@@ -56,7 +56,7 @@ class ShadowJarNettyRelocationTest {
         // or it would clash on a backend with another plugin that bundles uxmlib.
         Path jar = findShadowJar();
         if (jar == null) {
-            assumeTrue(false, "uxmEssentials-redis shadow jar not built — skipping (run :redis-adapter:shadowJar)");
+            assumeTrue(false, "uxmEssentials-redis shadow jar not built, skipping (run :redis-adapter:shadowJar)");
             return;
         }
 
@@ -74,18 +74,18 @@ class ShadowJarNettyRelocationTest {
     void shadow_jar_does_not_ship_a_second_copy_of_the_host_bus_spi() throws IOException {
         // The whole point of making this a join-classpath plugin: core is compileOnly, never shaded. If a second
         // copy of BusTransport (or the rest of core) rode along in this jar, the host's bus core would reject the
-        // transport instance with a loader-constraint LinkageError — the exact bug this design fixes. So core's
+        // transport instance with a loader-constraint LinkageError: the exact bug this design fixes. So core's
         // packages must be absent from the companion jar; it resolves them from the host at runtime instead.
         Path jar = findShadowJar();
         if (jar == null) {
-            assumeTrue(false, "uxmEssentials-redis shadow jar not built — skipping (run :redis-adapter:shadowJar)");
+            assumeTrue(false, "uxmEssentials-redis shadow jar not built, skipping (run :redis-adapter:shadowJar)");
             return;
         }
 
         List<String> entries = entryNames(jar);
 
         assertThat(entries)
-                .as("core's BusTransport SPI must NOT be shaded — the companion uses the host's copy")
+                .as("core's BusTransport SPI must NOT be shaded. The companion uses the host's copy")
                 .noneMatch(p -> p.equals("com/uxplima/uxmessentials/shared/network/BusTransport.class"));
         assertThat(entries)
                 .as("the RedisTransportFactory SPI is the host's too, never shaded here")

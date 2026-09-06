@@ -11,7 +11,7 @@
  * {@code /broadcasttoggle} confirmations, the "no such info page" error, and the announcer-reloaded notice are
  * {@code CommunicationMessageKey}s in both locale catalogs and are parity-checked. The join/quit/death templates,
  * the announcer lines, and the {@code /rules} / {@code /motd} text are operator content carried as raw strings
- * through these use cases and rendered through MiniMessage in the adapter — never {@code MessageKey}s and never
+ * through these use cases and rendered through MiniMessage in the adapter, never {@code MessageKey}s and never
  * parity-checked. No Bukkit, Paper, Kyori, or logging type appears here; the layer is pure Java over the kernel
  * ports.
  */

@@ -26,7 +26,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>Presence persists nothing in v1 (no DB, no migration): the per-player presence map is in-memory and
  * dropped on quit. The use cases, the in-memory store, the activity listeners, the visibility applier, and the
  * AFK sweep are constructed in the adapter wiring once the module has started; the lifecycle bookkeeping here
- * keeps {@code stop()} honest — the sweep observes the running flag and exits cleanly on disable.
+ * keeps {@code stop()} honest: the sweep observes the running flag and exits cleanly on disable.
  */
 @NullMarked
 public final class PresenceModule implements FeatureModule {
@@ -61,7 +61,7 @@ public final class PresenceModule implements FeatureModule {
 
     @Override
     public List<MigrationSet> migrations() {
-        // Presence persists nothing in v1 — the per-player presence map is transient in-memory state — so the
+        // Presence persists nothing in v1, the per-player presence map is transient in-memory state, so the
         // module owns no Flyway location.
         return List.of();
     }

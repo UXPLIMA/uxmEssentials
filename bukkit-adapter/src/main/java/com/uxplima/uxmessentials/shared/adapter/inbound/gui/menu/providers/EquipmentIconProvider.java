@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
  * bare material name is left for the material fallback).
  *
  * <p>The provider reads only the <em>viewer's own</em> inventory, resolved from their UUID on the calling
- * thread — the menu's item-build chain already runs on the viewer's entity thread, so this is Folia-safe and
+ * thread. The menu's item-build chain already runs on the viewer's entity thread, so this is Folia-safe and
  * never blocks the main thread. The matching slot is returned as a clone, so layering name/lore onto the icon
  * can never mutate the player's real item. An empty or AIR slot, or a viewer who is offline, yields
  * {@link Optional#empty()} so the spec falls through to the material fallback rather than rendering nothing.

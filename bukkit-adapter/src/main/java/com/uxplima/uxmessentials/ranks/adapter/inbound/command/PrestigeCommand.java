@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /prestige}: a player at the top of the ladder resets back to the first rank for a permanent prestige
  * level. The handler resolves only the player's own identity and hands it to {@link Prestige}, which owns the
  * eligibility / requirement / cost / action pipeline and returns a typed {@link PrestigeResult}; this class maps
- * that outcome to the matching catalog line — the success line carrying the new prestige level as {@code {prestige}}
+ * that outcome to the matching catalog line. The success line carrying the new prestige level as {@code {prestige}}
  * and the earned reward multiplier as {@code {multiplier}}. Gated on {@code uxmessentials.ranks.prestige}, which
  * ships {@code true} so every player may prestige; the command is only registered at all when the prestige
  * mechanic is enabled in {@code modules/ranks/config.conf}.

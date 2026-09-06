@@ -9,7 +9,7 @@ import java.util.UUID;
  * authoritative mute from the shared DB on the player's next chat attempt, so the new gag takes effect on the
  * very next message without any in-memory state to refresh. The frame is published for symmetry with
  * {@link BanChanged} and so a future peer that does cache mute state has a hook to invalidate it; a peer with
- * no such cache (the current design — the moderation repo is intentionally uncached) treats it as a no-op.
+ * no such cache (the current design: the moderation repo is intentionally uncached) treats it as a no-op.
  *
  * @param originServer the backend that issued the mute
  * @param target the muted player

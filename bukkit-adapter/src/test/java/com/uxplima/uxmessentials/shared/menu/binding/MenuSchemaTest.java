@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Plain-JUnit coverage of {@link MenuBindings#schema()}, the Layer-1 export the in-game action/requirement pickers
  * render from. The schema lists the ids each registry actually holds, sorted, so a picker offers exactly the
- * bindings that are wired — no invented per-id arg schema, just the id catalog a viewer chooses from.
+ * bindings that are wired: no invented per-id arg schema, just the id catalog a viewer chooses from.
  */
 class MenuSchemaTest {
 

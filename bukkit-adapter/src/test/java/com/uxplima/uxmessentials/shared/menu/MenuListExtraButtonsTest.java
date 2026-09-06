@@ -40,7 +40,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * two extra buttons through {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.Menus#openList}, asserts
  * each renders at its slot with its baked icon, and that a click on one through the one {@link
  * com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} runs that button's handler with the
- * live viewer — proving both the paint and the click-routing seam the renderer records onto the list state.
+ * live viewer: proving both the paint and the click-routing seam the renderer records onto the list state.
  */
 class MenuListExtraButtonsTest {
 

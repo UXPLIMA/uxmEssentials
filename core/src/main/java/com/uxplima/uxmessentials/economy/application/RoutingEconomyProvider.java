@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * The {@link EconomyProvider} every caller sees. It owns no money: it reads a {@link Currency}'s
  * {@code backendId} and hands the work to that {@link CurrencyBackend}. A currency on the native ledger keeps
- * exactly the guarantees it had before this class existed — the guarded {@code UPDATE}, the atomic two-sided
+ * exactly the guarantees it had before this class existed. The guarded {@code UPDATE}, the atomic two-sided
  * transfer, the ranked baltop.
  *
  * <p>Every configured currency's backend is resolved once, in the constructor. A currency naming a backend the

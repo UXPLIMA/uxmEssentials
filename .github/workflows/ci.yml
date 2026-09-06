@@ -42,6 +42,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Writing style
+        working-directory: uxmEssentials
+        run: scripts/check-style.sh
+
       # Both this build and the uxmLib build it includes ask paperweight for the same Mojang-mapped dev
       # bundle. Run in parallel from a cold cache they reach for the same lock at the same moment and the
       # second one fails outright, so the bundle is unpacked once, on its own, before anything else runs.

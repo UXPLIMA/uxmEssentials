@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /break}: instantly break the block the caller is looking at, dropping it as if mined by hand. An
- * admin-fun verb (audit-logged) — a quick block-removal utility that is easy to abuse, so each break is
+ * admin-fun verb (audit-logged). A quick block-removal utility that is easy to abuse, so each break is
  * recorded with actor and block type. When nothing solid is in reach the caller is told
  * {@link ItemworldMessageKey#BREAK_NO_TARGET} and nothing changes.
  *

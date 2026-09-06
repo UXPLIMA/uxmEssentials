@@ -6,7 +6,7 @@ import java.util.Objects;
  * One typed effect a click target runs on a matching click: the {@link ClickTrigger} that fires it, the
  * {@link ClickActionType} that decides what it does, and the raw {@code value} the type interprets (a command line,
  * a MiniMessage source, a sound key, or a target server name). The value is operator-authored content stored
- * verbatim — the domain validates that the parts are present, not what they mean; the adapter's runner gives the
+ * verbatim. The domain validates that the parts are present, not what they mean; the adapter's runner gives the
  * value its meaning per type.
  *
  * @param trigger which click fires this action

@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultSize;
  */
 public final class VaultSizeQuota {
 
-    /** The quota family for vault sizes — the {@code MAX}-direction reducer over the numbered nodes. */
+    /** The quota family for vault sizes: the {@code MAX}-direction reducer over the numbered nodes. */
     public static final QuotaFamily FAMILY = QuotaFamily.quota("uxmessentials.vault.size");
 
     private final Permissions permissions;

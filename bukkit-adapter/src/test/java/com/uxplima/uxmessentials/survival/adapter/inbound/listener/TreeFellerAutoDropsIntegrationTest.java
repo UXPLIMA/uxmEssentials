@@ -33,7 +33,7 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * Proves the Phase 4 gap fix: a tree-fell routes <em>every</em> felled log through the shared auto-drops pipeline, not
  * only the origin the {@code BlockBreakEvent} carries. Registers the same two listeners the wiring registers over one
- * pipeline — {@link AutoDropsListener} (origin) and {@link TreeFellerListener} (cascade) — and asserts that with
+ * pipeline, {@link AutoDropsListener} (origin) and {@link TreeFellerListener} (cascade), and asserts that with
  * auto-pickup on, the whole trunk lands in the inventory and nothing spills to the ground, where before the cascade
  * logs bypassed the pipeline and dropped as items.
  */
@@ -93,7 +93,7 @@ class TreeFellerAutoDropsIntegrationTest {
 
     private static TreeFeller config() {
         // enabled, require-axe off (bare hand fells), no durability drain, multiplier 1, cap 64, no hunger, no sneak,
-        // no replant — the harvesting knobs are exercised elsewhere; here only the drop routing is under test.
+        // no replant: the harvesting knobs are exercised elsewhere; here only the drop routing is under test.
         return new TreeFeller(true, false, false, 1, 64, 0.0, false, false);
     }
 

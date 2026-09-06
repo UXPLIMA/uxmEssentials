@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The LiteBans {@link Convert} — the importer's first JDBC-backed source (docs/12-migration §1.1, §5.4). It
+ * The LiteBans {@link Convert}: the importer's first JDBC-backed source (docs/12-migration §1.1, §5.4). It
  * reads the {@code litebans_bans}/{@code litebans_mutes}/{@code litebans_warnings} tables over JDBC and maps
  * them into the moderation context's ban / IP-ban / mute / warning aggregates through its own ACL mappers,
  * draining into the same writer every other source uses. Like the live economy sources it is not a path

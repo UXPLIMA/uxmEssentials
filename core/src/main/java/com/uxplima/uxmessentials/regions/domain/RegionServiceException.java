@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.regions.domain;
 
 /**
- * Signals that a region mutation ({@code create} / {@code setFlag}) could not be applied — WorldGuard rejected the
+ * Signals that a region mutation ({@code create} / {@code setFlag}) could not be applied: WorldGuard rejected the
  * request or a reflective call into its API failed. Unlike the reads, a mutation must not fail silently: a swallowed
  * write would leave the operator believing a change landed that did not, so the adapter wraps the underlying failure
  * in this domain exception and the command surface turns it into an operator-facing "could not apply" message.

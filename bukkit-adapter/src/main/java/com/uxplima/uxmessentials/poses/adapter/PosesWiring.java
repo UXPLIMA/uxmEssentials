@@ -68,8 +68,8 @@ import org.jspecify.annotations.NullMarked;
  * non-persistent seat entity ({@link BukkitSeatPort}); the region gate is the real {@link ClaimAwareRegionGate},
  * composing the shared {@link ClaimService} (land claims) with the {@link WorldGuardPoseFlags} WorldGuard seam behind
  * the {@code respect-claims} / {@code respect-worldguard} config toggles; the player-sit opt-out is PDC-backed
- * ({@link PdcPlayerSitPreferences}). The context persists nothing — a pose is
- * transient state in {@link PoseSessions} — so there is no repository or migration.
+ * ({@link PdcPlayerSitPreferences}). The context persists nothing: a pose is
+ * transient state in {@link PoseSessions}, so there is no repository or migration.
  *
  * <p>On enable the caller runs {@link BukkitSeatPort#sweepOrphans()} to reap any seat a previous run's crash left
  * behind, and on stop {@link Wired#stop()} removes every live seat and clears the registry, so a disable or reload

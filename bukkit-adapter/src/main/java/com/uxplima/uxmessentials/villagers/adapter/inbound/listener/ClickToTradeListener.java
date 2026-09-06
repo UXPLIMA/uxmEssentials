@@ -15,8 +15,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Opens a villager's trade window on a right-click for a permitted player, even where the vanilla gate would refuse it
  * (a professionless villager, or one already claimed by another trader). The player must hold
- * {@code uxmessentials.villagers.trade}, and a disabled villager — by the global {@code disable-trades} switch or its
- * per-villager flag — never opens, so the click-to-trade feature never overrides a trade the operator turned off.
+ * {@code uxmessentials.villagers.trade}, and a disabled villager. By the global {@code disable-trades} switch or its
+ * per-villager flag: never opens, so the click-to-trade feature never overrides a trade the operator turned off.
  *
  * <p>When the listener opens the window it cancels the interaction so the vanilla open does not also fire; when it
  * declines (no permission, or disabled) it leaves the event untouched for the disable listener to handle. The open is

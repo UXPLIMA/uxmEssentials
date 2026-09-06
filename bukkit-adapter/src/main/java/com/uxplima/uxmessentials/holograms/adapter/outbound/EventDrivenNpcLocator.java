@@ -23,7 +23,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>It keeps a live {@code name → position} index of every NPC, seeded once from the npc repository when the
  * holograms module wires (so an NPC that already existed before enable is locatable at once) and kept current off
  * the in-process domain-event bus: {@link NpcCreated} and {@link NpcMoved} write the index, {@link NpcDeleted}
- * clears the entry. A {@link #locate(String)} therefore reads an in-memory map — allocation-light, never a
+ * clears the entry. A {@link #locate(String)} therefore reads an in-memory map, allocation-light, never a
  * database hit on the render path. The npc name is the canonical lowercase {@code NpcName}, matching the value a
  * hologram stores when linked.
  *
@@ -44,7 +44,7 @@ public final class EventDrivenNpcLocator implements LinkedNpcLocator, Consumer<D
 
     /**
      * Seed the index from {@code repository} and route re-anchors to {@code reanchor}. The repository is read once
-     * here (warm after the npc module's own load) and never again — every later change rides the event bus.
+     * here (warm after the npc module's own load) and never again: every later change rides the event bus.
      */
     public EventDrivenNpcLocator(NpcRepository repository, Consumer<String> reanchor) {
         Objects.requireNonNull(repository, "repository");

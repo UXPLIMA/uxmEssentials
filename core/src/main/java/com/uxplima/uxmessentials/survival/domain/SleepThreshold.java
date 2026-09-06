@@ -5,7 +5,7 @@ package com.uxplima.uxmessentials.survival.domain;
  * eligible in all, decide whether enough are asleep to skip the night. It is expressed two ways and one of them wins:
  *
  * <ul>
- *   <li><b>a fixed count</b> ({@code requiredCount}) — met when at least that many players are sleeping, taken
+ *   <li><b>a fixed count</b> ({@code requiredCount}). Met when at least that many players are sleeping, taken
  *       verbatim, so the eponymous one-player-sleep is simply {@code requiredCount = 1}; and
  *   <li><b>a percentage</b> ({@code requiredPercent}) of the eligible players, rounded up to a whole player and never
  *       below one.
@@ -13,8 +13,8 @@ package com.uxplima.uxmessentials.survival.domain;
  *
  * <p><b>Precedence: the fixed count wins whenever it is positive.</b> {@code requiredCount > 0} uses the count and
  * ignores the percentage entirely; only {@code requiredCount == 0} falls through to the percentage. A count larger
- * than the online population is honoured literally — the night simply will not skip until that many players are
- * present and sleeping — which is the operator's explicit intent when they raise it above the default of one.
+ * than the online population is honoured literally. The night simply will not skip until that many players are
+ * present and sleeping, which is the operator's explicit intent when they raise it above the default of one.
  *
  * <p>Pure: it works on two plain integers and the two configured thresholds, so it is unit-testable with no Bukkit in
  * sight. The adapter counts the live sleepers and eligible players per world and feeds them in.

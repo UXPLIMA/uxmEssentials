@@ -10,9 +10,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * One server-wide hologram: a {@link HologramName}, the {@link Position} it floats at, its {@link HologramContent}
- * (the {@link HologramType} and what it renders — text lines, an item material, or a BlockData string), its visual
+ * (the {@link HologramType} and what it renders. Text lines, an item material, or a BlockData string), its visual
  * {@link Appearance}, its {@link Visibility}, its display {@link Rotation}, how often it re-renders, and the moment
- * it was created. A hologram is a value object — re-anchoring (a move), editing a line, restyling, or switching to
+ * it was created. A hologram is a value object. Re-anchoring (a move), editing a line, restyling, or switching to
  * an item/block produces a new instance rather than mutating in place, so the aggregate is always in a valid state
  * and a repository save records a fully-formed snapshot.
  *
@@ -259,7 +259,7 @@ public record Hologram(
     }
 
     /**
-     * The line count of the longest page — the number of text displays a multi-page hologram must spawn so
+     * The line count of the longest page. The number of text displays a multi-page hologram must spawn so
      * every page fits, with shorter pages blanking the surplus. For a single-page hologram this is
      * {@link #lineCount()}.
      */
@@ -407,7 +407,7 @@ public record Hologram(
     }
 
     /**
-     * A copy with its page set replaced. A {@code null} or single-page list clears the paging — the hologram
+     * A copy with its page set replaced. A {@code null} or single-page list clears the paging, the hologram
      * becomes an ordinary single-page hologram, adopting that lone page's lines as its content when one is given.
      * Two or more pages make it multi-page, and page 0's lines become the rendered {@link #content()} so the base
      * spawn and every single-page code path keep showing the first page. Used by the page-management use cases.
@@ -472,7 +472,7 @@ public record Hologram(
     }
 
     /**
-     * A full clone under {@code newName}, keeping every other property — location, content, appearance, visibility,
+     * A full clone under {@code newName}, keeping every other property, location, content, appearance, visibility,
      * rotation, refresh interval, creation time and any NPC link. Backs {@code /hologram copy}: the duplicate is the
      * same hologram in every way but its name.
      */
@@ -501,7 +501,7 @@ public record Hologram(
 
     /**
      * A copy with the line at {@code index} removed; rejects an out-of-range index, and (for a TEXT hologram)
-     * rejects removing the last remaining line — a text hologram must keep at least one line, so the caller deletes
+     * rejects removing the last remaining line. A text hologram must keep at least one line, so the caller deletes
      * the hologram instead.
      */
     public Hologram withLineRemoved(int index) {
@@ -561,7 +561,7 @@ public record Hologram(
         HologramBuilder builder = toBuilder().content(newContent);
         if (pages != null && !newContent.lines().isEmpty()) {
             // Page 0 is the rendered content, so a line edit (or model switch that keeps the lines) flows into it,
-            // keeping the page set and the content in step — otherwise a reload would revert the edit from page 0.
+            // keeping the page set and the content in step: otherwise a reload would revert the edit from page 0.
             List<HologramPage> synced = new java.util.ArrayList<>(pages);
             synced.set(0, HologramPage.of(newContent.lines()));
             builder.pages(synced);

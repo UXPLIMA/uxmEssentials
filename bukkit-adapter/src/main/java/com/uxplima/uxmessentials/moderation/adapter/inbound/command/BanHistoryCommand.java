@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /banhistory <player>}: review a player's full ban/unban history newest-first. A read-only companion
- * to the ban family — the {@code ReviewBanHistory} use case runs the bounded, append-only history query. It
+ * to the ban family: the {@code ReviewBanHistory} use case runs the bounded, append-only history query. It
  * reuses the {@code uxmessentials.moderation.ban} node ({@code /ban}/{@code /unban}), the same surface staff
  * already hold to act on bans. The lookup is hopped off the tick thread through the {@link Scheduler} port so
  * a large history table never blocks the command.

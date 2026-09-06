@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
  * wired before the moderation context lands (registry order), so its {@link TeleportEngine} and
  * {@link com.uxplima.uxmessentials.teleport.application.RequestTeleport} are built against this gate while it
  * still delegates to {@link JailGate#NEVER}. When moderation wires, it calls {@link #bind} to supply the
- * real jail policy, and every already-constructed teleport use case begins honouring it — no re-wiring.
+ * real jail policy, and every already-constructed teleport use case begins honouring it: no re-wiring.
  *
  * <p>If moderation is disabled the delegate stays {@link JailGate#NEVER}, so teleport degrades to "no one is
  * jailed" exactly as the soft-couple contract requires. The reference is atomic so the rebind on the enable

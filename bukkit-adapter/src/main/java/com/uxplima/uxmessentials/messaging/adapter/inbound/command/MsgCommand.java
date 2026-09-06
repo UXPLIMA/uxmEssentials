@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * {@code /msg <player> <text>}: send a private message. The target is a string-name argument that completes
  * against the online roster but parses any name, so an <em>offline</em> player is reachable too: an online
  * target takes the live delivery path (mute, self, toggle, ignore, the socialspy fan-out, the both-sides
- * reply capture — the {@link com.uxplima.uxmessentials.messaging.application.SendMessage} use case's job, plus
+ * reply capture. The {@link com.uxplima.uxmessentials.messaging.application.SendMessage} use case's job, plus
  * the AFK courtesy notice), while a genuinely-offline target whose profile resolves takes the 4-arg
  * {@code send(..., targetOnline=false)} so the use case's offline → mail fallback runs (config-gated by
  * {@code offline-to-mail}).
@@ -35,7 +35,7 @@ import org.jspecify.annotations.NullMarked;
  * live, but rather than short-circuiting with a hidden-only response it is routed through the same 4-arg
  * {@code send(..., targetOnline=false)} as a genuinely-offline player. So with {@code offline-to-mail} on the
  * sender gets {@code MSG_SENT_TO_MAIL} and the note waits in the vanished player's box; with it off the sender
- * gets {@code MSG_TARGET_OFFLINE} — byte-identical to a real offline target in both config modes, so the
+ * gets {@code MSG_TARGET_OFFLINE}, byte-identical to a real offline target in both config modes, so the
  * sender can never infer "online-but-hidden" from the feedback. A hidden player's presence is never leaked and
  * they never receive a live delivery. Only a name that resolves to no online player and no played-before
  * profile is rejected as unknown.
@@ -81,7 +81,7 @@ public final class MsgCommand extends MessagingCommandSupport implements Command
             if (services.vanish().isHiddenFrom(from, target)) {
                 // The target is online but the sender cannot see them. Route through the offline path so the
                 // outcome is identical to a genuinely-offline target (mail when offline-to-mail is on, the
-                // TARGET_OFFLINE rejection when it is off) — never a live delivery, never a hidden-only tell.
+                // TARGET_OFFLINE rejection when it is off), never a live delivery, never a hidden-only tell.
                 services.sendMessage().send(from, target, text, false);
                 return Command.SINGLE_SUCCESS;
             }

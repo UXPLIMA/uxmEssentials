@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Registers the read-only transaction-history list with the menu engine and opens it. One spec serves the three
- * original entry points — a player's history, the global log, and a bank's logs — because they differ only in the
+ * original entry points (a player's history, the global log, and a bank's logs) because they differ only in the
  * records they query and the title; the grid, nav buttons, and per-record icons are identical. A click does
  * nothing, because a ledger row is immutable.
  *
@@ -70,7 +70,7 @@ public final class TransactionsHistoryMenu {
         bindings.list("economy:transactions", ctx -> subject(ctx).records());
         bindings.placeholder("history_title_key", ctx -> subject(ctx).titleKey());
         // The player and bank titles each take one argument; both read the subject's single title argument, and only
-        // the token the active title key names is filled — the other simply goes unused.
+        // the token the active title key names is filled: the other simply goes unused.
         bindings.placeholder("history_player", ctx -> subject(ctx).titleArg());
         bindings.placeholder("history_bank", ctx -> subject(ctx).titleArg());
         bindings.placeholder("history_icon", ctx -> iconMaterial(entry(ctx)));

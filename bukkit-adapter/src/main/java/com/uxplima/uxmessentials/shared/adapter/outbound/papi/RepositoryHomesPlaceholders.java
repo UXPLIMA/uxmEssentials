@@ -15,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link HomesPlaceholders} over the homes context's read ports: the {@link HomeRepository} and the {@link
  * HomeQuota} reducer. Built during homes wiring from the same repository and quota the {@code /home} use
  * cases hold, so the placeholder count and limit match what {@code /sethome} enforces. The repository is the
- * Caffeine read-cached one — the same cached set {@code /home} and the {@code /sethome} count check share, so
+ * Caffeine read-cached one. The same cached set {@code /home} and the {@code /sethome} count check share, so
  * the list read is a cache hit for an online (join-warmed) player rather than a fresh query.
  *
  * <p>The limit is resolved unscoped (no world in hand on the placeholder surface) and an unlimited quota maps

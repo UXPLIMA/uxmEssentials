@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.application.message.SharedMessageKey;
 /**
  * The modelled failures a home operation can produce. Each value carries the {@link HomesMessageKey} the
  * command adapter renders, so a use case returns a {@code Result.err(HomeError.X)} and the caller never
- * re-derives the message — the error carries it, and the failure reason and its localized text never
+ * re-derives the message. The error carries it, and the failure reason and its localized text never
  * drift apart.
  */
 public enum HomeError {

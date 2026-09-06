@@ -34,14 +34,14 @@ import org.jspecify.annotations.NullMarked;
  * a block with that item places the villager back, spawning a fresh villager and decoding the stored data onto it before
  * it joins the world, then consuming one item from the placer's hand.
  *
- * <p>Both directions cancel their event so the vanilla interaction — the trade window on pickup, the spawn-egg's own
- * spawn on placement — never also fires. The captured item's stored data is applied inside the spawn callback, so the
+ * <p>Both directions cancel their event so the vanilla interaction. The trade window on pickup, the spawn-egg's own
+ * spawn on placement: never also fires. The captured item's stored data is applied inside the spawn callback, so the
  * villager offers its restored trades from the moment it appears rather than a re-rolled vanilla set. With the feature
  * off, {@code enabled} is {@code false} and both handlers are an inert early return.
  *
  * <h2>Folia</h2>
  * The pickup runs on the region owning the clicked villager (the player is right there interacting with it), and the
- * placement runs on the region owning the clicked block, spawning the villager into that same region — each a
+ * placement runs on the region owning the clicked block, spawning the villager into that same region, each a
  * region-local touch with no scheduler hop.
  */
 @NullMarked

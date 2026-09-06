@@ -62,8 +62,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The communication admin golden test: the engine-rendered panel and its read-only announcer list must draw the
  * exact windows the original {@code CommunicationAdminView} drew. Both paths are opened for the same player against
- * the same fixture, and each populated slot — the four panel buttons and the back button, then the two
- * announcement icons and the two nav arrows — is snapshotted as {@code (slot -> material, plain name)} and asserted
+ * the same fixture, and each populated slot. The four panel buttons and the back button, then the two
+ * announcement icons and the two nav arrows. Is snapshotted as {@code (slot -> material, plain name)} and asserted
  * equal slot for slot (the glass filler is skipped, as it is in the pilot and vault golden tests). Then clicks
  * through the engine's own {@link MenuListener} prove the migrated path keeps the behaviour: the chat-lock button
  * flips the live {@link ChatLock} the {@code /togglechat} command flips, the clearchat button is confirm-gated and

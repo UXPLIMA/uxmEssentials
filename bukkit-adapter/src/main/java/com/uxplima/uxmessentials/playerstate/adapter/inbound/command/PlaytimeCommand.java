@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /playtime [player]} ({@code uxmessentials.playtime.use}): show a player's playtime breakdown — active
+ * {@code /playtime [player]} ({@code uxmessentials.playtime.use}): show a player's playtime breakdown, active
  * (non-AFK) and AFK time across today / last 7 days / last 30 days / all time, read from the DB-backed
  * {@code ShowPlaytime} use case, plus a lifetime continuity line. The target is a plain online-player name (an
  * online-name-completing word, never an {@code @a}/{@code @p}/{@code @s} selector): showing one player's stats is
@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The breakdown can show as a GUI panel or as the chat lines. Bare {@code /playtime} opens the viewer's own
  * panel through {@link #guiRoot()} when the command's catalog {@code gui} flag is on, and renders the chat
- * {@code ShowPlaytime} on its own bare-root executor when it is off — so the catalog flag toggles the self view
+ * {@code ShowPlaytime} on its own bare-root executor when it is off, so the catalog flag toggles the self view
  * exactly as the shared framework intends. {@code /playtime <name>} opens that player's panel (the richer view of
  * the same data, mirroring how {@code /warp <name>} opens its editor unconditionally). With no GUI wired every
  * form renders the chat breakdown.

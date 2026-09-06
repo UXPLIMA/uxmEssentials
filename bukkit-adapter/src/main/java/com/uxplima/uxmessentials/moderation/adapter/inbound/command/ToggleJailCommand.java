@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /togglejail <player> [jail] [reason]}: release the target when they are jailed, otherwise jail them in
  * the named jail (or the first configured jail when the name is omitted). A convenience wrapper for staff who
- * do not want to check first whether a player is jailed — the direction is decided by the current jail row.
+ * do not want to check first whether a player is jailed: the direction is decided by the current jail row.
  * The exempt / unknown-jail gating, the audit lines and the teleport are the {@code ToggleJail} use case's
  * job (which reuses {@code Jail}/{@code Unjail}); this handler only maps the name, the optional jail and the
  * greedy reason. The target may be offline.

@@ -23,7 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqVaultRepository} against the default embedded SQLite backend with the
- * Flyway V6 vaults table applied — the tested default of the backend-parity matrix. It proves the round-trip
+ * Flyway V6 vaults table applied: the tested default of the backend-parity matrix. It proves the round-trip
  * (save → find), that the opaque serialized contents survive the base64 TEXT column byte-for-byte, that an
  * empty vault stores a null {@code contents} cell and round-trips back to empty, that the optional per-vault
  * display name and icon persist (and round-trip to null when unset, updating in place on a re-save), that the
@@ -79,7 +79,7 @@ class JooqVaultRepositoryTest {
     @Test
     void saveUpsertsOnTheOwnerIndexKeyRatherThanInserting() {
         repository.save(vault(1, 3, VaultContents.of(new byte[] {1})));
-        repository.save(vault(1, 6, VaultContents.of(new byte[] {9, 9}))); // same (owner, idx) — a re-save
+        repository.save(vault(1, 6, VaultContents.of(new byte[] {9, 9}))); // same (owner, idx), a re-save
 
         assertThat(repository.count(owner)).isEqualTo(1);
         Vault reloaded = repository.find(VaultId.of(owner, 1)).orElseThrow();
@@ -113,7 +113,7 @@ class JooqVaultRepositoryTest {
     @Test
     void reSavingUpdatesTheDisplayNameAndIconOnTheUpsertPath() {
         repository.save(named(1, "Old Name", "CHEST"));
-        repository.save(named(1, "New Name", "BARREL")); // same (owner, idx) — a re-save through onConflict
+        repository.save(named(1, "New Name", "BARREL")); // same (owner, idx), a re-save through onConflict
 
         assertThat(repository.count(owner)).isEqualTo(1);
         Vault reloaded = repository.find(VaultId.of(owner, 1)).orElseThrow();
@@ -125,7 +125,7 @@ class JooqVaultRepositoryTest {
     void summariesReturnTheIndexNameAndIconAscendingByIndex() {
         repository.save(named(3, "Gear", "DIAMOND_CHESTPLATE"));
         repository.save(named(1, "Loot", "ENDER_CHEST"));
-        repository.save(vault(2, 6, VaultContents.empty())); // no appearance set — null name and icon
+        repository.save(vault(2, 6, VaultContents.empty())); // no appearance set, null name and icon
 
         assertThat(repository.summaries(owner))
                 .containsExactly(
@@ -168,7 +168,7 @@ class JooqVaultRepositoryTest {
 
     @Test
     void deletingANonExistentVaultIsANoOp() {
-        repository.delete(VaultId.of(owner, 7)); // never opened — no row to remove
+        repository.delete(VaultId.of(owner, 7)); // never opened, no row to remove
 
         assertThat(repository.count(owner)).isZero();
     }
@@ -262,7 +262,7 @@ class JooqVaultRepositoryTest {
                 Instant.ofEpochMilli(1_000));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

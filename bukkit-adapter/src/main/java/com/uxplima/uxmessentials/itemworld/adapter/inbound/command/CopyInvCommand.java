@@ -21,7 +21,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandSuggestio
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /copyinv <player>}: copy an online target's inventory contents into your own — a staff tool for
+ * {@code /copyinv <player>}: copy an online target's inventory contents into your own, a staff tool for
  * cloning a loadout. The named target must resolve online (else {@link ItemworldMessageKey#UNKNOWN_TARGET}).
  *
  * <p>The target's inventory is snapshotted on the <em>target's</em> own region thread, then the cloned

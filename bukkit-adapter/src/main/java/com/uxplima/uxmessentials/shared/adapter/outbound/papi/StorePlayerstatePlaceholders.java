@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * <p>PlaceholderAPI requests for an online player arrive on the main thread, so reading the live player here
  * is valid; an offline player resolves to {@code null} and the seam reports empty, which the resolver renders
  * as the dash. The god flag is read from the store rather than the player because Bukkit exposes no damage-
- * immunity flag — the context tracks it in its snapshot map.
+ * immunity flag: the context tracks it in its snapshot map.
  */
 @NullMarked
 public final class StorePlayerstatePlaceholders implements PlayerstatePlaceholders {
@@ -50,7 +50,7 @@ public final class StorePlayerstatePlaceholders implements PlayerstatePlaceholde
 
     private Snapshot read(PlayerRef who, Player player) {
         // Paper marks Player#getLocation() nullable (null only for an entity with no world, which a
-        // connected player never is) — assert it so NullAway is satisfied at the dereference.
+        // connected player never is): assert it so NullAway is satisfied at the dereference.
         Location location = Objects.requireNonNull(player.getLocation(), "player location");
         World world = player.getWorld();
         int x = location.getBlockX();

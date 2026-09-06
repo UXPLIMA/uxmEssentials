@@ -132,7 +132,7 @@ class VanishAdapterTest {
         assertThat(store.isVanished(alice.getUniqueId())).isFalse(); // vanish state dropped on quit
     }
 
-    /** A view that records nothing — the lifecycle test only asserts store state and the quit message. */
+    /** A view that records nothing: the lifecycle test only asserts store state and the quit message. */
     private static final class NoopView implements com.uxplima.uxmessentials.vanish.application.port.VanishView {
         @Override
         public void hide(PlayerRef who, VanishLevel level) {}
@@ -141,7 +141,7 @@ class VanishAdapterTest {
         public void reveal(PlayerRef who) {}
     }
 
-    /** A buffs port that does nothing — the toggle/level behaviour under test does not assert on buffs here. */
+    /** A buffs port that does nothing: the toggle/level behaviour under test does not assert on buffs here. */
     private static final class NoopBuffs implements VanishBuffs {
         @Override
         public void apply(PlayerRef who) {}

@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.teleport.domain.SpawnMirror;
 /**
  * The anti-corruption mapping between a spawn row and a domain {@link Position} (or {@link SpawnMirror}). The
  * location is the warps shape verbatim: the world uid as canonical 36-character text plus the operator-facing
- * world name, the coordinates as doubles and the look angles as reals — so a stored spawn round-trips through
+ * world name, the coordinates as doubles and the look angles as reals, so a stored spawn round-trips through
  * {@link Position} the same way a warp does. This class is the single place that translation lives for the
  * per-world, main, and named spawn tables and the mirror table.
  *

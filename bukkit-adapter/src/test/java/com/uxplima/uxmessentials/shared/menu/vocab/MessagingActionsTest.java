@@ -29,8 +29,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * MockBukkit coverage of the messaging action pack. Each registered handler is fetched back through
  * {@link MenuBindings#action(String)} and fired with a {@link MenuActionContext} built exactly as the click
- * listener builds it, then the effect on the live MockBukkit player(s) is asserted where the mock records it —
- * a delivered chat message, a broadcast fan-out, an action bar — and asserted no-crash where MockBukkit cannot
+ * listener builds it, then the effect on the live MockBukkit player(s) is asserted where the mock records it
+ * a delivered chat message, a broadcast fan-out, an action bar, and asserted no-crash where MockBukkit cannot
  * model the effect (the Adventure title path and the synthetic-advancement toast). The pure grammar edge cases
  * live in {@link #MESSAGE_TO}/{@link #TITLE}/{@link #TOAST}-parsing assertions that need no server at all.
  */

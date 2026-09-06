@@ -8,7 +8,7 @@ import com.uxplima.uxmessentials.economy.application.port.TransactionHistory;
 import com.uxplima.uxmessentials.economy.domain.EconomyReason;
 import com.uxplima.uxmessentials.economy.domain.Money;
 
-/** A {@link TransactionHistory} that records nothing — for tests that do not assert on the audit trail. */
+/** A {@link TransactionHistory} that records nothing: for tests that do not assert on the audit trail. */
 public final class NoopTransactionHistory implements TransactionHistory {
 
     @Override

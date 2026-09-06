@@ -408,7 +408,7 @@ class JoinVerificationTest {
         assertThat(limiter.isLockedOut(player.getUniqueId(), NOW)).isTrue();
     }
 
-    // I-1: the failure budget must survive a disconnect/rejoin — guessing maxAttempts-1, relogging, then one more
+    // I-1: the failure budget must survive a disconnect/rejoin. Guessing maxAttempts-1, relogging, then one more
     // guess must lock the account out, not hand the attacker a fresh set of attempts.
     @SuppressWarnings("removal")
     @Test
@@ -463,7 +463,7 @@ class JoinVerificationTest {
 
         optimistic.onJoin(player);
 
-        // The optimistic freeze applies to everyone in the synchronous window — "frozen until proven safe".
+        // The optimistic freeze applies to everyone in the synchronous window, "frozen until proven safe".
         assertThat(sessions.isPending(player.getUniqueId())).isTrue();
 
         deferred.runQueued(); // the lookup finds no factor and lifts the freeze
@@ -731,7 +731,7 @@ class JoinVerificationTest {
                 .containsEntry("max", "8");
     }
 
-    // C-18: a network that verifies on a lobby and plays elsewhere gets what it is for — the transfer happens only
+    // C-18: a network that verifies on a lobby and plays elsewhere gets what it is for. The transfer happens only
     // after the proof, so nothing unverified ever lands on the server worth reaching.
     @Test
     void aVerifiedPlayerIsHandedToTheConfiguredBackend() {

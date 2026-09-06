@@ -102,7 +102,7 @@ public final class MenuOpenCommand implements CommandRegistration {
             return 0;
         }
         // Pre-open actions ride the engine's open-actions seam: opening the menu below runs its open-actions on open,
-        // so a menu whose command opens it fires that menu's open-actions — no separate pre-open hook needed here.
+        // so a menu whose command opens it fires that menu's open-actions: no separate pre-open hook needed here.
         Map<String, String> arguments = ArgumentNodes.read(ctx, spec.arguments());
         menus.open(BukkitRefs.toRef(player), menuId, null, 0, arguments);
         return Command.SINGLE_SUCCESS;

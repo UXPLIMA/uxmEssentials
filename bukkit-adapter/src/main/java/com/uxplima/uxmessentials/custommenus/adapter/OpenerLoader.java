@@ -20,7 +20,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 /**
  * Reads the operator's {@code menus/openers.conf} into the list of {@link OpenerSpec}s the opener listeners run
  * from. The file declares an {@code openers = [ ... ]} array, one entry per opener. Each entry is parsed and
- * validated independently and, on any problem, logged and skipped rather than aborting the rest — one bad opener
+ * validated independently and, on any problem, logged and skipped rather than aborting the rest, one bad opener
  * never hides the others. An absent file is normal (openers are opt-in) and yields an empty list, exactly like the
  * {@link CustomMenuLoader}'s missing-directory case.
  *
@@ -94,7 +94,7 @@ public final class OpenerLoader {
 
     /**
      * The {@code swap-offhand-menu} the file names, or empty when it is absent, blank, or names a menu that is not in
-     * {@code knownMenus} — an unregistered id is dropped with a warning so the vanilla off-hand swap keeps working.
+     * {@code knownMenus}: an unregistered id is dropped with a warning so the vanilla off-hand swap keeps working.
      */
     private Optional<String> parseSwapMenu(ConfigurationNode root, Set<String> knownMenus) {
         String menu = root.node("swap-offhand-menu").getString("").strip();
@@ -111,7 +111,7 @@ public final class OpenerLoader {
     /**
      * Parse one {@code openers = [...]} entry into an {@link OpenerSpec}, or empty when it must be skipped: a blank
      * or unknown menu id, or an item whose material does not resolve. The slot defaults to {@code -1} (no fixed
-     * slot — the item is added to the first free slot on give) and give-on-join defaults to
+     * slot. The item is added to the first free slot on give) and give-on-join defaults to
      * {@link GiveOnJoin#NEVER}, so an opener with only a menu and an item is a valid click-to-open item.
      */
     private Optional<OpenerSpec> parseOne(ConfigurationNode entry, Set<String> knownMenus) {

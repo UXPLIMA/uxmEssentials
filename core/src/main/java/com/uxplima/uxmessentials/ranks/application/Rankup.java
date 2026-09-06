@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * {@code /rankup}: advance a player one rung up the ladder when they meet the next rank's requirements and can
  * pay its cost. The current standing is resolved through {@link CurrentRank} (defaulting to the first rank for a
  * player with no stored pointer), the next rank through {@link com.uxplima.uxmessentials.ranks.domain.RankLadder#next},
- * and the outcome is returned as a typed {@link RankupResult} the command boundary renders — this use case sends
+ * and the outcome is returned as a typed {@link RankupResult} the command boundary renders. This use case sends
  * no message and touches no Bukkit type.
  *
  * <h2>Ordering and rollback stance</h2>
@@ -30,16 +30,16 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *   <li><b>Requirements.</b> Every parsed requirement of the next rank is evaluated first; a single failure
  *       returns {@link RankupResult#requirementsNotMet()} with nothing charged and the pointer unmoved.</li>
  *   <li><b>Charge.</b> Only once the requirements pass is the cost charged through the {@link RankEconomy} seam.
- *       A refused debit (insufficient funds) returns {@link RankupResult#cannotAfford()} — the withdraw reported
+ *       A refused debit (insufficient funds) returns {@link RankupResult#cannotAfford()}: the withdraw reported
  *       {@code false}, so no money moved and there is nothing to compensate; the pointer does not advance. With
  *       no economy provider wired, or a zero cost, the charge is skipped and rankup is free.</li>
- *   <li><b>Advance.</b> The rank pointer is saved (the prestige level is carried over unchanged — prestige is a
+ *   <li><b>Advance.</b> The rank pointer is saved (the prestige level is carried over unchanged: prestige is a
  *       separate mechanic).</li>
  *   <li><b>Actions.</b> The rank's configured actions run last, only after the advance is durable.</li>
  * </ol>
  * Charging strictly before advancing is what guarantees a failed charge never advances. The one residual gap is
  * the exceptional case where the guarded debit succeeds but the subsequent {@code save} throws a genuine
- * database fault: Phase 2 does not auto-refund there — {@code save} is a single-row idempotent upsert, so a fault
+ * database fault: Phase 2 does not auto-refund there. {@code save} is a single-row idempotent upsert, so a fault
  * is exceptional and surfaces to the command boundary rather than being silently swallowed. A compensating
  * refund is deferred rather than papered over.
  */
@@ -83,7 +83,7 @@ public final class Rankup {
      * autorank scan reuses so it does not duplicate the requirement / advance / action logic: when {@code charge}
      * is {@code false} the cost step is skipped entirely and a met rank-up promotes for free, so an operator who
      * turns autorank's {@code charge-cost} off lets an eligible player climb without their balance moving. With
-     * {@code charge} {@code true} the behaviour is identical to {@code /rankup} — the cost is charged before the
+     * {@code charge} {@code true} the behaviour is identical to {@code /rankup}. The cost is charged before the
      * pointer advances, so a short balance refuses without promoting.
      */
     public RankupResult rankUp(PlayerRef who, boolean charge) {

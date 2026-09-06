@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.ranks.domain;
 import java.util.Objects;
 
 /**
- * Identity of a single rank on the ladder — the stable key an operator names the rank by in {@code ranks.conf}
+ * Identity of a single rank on the ladder. The stable key an operator names the rank by in {@code ranks.conf}
  * ({@code first}, {@code citizen}, {@code vip}) and the value stored in the {@code player_ranks.rank_id} column.
  * It is the rank's natural key, so a stored pointer resolves back to a {@link Rank} without a surrogate id.
  *

@@ -6,14 +6,14 @@ import java.util.Set;
 /**
  * The warp-name tokens the {@code /pwarp} subcommand tree claims as literals. A warp named {@code set},
  * {@code admin}, or {@code rate} would be shadowed by its verb literal and become unreachable through
- * {@code /pwarp <name>}, so these names are refused at every point a name is created — the {@code /setpwarp}
- * command, a rename, and any importer — not merely documented.
+ * {@code /pwarp <name>}, so these names are refused at every point a name is created, the {@code /setpwarp}
+ * command, a rename, and any importer, not merely documented.
  *
  * <p>The set is a canonical, lowercase superset of the current subcommand literals: it also holds the verbs a
  * menu or a future subcommand is likely to add ({@code create}, {@code delete}, {@code search}, {@code near},
  * {@code manage}, {@code sponsor}), so reserving them now keeps a later addition from silently colliding with an
- * existing warp. A {@code bukkit-adapter} drift guard pins the other direction — every literal the command builder
- * registers must be present here — so the two can never drift apart.
+ * existing warp. A {@code bukkit-adapter} drift guard pins the other direction, every literal the command builder
+ * registers must be present here, so the two can never drift apart.
  */
 public final class ReservedWarpNames {
 

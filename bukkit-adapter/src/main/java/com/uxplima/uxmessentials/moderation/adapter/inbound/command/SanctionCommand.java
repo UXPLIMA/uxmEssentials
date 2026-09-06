@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /sanction <player>}: an aggregated, read-only punishment summary for one target — their current mute,
+ * {@code /sanction <player>}: an aggregated, read-only punishment summary for one target, their current mute,
  * jail and tempban state plus the count of warnings still in effect, gathered in one read. A staff
  * convenience that saves running {@code /mutelist}, {@code /jailedplayers} and {@code /warns} separately; it
  * wires under its own {@code uxmessentials.moderation.sanction} node. The lookup rebuilds the profile from the

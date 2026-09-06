@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * A single cross-server trade control message, carried over the bus between the two backend servers a trade spans. It
  * names the trade, the kind of signal, and the two participants (the sender {@code from} and the addressed {@code to}),
- * plus the backend that produced it. The heavy state — the escrowed items and money — is never in the signal; it lives
+ * plus the backend that produced it. The heavy state, the escrowed items and money, is never in the signal; it lives
  * in the shared escrow table, and the signal only tells the addressed backend to re-evaluate that trade's rows.
  *
  * @param tradeId the trade both backends agree on

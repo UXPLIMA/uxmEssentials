@@ -211,7 +211,7 @@ class BukkitClickActionRunnerTest {
         assertThat(commandRunner.playerCommands).containsExactly("one");
         assertThat(scheduler.pendingDelays()).isEqualTo(1);
 
-        // Resuming the first delay runs "two" and parks again at the second delay — no skipped or repeated action.
+        // Resuming the first delay runs "two" and parks again at the second delay: no skipped or repeated action.
         scheduler.runDelayedOnce();
         assertThat(commandRunner.playerCommands).containsExactly("one", "two");
         assertThat(scheduler.pendingDelays()).isEqualTo(1);
@@ -586,7 +586,7 @@ class BukkitClickActionRunnerTest {
     @Test
     void aGateChosenInsideARandomGroupThatDeniesStopsTheRestOfTheChain() {
         // The group's chosen member is a CHANCE 0 gate (offset 0): a denied gate must stop the whole chain, exactly
-        // as it would inline — the action after the group must not run.
+        // as it would inline: the action after the group must not run.
         BukkitClickActionRunner deterministic = new BukkitClickActionRunner(
                 commandRunner,
                 connector,

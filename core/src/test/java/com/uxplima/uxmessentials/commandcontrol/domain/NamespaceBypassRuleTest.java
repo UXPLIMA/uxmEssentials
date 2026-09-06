@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The pure decision guard for the namespace-bypass block. Exercises the strip helper across the namespace forms a
  * client can send ({@code minecraft:gamemode}, {@code /bukkit:pl}, mixed case), its edge cases (no colon, empty
- * namespace, empty label), and the deny decision itself — a namespaced form is blocked exactly when its bare form is
+ * namespace, empty label), and the deny decision itself. A namespaced form is blocked exactly when its bare form is
  * denied, a bypass holder is never blocked, and the whole block is a no-op when switched off.
  */
 class NamespaceBypassRuleTest {

@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The numeric and spatial slice of the menu condition vocabulary. Two capabilities the other packs left just out of
  * reach: an explicit {@code compare:<A> <op> <B>} that weighs two placeholder-expanded operands (the same numeric-or-
- * string comparison {@code papi-compare} performs, but reachable from a plain {@code id:value} token — the loader
+ * string comparison {@code papi-compare} performs, but reachable from a plain {@code id:value} token, the loader
  * cannot fill {@code papi-compare}'s three named {@code left}/{@code op}/{@code right} args from config), and a set of
  * location gates ({@code is-near}, {@code cuboid}, {@code world}) that ask <em>where the viewer is standing</em>. The
  * general numeric comparators ({@code > >= == != <= <}) and arithmetic are already reachable through the {@code expr}
@@ -38,13 +38,13 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><strong>Every condition fails closed.</strong> A gate that cannot be evaluated must not pass: an offline viewer,
  * a wrong token count, a non-numeric coordinate, an unknown operator, or anything a lookup unexpectedly throws all
- * answer {@code false} through the {@link #closed} wrapper — better to hide an item or deny a click than to grant on a
+ * answer {@code false} through the {@link #closed} wrapper, better to hide an item or deny a click than to grant on a
  * value we could not read. The viewer's live {@link Player} is resolved from the open context's UUID; a viewer who
  * logged off in the gap resolves to {@code null} and the spatial conditions are {@code false}.
  *
  * <p>Threading: the spatial gates read only the viewer's <em>own</em> location and world on the render/entity thread
  * that runs them (a {@code view} scan during the renderer's populate, a click gate on the viewer's entity thread),
- * which is Folia-safe — no foreign entity is touched and the online roster is never enumerated, so no Folia allowlist
+ * which is Folia-safe. No foreign entity is touched and the online roster is never enumerated, so no Folia allowlist
  * entry is needed. {@code compare} is pure string/number work. Nothing here produces player-facing text (a condition
  * returns a boolean), so no {@code MessageKey} is involved; the only text is a diagnostic {@code log} line when an
  * evaluation throws.
@@ -63,7 +63,7 @@ public final class NumericSpatialConditions {
      * Register the numeric and spatial conditions into {@code bindings}. The placeholder registry {@code compare}'s
      * operands expand through is read from {@code bindings} itself, so no separate handle is threaded; {@code log} is
      * the operator console logger a fail-closed condition warns through when an evaluation throws. Left separate from
-     * {@link MenuVocabulary#registerConditions} so that method's existing call-sites stay untouched — the composition
+     * {@link MenuVocabulary#registerConditions} so that method's existing call-sites stay untouched, the composition
      * root calls both.
      */
     public static void register(MenuBindings bindings, Logger log) {
@@ -78,7 +78,7 @@ public final class NumericSpatialConditions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a {@code false}
-     * result rather than escaping into the render or click path — a condition that cannot be evaluated must fail
+     * result rather than escaping into the render or click path. A condition that cannot be evaluated must fail
      * closed, the same discipline the string and requirement packs apply.
      */
     private static BiPredicate<MenuContext, Map<String, String>> closed(
@@ -94,7 +94,7 @@ public final class NumericSpatialConditions {
     }
 
     /**
-     * {@code compare:<A> <op> <B>} — exactly three whitespace tokens. Expand A and B, then compare them: when both
+     * {@code compare:<A> <op> <B>}: exactly three whitespace tokens. Expand A and B, then compare them: when both
      * resolve to numbers the comparison is numeric across the full operator set ({@code = == != < > <= >=}), otherwise
      * only equality is meaningful and falls back to a string test ({@code =}/{@code ==} equals, {@code !=} not-equals,
      * any other operator on non-numbers is {@code false}). A wrong token count is {@code false}. This is the
@@ -129,7 +129,7 @@ public final class NumericSpatialConditions {
     }
 
     /**
-     * {@code is-near:<x> <y> <z> <radius>} — four whitespace tokens as numbers. True iff the viewer's current location
+     * {@code is-near:<x> <y> <z> <radius>}: four whitespace tokens as numbers. True iff the viewer's current location
      * is within {@code radius} blocks of {@code (x,y,z)} in the viewer's current world. The comparison uses
      * {@link Location#distanceSquared} against {@code radius*radius} so no square root is taken; a negative radius is
      * {@code false} (an empty region), and a malformed coordinate is {@code false}.
@@ -150,7 +150,7 @@ public final class NumericSpatialConditions {
     }
 
     /**
-     * {@code cuboid:<x1> <y1> <z1> <x2> <y2> <z2>} — six whitespace tokens as numbers. True iff the viewer's current
+     * {@code cuboid:<x1> <y1> <z1> <x2> <y2> <z2>}: six whitespace tokens as numbers. True iff the viewer's current
      * location falls inside the axis-aligned box the two corners span (min/max taken per axis, both bounds inclusive),
      * in the viewer's current world. A malformed coordinate is {@code false}.
      */
@@ -167,7 +167,7 @@ public final class NumericSpatialConditions {
         return within(at.getX(), c[0], c[3]) && within(at.getY(), c[1], c[4]) && within(at.getZ(), c[2], c[5]);
     }
 
-    /** {@code world:<name>} — true iff the viewer's current world name equals {@code name} ignoring case. Blank is false. */
+    /** {@code world:<name>}: true iff the viewer's current world name equals {@code name} ignoring case. Blank is false. */
     private static boolean world(MenuContext ctx, Map<String, String> args) {
         Player player = viewer(ctx);
         String name = value(args).strip();

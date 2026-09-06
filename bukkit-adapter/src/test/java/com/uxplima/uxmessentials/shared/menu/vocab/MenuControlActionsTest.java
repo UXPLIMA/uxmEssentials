@@ -29,7 +29,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Unit coverage of the menu-control action pack away from a live window: the {@code refresh-slot} slot grammar and
  * the {@code open:<menu> [page]} target grammar are pinned with plain assertions, the {@code refresh-slot} ref is
- * proved to split its slot argument, and — the regression that keeps every other action pack safe — a context built
+ * proved to split its slot argument, and, the regression that keeps every other action pack safe, a context built
  * the way a unit test or a feature binding builds it (the four-argument constructor) is proved to carry a no-op
  * control, so firing {@code refresh}/{@code reset-pagination}/{@code refresh-slot} through it does nothing rather than
  * dereferencing null. The through-the-listener behaviour (a real repaint, a real page reset) is covered by
@@ -155,7 +155,7 @@ class MenuControlActionsTest {
 
     // --- harness -------------------------------------------------------------------------------------------------
 
-    /** Builds the four-argument context a unit test or feature binding builds — no window, so a no-op control. */
+    /** Builds the four-argument context a unit test or feature binding builds, no window, so a no-op control. */
     private MenuActionContext context(String arg) {
         PlayerRef ref = new PlayerRef(viewer.getUniqueId(), viewer.getName());
         return new MenuActionContext(MenuContext.of(ref, null, 0), viewer, ClickKind.LEFT, Map.of("value", arg));

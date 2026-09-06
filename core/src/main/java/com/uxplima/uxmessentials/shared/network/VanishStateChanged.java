@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * A player's vanish state changed on the origin backend — they vanished, reappeared, or had their use level
+ * A player's vanish state changed on the origin backend. They vanished, reappeared, or had their use level
  * re-resolved. Unlike the DB-backed {@code *Changed} frames (which only tell a peer to drop a cached row), the
  * vanish state is transient in-memory state with no shared table, so this frame <strong>carries the value</strong>:
  * the affected player, their name (so a network-wide {@code /vanish list} can render a hidden player who is not

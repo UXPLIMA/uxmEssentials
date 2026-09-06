@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  *
  * <p><strong>Proof of teeth.</strong> {@link #guardTripsWhenTheLimitIsRemoved} and
  * {@link #guardTripsWhenTheWholeTableIsMaterialised} run the same predicates against mutated copies of the source
- * — one with the {@code LIMIT} stripped, others with each forbidden full-table shape spliced in — and assert the
+ * (one with the {@code LIMIT} stripped, others with each forbidden full-table shape spliced in) and assert the
  * guard flags them, so a regression that drops the {@code LIMIT} or reintroduces a full scan fails the build.
  */
 class PlayerWarpBrowseIsPagedDriftTest {

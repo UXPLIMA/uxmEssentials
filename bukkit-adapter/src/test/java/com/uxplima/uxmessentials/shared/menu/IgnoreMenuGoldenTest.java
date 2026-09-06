@@ -60,11 +60,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@code IgnoreListView} drew. A player ignores two others, so the engine draws two PLAYER_HEAD icons (content slots
  * 0 and 1), the add LIME_DYE button (slot 49), and the two nav ARROWs (slots 48 and 50). The engine's window is
  * snapshotted as {@code (slot -> material, plain name)} and asserted equal, slot for slot, to the baseline the old
- * view produced — captured once while both rendered the same fixture, then frozen here as the contract so the old
+ * view produced. Captured once while both rendered the same fixture, then frozen here as the contract so the old
  * class could be deleted (the glass filler is skipped, as in the pilot and vault golden tests). Then a click on the
  * first head through the engine's own {@link MenuListener} proves the migrated path un-ignores that player through
  * the same {@link Unignore} use case the {@code /unignore} command drives, and the add seam ignores a resolvable
- * name through {@link Ignore} — so the move is faithful in both appearance and behaviour.
+ * name through {@link Ignore}, so the move is faithful in both appearance and behaviour.
  */
 class IgnoreMenuGoldenTest {
 

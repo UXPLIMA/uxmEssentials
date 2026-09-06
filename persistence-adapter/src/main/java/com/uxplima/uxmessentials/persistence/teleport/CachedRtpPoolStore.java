@@ -13,11 +13,11 @@ import com.uxplima.uxmessentials.teleport.domain.RtpColumn;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A Caffeine read-cache in front of the jOOQ {@link RtpPoolStore}, caching the per-world {@code count} — the one
- * scalar read repeatedly (the cap/health checks) while the pool refills — so a repeated count does not re-hit the
+ * A Caffeine read-cache in front of the jOOQ {@link RtpPoolStore}, caching the per-world {@code count}, the one
+ * scalar read repeatedly (the cap/health checks) while the pool refills, so a repeated count does not re-hit the
  * single-writer SQLite backend. The cache is bounded and short-lived, and every write invalidates it: a {@code save}
  * drops the world's count, a {@code deleteStale} drops all of them, so the next read reflects the durable state
- * (write-through at the database, invalidate here — never a write-back cache that could lose a mutation).
+ * (write-through at the database, invalidate here: never a write-back cache that could lose a mutation).
  *
  * <p>{@link #load} is intentionally not cached: it is the one-shot startup pre-warm read and must always reflect the
  * freshest persisted set, so it passes straight through to the delegate.

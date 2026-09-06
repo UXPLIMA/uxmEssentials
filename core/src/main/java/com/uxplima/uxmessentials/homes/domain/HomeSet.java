@@ -24,8 +24,8 @@ import com.uxplima.uxmessentials.shared.domain.Result;
  * The aggregate over one owner's homes, keyed by {@link HomeSlot}. It owns the invariants the rest of the
  * context relies on: a slot index stays within the owner's resolved maximum-slot count, a slot holds at
  * most one home, and the count never exceeds the owner's resolved {@link HomeLimit}. Every mutation is a
- * pure transition — it returns a new {@code HomeSet} plus the {@link HomeEvent} it raised, or a
- * {@link HomeError} when an invariant would be broken — so the aggregate never reaches for a repository,
+ * pure transition. It returns a new {@code HomeSet} plus the {@link HomeEvent} it raised, or a
+ * {@link HomeError} when an invariant would be broken, so the aggregate never reaches for a repository,
  * a clock, or a teleport. The application layer loads the set, applies a transition, and persists the
  * result.
  *

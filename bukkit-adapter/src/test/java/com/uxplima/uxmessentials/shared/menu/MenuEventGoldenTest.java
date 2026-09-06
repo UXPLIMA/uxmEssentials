@@ -50,7 +50,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The end-to-end proof for the two public dev-API events. A real Bukkit {@link Listener} is registered through
  * {@link org.bukkit.plugin.PluginManager#registerEvents}, which itself proves each event carries the required static
- * {@code getHandlerList()} — registration reflects on it and throws when it is missing. The live {@link Menus} facade
+ * {@code getHandlerList()}: registration reflects on it and throws when it is missing. The live {@link Menus} facade
  * and {@link MenuListener} drive open → event → effect, so these are integration goldens, not unit checks of the event
  * records.
  *
@@ -200,7 +200,7 @@ class MenuEventGoldenTest {
         return bedrock;
     }
 
-    /** Whether the viewer's open top inventory is an engine menu window — false when nothing (or no menu) is open. */
+    /** Whether the viewer's open top inventory is an engine menu window: false when nothing (or no menu) is open. */
     private boolean menuOpen() {
         InventoryView view = player.getOpenInventory();
         if (view == null) {

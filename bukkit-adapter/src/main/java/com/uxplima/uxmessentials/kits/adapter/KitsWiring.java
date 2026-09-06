@@ -65,7 +65,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Constructs the kits context's adapters and use cases over the injected kernel ports, the per-kit files
  * under {@code modules/kits/kits/}, and the PDC claim store, and produces the Brigadier command list the
- * plugin registers. This is the one place the kits context is wired — nothing else news up its classes.
+ * plugin registers. This is the one place the kits context is wired: nothing else news up its classes.
  *
  * <p>The repository is the Configurate adapter over the per-kit files (read-on-load, write-through on
  * authoring; a legacy {@code kits.conf} monolith is split into per-kit files on first load). The claim store
@@ -98,7 +98,7 @@ public final class KitsWiring {
      * Build the kits context, charging a recorded per-kit cost through {@code economy} when present. The
      * economy context lands before kits in the registry, so its {@link KitEconomy} bridge is captured during
      * economy wiring and handed in here; when it is empty (economy disabled), a priced kit's cost is recorded
-     * but not charged — the soft coupling the kits context owns.
+     * but not charged: the soft coupling the kits context owns.
      */
     public static Wired wire(
             Plugin plugin,
@@ -241,7 +241,7 @@ public final class KitsWiring {
                 new KitsJoinListener(repository, granter, access));
 
         // The kit's claim/deny effects (sound, particles, title, firework, commands, the wait-ticks delay) now run
-        // through the KitActionRunner inside ClaimKit, ordered around the item grant — so there is no longer a
+        // through the KitActionRunner inside ClaimKit, ordered around the item grant, so there is no longer a
         // KitClaimed event subscriber to run them reactively after the fact, and none to unsubscribe on stop.
 
         return new Wired(

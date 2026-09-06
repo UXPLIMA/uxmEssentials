@@ -35,8 +35,8 @@ import com.uxplima.uxmessentials.teleport.domain.event.WarmupCancelled;
 /**
  * The cooldown/warmup machinery every cooldowned teleport flows through. It owns three steps in order:
  * (1) gate the shared teleport cooldown, (2) begin a move-cancellable warmup through the {@link Warmups}
- * port, and (3) on completion issue the async hop via {@link TeleportExecutor} and — under the
- * {@code teleport} start phase — stamp the cooldown only then, so a denied, cancelled, or move-cancelled
+ * port, and (3) on completion issue the async hop via {@link TeleportExecutor} and, under the
+ * {@code teleport} start phase. Stamp the cooldown only then, so a denied, cancelled, or move-cancelled
  * teleport never burns it (the cooldown is added <em>after</em> the warmup).
  *
  * <p>The move-cancels-warmup invariant is enforced by the adapter's {@code PlayerMoveEvent} listener
@@ -48,7 +48,7 @@ public final class TeleportEngine {
 
     private static final String FEATURE = "tp";
 
-    // /rtp resolves its own cooldown tier — uxmessentials.rtp.cooldown.<seconds> — rather than riding the shared tp
+    // /rtp resolves its own cooldown tier, uxmessentials.rtp.cooldown.<seconds>, rather than riding the shared tp
     // tier, so an operator can rate-limit random-teleport independently. The pre-search check (gateRandom) and the
     // post-arrival stamp (onLanded) both resolve this same feature, so the two never key different nodes.
     private static final String RTP_FEATURE = "rtp";
@@ -162,7 +162,7 @@ public final class TeleportEngine {
         Objects.requireNonNull(destination, "destination");
         Objects.requireNonNull(kind, "kind");
         if (jail.isJailed(mover)) {
-            // A jailed player cannot self-teleport — /home, /warp, /spawn, /back, /rtp all funnel through here
+            // A jailed player cannot self-teleport, /home, /warp, /spawn, /back, /rtp all funnel through here
             // (docs/permissions.md). The moderation context owns the gate; without moderation it is NEVER.
             notifier.send(mover, TeleportMessageKey.JAILED);
             return Result.err(TeleportError.JAILED);
@@ -201,8 +201,8 @@ public final class TeleportEngine {
     }
 
     /**
-     * Gate an {@code /rtp} <em>before</em> the safe-search runs: the jail gate, the shared cooldown, and — when
-     * a cost is configured — affordability. A player who is jailed, on cooldown, or short on funds is rejected
+     * Gate an {@code /rtp} <em>before</em> the safe-search runs: the jail gate, the shared cooldown, and, when
+     * a cost is configured, affordability. A player who is jailed, on cooldown, or short on funds is rejected
      * here (with the matching notice) so the pre-warmed queue is never even consulted for them; the money is not
      * touched, only checked. On {@code ok} the caller may serve a location and hand it to {@link #launchRandom}.
      */
@@ -231,7 +231,7 @@ public final class TeleportEngine {
 
     /**
      * Begin the move-cancellable warmup for an already-gated {@code /rtp}; on a successful landing the cooldown
-     * is stamped, the cost (if any) is withdrawn, and the arrival grace window is applied — all only after the
+     * is stamped, the cost (if any) is withdrawn, and the arrival grace window is applied, all only after the
      * player has truly arrived, never for a warmup that is move-cancelled or a teleport Paper refuses.
      */
     public void launchRandom(PlayerRef who, Destination destination) {
@@ -241,7 +241,7 @@ public final class TeleportEngine {
     }
 
     /**
-     * Serve an immediate {@code /rtp} landing with no warmup, cooldown, or charge — the respawn / first-join
+     * Serve an immediate {@code /rtp} landing with no warmup, cooldown, or charge, the respawn / first-join
      * path. The grace window still applies on arrival, since a fresh drop into unexplored terrain is exactly
      * where it matters most. There is no move-cancel because these teleports are involuntary and instant.
      */
@@ -335,7 +335,7 @@ public final class TeleportEngine {
     private CooldownKind cooldownKind(TeleportKind kind, Destination destination) {
         if (kind == TeleportKind.RANDOM && destination.cooldownOverride().isEmpty()) {
             // A random teleport carries no destination-level override, so its stamp resolves the same rtp-specific
-            // tier the pre-search gate checked — keeping gateRandom's check and onLanded's stamp on one node.
+            // tier the pre-search gate checked: keeping gateRandom's check and onLanded's stamp on one node.
             return randomCooldownKind();
         }
         if (destination.cooldownOverride().isPresent()) {
@@ -354,7 +354,7 @@ public final class TeleportEngine {
     /**
      * The {@code /rtp} cooldown identity used by {@link #gateRandom} before a destination exists. A random
      * teleport never carries a destination-level override, so this matches {@link #cooldownKind} for a
-     * RANDOM destination exactly — the pre-search check and the post-arrival stamp resolve the same key.
+     * RANDOM destination exactly, the pre-search check and the post-arrival stamp resolve the same key.
      *
      * <p>RTP keys its own {@code rtp} tier ({@code uxmessentials.rtp.cooldown.<seconds>}) with its own stamp, so
      * a {@code /rtp} cooldown is independent of the shared {@code tp} tier. The config default is the per-verb

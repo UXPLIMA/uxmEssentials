@@ -314,7 +314,7 @@ class WarpEditorGoldenTest {
         out.put(TELEPORT_SLOT, new Snapshot(Material.ENDER_PEARL, WarpsMessageKey.WARP_EDITOR_TELEPORT_NAME.key()));
         out.put(ICON_SLOT, new Snapshot(Material.ENDER_PEARL, WarpsMessageKey.WARP_EDITOR_ICON_NAME.key()));
         if (serverWarp) {
-            // Category, lock, password, and welcome are server-warp concepts — a player warp carries none of them
+            // Category, lock, password, and welcome are server-warp concepts. A player warp carries none of them
             // after the surrogate-id rebuild, so all four are gated off for a player warp in warp-editor.conf.
             out.put(CATEGORY_SLOT, new Snapshot(Material.BOOK, WarpsMessageKey.WARP_EDITOR_CATEGORY_NAME.key()));
             out.put(LOCK_SLOT, new Snapshot(Material.LEVER, WarpsMessageKey.WARP_EDITOR_LOCK_NAME.key()));
@@ -467,7 +467,7 @@ class WarpEditorGoldenTest {
         public void refreshFavouriteCount(com.uxplima.uxmessentials.playerwarps.domain.PlayerWarpId id) {}
     }
 
-    /** An empty category repository — the category selector reads it but this test never picks a category. */
+    /** An empty category repository: the category selector reads it but this test never picks a category. */
     private static final class EmptyCategories
             implements com.uxplima.uxmessentials.warps.application.port.WarpCategoryRepository {
         @Override

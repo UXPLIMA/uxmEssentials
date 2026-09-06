@@ -66,7 +66,7 @@ public final class ReauthCommandListener implements Listener {
         Instant now = clock.instant();
         if (policy.decide(message, reauthState.lastVerified(player.getUniqueId()), now)
                 == ReauthPolicy.Decision.ALLOW) {
-            return; // verified recently enough — let the protected command run
+            return; // verified recently enough. Let the protected command run
         }
         event.setCancelled(true);
         controller.require(player, message);

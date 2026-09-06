@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.economy.domain.Money;
  * The pay-tax rule, loaded once on enable and swapped atomically on reload (the {@code LoanPolicy} pattern). A
  * {@code /pay} of a gross amount is taxed by {@code percent}% of the amount plus a {@code flat} cut; the result
  * is the money the server takes out of the transfer (the receiver is credited the remainder). The tax is a sink
- * that fights inflation — it is computed here, in the currency of the payment, and never exceeds the payment
+ * that fights inflation. It is computed here, in the currency of the payment, and never exceeds the payment
  * itself so a receiver can never be credited a negative figure.
  *
  * @param enabled whether any tax is applied at all (the default-off switch)
@@ -32,7 +32,7 @@ public record TaxPolicy(boolean enabled, BigDecimal percent, BigDecimal flat) {
         }
     }
 
-    /** A disabled policy — the shipped default, leaving every {@code /pay} untaxed. */
+    /** A disabled policy: the shipped default, leaving every {@code /pay} untaxed. */
     public static TaxPolicy disabled() {
         return new TaxPolicy(false, BigDecimal.ZERO, BigDecimal.ZERO);
     }

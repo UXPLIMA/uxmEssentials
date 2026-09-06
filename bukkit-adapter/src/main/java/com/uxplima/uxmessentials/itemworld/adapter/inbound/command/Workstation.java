@@ -16,8 +16,8 @@ import org.jspecify.annotations.Nullable;
  * than nine near-identical files; the enum holds only immutable scalar data so the open behaviour lives in
  * {@link #open} as a {@code switch}, keeping the constants Error-Prone-clean.
  *
- * <p>Most stations open through a {@link MenuType} view created for the player with no backing block — the
- * non-deprecated {@code MenuType.Typed#create(HumanEntity)} path — so no real workstation is required. The
+ * <p>Most stations open through a {@link MenuType} view created for the player with no backing block, the
+ * non-deprecated {@code MenuType.Typed#create(HumanEntity)} path, so no real workstation is required. The
  * ender chest opens the player's own {@code getEnderChest()} inventory. {@link #open} must run on the player's
  * region thread.
  */
@@ -45,17 +45,17 @@ public enum Workstation {
         this.displayName = displayName;
     }
 
-    /** This station's command literal — public so the itemworld hub keys its launcher button slot/material by it. */
+    /** This station's command literal, public so the itemworld hub keys its launcher button slot/material by it. */
     public String literal() {
         return literal;
     }
 
-    /** This station's permission node — public so the itemworld hub gates its launcher button by it. */
+    /** This station's permission node: public so the itemworld hub gates its launcher button by it. */
     public String permission() {
         return permission;
     }
 
-    /** This station's display name — public so the itemworld hub renders its launcher button by it. */
+    /** This station's display name: public so the itemworld hub renders its launcher button by it. */
     public String displayName() {
         return displayName;
     }

@@ -96,7 +96,7 @@ class BanAddressStrictnessTest {
         Instant cappedExpiry = NOW.plusSeconds(capSeconds);
         // The capped UUID ban's expiry...
         assertThat(repository.loadTempban(TARGET).expiry()).contains(cappedExpiry);
-        // ...is exactly the IP ban's expiry — not a permanent (empty) IP ban that would outlive the sanction.
+        // ...is exactly the IP ban's expiry, not a permanent (empty) IP ban that would outlive the sanction.
         assertThat(repository.activeIpBan("203.0.113.7", NOW)).isPresent().get().satisfies(b -> {
             assertThat(b.until()).contains(cappedExpiry);
             assertThat(b.target()).contains(TARGET.uuid());

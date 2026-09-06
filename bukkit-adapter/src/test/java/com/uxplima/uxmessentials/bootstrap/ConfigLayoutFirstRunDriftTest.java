@@ -11,7 +11,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * Guards that a fresh first-run extraction produces a layout the {@link ConfigurateConfigStore} resolves to the
- * bundled per-module defaults — a sibling file ({@code rtp.conf}), a one-file module ({@code homes}), and a
+ * bundled per-module defaults. A sibling file ({@code rtp.conf}), a one-file module ({@code homes}), and a
  * global from the root {@code config.conf}. Lives beside {@link DefaultResources} because its writer is
  * package-private.
  */

@@ -27,8 +27,8 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The integration slice of the menu condition vocabulary: gates that ask a neighbouring plugin — a permission group,
- * a currency balance, a job, a protected region — or the viewer's own world weather and a persistent per-label
+ * The integration slice of the menu condition vocabulary: gates that ask a neighbouring plugin, a permission group,
+ * a currency balance, a job, a protected region, or the viewer's own world weather and a persistent per-label
  * cooldown. Registered once at startup into the shared {@link MenuBindings} alongside the generic
  * {@link MenuVocabulary} conditions and the {@link RequirementConditions} / {@link StringConditions} /
  * {@link NumericSpatialConditions} packs, so a disk-loaded spec resolves {@code has-group} / {@code weather} /
@@ -41,7 +41,7 @@ import org.jspecify.annotations.Nullable;
  * argument from {@code value}, exactly as an action does.
  *
  * <p>Several lean on existing substrate: {@code has-group} rides the Vault {@link PermissionQuery} seam (which
- * resolves LuckPerms and friends through Vault — absent → false), and {@code has-points} is a convenience alias over
+ * resolves LuckPerms and friends through Vault. Absent → false), and {@code has-points} is a convenience alias over
  * the existing PlayerPoints {@link Currencies} back-end. {@code weather} reads the viewer's own world,
  * {@code cooldown}/{@code set-cooldown} ride the shared {@link Cooldowns} PDC-backed port, and
  * {@code client-version} reads the {@link ClientProtocol} port ViaVersion backs. The rest ({@code job} for
@@ -52,11 +52,11 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><strong>Every condition fails closed.</strong> A gate that cannot be evaluated must not pass: an offline viewer
  * (where a live world is needed), a blank or unknown argument, an absent integration, or anything a lookup
- * unexpectedly throws all answer {@code false} through the {@link #closed} wrapper — better to hide an item or deny a
+ * unexpectedly throws all answer {@code false} through the {@link #closed} wrapper, better to hide an item or deny a
  * click than to grant on a value we could not read. The paired {@code set-cooldown} action is fail-soft the same way
  * through {@link #safe}: a stamp that throws is a logged no-op, never an aborted click chain.
  *
- * <p>Threading: these run on the render/entity thread — {@code view} during the renderer's populate, a click gate on
+ * <p>Threading: these run on the render/entity thread. {@code view} during the renderer's populate, a click gate on
  * the viewer's entity thread. {@code weather} reads only the viewer's <em>own</em> world (Folia-safe, no foreign
  * entity, no roster enumeration), and the reflective gates read only the viewer's own job membership and standing
  * location. Nothing here produces player-facing text (a condition returns a boolean, the action is silent), so no
@@ -73,7 +73,7 @@ public final class IntegrationConditions {
      * PDC-backed port the cooldown gate reads and {@code set-cooldown} stamps; {@code server} resolves the viewer's
      * live handle and gates the reflective integrations on plugin presence; {@code log} is the operator console
      * logger a fail-closed condition or fail-soft action warns through. Left separate from
-     * {@link MenuVocabulary#registerConditions} so that method's existing call-sites stay untouched — the
+     * {@link MenuVocabulary#registerConditions} so that method's existing call-sites stay untouched, the
      * composition root calls both.
      */
     public static void register(
@@ -101,7 +101,7 @@ public final class IntegrationConditions {
         registerMcMmo(bindings, server, log);
     }
 
-    /** {@code has-group:<group>} (aliases {@code luckperm-group}, {@code group}) — the viewer's Vault group membership. */
+    /** {@code has-group:<group>} (aliases {@code luckperm-group}, {@code group}): the viewer's Vault group membership. */
     private static void registerGroup(MenuBindings bindings, PermissionQuery permissions, Logger log) {
         BiPredicate<MenuContext, Map<String, String>> gate =
                 closed("has-group", log, (ctx, args) -> hasGroup(ctx, args, permissions));
@@ -110,19 +110,19 @@ public final class IntegrationConditions {
         bindings.condition("group", gate);
     }
 
-    /** {@code has-points:<amount>} — a convenience alias over the existing PlayerPoints currency back-end. */
+    /** {@code has-points:<amount>}: a convenience alias over the existing PlayerPoints currency back-end. */
     private static void registerPoints(MenuBindings bindings, Currencies currencies, Logger log) {
         bindings.condition("has-points", closed("has-points", log, (ctx, args) -> hasPoints(ctx, args, currencies)));
     }
 
-    /** {@code weather:<clear|rain|thunder>} — the viewer's current world weather. */
+    /** {@code weather:<clear|rain|thunder>}: the viewer's current world weather. */
     private static void registerWeather(MenuBindings bindings, Server server, Logger log) {
         bindings.condition("weather", closed("weather", log, (ctx, args) -> weather(ctx, args, server)));
     }
 
     /**
-     * {@code cooldown:<label>} — true when the named persistent cooldown is <em>ready</em> (expired), so the gate
-     * passes when the viewer is NOT on cooldown — plus the paired {@code set-cooldown:<label> [seconds]} action.
+     * {@code cooldown:<label>}. True when the named persistent cooldown is <em>ready</em> (expired), so the gate
+     * passes when the viewer is NOT on cooldown: plus the paired {@code set-cooldown:<label> [seconds]} action.
      */
     private static void registerCooldown(MenuBindings bindings, Cooldowns cooldowns, Logger log) {
         bindings.condition("cooldown", closed("cooldown", log, (ctx, args) -> cooldownReady(ctx, args, cooldowns)));
@@ -130,7 +130,7 @@ public final class IntegrationConditions {
     }
 
     /**
-     * {@code client-version:<protocol>} (alias {@code protocol}) — whether the viewer's client speaks at least that
+     * {@code client-version:<protocol>} (alias {@code protocol}). Whether the viewer's client speaks at least that
      * protocol version, for hiding items an older client renders badly.
      *
      * <p>This is the one condition here that does <em>not</em> fail closed on a missing answer, and the asymmetry is
@@ -147,14 +147,14 @@ public final class IntegrationConditions {
         bindings.condition("protocol", gate);
     }
 
-    /** {@code job:<jobname>} — whether the viewer holds that JobsReborn job (reflection, absent → false). */
+    /** {@code job:<jobname>}: whether the viewer holds that JobsReborn job (reflection, absent → false). */
     private static void registerJob(MenuBindings bindings, Server server, Logger log) {
         JobsIntegration jobs = new JobsIntegration(server, log);
         bindings.condition("job", closed("job", log, (ctx, args) -> job(ctx, args, jobs, server)));
     }
 
     /**
-     * {@code worldguard-region:<regionId>} (aliases {@code wg-region}, {@code region}) — whether the viewer stands in
+     * {@code worldguard-region:<regionId>} (aliases {@code wg-region}, {@code region}). Whether the viewer stands in
      * that WorldGuard region (reflection, absent → false).
      */
     private static void registerRegion(MenuBindings bindings, Server server, Logger log) {
@@ -167,7 +167,7 @@ public final class IntegrationConditions {
     }
 
     /**
-     * {@code mcmmo-level:<skill>:<level>} and {@code mcmmo-power:<level>} — the viewer's mcMMO standing, for menus
+     * {@code mcmmo-level:<skill>:<level>} and {@code mcmmo-power:<level>}. The viewer's mcMMO standing, for menus
      * that gate a reward or a warp on how far a player has actually got (reflection, absent → false).
      */
     private static void registerMcMmo(MenuBindings bindings, Server server, Logger log) {
@@ -180,7 +180,7 @@ public final class IntegrationConditions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a {@code false}
-     * result rather than escaping into the render or click path — a condition that cannot be evaluated must fail
+     * result rather than escaping into the render or click path. A condition that cannot be evaluated must fail
      * closed, the same discipline the sibling condition packs apply.
      */
     private static BiPredicate<MenuContext, Map<String, String>> closed(
@@ -197,7 +197,7 @@ public final class IntegrationConditions {
 
     /**
      * Wrap {@code body} so any thrown {@link RuntimeException} becomes a one-line operator warning and a no-op rather
-     * than escaping into the click dispatch — the same fail-soft contract the sibling action packs apply.
+     * than escaping into the click dispatch: the same fail-soft contract the sibling action packs apply.
      */
     private static Consumer<MenuActionContext> safe(String action, Logger log, Consumer<MenuActionContext> body) {
         return ctx -> {
@@ -211,13 +211,13 @@ public final class IntegrationConditions {
 
     // --- substrate-backed gates --------------------------------------------------------------------------------------
 
-    /** {@code has-group:<group>} — whether the viewer belongs to {@code group}; a blank group or absent Vault is false. */
+    /** {@code has-group:<group>}: whether the viewer belongs to {@code group}; a blank group or absent Vault is false. */
     private static boolean hasGroup(MenuContext ctx, Map<String, String> args, PermissionQuery permissions) {
         String group = value(args).strip();
         return !group.isEmpty() && permissions.inGroup(ctx.viewer().uuid(), group);
     }
 
-    /** {@code has-points:<amount>} — whether the viewer holds at least {@code amount} PlayerPoints; non-numeric is false. */
+    /** {@code has-points:<amount>}: whether the viewer holds at least {@code amount} PlayerPoints; non-numeric is false. */
     private static boolean hasPoints(MenuContext ctx, Map<String, String> args, Currencies currencies) {
         OptionalDouble amount = parseNumber(value(args));
         return amount.isPresent()
@@ -225,7 +225,7 @@ public final class IntegrationConditions {
     }
 
     /**
-     * {@code client-version:<protocol>} — true when the viewer's protocol version is at least the given number, and
+     * {@code client-version:<protocol>}. True when the viewer's protocol version is at least the given number, and
      * true as well when no version is known (see {@link #registerClientVersion}). A blank or unparseable argument is
      * still false: that is an authoring mistake, not a missing answer.
      */
@@ -238,7 +238,7 @@ public final class IntegrationConditions {
         return actual == ClientProtocol.UNKNOWN || actual >= required.getAsDouble();
     }
 
-    /** {@code weather:<clear|rain|thunder>} — matches the viewer's world weather; an unknown token or offline is false. */
+    /** {@code weather:<clear|rain|thunder>}: matches the viewer's world weather; an unknown token or offline is false. */
     private static boolean weather(MenuContext ctx, Map<String, String> args, Server server) {
         Player player = viewer(ctx, server);
         if (player == null) {
@@ -254,7 +254,7 @@ public final class IntegrationConditions {
     }
 
     /**
-     * {@code cooldown:<label>} — true when the persistent, PDC-backed cooldown keyed by {@code label} is ready
+     * {@code cooldown:<label>}. True when the persistent, PDC-backed cooldown keyed by {@code label} is ready
      * (expired), i.e. the viewer is NOT currently on it; an active cooldown answers an {@link Cooldowns#checkLabel
      * err Result} and so is false, and a blank label is false. The label is the first token, so it agrees with the
      * paired {@code set-cooldown}, whose optional trailing seconds token is not part of the label.
@@ -265,7 +265,7 @@ public final class IntegrationConditions {
     }
 
     /**
-     * {@code set-cooldown:<label> [seconds]} — start or refresh the persistent cooldown keyed by {@code label} so a
+     * {@code set-cooldown:<label> [seconds]}. Start or refresh the persistent cooldown keyed by {@code label} so a
      * {@code cooldown:} view-condition then gates it. The optional {@code [seconds]} token is accepted for a natural
      * operator grammar but is not applied per call: the {@link Cooldowns} port sizes a label's duration from its
      * resolved quota nodes (the {@code uxmessentials.cooldown.bypass.<label>} min-reducer), not from the action, so
@@ -280,20 +280,20 @@ public final class IntegrationConditions {
 
     // --- reflective gates ------------------------------------------------------------------------------------------
 
-    /** {@code job:<jobname>} — whether the viewer holds that job; an offline viewer or absent JobsReborn is false. */
+    /** {@code job:<jobname>}: whether the viewer holds that job; an offline viewer or absent JobsReborn is false. */
     private static boolean job(MenuContext ctx, Map<String, String> args, JobsIntegration jobs, Server server) {
         Player player = viewer(ctx, server);
         return player != null && jobs.inJob(player, value(args).strip());
     }
 
-    /** {@code worldguard-region:<regionId>} — whether the viewer stands in that region; offline or absent WG is false. */
+    /** {@code worldguard-region:<regionId>}: whether the viewer stands in that region; offline or absent WG is false. */
     private static boolean region(MenuContext ctx, Map<String, String> args, WorldGuardRegions regions, Server server) {
         Player player = viewer(ctx, server);
         return player != null && regions.inRegion(player, value(args).strip());
     }
 
     /**
-     * {@code mcmmo-level:<skill>:<level>} — whether the viewer's level in that mcMMO skill is at least {@code level}.
+     * {@code mcmmo-level:<skill>:<level>}: whether the viewer's level in that mcMMO skill is at least {@code level}.
      * The skill and the level arrive as one argument because the runtime's split carries everything after the head, so
      * they are separated here; a missing level, an unknown skill or an absent mcMMO is false.
      */
@@ -310,7 +310,7 @@ public final class IntegrationConditions {
                 && atLeast(mcmmo.skillLevel(player, parts[0]), required.getAsDouble());
     }
 
-    /** {@code mcmmo-power:<level>} — whether the viewer's mcMMO power level is at least {@code level}. */
+    /** {@code mcmmo-power:<level>}: whether the viewer's mcMMO power level is at least {@code level}. */
     private static boolean mcmmoPower(
             MenuContext ctx, Map<String, String> args, McMmoIntegration mcmmo, Server server) {
         OptionalDouble required = parseNumber(value(args));
@@ -353,7 +353,7 @@ public final class IntegrationConditions {
     /**
      * Invoke the first public single-argument method named {@code method} on {@code target} whose parameter accepts
      * {@code arg}. The reflective integrations use this to bind to an SDK method whose exact declared parameter type
-     * we do not name (a {@code UUID}, an SDK {@code Job}, a WorldEdit {@code Location}) — matching by
+     * we do not name (a {@code UUID}, an SDK {@code Job}, a WorldEdit {@code Location}), matching by
      * {@link Class#isInstance} sidesteps the exact overload while still hitting the intended method.
      */
     private static @Nullable Object invokeSingleArg(Object target, String method, Object arg)
@@ -374,7 +374,7 @@ public final class IntegrationConditions {
      * {@code com.gamingmesh} type: constructing this on a server without JobsReborn loads none of its classes, and
      * the present-guard short-circuits before any reflection runs. Any {@link ReflectiveOperationException} (the API
      * absent, or its shape shifted under a version bump) or unchecked failure is logged exactly once and degraded to
-     * {@code false} — the same discipline {@code ReflectiveItemProvider} uses.
+     * {@code false}, the same discipline {@code ReflectiveItemProvider} uses.
      */
     private static final class JobsIntegration {
 
@@ -403,7 +403,7 @@ public final class IntegrationConditions {
             Class<?> jobsApi = Class.forName("com.gamingmesh.jobs.Jobs");
             Object job = jobsApi.getMethod("getJob", String.class).invoke(null, jobName);
             if (job == null) {
-                return false; // no such job configured — the viewer cannot be in it
+                return false; // no such job configured. The viewer cannot be in it
             }
             Object manager = jobsApi.getMethod("getPlayerManager").invoke(null);
             if (manager == null) {

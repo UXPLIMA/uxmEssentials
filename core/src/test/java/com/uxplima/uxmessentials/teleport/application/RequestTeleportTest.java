@@ -33,7 +33,7 @@ import org.junit.jupiter.api.Test;
 /**
  * The {@code /tpa} / {@code /tpahere} gate must never reject in silence: a self-request, a toggled-off
  * target, a blocked requester and a jailed mover each return the modelled {@link TeleportError} <em>and</em>
- * notify the requester with that error's own catalog key — exactly once, so the jailed path (which always
+ * notify the requester with that error's own catalog key. Exactly once, so the jailed path (which always
  * notified) does not double-send. A request that passes every gate stores nothing through the gate and
  * announces to both parties instead. The collaborators are hand-rolled fakes so the rule is pinned in
  * pure {@code :core}.

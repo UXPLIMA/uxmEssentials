@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * side's confirmation flag, and the {@link TradeState}. Every transition returns a new {@code TradeSession}; the
  * adapter keeps the latest instance and re-renders both views from it.
  *
- * <p>The anti-scam invariant lives here: {@link #withOffer} — the only way an offer changes — clears BOTH
+ * <p>The anti-scam invariant lives here: {@link #withOffer}, the only way an offer changes, clears BOTH
  * confirmations and returns the session to {@code OPEN}, so no one can confirm a fair offer and then swap it for a
  * worse one. A trade only reaches {@code READY} through {@link #ready()} once both sides have confirmed the current
  * offers, and only a {@code READY} session may {@link #commit()}. An illegal transition raises
@@ -60,7 +60,7 @@ public final class TradeSession {
 
     /**
      * Replace {@code side}'s staked offer wholesale and clear BOTH confirmations, returning the session to
-     * {@code OPEN} — the anti-scam invariant. Legal from any non-terminal state.
+     * {@code OPEN}, the anti-scam invariant. Legal from any non-terminal state.
      */
     public TradeSession withOffer(TradeSide side, TradeOffer offer) {
         Objects.requireNonNull(side, "side");
@@ -140,7 +140,7 @@ public final class TradeSession {
         return side == TradeSide.INITIATOR ? initiatorConfirmed : partnerConfirmed;
     }
 
-    /** True once both sides have confirmed — the precondition {@link #ready()} checks. */
+    /** True once both sides have confirmed: the precondition {@link #ready()} checks. */
     public boolean bothConfirmed() {
         return initiatorConfirmed && partnerConfirmed;
     }

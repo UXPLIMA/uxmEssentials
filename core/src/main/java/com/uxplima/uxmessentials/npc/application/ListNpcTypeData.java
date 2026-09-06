@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * {@code /npc data <name> list}: show an NPC's per-entity-type appearance metadata as key/value rows. No new
- * query is needed — the NPC is loaded and its {@code typeData()} read. A name no NPC exists at is rejected with
+ * query is needed: the NPC is loaded and its {@code typeData()} read. A name no NPC exists at is rejected with
  * {@link NpcError#NOT_FOUND}; an NPC with no metadata gets the empty notice. The header / per-entry / none
  * feedback is pushed through the notifier so all text resolves from {@link NpcMessageKey}.
  */

@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.uxplima.uxmessentials.shared.application.module.BrigadierCommand;
 
 /**
- * The kernel-side description of one teleport command — its literal, aliases, and help text — with no
+ * The kernel-side description of one teleport command (its literal, aliases, and help text) with no
  * Brigadier or Bukkit type. The teleport inbound adapter realises this into a real
  * {@code LiteralCommandNode} when Paper fires {@code LifecycleEvents.COMMANDS}; until then the module
  * carries only this platform-neutral shape, which is what lets {@code TeleportModule} stay pure

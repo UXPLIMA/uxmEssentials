@@ -36,7 +36,7 @@ public final class GamemodeCommand extends PlayerstateCommandSupport implements 
 
     private static final String PERMISSION = "uxmessentials.gamemode.use";
 
-    // Every form GameModeRef.parse accepts — the full name, the short alias, and the numeric id — derived from the
+    // Every form GameModeRef.parse accepts (the full name, the short alias, and the numeric id) derived from the
     // enum so the type-ahead never drifts from what the parser resolves.
     private static final List<String> MODE_SUGGESTIONS = modeSuggestions();
 

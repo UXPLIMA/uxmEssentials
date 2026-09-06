@@ -20,8 +20,8 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p><b>Ships enabled by default.</b> The bundled config enables the common poses out of the box (player-sit is the
  * one opt-in verb), so {@link #enabled(ConfigStore)} defaults to {@code true} like the steady-state contexts; an
- * operator flips {@code modules.poses.enabled = false} to turn the feature off. It persists nothing — a pose is
- * transient in-memory state held in {@code PoseSessions} — so the module owns no Flyway location.
+ * operator flips {@code modules.poses.enabled = false} to turn the feature off. It persists nothing: a pose is
+ * transient in-memory state held in {@code PoseSessions}, so the module owns no Flyway location.
  *
  * <p>Phase 0 publishes no command and registers no listener: the verbs arrive as their behaviour phases land, and a
  * disabled module wires zero either way (the {@code FeatureModule} contract). The registry is cleared on

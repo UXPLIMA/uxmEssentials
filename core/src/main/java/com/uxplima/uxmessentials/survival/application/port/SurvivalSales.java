@@ -6,14 +6,14 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * The narrow economy seam autosell owns so a break's drops can be sold into the server economy <em>without</em> a hard
- * dependency on the economy context. This is the entire economy surface autosell needs — a single credit of the sale
- * proceeds to the seller — expressed in survival's own terms ({@link BigDecimal} in the default currency, never an
+ * dependency on the economy context. This is the entire economy surface autosell needs, a single credit of the sale
+ * proceeds to the seller. Expressed in survival's own terms ({@link BigDecimal} in the default currency, never an
  * economy type); the economy context supplies an adapter that bridges this to its {@code EconomyProvider}/{@code
  * Wallet}, and the survival context never imports an economy type (mirrors the kits {@code KitEconomy} and the shared
  * {@code ClickActionEconomy} seams).
  *
  * <p>Soft coupling: this port is injected as an {@link java.util.Optional} into the autosell path. When no provider is
- * present the whole mechanic is inert — a drop is never removed for a sale that cannot be paid — so autosell degrades
+ * present the whole mechanic is inert (a drop is never removed for a sale that cannot be paid) so autosell degrades
  * to doing nothing rather than deleting items on a server without an economy. When a provider is present the proceeds
  * are credited once through {@link #credit}.
  */

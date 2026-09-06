@@ -433,7 +433,7 @@ class PosesAdapterTest {
 
         startPose.start(who, PoseType.LAY, feet, feet.yaw());
         assertThat(snores.isSnoring(player.getUniqueId())).isTrue();
-        snores.tick(); // the loop runs without throwing — it plays the snore sound at the laying player
+        snores.tick(); // the loop runs without throwing. It plays the snore sound at the laying player
 
         stopPose.stop(who);
         assertThat(snores.isSnoring(player.getUniqueId())).isFalse();
@@ -756,7 +756,7 @@ class PosesAdapterTest {
         return new PlayerInteractEntityEvent(clicker, target, EquipmentSlot.HAND);
     }
 
-    /** Every entity in the world that carries the {@code poses_seat} PDC tag — the ghost-prevention probe. */
+    /** Every entity in the world that carries the {@code poses_seat} PDC tag, the ghost-prevention probe. */
     private List<Entity> taggedSeats() {
         return world.getEntities().stream()
                 .filter(entity -> entity.getPersistentDataContainer().has(seatKey, PersistentDataType.STRING))

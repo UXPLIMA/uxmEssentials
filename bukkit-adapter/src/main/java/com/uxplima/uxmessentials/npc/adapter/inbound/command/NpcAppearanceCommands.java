@@ -43,9 +43,9 @@ import org.jspecify.annotations.Nullable;
 final class NpcAppearanceCommands extends NpcCommandSupport {
 
     private static final String HAND_KEYWORD = "hand";
-    /** The smallest accepted scale — the lower bound of the protocol's usable {@code generic.scale} range. */
+    /** The smallest accepted scale: the lower bound of the protocol's usable {@code generic.scale} range. */
     private static final double MIN_SCALE = 0.0625;
-    /** The largest accepted scale — the upper bound of the protocol's usable {@code generic.scale} range. */
+    /** The largest accepted scale: the upper bound of the protocol's usable {@code generic.scale} range. */
     private static final double MAX_SCALE = 16.0;
     /** A sentinel the equip handler returns instead of a material when the word named no known item material. */
     private static final String INVALID_MATERIAL = "invalid-material";
@@ -254,8 +254,8 @@ final class NpcAppearanceCommands extends NpcCommandSupport {
 
     /**
      * Resolve the equip word into the token to store: {@code air}/{@code none} clears the slot (empty string),
-     * {@code hand} captures the FULL item the sender holds — a single-quantity clone serialized with all its NBT
-     * (enchantments, name, lore, custom model data), or empty when their hand is empty — and any other word is a
+     * {@code hand} captures the FULL item the sender holds. A single-quantity clone serialized with all its NBT
+     * (enchantments, name, lore, custom model data), or empty when their hand is empty, and any other word is a
      * bare Material name (human-readable, resolved to a plain item at render). Returns the {@link #INVALID_MATERIAL}
      * sentinel after sending feedback when the word names no known item material.
      */

@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /staff} ({@code uxmessentials.staff.use}): print the online staff roster, vanish-aware. The online set is
- * narrowed to holders of {@code uxmessentials.staff.member} — the marker that designates a player as staff — and
+ * narrowed to holders of {@code uxmessentials.staff.member}, the marker that designates a player as staff, and
  * then filtered through the running player's {@code canSee} graph, the same seam {@code /list} reads, so a vanished
  * staffer the viewer may not see is absent from both the line and the count. The console has no {@code canSee}
  * graph and sees every staff member. An empty roster resolves a dedicated key rather than an empty list. This is a

@@ -11,12 +11,12 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * same way {@code HelpOp} fans a help request out to staff.
  *
  * <p>The coupling is soft: when the messaging module is disabled (or has not yet landed) the wiring binds
- * {@link #NONE}, so {@link #onlineStaff()} is empty and {@link #send} is a no-op — staff chat degrades
- * rather than fails — mirroring messaging's own {@code MutePolicy.NEVER}.
+ * {@link #NONE}, so {@link #onlineStaff()} is empty and {@link #send} is a no-op: staff chat degrades
+ * rather than fails: mirroring messaging's own {@code MutePolicy.NEVER}.
  */
 public interface StaffChannel {
 
-    /** A no-op channel with no audience — the binding when messaging is disabled. */
+    /** A no-op channel with no audience: the binding when messaging is disabled. */
     StaffChannel NONE = new StaffChannel() {
         @Override
         public void send(PlayerRef from, List<PlayerRef> recipients, String message) {
@@ -32,6 +32,6 @@ public interface StaffChannel {
     /** Deliver {@code message} from {@code from} to each of {@code recipients} on the staff channel. */
     void send(PlayerRef from, List<PlayerRef> recipients, String message);
 
-    /** Every online player holding the staff-chat node — the staff-chat audience. */
+    /** Every online player holding the staff-chat node, the staff-chat audience. */
     List<PlayerRef> onlineStaff();
 }

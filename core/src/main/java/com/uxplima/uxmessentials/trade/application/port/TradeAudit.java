@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.trade.application.port;
 import com.uxplima.uxmessentials.trade.application.TradeReceipt;
 
 /**
- * Outbound port for the trade audit trail — one {@code event=trade_completed} line on the shared
+ * Outbound port for the trade audit trail. One {@code event=trade_completed} line on the shared
  * {@code com.uxplima.uxmessentials.audit} channel per completed swap, mirroring the moderation, economy, and vaults
  * audits (docs/09-deployment.md §Audit logging). The line records who traded whom and what each side gave, so a
  * completed trade is always replayable from the audit channel and the optional Discord bridge can surface it.
@@ -14,6 +14,6 @@ import com.uxplima.uxmessentials.trade.application.TradeReceipt;
  */
 public interface TradeAudit {
 
-    /** {@code event=trade_completed} — both sides confirmed and the swap settled. */
+    /** {@code event=trade_completed}: both sides confirmed and the swap settled. */
     void completed(TradeReceipt receipt);
 }

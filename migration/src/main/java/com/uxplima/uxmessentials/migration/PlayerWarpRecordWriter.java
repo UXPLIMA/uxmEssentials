@@ -37,7 +37,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <ul>
  *   <li><b>Name.</b> The source name is coerced into the {@link PlayerWarpName} shape (lowercase {@code [a-z0-9_-]},
- *       3..32) and then globally de-collided against the live table — the first claimant keeps the base, a later
+ *       3..32) and then globally de-collided against the live table. The first claimant keeps the base, a later
  *       warp that wants a taken name gets {@code base2}, {@code base3}, ….
  *   <li><b>Password.</b> A plaintext password is hashed through the {@link PlayerWarpPasswordStore} (PBKDF2 behind
  *       that seam) and only the digest is written; the plaintext never leaves this method and is never logged.
@@ -49,8 +49,8 @@ import org.jspecify.annotations.NullMarked;
  * <p><b>Idempotent.</b> The collision walk doubles as the existing-import check: if it reaches a name already owned by
  * this same owner, the warp was imported on a previous run and is {@linkplain RecordOutcome#SKIPPED skipped}, so a
  * re-run imports nothing new. <b>Dry-run.</b> {@link #preview} runs the identical resolution read-only and reports the
- * outcome the record would get without writing a row. This class holds no Bukkit type — the source's mapper already
- * resolved the world — so it composes over the domain ports alone.
+ * outcome the record would get without writing a row. This class holds no Bukkit type. The source's mapper already
+ * resolved the world, so it composes over the domain ports alone.
  */
 @NullMarked
 public final class PlayerWarpRecordWriter {
@@ -108,7 +108,7 @@ public final class PlayerWarpRecordWriter {
                 "player-warp import could not settle a free name after retries: " + imported.name());
     }
 
-    /** Report the outcome {@code imported} would get, read-only — the dry-run path writes nothing. */
+    /** Report the outcome {@code imported} would get, read-only: the dry-run path writes nothing. */
     public RecordOutcome preview(ImportedPlayerWarp imported) {
         Objects.requireNonNull(imported, "imported");
         return resolve(imported).alreadyImported() ? RecordOutcome.SKIPPED : RecordOutcome.WRITTEN;
@@ -258,7 +258,7 @@ public final class PlayerWarpRecordWriter {
         return head + tail;
     }
 
-    /** The outcome of resolving a source name to a free, globally-unique name — or to an already-imported skip. */
+    /** The outcome of resolving a source name to a free, globally-unique name, or to an already-imported skip. */
     private record Resolution(boolean alreadyImported, Optional<PlayerWarpName> name) {
 
         static Resolution allocate(PlayerWarpName name) {

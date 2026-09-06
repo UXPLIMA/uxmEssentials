@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.vanish.domain.VanishLevel;
 
 /**
  * The network-wide vanish view a backend keeps of who is vanished across the <em>whole cluster</em>, not just those
- * hidden on this server. It is fed only by the cross-server bus — a peer's {@link VanishSync} — and is separate from
+ * hidden on this server. It is fed only by the cross-server bus, a peer's {@link VanishSync}, and is separate from
  * the local {@link VanishStore} (which holds who this backend is actively hiding, and is dropped on quit). Keeping the
  * two apart is what lets a player hop {@code survival-1 -> survival-2} without the quit on the origin erasing the
  * network-wide fact that they are still vanished: the origin's local store drops them, but every backend's network

@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The cross-server two-phase commit engine, driven with two coordinators (one per backend) over a single shared escrow
- * store and a single shared DB-backed economy — the real topology of a network trade. The two fake buses route each
+ * store and a single shared DB-backed economy, the real topology of a network trade. The two fake buses route each
  * side's signals into the other coordinator, so the handshake runs exactly as it would across the proxy. The invariant
  * under test is the money-and-items-conservation one: on commit both stakes reach the right players once; on any
  * back-out both stakes return to their owners once; a debit that cannot be covered escrows nothing; and a duplicate
@@ -103,7 +103,7 @@ class CrossServerTradeTest {
 
     @Test
     void declineByOneSideRefundsBothSidesOnce() {
-        // Bob escrows first, then Alice declines (never escrows) — Bob's ABORT-driven refund must return his stake.
+        // Bob escrows first, then Alice declines (never escrows): Bob's ABORT-driven refund must return his stake.
         TradeId id = TradeId.newId();
         serverB.escrow(id, BOB, SERVER_A, ALICE, APPLE, 1, coins("40"));
         assertThat(economy.balance(BOB, "coins")).isEqualByComparingTo("460");
@@ -129,7 +129,7 @@ class CrossServerTradeTest {
 
         deliveryB.online = true;
         serverB.reconcile(BOB.uuid());
-        serverB.reconcile(BOB.uuid()); // idempotent — a second rejoin delivers nothing more.
+        serverB.reconcile(BOB.uuid()); // idempotent: a second rejoin delivers nothing more.
 
         assertThat(deliveryB.received).containsExactly("diamond_sword");
         assertThat(economy.balance(BOB, "coins")).isEqualByComparingTo("560");
@@ -152,7 +152,7 @@ class CrossServerTradeTest {
         TradeId id = TradeId.newId();
         serverA.escrow(id, ALICE, SERVER_B, BOB, SWORD, 1, coins("100"));
         serverB.escrow(id, BOB, SERVER_A, ALICE, APPLE, 1, coins("40"));
-        // Replay a stale COMMIT to each side — the guarded claim makes it a no-op.
+        // Replay a stale COMMIT to each side: the guarded claim makes it a no-op.
         serverA.onSignal(new TradeSignal(id, TradeSignalType.COMMIT, BOB, ALICE, SERVER_B));
         serverB.onSignal(new TradeSignal(id, TradeSignalType.COMMIT, ALICE, BOB, SERVER_A));
 

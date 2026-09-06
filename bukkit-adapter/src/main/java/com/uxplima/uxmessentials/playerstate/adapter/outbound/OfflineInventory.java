@@ -13,10 +13,10 @@ import org.jspecify.annotations.Nullable;
  * reshuffling:
  *
  * <ul>
- *   <li>{@code slots} — length {@value #SLOT_COUNT}: indices {@code 0..35} the main inventory (hotbar then
+ *   <li>{@code slots}. Length {@value #SLOT_COUNT}: indices {@code 0..35} the main inventory (hotbar then
  *       storage), {@code 36..39} armour (boots, leggings, chestplate, helmet), {@code 40} the offhand. This is
  *       exactly the slot order the {@code /invsee} menu lays out, so the snapshot drops straight into it.
- *   <li>{@code ender} — length {@value #ENDER_SIZE}: the ender chest, slots {@code 0..26}.
+ *   <li>{@code ender}: length {@value #ENDER_SIZE}: the ender chest, slots {@code 0..26}.
  * </ul>
  *
  * <p>A {@code null} element is an empty slot. Not a record: the holder owns two arrays, and exposing arrays from a

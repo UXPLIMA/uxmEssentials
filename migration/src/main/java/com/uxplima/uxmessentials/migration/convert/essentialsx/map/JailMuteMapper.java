@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>EssentialsX userdata records neither who issued a sanction nor when, so both are reconstructed
  * conservatively: the issuer is the {@link Issuer#console(String) console} actor named for the source,
- * and the issue instant is {@link Instant#EPOCH} — the import does not invent a staff UUID or a
+ * and the issue instant is {@link Instant#EPOCH}. The import does not invent a staff UUID or a
  * plausible-but-false timestamp. The expiry/remaining figures, which <em>are</em> recorded, are carried
  * faithfully so the domain gate computes activity exactly as it would for a live sanction.
  */

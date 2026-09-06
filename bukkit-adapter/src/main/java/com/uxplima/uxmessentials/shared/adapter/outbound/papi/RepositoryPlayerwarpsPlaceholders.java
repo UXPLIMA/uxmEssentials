@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link PlayerwarpsPlaceholders} over the player-warps context's read ports: the {@link PlayerWarpRepository}
  * and the {@link PlayerWarpQuota} reducer. Built during playerwarps wiring from the same cached repository and
  * quota the {@code /pwarp} use cases hold, so the placeholder count and limit match what {@code /setpwarp}
- * enforces. The repository is the Caffeine read-cached one — the same cached set the {@code /pwarps} list and
+ * enforces. The repository is the Caffeine read-cached one. The same cached set the {@code /pwarps} list and
  * the {@code /setpwarp} count check share, so the list read is a cache hit for a join-warmed owner rather than
  * a fresh query.
  *

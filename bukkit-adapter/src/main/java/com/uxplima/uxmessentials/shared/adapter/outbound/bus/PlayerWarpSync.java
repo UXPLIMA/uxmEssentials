@@ -18,13 +18,13 @@ import com.uxplima.uxmessentials.shared.network.PlayerWarpChanged;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The player-warps context's cross-server sync seam — the same shape as {@link HomeSync}, keyed by the same
+ * The player-warps context's cross-server sync seam. The same shape as {@link HomeSync}, keyed by the same
  * {@link CachedPlayerWarpRepository} the {@code /pwarp} commands read. It does two things:
  *
  * <ul>
  *   <li><b>Outbound</b>: {@link #repository(CachedPlayerWarpRepository, BusPublisher)} wraps the cached
- *       repository so every local player-warp write (a {@code save} — a {@code /setpwarp}, a move/relocate, or
- *       a visibility flip all upsert the same row — or a {@code delete}) publishes a {@link PlayerWarpChanged}
+ *       repository so every local player-warp write (a {@code save}, a {@code /setpwarp}, a move/relocate, or
+ *       a visibility flip all upsert the same row, or a {@code delete}) publishes a {@link PlayerWarpChanged}
  *       frame after the durable write commits, so peers learn the owner's warps changed.
  *   <li><b>Inbound</b>: {@link #listener(CachedPlayerWarpRepository)} returns a {@link RemoteSyncListener}
  *       that, on a remote {@code PlayerWarpChanged}, invalidates exactly that owner's cached set so the next
@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The decorator wraps the <em>same</em> cache the player-warp commands read, so the loop closes: a write
  * here emits a frame, the peer's listener drops the matching owner there. This is {@link HomeSync} copied for
- * the per-owner player-warp set — a write decorator plus an invalidation listener over its own cached
+ * the per-owner player-warp set, a write decorator plus an invalidation listener over its own cached
  * repository.
  */
 @NullMarked
@@ -149,7 +149,7 @@ public final class PlayerWarpSync {
 
         @Override
         public List<PlayerWarp> dueForRent(Instant now, int limit) {
-            // A cross-owner sweep read; forward straight through — the rent charge's own save() announces the flip.
+            // A cross-owner sweep read; forward straight through: the rent charge's own save() announces the flip.
             return delegate.dueForRent(now, limit);
         }
 

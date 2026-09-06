@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Shared fixtures for the economy persistence tests run against the embedded SQLite backend — the tested
+ * Shared fixtures for the economy persistence tests run against the embedded SQLite backend: the tested
  * default of the backend-parity matrix (network backends run the same DSL behind Testcontainers, which this
  * environment may not have). It provides the single-currency {@code coins} default the worked example walks,
  * a random-player helper, and the no-network SQLite {@link ConfigStore} the homes test also uses.
@@ -61,7 +61,7 @@ final class EconomyTestSupport {
         return List.of("db/migration");
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

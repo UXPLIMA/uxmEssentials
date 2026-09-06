@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.persistence.runtime.ReadThroughCache;
 
 /**
  * An in-memory-authoritative decorator over a delegate {@link HologramRepository}. Holograms are server-wide
- * and the full set is small; it is loaded once — the renderer's spawn-on-enable reads {@link #all()} — and
+ * and the full set is small; it is loaded once, the renderer's spawn-on-enable reads {@link #all()}, and
  * thereafter the loaded set is the authoritative answer for {@code find}/{@code exists}/{@code all}: a name not
  * in the set is absent rather than a trigger to re-query the database. This matters most for the refresh tick,
  * which reads {@code all()} once a second on the global tick thread; re-querying SQLite there on a miss (after a
@@ -27,7 +27,7 @@ import com.uxplima.uxmessentials.persistence.runtime.ReadThroughCache;
  *
  * <p>Every hologram mutation goes through this repository, so the in-memory set stays complete: a {@code save}
  * writes through to the delegate then publishes a new set with the hologram added, and a {@code delete} writes
- * through then publishes one with it removed — write-through at the delegate, applied here, never a reload and
+ * through then publishes one with it removed. Write-through at the delegate, applied here, never a reload and
  * never a write-back cache that could lose a mutation. The set is held in an {@link AtomicReference} and swapped
  * copy-on-write (the set is tiny and edits are rare operator commands), so a reader on the tick thread always
  * sees a consistent immutable snapshot while a writer publishes the next one. The durable source of truth is
@@ -35,7 +35,7 @@ import com.uxplima.uxmessentials.persistence.runtime.ReadThroughCache;
  *
  * <p>The MANUAL-visibility viewer set is cached separately, keyed by hologram name in a Caffeine read-cache: it
  * is read on every render (so a refreshing MANUAL hologram queries it each refresh tick) and on every join, yet
- * mutated only on {@code /hologram show|hide} — exactly the small, hot-read, rare-write shape a read cache is
+ * mutated only on {@code /hologram show|hide}, exactly the small, hot-read, rare-write shape a read cache is
  * for. A {@code showTo}/{@code hideFrom}/{@code delete} writes through the delegate then invalidates that name,
  * so the next read reloads the durable set; the immediate show/hide path never serves a stale set because the
  * mutation evicts before it returns. Caching it keeps the render path off a synchronous SQLite read on the tick
@@ -127,7 +127,7 @@ public final class CachedHologramRepository implements HologramRepository {
     @Override
     public Set<UUID> blacklisted(HologramName name) {
         Objects.requireNonNull(name, "name");
-        // Served from memory like the manual viewer set — read on each spawn and join; an add/remove/delete
+        // Served from memory like the manual viewer set, read on each spawn and join; an add/remove/delete
         // invalidates this name so the next read reloads the durable set.
         return blacklists.get(name.value());
     }
@@ -157,7 +157,7 @@ public final class CachedHologramRepository implements HologramRepository {
 
     /**
      * Re-read one hologram from the durable delegate and update the in-memory set to match, returning its fresh
-     * state — present when it now exists (created or edited on a peer), empty when it was deleted there. Unlike
+     * state: present when it now exists (created or edited on a peer), empty when it was deleted there. Unlike
      * {@link #save}/{@link #delete}, the change did not pass through this cache (a peer wrote the shared row), so
      * the in-memory authoritative set is stale for that name; this hops it back in step against the database. The
      * viewer and blacklist caches for the name are invalidated too, so a peer's show/hide/blacklist edit is

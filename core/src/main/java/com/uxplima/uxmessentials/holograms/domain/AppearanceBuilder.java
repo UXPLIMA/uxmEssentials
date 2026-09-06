@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * A mutable builder for {@link Appearance}, kept package-private so it is purely an internal mechanism: each
  * {@link Appearance} {@code with*} transition reads {@link Appearance#toBuilder()}, changes the one field it owns,
- * and calls {@link #build()} — which routes through the canonical {@code Appearance} constructor, so every
+ * and calls {@link #build()}, which routes through the canonical {@code Appearance} constructor, so every
  * validation and range check still fires. Extracting the per-field copy boilerplate here keeps {@code Appearance}
  * itself small without changing its public surface (no new public type, no new public method beyond the
  * unchanged {@code with*}).

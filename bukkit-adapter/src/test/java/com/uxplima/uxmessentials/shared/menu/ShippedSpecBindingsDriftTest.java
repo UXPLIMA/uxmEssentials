@@ -20,7 +20,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 /**
  * A shipped menu spec may only name binding ids that production wiring actually registers. Without this guard a
- * typo in a {@code .conf} — or a spec that outlives the wiring that fed it — becomes a broken menu a player meets
+ * typo in a {@code .conf} (or a spec that outlives the wiring that fed it) becomes a broken menu a player meets
  * at runtime instead of a failure a maintainer meets at build time. The test walks the bundled specs, parses each
  * (a parse failure is itself a drift the test surfaces), and asserts every ref resolves against an allowlist that
  * mirrors the ids the feature wiring registers.
@@ -756,7 +756,7 @@ class ShippedSpecBindingsDriftTest {
     /**
      * Paged list-source ids any shipped spec may reference. Registered through {@code pagedList} rather than
      * {@code list}, because a paged source is the one kind that may carry {@code page-size} and {@code sorts} on its
-     * list block — the browse menu declares sorts, so validating it as a plain list would wrongly flag those knobs.
+     * list block: the browse menu declares sorts, so validating it as a plain list would wrongly flag those knobs.
      * Keep in sync with the ids registered as paged sources in production wiring.
      */
     private static final Set<String> EXPECTED_PAGED_LISTS = Set.of("playerwarps:browse");
@@ -805,7 +805,7 @@ class ShippedSpecBindingsDriftTest {
      * Parses every engine spec shipped under a module's {@code gui/} folder; a parse failure propagates as the
      * drift it is. Each built-in menu's spec lives under its own module ({@code modules/<module>/gui/<name>.conf}),
      * alongside the layout {@code .conf}s the older menus still read. An engine spec is told apart by its
-     * {@code items} block — a layout conf carries none — so the geometry layouts are skipped rather than parsed as
+     * {@code items} block, a layout conf carries none, so the geometry layouts are skipped rather than parsed as
      * specs.
      */
     private static List<MenuSpec> loadAll(Path modulesDir) {
@@ -830,7 +830,7 @@ class ShippedSpecBindingsDriftTest {
         return parent != null && parent.getFileName().toString().equals("gui");
     }
 
-    /** True when {@code conf} is an engine menu spec — it declares an {@code items} block; a layout conf does not. */
+    /** True when {@code conf} is an engine menu spec: it declares an {@code items} block; a layout conf does not. */
     private static boolean isEngineSpec(Path conf) {
         try {
             ConfigurationNode root =

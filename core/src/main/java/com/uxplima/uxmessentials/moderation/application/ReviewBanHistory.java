@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * {@code /banhistory <player>}: review a player's ban-family history (every {@code /ban}, {@code /tempban},
  * {@code /banip}, {@code /unban}, {@code /unbanip} applied to them) newest-first. A read-only, bounded query
- * against the append-only history — it renders a header with the count, one entry per row (action, issuer,
+ * against the append-only history. It renders a header with the count, one entry per row (action, issuer,
  * reason, expiry, ip, when), or an empty notice when the target has none. The query is capped at
  * {@link #PAGE_LIMIT} rows so the read stays within budget; the command runs it off the tick thread.
  */

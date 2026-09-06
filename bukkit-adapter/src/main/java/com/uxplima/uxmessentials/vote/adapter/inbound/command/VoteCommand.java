@@ -35,22 +35,22 @@ import org.jspecify.annotations.Nullable;
  * player. Subcommands:
  *
  * <ul>
- *   <li>{@code sites} — open the vote-sites GUI (or fall back to chat links when gui mode is off).
- *   <li>{@code claim} — pay out the rewards the player accrued while offline (the queue drain that the
+ *   <li>{@code sites}: open the vote-sites GUI (or fall back to chat links when gui mode is off).
+ *   <li>{@code claim}. Pay out the rewards the player accrued while offline (the queue drain that the
  *       join handler runs automatically when auto-claim is on). Gated by {@code uxmessentials.vote.use}.
- *   <li>{@code total [player]} — show the sender's (or another player's) accumulated vote totals
+ *   <li>{@code total [player]}. Show the sender's (or another player's) accumulated vote totals
  *       across all periods. Gated by {@code uxmessentials.vote.use}.
- *   <li>{@code streak [player]} — show the sender's (or another player's) current and best
+ *   <li>{@code streak [player]}. Show the sender's (or another player's) current and best
  *       consecutive-day voting streak. Gated by {@code uxmessentials.vote.use}.
- *   <li>{@code top [daily|weekly|monthly|alltime]} — show the leaderboard for the given period
+ *   <li>{@code top [daily|weekly|monthly|alltime]}, show the leaderboard for the given period
  *       (default {@code monthly}). Gated by {@code uxmessentials.vote.top}.
- *   <li>{@code next} — show when the player can next vote on each configured site.
- *   <li>{@code last} — show when the player last voted on each configured site.
- *   <li>{@code remind} — toggle vote reminder messages on/off for the sender.
- *   <li>{@code broadcasts} — toggle whether the sender sees server-wide vote broadcasts.
- *   <li>{@code admin givevote <player> [amount]} — inject synthetic votes for a player (offline-capable),
+ *   <li>{@code next}: show when the player can next vote on each configured site.
+ *   <li>{@code last}: show when the player last voted on each configured site.
+ *   <li>{@code remind}: toggle vote reminder messages on/off for the sender.
+ *   <li>{@code broadcasts}: toggle whether the sender sees server-wide vote broadcasts.
+ *   <li>{@code admin givevote <player> [amount]}. Inject synthetic votes for a player (offline-capable),
  *       gated by {@code uxmessentials.vote.admin}.
- *   <li>{@code admin reset <player>} — reset all vote totals for a player (offline-capable),
+ *   <li>{@code admin reset <player>}. Reset all vote totals for a player (offline-capable),
  *       gated by {@code uxmessentials.vote.admin}.
  * </ul>
  *

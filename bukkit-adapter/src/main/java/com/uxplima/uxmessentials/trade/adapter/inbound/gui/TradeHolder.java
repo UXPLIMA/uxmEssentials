@@ -10,12 +10,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * One participant's side of a trade, carried as the subject of their trade window. It says which trade the window
  * belongs to ({@link #tradeId}), which {@link TradeSide} it renders and edits, who is looking at it, and who they are
- * trading with — enough for every binding on that window (a placeholder, a button's state, a click, the content
+ * trading with. Enough for every binding on that window (a placeholder, a button's state, a click, the content
  * region's rules) to reach the one shared {@link TradeExchange} and act on the right half of it.
  *
  * <p>The window itself is the menu engine's; this holder never owns one. It is created when the trade opens and
  * outlives a re-open of the window (the money prompt closes and reopens it), so the one piece of per-viewer screen
- * state that must survive that round trip — which currency the money button is showing — lives here.
+ * state that must survive that round trip, which currency the money button is showing, lives here.
  */
 @NullMarked
 final class TradeHolder {
@@ -54,7 +54,7 @@ final class TradeHolder {
         return viewer;
     }
 
-    /** The player on the other side of this trade — whom the window's title names. */
+    /** The player on the other side of this trade, whom the window's title names. */
     PlayerRef counterpart() {
         return counterpart;
     }

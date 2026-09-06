@@ -935,7 +935,7 @@ class JooqPlayerWarpBrowseTest {
                 .orElseThrow(() -> new AssertionError("no card named " + name + " on the page"));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

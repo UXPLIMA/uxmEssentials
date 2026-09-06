@@ -11,8 +11,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /baltop [currency] [page]}: render the ranked leaderboard for one currency. The ordering and
- * exemption are the provider/snapshot's concern ({@code docs/11-economy-integration.md} §11) — rows arrive
- * already sorted descending by balance and with exempt owners filtered out — so this use case pages the
+ * exemption are the provider/snapshot's concern ({@code docs/11-economy-integration.md} §11), rows arrive
+ * already sorted descending by balance and with exempt owners filtered out, so this use case pages the
  * result and renders a header, one row per entry, or an empty notice. The query is budgeted and off-tick at
  * the adapter; this use case only formats what it is handed.
  */

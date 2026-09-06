@@ -37,8 +37,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * MockBukkit coverage of the completed-trade audit: a both-confirm swap emits exactly one {@link TradeReceipt} — the
- * two participants and each side's item quantity — when the module's {@code audit} knob is on, and emits nothing when it
+ * MockBukkit coverage of the completed-trade audit: a both-confirm swap emits exactly one {@link TradeReceipt}, the
+ * two participants and each side's item quantity. When the module's {@code audit} knob is on, and emits nothing when it
  * is off. The scheduler is synchronous so the settlement (and its audit emission) runs inline.
  */
 class TradeAuditTest {
@@ -173,7 +173,7 @@ class TradeAuditTest {
                 : exchange.holder(TradeSide.PARTNER);
     }
 
-    /** One test's collaborators over a shared session — kept local so each test picks its own audit setting. */
+    /** One test's collaborators over a shared session: kept local so each test picks its own audit setting. */
     private record Fixture(
             TradeSessions sessions, TradeWindow window, TradeView view, RecordingAudit audit, RecordingEvents events) {}
 

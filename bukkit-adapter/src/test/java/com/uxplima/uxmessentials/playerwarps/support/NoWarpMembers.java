@@ -11,8 +11,8 @@ import com.uxplima.uxmessentials.playerwarps.domain.WarpRole;
 
 /**
  * A {@link WarpMemberStore} with no members, shared by the player-warp GUI and command tests that build a
- * {@code WarpAuthorization} over it. With no member rows, authority collapses to ownership alone — the owner is the
- * only actor a warp admits — which is exactly what those tests exercise (an owner archives their own warp).
+ * {@code WarpAuthorization} over it. With no member rows, authority collapses to ownership alone. The owner is the
+ * only actor a warp admits, which is exactly what those tests exercise (an owner archives their own warp).
  */
 public final class NoWarpMembers implements WarpMemberStore {
 

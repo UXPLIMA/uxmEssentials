@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultAmount;
  */
 public final class VaultAmountQuota {
 
-    /** The quota family for vault counts — the {@code MAX}-direction reducer over the numbered nodes. */
+    /** The quota family for vault counts: the {@code MAX}-direction reducer over the numbered nodes. */
     public static final QuotaFamily FAMILY = QuotaFamily.quota("uxmessentials.vault.amount");
 
     private final Permissions permissions;

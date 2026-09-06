@@ -28,14 +28,14 @@ import org.jspecify.annotations.NullMarked;
  * that no longer fits the world's current border/radius is discarded on serve and the next is polled.
  *
  * <p>The refill launches {@link BudgetedSafeSearch}es one at a time until the queue reaches its target size
- * or a per-cycle cap is hit — <strong>none of which blocks a thread</strong>. Each search chains its own
+ * or a per-cycle cap is hit: <strong>none of which blocks a thread</strong>. Each search chains its own
  * attempts through the scheduler (budget-bounded and tick-sliced) and completes a future; the refill composes
  * onto it with {@code thenAccept} rather than parking a worker on a {@code .get()} the way the pre-P1 loop did.
  *
  * <p>Durable restart-survival is wired through the {@link RtpPoolSink}: every location a refill validates is recorded,
  * and the world's batch is flushed to the {@code rtp_pool} table off-tick once the refill cycle ends (ADR 0010 §7).
- * On enable, {@link #prewarm} re-loads a world's persisted columns and re-probes each — a fresh Y and full safety
- * revalidation — offering the still-valid ones straight into the queue, so the first {@code /rtp} after a restart
+ * On enable, {@link #prewarm} re-loads a world's persisted columns and re-probes each, a fresh Y and full safety
+ * revalidation, offering the still-valid ones straight into the queue, so the first {@code /rtp} after a restart
  * serves from a warm queue instead of paying for a cold search storm. When the persisted pool is switched off, the
  * sink is {@link RtpPoolSink#NONE} and {@link #prewarm} is never called, so the queue runs purely in memory as before.
  *
@@ -113,7 +113,7 @@ public final class PrewarmedSafeLocationQueue implements SafeLocationQueue {
         Objects.requireNonNull(world, "world");
         Optional<RtpSafeLocation> queued = poll(world);
         if (queued.isEmpty()) {
-            // No inline search on the caller's thread — warm the queue and let the caller show the no-location
+            // No inline search on the caller's thread, warm the queue and let the caller show the no-location
             // message; the budgeted search runs off-thread for the next attempt.
             requestRefill(world);
         }
@@ -194,7 +194,7 @@ public final class PrewarmedSafeLocationQueue implements SafeLocationQueue {
      * Re-populate {@code world}'s queue from the persisted pool on enable: load up to {@code limit} columns and
      * re-probe each through {@code prewarm}, offering every re-validated location straight into the queue. A no-op
      * when the module is stopping or the world has no valid RTP area. The re-probe (fresh Y + full safety check)
-     * is what keeps a stale persisted column from ever being served — only columns that still pass rejoin the queue.
+     * is what keeps a stale persisted column from ever being served: only columns that still pass rejoin the queue.
      */
     public void prewarm(RtpPoolPrewarm prewarm, WorldRef world, int limit) {
         Objects.requireNonNull(prewarm, "prewarm");

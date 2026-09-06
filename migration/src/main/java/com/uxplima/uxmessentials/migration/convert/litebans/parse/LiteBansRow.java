@@ -5,7 +5,7 @@ import java.util.Optional;
 
 /**
  * One raw row read from a LiteBans punishment table ({@code litebans_bans}, {@code litebans_mutes},
- * {@code litebans_warnings}). It carries the columns the importer reads, untranslated — a parse-layer value
+ * {@code litebans_warnings}). It carries the columns the importer reads, untranslated, a parse-layer value
  * with no domain meaning yet, exactly as {@code EssX*} records carry untranslated YAML. The three tables
  * share their column set; {@code warned} is meaningful only for warnings (empty elsewhere). Mapping these
  * columns to {@code :core} sanction types is the {@code map/} layer's job.

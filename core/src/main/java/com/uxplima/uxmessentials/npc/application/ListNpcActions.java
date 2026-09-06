@@ -17,7 +17,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
 
 /**
  * {@code /npc action list <name>}: show an NPC's action chain in run order, 1-based, with each action's trigger,
- * type and value. No new query is needed — the NPC is loaded and its {@code actions()} read. A name no NPC exists
+ * type and value. No new query is needed: the NPC is loaded and its {@code actions()} read. A name no NPC exists
  * at is rejected with {@link NpcError#NOT_FOUND}; an NPC with no actions gets the empty notice. The header /
  * per-entry / none feedback is pushed through the notifier so all text resolves from {@link NpcMessageKey}.
  */

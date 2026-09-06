@@ -2,7 +2,7 @@ package com.uxplima.uxmessentials.teleport.domain;
 
 /**
  * One learned rare-biome hotspot: the chunk coordinates where a biome was seen at least once. The passive
- * {@code BiomeHotspots} registry stores these as the biome-targeted search's sampling bias — when a biome has a
+ * {@code BiomeHotspots} registry stores these as the biome-targeted search's sampling bias. When a biome has a
  * known hotspot, most samples are drawn near it so a rare biome converges instead of the search random-hammering
  * the whole world.
  *

@@ -21,11 +21,11 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /payall <amount> [currency]}: pay {@code amount} to every online player from the sender's own wallet —
+ * {@code /payall <amount> [currency]}: pay {@code amount} to every online player from the sender's own wallet
  * the player-funded counterpart to the admin {@code /eco giveall}. The fan-out, the per-recipient gates, and
  * the atomic moves are the {@link com.uxplima.uxmessentials.economy.application.PayAll} use case's job (which
  * delegates each leg to {@code Pay}); this handler resolves the currency and parses the amount at the boundary,
- * snapshots the online roster on the tick thread (the Bukkit roster is not safe to read off-tick — the same
+ * snapshots the online roster on the tick thread (the Bukkit roster is not safe to read off-tick, the same
  * rule {@link EcoTargets} follows), then runs the transfers off the tick thread so no foreign provider can
  * wedge the command.
  */

@@ -20,8 +20,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /book}: unlock the written book in the player's main hand back into an editable writable book.
  * A signed {@link Material#WRITTEN_BOOK} becomes a {@link Material#WRITABLE_BOOK} that
- * keeps the original pages, so the text can be edited again; any other item — a writable book that is already
- * editable, a non-book item, or an empty hand — replies {@link ItemworldMessageKey#NOT_A_WRITTEN_BOOK} and
+ * keeps the original pages, so the text can be edited again; any other item. A writable book that is already
+ * editable, a non-book item, or an empty hand, replies {@link ItemworldMessageKey#NOT_A_WRITTEN_BOOK} and
  * mutates nothing. The new item is set back on the player's region thread through the {@code Scheduler} port.
  */
 @NullMarked
@@ -63,7 +63,7 @@ public final class BookCommand extends ItemworldCommandSupport implements Comman
         return Command.SINGLE_SUCCESS;
     }
 
-    // A writable book carries only the raw page text — the author, title and signed formatting are
+    // A writable book carries only the raw page text. The author, title and signed formatting are
     // intentionally dropped when a signed book is reopened for editing. The plain-text getPages/setPages
     // pair is the only page API the test harness (MockBukkit) implements; the Adventure pages() overloads
     // throw there, so the transfer rides the String form, which is exactly what a writable book stores.

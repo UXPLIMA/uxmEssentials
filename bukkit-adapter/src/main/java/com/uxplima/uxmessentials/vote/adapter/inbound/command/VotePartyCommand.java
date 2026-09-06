@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * {@code /voteparty} ({@code uxmessentials.voteparty.use}): show the invoking player the progress towards the
- * next vote party — the accumulated count, the configured threshold, and how many votes remain. The count is
+ * next vote party: the accumulated count, the configured threshold, and how many votes remain. The count is
  * read from the durable repository through {@link com.uxplima.uxmessentials.vote.application.VotePartyStatus},
  * so the read runs off the tick thread via the {@link Scheduler} port's async seam; the reply hops back to the
  * viewer through the message sink inside the use case.
@@ -33,11 +33,11 @@ import org.jspecify.annotations.Nullable;
  * <p>Admin subcommands (console-capable) are nested under the same literal:
  *
  * <ul>
- *   <li>{@code force} ({@code uxmessentials.voteparty.admin}, default op) — fire the party immediately via
+ *   <li>{@code force} ({@code uxmessentials.voteparty.admin}, default op), fire the party immediately via
  *       {@link com.uxplima.uxmessentials.vote.application.ForceParty}, regardless of the current counter.
- *   <li>{@code set <n>} — set the party counter to an exact value via
+ *   <li>{@code set <n>}, set the party counter to an exact value via
  *       {@link com.uxplima.uxmessentials.vote.application.SetPartyCount}.
- *   <li>{@code add <n>} — add to the party counter (fires a party if the threshold is now reached) via
+ *   <li>{@code add <n>}. Add to the party counter (fires a party if the threshold is now reached) via
  *       {@link com.uxplima.uxmessentials.vote.application.AddPartyCount}.
  * </ul>
  *

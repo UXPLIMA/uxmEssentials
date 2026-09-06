@@ -22,12 +22,12 @@ import org.jspecify.annotations.NullMarked;
  * engine sees no operator specs at all.
  *
  * <p><b>Ships enabled by default but inert.</b> Like holograms and npc this is a steady-state context that changes
- * nothing out of the box — a fresh install ships one sample {@code menus/example.conf}, but no menu opens until a
+ * nothing out of the box. A fresh install ships one sample {@code menus/example.conf}, but no menu opens until a
  * player runs {@code /menu open <name>}. The {@link #enabled(ConfigStore)} gate therefore defaults to {@code true};
  * an operator flips {@code modules.custommenus.enabled = false} to turn the whole surface off.
  *
  * <p>The {@code /menu} command depends on the shared menu engine ({@code Menus} / the {@code CustomMenuLoader}),
- * which live in the bukkit-adapter rather than the kernel ports, so — as with worlds and warps — the real Brigadier
+ * which live in the bukkit-adapter rather than the kernel ports, so, as with worlds and warps, the real Brigadier
  * node is constructed in the adapter wiring. The {@link CommandSpec} published here is the catalog/drift descriptor
  * that names the literal and its base node; the lifecycle bookkeeping keeps {@code stop()} honest.
  */

@@ -1,5 +1,5 @@
 /**
- * The poses context's domain: the immutable value objects behind GSit-parity sitting and posing — the
+ * The poses context's domain: the immutable value objects behind GSit-parity sitting and posing, the
  * {@link com.uxplima.uxmessentials.poses.domain.PoseType} surface (sit, player-sit, lay, bellyflop, spin, crawl)
  * and the {@link com.uxplima.uxmessentials.poses.domain.PoseSession} a player holds while posing (subject, type,
  * return location, opaque seat handle, optional carrier, start time). The one-session-per-player invariant is

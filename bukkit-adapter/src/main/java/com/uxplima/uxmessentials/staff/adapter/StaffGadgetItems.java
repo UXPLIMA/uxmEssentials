@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Builds the staff-mode gadget items and reads the gadget tag back off them. One {@link NamespacedKey} is
- * created once in the constructor and reused on every build and every interact read — never on a hot path
+ * created once in the constructor and reused on every build and every interact read, never on a hot path
  * (CLAUDE.md §NamespacedKey). The tag carries the stable {@link StaffGadget#tag()} value (not the operator's
  * re-skinnable display name), so the right-click listener resolves the gadget regardless of how the item is
  * styled in config.
@@ -62,7 +62,7 @@ public final class StaffGadgetItems {
         return StaffGadget.fromTag(tag);
     }
 
-    /** Whether {@code item} is any staff gadget — the drop/move guard's cheap predicate. */
+    /** Whether {@code item} is any staff gadget: the drop/move guard's cheap predicate. */
     public boolean isGadget(@Nullable ItemStack item) {
         return gadgetOf(item).isPresent();
     }

@@ -102,8 +102,8 @@ public final class EcoCommand extends EconomyCommandSupport implements CommandRe
 
     /**
      * Bare {@code /eco} opens the admin economy GUI when GUIs are enabled (the {@code .requires(...)} admin gate
-     * is carried by the rebind, so a non-admin still cannot open it). Absent the GUI stack — when economy GUIs
-     * are off — this returns empty and bare {@code /eco} falls through to its usage text; every raw
+     * is carried by the rebind, so a non-admin still cannot open it). Absent the GUI stack, when economy GUIs
+     * are off. This returns empty and bare {@code /eco} falls through to its usage text; every raw
      * {@code /eco give|take|set|reset …} subcommand is unaffected either way.
      */
     @Override

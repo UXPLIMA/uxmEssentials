@@ -33,7 +33,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * The {@code /hologram action <name> <add|add_before|add_after|set|move_up|move_down|list|remove|clear>}
  * subcommands: edit the ordered click-action chain that fires when a player clicks the hologram. {@code add} takes
- * a trigger word (left/right/any), a type word, and the rest of the line as the value — the type word is one of
+ * a trigger word (left/right/any), a type word, and the rest of the line as the value. The type word is one of
  * the effects ({@code console}, {@code player}, {@code player_op}, {@code message}, {@code actionbar},
  * {@code title}, {@code sound}, {@code connect}), the sequencer's {@code delay} or {@code random}, or a gate
  * ({@code chance}, {@code permission}, {@code condition}, {@code cost}, {@code give}); the cheap value shapes are

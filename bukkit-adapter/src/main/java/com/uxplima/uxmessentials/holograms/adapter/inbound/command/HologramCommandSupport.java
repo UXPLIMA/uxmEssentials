@@ -29,7 +29,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Shared collaborators the holograms Brigadier command holds: the constructed {@link HologramServices} and
- * the {@link Messages} catalog (the latter only for the players-only rejection a console may see — all other
+ * the {@link Messages} catalog (the latter only for the players-only rejection a console may see, all other
  * player-facing feedback flows through the use cases' {@code MessageSink}). The single {@code /hologram}
  * command class extends this so it stays focused on building its node and mapping arguments to use-case calls.
  */

@@ -30,12 +30,12 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@code /regions [world]} list: a paginated, engine-backed panel (the shared {@link EntityListView}, so it
  * renders through the menu engine and needs no raw-inventory allow-list entry) of one icon per WorldGuard region in
- * the chosen world, priority-first. The region set — and each region's priority and member/owner counts — is read
+ * the chosen world, priority-first. The region set, and each region's priority and member/owner counts, is read
  * off the tick thread through the {@link RegionService} (WorldGuard's region store is queried on the global region
  * thread, never a viewer's region thread), then the panel opens on the staff member's own entity thread; the icon
  * renderer reads only that snapshot.
  *
- * <p>Clicking a region hands it to the injected {@code onRegionSelected} callback — the wiring points it at the
+ * <p>Clicking a region hands it to the injected {@code onRegionSelected} callback. The wiring points it at the
  * Phase 2 flag editor (gated on the flags permission); the members/owners editor joins it in Phase 3. A world with
  * no regions sends the "no regions" line instead of an empty window. A fresh {@link EntityListView} is built per
  * open, so two staff inspecting different worlds never share list state.
@@ -75,7 +75,7 @@ public final class RegionListView {
     }
 
     /**
-     * Read {@code world}'s regions off the tick thread, then open the priority-first list for {@code staff} — or,
+     * Read {@code world}'s regions off the tick thread, then open the priority-first list for {@code staff}, or,
      * when the world holds none, send {@code staff} the "no regions" line instead of an empty window.
      */
     public void open(PlayerRef staff, WorldRef world) {

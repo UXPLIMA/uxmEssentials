@@ -32,14 +32,14 @@ import org.jspecify.annotations.Nullable;
  * {@link MenuBindings} alongside {@link MenuVocabulary}, so a disk-loaded spec resolves {@code message-to} /
  * {@code broadcast} / {@code title} / {@code toast} the same way a code-registered feature menu does.
  *
- * <p>The delivered text is operator content, not a code-authored string — it flows through {@link StyledText}
+ * <p>The delivered text is operator content, not a code-authored string. It flows through {@link StyledText}
  * (MiniMessage) exactly as {@code MenuVocabulary}'s {@code message} action does, so no {@code MessageKey} is
  * involved (the catalog is the code path; this is the data path). The pipe grammar for {@code title}
  * ({@code title|subtitle|fadeIn|stay|fadeOut}) mirrors the npc/holograms click runner so an operator reads the
  * two systems consistently.
  *
  * <p>Every action is fail-soft: a malformed argument, an offline target, or an unparseable component becomes a
- * logged-or-silent no-op through {@link #safe}, never an exception thrown back into the click dispatch — one bad
+ * logged-or-silent no-op through {@link #safe}, never an exception thrown back into the click dispatch, one bad
  * effect must not abort the rest of a chain or spill a stack trace onto the tick thread.
  */
 public final class MessagingActions {
@@ -52,7 +52,7 @@ public final class MessagingActions {
      * Register the messaging actions into {@code bindings}. {@code toasts} is the uxmLib advancement-toast service
      * the toast action pops through (it routes its own cleanup through the library scheduler, so the action is
      * Folia-safe); {@code log} is the operator console logger a fail-soft action warns through. Left separate from
-     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched — the composition
+     * {@link MenuVocabulary#registerActions} so that method's existing call-sites stay untouched, the composition
      * root calls both.
      */
     public static void register(MenuBindings bindings, Toasts toasts, Logger log) {
@@ -97,7 +97,7 @@ public final class MessagingActions {
         }
         Player target = Bukkit.getPlayerExact(parsed.target());
         if (target == null) {
-            return; // the target is offline or unknown — nothing to deliver to, but not an error
+            return; // the target is offline or unknown. Nothing to deliver to, but not an error
         }
         target.sendMessage(StyledText.render(parsed.message()));
     }
@@ -128,11 +128,11 @@ public final class MessagingActions {
     private static void toast(MenuActionContext ctx, Toasts toasts) {
         ParsedToast parsed = ParsedToast.parse(ctx.arg());
         if (parsed.title().isBlank()) {
-            return; // the title is required — without it there is no toast to build
+            return; // the title is required. Without it there is no toast to build
         }
         Material icon = Material.matchMaterial(parsed.icon());
         if (icon == null) {
-            return; // unknown icon material — skip rather than throw
+            return; // unknown icon material, skip rather than throw
         }
         Toast.Builder builder = Toast.builder()
                 .icon(icon)
@@ -176,8 +176,8 @@ public final class MessagingActions {
     /**
      * A parsed {@code title|subtitle|fadeIn|stay|fadeOut} title value, mirroring the npc/holograms click runner's
      * grammar. The title is always present; the subtitle and the three tick timings are optional. The timings are
-     * taken as a set — either all three trailing segments parse as whole numbers, or the whole tail is kept as the
-     * subtitle and the vanilla defaults (10 fade-in, 70 stay, 20 fade-out) apply — so a partial or non-numeric tail
+     * taken as a set. Either all three trailing segments parse as whole numbers, or the whole tail is kept as the
+     * subtitle and the vanilla defaults (10 fade-in, 70 stay, 20 fade-out) apply, so a partial or non-numeric tail
      * never half-applies. Only the first {@code |} splits title from the rest, and the timings are peeled off the
      * right, so a subtitle may itself contain {@code |}.
      */
@@ -227,7 +227,7 @@ public final class MessagingActions {
     /**
      * A parsed {@code <icon-material>|<title>|<description>|<frame>} toast value. The icon and title are the first
      * two pipe-delimited segments; the description and frame are the optional third and fourth. Each segment is
-     * trimmed and a missing one is empty — the action requires a non-blank title, resolves the icon fail-soft, and
+     * trimmed and a missing one is empty. The action requires a non-blank title, resolves the icon fail-soft, and
      * defaults a blank/unknown frame to {@code TASK}.
      */
     public record ParsedToast(String icon, String title, String description, String frame) {

@@ -70,11 +70,11 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * The homes grid golden test: the engine-rendered {@code /home} slot grid must draw the exact grid the original {@code
  * HomeListView} drew. The fixture is a 3-slot limit with homes in slots 0 and 2, so the grid draws two filled RED_BED
- * cells (content slots 10 and 12), one empty GRAY_BED cell (slot 11), and the RED_BED page indicator (slot 22) — and,
+ * cells (content slots 10 and 12), one empty GRAY_BED cell (slot 11), and the RED_BED page indicator (slot 22), and,
  * with everything on one page, no nav arrows. The engine window is snapshotted as {@code (slot -> material, plain
  * name)} and asserted equal, slot for slot, to the baseline the old view produced for this fixture, the page indicator
  * included. Then a click on the first filled cell through the engine's own {@link MenuListener} proves the migrated
- * path hands that home to the action-menu seam the old grid drove — faithful in both appearance and behaviour.
+ * path hands that home to the action-menu seam the old grid drove, faithful in both appearance and behaviour.
  */
 class HomeListGoldenTest {
 

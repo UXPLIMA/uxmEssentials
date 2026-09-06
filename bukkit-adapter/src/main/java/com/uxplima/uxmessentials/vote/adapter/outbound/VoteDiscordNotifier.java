@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p><b>A webhook failure never breaks vote handling.</b> Two layers guarantee this. First, a malformed
  * URL is caught in the constructor: the notifier marks itself disabled, logs once, and {@link #accept}
- * becomes a no-op — it never throws. Second, every send is fire-and-forget: the {@link DiscordWebhook}
+ * becomes a no-op: it never throws. Second, every send is fire-and-forget: the {@link DiscordWebhook}
  * future is never awaited (no {@code .get()} on the vote thread), and a {@code whenComplete} callback logs
  * a delivery failure at debug rather than letting it propagate, so a network error or a non-2xx status is
  * swallowed after the vote has already been credited.
@@ -61,13 +61,13 @@ public final class VoteDiscordNotifier implements Consumer<DomainEvent> {
         try {
             return new DiscordWebhook(settings.webhookUrl());
         } catch (IllegalArgumentException malformed) {
-            // Never log the URL itself — it is a secret. Report only that Discord output is disabled.
+            // Never log the URL itself: it is a secret. Report only that Discord output is disabled.
             log.warn("Vote Discord webhook URL is malformed; Discord vote notifications are disabled.");
             return null;
         }
     }
 
-    /** Whether this notifier will actually post — false when disabled or the URL was malformed. */
+    /** Whether this notifier will actually post: false when disabled or the URL was malformed. */
     public boolean active() {
         return webhook != null;
     }

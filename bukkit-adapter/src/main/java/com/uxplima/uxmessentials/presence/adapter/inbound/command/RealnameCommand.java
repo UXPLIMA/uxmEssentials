@@ -29,8 +29,8 @@ import org.jspecify.annotations.Nullable;
  * {@code /realname <player>} ({@code uxmessentials.realname.use}): resolve a display name back to the underlying
  * account name, the inverse of the cosmetic rename a chat plugin or nickname feature applies. The query matches
  * either a player's account name or their rendered display name, case-insensitively, against the online set
- * filtered through the sender's {@code canSee} graph — the same seam {@code /list}, {@code /msg} and {@code /tpa}
- * read — so a vanished player the sender may not see is unresolvable, never revealing a name they could not
+ * filtered through the sender's {@code canSee} graph, the same seam {@code /list}, {@code /msg} and {@code /tpa}
+ * read, so a vanished player the sender may not see is unresolvable, never revealing a name they could not
  * otherwise learn. The console has no {@code canSee} graph and may resolve anyone. A pure read: no use case, no
  * state mutation, just a scan of the visible online set and one resolved reply.
  */

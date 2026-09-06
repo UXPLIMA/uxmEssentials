@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.playerstate.domain.PersonalWeather;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Outbound port for the apply-once and live-only effects that carry no persisted snapshot flag — heal, feed,
+ * Outbound port for the apply-once and live-only effects that carry no persisted snapshot flag, heal, feed,
  * extinguish, suicide, night-vision, glow, and the per-player time/weather overrides. The adapter resolves the live
  * {@code Player} and performs each on the player's owning region/entity thread via the {@code Scheduler}
  * port; an offline target is a silent no-op.

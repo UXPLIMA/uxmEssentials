@@ -14,10 +14,10 @@ import com.uxplima.uxmlib.item.SkullData;
  * Turns a skull-source spec into a player head. Three prefixes are recognised, case-insensitively:
  *
  * <ul>
- *   <li>{@code skull:<value>} / {@code head:<value>} — {@code <value>} is a player name, a UUID (dashed or
+ *   <li>{@code skull:<value>} / {@code head:<value>}. {@code <value>} is a player name, a UUID (dashed or
  *       undashed), a base64 texture, or a skin URL; {@link SkullData#parse} routes all four to the right head.
- *   <li>{@code skull:self} / {@code head:self} — the viewer's own head, by their UUID.
- *   <li>{@code basehead:<base64>} — a head from a raw base64 texture value (the {@code textures} payload).
+ *   <li>{@code skull:self} / {@code head:self}: the viewer's own head, by their UUID.
+ *   <li>{@code basehead:<base64>}, a head from a raw base64 texture value (the {@code textures} payload).
  * </ul>
  *
  * <p>uxmLib applies every variant synchronously ({@code setOwningPlayer} for a name/UUID, an embedded textures

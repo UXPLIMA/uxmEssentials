@@ -31,7 +31,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 /**
  * Pins that jail removal now folds into {@code /jail del <name>} (the way {@code /warp del} sits under
  * {@code /warp}) and still drives the {@link DelJail} use case with the typed jail name, under the shared
- * {@code uxmessentials.moderation.jail} node. The standalone {@code /deljail} literal is gone — this guards the
+ * {@code uxmessentials.moderation.jail} node. The standalone {@code /deljail} literal is gone: this guards the
  * replacement keeps the same behaviour as a subcommand of {@code /jail}. The bare {@code /jail} hub and the
  * {@code /jail <player> ...} subcommand are exercised by {@link JailGuiRootTest}.
  */

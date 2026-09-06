@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * Resolves the icon material for a warp category, shared across the category GUIs so the parsing-and-fallback
  * rule lives in one place. A category with no display material, or one naming a material this server does not
- * have, falls back to a book — the same default the kit category icons use.
+ * have, falls back to a book: the same default the kit category icons use.
  */
 @NullMarked
 final class WarpCategoryIcons {

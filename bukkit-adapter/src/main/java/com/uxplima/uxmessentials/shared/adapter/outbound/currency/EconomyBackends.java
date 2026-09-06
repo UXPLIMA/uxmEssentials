@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.economy.domain.CurrencyRegistry;
  *
  * <p>The menu-currency façade is constructed while the menu engine wires, well before the economy module runs,
  * so it cannot take these at construction. It holds a supplier of this record instead and reads it on the first
- * click that resolves a currency — by which point {@code EconomyWiring} has filled the reference.
+ * click that resolves a currency: by which point {@code EconomyWiring} has filled the reference.
  *
  * @param backends the closed backend set the routing provider resolves each currency against
  * @param currencies the closed currency set, one of which is the configured default

@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.application.port.DomainEventPublisher;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /fly [player]}: flip a player's flight allowance — the plain on/off toggle (timed fly is deferred
+ * {@code /fly [player]}: flip a player's flight allowance. The plain on/off toggle (timed fly is deferred
  * post-v1). The snapshot is mutated atomically through the {@link PlayerStateStore}, the new value is pushed
  * to the live player by the {@link StateReconciler} on the owning region thread (which sets
  * {@code setAllowFlight} and, on disable, lowers the player out of flight), the {@link FlyToggled} event is

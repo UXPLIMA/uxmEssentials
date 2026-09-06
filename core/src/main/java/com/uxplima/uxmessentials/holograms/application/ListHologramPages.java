@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * {@code /hologram page <name> list}: show a hologram's page set — a header with the page count, then one entry
+ * {@code /hologram page <name> list}: show a hologram's page set, a header with the page count, then one entry
  * per page with its line count (1-based page numbers at the boundary). An ordinary single-page hologram lists
  * its one page. A name no hologram exists at is rejected with {@link HologramError#NOT_FOUND}; all feedback
  * resolves through {@link HologramsMessageKey}.

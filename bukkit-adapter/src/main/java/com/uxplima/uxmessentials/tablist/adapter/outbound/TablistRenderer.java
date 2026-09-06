@@ -62,9 +62,9 @@ import org.jspecify.annotations.Nullable;
  *       uxmLib's {@link Tablist#set} ships both in one native call and an empty pair would wipe whatever vanilla or
  *       another plugin set; {@link #appliedHeaderFooter} tracks who this renderer last sent one to so a switch away from
  *       a header-having format clears its own header/footer instead of leaving it stale.</li>
- *   <li><strong>Name, order, and skin.</strong> How the real player themselves appears in the tab — the list name, the
+ *   <li><strong>Name, order, and skin.</strong> How the real player themselves appears in the tab, the list name, the
  *       sort order, and, when the format carries one, a custom-skin texture (the one thing native Paper cannot do, so it
- *       goes through a packet) — delegated to {@link RealPlayerRowPainter}, called from {@link #renderFor},
+ *       goes through a packet). Delegated to {@link RealPlayerRowPainter}, called from {@link #renderFor},
  *       {@link #clear}, {@link #forget}, and {@link #repaintSkinsFor}. The real players keep the early slots: the painter
  *       gives them the layout's {@link TablistLayout#realPlayerOrder() real-player order} (above every filler) unless the
  *       format authored an explicit sort order, which wins.</li>
@@ -74,7 +74,7 @@ import org.jspecify.annotations.Nullable;
  * </ul>
  *
  * <p>{@link #renderFor(Player)} touches the live player, so the caller must invoke it on the player's region/entity
- * thread — the render timer and the connection listener both hop there first.
+ * thread, the render timer and the connection listener both hop there first.
  */
 @NullMarked
 public final class TablistRenderer {
@@ -130,7 +130,7 @@ public final class TablistRenderer {
     /**
      * The opt-in "suppress real players" mechanism, or {@code null} when the packet-interception pipeline is not wired
      * (every constructor but the suppression-enabled one). A {@code null} suppression means the {@code suppress-real-
-     * players} flag is inert — the tab is never rewritten — so the gate is default-off and the historical behaviour
+     * players} flag is inert, the tab is never rewritten, so the gate is default-off and the historical behaviour
      * stands; this keeps the renderer's many existing call sites unchanged.
      */
     private final @Nullable TablistSuppression suppression;
@@ -169,7 +169,7 @@ public final class TablistRenderer {
         this.suppression = suppression;
     }
 
-    /** Build a renderer whose viewers are every online player — the production fan-out. */
+    /** Build a renderer whose viewers are every online player, the production fan-out. */
     public TablistRenderer(
             Supplier<TablistFormatConfig> formats,
             AnimationRegistry animations,
@@ -184,7 +184,7 @@ public final class TablistRenderer {
         Objects.requireNonNull(player, "player");
         ConditionContext ctx = conditionContext(player);
         // Capture the global animation tick once for this paint, so the header, footer, and name format all read the
-        // same frame — the render task steps the clock once per loop tick before this fan-out.
+        // same frame: the render task steps the clock once per loop tick before this fan-out.
         long tick = animations.tick();
         Optional<TablistFormat> selected = formats.get().select(ctx);
         if (selected.isEmpty()) {
@@ -324,10 +324,10 @@ public final class TablistRenderer {
 
     /**
      * Re-send every currently-skinned online player's packet entry to a single newly-joined {@code viewer} so a late
-     * joiner sees the custom skins the steady-state tick would not repaint for them — delegated to
+     * joiner sees the custom skins the steady-state tick would not repaint for them, delegated to
      * {@link RealPlayerRowPainter#repaintSkinsFor}. Native Paper replicates a player's list name and order to every
      * viewer including late joiners, but the skin packet does not, so without this the joiner would see real skins. Must
-     * run on the joining {@code viewer}'s region/entity thread, like {@link #renderFor(Player)} — the connection listener
+     * run on the joining {@code viewer}'s region/entity thread, like {@link #renderFor(Player)}, the connection listener
      * hops there first.
      */
     public void repaintSkinsFor(Player viewer) {
@@ -356,7 +356,7 @@ public final class TablistRenderer {
         appliedHeaderFooter.remove(player.getUniqueId());
         appliedFormat.remove(player.getUniqueId());
         // On quit the player's connection is gone; just drop the tracking. A native reset packet to a closing channel
-        // is a no-op, so revert is skipped — only the tracking is forgotten so a relog re-paints from scratch.
+        // is a no-op, so revert is skipped: only the tracking is forgotten so a relog re-paints from scratch.
         fillerPainter.forget(player);
         rowPainter.forget(player);
         // Drop the suppress tracking and eject the interceptor without a relist packet to the closing channel.
@@ -368,8 +368,8 @@ public final class TablistRenderer {
     /**
      * Reconcile the player's tab header/footer with the selected format's {@link TablistContent}. An authored
      * (non-blank) content is sent and the player marked as carrying this renderer's header/footer. A blank content (a
-     * name-only / order-only format) sends nothing — uxmLib's {@link Tablist#set} would otherwise wipe the player's
-     * existing header/footer — but if this renderer previously sent one for the player (a switch from a header-having
+     * name-only / order-only format) sends nothing. UxmLib's {@link Tablist#set} would otherwise wipe the player's
+     * existing header/footer, but if this renderer previously sent one for the player (a switch from a header-having
      * format) it clears its own to avoid leaving a stale header/footer behind.
      */
     private void applyHeaderFooter(Player player, TablistContent content, long tick) {

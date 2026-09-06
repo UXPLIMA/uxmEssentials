@@ -6,11 +6,11 @@ import com.uxplima.uxmessentials.migration.MappingRow;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The FancyHolograms source's {@code SupportedMappings} rows — its claim of what it migrates
+ * The FancyHolograms source's {@code SupportedMappings} rows. Its claim of what it migrates
  * (docs/12-migration §5.6). FancyHolograms holograms are server-wide display objects, not player data, so
  * the source contributes a single row: each entry under {@code holograms.yml}'s {@code holograms} section
- * maps to one {@code Hologram}, keyed on its name. The deliberate gaps — item/block holograms (no text),
- * per-line offsets, billboard/scale/shadow display flags — are not modelled on the imported hologram and
+ * maps to one {@code Hologram}, keyed on its name. The deliberate gaps. Item/block holograms (no text),
+ * per-line offsets, billboard/scale/shadow display flags. Are not modelled on the imported hologram and
  * carry no row.
  */
 @NullMarked

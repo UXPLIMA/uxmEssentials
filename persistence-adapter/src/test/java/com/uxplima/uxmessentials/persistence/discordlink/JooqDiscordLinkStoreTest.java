@@ -21,7 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /**
  * End-to-end coverage of {@link JooqDiscordLinkStore} against the default embedded SQLite backend with the
- * Flyway baseline applied (including the V16 discord-link tables) — the tested default of the backend-parity
+ * Flyway baseline applied (including the V16 discord-link tables). The tested default of the backend-parity
  * matrix. It proves the pending round-trip, the per-player upsert (a fresh code replaces the row), the
  * confirm-binds-and-clears-pending contract, the by-player and by-Discord-id lookups, the unlink contract
  * (true on the first removal, false on the second), and the unique Discord-id constraint.
@@ -102,7 +102,7 @@ class JooqDiscordLinkStoreTest {
                 .isEqualTo(BOB);
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {

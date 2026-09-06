@@ -10,7 +10,7 @@ import java.util.function.ToIntFunction;
  * staff member who issued a punishment in the window; a per-staff report carries at most one row. An empty
  * leaderboard means no punishments fell in the window.
  *
- * <p>The totals are derived from the leaderboard so the report cannot disagree with itself — the server-wide
+ * <p>The totals are derived from the leaderboard so the report cannot disagree with itself, the server-wide
  * figures are exactly the column sums of the rows shown.
  *
  * @param leaderboard the per-staff rows, ordered by {@link StaffPunishmentCount#total} descending

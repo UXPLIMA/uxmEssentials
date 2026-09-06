@@ -8,8 +8,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Resolves the cuboid a player is defining for {@code /regions create}. Two sources feed it: a player's WorldEdit
- * selection (the wand the operator already knows), and — for a player without WorldEdit, or one who prefers commands
- * — two corners marked in-game with {@code /regions pos1} / {@code /regions pos2}. The command asks only for the
+ * selection (the wand the operator already knows), and, for a player without WorldEdit, or one who prefers commands
+ *: two corners marked in-game with {@code /regions pos1} / {@code /regions pos2}. The command asks only for the
  * resolved {@link RegionBounds}, so it is agnostic to which source answered.
  *
  * <p>This is an inbound-adapter seam, not a core port: it speaks in the Bukkit {@link Player} the command already

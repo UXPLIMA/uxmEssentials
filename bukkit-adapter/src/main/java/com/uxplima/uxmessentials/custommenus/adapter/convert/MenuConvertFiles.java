@@ -17,8 +17,8 @@ import org.jspecify.annotations.Nullable;
  * and {@link ZMenuConvertService} keep only the per-format read/convert/write and share this identical path logic.
  *
  * <p>A path is absolute or taken relative to the menus directory; a directory yields its {@code .yml}/{@code .yaml}
- * files in a stable order, a single file yields itself, and anything else — a missing path, a non-YAML file, a
- * malformed path — yields nothing (logged under the {@code menu-convert} prefix) so the calling service reports
+ * files in a stable order, a single file yields itself, and anything else. A missing path, a non-YAML file, a
+ * malformed path. Yields nothing (logged under the {@code menu-convert} prefix) so the calling service reports
  * not-found rather than crashing.
  */
 final class MenuConvertFiles {
@@ -37,7 +37,7 @@ final class MenuConvertFiles {
         return Files.isRegularFile(resolved) && isYaml(resolved) ? List.of(resolved) : List.of();
     }
 
-    /** The file name without its YAML extension — the id the converted {@code .conf} is written under. */
+    /** The file name without its YAML extension: the id the converted {@code .conf} is written under. */
     static String baseName(Path file) {
         String name = file.getFileName().toString();
         int dot = name.lastIndexOf('.');

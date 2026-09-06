@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * One read-only row in the {@code /playtime} panel: a labelled window of the breakdown whose lore shows the
  * active (and, where the window has one, the AFK) figure the viewer inspects but cannot change. It is the
- * playtime panel's analogue of the moderation {@code LabelProperty} — a {@link EditableProperty} the framework
+ * playtime panel's analogue of the moderation {@code LabelProperty}, a {@link EditableProperty} the framework
  * draws for a value shown but never edited, so {@link #onClick} does nothing.
  *
  * <p>The figures come pre-rendered in the captured breakdown map (the same compact {@code Nd Nh Nm} strings the

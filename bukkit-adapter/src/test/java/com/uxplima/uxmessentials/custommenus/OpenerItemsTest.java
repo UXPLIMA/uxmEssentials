@@ -58,7 +58,7 @@ class OpenerItemsTest {
         assertThat(openerItems.hasGiven(player, "hub")).isFalse();
         openerItems.markGiven(player, "hub");
         assertThat(openerItems.hasGiven(player, "hub")).isTrue();
-        // Different opener, its own flag — marking one does not mark another.
+        // Different opener, its own flag: marking one does not mark another.
         assertThat(openerItems.hasGiven(player, "shop")).isFalse();
     }
 

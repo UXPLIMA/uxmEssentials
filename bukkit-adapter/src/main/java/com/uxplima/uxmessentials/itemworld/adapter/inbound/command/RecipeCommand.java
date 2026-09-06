@@ -33,7 +33,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * {@code /recipe [item]}: show an item's crafting recipe as text — the held item when called with no
+ * {@code /recipe [item]}: show an item's crafting recipe as text. The held item when called with no
  * argument, or a named item resolved against the registry. Read-only, so no audit and no region hop is
  * needed; the first shaped or shapeless crafting recipe is rendered through
  * {@link ItemworldMessageKey#RECIPE_SHAPED} / {@link ItemworldMessageKey#RECIPE_SHAPELESS}, and an item with
@@ -42,7 +42,7 @@ import org.jspecify.annotations.Nullable;
  * {@link ItemworldMessageKey#NO_ITEM_IN_HAND}.
  *
  * <p>With its catalog {@code gui} flag on, bare {@code /recipe} (held item) and {@code /recipe <item>} open the
- * {@link RecipeGridMenu} crafting grid instead — the same first recipe, laid into a 3x3 ingredient grid with the
+ * {@link RecipeGridMenu} crafting grid instead, the same first recipe, laid into a 3x3 ingredient grid with the
  * result in its own slot. The {@link #runGui} opener installed on the bare root by the {@code GuiRootBinding}
  * reuses the same recipe resolution, mapping each shape cell (or each shapeless ingredient, in order) to a
  * representative item; the empty-hand, unknown-item, and no-recipe replies are unchanged, with no-recipe opening
@@ -235,7 +235,7 @@ public final class RecipeCommand extends ItemworldCommandSupport implements Comm
 
     /**
      * A representative {@link Material} for a slot's choice, or {@code null} for an empty slot (a space in the
-     * shape) or an unrenderable choice. The first material of a material/exact choice is used — the same one the
+     * shape) or an unrenderable choice. The first material of a material/exact choice is used, the same one the
      * text {@link #choiceName} prints, so the grid and the text never disagree about what fills a cell.
      */
     private static @Nullable Material choiceMaterial(@Nullable RecipeChoice choice) {

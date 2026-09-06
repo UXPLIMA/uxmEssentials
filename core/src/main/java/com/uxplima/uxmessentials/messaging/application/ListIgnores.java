@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /ignorelist}: report the players the owner is ignoring — the read-only companion to {@code /ignore}
+ * {@code /ignorelist}: report the players the owner is ignoring, the read-only companion to {@code /ignore}
  * and {@code /unignore}, reusing the same persistent {@link IgnoreStore} they write to. An owner who ignores
  * no one gets the empty notice; otherwise the listing opens with a header carrying the count and then names
  * each ignored player in turn, in the stable insertion order {@link IgnoreList#entries()} preserves so a

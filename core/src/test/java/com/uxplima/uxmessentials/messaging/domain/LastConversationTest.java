@@ -59,7 +59,7 @@ class LastConversationTest {
         LastConversation refreshed = LastConversation.with(PARTNER, TOUCHED).touchedAt(TOUCHED.plusSeconds(600));
 
         assertThat(refreshed.partner()).isEqualTo(PARTNER);
-        // The re-stamp moves the freshness window forward — what was stale before is fresh now.
+        // The re-stamp moves the freshness window forward: what was stale before is fresh now.
         assertThat(refreshed.isFresh(TOUCHED.plusSeconds(660), Duration.ofMinutes(5)))
                 .isTrue();
     }

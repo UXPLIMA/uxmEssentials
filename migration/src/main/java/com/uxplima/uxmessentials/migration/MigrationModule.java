@@ -15,14 +15,14 @@ import org.jspecify.annotations.NullMarked;
  * The migration adapter as a first-class, command-gated {@link FeatureModule} (docs/12-migration §10).
  * Unlike the twelve feature contexts it is <em>not</em> a steady-state feature: it ships <strong>
  * disabled</strong> in {@code modules.conf} and is enabled only for a cutover (§9). It runs nothing at
- * plugin enable — the importer fires only on the {@code /uxmess import} command — so this module wires no
+ * plugin enable (the importer fires only on the {@code /uxmess import} command) so this module wires no
  * listeners and acquires no runtime state in {@link #start}; the importer's bounded executor is created
  * and torn down per command invocation, not held here.
  *
  * <p>It is intentionally absent from the feature-context registry (the eleven contexts there are the
  * steady-state surface). Bootstrap consults this module's {@link #enabled(ConfigStore)} gate directly
  * when deciding whether to publish the {@code /uxmess import} subcommand, so a disabled module surfaces a
- * dormant importer and an enabled one a live command — wiring zero adapters until the command runs.
+ * dormant importer and an enabled one a live command: wiring zero adapters until the command runs.
  */
 @NullMarked
 public final class MigrationModule implements FeatureModule {
@@ -60,7 +60,7 @@ public final class MigrationModule implements FeatureModule {
 
     @Override
     public boolean enabled(ConfigStore config) {
-        // Ships disabled — the importer is a one-shot cutover tool, not a steady-state feature (§1, §9).
+        // Ships disabled: the importer is a one-shot cutover tool, not a steady-state feature (§1, §9).
         return config.getBoolean(configRoot() + ".enabled", false);
     }
 

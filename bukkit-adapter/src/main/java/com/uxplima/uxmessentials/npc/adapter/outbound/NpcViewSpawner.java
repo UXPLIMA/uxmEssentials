@@ -27,7 +27,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Builds and sends the spawn packets for one (viewer, NPC) pair, branching on type. A fake player takes the
- * player path — a player-info ADD (carrying the name and skin) bundled with a spawn-player packet so they arrive
+ * player path. A player-info ADD (carrying the name and skin) bundled with a spawn-player packet so they arrive
  * together; the entry is added unlisted ({@code listed=false}) so the body renders but the NPC shows no tab-list
  * row, or listed when the operator opted the NPC into the tab list, and either way the entry is kept (the
  * {@link NpcRenderer} drops it on despawn). Any other type spawns the mob through {@code spawnEntity} with no tab
@@ -40,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  * thread), so a bad row never spawns. The warn-once cache lives here because it is part of the type-resolution
  * concern: the renderer's 1s reconcile retries an unresolvable NPC for every viewer every tick (the skip never
  * marks the viewer shown), so an unconditional warn would flood the log. This caps it at one line per NPC per
- * distinct bad value and re-arms when the type changes — to a valid type (which renders and clears the record via
+ * distinct bad value and re-arms when the type changes. To a valid type (which renders and clears the record via
  * the {@code spawn} success path) or to a different bad value (which warns afresh). The renderer calls
  * {@link #forget(String)} / {@link #forgetAll()} on its despawn paths so a deleted NPC drops its record too.
  */
@@ -83,7 +83,7 @@ public final class NpcViewSpawner {
             }
             spawnMobForViewer(viewer, rendered, typeKey);
         }
-        // The type resolved (player or a real mob), so forget any earlier warning for this NPC — a fixed type
+        // The type resolved (player or a real mob), so forget any earlier warning for this NPC: a fixed type
         // re-arms the warn if it ever breaks again.
         warnedBadType.remove(npc.name().value());
         Position at = npc.location();
@@ -98,7 +98,7 @@ public final class NpcViewSpawner {
         warnedBadType.remove(npcName);
     }
 
-    /** Drop every warned-bad-type record — call on a full despawn so nothing outlives the module. */
+    /** Drop every warned-bad-type record: call on a full despawn so nothing outlives the module. */
     void forgetAll() {
         warnedBadType.clear();
     }
@@ -138,7 +138,7 @@ public final class NpcViewSpawner {
     /**
      * Dress the just-spawned fake player for this viewer: send its equipment, then its glow toggle and (when the
      * NPC carries a colour) the team that tints the outline. An equipment slot whose stored token does not resolve
-     * to a real item — an unknown material name, or a corrupt serialized payload — is dropped from the map, so the
+     * to a real item (an unknown material name, or a corrupt serialized payload) is dropped from the map, so the
      * slot shows empty rather than failing the whole spawn, and an unparseable colour falls back to the default
      * white outline; the appearance is always fail-soft.
      */
@@ -159,7 +159,7 @@ public final class NpcViewSpawner {
         }
         applyShape(viewer, rendered, npc);
         // The per-entity-type metadata (baby/size/charged/villager) is sent only for the type that carries each
-        // field, fail-soft per property — the support map lives in NpcTypeData to keep this class under its limit.
+        // field, fail-soft per property: the support map lives in NpcTypeData to keep this class under its limit.
         NpcTypeData.apply(packets, viewer, id, npc, log);
     }
 
@@ -183,8 +183,8 @@ public final class NpcViewSpawner {
 
     /**
      * Apply the NPC's pose and scale for this viewer. A non-default pose resolves to a packet-layer {@link NpcPose}
-     * (an unknown name renders standing — fail-soft, never thrown on the render thread); a non-default scale ships
-     * the resize attribute. The natural-size, standing default sends nothing — the entity already renders that way.
+     * (an unknown name renders standing, fail-soft, never thrown on the render thread); a non-default scale ships
+     * the resize attribute. The natural-size, standing default sends nothing: the entity already renders that way.
      */
     private void applyShape(Player viewer, RenderedNpc rendered, Npc npc) {
         if (npc.hasPose()) {
@@ -266,7 +266,7 @@ public final class NpcViewSpawner {
         return resolved;
     }
 
-    /** Map a domain equipment slot onto the uxmLib packet slot — the single place those two enums meet. */
+    /** Map a domain equipment slot onto the uxmLib packet slot: the single place those two enums meet. */
     private static EquipmentSlot toPacketSlot(com.uxplima.uxmessentials.npc.domain.EquipmentSlot slot) {
         return switch (slot) {
             case MAINHAND -> EquipmentSlot.MAINHAND;

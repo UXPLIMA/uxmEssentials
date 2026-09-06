@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The selector serves a server warp; the menu opens with a {@link WarpSoundEdit} subject carrying the warp and
  * whether the click sets its departure or arrival sound, so the single spec covers both editor buttons. The option
- * grid is the same preset list the original fixed view drew, so a player sees an identical menu — only the
+ * grid is the same preset list the original fixed view drew, so a player sees an identical menu, only the
  * machinery behind it changed.
  */
 @NullMarked

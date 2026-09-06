@@ -28,7 +28,7 @@ final class StaffAlertWiring {
 
     /**
      * Subscribe the roster-alert consumer to {@code events}, returning it so {@code Wired.stop} can unsubscribe.
-     * Returns {@code null} when the messaging audience seam is absent — nothing is registered in that case.
+     * Returns {@code null} when the messaging audience seam is absent: nothing is registered in that case.
      */
     static @Nullable Consumer<DomainEvent> subscribe(
             StaffSeams seams, StaffSettings settings, KernelPorts kernel, InProcessDomainEventPublisher events) {

@@ -23,8 +23,8 @@ import org.jspecify.annotations.NullMarked;
  * to the server default (AxPlayerWarps stores an economy-provider hook name, not one of our currency ids), and the
  * source name is kept as the display label so its original casing survives the lowercase-id sanitising the writer does.
  *
- * <p>A warp whose world the live server does not know is dropped — the mapper returns {@link Optional#empty()} and the
- * plan counts it as skipped — exactly as the EssentialsX warp mapper drops an unknown world, so a migrated warp always
+ * <p>A warp whose world the live server does not know is dropped. The mapper returns {@link Optional#empty()} and the
+ * plan counts it as skipped. Exactly as the EssentialsX warp mapper drops an unknown world, so a migrated warp always
  * has a resolvable destination. The owner and the side-list players are resolved to uuids by the plan through the
  * player map before they reach this mapper.
  */
@@ -92,7 +92,7 @@ public final class AxWarpMapper {
     }
 
     /**
-     * The resolved side-table data for one warp — the members-less AxPlayerWarps social state, gathered and keyed to
+     * The resolved side-table data for one warp. The members-less AxPlayerWarps social state, gathered and keyed to
      * uuids by the plan before mapping.
      *
      * @param whitelist the whitelisted players
@@ -117,7 +117,7 @@ public final class AxWarpMapper {
             ratings = List.copyOf(Objects.requireNonNull(ratings, "ratings"));
         }
 
-        /** An empty sidecar — a warp with no whitelist, bans, favourites, ratings, or recorded visits. */
+        /** An empty sidecar: a warp with no whitelist, bans, favourites, ratings, or recorded visits. */
         public static Sidecar empty() {
             return new Sidecar(List.of(), List.of(), List.of(), List.of(), 0L, 0);
         }

@@ -22,15 +22,15 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 /**
  * Converts a DeluxeMenus menu YAML into an equivalent uxmEssentials HOCON menu spec, so an operator migrating off
- * DeluxeMenus keeps their menus. It reads the well-known DeluxeMenus surface — {@code menu_title}, {@code size},
+ * DeluxeMenus keeps their menus. It reads the well-known DeluxeMenus surface, {@code menu_title}, {@code size},
  * {@code open_requirement}, and each {@code items.<id>} with its material / name / lore / slots / per-gesture click
- * commands and requirements — and emits the {@code title} / {@code rows} / {@code items { … }} shape
+ * commands and requirements, and emits the {@code title} / {@code rows} / {@code items { … }} shape
  * {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.spec.MenuSpecLoader} loads.
  *
  * <p>The conversion covers the common surface and degrades gracefully everywhere else: an unknown click tag becomes a
  * best-effort {@code console} command, an unmappable requirement type (a JavaScript expression, a construct we have no
  * condition for) is dropped, and every such compromise is recorded as a {@link ConversionResult#warnings() warning}
- * the caller logs — never a thrown exception. Only a fundamentally unparsable YAML document raises, which the calling
+ * the caller logs, never a thrown exception. Only a fundamentally unparsable YAML document raises, which the calling
  * service catches per file so one bad export never aborts a whole directory convert.
  *
  * <p>DeluxeMenus colour codes ({@code &a}) and PlaceholderAPI tokens ({@code %player_name%}) are carried through
@@ -46,7 +46,7 @@ public final class DeluxeMenusConverter {
     /** A chest tops out at six rows; a DeluxeMenus size beyond {@code 54} is clamped to this with a warning. */
     private static final int MAX_ROWS = 6;
 
-    /** The fallback row count for a menu that declares no {@code size} — DeluxeMenus defaults an absent size to 54. */
+    /** The fallback row count for a menu that declares no {@code size}: DeluxeMenus defaults an absent size to 54. */
     private static final int DEFAULT_ROWS = 6;
 
     /** The DeluxeMenus trailing per-command modifier ({@code <delay=100>}); stripped and warned about, not converted. */
@@ -106,7 +106,7 @@ public final class DeluxeMenusConverter {
         return Math.max(1, Math.min(MAX_ROWS, declared / SLOTS_PER_ROW));
     }
 
-    /** The {@code open_command} (string or list) as a note for the emitted spec — our opener wiring is separate. */
+    /** The {@code open_command} (string or list) as a note for the emitted spec: our opener wiring is separate. */
     private java.util.Optional<String> openCommandNote(ConfigurationNode source) {
         ConfigurationNode open = source.node("open_command");
         if (open.virtual() || open.isNull()) {
@@ -116,7 +116,7 @@ public final class DeluxeMenusConverter {
         if (value.isBlank()) {
             return java.util.Optional.empty();
         }
-        return java.util.Optional.of("open_command: " + value + " — wire this via /menu open or an openers.conf entry");
+        return java.util.Optional.of("open_command: " + value + ". Wire this via /menu open or an openers.conf entry");
     }
 
     /** Map the DeluxeMenus {@code open_requirement} conditions onto our flat {@code open-requirement} list. */
@@ -264,8 +264,8 @@ public final class DeluxeMenusConverter {
     }
 
     /**
-     * Map a DeluxeMenus requirement block — its {@code requirements} map, {@code deny_commands}, {@code
-     * minimum_requirements} and {@code stop_at_success} — onto our condition tokens plus deny actions.
+     * Map a DeluxeMenus requirement block. Its {@code requirements} map, {@code deny_commands}, {@code
+     * minimum_requirements} and {@code stop_at_success}: onto our condition tokens plus deny actions.
      */
     private RequirementBlock requirementBlock(ConfigurationNode block, List<String> warnings) {
         List<String> conditions = new ArrayList<>();

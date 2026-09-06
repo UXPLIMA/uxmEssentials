@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /itemworld gui} ({@code uxmessentials.itemworld.gui}, default op): open the itemworld utilities hub — the
+ * {@code /itemworld gui} ({@code uxmessentials.itemworld.gui}, default op): open the itemworld utilities hub, the
  * launcher of virtual workstations, world time/weather actions, and cleanup sweeps. A players-only command that
  * opens the same {@link ItemworldHubMenu} the {@code /uxmess gui} hub does; it mutates nothing itself, and each
  * launcher button is additionally gated by the permission of the command it stands in for, so a viewer only sees

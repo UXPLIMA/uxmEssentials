@@ -6,8 +6,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * An informational line for {@code /uxmess doctor}: whether the server is Folia (regionised threading) or
- * regular Paper. The plugin is Folia-ready either way — every scheduled task already routes through the
- * region-aware {@code Scheduler} port — so this is always {@code OK}; it just tells the operator which threading
+ * regular Paper. The plugin is Folia-ready either way. Every scheduled task already routes through the
+ * region-aware {@code Scheduler} port, so this is always {@code OK}; it just tells the operator which threading
  * model is live, which colours how they read the rest of the report. Folia is detected by the presence of the
  * {@code RegionizedServer} class, which exists only on a Folia server.
  */

@@ -22,7 +22,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /beezooka} (alias {@code /beecannon}): launch an angry bee from the caller's eye in their facing
- * direction — a bee-cannon gag. An admin-fun verb (audit-logged).
+ * direction, a bee-cannon gag. An admin-fun verb (audit-logged).
  *
  * <p>Spawning and propelling the bee is region-bound, so it runs on the caller's region thread through the
  * kernel {@code Scheduler}; the launch is reported through {@link ItemworldMessageKey#BEEZOOKA_FIRED} and

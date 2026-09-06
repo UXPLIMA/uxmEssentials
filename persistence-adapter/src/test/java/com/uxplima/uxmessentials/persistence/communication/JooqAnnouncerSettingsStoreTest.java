@@ -73,7 +73,7 @@ class JooqAnnouncerSettingsStoreTest {
         assertThat(store.load().interval()).contains(Duration.ofSeconds(200));
     }
 
-    /** A config that selects the embedded SQLite backend with every default — no network coordinates. */
+    /** A config that selects the embedded SQLite backend with every default: no network coordinates. */
     private record SqliteConfig() implements ConfigStore {
         @Override
         public boolean getBoolean(String path, boolean fallback) {
@@ -91,7 +91,7 @@ class JooqAnnouncerSettingsStoreTest {
         }
     }
 
-    /** A logger that drops everything — the store test asserts on rows, not log output. */
+    /** A logger that drops everything: the store test asserts on rows, not log output. */
     private static final class NoopLogger implements Logger {
         @Override
         public void info(String message, Object... args) {}

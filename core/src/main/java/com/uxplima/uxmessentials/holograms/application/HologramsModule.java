@@ -25,7 +25,7 @@ import org.jspecify.annotations.NullMarked;
  * location of its own; a disabled module leaves the baseline tables in place but wires nothing over them. The
  * use cases, the jOOQ repository over {@code persistence.dsl()}, and the uxmLib-backed renderer are
  * constructed in the adapter wiring once the module has started; the lifecycle bookkeeping here keeps
- * {@code stop()} honest — on disable the spawned holograms are despawned.
+ * {@code stop()} honest: on disable the spawned holograms are despawned.
  */
 @NullMarked
 public final class HologramsModule implements FeatureModule {

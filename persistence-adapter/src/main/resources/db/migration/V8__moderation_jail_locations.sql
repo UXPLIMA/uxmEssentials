@@ -7,7 +7,7 @@
 --
 -- The location is the warps shape verbatim (V1 `warps`): the world uid as canonical
 -- 36-char text plus the operator-facing world name, the coordinates as DOUBLE
--- PRECISION and the look angles as REAL — so the column types are identical on every
+-- PRECISION and the look angles as REAL, so the column types are identical on every
 -- backend. defined_by is the actor uuid (NULL for a console actor); created_at is
 -- epoch milliseconds in a BIGINT, mirroring every other instant in the schema.
 --

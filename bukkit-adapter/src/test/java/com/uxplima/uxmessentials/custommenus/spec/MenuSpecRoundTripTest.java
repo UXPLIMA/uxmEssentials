@@ -19,13 +19,13 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The golden round-trip proof for {@link MenuSpecWriter}: a spec that has been through the loader, then the writer,
- * then the loader again must equal the spec it started as. It is the load-time contract of the whole menu editor —
- * an in-game edit is only safe to write back if writing then re-reading is lossless — so the coverage is deliberately
+ * then the loader again must equal the spec it started as. It is the load-time contract of the whole menu editor
+ * an in-game edit is only safe to write back if writing then re-reading is lossless, so the coverage is deliberately
  * exhaustive: the shipped {@code menus/example.conf} plus synthesized specs that exercise every key the loader reads
  * (multiple items, slot ranges, the full decor surface, every click gesture with a requirement block and an
  * else-chain, view requirements and the {@code permission}/{@code pages} shorthands, a list item, item-drag, refresh,
  * a non-chest inventory type, a bottom-inventory canvas, the chest-only routing hint, a fill item, and a Bedrock
- * form). Pure JUnit and Configurate only — no MockBukkit — because the writer and the model it walks are Bukkit-free.
+ * form). Pure JUnit and Configurate only, no MockBukkit, because the writer and the model it walks are Bukkit-free.
  *
  * <p>Equality is the records' own deep value equality: {@link MenuSpec} and every type it holds are records, so a
  * single {@code isEqualTo} compares title, rows, refresh, actions, items, decor, clicks, requirements, and the rest
@@ -81,8 +81,8 @@ class MenuSpecRoundTripTest {
     }
 
     /**
-     * The editor's write path, end to end: a spec built up through {@link MenuEditSession} mutations — the very model
-     * the in-game editor drives — must survive write → re-load unchanged. This locks the edit-model → HOCON path against
+     * The editor's write path, end to end: a spec built up through {@link MenuEditSession} mutations, the very model
+     * the in-game editor drives: must survive write → re-load unchanged. This locks the edit-model → HOCON path against
      * regression the way the golden cases above lock the loader → writer path, covering a captured {@code b64:} material
      * token, a renamed item with lore and glow, an appended right-click action, and a resize.
      */
@@ -97,7 +97,7 @@ class MenuSpecRoundTripTest {
         session.setName("x", "<aqua>Renamed");
         session.setLore("x", List.of("<gray>Line one", "<gray>Line two"));
         session.setGlow("x", true);
-        // A capture stores the held item as a b64 token — the material the /menu captureitem and drag paths write.
+        // A capture stores the held item as a b64 token: the material the /menu captureitem and drag paths write.
         session.setMaterial("x", "b64:cmVhbGx5LWFuLW9wYXF1ZS1zdGFjaw==");
         session.addAction("x", ClickKind.RIGHT, Ref.parse("sound:UI_BUTTON_CLICK_1"));
         session.addItem("y", base.items().get("x").withSlots(new SlotSet(List.of(5))));
@@ -109,7 +109,7 @@ class MenuSpecRoundTripTest {
         assertThat(reloaded).isEqualTo(edited);
     }
 
-    /** Parse, write, re-parse, and assert the two models are equal — the round-trip every case shares. */
+    /** Parse, write, re-parse, and assert the two models are equal: the round-trip every case shares. */
     private void assertRoundTrips(String hocon) {
         MenuSpec original = loader.parse(hocon);
         MenuSpec reloaded = loader.parse(writer.write(original));

@@ -6,8 +6,8 @@ import java.util.List;
 import org.jspecify.annotations.Nullable;
 
 /**
- * A recursive-descent evaluator over a token list. It evaluates as it parses — there is no intermediate syntax
- * tree and therefore no node type that could carry behaviour — so the only values that ever flow through are
+ * A recursive-descent evaluator over a token list. It evaluates as it parses. There is no intermediate syntax
+ * tree and therefore no node type that could carry behaviour, so the only values that ever flow through are
  * doubles, booleans, and strings. Precedence climbs from boolean {@code or} down to unary minus and primaries;
  * {@code ^} is right associative. A recursion-depth cap bounds the work a pathologically nested expression can
  * demand, keeping a hostile menu config from exhausting the stack.
@@ -47,7 +47,7 @@ final class Parser {
         Object value = and();
         while (matchOperator("||") || matchKeyword("or")) {
             boolean left = Values.bool(value);
-            // The right operand is parsed unconditionally — the parser must consume its tokens even when
+            // The right operand is parsed unconditionally. The parser must consume its tokens even when
             // the result is already determined, so the combine happens on two already-evaluated locals.
             boolean right = Values.bool(and());
             value = left || right;

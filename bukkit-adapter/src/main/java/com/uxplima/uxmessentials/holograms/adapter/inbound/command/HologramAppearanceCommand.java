@@ -97,7 +97,7 @@ final class HologramAppearanceCommand extends HologramCommandSupport {
                                         .executes(this::brightness))));
     }
 
-    /** {@code scale <name> <x> [y] [z]} — one value scales uniformly, three set each axis independently. */
+    /** {@code scale <name> <x> [y] [z]}: one value scales uniformly, three set each axis independently. */
     private LiteralArgumentBuilder<CommandSourceStack> scaleNode() {
         return Commands.literal("scale")
                 .then(nameArgument("name")

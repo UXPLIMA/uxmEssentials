@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.shared.display.BroadcastChannel;
  * this port owns the <em>how</em>: the recipient loop, the per-player opt-out check, resolving the message
  * in each viewer's locale, delivering it on each requested channel, and any broadcast sound.
  *
- * <p>Like {@link com.uxplima.uxmessentials.shared.application.message.Notifier} this carries only key content —
+ * <p>Like {@link com.uxplima.uxmessentials.shared.application.message.Notifier} this carries only key content
  * the plugin's parity-checked strings, never operator-authored vote-link or reward text. The adapter maps
  * the live players and channels to the Bukkit/Adventure API at the boundary.
  */

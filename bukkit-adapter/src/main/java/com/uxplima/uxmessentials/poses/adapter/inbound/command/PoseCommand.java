@@ -31,7 +31,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * One free-pose command — {@code /lay}, {@code /bellyflop}, or {@code /spin} — gated on its own
+ * One free-pose command ({@code /lay}, {@code /bellyflop}, or {@code /spin}) gated on its own
  * {@code uxmessentials.<pose>.use} node. A free pose is always struck where the player stands, so this handler
  * resolves nothing but the player's own feet and hands the pose to {@link StartPose}, which owns the feature gate,
  * the region gate, the one-session invariant, and the anchor. The three commands share this class, each constructed

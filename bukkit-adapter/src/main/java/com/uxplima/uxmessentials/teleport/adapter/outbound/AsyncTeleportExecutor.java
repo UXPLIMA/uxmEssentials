@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * window is the engine's concern, not this adapter's.
  *
  * <p>The completion callback may resume on any region/IO thread, so the success message and the
- * {@code /back} capture hop back to the player's region thread — the one place the teleport flow
+ * {@code /back} capture hop back to the player's region thread, the one place the teleport flow
  * deliberately hops more than once (docs/02-concurrency.md §6.5).
  */
 @NullMarked
@@ -103,7 +103,7 @@ public final class AsyncTeleportExecutor implements TeleportExecutor {
             boolean showArrival) {
         Player player = Bukkit.getPlayer(who.uuid());
         if (player == null || !player.isOnline()) {
-            return; // despawned between launch and hop — nothing to move
+            return; // despawned between launch and hop: nothing to move
         }
         Position target = applyCentering(resolveTarget(destination));
         Location to = locationFor(target);
@@ -135,7 +135,7 @@ public final class AsyncTeleportExecutor implements TeleportExecutor {
             return;
         }
         if (Boolean.FALSE.equals(ok)) {
-            return; // Paper refused the hop (e.g. unloaded target); the player stayed put — no landed callback
+            return; // Paper refused the hop (e.g. unloaded target); the player stayed put: no landed callback
         }
         scheduler.onEntity(who, () -> {
             events.publish(new PlayerTeleported(who, kind, from, to));
@@ -143,7 +143,7 @@ public final class AsyncTeleportExecutor implements TeleportExecutor {
                 arrivalHud.arrived(who, kind);
                 arrivalEffects.arrived(who, kind);
             }
-            // The cooldown stamp / RTP charge / arrival grace hang off a real landing only — never a refusal.
+            // The cooldown stamp / RTP charge / arrival grace hang off a real landing only, never a refusal.
             onLanded.run();
         });
     }

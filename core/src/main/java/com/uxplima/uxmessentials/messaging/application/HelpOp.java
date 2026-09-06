@@ -20,7 +20,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
  * {@code /helpop <text>}: open a player→staff support request. The send is mute-gated (a muted player cannot
  * raise a help-op) and fans the request out to every online staff member holding the receive node. The
  * requester always gets a sent confirmation even when no staff are online, so a help-op is never lost
- * silently — operators can read the {@code HelpOpRaised} event in their audit trail. The request itself is
+ * silently: operators can read the {@code HelpOpRaised} event in their audit trail. The request itself is
  * transient; only the fact that it was raised is a domain event.
  */
 public final class HelpOp {

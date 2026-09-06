@@ -11,7 +11,7 @@ import java.util.UUID;
  *
  * <p>The migration lives in the persistence layer and must not depend on the messaging module, so it takes a
  * {@code Consumer<PlayerWarpRenameNotice>} rather than reaching for a mailbox directly. Bootstrap decides where the
- * notice goes — an operator log line today, offline mail to the owner once that seam is threaded through the
+ * notice goes, an operator log line today, offline mail to the owner once that seam is threaded through the
  * player-warps wiring. This record is only the data carried across that seam.
  *
  * @param owner the warp owner whose warp was renamed

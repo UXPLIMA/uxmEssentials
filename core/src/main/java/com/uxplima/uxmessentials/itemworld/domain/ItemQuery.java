@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * A validated, namespaced item identifier as accepted by {@code /give}, {@code /item} and {@code /itemdb}.
  *
- * <p>The domain does not know Bukkit {@code Material} — it only normalises the textual id to the canonical
+ * <p>The domain does not know Bukkit {@code Material}. It only normalises the textual id to the canonical
  * lowercase, {@code namespace:path} shape the adapter then resolves against the live registry. A bare id
  * without a namespace defaults to {@code minecraft:}. The grammar here rejects obviously malformed ids
  * (blank, illegal characters) so the adapter's registry lookup is the only remaining failure mode; an id

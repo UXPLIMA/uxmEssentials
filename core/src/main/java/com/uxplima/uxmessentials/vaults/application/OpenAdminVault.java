@@ -13,7 +13,7 @@ import com.uxplima.uxmessentials.vaults.domain.VaultSize;
 
 /**
  * {@code /vault <player> [n]}: the staff override that opens another player's vault for inspection. Unlike the
- * owner path, the amount quota is not enforced — staff may open any index — but the open is always
+ * owner path, the amount quota is not enforced, staff may open any index, but the open is always
  * audit-logged through {@link VaultAudit} so the override is replayable from the audit channel (the
  * {@code event=vault_admin_open} line). An absent vault is opened as an empty one at the owner's resolved
  * size, so staff can audit a player who has not used that index yet without a missing-row error.

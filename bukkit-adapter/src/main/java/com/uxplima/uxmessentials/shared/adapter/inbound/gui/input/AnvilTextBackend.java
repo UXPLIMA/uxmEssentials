@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
  * The anvil backend of the text-input seam: opens a uxmLib {@link AnvilInput}, putting the resolved prompt line on the
  * left-slot item (its name is the on-screen hint, exactly as the property widgets did before). A vanilla anvil seeds
  * its rename field from that item's display name, so when an {@code initialText} is supplied it becomes the item name
- * — the field opens pre-filled with it; otherwise the styled prompt is the hint and the field opens empty. The anvil's
+ *: the field opens pre-filled with it; otherwise the styled prompt is the hint and the field opens empty. The anvil's
  * own outcome ({@code Submitted}/{@code Cancelled}) maps one-to-one onto {@link InputResult}; the cancel-keyword check
  * happens upstream in {@link TextInput}, so this backend stays a thin adapter over {@link AnvilInput}.
  */

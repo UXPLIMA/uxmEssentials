@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
  * A jailed-and-muted player streams as one {@code ModerationRecord}; a live run writes it once and a
  * re-run upserts (set, never append) so two runs leave exactly one stored sanction per uuid. A dry run
  * takes no backup, stores nothing, and still tallies the same {@code jails}/{@code mutes} summary so an
- * operator can review counts before committing. Pure application code — no Bukkit, no disk.
+ * operator can review counts before committing. Pure application code, no Bukkit, no disk.
  */
 class MigrationIdempotencyDryRunTest {
 
@@ -120,7 +120,7 @@ class MigrationIdempotencyDryRunTest {
         }
     }
 
-    /** A writer that "sets" each sanctioned uuid into a map — a re-run replaces, never duplicates. */
+    /** A writer that "sets" each sanctioned uuid into a map: a re-run replaces, never duplicates. */
     private static final class SanctionSetWriter implements RecordWriter {
         private final ConcurrentHashMap<UUID, Boolean> stored = new ConcurrentHashMap<>();
 

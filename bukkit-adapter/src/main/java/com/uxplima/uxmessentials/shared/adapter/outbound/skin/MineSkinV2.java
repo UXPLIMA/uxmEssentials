@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  *       {@code GET /v2/queue/<jobId>} a bounded number of times with a short delay between, until the texture is
  *       ready or the attempts are exhausted (then a miss);</li>
  *   <li>a {@code 429} rate limit is retried a bounded number of times honouring {@code Retry-After} (capped), and
- *       failed soft to a miss thereafter — never an unbounded retry storm.</li>
+ *       failed soft to a miss thereafter. Never an unbounded retry storm.</li>
  * </ol>
  *
  * <p>The blocking calls and the bounded {@link #sleeper} delay run on the async-scheduler thread the caller has
@@ -34,9 +34,9 @@ import org.jspecify.annotations.Nullable;
  * fail-soft: a transport error, a textureless response, an exhausted poll, or an exhausted rate-limit backoff all
  * yield {@link Optional#empty()}.
  *
- * <p>Maintainer-verify: the exact v2 wire shape — whether a queue submit answers {@code 200}-with-skin or
+ * <p>Maintainer-verify: the exact v2 wire shape. Whether a queue submit answers {@code 200}-with-skin or
  * {@code 202}-with-job, the JSON path to the texture ({@code skin.texture.data.*} here) and to the job id
- * ({@code job.id}), the {@code visibility} enum, and the queue-poll path ({@code /v2/queue/<id>}) — is read from
+ * ({@code job.id}), the {@code visibility} enum, and the queue-poll path ({@code /v2/queue/<id>}), is read from
  * the documented v2 API and parsed defensively (v2 + v1 paths). Confirm against the live API and adjust the
  * endpoint constants / {@link MineSkinJson} paths in one place if it has shifted.
  */
@@ -181,8 +181,8 @@ final class MineSkinV2 {
     }
 
     /**
-     * The v2 generate body: the image URL and a string {@code visibility}. Built through gson so the URL — which
-     * may carry a quote, backslash, or control character — is escaped exactly as JSON requires and can never break
+     * The v2 generate body: the image URL and a string {@code visibility}. Built through gson so the URL, which
+     * may carry a quote, backslash, or control character. Is escaped exactly as JSON requires and can never break
      * the body or inject a field, rather than relying on hand-rolled escaping.
      */
     private String requestBody(String imageUrl, @Nullable String variant) {
@@ -197,7 +197,7 @@ final class MineSkinV2 {
 
     /**
      * The bounded inter-poll / backoff sleep, behind a seam so a unit test runs instantly (a no-op sleeper) while
-     * production sleeps on the async-scheduler thread the caller already owns — never a region or tick thread.
+     * production sleeps on the async-scheduler thread the caller already owns, never a region or tick thread.
      */
     @FunctionalInterface
     interface Sleeper {

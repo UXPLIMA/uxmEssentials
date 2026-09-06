@@ -179,7 +179,7 @@ class ListCommandTest {
         }
     }
 
-    /** Resolves any key to its own string — used by the GUI path, which raises several different keys. */
+    /** Resolves any key to its own string: used by the GUI path, which raises several different keys. */
     private static final class KeyEchoMessages implements Messages {
         @Override
         public String resolve(PlayerRef viewer, MessageKey key, Map<String, String> placeholders) {

@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * The first step of TOTP enrolment ({@code /2fa setup}): mint a fresh shared secret, hold it as the player's
- * pending (un-confirmed) enrolment, and hand back the challenge — the secret and its {@code otpauth://} URI — for
+ * pending (un-confirmed) enrolment, and hand back the challenge, the secret and its {@code otpauth://} URI, for
  * the adapter to show the player. Crucially it persists <b>nothing</b>: the secret becomes a real factor only after
  * {@link ConfirmTotpEnrollment} proves the player can produce a code from it, so a setup the player abandons never
  * leaves a factor that could lock them out later.

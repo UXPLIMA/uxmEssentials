@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Pins {@link BlockedCommands}: the first-word, slash-stripped, case-insensitive matching and the normalisation of
- * configured entries (blank ones dropped). An empty list blocks nothing — the default.
+ * configured entries (blank ones dropped). An empty list blocks nothing, the default.
  */
 class BlockedCommandsTest {
 

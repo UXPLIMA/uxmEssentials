@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The staff direct-teleport verbs — {@code /tp}, {@code /tphere}, {@code /tpo}, {@code /tpohere} — handled
+ * The staff direct-teleport verbs ({@code /tp}, {@code /tphere}, {@code /tpo}, {@code /tpohere}) handled
  * without a warmup or cooldown (a staff hop is instant). {@link Pull#GO} moves the invoking player to the
  * target ({@code /tp}, {@code /tpo}); {@link Pull#BRING} moves the target to the invoking player
  * ({@code /tphere}, {@code /tpohere}). The {@code o} variants exist to override no-teleport flags; those
@@ -85,8 +85,8 @@ public final class AdminTpCommand extends TeleportCommandSupport implements Comm
         var root = Commands.literal(literal)
                 .requires(src -> src.getSender().hasPermission(permission))
                 .then(player);
-        // The coordinate form mirrors /tppos and only makes sense for the GO variants (/tp, /tpo) —
-        // moving the actor to a raw point — so /tphere and /tpohere keep the player-only argument.
+        // The coordinate form mirrors /tppos and only makes sense for the GO variants (/tp, /tpo)
+        // moving the actor to a raw point, so /tphere and /tpohere keep the player-only argument.
         if (pull == Pull.GO) {
             root.then(Commands.literal("at")
                     .requires(src -> src.getSender().hasPermission(POSITION_PERMISSION))

@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
  * Resolves a text hologram's lines <em>per viewer</em> and sends each viewer a text-override packet, so a
  * hologram whose lines embed a PlaceholderAPI token renders that viewer's own placeholder values while staying a
  * single shared {@code TextDisplay}. The approach: one real shared entity, plus a
- * per-viewer metadata override — and it lives here, off {@link HologramRenderer}, so the renderer keeps the
+ * per-viewer metadata override, and it lives here, off {@link HologramRenderer}, so the renderer keeps the
  * shared-entity lifecycle and this collaborator owns the per-viewer placeholder work.
  *
  * <p>A hologram is per-viewer iff it is a {@link HologramType#TEXT} hologram and at least one of its lines
@@ -34,7 +34,7 @@ import org.jspecify.annotations.NullMarked;
  * hologram (no token) is never touched, so a default server with no placeholder hologram pays nothing.
  *
  * <p>The per-viewer text is built exactly as the shared entity renders it: each line's MiniMessage source is run
- * through that viewer's {@code messageBridge} (the per-viewer PlaceholderAPI transform — the identity when
+ * through that viewer's {@code messageBridge} (the per-viewer PlaceholderAPI transform, the identity when
  * PlaceholderAPI is absent, so per-viewer text then equals the global text), deserialised, and the lines joined
  * with newlines. Resolution is fail-soft per viewer: a bridge or parse error for one viewer is logged and
  * skipped so it never stops the others from getting their override.
@@ -128,7 +128,7 @@ public final class HologramTextOverrides {
         for (HologramLine line : lines) {
             String tokens = HologramTokens.resolve(line.value(), viewer.getName(), page + 1, pages);
             // The per-viewer path renders a static frame, so an inline animation directive is stripped rather than
-            // shown literally — animation and per-viewer placeholders do not combine (the placeholder wins).
+            // shown literally: animation and per-viewer placeholders do not combine (the placeholder wins).
             String source = HologramAnimations.stripDirective(bridge.apply(tokens));
             resolved.add(miniMessage.deserialize(source, tags));
         }

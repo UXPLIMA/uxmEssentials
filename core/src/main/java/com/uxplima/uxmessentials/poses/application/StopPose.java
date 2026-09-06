@@ -16,7 +16,7 @@ import com.uxplima.uxmessentials.shared.application.port.DomainEventPublisher;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Ends a player's pose — by their own command, or because they moved, took damage, dismounted, teleported, or
+ * Ends a player's pose. By their own command, or because they moved, took damage, dismounted, teleported, or
  * quit. It pulls the active {@link PoseSession} from the registry (a player who is not posing is a safe no-op),
  * removes the seat entity the session recorded so no ghost is left behind, clears any free-pose render and snore,
  * optionally returns the player to where the pose began, clears the session, and publishes {@link PoseEnded}.
@@ -32,7 +32,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  * is gone) and a teleport (returning them would fight the teleport that ended the pose) call
  * {@link #stop(PlayerRef, boolean)} with {@code allowReturn = false}. The command, sneak, damage, and dismount
  * exits use {@link #stop(PlayerRef)}, which returns the player when the server is configured to. A crawl is never
- * returned wherever it ends — a pose you walk around in has no meaningful start to snap back to.
+ * returned wherever it ends: a pose you walk around in has no meaningful start to snap back to.
  */
 public final class StopPose {
 
@@ -97,7 +97,7 @@ public final class StopPose {
         // pose-type branch is needed here.
         poses.clearPose(who);
         snores.stopSnoring(who);
-        // A crawl is never returned — it is a pose you walk around in, so there is no meaningful spot to snap back to.
+        // A crawl is never returned: it is a pose you walk around in, so there is no meaningful spot to snap back to.
         if (allowReturn && returnToStart && session.type() != PoseType.CRAWL) {
             poseReturn.returnTo(who, session.returnLocation());
         }

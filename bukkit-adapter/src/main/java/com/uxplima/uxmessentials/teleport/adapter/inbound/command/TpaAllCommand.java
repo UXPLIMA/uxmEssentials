@@ -21,8 +21,8 @@ import org.jspecify.annotations.NullMarked;
 /**
  * {@code /tpaall}: open a {@code /tpahere}-direction request to every other online player at once. Each
  * request runs through the same {@link com.uxplima.uxmessentials.teleport.application.RequestTeleport}
- * gates (toggle, block, self): a toggled-off or blocking target is skipped, and — as with a single
- * {@code /tpa} — the requester is told why for each one. The command is a fan-out over the single-target
+ * gates (toggle, block, self): a toggled-off or blocking target is skipped, and, as with a single
+ * {@code /tpa}: the requester is told why for each one. The command is a fan-out over the single-target
  * use case, never a privileged bypass.
  */
 @NullMarked

@@ -20,8 +20,8 @@ import com.uxplima.uxmessentials.shared.domain.Result;
 import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
- * {@code /hologram info <name>}: print a hologram's stored properties to the operator — its location, line
- * count, type, billboard, background, scale, view range, visibility, refresh interval and rotation — as one
+ * {@code /hologram info <name>}: print a hologram's stored properties to the operator, its location, line
+ * count, type, billboard, background, scale, view range, visibility, refresh interval and rotation, as one
  * header followed by structured {@link HologramsMessageKey} entries (the values interpolate the data). A name no
  * hologram exists at is rejected with {@link HologramError#NOT_FOUND}. The operator-only permission is enforced
  * at the adapter gate.

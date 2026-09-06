@@ -59,7 +59,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * {@link MenuListener}. The editor is laid out entirely from a temp layout conf (no hardcoded slots): it draws one
  * button per property at its conf slot plus the conf'd back and delete buttons, a {@link ToggleProperty} click flips
  * the value and runs its setter, a {@link NumberProperty} click steps within bounds, a {@link TextProperty} routes a
- * validated line to its setter, and the delete button opens the engine confirm so a stray click cannot delete — only
+ * validated line to its setter, and the delete button opens the engine confirm so a stray click cannot delete, only
  * a confirm-slot click does. The scheduler is synchronous so the off-thread setter runs inline.
  */
 class EntityEditorViewTest {

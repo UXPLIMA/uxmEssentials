@@ -8,7 +8,7 @@ import java.util.UUID;
  * visibility flip, or a move/relocate), so peers must drop their cached copy of {@code owner}'s warps and
  * re-read the authoritative rows on the next {@code /pwarp} / {@code /pwarps}. The frame carries the owner
  * identity only; the warp rows live in the shared database, and a {@code /pwarp} on a peer resolves the
- * location from there. It mirrors {@link HomeChanged} — player-warps are per-owner, so the unit a peer
+ * location from there. It mirrors {@link HomeChanged}. Player-warps are per-owner, so the unit a peer
  * invalidates is exactly that owner's cached set.
  *
  * @param originServer the backend that made the change

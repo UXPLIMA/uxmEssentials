@@ -37,7 +37,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * {@code /trade <player>} opens a trade request; {@code /trade accept|deny [player]} resolves one. A request is held in
  * the in-memory {@link TradeRequests} book (expiring after the configured window) and only opens the dual-inventory
- * window — through the injected opener — once the target accepts and both players are still online, unblocked, and
+ * window, through the injected opener, once the target accepts and both players are still online, unblocked, and
  * within range. The send is gated on the self-check, the busy-check for either side, the configured request distance,
  * and the per-player {@link TradeCooldown}; every refusal maps to a {@link TradeMessageKey} line. Gated on
  * {@code uxmessentials.trade.use}, which ships {@code true}.

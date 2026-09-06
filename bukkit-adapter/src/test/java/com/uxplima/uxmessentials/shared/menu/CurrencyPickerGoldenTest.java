@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * the old view produced for this fixture; the active currency's icon must carry the {@code UNBREAKING} glint with
  * {@code HIDE_ENCHANTS} while the inactive one carries neither. Then a left click on the inactive currency through the
  * engine's own {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu.runtime.MenuListener} proves the
- * migrated path hands that currency to the recording {@code onPick} the old view drove — faithful in both
+ * migrated path hands that currency to the recording {@code onPick} the old view drove, faithful in both
  * appearance and behaviour.
  */
 class CurrencyPickerGoldenTest {

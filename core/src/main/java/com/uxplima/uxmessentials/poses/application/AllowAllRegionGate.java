@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.domain.Position;
 
 /**
  * The permissive {@link PoseRegionGate}: posing is allowed everywhere. Production wires the claim- and
- * WorldGuard-aware {@link ClaimAwareRegionGate}; this remains the "nothing forbids a pose" gate — the behaviour a
+ * WorldGuard-aware {@link ClaimAwareRegionGate}; this remains the "nothing forbids a pose" gate, the behaviour a
  * server with no region plugin lands on, and the fixture the use-case tests gate with when region checks are not
  * under test.
  */

@@ -5,7 +5,7 @@
  * {@link com.uxplima.uxmessentials.trade.application.TradeMessageKey} catalog of player-facing notices. Phase 1 stands
  * up the module skeleton and the pure state machine only; the trade-window use cases, the request/accept flow, and
  * the cross-server escrow orchestration land in the later phases behind this same module. No Bukkit, Paper, Kyori, or
- * infrastructure type appears here — the layer speaks only the domain and the shared kernel ports.
+ * infrastructure type appears here: the layer speaks only the domain and the shared kernel ports.
  */
 @org.jspecify.annotations.NullMarked
 package com.uxplima.uxmessentials.trade.application;

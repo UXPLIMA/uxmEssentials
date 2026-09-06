@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>Reads go through the cache, which loads a miss from the backing query; writes invalidate the
  * affected key so the next read reflects the durable state (write-through at the repository, invalidate
- * here — never a write-back cache that could lose a mutation). The cache is bounded by size and a short
+ * here: never a write-back cache that could lose a mutation). The cache is bounded by size and a short
  * expire-after-write so a never-touched-again entry cannot pin memory; the source of truth is always the
  * DB. This is the shared shape the per-context cache decorators ({@code CachedHomeRepository},
  * {@code CachedWarpRepository}) compose rather than re-implementing Caffeine wiring each time.
@@ -52,7 +52,7 @@ public final class ReadThroughCache<K, V> {
     }
 
     /**
-     * The cached value for {@code key} only if it is already in memory — never loads through to the backing
+     * The cached value for {@code key} only if it is already in memory. Never loads through to the backing
      * query. A present {@link Optional} is a cache hit; an empty one is a miss. Tick-thread callers that must
      * not block on I/O (the home/pwarp name suggesters) read through this rather than {@link #get}.
      */

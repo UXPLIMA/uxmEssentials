@@ -29,12 +29,12 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  *
  * <p>{@link AnvilInput} is a Bukkit {@link Listener}: its {@code @EventHandler}s only run once {@link
  * AnvilInput#install()} has registered it. A {@code new AnvilInput(plugin)} handed to a module's wiring
- * without {@code install()} behaves as a vanilla anvil — the rename click is never cancelled and the submit
+ * without {@code install()} behaves as a vanilla anvil. The rename click is never cancelled and the submit
  * callback never fires, so the entity-create / rename never happens and the prompt item is taken instead.
  * That was the regression: three module wirings (holograms / npc / playerwarps) constructed an anvil inline
  * and never installed it.
  *
- * <p>A full anvil-click simulation is impractical under MockBukkit — {@code Player.openAnvil} throws an
+ * <p>A full anvil-click simulation is impractical under MockBukkit. {@code Player.openAnvil} throws an
  * {@code UnimplementedOperationException} and there is no {@code AnvilView} mock, so {@code AnvilInput.onClick}
  * can never reach its result-slot branch in a mock world. This guard instead pins the two halves of the fix:
  * the install discriminator that the create/rename flow depends on (a behavioural MockBukkit check), and the

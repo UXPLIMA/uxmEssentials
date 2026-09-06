@@ -12,14 +12,14 @@ import com.uxplima.uxmessentials.worlds.domain.WorldName;
 
 /**
  * Outbound port over the on-disk backup store for a world: the snapshot zips kept under the backups
- * directory. The only place in the worlds context that performs the long-running archive I/O — every
+ * directory. The only place in the worlds context that performs the long-running archive I/O, every
  * method is the adapter's responsibility, dispatched off-tick through the {@code Scheduler} port.
  */
 public interface WorldArchive {
 
     /**
      * Kick the asynchronous snapshot zip of {@code world} and return the new backup's id immediately.
-     * The {@code initiator} is carried so the adapter, on completion, can notify the right operator —
+     * The {@code initiator} is carried so the adapter, on completion, can notify the right operator
      * the {@code WORLD_BACKUP_CREATED} / {@code WORLD_BACKUP_FAILED} message is the adapter's, fired
      * when the off-tick zip finishes, not here.
      */

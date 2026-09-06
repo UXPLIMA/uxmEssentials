@@ -23,7 +23,7 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The client-brand guard's join brain: it reads the {@code minecraft:brand} a joining player reports, records it
- * for {@code /clientinfo}, and applies the configured {@link ClientPolicy} — kicking a denied client and raising a
+ * for {@code /clientinfo}, and applies the configured {@link ClientPolicy}. Kicking a denied client and raising a
  * staff notice for a denied or flagged one. The allow/deny decision itself is the pure domain {@link ClientPolicy};
  * this class only records, kicks, and notifies around it.
  *

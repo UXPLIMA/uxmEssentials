@@ -8,7 +8,7 @@ import java.util.Optional;
  * A validated enchantment request for {@code /enchant <enchant> [level]}: a normalised enchantment id and a
  * level clamped to a configured ceiling.
  *
- * <p>The domain does not know Bukkit {@code Enchantment} — it normalises the id to the canonical lowercase
+ * <p>The domain does not know Bukkit {@code Enchantment}. It normalises the id to the canonical lowercase
  * {@code namespace:path} shape and the adapter resolves it. The level is clamped at the boundary: an operator
  * sets a {@code max-enchant-level} in {@code itemworld.conf} (docs/09-deployment.md §itemworld.conf) so an
  * over-vanilla level like {@code sharpness 32767} is bounded rather than handed to the registry verbatim.

@@ -29,8 +29,8 @@ import org.mockbukkit.mockbukkit.ServerMock;
  * {@link VotePartyTriggered} event, must ignore non-party events (e.g. {@link VoteReceived}), and the
  * registry key resolution must gracefully skip unknown sound/particle names without throwing.
  *
- * <p>The actual {@code playSound} / {@code spawnParticle} calls are tested at the unit level only —
- * MockBukkit records them and a missing player simply means no effect — so the guard here is
+ * <p>The actual {@code playSound} / {@code spawnParticle} calls are tested at the unit level only
+ * MockBukkit records them and a missing player simply means no effect, so the guard here is
  * no-throw, not a full effect-assertion.
  */
 class VotePartyEffectsTest {
@@ -82,7 +82,7 @@ class VotePartyEffectsTest {
     void unknownSoundNameResolvesToNull() {
         // Verifies that BukkitRegistryKeys does not throw on an unknown name; the handler must tolerate a null.
         @Nullable Sound resolved = BukkitRegistryKeys.resolveSound("definitely_not_a_real_sound_xyz");
-        // The resolver returns null — not an exception — for unknown keys.
+        // The resolver returns null, not an exception, for unknown keys.
         // assertThat(resolved).isNull() would work, but we just confirm no throw here.
         Consumer<DomainEvent> handler = buildHandler(resolved, null);
         assertThatCode(() -> handler.accept(new VotePartyTriggered(10))).doesNotThrowAnyException();

@@ -1,4 +1,4 @@
--- Schema for the moderation bounded context — the DB-backed sanction state that
+-- Schema for the moderation bounded context. The DB-backed sanction state that
 -- survives restart (the hard moderation invariant): a mute, a jail sentence, a
 -- tempban, the warning history and the last-seen/IP record never live in PDC or
 -- an in-memory authority, so an offline `/jail`/`/banip`, a ban-on-login check at
@@ -11,7 +11,7 @@
 -- BIGINT so there is no dialect-specific datetime handling; flags are a SMALLINT
 -- (0/1) so there is no dialect-specific BOOLEAN handling. Every fact a query or
 -- an audit line needs (target, actor, until, reason, jail name, the online
--- remaining millis, the last IP) is a first-class, indexable column — there are
+-- remaining millis, the last IP) is a first-class, indexable column: there are
 -- no opaque JSON blobs (architecture persistence invariant). jOOQ's DDLDatabase
 -- parses this file alongside V1-V4 at build time, so the generated classes always
 -- match the runtime schema.
@@ -49,8 +49,8 @@ CREATE INDEX idx_moderation_mutes_until ON moderation_mutes (until);
 -- jail into wall-clock countdown via `jail-countdown` in `moderation.conf`; the
 -- two columns are mutually exclusive per sentence. `jailed_by`/`jailed_by_name`
 -- mirror the mute issuer columns. The presence of a row is the jail: the teleport
--- context's jail gate reads it to block `/home`/`/tpa`, and `/unjail` — the only
--- release for a target who never logs back in — deletes the row.
+-- context's jail gate reads it to block `/home`/`/tpa`, and `/unjail`, the only
+-- release for a target who never logs back in, deletes the row.
 CREATE TABLE moderation_jails (
     target            VARCHAR(36)  NOT NULL,
     jail              VARCHAR(64)  NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE moderation_jails (
 );
 
 -- One row per actively tempbanned target. `until` is the ban expiry in epoch
--- millis (non-null — a permanent ban is `/banip`/an external ban-list, not a
+-- millis (non-null. A permanent ban is `/banip`/an external ban-list, not a
 -- tempban). The ban-on-login listener at `PlayerLoginEvent` priority HIGHEST
 -- reads this table by target UUID and kicks before player data loads when `until`
 -- is still in the future; the sweep removes rows whose `until` has passed.
@@ -84,11 +84,11 @@ CREATE TABLE moderation_tempbans (
 -- soon-to-expire bans straight off the index.
 CREATE INDEX idx_moderation_tempbans_until ON moderation_tempbans (until);
 
--- Append-only warning history — one row per `/warn`. `id` is the synthetic key;
+-- Append-only warning history, one row per `/warn`. `id` is the synthetic key;
 -- `target` is the warned player, `warned_by`/`warned_by_name` the issuer (null
 -- UUID for a console actor), `reason` the free text, `ts` the issue time in epoch
 -- millis. This table is only inserted into and read back (the `/warns <player>`
--- review lists newest-first) — never updated — so warning history is preserved in
+-- review lists newest-first), never updated, so warning history is preserved in
 -- full and never overwritten by a later warning.
 CREATE TABLE moderation_warns (
     id             BIGINT       NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE moderation_warns (
 -- descending `ts` lets the engine read the ordering off the index without a sort.
 CREATE INDEX idx_moderation_warns_target ON moderation_warns (target, ts DESC);
 
--- IP ban-list — one row per banned address. `ip` is the banned inet literal (the
+-- IP ban-list: one row per banned address. `ip` is the banned inet literal (the
 -- key); `until` is null for a permanent `/banip` and a non-null epoch-millis
 -- expiry for a timed one. The login listener resolves the connecting IP against
 -- this table (alongside the per-UUID tempban) before data load. `banned_by`/
@@ -123,9 +123,9 @@ CREATE TABLE moderation_ip_bans (
     CONSTRAINT pk_moderation_ip_bans PRIMARY KEY (ip)
 );
 
--- The last-seen / last-IP record — one row per player, upserted on join/quit.
+-- The last-seen / last-IP record: one row per player, upserted on join/quit.
 -- `name` is the most recent name (for the `/seen` rename-aware render); `last_ip`
--- is the most recent connecting address — an indexed column, never a JSON blob —
+-- is the most recent connecting address (an indexed column, never a JSON blob) 
 -- so `/seenip` and the alt-detection check (other UUIDs sharing this IP) are real
 -- DB lookups; `first_seen`/`last_seen` are the first-join and last-activity
 -- instants in epoch millis that `/seen` reports.

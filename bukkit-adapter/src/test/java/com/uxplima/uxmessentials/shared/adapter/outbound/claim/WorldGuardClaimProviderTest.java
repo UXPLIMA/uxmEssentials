@@ -21,14 +21,14 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * The WorldGuard provider with WorldGuard absent — the case on the test classpath, where no {@code com.sk89q}
+ * The WorldGuard provider with WorldGuard absent, the case on the test classpath, where no {@code com.sk89q}
  * class resolves. {@link WorldGuardClaimProvider#active()} must report inactive without naming a WorldGuard type
  * and {@link WorldGuardClaimProvider#claimAt} must degrade to empty, proving the present-guard keeps the
  * reflective region chain from loading on a server without WorldGuard.
  *
  * <p>The region-container chain cannot be stood up under MockBukkit, so the two decisions that do not need a
- * live WorldGuard — excluding the world-wide {@code __global__} region, and folding owner/member across the
- * covering regions — are exercised against the pure {@link RegionView} seam instead.
+ * live WorldGuard. Excluding the world-wide {@code __global__} region, and folding owner/member across the
+ * covering regions: are exercised against the pure {@link RegionView} seam instead.
  */
 class WorldGuardClaimProviderTest {
 

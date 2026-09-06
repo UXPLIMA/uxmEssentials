@@ -10,7 +10,7 @@ import java.util.Objects;
  * shape the vanilla client reads to populate the "server brand" line on the F3 debug screen, so re-sending it after
  * join overrides the brand the server announced during the configuration phase.
  *
- * <p>Pure byte manipulation — no Bukkit types — so the encoding is unit-testable on its own.
+ * <p>Pure byte manipulation, no Bukkit types, so the encoding is unit-testable on its own.
  */
 final class BrandPayload {
 

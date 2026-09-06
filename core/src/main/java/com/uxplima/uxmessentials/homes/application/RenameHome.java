@@ -18,7 +18,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 
 /**
  * Set or clear the display label of the home in a slot, keeping its location, icon, and creation time. The
- * label is cosmetic — the slot remains the home's identity — so an empty {@code label} clears it. The
+ * label is cosmetic, the slot remains the home's identity, so an empty {@code label} clears it. The
  * aggregate rejects an empty slot with {@link HomeError#NOT_FOUND}; a successful change saves the row,
  * publishes {@code HomeRenamed}, and notifies {@link HomesMessageKey#HOME_RENAMED}.
  */

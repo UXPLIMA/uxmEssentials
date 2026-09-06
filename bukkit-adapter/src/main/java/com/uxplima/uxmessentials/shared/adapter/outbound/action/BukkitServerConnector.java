@@ -17,7 +17,7 @@ import org.jspecify.annotations.NullMarked;
  * ({@code BungeeCord}, which Velocity also honours) once on construction and sends a {@code Connect} subchannel
  * frame through the clicking player's own connection to move them to another backend. A plugin message rides a
  * player connection, so the {@code viewer} carries the frame directly. With no proxy in front of the server the
- * frame is simply discarded by the vanilla handler — a harmless no-op — which is the degraded single-server
+ * frame is simply discarded by the vanilla handler, a harmless no-op, which is the degraded single-server
  * behaviour.
  */
 @NullMarked
@@ -61,7 +61,7 @@ public final class BukkitServerConnector implements ServerConnector {
      * automatically on disable, which is the only point at which the channel should actually go away.
      */
     public void close() {
-        // No per-module teardown — see the method contract above.
+        // No per-module teardown, see the method contract above.
     }
 
     // Package-private rather than private so the connector's own test can decode and assert the exact

@@ -20,8 +20,8 @@ import com.uxplima.uxmessentials.survival.adapter.inbound.gui.SurvivalSettingsVi
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /survival}: open the personal survival settings panel — one row per toggleable mechanic the player may switch
- * — gated by the self-service {@code uxmessentials.survival.gui}. It consolidates the per-mechanic toggle commands
+ * {@code /survival}: open the personal survival settings panel. One row per toggleable mechanic the player may switch
+ *: gated by the self-service {@code uxmessentials.survival.gui}. It consolidates the per-mechanic toggle commands
  * ({@code /treefeller}, {@code /veinminer}, …) into one screen; those commands still work, and every flip the panel
  * makes is the same PDC write they make. A non-player sender gets the players-only notice.
  */

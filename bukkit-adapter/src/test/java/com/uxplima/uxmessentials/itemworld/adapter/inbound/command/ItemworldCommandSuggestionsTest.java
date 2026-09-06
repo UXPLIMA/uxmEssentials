@@ -27,7 +27,7 @@ import org.mockbukkit.mockbukkit.command.CommandSourceStackMock;
  * {@code /enchant}, {@code /itemflag}, {@code /remove}, {@code /tree} and {@code /bigtree} suggested nothing for
  * their first argument. Each helper builds the same node the command wires, so a regression that drops the
  * provider (or points it at the wrong registry) fails here. The value still parses as a bare word, so suggestions
- * never narrow what the command accepts — they only surface the obvious choices.
+ * never narrow what the command accepts: they only surface the obvious choices.
  */
 class ItemworldCommandSuggestionsTest {
 
@@ -57,7 +57,7 @@ class ItemworldCommandSuggestionsTest {
     @Test
     void itemFlagArgumentSuggestsLowerCasedFlags() {
         List<String> all = suggest(node(ItemworldCommandSupport.itemFlagArgument()), "root ");
-        // Every ItemFlag, lower-cased — the form BukkitItemResolver#itemFlag upper-cases before resolving.
+        // Every ItemFlag, lower-cased: the form BukkitItemResolver#itemFlag upper-cases before resolving.
         assertThat(all)
                 .containsExactlyInAnyOrderElementsOf(java.util.Arrays.stream(ItemFlag.values())
                         .map(f -> f.name().toLowerCase(java.util.Locale.ROOT))

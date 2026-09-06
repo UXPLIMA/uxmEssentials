@@ -7,7 +7,7 @@ import java.util.Objects;
  * Read access to the typed configuration tree, addressed by dotted HOCON paths
  * ({@code modules.homes.enabled}). The concrete implementation loads the HOCON files once on enable
  * and swaps the parsed tree atomically on {@link #reload()} (an {@code AtomicReference<Config>} swap
- * behind the adapter), so a reader either sees the whole previous tree or the whole new one — never a
+ * behind the adapter), so a reader either sees the whole previous tree or the whole new one, never a
  * half-applied config. The kernel depends only on this narrow contract so application code never
  * touches Configurate types directly.
  *

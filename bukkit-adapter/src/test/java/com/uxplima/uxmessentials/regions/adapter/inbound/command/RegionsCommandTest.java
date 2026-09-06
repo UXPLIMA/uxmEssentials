@@ -135,7 +135,7 @@ class RegionsCommandTest {
         assertThat(menuHolderOpen(staff)).isFalse();
     }
 
-    /** Whether {@code player} currently has an engine menu open — null-safe (no window means a null top inventory). */
+    /** Whether {@code player} currently has an engine menu open: null-safe (no window means a null top inventory). */
     private static boolean menuHolderOpen(PlayerMock player) {
         Inventory top = player.getOpenInventory().getTopInventory();
         return top != null && top.getHolder() instanceof MenuHolder;

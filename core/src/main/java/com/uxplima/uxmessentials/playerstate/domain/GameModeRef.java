@@ -50,7 +50,7 @@ public enum GameModeRef {
     }
 
     /**
-     * Resolve a mode from raw input — the full name, its short alias, or the numeric id — case-insensitively.
+     * Resolve a mode from raw input (the full name, its short alias, or the numeric id) case-insensitively.
      * Returns empty when nothing matches, so the command can reject an unknown mode with a localized message.
      */
     public static Optional<GameModeRef> parse(String raw) {

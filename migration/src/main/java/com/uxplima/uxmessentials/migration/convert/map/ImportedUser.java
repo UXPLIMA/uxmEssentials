@@ -14,7 +14,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link Home} aggregates, the raw balance to seed a wallet with, and the mailbox lines.
  *
  * <p>The balance is carried as a raw {@link BigDecimal} rather than a {@code Money} because the target
- * {@code Currency} is resolved at write time from the live economy config — keeping this mapper output
+ * {@code Currency} is resolved at write time from the live economy config, keeping this mapper output
  * free of any runtime-configured currency instance. The writer pairs the figure with the default
  * currency and applies the {@code balance-policy} (docs/12-migration §5.1, §6).
  *

@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The self-rescheduling bank-interest loop (the {@link SalaryTask} pattern): on the policy's interval it mints the
  * tiered interest into every shared bank through {@link BankRepository#creditBank}, off the tick thread. Interest
- * is a system credit minted into the bank — no member is debited — and each bank's credit is a single atomic
+ * is a system credit minted into the bank, no member is debited, and each bank's credit is a single atomic
  * {@code balance = balance + ?} so a concurrent deposit or withdraw is never clobbered. A bank below every tier's
  * minimum earns nothing.
  */

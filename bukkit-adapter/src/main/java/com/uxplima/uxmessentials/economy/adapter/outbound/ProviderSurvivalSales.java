@@ -19,7 +19,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>A sale amount is a bare {@link BigDecimal} in survival's own terms; this adapter denominates it in the configured
  * default {@link Currency} before crediting. {@code credit} is a single guarded deposit whose {@code isOk()} reports
- * whether the proceeds were banked — so a sale pays out exactly once, and a refused deposit (a balance cap) reports
+ * whether the proceeds were banked, so a sale pays out exactly once, and a refused deposit (a balance cap) reports
  * {@code false} rather than silently dropping the coin.
  *
  * <p>{@code format} renders the proceeds for the sale notice through the same {@link MoneyFormat} every other economy

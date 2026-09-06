@@ -11,7 +11,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
  *
  * <p>The binding is keyed by the player's UUID and lives in the host persistence, not the optional Discord
  * bridge jar, so both reads answer for an offline player too. The stored binding carries only the Discord
- * snowflake id (account identity) — no Discord username is persisted — so there is no username placeholder.
+ * snowflake id (account identity), no Discord username is persisted, so there is no username placeholder.
  */
 public interface DiscordlinkPlaceholders {
 

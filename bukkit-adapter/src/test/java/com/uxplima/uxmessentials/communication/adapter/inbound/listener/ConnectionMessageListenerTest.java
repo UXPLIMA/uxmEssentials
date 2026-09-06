@@ -128,7 +128,7 @@ class ConnectionMessageListenerTest {
         return player;
     }
 
-    /** A {@link SequenceCounter} that hands out 0, 1, 2, … per channel — the production atomic counter, in-test. */
+    /** A {@link SequenceCounter} that hands out 0, 1, 2, … per channel, the production atomic counter, in-test. */
     private static final class CountingSequence implements SequenceCounter {
         private final Map<String, Integer> counters = new java.util.HashMap<>();
 

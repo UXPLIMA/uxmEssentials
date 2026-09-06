@@ -13,7 +13,7 @@ import org.jspecify.annotations.NullMarked;
 /**
  * The {@link JailDirectory} that merges the read-only config jails ({@code moderation.conf}) with the
  * DB-backed jails an operator defines in-game with {@code /setjail}. A jail exists when either source knows it,
- * {@link #names()} is the sorted distinct union, and the countdown mode comes from the config — a stored jail
+ * {@link #names()} is the sorted distinct union, and the countdown mode comes from the config: a stored jail
  * with no config override defaults to the module's countdown mode (the config directory answers {@code false}
  * for a name it does not know, which is the online-only default).
  *

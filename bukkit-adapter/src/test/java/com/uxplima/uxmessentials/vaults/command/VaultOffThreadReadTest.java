@@ -68,8 +68,8 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * thread, the same shape {@code /home} uses.
  *
  * <p>The scheduler is a <em>deferring</em> double: {@code async} captures the task without running it, and
- * {@code onEntity} runs inline (the region bridge). So after dispatch the repository has seen zero reads —
- * proving the lookup did not run on the command thread — and only once the captured task is drained does the
+ * {@code onEntity} runs inline (the region bridge). So after dispatch the repository has seen zero reads
+ * proving the lookup did not run on the command thread, and only once the captured task is drained does the
  * read happen.
  */
 class VaultOffThreadReadTest {
@@ -102,7 +102,7 @@ class VaultOffThreadReadTest {
 
         execute(dispatcher, "vault");
 
-        // The command returned without scanning the database — the index read was handed to scheduler.async.
+        // The command returned without scanning the database: the index read was handed to scheduler.async.
         assertThat(repository.reads).isZero();
         assertThat(scheduler.deferred).isNotEmpty();
 

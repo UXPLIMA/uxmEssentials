@@ -8,8 +8,8 @@ import org.jspecify.annotations.Nullable;
 /**
  * What a hologram renders as: lines of {@link HologramType#TEXT} (the default), a single floating item
  * ({@link HologramType#ITEM}), or a single floating block model ({@link HologramType#BLOCK}). The type decides
- * which content a {@link Hologram} carries — a TEXT hologram its {@code lines}, an ITEM hologram its
- * {@code itemMaterial}, a BLOCK hologram its {@code blockData} — and which native Display the adapter spawns.
+ * which content a {@link Hologram} carries. A TEXT hologram its {@code lines}, an ITEM hologram its
+ * {@code itemMaterial}, a BLOCK hologram its {@code blockData}, and which native Display the adapter spawns.
  *
  * <p>A TEXT hologram must keep at least one line; an ITEM or BLOCK hologram needs none (its content is the
  * model), so the {@link Hologram} line invariant is relaxed for the non-text types. The enum is pure (no

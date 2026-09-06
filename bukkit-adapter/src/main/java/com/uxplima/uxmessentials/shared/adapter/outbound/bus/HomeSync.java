@@ -15,13 +15,13 @@ import com.uxplima.uxmessentials.shared.network.NetworkMessage;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The homes context's cross-server sync seam — one of the two representative wirings (the other is
+ * The homes context's cross-server sync seam. One of the two representative wirings (the other is
  * {@link WalletSync}). It does two things, both keyed by the same {@link CachedHomeRepository}:
  *
  * <ul>
  *   <li><b>Outbound</b>: {@link #repository(CachedHomeRepository, BusPublisher)} wraps the cached repository
  *       so every local home write (a slot {@code save} or {@code deleteSlot}) publishes a
- *       {@link HomeChanged} frame after the durable write commits — peers learn the owner's homes changed.
+ *       {@link HomeChanged} frame after the durable write commits: peers learn the owner's homes changed.
  *   <li><b>Inbound</b>: {@link #listener(CachedHomeRepository)} returns a {@link RemoteSyncListener} that, on
  *       a remote {@code HomeChanged}, invalidates exactly that owner's cached set so the next {@code /home}
  *       on this backend resolves the fresh location from the shared DB.
@@ -29,7 +29,7 @@ import org.jspecify.annotations.NullMarked;
  *
  * <p>The decorator wraps the <em>same</em> cache the homes commands read, so the loop closes: a write here
  * emits a frame, the peer's listener drops the matching owner there. Warps and vaults follow this exact shape
- * (a write decorator + an invalidation listener over their own cached repository) — adding a context is
+ * (a write decorator + an invalidation listener over their own cached repository). Adding a context is
  * copying this class, not changing the bus.
  */
 @NullMarked

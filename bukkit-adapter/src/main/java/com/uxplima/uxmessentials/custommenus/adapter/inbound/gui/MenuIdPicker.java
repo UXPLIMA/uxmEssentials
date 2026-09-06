@@ -20,10 +20,10 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * A paginated picker over the registered ids the {@link com.uxplima.uxmessentials.shared.adapter.inbound.gui.menu
- * .binding.MenuSchema schema} exports — the action ids for a click gesture, the condition ids for a view requirement.
+ * .binding.MenuSchema schema} exports, the action ids for a click gesture, the condition ids for a view requirement.
  * It opens as an engine selector child window (through the caller's {@link ClickContext} opener), one paper button per
  * id, prev/next buttons when the catalog spans more than one page, and a back button to the ref-list it was opened
- * from. Picking an id runs {@code onPick} once; nothing here mutates a session — the ref-list editor that opened it
+ * from. Picking an id runs {@code onPick} once; nothing here mutates a session. The ref-list editor that opened it
  * owns the arg entry and the append.
  */
 @NullMarked
@@ -31,7 +31,7 @@ final class MenuIdPicker {
 
     private static final int ROWS = 6;
 
-    /** The 45 content slots (rows 0–4) an id button may occupy; the sixth row carries the nav and back controls. */
+    /** The 45 content slots (rows 0 to 4) an id button may occupy; the sixth row carries the nav and back controls. */
     private static final List<Integer> CONTENT_SLOTS = contentSlots();
 
     private static final int PREV_SLOT = 45;

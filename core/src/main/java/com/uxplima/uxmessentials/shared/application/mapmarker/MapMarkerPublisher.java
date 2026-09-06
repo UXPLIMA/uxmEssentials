@@ -27,7 +27,7 @@ public interface MapMarkerPublisher {
     /** Remove every marker this plugin owns on the map (the whole layer's content), e.g. on disable. */
     void clear();
 
-    /** A publisher that renders nothing — the binding when no supported map plugin is present. */
+    /** A publisher that renders nothing: the binding when no supported map plugin is present. */
     static MapMarkerPublisher noOp() {
         return NoOpMapMarkerPublisher.INSTANCE;
     }

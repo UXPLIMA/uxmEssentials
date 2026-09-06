@@ -21,7 +21,7 @@ public final class NotificationFormatter {
     private NotificationFormatter() {}
 
     /**
-     * Format the notice for forwarding, or {@link Optional#empty()} when it must not be forwarded — currently
+     * Format the notice for forwarding, or {@link Optional#empty()} when it must not be forwarded, currently
      * only the loop-sentinel case (a bridge-originated notice). All other notices format to a {@link Notification}
      * tagged with the notice's own {@link AuditNotice#category() category}; the per-category channel mapping and
      * enable flags are applied later by the {@link NotificationForwarder} against {@code discord.conf}.

@@ -90,7 +90,7 @@ final class CommunicationContentCodec {
                 firstJoin(root.node("first-join")),
                 strings(root.node("motd")),
                 optionalString(root.node("death-info-page")).map(name -> name.toLowerCase(Locale.ROOT)),
-                // Default true so a fresh install — and an upgraded one whose file predates the key — greets joining
+                // Default true so a fresh install, and an upgraded one whose file predates the key, greets joining
                 // players with the motd; an operator who wants silence sets motd-on-join = false.
                 root.node("motd-on-join").getBoolean(true),
                 infoPages(root.node("info-pages")),
@@ -100,7 +100,7 @@ final class CommunicationContentCodec {
     /**
      * Parse the {@code chat} block into a {@link ChatFormatPolicy}. An absent block (no {@code chat.conf}) yields
      * {@link ChatFormatPolicy#disabled()}, so a server without the file keeps vanilla chat. When present the policy
-     * defaults {@code enabled} to {@code false} — the operator opts in explicitly — and falls back to the shipped
+     * defaults {@code enabled} to {@code false}, the operator opts in explicitly, and falls back to the shipped
      * near-vanilla format when the {@code format} key is blank, so an enabled-but-empty block still renders. The
      * {@code group-formats} map drops blank values, and the two name-decoration keys default to empty (no hover /
      * no click).
@@ -137,7 +137,7 @@ final class CommunicationContentCodec {
     /**
      * Parse the {@code advancements} block into an {@link AdvancementNoticeConfig}. The feature ships off
      * ({@code enabled = false}); recipes are excluded and only announce-to-chat advancements considered by default,
-     * matching vanilla. The allow/deny lists and the per-advancement template map are read leniently — blank entries
+     * matching vanilla. The allow/deny lists and the per-advancement template map are read leniently: blank entries
      * are dropped, and the domain record lowercases every key. Channels are parsed by the shared {@link #channels}
      * helper (unknown channels skipped, empty defaults to {@code CHAT}); a blank sound key stays absent.
      */
@@ -157,7 +157,7 @@ final class CommunicationContentCodec {
                 optionalString(node.node("sound")));
     }
 
-    /** The per-advancement template overrides — a key→template map; a blank template value drops that entry. */
+    /** The per-advancement template overrides, a key→template map; a blank template value drops that entry. */
     private static Map<String, String> perAdvancementTemplates(ConfigurationNode node) {
         Map<String, String> overrides = new LinkedHashMap<>();
         node.childrenMap().forEach((key, child) -> {
@@ -170,7 +170,7 @@ final class CommunicationContentCodec {
     }
 
     /*
-     * Parse the optional announcer.display block — the title fade/stay/fade timing and the boss-bar colour,
+     * Parse the optional announcer.display block. The title fade/stay/fade timing and the boss-bar colour,
      * overlay, and visible-seconds the TITLE/SUBTITLE/BOSS_BAR channels render with. Every field defaults to
      * the same values the vote broadcaster uses, and colour/overlay names are tolerant of typos.
      */
@@ -199,7 +199,7 @@ final class CommunicationContentCodec {
 
     /**
      * Parse the {@code join} block into a {@link JoinGroupPolicies}. The block itself is the default policy (parsed
-     * by {@link #policy}), and each entry under a nested {@code groups} map is a per-group override — a bare template
+     * by {@link #policy}), and each entry under a nested {@code groups} map is a per-group override, a bare template
      * list keyed by a permission group name. An empty template list is skipped, so that group falls through to the
      * default; the block's own {@code ordering} governs how a per-group list rotates, keeping a group override
      * consistent with the default. A file with no {@code groups} map yields the single-default table, the
@@ -226,7 +226,7 @@ final class CommunicationContentCodec {
      * Parse the {@code first-join} node into the welcome {@link MessagePolicy} broadcast on a player's first-ever
      * join. A block ({@code first-join { mode = CUSTOM, templates = [ ... ] }}) parses through {@link #policy}; the
      * legacy bare-string form ({@code first-join = "welcome {player}"}) maps to a single-template CUSTOM policy so an
-     * un-migrated file keeps working. An absent or blank value yields {@link MessagePolicy#vanilla()} — no welcome, so
+     * un-migrated file keeps working. An absent or blank value yields {@link MessagePolicy#vanilla()}, no welcome, so
      * the join falls through to the ordinary per-group line.
      */
     private static MessagePolicy firstJoin(ConfigurationNode node) {
@@ -253,7 +253,7 @@ final class CommunicationContentCodec {
     /**
      * Parse the {@code death} block into a {@link DeathCausePolicies}. The block itself is the default policy (its
      * policy mode, ordering, and templates, parsed by {@link #policy}), and each entry under a nested
-     * {@code causes} map is a per-cause override — a bare template list keyed by a {@link DeathCause} name. An
+     * {@code causes} map is a per-cause override: a bare template list keyed by a {@link DeathCause} name. An
      * unknown cause key or an empty template list is skipped, so the cause falls through to the default; the block's
      * own {@code ordering} governs how a per-cause list rotates, keeping a cause override consistent with the
      * default. A file with no {@code causes} map yields the single-default table, the pre-per-cause behaviour.
@@ -352,7 +352,7 @@ final class CommunicationContentCodec {
     }
 
     /**
-     * Parse one announcement entry. Lines are required — an entry with no usable line is dropped rather than
+     * Parse one announcement entry. Lines are required. An entry with no usable line is dropped rather than
      * failing the load. The id defaults to {@code announcement-<n>} when blank; the condition is parsed fail-safe
      * by {@link ConditionParser}; an unknown channel is skipped (an empty set defaults to {@code CHAT} in the
      * domain record); a non-positive interval override is ignored; a blank sound key is left absent.

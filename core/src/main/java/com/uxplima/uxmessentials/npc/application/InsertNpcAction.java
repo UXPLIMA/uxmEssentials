@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.domain.action.ClickAction;
  * existing position. {@code index1Based} is the 1-based position the operator sees in {@code /npc action list};
  * {@code after} chooses whether the new action lands just after it ({@code true}) or just before it
  * ({@code false}). A name no NPC exists at is rejected with {@link NpcError#NOT_FOUND}; an index outside the
- * current list with {@link NpcError#ACTION_INDEX_INVALID} (an empty chain has no valid position — use plain
+ * current list with {@link NpcError#ACTION_INDEX_INVALID} (an empty chain has no valid position, use plain
  * {@code add}). The operator-only permission is enforced at the command gate.
  */
 public final class InsertNpcAction {

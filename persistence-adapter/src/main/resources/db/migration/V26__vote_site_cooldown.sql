@@ -5,7 +5,7 @@
 -- canonical 36-char UUID text, site_name the vote-site identifier normalised to
 -- lowercase on write (so a case-insensitive lookup is a plain equality scan with
 -- no lower() on the stored value), and last_vote_at epoch milliseconds in a BIGINT
--- — the same convention used by every other timestamp column in this schema
+--, the same convention used by every other timestamp column in this schema
 -- (vote_queue.queued_at, discord_link_pending.expires_at, moderation timestamps).
 --
 -- The (player, site_name) primary key doubles as the unique constraint, so the

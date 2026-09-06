@@ -14,16 +14,16 @@ import org.jspecify.annotations.Nullable;
  * {@code /uxmess reload communication} takes effect on the next join with no re-wiring:
  *
  * <ul>
- *   <li>the per-group {@link JoinGroupPolicies} — the joiner's primary permission group picks a {@link MessagePolicy}
+ *   <li>the per-group {@link JoinGroupPolicies}. The joiner's primary permission group picks a {@link MessagePolicy}
  *       (its own override when authored, else the default join policy), so a rank can be greeted differently;</li>
- *   <li>the optional first-join welcome {@link MessagePolicy} — broadcast instead of the ordinary join line the
+ *   <li>the optional first-join welcome {@link MessagePolicy}, broadcast instead of the ordinary join line the
  *       first time the server has ever seen a player, and only when the operator authored a welcome template.</li>
  * </ul>
  *
  * <p>First-join is a plain boolean input to selection here (the adapter derives it from
  * {@code Player#hasPlayedBefore()}); the group is a nullable string the adapter reads from the permission plugin.
- * The standard join tokens — {@code {player}} (display name), {@code {count}} (online count after join),
- * {@code {world}} — are bound by the adapter from the live join event and passed in; this use case never touches a
+ * The standard join tokens, {@code {player}} (display name), {@code {count}} (online count after join),
+ * {@code {world}}, are bound by the adapter from the live join event and passed in; this use case never touches a
  * Bukkit type, and the returned {@link ResolvedMessage} carries operator content for the adapter to render.
  */
 public final class ResolveJoinMessage {

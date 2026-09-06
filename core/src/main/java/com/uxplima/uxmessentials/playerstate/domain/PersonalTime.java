@@ -22,7 +22,7 @@ public record PersonalTime(long ticks, boolean reset) {
         }
     }
 
-    /** The reset form — follow world time again. */
+    /** The reset form, follow world time again. */
     public static PersonalTime resetTime() {
         return new PersonalTime(0L, true);
     }

@@ -19,11 +19,11 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /seed} ({@code uxmessentials.seed.use}): tell the player the world generation seed of the world they
- * are standing in, read straight from {@code World#getSeed()}. A pure read in the adapter — no use case and no
+ * are standing in, read straight from {@code World#getSeed()}. A pure read in the adapter, no use case and no
  * state mutation. Self-only, so there is no {@code [player]} target form; the seed is always that of the
  * invoking player's current world.
  *
- * <p>Unlike {@code /biome}, the seed needs no block position — it is a world-level value — so there is no
+ * <p>Unlike {@code /biome}, the seed needs no block position, it is a world-level value, so there is no
  * {@code getLocation()} dereference here. The numeric seed is data, not a user-facing literal, so it feeds the
  * {@code seed} placeholder of the localized show line rather than being a message of its own.
  */

@@ -3,7 +3,7 @@ package com.uxplima.uxmessentials.vote.application.port;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * Per-player preference for vote reminder messages. The default state is opted in — a player who has
+ * Per-player preference for vote reminder messages. The default state is opted in. A player who has
  * never run {@code /vote remind} wants reminders. {@link #toggle} flips the preference and returns
  * the new value so the adapter can send the right confirmation key without a second read.
  *

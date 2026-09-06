@@ -9,7 +9,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@link ScoreboardPlaceholders} over the scoreboard context's {@link ScoreboardVisibilityStore} — the same PDC-backed
+ * {@link ScoreboardPlaceholders} over the scoreboard context's {@link ScoreboardVisibilityStore}: the same PDC-backed
  * "hidden" bit the {@code /scoreboard} toggle flips and the render loop reads. Built during scoreboard wiring, so the
  * placeholder matches whether the player actually sees the sidebar in game.
  *

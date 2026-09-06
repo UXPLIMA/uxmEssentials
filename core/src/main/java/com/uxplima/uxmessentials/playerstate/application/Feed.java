@@ -12,7 +12,7 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * {@code /feed [player]}: an apply-once restore of a player's hunger and saturation. It changes no persisted
- * snapshot — the {@link PlayerEffects} port restores the live player on the owning region thread — then
+ * snapshot (the {@link PlayerEffects} port restores the live player on the owning region thread) then
  * publishes {@link Fed} and notifies the actor and subject.
  */
 public final class Feed {

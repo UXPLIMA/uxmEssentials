@@ -37,9 +37,9 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 /**
  * Drives the pre-generation engine through its injectable seams. The chunk source completes every request
  * synchronously and the scheduler captures the repeating loop's {@code Runnable} per {@code start}, so a
- * test can advance the loop one tick at a time and observe the whole orchestration — start, the
+ * test can advance the loop one tick at a time and observe the whole orchestration, start, the
  * already-running guard, draining to completion with the DONE notice, cancellation without a notice, and
- * bulk stop — without a live server or a real clock. The real {@code World#getChunkAtAsync} is exercised
+ * bulk stop, without a live server or a real clock. The real {@code World#getChunkAtAsync} is exercised
  * only against a running Paper server; here the seam stands in for it deterministically.
  */
 class BukkitWorldPregenTest {

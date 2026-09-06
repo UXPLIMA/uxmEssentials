@@ -28,7 +28,7 @@ import org.jspecify.annotations.NullMarked;
  * {@link com.uxplima.uxmessentials.economy.application.SellAll} use case's job; this handler snapshots the
  * inventory's materials and counts on the seller's region thread, runs the worth lookups and the credit off the
  * tick thread (so a foreign provider never wedges the command, the same shape {@link SellCommand} uses), and
- * only when the credit actually applied hops back to the seller's region thread to remove the sold stacks — so
+ * only when the credit actually applied hops back to the seller's region thread to remove the sold stacks, so
  * the inventory and the balance never diverge.
  */
 @NullMarked

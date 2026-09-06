@@ -38,7 +38,7 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * MockBukkit coverage of the editable {@code /kit editor} window: the window is seeded with the kit's current
  * stacks at their definition-order slots; the editor's edit to the private window copy is encoded back into the
  * kit on close, and nothing is duplicated because the kit is overwritten wholesale from the window's final
- * contents (replace, never append) — an item added in the window lands once and an item removed disappears.
+ * contents (replace, never append): an item added in the window lands once and an item removed disappears.
  *
  * <p>The scheduler is a synchronous double so the entity-bound open and the async persist run inline, and the
  * close is dispatched as a real {@link InventoryCloseEvent} through the same {@link KitEditorListener} a live
@@ -93,7 +93,7 @@ class KitEditorViewPathTest {
         KitDefinition saved = repository.lastSaved();
         assertThat(saved).isNotNull();
         assertThat(saved.id()).isEqualTo(KitId.of("starter"));
-        // Two items in, two items out: the original sword plus the added apple — never the sword twice.
+        // Two items in, two items out: the original sword plus the added apple, never the sword twice.
         assertThat(saved.items()).hasSize(2);
         assertThat(materialAt(saved, 0)).isEqualTo(Material.DIAMOND_SWORD);
         assertThat(materialAt(saved, 1)).isEqualTo(Material.GOLDEN_APPLE);

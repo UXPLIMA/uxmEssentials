@@ -1,4 +1,4 @@
--- The /paytoggle accept-pay flag — a queryable key-value row on the player's
+-- The /paytoggle accept-pay flag. A queryable key-value row on the player's
 -- economy state, not a JSON blob, so it survives relog and can be read without
 -- materialising a wallet (docs/11-economy-integration.md §9.1).
 --

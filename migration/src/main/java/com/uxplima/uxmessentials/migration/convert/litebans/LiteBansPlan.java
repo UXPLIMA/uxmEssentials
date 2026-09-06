@@ -22,7 +22,7 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The LiteBans source's {@link ImportPlan}. It composes three sub-streams — bans, mutes, warnings — into one
+ * The LiteBans source's {@link ImportPlan}. It composes three sub-streams (bans, mutes, warnings) into one
  * {@link ImportRecord} stream, each table read and mapped on demand as the importer's bounded executor drains
  * it (docs/12-migration §7). Each table is queried through {@link JdbcSource}, which opens and closes its own
  * read-only connection per query, so no handle is held across records.

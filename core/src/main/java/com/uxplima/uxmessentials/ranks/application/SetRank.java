@@ -15,8 +15,8 @@ import com.uxplima.uxmessentials.shared.application.port.DomainEventPublisher;
 
 /**
  * {@code /ranks setrank <player> <rank>}: an administrator sets a player's rank pointer directly, bypassing the
- * requirements, cost and actions a normal {@code /rankup} runs. The move is validated against the ladder — a rank
- * id that is not a rung is refused (an empty result) so an operator typo never writes an unreachable pointer — and
+ * requirements, cost and actions a normal {@code /rankup} runs. The move is validated against the ladder, a rank
+ * id that is not a rung is refused (an empty result) so an operator typo never writes an unreachable pointer, and
  * the player's prestige level is carried over unchanged, since setting a rank is not a prestige event.
  *
  * <p>This is the deliberate escape hatch for corrections and grants; the requirement/cost/action pipeline lives in

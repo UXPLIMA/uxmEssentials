@@ -24,7 +24,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * Ends a pose on the exits a posing player can take: they quit, teleport away, die, change world, take damage,
- * dismount the seat, or start sneaking. {@link StopPose} cleans up whatever the pose rode on each — it removes the
+ * dismount the seat, or start sneaking. {@link StopPose} cleans up whatever the pose rode on each: it removes the
  * seat entity for a sit and releases the hold on a crawl, so nothing is left behind. The quit, teleport, death, and world-change exits pass {@code allowReturn = false} (the player is leaving
  * or already moving, so the {@code return-to-start} teleport would be wrong there); the others return the player
  * when the server is configured to. Every branch is guarded by the session registry so a non-posing player is
@@ -63,7 +63,7 @@ public final class PoseCancelListener implements Listener {
         // Always attempt cleanup on quit so no seat can outlive the player; no return for a leaver.
         stopPose.stop(who, false);
         // End the pose of anyone stacked on the leaver too, so no rider is left with a session once its carrier is
-        // gone. Snapshot first, then stop each — stopping mutates the registry ridersOf reads.
+        // gone. Snapshot first, then stop each: stopping mutates the registry ridersOf reads.
         for (PlayerRef rider : sessions.ridersOf(who)) {
             stopPose.stop(rider, false);
         }

@@ -10,7 +10,7 @@ import com.uxplima.uxmessentials.npc.domain.NpcSkin;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Lifts a fake player's {@link NpcSkin} out of an online Bukkit player's profile — the {@code textures} property
+ * Lifts a fake player's {@link NpcSkin} out of an online Bukkit player's profile. The {@code textures} property
  * value and its signature, exactly the two strings the spawn packet carries. The creator's own skin is the
  * default for {@code /npc create}, and {@code /npc skin <name> player:<other>} copies another online player's
  * skin; both read the live profile, which is already populated at login, so this is a pure off-the-profile read

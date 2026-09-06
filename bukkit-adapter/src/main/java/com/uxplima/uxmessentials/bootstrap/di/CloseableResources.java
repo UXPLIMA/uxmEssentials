@@ -31,7 +31,7 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>Module stop hooks are pushed in wiring order and run in the reverse of it, so dependents tear
  * down before prerequisites. The command nodes collected here are the already-module-filtered set
- * the plugin's {@code LifecycleEvents.COMMANDS} handler publishes — a disabled module contributes
+ * the plugin's {@code LifecycleEvents.COMMANDS} handler publishes. A disabled module contributes
  * nothing, so its command literal never reaches the dispatcher. Every published command is wrapped by
  * the shared {@link LocaleBinding} so the requesting player's locale is bound at the inbound boundary
  * (docs/13-i18n §5) before any handler resolves a message. The chokepoint runs the binding steps in
@@ -247,7 +247,7 @@ public final class CloseableResources implements AutoCloseable {
     }
 
     /**
-     * Captures the resolved {@link BedrockScreen} so a later consumer — the text-input seam — can render a Bedrock
+     * Captures the resolved {@link BedrockScreen} so a later consumer, the text-input seam, can render a Bedrock
      * viewer's prompt as a native Cumulus form. Resolved once at wiring alongside {@link #bedrock(BedrockDetector)}:
      * the Cumulus-backed screen when Floodgate is installed, otherwise the no-op {@code NONE}.
      */

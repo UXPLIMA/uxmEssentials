@@ -36,13 +36,13 @@ import org.jspecify.annotations.NullMarked;
  * {@link PlayerRef}; an unresolvable typed name replies with the caller's unknown-player {@link MessageKey} and reopens
  * the picker.
  *
- * <p>The view holds no feature logic. One instance is shared across callers — the framework collaborators (the menu
+ * <p>The view holds no feature logic. One instance is shared across callers. The framework collaborators (the menu
  * engine, text, scheduler, anvil, server) live on the instance, and the per-use parts (the title, the pick callback,
  * the offline-name resolver, and the unknown-player reply key) are passed to {@link #open}. The moderation
  * {@code /ban} and {@code /mute} GUI flows reuse it; the offline resolver a caller passes is its own (moderation backs
  * it with {@code PlayerLookupTargetResolver}), so this class never reaches for a context's lookup itself.
  *
- * <p>A caller may also supply optional {@link Request#footerButtons() footer buttons} — extra bottom-row actions that
+ * <p>A caller may also supply optional {@link Request#footerButtons() footer buttons}. Extra bottom-row actions that
  * are not a player pick (the jail hub uses two: a "jails" manager and a "jailed players" list). They default to empty,
  * so the sanction callers that only pick a target are unaffected; a supplied button renders in a free bottom-row slot
  * and fires its own callback with the live viewer.
@@ -275,7 +275,7 @@ public final class PlayerPickerView {
     }
 
     /**
-     * An optional bottom-row picker button that performs an action other than picking a player — its name and lore
+     * An optional bottom-row picker button that performs an action other than picking a player, its name and lore
      * catalog keys, its icon material, and the callback fired (with the live viewer) when it is clicked. The jail hub
      * adds two: a jails manager and a jailed-players list.
      *

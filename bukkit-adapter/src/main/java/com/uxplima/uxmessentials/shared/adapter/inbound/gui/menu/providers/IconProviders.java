@@ -18,7 +18,7 @@ import org.jspecify.annotations.Nullable;
  * result from every provider means no provider claimed the spec, so the renderer treats it as a material name.
  *
  * <p>Two shapes are wired at the composition root. {@link #defaults()} carries only the providers that need no
- * external plugin — the raw-entry stack provider, skull sources and viewer equipment — and is what the plain
+ * external plugin (the raw-entry stack provider, skull sources and viewer equipment) and is what the plain
  * {@code ItemRenderer(GuiText, PlaceholderRegistry)} constructor uses, so every existing call site gains those
  * for free.
  * {@link #withHeadDatabase(HeadQuery)} additionally chains the HeadDatabase provider, built from the Phase-0
@@ -47,7 +47,7 @@ public final class IconProviders {
     /**
      * The chain in priority order. Constructed directly only by the factories below and by integrations that
      * extend the default set with their own provider; the list is defensively copied so the chain is immutable
-     * once built. This form carries no runtime tail — opt into one with {@link #withRuntime}.
+     * once built. This form carries no runtime tail, opt into one with {@link #withRuntime}.
      */
     public IconProviders(List<IconProvider> providers) {
         this(providers, null);
@@ -61,7 +61,7 @@ public final class IconProviders {
     /**
      * A copy of this chain that additionally consults {@code runtime} after every built-in provider. The same
      * immutable built-in list is reused and a <em>live</em> reference to the mutable registry is carried, so a
-     * plugin that registers a provider later — through the public {@code MenuApi} — is seen at resolve time
+     * plugin that registers a provider later, through the public {@code MenuApi}, is seen at resolve time
      * without rebuilding the chain. The composition root opts in; the {@link #defaults()}/{@link
      * #withHeadDatabase}/{@link #full} factories stay runtime-free.
      */
@@ -70,7 +70,7 @@ public final class IconProviders {
         return new IconProviders(this.providers, runtime);
     }
 
-    /** Skull sources, viewer equipment, and the raw-entry stack provider — the providers that need no external plugin. */
+    /** Skull sources, viewer equipment, and the raw-entry stack provider: the providers that need no external plugin. */
     public static IconProviders defaults() {
         return new IconProviders(
                 List.of(new EntryStackIconProvider(), new SkullIconProvider(), new EquipmentIconProvider()));
@@ -96,7 +96,7 @@ public final class IconProviders {
      * keywords), then the six
      * custom-item providers (ItemsAdder, Oraxen, Nexo, CraftEngine, MMOItems, ExecutableItems), then the
      * HeadDatabase provider. The prefixes are
-     * disjoint, so order is a readability choice rather than a routing one — a spec reaches exactly the one provider
+     * disjoint, so order is a readability choice rather than a routing one. A spec reaches exactly the one provider
      * that owns its prefix. The two native sources need no external plugin; each custom-item provider reaches its
      * plugin reflectively behind a present-guard, so on a server without that plugin its prefix resolves to empty and
      * the renderer falls back to the plain material.
@@ -122,7 +122,7 @@ public final class IconProviders {
 
     /**
      * The first icon any provider returns for {@code spec}, or {@link Optional#empty()} when no provider claims
-     * it — in which case the renderer reads {@code spec} as a material name. The spec is the material string
+     * it: in which case the renderer reads {@code spec} as a material name. The spec is the material string
      * with its {@code %placeholder%} already resolved, so {@code %head%} → {@code skull:Notch} reaches the
      * skull provider here. Every built-in provider is consulted first; only when none claims the spec is the
      * runtime registry (when this chain carries one) asked, so a runtime provider adds prefixes but never shadows

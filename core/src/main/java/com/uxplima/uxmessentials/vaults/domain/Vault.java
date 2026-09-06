@@ -9,9 +9,9 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The vaults aggregate: one owner's numbered, DB-persisted item container. It carries the queryable facts the
- * {@code vaults} row stores as first-class columns — the owner, the one-based {@link VaultId#index()}, the
+ * {@code vaults} row stores as first-class columns. The owner, the one-based {@link VaultId#index()}, the
  * {@link VaultSize} in rows, an optional player-chosen display name and icon material name, and the
- * {@code lastTouched} instant — plus the opaque {@link VaultContents} the adapter (de)serialises. The aggregate
+ * {@code lastTouched} instant: plus the opaque {@link VaultContents} the adapter (de)serialises. The aggregate
  * never sees a Bukkit {@code ItemStack}; it holds the already-serialized payload, which is the only part the
  * architecture invariant lets serialize (docs/01-architecture.md). The icon is a plain material <em>name</em>
  * (e.g. {@code "ENDER_CHEST"}); the adapter resolves it to a real {@code Material} at the boundary, so the
@@ -19,8 +19,8 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>A vault is the authority for its stored items, not the live GUI: a save resolves the owning vault from the
  * inventory holder, replaces its contents through {@link #withContents}, and writes the result through the
- * repository. {@link #withContents} is a pure transition — it returns a new {@code Vault} and the
- * {@link VaultContentsChanged} event it raised — so the aggregate never reaches for a repository or a clock.
+ * repository. {@link #withContents} is a pure transition. It returns a new {@code Vault} and the
+ * {@link VaultContentsChanged} event it raised, so the aggregate never reaches for a repository or a clock.
  */
 public final class Vault {
 
@@ -50,7 +50,7 @@ public final class Vault {
 
     /**
      * Rebuild a vault from its persisted row. {@code displayName} and {@code iconMaterial} are the optional
-     * player-chosen presentation columns — {@code null} when the player has not set them — and the icon, when
+     * player-chosen presentation columns, {@code null} when the player has not set them, and the icon, when
      * present, is a material <em>name</em> the adapter resolves to a Bukkit {@code Material}.
      */
     public static Vault of(
@@ -133,7 +133,7 @@ public final class Vault {
     /**
      * Set or clear this vault's display name, preserving its size, contents, icon and last-touched. A
      * {@code null} name clears it; a non-null name must satisfy the domain sanity cap of {@value #MAX_NAME_LENGTH}
-     * characters — anything longer is a programming error and throws. The configurable, friendlier clamp the
+     * characters: anything longer is a programming error and throws. The configurable, friendlier clamp the
      * player sees is the adapter's job; this guard only stops an absurd name from ever reaching the row.
      */
     public Vault renamedTo(@Nullable String name) {

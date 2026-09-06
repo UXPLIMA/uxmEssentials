@@ -12,8 +12,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@link WarpsPlaceholders} over the warps context's {@link ListWarps} access filter. Every read goes through
- * the same {@link ListWarps#available(PlayerRef)} filter the {@code /warps} list and browse menu render — the
- * warps whose per-warp permission (and optional extra permission) the viewer holds — so a placeholder never
+ * the same {@link ListWarps#available(PlayerRef)} filter the {@code /warps} list and browse menu render, the
+ * warps whose per-warp permission (and optional extra permission) the viewer holds, so a placeholder never
  * surfaces a warp the player cannot reach. The accessible set is small (server warps are operator-curated), so
  * filtering it on the placeholder path is cheap.
  */

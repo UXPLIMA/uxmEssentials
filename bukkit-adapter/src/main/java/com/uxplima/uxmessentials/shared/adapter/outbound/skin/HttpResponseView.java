@@ -10,7 +10,7 @@ import org.jspecify.annotations.NullMarked;
  * The status-aware result of an HTTP call the {@link MineSkinService} v2 flow needs to branch on, where the plain
  * body-or-empty contract of {@link HttpFetcher#post(java.net.URI, String)} is too coarse. The v2 queue can answer
  * {@code 200} with the skin inline, {@code 202} (or a body carrying a job id) for a queued generation that must
- * be polled, and {@code 429} when rate-limited — each carries the body (the inline skin, the job reference, or an
+ * be polled, and {@code 429} when rate-limited. Each carries the body (the inline skin, the job reference, or an
  * error) and, on a {@code 429}, the {@code Retry-After} seconds when the server sent one, so the caller can honour
  * a bounded backoff rather than hammer the endpoint.
  *
@@ -26,7 +26,7 @@ public record HttpResponseView(int status, Optional<String> body, OptionalLong r
         Objects.requireNonNull(retryAfterSeconds, "retryAfterSeconds");
     }
 
-    /** A transport error or timeout: no status, no body — the service treats it as a miss. */
+    /** A transport error or timeout: no status, no body: the service treats it as a miss. */
     public static HttpResponseView transportError() {
         return new HttpResponseView(0, Optional.empty(), OptionalLong.empty());
     }

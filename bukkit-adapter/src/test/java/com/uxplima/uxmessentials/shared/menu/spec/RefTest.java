@@ -92,7 +92,7 @@ class RefTest {
 
     @Test
     void parseSplitsAKnownGenericOnTheFirstColonOnly() {
-        // message is a known generic prefix, so it splits — and only the first colon splits, so a value that
+        // message is a known generic prefix, so it splits, and only the first colon splits, so a value that
         // itself contains colons is preserved whole.
         Ref r = Ref.parse("message:Steve hi:there");
         assertThat(r.id()).isEqualTo("message");
@@ -101,7 +101,7 @@ class RefTest {
 
     @Test
     void resolveLeavesARegisteredWholeTokenUnchanged() {
-        // A feature ref whose whole id is registered (colon and all) resolves to itself — same identity, not re-split.
+        // A feature ref whose whole id is registered (colon and all) resolves to itself, same identity, not re-split.
         Ref feature = Ref.parse("economy:open-bank");
         Ref resolved = feature.resolve(Set.of("economy:open-bank")::contains);
         assertThat(resolved).isSameAs(feature);
@@ -165,7 +165,7 @@ class RefTest {
         assertThat(Ref.parse("give").deniedAt(0.0)).isFalse();
         assertThat(Ref.parse("give").deniedAt(99.9)).isFalse();
 
-        // Zero chance is always a miss — a [0,100) draw is always at or above 0.
+        // Zero chance is always a miss: a [0,100) draw is always at or above 0.
         assertThat(Ref.parse("give").withModifiers(0, 0.0, null).deniedAt(0.0)).isTrue();
 
         // A 25% ref proceeds on a draw in [0,25) and misses at or above it.

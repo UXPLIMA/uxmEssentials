@@ -20,7 +20,7 @@ class HidePolicyTest {
 
     private static final List<String> HIDDEN = List.of("plugins", "pl", "?", "help", "ver", "version", "icanhasbukkit");
 
-    /** A player with no view permission — the common case the hide rules are tested against. */
+    /** A player with no view permission: the common case the hide rules are tested against. */
     private static PlayerFacts noView() {
         return facts(false);
     }

@@ -11,7 +11,7 @@ import org.jspecify.annotations.Nullable;
  * {@code io.th0rgal.oraxen.api.OraxenItems.getItemById(String)} that returns an Oraxen {@code ItemBuilder} (or
  * {@code null} for an unknown id), whose {@code build()} yields the finished {@link ItemStack}.
  *
- * <p>No {@code io.th0rgal} type is named here — the SDK is reached only by string class-name through reflection — so a
+ * <p>No {@code io.th0rgal} type is named here (the SDK is reached only by string class-name through reflection) so a
  * server without Oraxen loads none of its classes and the present-guard in {@link ReflectiveItemProvider}
  * short-circuits before any lookup runs.
  */

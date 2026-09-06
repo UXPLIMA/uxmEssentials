@@ -6,8 +6,8 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
  * The narrow economy seam the kits context owns so a per-kit cost can be charged <em>without</em> a hard
- * dependency on the economy context. This is the entire economy surface kits needs — a balance check and a
- * withdrawal — expressed in kits' own terms; the economy context (P3) supplies an adapter that bridges this
+ * dependency on the economy context. This is the entire economy surface kits needs, a balance check and a
+ * withdrawal. Expressed in kits' own terms; the economy context (P3) supplies an adapter that bridges this
  * to its {@code EconomyProvider}/{@code Wallet}, and the kits context never imports an economy type.
  *
  * <p>Soft coupling: this port is injected as an {@link java.util.Optional} into the claim gate. When no

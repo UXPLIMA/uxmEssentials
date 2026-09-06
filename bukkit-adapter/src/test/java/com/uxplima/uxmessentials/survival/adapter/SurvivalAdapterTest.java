@@ -35,8 +35,8 @@ import org.mockbukkit.mockbukkit.world.WorldMock;
 /**
  * MockBukkit coverage of the survival harvesting listeners over a real world: breaking one log fells the connected
  * trunk (capped at {@code max-blocks}, respecting the axe/sneak gates and the per-player toggle), and breaking one
- * configured ore veins the connected run. The origin block is left to the vanilla break — the listener takes only the
- * connected extras — so the assertions read the blocks above the origin.
+ * configured ore veins the connected run. The origin block is left to the vanilla break. The listener takes only the
+ * connected extras, so the assertions read the blocks above the origin.
  */
 class SurvivalAdapterTest {
 
@@ -93,7 +93,7 @@ class SurvivalAdapterTest {
 
         listener.onBreak(breakOf(blockAt(0, 64, 0)));
 
-        // Toggled off: nothing cascades — the log above the origin is untouched.
+        // Toggled off: nothing cascades: the log above the origin is untouched.
         assertThat(typeAt(0, 65, 0)).isEqualTo(Material.OAK_LOG);
     }
 
@@ -346,7 +346,7 @@ class SurvivalAdapterTest {
         return new BlockBreakEvent(block, player);
     }
 
-    /** A mutable builder of tree-feller test knobs — the config record itself is final and positional. */
+    /** A mutable builder of tree-feller test knobs: the config record itself is final and positional. */
     private static final class TreeFellerBuilder {
         private boolean requireAxe = false;
         private boolean durabilityDrain = true;

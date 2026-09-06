@@ -27,7 +27,7 @@ public interface ClaimProvider {
      * ({@code blockX}, {@code blockZ}) in {@code world}, or empty when no claim is present.
      *
      * <p>The coordinates are block-level (i.e. the integer floor of the world coordinates). The
-     * implementation is expected to be fast — it is called on the region thread and may be called
+     * implementation is expected to be fast. It is called on the region thread and may be called
      * repeatedly for proximity checks.
      */
     Optional<ClaimLookup> claimAt(WorldRef world, int blockX, int blockZ);
@@ -53,8 +53,8 @@ public interface ClaimProvider {
 
         /**
          * Returns {@code true} when {@code player} owns this claim, as distinct from merely being a
-         * trusted member of it. Callers that must gate an action on ownership — creating a public
-         * warp on your own land, for instance — need this narrower question than {@link
+         * trusted member of it. Callers that must gate an action on ownership, creating a public
+         * warp on your own land, for instance, need this narrower question than {@link
          * #isTrusted(UUID)}, which answers owner-or-member.
          *
          * <p>This is the authoritative ownership check regardless of whether {@link #owner()} can

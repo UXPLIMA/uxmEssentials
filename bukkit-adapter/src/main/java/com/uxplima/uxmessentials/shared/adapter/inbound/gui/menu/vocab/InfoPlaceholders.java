@@ -21,8 +21,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * A ready-made pack of built-in {@code %token%} placeholders any menu spec can use in its name, lore or title to
- * surface the viewer's live state — the real-world clock, the world's in-game time, the viewer's inventory occupancy
- * and their vanilla statistics — without a feature wiring a handler per token. Registered once at startup into the
+ * surface the viewer's live state. The real-world clock, the world's in-game time, the viewer's inventory occupancy
+ * and their vanilla statistics: without a feature wiring a handler per token. Registered once at startup into the
  * shared {@link MenuBindings}, so a spec loaded from disk resolves these the same way a code-registered feature menu
  * would. A spec might read:
  *
@@ -35,22 +35,22 @@ import org.jspecify.annotations.Nullable;
  * <p>Fixed-key placeholders:
  *
  * <ul>
- *   <li>{@code %server_date%} / {@code %server_time%} — the real server clock as {@code yyyy-MM-dd} and
+ *   <li>{@code %server_date%} / {@code %server_time%}, the real server clock as {@code yyyy-MM-dd} and
  *       {@code HH:mm:ss}. These read {@link LocalDate#now()} / {@link LocalTime#now()} and do not depend on the
  *       viewer, so they resolve even for an absent player.</li>
- *   <li>{@code %world_time%} — the viewer's world time of day in ticks (0–24000).</li>
- *   <li>{@code %world_time_formatted%} — that tick converted to the in-game 24-hour clock, {@code HH:mm}.</li>
- *   <li>{@code %world_day%} — the world's day number, {@code fullTime / 24000}.</li>
- *   <li>{@code %empty_slots%} / {@code %used_slots%} — the count of empty and occupied slots among the viewer's 36
+ *   <li>{@code %world_time%}. The viewer's world time of day in ticks (0 to 24000).</li>
+ *   <li>{@code %world_time_formatted%}. That tick converted to the in-game 24-hour clock, {@code HH:mm}.</li>
+ *   <li>{@code %world_day%}. The world's day number, {@code fullTime / 24000}.</li>
+ *   <li>{@code %empty_slots%} / {@code %used_slots%}. The count of empty and occupied slots among the viewer's 36
  *       main storage slots (a slot is empty when it holds nothing or air).</li>
- *   <li>{@code %held_item%} / {@code %held_amount%} — the viewer's main-hand item's material name and stack size;
+ *   <li>{@code %held_item%} / {@code %held_amount%}. The viewer's main-hand item's material name and stack size;
  *       an empty hand reads as {@code ""} and {@code 0} respectively.</li>
  * </ul>
  *
  * <p>Statistic family: {@code %stat_<NAME>%} resolves the viewer's vanilla {@link Statistic} whose enum name is the
  * token tail, e.g. {@code %stat_MOB_KILLS%}, {@code %stat_PLAY_ONE_MINUTE%}, {@code %stat_DEATHS%}. This is a prefix
  * fallback registered alongside the disjoint {@code papi_} ({@link PapiPlaceholders}) and {@code data_}/{@code meta_}
- * ({@link PlayerDataPlaceholders}) families — the registry consults each in order and the first that claims an id
+ * ({@link PlayerDataPlaceholders}) families. The registry consults each in order and the first that claims an id
  * wins, so the three coexist. Only <em>untyped</em> statistics are supported here: a name that is unknown or names a
  * typed statistic (one that needs a block/item/entity sub-parameter, e.g. {@code MINE_BLOCK}) fails soft to
  * {@code ""} rather than throwing.
@@ -59,7 +59,7 @@ import org.jspecify.annotations.Nullable;
  * viewer reads as {@code ""}, and no resolver ever throws, so one placeholder can never abort a render. The reads are
  * entity-thread-safe where a menu renders: a placeholder resolves during render on the viewer's own region thread, so
  * reading that viewer's inventory, world time and statistics touches only state the render thread already owns. The
- * values are data — material names, counts, formatted times — not catalog message text, so no {@code MessageKey} is
+ * values are data (material names, counts, formatted times) not catalog message text, so no {@code MessageKey} is
  * involved, mirroring {@link PapiPlaceholders} and {@link PlayerDataPlaceholders}.
  */
 @NullMarked
@@ -198,7 +198,7 @@ public final class InfoPlaceholders {
     }
 
     /**
-     * Convert a Minecraft world tick (0–24000) to the in-game 24-hour clock {@code HH:mm}. Tick 0 is dawn, so
+     * Convert a Minecraft world tick (0 to 24000) to the in-game 24-hour clock {@code HH:mm}. Tick 0 is dawn, so
      * {@code hour = (ticks/1000 + 6) % 24}; the sub-hour remainder scales into minutes as
      * {@code minute = (ticks % 1000) * 60 / 1000}. Pure and side-effect-free so the conversion is unit-testable
      * without a server (public for that reason, like the other pure grammar helpers in this package).
@@ -209,7 +209,7 @@ public final class InfoPlaceholders {
         return pad2(hour) + ":" + pad2(minute);
     }
 
-    /** Two-digit zero-padded rendering of a 0–59/0–23 clock component. */
+    /** Two-digit zero-padded rendering of a 0 to 59/0 to 23 clock component. */
     private static String pad2(long value) {
         return value < 10 ? "0" + value : Long.toString(value);
     }

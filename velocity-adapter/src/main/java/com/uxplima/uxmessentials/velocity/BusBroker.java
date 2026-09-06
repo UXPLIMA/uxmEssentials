@@ -21,12 +21,12 @@ import org.slf4j.Logger;
  * <p>Two things make the relay safe against replication loops ({@code docs/02-concurrency.md}):
  *
  * <ol>
- *   <li>It only relays frames whose source is a {@link ServerConnection} — a backend → proxy message. A
+ *   <li>It only relays frames whose source is a {@link ServerConnection}, a backend → proxy message. A
  *       frame the proxy itself sent to a backend arrives with a different source type and is never
  *       re-relayed, so the broker cannot bounce its own output.
  *   <li>It skips the origin backend in the fan-out (origin read from the decoded frame), and additionally
  *       skips the connection's own server. The receiving backend's bus client also drops any frame whose
- *       origin equals its own id — belt and suspenders — so a mutation reaches each peer exactly once.
+ *       origin equals its own id, belt and suspenders, so a mutation reaches each peer exactly once.
  * </ol>
  *
  * <p>Every relayed frame is marked {@link PluginMessageEvent.ForwardResult#handled() handled} so the proxy

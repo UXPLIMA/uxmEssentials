@@ -30,9 +30,9 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>A rotating announcement is delivered through the shared {@link ChannelBroadcaster}: for each online player the
  * broadcaster hops to their entity thread and asks this class's per-viewer render function for the text. The render
- * function gates the recipient three ways — it returns {@code null} (skipping the player) when they have opted out
+ * function gates the recipient three ways. It returns {@code null} (skipping the player) when they have opted out
  * <em>or</em> when the announcement's {@link com.uxplima.uxmessentials.shared.display.DisplayCondition} does not
- * match that viewer — and otherwise renders each operator line through {@link HudText} (per-viewer PlaceholderAPI
+ * match that viewer, and otherwise renders each operator line through {@link HudText} (per-viewer PlaceholderAPI
  * then MiniMessage) and joins them with newlines. The lines are operator content, never a {@code MessageKey} and
  * never parity-checked. The announcement's optional sound is resolved once through {@link BukkitRegistryKeys} and
  * passed to the broadcaster.
@@ -79,7 +79,7 @@ public final class BukkitAnnouncerBroadcaster {
     }
 
     /**
-     * Show {@code announcement} to {@code viewer} alone, across its channels — the {@code /announce preview} path.
+     * Show {@code announcement} to {@code viewer} alone, across its channels, the {@code /announce preview} path.
      * Unlike {@link #broadcast(Announcement)} this bypasses the opt-out and condition gates (a preview should always
      * render for the previewer) and fans out to no one else; the lines still expand PlaceholderAPI for the viewer.
      */
@@ -126,7 +126,7 @@ public final class BukkitAnnouncerBroadcaster {
     }
 
     /**
-     * Send {@code line} only to online, opted-in players in the world identified by {@code worldId} — the
+     * Send {@code line} only to online, opted-in players in the world identified by {@code worldId}, the
      * fan-out a {@code /broadcastworld} restricts to the sender's world. Same opt-out and per-viewer region
      * hop as {@link #broadcast(String)}; a player who left the world between the scan and the send is simply
      * skipped.

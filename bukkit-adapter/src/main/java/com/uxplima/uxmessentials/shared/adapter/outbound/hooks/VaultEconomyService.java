@@ -15,7 +15,7 @@ import org.jspecify.annotations.Nullable;
  * The real {@link EconomyQuery}, backed by the Vault {@link Economy} registered in the {@code ServicesManager}.
  * This is the only class in the hooks package that imports {@code net.milkbowl.vault.economy}; it is reached
  * solely from {@link VaultEconomyHook#whenPresent}, past {@code Hooks}' present-guard, so it loads only on a
- * server that actually has Vault installed — the no-op {@link EconomyQuery#ABSENT} carries none of these types.
+ * server that actually has Vault installed: the no-op {@link EconomyQuery#ABSENT} carries none of these types.
  *
  * <p>The economy can be absent even when Vault is present (Vault installed with no economy plugin behind it):
  * the registration is resolved once in the constructor and may be {@code null}, in which case every operation

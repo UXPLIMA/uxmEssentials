@@ -18,13 +18,13 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The restock timer: a single repeating task on the {@link Scheduler} port that, every configured interval, restocks
- * the trades of every loaded villager whose last restock is older than the interval — replacing the vanilla
+ * the trades of every loaded villager whose last restock is older than the interval, replacing the vanilla
  * work-station cycle with a predictable sweep. It owns no timing rule of its own; the {@link RestockPolicy} decides
  * whether a villager is due from its PDC last-restock stamp, and {@link VillagerTrades#restockAll} performs the reset.
  *
  * <p><b>Threading (Folia).</b> A world's villagers span every region, and each is owned by the region thread its
- * location falls in. So {@link #tick} runs on the global region thread — the one thread that can read a whole world's
- * roster coherently — where it snapshots each villager's owning-region {@link Position} and hops the restock onto that
+ * location falls in. So {@link #tick} runs on the global region thread. The one thread that can read a whole world's
+ * roster coherently. Where it snapshots each villager's owning-region {@link Position} and hops the restock onto that
  * region via {@link Scheduler#onRegion}. It never reads or mutates a foreign villager inline; the due-check, the
  * recipe reset, and the re-stamp all run on the villager's own region thread. This mirrors the
  * {@code BukkitEntityPurger} enumerate-on-global-then-hop-per-region idiom. On Paper every region is the main thread,

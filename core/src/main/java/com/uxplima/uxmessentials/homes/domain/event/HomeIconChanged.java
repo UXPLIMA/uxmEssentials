@@ -6,7 +6,7 @@ import com.uxplima.uxmessentials.homes.domain.HomeSlot;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * A home's GUI icon changed — the cosmetic {@link com.uxplima.uxmessentials.homes.domain.HomeIcon} set,
+ * A home's GUI icon changed. The cosmetic {@link com.uxplima.uxmessentials.homes.domain.HomeIcon} set,
  * cleared, or replaced. The slot is the home's identity and is unchanged; only the icon the menu renders
  * moved.
  *

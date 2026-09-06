@@ -31,10 +31,10 @@ import org.jspecify.annotations.NullMarked;
  * The {@link Sanctions} adapter: the live-player side of a sanction on top of the Paper {@link Server} and the
  * kernel {@link Scheduler}. Every per-player action hops to the player's entity thread through the scheduler
  * (Folia-valid) and silently no-ops when the player is offline. The frozen set is session-scoped runtime
- * state owned here — a {@code ConcurrentHashMap}-backed UUID set the move listener consults — so a relog
+ * state owned here (a {@code ConcurrentHashMap}-backed UUID set the move listener consults) so a relog
  * clears a freeze; it is not DB-backed.
  *
- * <p>The jail teleport resolves the named jail's location store-first — the DB-backed {@link JailLocationStore}
+ * <p>The jail teleport resolves the named jail's location store-first. The DB-backed {@link JailLocationStore}
  * an operator fills with {@code /setjail}, falling back to {@link ModerationSettings} (the {@code
  * moderation.conf} jails), so an in-game {@code /setjail} overrides a same-named config entry. An unresolved
  * jail (missing world) is a no-op rather than a crash. Release teleports back to the world spawn.
@@ -67,7 +67,7 @@ public final class BukkitSanctions implements Sanctions {
     @Override
     public Collection<PlayerRef> onlinePlayers() {
         // The only caller, the KickAll use case, is reached solely from the /kickall Brigadier handler, which
-        // Paper dispatches on the global region thread — the one thread where Bukkit.getOnlinePlayers() is
+        // Paper dispatches on the global region thread. The one thread where Bukkit.getOnlinePlayers() is
         // consistently readable on Folia. The enumeration is therefore already on the correct thread and needs
         // no onGlobal hop; each per-target kick still hops to that player's own entity thread (see kick()).
         return server.getOnlinePlayers().stream().map(BukkitRefs::toRef).toList();
@@ -91,7 +91,7 @@ public final class BukkitSanctions implements Sanctions {
         return frozen.contains(target.uuid());
     }
 
-    /** True when {@code uuid} is currently frozen — the move listener's hot-path check. */
+    /** True when {@code uuid} is currently frozen: the move listener's hot-path check. */
     public boolean isFrozen(UUID uuid) {
         return frozen.contains(uuid);
     }

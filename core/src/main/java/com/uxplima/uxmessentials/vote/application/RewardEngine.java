@@ -17,11 +17,11 @@ import com.uxplima.uxmessentials.vote.domain.reward.StreakReward;
 /**
  * The pure config-driven reward engine: given a {@link RewardCatalog} (fixed at construction) and a
  * {@link RewardContext} (one vote's facts), it resolves the ordered list of {@link RewardGrant}s the
- * adapter must apply for that vote. It is a function of its inputs — no RNG, no Bukkit, no I/O; the
+ * adapter must apply for that vote. It is a function of its inputs, no RNG, no Bukkit, no I/O; the
  * randomness and the permission/world facts arrive through the context seams so a test can drive it
  * deterministically.
  *
- * <p>Candidate specs are collected in a fixed order — all per-vote specs, then the per-site specs for the
+ * <p>Candidate specs are collected in a fixed order. All per-vote specs, then the per-site specs for the
  * vote's service, then (only when this is the voter's first ever vote) the first-vote specs, then each
  * milestone whose threshold the all-time count just hit, then (only when this vote advanced the streak)
  * each streak reward the current streak length matches. Each candidate is then gated in order: world,

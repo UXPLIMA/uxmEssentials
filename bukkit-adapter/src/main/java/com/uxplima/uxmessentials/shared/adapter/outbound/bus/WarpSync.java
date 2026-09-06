@@ -12,13 +12,13 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * The warps context's cross-server sync seam — the same shape as {@link HomeSync} and {@link WalletSync},
+ * The warps context's cross-server sync seam, the same shape as {@link HomeSync} and {@link WalletSync},
  * applied to the server-wide warp set:
  *
  * <ul>
  *   <li><b>Outbound</b>: {@link #repository(CachedWarpRepository, BusPublisher)} wraps the cached repository
  *       so every local warp write ({@code /setwarp}, {@code /delwarp}, move) publishes a {@link WarpChanged}
- *       frame after the durable write commits — peers learn the warp set changed.
+ *       frame after the durable write commits: peers learn the warp set changed.
  *   <li><b>Inbound</b>: {@link #listener(CachedWarpRepository)} returns a {@link RemoteSyncListener} that, on a
  *       remote {@code WarpChanged}, drops the cached set so the next {@code /warp} on this backend resolves the
  *       fresh rows from the shared DB.

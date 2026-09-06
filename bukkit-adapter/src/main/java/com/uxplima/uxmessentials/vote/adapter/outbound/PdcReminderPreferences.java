@@ -37,7 +37,7 @@ public final class PdcReminderPreferences implements ReminderPreferences {
         Objects.requireNonNull(who, "who");
         Player player = Bukkit.getPlayer(who.uuid());
         if (player == null) {
-            // Offline — cannot read PDC; assume they want reminders (safe default).
+            // Offline: cannot read PDC; assume they want reminders (safe default).
             return true;
         }
         return currentlyWants(player);

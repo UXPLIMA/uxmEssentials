@@ -2,10 +2,10 @@
 -- alt detection across all historical addresses (not only the current one) and the optional STRICT
 -- address-strictness that fans a UUID ban out to a target's known IPs. This broadens IP retention: an
 -- operator who must keep that surface small caps it with the moderation config (and the censor option that
--- masks addresses in /alts and /seen output) — see modules/moderation/config.conf.
+-- masks addresses in /alts and /seen output): see modules/moderation/config.conf.
 --
 -- Same portability contract as V5 and V33: VARCHAR(36) UUIDs, instants in epoch-millis BIGINTs, no
--- dialect-specific datetime handling. The address is VARCHAR(45) — the max IPv6 literal length — matching
+-- dialect-specific datetime handling. The address is VARCHAR(45), the max IPv6 literal length, matching
 -- the moderation_seen.last_ip and moderation_ip_bans.ip columns. One row per (player, address): the join
 -- capture upserts it, bumping last_seen on a repeat connection from the same address rather than inserting a
 -- duplicate, so a player's history is the set of distinct addresses they have ever used. jOOQ's DDLDatabase

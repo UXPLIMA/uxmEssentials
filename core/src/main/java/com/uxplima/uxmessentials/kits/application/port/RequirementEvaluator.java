@@ -9,13 +9,13 @@ import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 /**
  * The narrow placeholder seam the kits context owns so a kit's claim {@link KitRequirement requirements} can be
  * evaluated <em>without</em> a hard dependency on any placeholder engine. This is the entire surface kits needs
- * — resolve a single condition against a player — expressed in kits' own terms; the adapter supplies an
+ *, resolve a single condition against a player, expressed in kits' own terms; the adapter supplies an
  * implementation that resolves the {@code %placeholder%} operands through PlaceholderAPI and compares the
  * resolved values, and the kits context never imports a PlaceholderAPI type.
  *
  * <p>Soft coupling: this port is injected as an {@link java.util.Optional} into the claim gate, mirroring
  * {@link KitEconomy}. When no evaluator is present (PlaceholderAPI absent), a kit with no requirements is
- * claimable, but a kit that <em>declares</em> requirements <strong>fails closed</strong> — it cannot be
+ * claimable, but a kit that <em>declares</em> requirements <strong>fails closed</strong>: it cannot be
  * claimed, because the conditions cannot be checked. This matches the competitor behaviour where an
  * unresolvable condition denies the claim rather than silently passing it.
  *

@@ -32,7 +32,7 @@ import org.jspecify.annotations.NullMarked;
  * tick thread. No Bukkit API is touched off the global thread, and no write blocks a tick thread.
  *
  * <p>Day boundary: each tick stamps the seconds onto the server's current local date (the {@code clock}'s zone).
- * A session that spans midnight naturally lands its post-midnight seconds in the new day's row on the next sample —
+ * A session that spans midnight naturally lands its post-midnight seconds in the new day's row on the next sample
  * there is no rollover step; the per-day rows make that automatic.
  */
 @NullMarked

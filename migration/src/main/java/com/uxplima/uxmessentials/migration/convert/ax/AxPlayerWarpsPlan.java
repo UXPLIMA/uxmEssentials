@@ -29,8 +29,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * The AxPlayerWarps source's {@link ImportPlan}. AxPlayerWarps stores every foreign reference as an integer id, so the
- * plan first loads the small lookup tables — the players once, and the whitelist / blacklist / favourite / rating /
- * visit side tables grouped by warp — resolving each player id to a uuid up front. It then streams the warps, joining
+ * plan first loads the small lookup tables. The players once, and the whitelist / blacklist / favourite / rating /
+ * visit side tables grouped by warp, resolving each player id to a uuid up front. It then streams the warps, joining
  * each to its side data and handing it to the {@link AxWarpMapper}. The side tables are bounded (a player-warp network
  * is modest next to a 50 000-file userdata tree), so gathering them eagerly is what lets each warp be assembled without
  * a per-warp query; the warp stream itself stays lazy.

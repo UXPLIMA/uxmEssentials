@@ -225,7 +225,7 @@ public final class JooqHologramRepository extends JooqRepository implements Holo
         return pages;
     }
 
-    /** Every hologram's extra pages, keyed by name — the {@link #all()} counterpart of {@link #extraPages}. */
+    /** Every hologram's extra pages, keyed by name: the {@link #all()} counterpart of {@link #extraPages}. */
     private static Map<String, List<List<String>>> allExtraPages(DSLContext dsl) {
         Map<String, Map<Integer, List<String>>> byName = new LinkedHashMap<>();
         for (Record row : dsl.select(HOLOGRAM_PAGES.HOLOGRAM, HOLOGRAM_PAGES.PAGE_INDEX, HOLOGRAM_PAGES.TEXT)
@@ -254,7 +254,7 @@ public final class JooqHologramRepository extends JooqRepository implements Holo
         return actions;
     }
 
-    /** Every hologram's action chain, keyed by name — the {@link #all()} counterpart of {@link #actions}. */
+    /** Every hologram's action chain, keyed by name: the {@link #all()} counterpart of {@link #actions}. */
     private static Map<String, List<ClickAction>> allActions(DSLContext dsl) {
         Map<String, List<ClickAction>> byName = new LinkedHashMap<>();
         for (Record row : dsl.select(

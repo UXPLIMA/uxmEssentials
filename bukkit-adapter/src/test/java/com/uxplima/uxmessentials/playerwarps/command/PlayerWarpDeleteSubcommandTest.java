@@ -32,10 +32,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
  * Pins that warp removal now folds into {@code /pwarp del <name>} (the way {@code /warp del} sits under
- * {@code /warp}) and drives the {@link ArchivePlayerWarp} use case — archiving by default (recoverable) — with the
+ * {@code /warp}) and drives the {@link ArchivePlayerWarp} use case, archiving by default (recoverable), with the
  * player's own ref and the typed name. The archive reads then writes the store, so the command hands it to
  * {@link Scheduler#async}; the inline scheduler here runs that task in the same dispatch so the use-case call is
- * observable. The standalone {@code /delpwarp} literal is gone — this guards the replacement keeps the same
+ * observable. The standalone {@code /delpwarp} literal is gone. This guards the replacement keeps the same
  * command shape under {@code /pwarp}.
  */
 class PlayerWarpDeleteSubcommandTest {

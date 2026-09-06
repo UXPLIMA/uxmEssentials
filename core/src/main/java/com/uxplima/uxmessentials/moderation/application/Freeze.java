@@ -14,7 +14,7 @@ import com.uxplima.uxmessentials.shared.domain.Unit;
 /**
  * {@code /freeze <player>} and {@code /unfreeze <player>}: pin a connected player in place pending review, or
  * release them. Freeze is session-scoped runtime state owned by the {@link Sanctions} adapter (a relog clears
- * it) — not a DB-backed sanction — but each toggle is still audit-logged because it is an admin action. The
+ * it), not a DB-backed sanction, but each toggle is still audit-logged because it is an admin action. The
  * exempt target cannot be frozen.
  */
 public final class Freeze {

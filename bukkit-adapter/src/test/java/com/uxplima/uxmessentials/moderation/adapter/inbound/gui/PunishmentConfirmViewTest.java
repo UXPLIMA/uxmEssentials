@@ -47,14 +47,14 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
  * The punishment-confirm golden test: the engine-rendered screen must draw the exact window the original bespoke
  * {@code PunishmentConfirmView} drew, and its buttons must keep the behaviour. The screen draws the target's
  * PLAYER_HEAD@4, the apply REDSTONE_BLOCK@10, the silent BARRIER@12 (hidden for {@code /banip}), the reason
- * WRITABLE_BOOK@14 and the back ARROW@22 over a grey-glass backdrop — snapshotted as {@code (slot -> material,
+ * WRITABLE_BOOK@14 and the back ARROW@22 over a grey-glass backdrop, snapshotted as {@code (slot -> material,
  * plain name)} and asserted equal slot for slot to the baseline the old view produced (frozen here so the old
  * SimpleGui path could be deleted), for both the with-silent ({@code /ban}) and no-silent ({@code /banip}) layouts.
  *
  * <p>Clicking apply runs the subject's executor with {@code silent=false}; clicking silent runs it with
  * {@code silent=true}; the back button runs {@code onBack}. The set-reason button opens the shared anvil seam,
  * which MockBukkit leaves unimplemented (no {@code player.openAnvil}), so the reason round-trip is verified through
- * the package-private {@code applyReason} seam — reopening carries the captured reason in the subject, which the
+ * the package-private {@code applyReason} seam. Reopening carries the captured reason in the subject, which the
  * reason item's lore key then reflects.
  */
 class PunishmentConfirmViewTest {

@@ -28,7 +28,7 @@ import org.mockbukkit.mockbukkit.MockBukkit;
  * keys config overrides against, so they must read straight off the code-side registration: the id and
  * default name come from the built node's root literal, the default aliases mirror {@link
  * CommandRegistration#aliases()}. These derivations also have to survive the {@link LocaleBinding} wrapper,
- * which rebuilds the tree at registration time — if the wrapper dropped the literal or the alias list the
+ * which rebuilds the tree at registration time. If the wrapper dropped the literal or the alias list the
  * catalog would key overrides against the wrong command. MockBukkit boots Paper's Brigadier so {@link
  * Commands#literal} is wired before the nodes are built.
  */

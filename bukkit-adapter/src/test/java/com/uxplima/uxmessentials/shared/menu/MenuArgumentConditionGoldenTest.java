@@ -46,7 +46,7 @@ import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
 /**
- * The end-to-end proof that {@code %argument_<name>%} resolves in condition evaluation — the open-requirement gate, an
+ * The end-to-end proof that {@code %argument_<name>%} resolves in condition evaluation, the open-requirement gate, an
  * item's {@code view} block, and a click requirement all read the values a menu was opened with, so a typed
  * open-command's arguments can gate the whole menu. A real {@link MenuSpecLoader} parses the spec, a real {@link Menus}
  * wired with the live registries opens it carrying arguments, and the real {@link MenuRenderer}/{@link MenuListener}

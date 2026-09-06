@@ -61,17 +61,17 @@ import org.jspecify.annotations.NullMarked;
  * Constructs the custommenus context's adapters over the shared menu engine: a {@link CustomMenuLoader} that reads
  * the operator's {@code menus/*.conf} into {@link Menus}, run once on enable, the {@code /menu} command, one
  * {@link MenuOpenCommand} per menu that declared its own {@code command {}} block ({@code /shop}, {@code /store}),
- * and the opener-item listeners loaded from {@code menus/openers.conf}. This is the one place the context is wired —
+ * and the opener-item listeners loaded from {@code menus/openers.conf}. This is the one place the context is wired
  * nothing else news up its classes.
  *
  * <p>The loaded menu names are held in an {@link AtomicReference} the {@code /menu list} and tab-completion read and
  * {@code /menu reload} swaps atomically: a reload re-runs the loader (re-registering specs into the engine,
  * overwriting the previous ones) and publishes the fresh name set in one assignment, so a reader sees either the old
  * or the new list, never a half-applied one. The parsed openers are held in a second {@link AtomicReference} swapped
- * the same way, so a {@code /menu reload} also re-reads {@code openers.conf} — the join listener reads the fresh list
+ * the same way, so a {@code /menu reload} also re-reads {@code openers.conf}. The join listener reads the fresh list
  * on the next join, the interact listener reads the fresh menu-name set, and the swap listener reads the fresh
  * off-hand-swap menu (or none) on the next swap. (Open commands are the one exception:
- * Brigadier only registers at startup, so a reload cannot add or drop a {@code /shop}-style command — that needs a
+ * Brigadier only registers at startup, so a reload cannot add or drop a {@code /shop}-style command: that needs a
  * restart, as in DeluxeMenus.) A disabled module never reaches this wiring, so it loads no menus and registers
  * nothing.
  */
@@ -177,10 +177,10 @@ public final class CustomMenusWiring {
                 menusDir, persistence, menus::registeredSpec, openCommandFor, reloadOne, forget, log);
         // One-editor-per-menu lock: the grid and property editors take it on open (refusing a second viewer with a
         // "being edited by …" line), the picker release it on returning to the browser, and the quit listener release
-        // it on disconnect — so a menu is never rewritten while another operator has it open.
+        // it on disconnect, so a menu is never rewritten while another operator has it open.
         MenuEditLocks editLocks = new MenuEditLocks();
-        // The slot-grid canvas (the overview's "Slot editor" button) and the overview reference each other — the
-        // overview opens the grid, the grid's Back returns to the overview — so the grid is built first with a Back
+        // The slot-grid canvas (the overview's "Slot editor" button) and the overview reference each other, the
+        // overview opens the grid, the grid's Back returns to the overview, so the grid is built first with a Back
         // hook that reads the overview through a holder set once the overview exists, breaking the construction cycle.
         // The item property editor and the grid reference each other the same way: the grid opens the item editor for a
         // clicked cell, the item editor's Back reopens the grid, so the item editor is built first with a Back hook
@@ -190,8 +190,8 @@ public final class CustomMenusWiring {
         AtomicReference<MenuGridView> gridViewRef = new AtomicReference<>();
         AtomicReference<MenuPropertiesView> propertiesViewRef = new AtomicReference<>();
         // The click-action and view-requirement builders (the item editor's two new rows). The requirement editor and
-        // the item editor reference each other — the item editor opens the requirement editor, the requirement editor's
-        // back reopens the item editor — so the requirement editor is built first with a back hook that reads the item
+        // the item editor reference each other. The item editor opens the requirement editor, the requirement editor's
+        // back reopens the item editor, so the requirement editor is built first with a back hook that reads the item
         // editor through a holder set once it exists, breaking the construction cycle (mirroring the grid↔overview
         // one).
         // Both builders read the id catalog from the live bindings' schema export, so a late-registered feature is
@@ -222,8 +222,8 @@ public final class CustomMenusWiring {
                 requirementsView);
         itemEditorViewRef.set(itemEditorView);
         // The menu-level property editor (the overview's "Edit properties" row and the create-from-scratch landing)
-        // and its open-command sub-editor. The command editor and the property editor reference each other — the
-        // property editor opens the command editor, the command editor's back reopens the property editor — so the
+        // and its open-command sub-editor. The command editor and the property editor reference each other, the
+        // property editor opens the command editor, the command editor's back reopens the property editor, so the
         // command editor is built first with a back hook that reads the property editor through a holder set once it
         // exists. A property-editor Save writes the session's own command block, so rememberCommand mirrors it into the
         // live open-command reference: a later grid save (which re-attaches from that reference) then keeps the edit
@@ -313,7 +313,7 @@ public final class CustomMenusWiring {
 
         // The open commands a menu declares in its `command {}` block are built once here, from this first load,
         // and handed back for the bootstrap to register at the LifecycleEvents.COMMANDS event. Brigadier only
-        // accepts command registrations at that startup event, so — as in DeluxeMenus — a later `/menu reload`
+        // accepts command registrations at that startup event, so, as in DeluxeMenus, a later `/menu reload`
         // refreshes menu CONTENT (specs re-parsed, /menu open sees the new set) but does NOT add, rename, or drop
         // open commands for new or edited menus: that needs a server restart. We deliberately do not try to
         // re-register Brigadier nodes on reload.
@@ -353,7 +353,7 @@ public final class CustomMenusWiring {
 
     /**
      * {@code current} with {@code name} bound to {@code command} (or dropped when it is empty), as a fresh immutable
-     * map — how a property-editor Save that added, changed, or cleared a menu's {@code command {}} block keeps the live
+     * map. How a property-editor Save that added, changed, or cleared a menu's {@code command {}} block keeps the live
      * open-command reference in step, so a subsequent grid save re-attaches the edited block rather than the stale one.
      */
     private static Map<String, OpenCommandSpec> withCommand(
@@ -375,7 +375,7 @@ public final class CustomMenusWiring {
 
     /**
      * The wired custommenus adapters handed back to bootstrap: the {@code /menu} command (plus any open commands),
-     * the loaded-menu-names supplier (so a later consumer — e.g. a management hub entry — can read the current set),
+     * the loaded-menu-names supplier (so a later consumer, e.g. a management hub entry, can read the current set),
      * and the opener-item and off-hand-swap listeners. There is no stop hook: the loader registers specs into the
      * shared engine, which the bootstrap tears down centrally on disable.
      */

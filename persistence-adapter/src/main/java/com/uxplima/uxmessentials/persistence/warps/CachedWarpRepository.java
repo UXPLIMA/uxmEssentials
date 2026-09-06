@@ -15,7 +15,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
 /**
  * An in-memory-authoritative decorator over a delegate {@link WarpRepository}. Warps are server-wide and the
  * full set is small and bounded, and it is read on nearly every {@code /warp}, {@code /warp list}, and
- * tab-complete — all on the command (tick/region) thread — so re-querying SQLite on a miss would block that
+ * tab-complete, all on the command (tick/region) thread, so re-querying SQLite on a miss would block that
  * thread. The set is loaded once (the wiring's warm load on enable reads {@link #all()}) and thereafter the
  * loaded set is the authoritative answer for {@code find}/{@code exists}/{@code all}: a name not in the set is
  * absent rather than a trigger to re-query the database. After that one warm load the lookup never touches the
@@ -23,7 +23,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
  *
  * <p>Every warp mutation goes through this repository, so the in-memory set stays complete: a {@code save}
  * writes through to the delegate then publishes a new set with the warp added (immediately findable), and a
- * {@code delete} writes through then publishes one with it removed (immediately absent) — write-through at the
+ * {@code delete} writes through then publishes one with it removed (immediately absent), write-through at the
  * delegate, applied here, never a reload and never a write-back cache that could lose a mutation. The set is
  * held in an {@link AtomicReference} and swapped copy-on-write (the set is tiny and edits are rare operator
  * commands), so a reader on a command thread always sees a consistent immutable snapshot while a writer
@@ -31,7 +31,7 @@ import com.uxplima.uxmessentials.warps.domain.WarpName;
  * next read after an {@link #invalidateAll()} (a module reload, or a cross-server peer reporting a change),
  * which the next read triggers lazily.
  *
- * <p>Ratings are not part of the cached set — {@code rate}/{@code averageRating} pass straight through to the
+ * <p>Ratings are not part of the cached set. {@code rate}/{@code averageRating} pass straight through to the
  * delegate, as a rating change does not alter the warp's identity or location the command thread resolves.
  */
 public final class CachedWarpRepository implements WarpRepository {

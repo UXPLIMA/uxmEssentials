@@ -7,7 +7,7 @@ import java.util.Objects;
  * One page of rows plus the size of the whole filtered corpus. The total is what lets the engine render
  * {@code %max_page%} and decide whether a next-page button applies, without ever holding more than a page.
  *
- * <p>{@code pinned} rows claim a fixed content slot through {@link PinnedEntry} and sit outside the page's flow —
+ * <p>{@code pinned} rows claim a fixed content slot through {@link PinnedEntry} and sit outside the page's flow
  * a sponsored entry that must appear on every page, for instance. They are not counted in {@code totalCount}.
  *
  * <p>A page has a fixed capacity: because pinned entries occupy content slots too, {@code rows.size() + pinned.size()}
@@ -27,7 +27,7 @@ public record PagedResult<T>(List<T> rows, long totalCount, List<T> pinned) {
         }
     }
 
-    /** A page with no pinned rows — the common case. */
+    /** A page with no pinned rows, the common case. */
     public static <T> PagedResult<T> of(List<T> rows, long totalCount) {
         return new PagedResult<>(rows, totalCount, List.of());
     }

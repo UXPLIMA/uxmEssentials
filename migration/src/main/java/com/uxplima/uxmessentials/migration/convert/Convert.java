@@ -7,21 +7,21 @@ import com.uxplima.uxmessentials.migration.ImportPlan;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * A single legacy data source the importer can read from — the multi-source port (docs/12-migration
+ * A single legacy data source the importer can read from, the multi-source port (docs/12-migration
  * §1.1). One implementation per legacy plugin: EssentialsX ships first; CMI, HuskHomes, PlayerVaultX,
  * CoinsEngine, SunLight, and AxVault are planned, each a future {@code Convert} impl behind this same
  * interface.
  *
  * <p>An impl is stateless and self-contained: it owns its own {@code parse/} tree (foreign-format
  * detail) and its {@code map/} ACL mappers, and it drains into the same domain aggregates every other
- * adapter uses. What it does <em>not</em> own is the write path — every source funnels its mapped
+ * adapter uses. What it does <em>not</em> own is the write path. Every source funnels its mapped
  * records through the same {@code ImportData} use case and the same application services, so
  * idempotency, conflict policy, quotas, and audit are identical no matter which source ran. Adding a
  * source adds a {@code Convert} impl and a mappings table; it changes nothing in the write/idempotency/
  * audit machinery.
  *
  * <p>Parsing stays here, strictly in the adapter: no {@code Convert} impl exposes a YAML node or a
- * foreign field to its caller — {@link #plan} yields only mapped {@code ImportRecord} domain shapes.
+ * foreign field to its caller: {@link #plan} yields only mapped {@code ImportRecord} domain shapes.
  */
 @NullMarked
 public interface Convert {

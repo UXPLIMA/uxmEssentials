@@ -24,8 +24,8 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * {@code /time <set|add> <value>}: set or advance the world's time. The value is validated by the domain
- * {@link TimeSpec} — a tick number or a named keyword ({@code day}, {@code noon}, {@code night}, …), a set
- * bounded to {@code [0, 24000)} — before the world is touched (else {@link ItemworldMessageKey#BAD_TIME}). The
+ * {@link TimeSpec}. A tick number or a named keyword ({@code day}, {@code noon}, {@code night}, …), a set
+ * bounded to {@code [0, 24000)}: before the world is touched (else {@link ItemworldMessageKey#BAD_TIME}). The
  * {@code /day} and {@code /night} alias verbs share this group through their own classes.
  *
  * <p>World time is global game state, so the change runs on the global region thread through the kernel

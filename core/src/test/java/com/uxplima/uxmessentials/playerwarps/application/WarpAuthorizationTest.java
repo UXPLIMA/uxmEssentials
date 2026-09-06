@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The authority resolver: an owner is always {@link WarpRole#OWNER} without a store lookup, a member resolves to
- * their stored role, and a stranger resolves to nothing — so {@link WarpAuthorization#allows} is fail-closed.
+ * their stored role, and a stranger resolves to nothing, so {@link WarpAuthorization#allows} is fail-closed.
  */
 class WarpAuthorizationTest {
 

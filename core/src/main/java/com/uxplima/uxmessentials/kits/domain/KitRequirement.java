@@ -6,14 +6,14 @@ import java.util.Optional;
 /**
  * One operator-authored condition a player must satisfy before they may claim a kit, modelled as two opaque
  * operands and the {@link RequirementOperator} between them. The operands are raw strings exactly as written
- * in the kit's config — typically carrying {@code %placeholder%} tokens ({@code "%player_level%"},
- * {@code "10"}) — and the kernel never resolves or inspects them, mirroring how {@link KitItem#data()} carries
+ * in the kit's config. Typically carrying {@code %placeholder%} tokens ({@code "%player_level%"},
+ * {@code "10"}), and the kernel never resolves or inspects them, mirroring how {@link KitItem#data()} carries
  * an opaque serialized item. Resolving the placeholders and comparing the resolved values is the job of the
  * {@code RequirementEvaluator} port the adapter implements over PlaceholderAPI, so the kits context keeps zero
  * dependency on any placeholder engine.
  *
  * <p>A requirement is a value object: two requirements are equal when their operands and operator match, which
- * is what lets a kit definition compare equal across a config reload. Both operands must be non-blank — a
+ * is what lets a kit definition compare equal across a config reload. Both operands must be non-blank, a
  * condition with an empty side is malformed and is rejected at construction so it never reaches the gate.
  *
  * @param left the left operand, an opaque raw string (often a {@code %placeholder%})
@@ -37,7 +37,7 @@ public record KitRequirement(String left, RequirementOperator operator, String r
     }
 
     /**
-     * Parse a single {@code requirements} entry — {@code "%player_level% >= 10"} — into a requirement, splitting
+     * Parse a single {@code requirements} entry, {@code "%player_level% >= 10"}, into a requirement, splitting
      * it on the first operator token found, or empty when no recognised operator appears or either side is
      * blank. The two-character tokens ({@code >= <= == !=}) are tried before the single-character ones so a
      * {@code >=} is never mistaken for a {@code >}. Spacing around the operator is tolerated. A malformed entry

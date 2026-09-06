@@ -16,7 +16,7 @@ import org.jspecify.annotations.NullMarked;
 
 /**
  * jOOQ-backed {@link PlayerWarpPasswordStore} over the {@code password_algorithm/salt/hash} columns of the V70
- * {@code player_warps} table. It is the only writer of those columns — {@link JooqPlayerWarpRepository} never
+ * {@code player_warps} table. It is the only writer of those columns, {@link JooqPlayerWarpRepository} never
  * touches them, so a warp save can never wipe a set password. The plaintext is hashed here through the injected
  * {@link PasswordHasher} and only the resulting {@link PasswordHash} is ever written; the plaintext never leaves a
  * store method and is never logged. Every statement is typed jOOQ DSL; no SQL is ever string-concatenated.

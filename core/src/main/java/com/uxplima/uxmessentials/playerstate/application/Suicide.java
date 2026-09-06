@@ -7,7 +7,7 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
 
 /**
- * {@code /suicide}: kill yourself. Self-only — there is no target form (§15.6, docs/permissions.md), so the
+ * {@code /suicide}: kill yourself. Self-only. There is no target form (§15.6, docs/permissions.md), so the
  * use case takes a single player. A live-only effect through the {@link PlayerEffects} port; the death itself
  * is the feedback, with a short confirmation message for the player.
  */

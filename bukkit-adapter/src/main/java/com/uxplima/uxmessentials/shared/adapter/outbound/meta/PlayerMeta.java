@@ -16,13 +16,13 @@ import org.bukkit.plugin.Plugin;
  * the Phase-7 anti-dupe marking writes it; {@link #add} layers a parse-then-store numeric view on top so a meta key
  * can be used as a counter.
  *
- * <p>This is for <b>online players only</b> — an offline player's PDC is not reachable through the Bukkit API
+ * <p>This is for <b>online players only</b>. An offline player's PDC is not reachable through the Bukkit API
  * without NMS, which is out of scope here. Durable, server-authoritative data belongs in the database-backed
  * {@code PlayerDataStore}; PDC is the right home only for transient per-holder state.
  *
  * <h2>NamespacedKey discipline</h2>
  * Operator-chosen key names are open-ended, so the {@link NamespacedKey} for each is built once on first use and
- * cached in a {@link ConcurrentHashMap} — the hot-path rule from CLAUDE.md forbids constructing a
+ * cached in a {@link ConcurrentHashMap}. The hot-path rule from CLAUDE.md forbids constructing a
  * {@link NamespacedKey} per call. Every key lives under the one {@code uxmessentials} namespace, with the name
  * segment sanitised to the legal {@code [a-z0-9._-]} alphabet.
  */

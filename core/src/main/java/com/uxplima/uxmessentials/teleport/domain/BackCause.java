@@ -7,9 +7,9 @@ package com.uxplima.uxmessentials.teleport.domain;
  */
 public enum BackCause {
 
-    /** Captured just before a teleport hop — the pre-teleport location. */
+    /** Captured just before a teleport hop, the pre-teleport location. */
     TELEPORT,
 
-    /** Captured at the point of death — only returnable with the death-back permission. */
+    /** Captured at the point of death, only returnable with the death-back permission. */
     DEATH
 }

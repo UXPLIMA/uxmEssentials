@@ -55,7 +55,7 @@ class RatePlayerWarpTest {
     @Test
     void aVoteRecordsTheStarAndWritesBackTheBayesianRollup() {
         // Three foreign 2-star votes drag the global mean down, so this lone 5-star vote scores well below its own
-        // 5.0 average — exactly the smoothing the browse sort relies on.
+        // 5.0 average: exactly the smoothing the browse sort relies on.
         ratings.seed(FOREIGN, UUID.randomUUID(), 2);
         ratings.seed(FOREIGN, UUID.randomUUID(), 2);
         ratings.seed(FOREIGN, UUID.randomUUID(), 2);

@@ -4,7 +4,7 @@ import com.uxplima.uxmessentials.economy.application.EconomyMessageKey;
 
 /**
  * The modelled failures a loan operation ({@code /loan take}, {@code /loan pay}) can produce. Each value is a
- * distinct outcome the command adapter renders through its own {@link EconomyMessageKey} — never collapsed to
+ * distinct outcome the command adapter renders through its own {@link EconomyMessageKey}: never collapsed to
  * a single "insufficient funds" notice, so a debtor over their credit limit and a debtor with an empty wallet
  * see different messages.
  *
@@ -24,7 +24,7 @@ public enum LoanError {
     /** The caller is not the debtor of the named loan. */
     WRONG_DEBTOR(EconomyMessageKey.LOAN_WRONG_DEBTOR),
 
-    /** The debtor cannot cover the installment — the guarded debit changed no rows. */
+    /** The debtor cannot cover the installment: the guarded debit changed no rows. */
     INSUFFICIENT_FUNDS(EconomyMessageKey.LOAN_INSUFFICIENT_FUNDS),
 
     /** The requested principal or installment count is outside the allowed range. */

@@ -8,7 +8,7 @@ package com.uxplima.uxmessentials.messaging.domain;
  */
 public enum IgnoreChannel {
 
-    /** A private message — {@code /msg} or {@code /reply}. */
+    /** A private message, {@code /msg} or {@code /reply}. */
     MESSAGE {
         @Override
         boolean blockedBy(IgnoreScope scope) {
@@ -16,7 +16,7 @@ public enum IgnoreChannel {
         }
     },
 
-    /** A piece of mail — {@code /mail send}. */
+    /** A piece of mail, {@code /mail send}. */
     MAIL {
         @Override
         boolean blockedBy(IgnoreScope scope) {

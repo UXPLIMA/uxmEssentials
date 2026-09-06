@@ -34,13 +34,13 @@ import org.jspecify.annotations.Nullable;
  *
  * <p>The join line is chosen by the joiner's rank and history. The player's LuckPerms primary group picks a
  * per-group join template when the operator authored one (else the default join policy), and a player the server
- * has never seen before ({@code !hasPlayedBefore()}) is greeted with the first-join welcome instead — when a welcome
- * is authored — so every viewer sees the welcome rather than the ordinary join line. Both inputs flow into the pure
+ * has never seen before ({@code !hasPlayedBefore()}) is greeted with the first-join welcome instead, when a welcome
+ * is authored, so every viewer sees the welcome rather than the ordinary join line. Both inputs flow into the pure
  * {@link ResolveJoinMessage}; this listener only reads them off the live event. The events fire on the
  * joining/quitting player's region thread, so reading the live player and setting the event component is
  * region-local, and the primary-group read is a non-blocking cached-meta lookup.
  *
- * <p>A joining player is also sent their personal MOTD — the {@code motd} lines, rendered through the
+ * <p>A joining player is also sent their personal MOTD. The {@code motd} lines, rendered through the
  * {@link BukkitInfoSender} (which expands PlaceholderAPI per viewer), delivered only to the joiner and never
  * broadcast. When no dedicated {@code motd} list is configured the listener falls back to the legacy {@code motd}
  * info page gated by {@code motd-on-join} (the same body {@code /motd} prints). This is the personal welcome the
@@ -82,7 +82,7 @@ public final class ConnectionMessageListener implements Listener {
     }
 
     /**
-     * Send the joining player their personal MOTD. A dedicated {@code motd} list is preferred — its lines deliver
+     * Send the joining player their personal MOTD. A dedicated {@code motd} list is preferred: its lines deliver
      * through the {@link BukkitInfoSender} (which hops to the player's region thread per line and expands
      * PlaceholderAPI), so this is safe from the join handler. When no list is configured the legacy {@code motd}
      * info page is sent instead, gated by {@code motd-on-join}. Only the joiner is sent the MOTD; the broadcast join

@@ -27,12 +27,12 @@ import org.jspecify.annotations.Nullable;
  * The opt-in "suppress real players" synthetic-tab mechanism (TAB-C). A {@link TablistRenderer} delegates here when a
  * viewer's selected format carries {@code suppress-real-players = true}: every real player is hidden from that viewer's
  * tab list so only this renderer's filler rows remain. It is split out of the renderer so each class stays a cohesive
- * size — the renderer owns the header/footer/name/order/skin/filler painting, this owns the packet-rewrite interception.
+ * size, the renderer owns the header/footer/name/order/skin/filler painting, this owns the packet-rewrite interception.
  *
  * <p><strong>How a player is hidden.</strong> A single shared {@link PacketListener} is registered once on the injected
  * {@link PacketListenerRegistry}. For every outbound {@code ClientboundPlayerInfoUpdatePacket} bound for a viewer who is
  * currently in suppress mode, it rewrites the packet (via {@link PlayerInfoUpdates#forceUnlisted}) so every entry whose
- * uuid is <em>not</em> one of this renderer's filler ids for that viewer is forced {@code listed=false} — present as a
+ * uuid is <em>not</em> one of this renderer's filler ids for that viewer is forced {@code listed=false}, present as a
  * known client entity (entity name/skin still work) but not drawn as a tab row. Any other packet, or a packet for a
  * viewer not in suppress mode, passes through unchanged. Because the rewrite forces every non-filler entry unlisted, a
  * TAB-A custom-skin {@code ADD_PLAYER} re-add for a real player is force-unlisted too, so it can never un-suppress them.
@@ -40,7 +40,7 @@ import org.jspecify.annotations.Nullable;
  * <p><strong>Netty-thread safety.</strong> The listener runs on a Netty I/O thread. It touches no Bukkit API and never
  * blocks: it reads only the thread-safe {@link #fillerIds} snapshot (a {@link ConcurrentHashMap} of immutable id sets
  * the main thread swaps whole) and the {@link #active} membership set. Any error building the rewrite is logged and the
- * original packet is passed unchanged — the listener never throws on the I/O thread and never drops a viewer's tab.
+ * original packet is passed unchanged: the listener never throws on the I/O thread and never drops a viewer's tab.
  *
  * <p><strong>Lifecycle.</strong> {@link #apply} runs on the viewer's region/entity thread each render: entering suppress
  * mode injects the interceptor into that viewer's connection and immediately relists the real players unlisted (so rows
@@ -84,7 +84,7 @@ public final class TablistSuppression {
      * The filler-entry ids this renderer owns for each viewer currently in suppress mode, keyed by viewer uuid. The
      * value is an immutable snapshot swapped whole by {@link #apply} on the viewer's region thread; the Netty listener
      * only ever reads it, so no entry is mutated in place and the read needs no lock. An absent viewer means no fillers
-     * are protected (everything would be suppressed) — but a viewer is only ever a key while {@link #active}, so the
+     * are protected (everything would be suppressed), but a viewer is only ever a key while {@link #active}, so the
      * listener reads this only for active viewers.
      */
     private final Map<UUID, Set<UUID>> fillerIds = new ConcurrentHashMap<>();
@@ -125,7 +125,7 @@ public final class TablistSuppression {
      *
      * <p>The renderer calls this <em>before</em> it paints the fillers, passing the ids the layout is about to paint, so
      * for an already-suppressed viewer the snapshot already protects a filler when its {@code ADD_PLAYER} crosses the
-     * live interceptor — otherwise that first paint would be force-unlisted and the per-cell flicker guard would never
+     * live interceptor. Otherwise that first paint would be force-unlisted and the per-cell flicker guard would never
      * repaint it.
      *
      * @param plannedFillerIds the filler entry ids the layout will paint this tick (the entries kept listed)
@@ -173,7 +173,7 @@ public final class TablistSuppression {
     }
 
     /**
-     * Drop a quitting {@code viewer}'s suppress tracking without sending a relist packet to a closing channel — the
+     * Drop a quitting {@code viewer}'s suppress tracking without sending a relist packet to a closing channel, the
      * connection is gone, so the relist would hit a dead channel. The interceptor is ejected anyway (idempotent and
      * harmless on a closed pipeline), and the tracking is forgotten so a relog re-evaluates from scratch.
      */
@@ -236,7 +236,7 @@ public final class TablistSuppression {
         }
     }
 
-    /** The uuids of the currently-online real players — the entries a suppress mode hides and a restore re-lists. */
+    /** The uuids of the currently-online real players: the entries a suppress mode hides and a restore re-lists. */
     private List<UUID> realPlayerIds() {
         Collection<? extends Player> online = viewers.get();
         List<UUID> ids = new ArrayList<>(online.size());
@@ -246,7 +246,7 @@ public final class TablistSuppression {
         return ids;
     }
 
-    /** True when {@code id} is one of {@code viewer}'s protected filler ids — i.e. an entry that must stay listed. */
+    /** True when {@code id} is one of {@code viewer}'s protected filler ids: i.e. an entry that must stay listed. */
     private boolean isFiller(UUID viewerId, UUID id) {
         Set<UUID> ids = fillerIds.get(viewerId);
         return ids != null && ids.contains(id);

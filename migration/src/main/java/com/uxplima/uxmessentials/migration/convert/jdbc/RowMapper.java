@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 /**
  * Maps the {@link ResultSet}'s current row to a value of type {@code R}. A mapper reads only columns by name
- * and never advances the cursor — {@link JdbcSource} owns iteration — so a mapper stays a pure per-row read.
+ * and never advances the cursor, {@link JdbcSource} owns iteration, so a mapper stays a pure per-row read.
  * It may throw {@link SQLException}, which {@link JdbcSource} surfaces as a single failed query rather than a
  * silently dropped row.
  *

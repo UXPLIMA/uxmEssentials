@@ -10,12 +10,12 @@ import java.util.Set;
 
 /**
  * The ordered chain of ranks an operator authored in {@code ranks.conf}. The ladder is the single source of
- * truth for progression order — it sorts its ranks by {@link Rank#order()} once at construction and answers the
+ * truth for progression order. It sorts its ranks by {@link Rank#order()} once at construction and answers the
  * pure questions the rankup, prestige and GUI phases ask: what is the {@link #first() first} rank, what is the
  * {@link #next(RankId) next} rank after one, does it {@link #contains(RankId) contain} a rank, and what remains
  * {@link #orderedFrom(RankId) from} a rank onward.
  *
- * <p>Rank ids are unique — two rungs with the same id would make {@code next} ambiguous — so a duplicate id is
+ * <p>Rank ids are unique (two rungs with the same id would make {@code next} ambiguous) so a duplicate id is
  * rejected at construction. The ladder may be empty (an operator who cleared {@code ranks.conf}); {@link #first()}
  * then answers empty rather than throwing, and callers decide how to degrade.
  */
@@ -78,7 +78,7 @@ public final class RankLadder {
         return index < 0 ? List.of() : List.copyOf(ranks.subList(index, ranks.size()));
     }
 
-    /** Every rank in ascending order — the whole ladder as an immutable list. */
+    /** Every rank in ascending order, the whole ladder as an immutable list. */
     public List<Rank> ranks() {
         return ranks;
     }

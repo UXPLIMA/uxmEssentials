@@ -5,9 +5,9 @@ import java.util.Objects;
 
 /**
  * The pure decision behind the console-spam filter: given a fixed list of substrings an operator wants gone from the
- * console, decide whether one rendered log line should be suppressed. The policy is deliberately conservative — it
+ * console, decide whether one rendered log line should be suppressed. The policy is deliberately conservative: it
  * suppresses a line only when the tweak is enabled, the list is non-empty, and the line actually contains one of the
- * configured substrings — so an empty or disabled configuration lets every line through and no error is ever
+ * configured substrings, so an empty or disabled configuration lets every line through and no error is ever
  * swallowed by accident.
  *
  * <p>Matching is a plain, case-sensitive {@link String#contains(CharSequence) substring} test: the operator names an

@@ -28,13 +28,13 @@ import org.jspecify.annotations.NullMarked;
  * does the duration resolution and the countdown; this decorator only snapshots the player's origin block
  * and the configured cancel toggles at {@code begin} time and arms the tracker with the returned handle.
  *
- * <p>Wrapping the port — rather than threading the handle back through the engine — keeps the cooldown /
+ * <p>Wrapping the port, rather than threading the handle back through the engine, keeps the cooldown /
  * warmup orchestration in {@code :core} untouched while still giving the adapter the live handle the
  * move-cancels-warmup invariant needs. A zero-duration (bypass) warmup returns an already-complete handle
  * the tracker drops, so a bypassed teleport is correctly immune to move-cancel.
  *
- * <p>The wrapper also resolves the warmup's duration here — the same min-reducer the kernel
- * {@code SchedulerWarmups} applies — and records the resulting completion instant with the tracker, so the
+ * <p>The wrapper also resolves the warmup's duration here, the same min-reducer the kernel
+ * {@code SchedulerWarmups} applies, and records the resulting completion instant with the tracker, so the
  * {@code teleport_warmup_remaining} placeholder can read the remaining wait the kernel port does not surface
  * back through its handle.
  */
@@ -81,7 +81,7 @@ public final class TrackingWarmups implements Warmups {
         if (handle.isComplete()) {
             return;
         }
-        // A real destination is not needed for the move comparison — the origin block is what the
+        // A real destination is not needed for the move comparison. The origin block is what the
         // invariant pins. The destination/kind fields are carried only for diagnostics, so a neutral
         // marker keeps the tracker honest without re-plumbing the engine's destination through the port.
         PendingTeleport warmup =

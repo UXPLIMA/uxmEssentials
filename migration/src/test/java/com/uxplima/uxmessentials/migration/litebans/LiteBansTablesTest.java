@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The prefix-sanitisation guard for the LiteBans table-name builder. A table name cannot be a JDBC bind
- * parameter, so the configured prefix is interpolated into the SQL — which makes strict whitelisting the
+ * parameter, so the configured prefix is interpolated into the SQL, which makes strict whitelisting the
  * single line of defence against injection. Anything outside {@code [a-z0-9_]+} is rejected at construction.
  */
 class LiteBansTablesTest {

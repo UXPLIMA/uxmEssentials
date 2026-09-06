@@ -9,7 +9,7 @@ import java.util.Objects;
  * atomically on reload (like every other config value). The {@link LoanService} reads its limit, interest band,
  * installment cycle, and credit-score deltas from here instead of hardcoding them, so a server can make loans
  * cheaper or stricter without a code change. Every {@link BigDecimal} is built from a string literal at the
- * config boundary — never {@code BigDecimal.valueOf(double)} — so no figure ever carries floating-point error.
+ * config boundary, never {@code BigDecimal.valueOf(double)}, so no figure ever carries floating-point error.
  *
  * @param limitMultiplier the loan limit is {@code creditScore * limitMultiplier}
  * @param interestMax the interest rate at the lowest credit score (a credit score of {@link #scoreFloor})
@@ -53,7 +53,7 @@ public record LoanPolicy(
         }
     }
 
-    /** The shipped defaults, matching the historical hardcoded economics (2%–22% band, 24h cycle). */
+    /** The shipped defaults, matching the historical hardcoded economics (2% to 22% band, 24h cycle). */
     public static LoanPolicy defaults() {
         return new LoanPolicy(
                 new BigDecimal("1000"),

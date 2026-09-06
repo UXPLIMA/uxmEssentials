@@ -49,11 +49,11 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The menu-level property editor of the {@code /menu editor}: opened from the overview's "Edit properties" button (and
- * landed on straight after a create), it edits everything about a menu that is not a slot — its title, row count,
+ * landed on straight after a create), it edits everything about a menu that is not a slot, its title, row count,
  * inventory shape, click cooldown, chest-only / bottom-inventory flags, open requirement, open / close actions, refresh
- * policy, and its {@code command {}} open-command block. It is a thin consumer of the shared {@link EntityEditorView} —
+ * policy, and its {@code command {}} open-command block. It is a thin consumer of the shared {@link EntityEditorView}
  * each field is one {@link EditableProperty} wired to a {@link MenuEditSession} setter, the ref lists reuse the P4
- * {@link MenuRefListEditor}, the requirement / command sub-editors open as engine child windows — so no raw Bukkit
+ * {@link MenuRefListEditor}, the requirement / command sub-editors open as engine child windows, so no raw Bukkit
  * inventory is built here and the editor stays on the menu engine like every other surface.
  *
  * <p>An open clones the registered {@link MenuSpec} (and its open command) into a per-viewer {@link MenuEditSession};
@@ -101,7 +101,7 @@ public final class MenuPropertiesView {
     private final BiConsumer<Player, PlayerRef> openList;
     private final EntityEditorView<MenuTarget> view;
 
-    /** The menu each viewer is editing, so the command sub-editor — its own engine window — can reopen the right one. */
+    /** The menu each viewer is editing, so the command sub-editor, its own engine window, can reopen the right one. */
     private final Map<UUID, MenuTarget> openTargets = new ConcurrentHashMap<>();
 
     public MenuPropertiesView(
@@ -185,7 +185,7 @@ public final class MenuPropertiesView {
         view.open(player, viewer, target);
     }
 
-    /** Reopen the property editor for whatever menu {@code viewer} was editing — the command sub-editor's back target. */
+    /** Reopen the property editor for whatever menu {@code viewer} was editing: the command sub-editor's back target. */
     public void reopen(Player player, PlayerRef viewer) {
         Objects.requireNonNull(player, "player");
         Objects.requireNonNull(viewer, "viewer");

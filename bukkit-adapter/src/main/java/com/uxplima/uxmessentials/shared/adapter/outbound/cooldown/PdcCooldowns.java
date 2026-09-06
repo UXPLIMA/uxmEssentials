@@ -106,7 +106,7 @@ public final class PdcCooldowns implements Cooldowns {
 
     private void writeStamp(PlayerRef who, NamespacedKey key, long seconds) {
         if (seconds <= 0) {
-            return; // a zero-length cooldown stamps nothing — there is no wait to enforce
+            return; // a zero-length cooldown stamps nothing. There is no wait to enforce
         }
         Player player = Bukkit.getPlayer(who.uuid());
         if (player == null) {

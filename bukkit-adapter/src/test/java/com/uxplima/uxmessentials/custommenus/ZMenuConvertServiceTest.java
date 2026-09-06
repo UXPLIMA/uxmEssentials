@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 /**
  * Pure coverage of the file-facing zMenu convert service: it turns a zMenu {@code .yml} (or a directory of them) under
  * the menus directory into {@code menus/<name>.conf}, tallies the outcome, and never crashes on a bad input. Uses a
- * temp directory rather than MockBukkit — the service is plain file I/O over the converter.
+ * temp directory rather than MockBukkit: the service is plain file I/O over the converter.
  */
 class ZMenuConvertServiceTest {
 

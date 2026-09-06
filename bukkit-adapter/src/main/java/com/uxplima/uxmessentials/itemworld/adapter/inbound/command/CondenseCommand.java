@@ -19,7 +19,7 @@ import com.uxplima.uxmessentials.shared.adapter.inbound.command.CommandRegistrat
 import org.jspecify.annotations.NullMarked;
 
 /**
- * {@code /condense} (alias {@code /compact}): recipe-stack inventory items — merge fragmented partial stacks of
+ * {@code /condense} (alias {@code /compact}): recipe-stack inventory items. Merge fragmented partial stacks of
  * the same item into full stacks, reclaiming slots. Stateless and ACL-thin: the whole-inventory scan groups
  * matching partial stacks and re-lays them out as the fewest full stacks plus one remainder, scheduled on the
  * player's region thread. The count of stacks condensed is reported through
@@ -74,7 +74,7 @@ public final class CondenseCommand extends ItemworldCommandSupport implements Co
 
     /**
      * Merge same-type partial stacks in the player's storage. Returns the number of partial (non-max) stacks
-     * that were absorbed into another stack — the count surfaced to the player.
+     * that were absorbed into another stack: the count surfaced to the player.
      */
     private static int condense(Inventory inventory) {
         ItemStack[] storage = inventory.getStorageContents();

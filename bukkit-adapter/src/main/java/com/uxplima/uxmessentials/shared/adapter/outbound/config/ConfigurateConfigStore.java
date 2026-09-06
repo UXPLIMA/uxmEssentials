@@ -29,7 +29,7 @@ import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
  *
  * <p>Dotted HOCON paths ({@code modules.homes.enabled}) are navigated by splitting on {@code .} and
  * descending through {@link ConfigurationNode#node(Object...)}; an absent or virtual node yields the
- * caller's fallback. The kernel only ever sees the {@link ConfigStore} contract — Configurate types
+ * caller's fallback. The kernel only ever sees the {@link ConfigStore} contract: Configurate types
  * stay behind this adapter.
  *
  * <h2>Concurrency</h2>

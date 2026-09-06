@@ -40,7 +40,7 @@ public record AnnouncerConfig(
     }
 
     /**
-     * An empty config with no announcements — the announcer never broadcasts. Used when the feature is configured
+     * An empty config with no announcements: the announcer never broadcasts. Used when the feature is configured
      * off. The interval is nominal (one minute) since no tick ever fires; it only satisfies the positive-interval
      * invariant.
      */
@@ -76,7 +76,7 @@ public record AnnouncerConfig(
     }
 
     /**
-     * The same config restricted to the announcements that rotate on the default cadence — those <em>without</em> an
+     * The same config restricted to the announcements that rotate on the default cadence. Those <em>without</em> an
      * {@link Announcement#intervalOverride() interval override}. The adapter drives the shared rotation cursor over
      * this view; each override announcement runs on its own independent timer outside the rotation, so it must not
      * also appear in the cursor's selection set. Preserves the interval, gate, and ordering.

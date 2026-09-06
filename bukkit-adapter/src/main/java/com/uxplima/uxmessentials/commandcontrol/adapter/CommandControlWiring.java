@@ -52,7 +52,7 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public final class CommandControlWiring {
 
-    /** The node that exempts a holder from the command gate — always allowed through, mirroring the other bypasses. */
+    /** The node that exempts a holder from the command gate: always allowed through, mirroring the other bypasses. */
     public static final String BYPASS_PERMISSION = "uxmessentials.commandcontrol.bypass";
 
     /** The node that reveals the plugin-listing / help commands the plugin-hide otherwise removes and blocks. */
