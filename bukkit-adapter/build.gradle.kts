@@ -24,40 +24,40 @@ dependencies {
     compileOnly(libs.bundles.adventure) // Paper ships Adventure at runtime
     compileOnly(libs.luckperms.api) // optional soft-depend (Permissions port, ADR 0005)
 
-    // Economy provider soft-depends — compileOnly: the outbound adapters bind to
+    // Economy provider soft-depends. CompileOnly: the outbound adapters bind to
     // these at runtime only if the plugin is present (ServicesManager, ADR 0004).
     compileOnly(libs.treasury.api)
     compileOnly(libs.vault.api)
 
-    // Claim-plugin hook soft-depends — compileOnly: the inbound adapters bind to
+    // Claim-plugin hook soft-depends. CompileOnly: the inbound adapters bind to
     // these only when the plugin is present (checked via Bukkit ServicesManager / plugin lookup).
     compileOnly(libs.hook.lands)
     compileOnly(libs.hook.griefprevention)
     compileOnly(libs.hook.simpleclaimsystem)
     compileOnly(libs.hook.rclaim)
 
-    // PlaceholderAPI soft-depend — compileOnly: the expansion and the message bridge
+    // PlaceholderAPI soft-depend, compileOnly: the expansion and the message bridge
     // touch these symbols only past the plugin-present guard, so the plugin runs fully
     // without PlaceholderAPI installed.
     compileOnly(libs.placeholderapi)
 
-    // MiniPlaceholders soft-depend — compileOnly: its MiniMessage tag resolvers are read only past the
+    // MiniPlaceholders soft-depend. CompileOnly: its MiniMessage tag resolvers are read only past the
     // plugin-present guard in MiniPlaceholdersSupport, so the plugin runs fully without it installed.
     compileOnly(libs.miniplaceholders)
 
-    // Map-plugin marker soft-depends — compileOnly: the Dynmap/squaremap marker publishers touch these
+    // Map-plugin marker soft-depends. CompileOnly: the Dynmap/squaremap marker publishers touch these
     // symbols only past the plugin-present guard, so the plugin runs fully with neither map plugin installed.
     // Dynmap splits its surface: dynmap-api carries the DynmapAPI plugin handle, DynmapCoreAPI the markers package.
     compileOnly(libs.squaremap.api)
     compileOnly(libs.dynmap.api)
     compileOnly(libs.dynmap.core.api)
 
-    // Floodgate/Cumulus Bedrock soft-depend — compileOnly: the Bedrock detector binds only when Floodgate is
+    // Floodgate/Cumulus Bedrock soft-depend. CompileOnly: the Bedrock detector binds only when Floodgate is
     // present, so the plugin runs fully on a Java-only server (Cumulus's form classes arrive transitively).
     compileOnly(libs.floodgate.api)
 
     compileOnly(libs.bundles.configs)
-    // Configurate YAML — the DeluxeMenus menu converter reads competitor menu YAML; compileOnly because the
+    // Configurate YAML. The DeluxeMenus menu converter reads competitor menu YAML; compileOnly because the
     // Paper library loader already provisions configurate-yaml at runtime (see UxmEssentialsLoader), the same
     // way the :migration module reads EssentialsX YAML.
     compileOnly(libs.configurate.yaml)
@@ -73,10 +73,10 @@ dependencies {
     // jar. The main never compiles against it: BusWiring names only the RedisTransportFactory SPI in :core and
     // resolves the companion's implementation through Bukkit's ServicesManager at runtime. The operator drops
     // the companion jar in plugins/ to enable the redis transport; BusWiring degrades to local-only when it is
-    // absent. So there is no compile dependency on :redis-adapter here — that would re-introduce the duplicate
+    // absent. So there is no compile dependency on :redis-adapter here. That would re-introduce the duplicate
     // BusTransport class the ServicesManager design exists to avoid.
 
-    // uxmLib GUI toolkit (dogfood) — consumed from mavenLocal; pulls uxmlib-item + uxmlib-common
+    // uxmLib GUI toolkit (dogfood). Consumed from mavenLocal; pulls uxmlib-item + uxmlib-common
     // transitively. Configurate is loaded at runtime via Paper library loader.
     implementation("com.uxplima.uxmlib:uxmlib-gui:0.46.0") {
         exclude(group = "org.spongepowered")
@@ -87,24 +87,24 @@ dependencies {
     implementation("com.uxplima.uxmlib:uxmlib-bedrock:0.46.0") {
         exclude(group = "org.spongepowered")
     }
-    // uxmLib item toolkit (dogfood) — the PdcFlag helper backing the per-player boolean-flag PDC stores.
+    // uxmLib item toolkit (dogfood): the PdcFlag helper backing the per-player boolean-flag PDC stores.
     // Arrives transitively via uxmlib-gui, but declared directly so the PdcFlag use is explicit.
     implementation("com.uxplima.uxmlib:uxmlib-item:0.46.0") { isTransitive = false }
-    // uxmLib HUD toolkit (dogfood) — Titles for the teleport arrival banner. Pulls uxmlib-common only.
+    // uxmLib HUD toolkit (dogfood), Titles for the teleport arrival banner. Pulls uxmlib-common only.
     implementation("com.uxplima.uxmlib:uxmlib-hud:0.46.0") {
         exclude(group = "org.spongepowered")
     }
-    // uxmLib integration toolkit (dogfood) — native-Display holograms for the holograms context.
+    // uxmLib integration toolkit (dogfood): native-Display holograms for the holograms context.
     implementation("com.uxplima.uxmlib:uxmlib-integration:0.46.0") {
         exclude(group = "org.spongepowered")
     }
-    // uxmLib packet-nametag toolkit (dogfood) — the per-viewer packet renderer the nametags context draws on. It is a
+    // uxmLib packet-nametag toolkit (dogfood): the per-viewer packet renderer the nametags context draws on. It is a
     // Mojang-mapped NMS module (rides along Mojang-mapped in the shaded jar, like the offline-inventory adapter), and
     // it sends through uxmlib-pipeline's channel sender.
     implementation("com.uxplima.uxmlib:uxmlib-nametags:0.46.0") {
         exclude(group = "org.spongepowered")
     }
-    // uxmLib packet-tablist toolkit (dogfood) — the per-viewer player-info packet builder the tablist context uses to
+    // uxmLib packet-tablist toolkit (dogfood), the per-viewer player-info packet builder the tablist context uses to
     // paint a custom skin on a tab row (the one tab thing native Paper cannot do). Same Mojang-mapped NMS module shape
     // as uxmlib-nametags; sends through uxmlib-pipeline's channel sender.
     implementation("com.uxplima.uxmlib:uxmlib-packet:0.46.0") {
@@ -113,7 +113,7 @@ dependencies {
     implementation("com.uxplima.uxmlib:uxmlib-pipeline:0.46.0") {
         exclude(group = "org.spongepowered")
     }
-    // uxmLib update toolkit (dogfood) — the opt-in release update-checker. Pulls uxmlib-common only.
+    // uxmLib update toolkit (dogfood), the opt-in release update-checker. Pulls uxmlib-common only.
     implementation("com.uxplima.uxmlib:uxmlib-update:0.46.0") {
         exclude(group = "org.spongepowered")
     }
@@ -124,7 +124,7 @@ dependencies {
     testImplementation(libs.vault.api) // the migration live-feed tests stub a Vault Economy provider
     // Lands and GriefPrevention on the test classpath so the ownership tests can stub a real Area/Claim and
     // prove owner is distinct from trusted. Transitive-free: the SDK types only reference org.bukkit.*, which
-    // paper-api already provides — pulling each plugin's own spigot-api would collide with it.
+    // paper-api already provides: pulling each plugin's own spigot-api would collide with it.
     testImplementation(libs.hook.lands) { isTransitive = false }
     testImplementation(libs.hook.griefprevention) { isTransitive = false }
     testImplementation(libs.bundles.adventure)
@@ -141,7 +141,7 @@ dependencies {
 // The Mojang-mapped dev bundle (declared above via paperDevBundle) is needed only to compile the
 // offline-inventory NMS adapter. Keep it off the test classpath: MockBukkit drives the plugin against the plain
 // Paper API, and the full server's PaperRegistryAccess static initializer throws if its classes leak onto the
-// unit-test runtime. compileOnly alone is what the adapter needs — net.minecraft is provided by the live server,
+// unit-test runtime. compileOnly alone is what the adapter needs. Net.minecraft is provided by the live server,
 // and Paper's runtime remapper maps the shipped Mojang-mapped jar at load (shadowJar manifest above).
 paperweight {
     addServerDependencyTo.set(listOf(configurations.compileOnly.get()))
@@ -237,13 +237,13 @@ tasks.shadowJar {
     // map it to the running server's mappings at load. Without it the NMS calls in the offline-inventory
     // adapter would miss at runtime. shadowJar builds its own manifest, so the attribute is set here too.
     manifest { attributes("paperweight-mappings-namespace" to "mojang") }
-    // Shade with relocation — see docs/04-build.md §16. Use a single per-plugin
+    // Shade with relocation, see docs/04-build.md §16. Use a single per-plugin
     // namespace (`com.uxplima.uxmessentials.libs.<lib>`) so two plugins shading
     // the same library at different versions do not clash on the classpath. DO
-    // NOT relocate Adventure / Kyori — Paper bundles them; relocating breaks
+    // NOT relocate Adventure / Kyori. Paper bundles them; relocating breaks
     // runtime symbol lookup.
     relocate("org.bstats", "com.uxplima.uxmessentials.libs.bstats")
-    // uxmLib (dogfood) — relocate into our per-plugin namespace so two plugins shading it cannot clash.
+    // uxmLib (dogfood): relocate into our per-plugin namespace so two plugins shading it cannot clash.
     relocate("com.uxplima.uxmlib", "com.uxplima.uxmessentials.libs.uxmlib")
     // The Redis client is no longer bundled here: the bus's Redis transport ships in the separate
     // uxmEssentials-redis companion jar (Lettuce, relocated there), so the main jar carries no Redis client at
@@ -255,7 +255,7 @@ tasks.shadowJar {
         // uxmLib uses reflection (Brigadier/registry/MiniMessage) + a GuiListener the minimizer can't
         // trace from the few entry points the adapter touches; keep its modules whole.
         exclude(dependency("com.uxplima.uxmlib:.*:.*"))
-        // The persistence adapter is the API surface the feature contexts build on — the generated
+        // The persistence adapter is the API surface the feature contexts build on: the generated
         // jOOQ tables/records and the repository/transaction/cache bases must survive even before a
         // consuming context references them, so keep the whole module out of dead-code elimination.
         exclude(project(":persistence-adapter"))
@@ -289,5 +289,24 @@ tasks.runServer {
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:+AllowEnhancedClassRedefinition",
         )
+    }
+}
+
+// This module, uxmlib-nametags and uxmlib-packet all apply paperweight-userdev against the same
+// Mojang-mapped dev bundle, so all three derive one work directory and want its lock. Gradle runs them
+// in parallel, and paperweight's lock is not re-entrant inside a build, so the second to reach it dies
+// with the lock held by its own process. That is what made a cold build fail once and pass on the retry.
+//
+// The library orders its own two. This orders ours behind them, which is the only place the three meet:
+// a composite build can depend on an included build's task but cannot merely order against it. The
+// dependency costs nothing that was not already going to run, because a composite build builds both.
+//
+// CI solves the same problem by unpacking the bundle once with --no-parallel before anything else. That
+// step can go once this has been through a few cold builds.
+val includedUxmLib = gradle.includedBuilds.firstOrNull { it.name == "uxm-lib" || it.name == "uxmLib" }
+if (includedUxmLib != null) {
+    tasks.named("paperweightUserdevSetup") {
+        dependsOn(includedUxmLib.task(":uxmlib-nametags:paperweightUserdevSetup"))
+        dependsOn(includedUxmLib.task(":uxmlib-packet:paperweightUserdevSetup"))
     }
 }
