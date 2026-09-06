@@ -14,12 +14,12 @@ import java.util.function.Supplier;
 import org.bukkit.entity.Player;
 
 import com.uxplima.uxmessentials.shared.application.port.Logger;
-import com.uxplima.uxmlib.npc.PacketAction;
-import com.uxplima.uxmlib.npc.PacketListener;
-import com.uxplima.uxmlib.npc.PacketListenerRegistry;
-import com.uxplima.uxmlib.npc.PacketVerdict;
 import com.uxplima.uxmlib.packet.tablist.PlayerInfoUpdates;
 import com.uxplima.uxmlib.packet.tablist.TabListPackets;
+import com.uxplima.uxmlib.pipeline.PacketAction;
+import com.uxplima.uxmlib.pipeline.PacketListener;
+import com.uxplima.uxmlib.pipeline.PacketListenerRegistry;
+import com.uxplima.uxmlib.pipeline.PacketVerdict;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

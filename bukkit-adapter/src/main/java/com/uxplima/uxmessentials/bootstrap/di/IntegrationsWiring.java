@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import net.kyori.adventure.text.event.ClickEvent;
+
 import com.uxplima.uxmessentials.persistence.runtime.Persistence;
 import com.uxplima.uxmessentials.shared.adapter.outbound.event.InProcessDomainEventPublisher;
 import com.uxplima.uxmessentials.shared.adapter.outbound.mapmarker.MapMarkersWiring;
@@ -18,7 +20,9 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import com.uxplima.uxmlib.scheduler.PaperScheduler;
 import com.uxplima.uxmlib.scheduler.Scheduler;
 import com.uxplima.uxmlib.scheduler.TaskHandle;
+import com.uxplima.uxmlib.text.Text;
 import com.uxplima.uxmlib.update.JsonUrlReleaseProvider;
+import com.uxplima.uxmlib.update.UpdateAnnouncement;
 import com.uxplima.uxmlib.update.UpdateChecker;
 import com.uxplima.uxmlib.update.UpdateNotifier;
 import com.uxplima.uxmlib.update.UpdateOutcome;
@@ -47,6 +51,20 @@ final class IntegrationsWiring {
     // The node a player must hold to see the on-join update notice. An admin/op-style node, not isOp(), so a
     // server owner controls exactly who is told (the uxmLib notifier gates on the permission, not on op status).
     private static final String UPDATE_NOTIFY_PERMISSION = "uxmessentials.update.notify";
+
+    // What the notice says. uxmLib used to write this line itself and it stopped: a library that words a
+    // message decides how a plugin sounds, and that is the plugin's to decide. The wording is the one the
+    // library shipped, kept to the letter, because an operator who has read this line on every start should
+    // not have to read a new one to learn the same thing.
+    private static final UpdateAnnouncement UPDATE_ANNOUNCEMENT = (pluginName, currentVersion, release) -> Text.mini(
+                    "<gray>[<aqua><name></aqua>]</gray> <yellow>A new version is available:</yellow> "
+                            + "<gray><current></gray> <dark_gray>-></dark_gray> <green><latest></green>",
+                    Text.placeholder("name", pluginName),
+                    Text.placeholder("current", currentVersion),
+                    Text.placeholder("latest", release.version()))
+            .appendSpace()
+            .append(Text.mini("<aqua><underlined>[Open release page]</underlined></aqua>")
+                    .clickEvent(ClickEvent.openUrl(release.url())));
 
     /**
      * Apply server links, start the update checker, and wire the map-marker integration from {@code config},
@@ -104,7 +122,8 @@ final class IntegrationsWiring {
     // cache anyway, so a player who joins before the first poll still triggers a check.
     private static Runnable startWithJoinNotice(
             JavaPlugin plugin, Scheduler scheduler, UpdateChecker checker, UpdateCheckSettings settings) {
-        UpdateNotifier notifier = new UpdateNotifier(plugin, scheduler, checker, UPDATE_NOTIFY_PERMISSION);
+        UpdateNotifier notifier =
+                new UpdateNotifier(plugin, scheduler, checker, UPDATE_NOTIFY_PERMISSION, UPDATE_ANNOUNCEMENT);
         notifier.start(Duration.ZERO, settings.repeats() ? settings.interval() : DEFAULT_POLL_PERIOD);
         return notifier::stop;
     }

@@ -17,6 +17,7 @@ import org.bukkit.plugin.Plugin;
 import net.kyori.adventure.text.Component;
 
 import com.uxplima.uxmessentials.shared.adapter.inbound.gui.GuiText;
+import com.uxplima.uxmessentials.shared.application.message.GuiMessageKey;
 import com.uxplima.uxmessentials.shared.application.message.MessageKey;
 import com.uxplima.uxmessentials.shared.application.port.Logger;
 import com.uxplima.uxmessentials.shared.application.port.Messages;
@@ -107,7 +108,7 @@ class DialogInputModeTest {
     @Test
     void theDialogBackendDeliversSubmitThroughTheInputResultContract() {
         FakePrompt fake = new FakePrompt();
-        DialogTextBackend backend = new DialogTextBackend(fake);
+        DialogTextBackend backend = new DialogTextBackend(fake, guiText);
         List<InputResult> results = new ArrayList<>();
 
         backend.open(player, viewer, Component.text("Name?"), "seed", results::add);
@@ -122,13 +123,30 @@ class DialogInputModeTest {
     @Test
     void theDialogBackendDeliversCancelThroughTheInputResultContract() {
         FakePrompt fake = new FakePrompt();
-        DialogTextBackend backend = new DialogTextBackend(fake);
+        DialogTextBackend backend = new DialogTextBackend(fake, guiText);
         List<InputResult> results = new ArrayList<>();
 
         backend.open(player, viewer, Component.text("Name?"), null, results::add);
         fake.cancel();
 
         assertThat(results).containsExactly(InputResult.Cancelled.INSTANCE);
+    }
+
+    @Test
+    void theTwoButtonWordsComeFromTheCatalogAndNotFromTheCode() {
+        FakePrompt fake = new FakePrompt();
+        DialogTextBackend backend = new DialogTextBackend(fake, guiText);
+
+        backend.open(player, viewer, Component.text("Name?"), null, result -> {});
+
+        // uxmLib wrote these two words itself until 0.46.0. A plugin that hardcodes them instead ships a dialog
+        // that answers in English on a Turkish server, and nothing fails to say so.
+        assertThat(fake.submitLabel)
+                .as("the submit button is resolved for this viewer through the message catalog")
+                .isEqualTo(guiText.text(viewer, GuiMessageKey.INPUT_DIALOG_SUBMIT));
+        assertThat(fake.cancelLabel)
+                .as("the cancel button is resolved for this viewer through the message catalog")
+                .isEqualTo(guiText.text(viewer, GuiMessageKey.INPUT_DIALOG_CANCEL));
     }
 
     private TextInput textInput(RecordingBackend sign, @Nullable RecordingBackend dialog, CapturingLogger log) {
@@ -163,9 +181,16 @@ class DialogInputModeTest {
         }
     }
 
-    /** A fake dialog seam: records the pre-fill and lets the test fire the submit or cancel callback by hand. */
+    /**
+     * A fake dialog seam: records the pre-fill and the two button words, and lets the test fire the submit or
+     * cancel callback by hand.
+     */
     private static final class FakePrompt implements DialogTextBackend.Prompt {
         @Nullable private String initial;
+
+        @Nullable private Component submitLabel;
+
+        @Nullable private Component cancelLabel;
 
         @Nullable private Consumer<String> onSubmit;
 
@@ -176,10 +201,14 @@ class DialogInputModeTest {
                 Player player,
                 Component title,
                 Component label,
+                Component submitLabel,
+                Component cancelLabel,
                 @Nullable String initial,
                 Consumer<String> onSubmit,
                 Runnable onCancel) {
             this.initial = initial;
+            this.submitLabel = submitLabel;
+            this.cancelLabel = cancelLabel;
             this.onSubmit = onSubmit;
             this.onCancel = onCancel;
         }

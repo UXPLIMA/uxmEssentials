@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.uxplima.uxmlib.npc.PacketPipeline;
+import com.uxplima.uxmlib.pipeline.PacketPipeline;
 import org.jspecify.annotations.NullMarked;
 
 /**

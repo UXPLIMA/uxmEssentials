@@ -12,11 +12,11 @@ import java.util.function.Predicate;
 import net.kyori.adventure.text.Component;
 
 import com.uxplima.uxmessentials.shared.application.port.Logger;
-import com.uxplima.uxmlib.npc.PacketListener;
-import com.uxplima.uxmlib.npc.PacketListenerRegistry;
-import com.uxplima.uxmlib.npc.PacketVerdict;
 import com.uxplima.uxmlib.packet.tablist.TabEntry;
 import com.uxplima.uxmlib.packet.tablist.TabListPackets;
+import com.uxplima.uxmlib.pipeline.PacketListener;
+import com.uxplima.uxmlib.pipeline.PacketListenerRegistry;
+import com.uxplima.uxmlib.pipeline.PacketVerdict;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

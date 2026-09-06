@@ -90,10 +90,10 @@ import com.uxplima.uxmessentials.shared.application.message.Notifier;
 import com.uxplima.uxmessentials.shared.application.module.KernelPorts;
 import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
 import com.uxplima.uxmessentials.shared.application.port.ClickActionEconomy;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketSender;
 import com.uxplima.uxmlib.packet.npc.NpcPackets;
 import com.uxplima.uxmlib.packet.npc.internal.NmsNpcPackets;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketSender;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

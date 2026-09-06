@@ -1,7 +1,7 @@
 package com.uxplima.uxmessentials.commandcontrol.adapter.outbound;
 
 import com.uxplima.uxmessentials.commandcontrol.domain.ChannelHidePolicy;
-import com.uxplima.uxmlib.npc.PacketVerdict;
+import com.uxplima.uxmlib.pipeline.PacketVerdict;
 import org.jspecify.annotations.NullMarked;
 
 /**

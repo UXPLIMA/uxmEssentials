@@ -874,7 +874,7 @@ class TablistRendererTest {
         RecordingGate gate = new RecordingGate();
         TablistSuppression suppression = new TablistSuppression(
                 gate,
-                new com.uxplima.uxmlib.npc.PacketListenerRegistry(),
+                new com.uxplima.uxmlib.pipeline.PacketListenerRegistry(),
                 packets,
                 server::getOnlinePlayers,
                 new TestLogger(),
@@ -906,7 +906,7 @@ class TablistRendererTest {
         RecordingGate gate = new RecordingGate();
         TablistSuppression suppression = new TablistSuppression(
                 gate,
-                new com.uxplima.uxmlib.npc.PacketListenerRegistry(),
+                new com.uxplima.uxmlib.pipeline.PacketListenerRegistry(),
                 packets,
                 server::getOnlinePlayers,
                 new TestLogger(),
@@ -937,7 +937,7 @@ class TablistRendererTest {
         SnapshotProbingPackets packets = new SnapshotProbingPackets();
         TablistSuppression suppression = new TablistSuppression(
                 new RecordingGate(),
-                new com.uxplima.uxmlib.npc.PacketListenerRegistry(),
+                new com.uxplima.uxmlib.pipeline.PacketListenerRegistry(),
                 packets,
                 server::getOnlinePlayers,
                 new TestLogger(),

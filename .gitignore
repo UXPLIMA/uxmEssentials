@@ -1,0 +1,34 @@
+# Build output. Gradle writes it and Gradle reproduces it, so it belongs to the machine and
+# never to the history. This repository is public: a jar committed here is the product
+# published for download.
+build/
+*/build/
+buildSrc/build/
+
+# Gradle's own state: caches, file hashes, execution history and lock files. Machine local.
+.gradle/
+*/.gradle/
+
+# The one jar that stays: the wrapper, which is how a clone builds without a Gradle install.
+!gradle/wrapper/gradle-wrapper.jar
+
+# Binaries and secrets never enter version control.
+*.zip
+*.tar.gz
+.env
+.env.*
+*.pem
+*.key
+*.keystore
+
+# Editor and assistant tooling.
+.claude/
+.cursor/
+CLAUDE.local.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# jqwik writes a failure database beside the module it ran in. A test run leaves it, not a person.
+.jqwik-database

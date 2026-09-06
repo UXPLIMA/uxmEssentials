@@ -11,7 +11,7 @@ import java.util.Objects;
 
 import com.uxplima.uxmessentials.commandcontrol.domain.ChannelHidePolicy;
 import com.uxplima.uxmessentials.shared.application.port.Logger;
-import com.uxplima.uxmlib.npc.PacketVerdict;
+import com.uxplima.uxmlib.pipeline.PacketVerdict;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.jspecify.annotations.NullMarked;

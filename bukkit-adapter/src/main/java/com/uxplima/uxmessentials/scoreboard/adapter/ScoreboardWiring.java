@@ -30,9 +30,9 @@ import com.uxplima.uxmessentials.shared.application.module.KernelPorts;
 import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
 import com.uxplima.uxmessentials.shared.application.port.Scheduler;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketSender;
 import com.uxplima.uxmlib.packet.scoreboard.internal.NmsScoreboardPackets;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketSender;
 import org.jspecify.annotations.NullMarked;
 
 /**

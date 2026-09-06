@@ -17,7 +17,12 @@ plugins {
 // clone lands in ../uxm-lib while older checkouts (and CI, which clones into a fixed path) are still ../uxmLib.
 // Matching only one of them would drop the composite silently and fall back to whatever mavenLocal happens to
 // hold, which reads as a stale library rather than a missing one.
-val uxmLibDir = listOf("../uxmLib", "../uxm-lib").map(::file).firstOrNull { it.isDirectory }
+//
+// The workspace puts every plugin under plugins/ and keeps the library at the root, because the library is
+// what the plugins build on rather than one of them. That checkout is two levels up, so it is named here too.
+val uxmLibDir = listOf("../uxmLib", "../uxm-lib", "../../uxm-lib")
+        .map(::file)
+        .firstOrNull { it.isDirectory }
 
 if (uxmLibDir != null) {
     includeBuild(uxmLibDir)

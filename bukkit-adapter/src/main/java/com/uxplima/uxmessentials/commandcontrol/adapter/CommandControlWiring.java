@@ -24,9 +24,9 @@ import com.uxplima.uxmessentials.commandcontrol.domain.WorldHidePolicies;
 import com.uxplima.uxmessentials.commandcontrol.domain.WorldRuleSets;
 import com.uxplima.uxmessentials.shared.application.module.KernelPorts;
 import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketListenerRegistry;
-import com.uxplima.uxmlib.npc.PacketPipeline;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketListenerRegistry;
+import com.uxplima.uxmlib.pipeline.PacketPipeline;
 import org.jspecify.annotations.NullMarked;
 
 /**

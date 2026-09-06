@@ -6,9 +6,9 @@ import java.util.UUID;
 import com.uxplima.uxmessentials.commandcontrol.adapter.outbound.ChannelRegistrationRewriter;
 import com.uxplima.uxmessentials.commandcontrol.domain.ChannelHidePolicy;
 import com.uxplima.uxmessentials.shared.application.port.Logger;
-import com.uxplima.uxmlib.npc.PacketAction;
-import com.uxplima.uxmlib.npc.PacketListener;
-import com.uxplima.uxmlib.npc.PacketVerdict;
+import com.uxplima.uxmlib.pipeline.PacketAction;
+import com.uxplima.uxmlib.pipeline.PacketListener;
+import com.uxplima.uxmlib.pipeline.PacketVerdict;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

@@ -27,6 +27,12 @@ public enum GuiMessageKey implements MessageKey {
     INPUT_CANCELLED("gui.input.cancelled"),
     INPUT_CANCEL_HINT("gui.input.cancel-hint"),
 
+    // the native text dialog: the words on its two buttons. uxmLib wrote these itself until 0.46.0 and it
+    // stopped, because a library that words a button decides how a plugin sounds. They resolve per viewer,
+    // like every other line here, so the dialog speaks the language the player is being served.
+    INPUT_DIALOG_SUBMIT("gui.input.dialog-submit"),
+    INPUT_DIALOG_CANCEL("gui.input.dialog-cancel"),
+
     // the shared confirm window — the two button labels a Bedrock ModalForm needs (the chest paints wordless wool)
     CONFIRM_YES("gui.confirm.yes"),
     CONFIRM_NO("gui.confirm.no"),

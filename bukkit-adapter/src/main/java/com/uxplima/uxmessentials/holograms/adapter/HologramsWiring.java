@@ -100,10 +100,10 @@ import com.uxplima.uxmessentials.shared.application.port.Logger;
 import com.uxplima.uxmessentials.shared.application.port.Scheduler;
 import com.uxplima.uxmessentials.shared.domain.DomainEvent;
 import com.uxplima.uxmlib.hologram.HologramManager;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketSender;
 import com.uxplima.uxmlib.packet.display.DisplayTextPackets;
 import com.uxplima.uxmlib.packet.display.internal.NmsDisplayTextPackets;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketSender;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 

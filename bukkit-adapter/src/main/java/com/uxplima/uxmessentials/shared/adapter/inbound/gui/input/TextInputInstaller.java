@@ -85,7 +85,8 @@ public final class TextInputInstaller {
         SignTextBackend signBackend = new SignTextBackend(playerInput);
         // Wire the dialog backend only where the native Dialog API exists (Minecraft 1.21.6+). On an older server it
         // stays null, so a dialog-mode input point falls back with a logged warning rather than an immediate cancel.
-        @Nullable DialogTextBackend dialogBackend = DialogInputScreen.isSupported() ? DialogTextBackend.paperNative() : null;
+        @Nullable DialogTextBackend dialogBackend =
+                DialogInputScreen.isSupported() ? DialogTextBackend.paperNative(guiText) : null;
         TextInput textInput = new TextInput(
                 settings,
                 guiText,

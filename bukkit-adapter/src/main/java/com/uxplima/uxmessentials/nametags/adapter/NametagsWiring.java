@@ -20,8 +20,8 @@ import com.uxplima.uxmessentials.shared.application.module.ModuleContext;
 import com.uxplima.uxmlib.nametag.NametagPackets;
 import com.uxplima.uxmlib.nametag.NametagRenderer;
 import com.uxplima.uxmlib.nametag.internal.NmsNametagPackets;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketSender;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketSender;
 import com.uxplima.uxmlib.scheduler.PaperScheduler;
 import org.jspecify.annotations.NullMarked;
 

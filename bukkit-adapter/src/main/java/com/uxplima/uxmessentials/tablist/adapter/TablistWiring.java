@@ -24,12 +24,12 @@ import com.uxplima.uxmessentials.tablist.adapter.outbound.TablistRenderer;
 import com.uxplima.uxmessentials.tablist.adapter.outbound.TablistSkinResolver;
 import com.uxplima.uxmessentials.tablist.adapter.outbound.TablistSuppression;
 import com.uxplima.uxmlib.hud.Tablist;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketListenerRegistry;
-import com.uxplima.uxmlib.npc.PacketPipeline;
-import com.uxplima.uxmlib.npc.PacketSender;
 import com.uxplima.uxmlib.packet.tablist.TabListPackets;
 import com.uxplima.uxmlib.packet.tablist.internal.NmsTabListPackets;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketListenerRegistry;
+import com.uxplima.uxmlib.pipeline.PacketPipeline;
+import com.uxplima.uxmlib.pipeline.PacketSender;
 import org.jspecify.annotations.NullMarked;
 
 /**

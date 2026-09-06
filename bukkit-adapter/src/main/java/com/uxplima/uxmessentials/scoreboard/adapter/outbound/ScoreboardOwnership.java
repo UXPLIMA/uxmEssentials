@@ -11,11 +11,11 @@ import com.uxplima.uxmessentials.shared.adapter.outbound.BukkitRefs;
 import com.uxplima.uxmessentials.shared.application.port.Logger;
 import com.uxplima.uxmessentials.shared.application.port.Scheduler;
 import com.uxplima.uxmessentials.shared.domain.PlayerRef;
-import com.uxplima.uxmlib.npc.ChannelResolver;
-import com.uxplima.uxmlib.npc.PacketAction;
-import com.uxplima.uxmlib.npc.PacketListenerRegistry;
-import com.uxplima.uxmlib.npc.PacketPipeline;
 import com.uxplima.uxmlib.packet.scoreboard.ScoreboardPacketEvents;
+import com.uxplima.uxmlib.pipeline.ChannelResolver;
+import com.uxplima.uxmlib.pipeline.PacketAction;
+import com.uxplima.uxmlib.pipeline.PacketListenerRegistry;
+import com.uxplima.uxmlib.pipeline.PacketPipeline;
 import org.jspecify.annotations.NullMarked;
 
 /** Connects the renderer's ownership state machine to outbound scoreboard packets without cancelling foreign traffic. */
